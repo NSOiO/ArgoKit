@@ -8,14 +8,17 @@
 import Foundation
 import UIKit
 import ArgoKit
-public struct ContentView:View {
+struct ContentView:View {
     let items = ["1","2","3"]
-    public var body:View{
+    var body:View{
         ForEach(items){item in
             Text(item as? String).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 120)
                 .left(point: 20).textColor(.red).marginRight(point:20)
         }.row()
-        
+        HStack{
+            Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+                .left(point: 20).textColor(.red)
+        }
         Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
             .left(point: 20).textColor(.red)
         
