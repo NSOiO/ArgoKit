@@ -1,6 +1,0 @@
-framework module ArgoKit {
-  umbrella header "ArgoKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
