@@ -1,0 +1,41 @@
+{
+  "name": "ArgoKit",
+  "version": "1.0.0",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "homepage": "https://facebook.github.io/yoga/",
+  "documentation_url": "https://facebook.github.io/yoga/docs/",
+  "summary": "Yoga is a cross-platform layout engine which implements Flexbox.",
+  "description": "Yoga is a cross-platform layout engine enabling maximum collaboration within your team by implementing an API many designers are familiar with, and opening it up to developers across different platforms.",
+  "authors": "Facebook",
+  "source": {
+    "git": "https://github.com/facebook/yoga.git",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "ios": {
+    "frameworks": "UIKit"
+  },
+  "default_subspecs": "Core",
+  "dependencies": {
+    "Yoga": [
+      "~> 1.14"
+    ]
+  },
+  "module_name": "ArgoKit",
+  "readme": "YogaKit/README.md",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": [
+        "Source/*.{h,m,mm}",
+        "Source/*.{swift}"
+      ],
+      "public_header_files": "Source/*.h"
+    }
+  ]
+}

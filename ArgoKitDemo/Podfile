@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+
+use_frameworks!
+
+target 'ArgoKitDemo' do
+#  pod 'YogaKit', '~> 1.5'
+  pod 'ArgoKit', :path=>'../'
+end
