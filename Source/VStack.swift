@@ -37,6 +37,7 @@ public struct VStack:View {
         }
     }
     
+    //TODO:是否考虑支持兼容/混合布局
     public init(_ view:UIView?,@ArgoKitViewBuilder _ builder:()->View) {
         pView = view ?? UIView();
         pNode = ArgoKitNode(view: pView);

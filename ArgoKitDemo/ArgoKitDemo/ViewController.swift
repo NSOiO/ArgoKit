@@ -7,23 +7,6 @@
 
 import UIKit
 import ArgoKit
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let width:CGFloat  = self.view.bounds.size.width;
-        let height:CGFloat  = self.view.bounds.size.height;
-      
-        VStack(self.view){
-            ContentView().body.marginH(point: 100).width(point: 200).height(point: 400).backgroundColor(.yellow)
-        }.backgroundColor(.clear).width(point: width)
-        .height(point: height).done()
-        print("buttom1")
-    }
-
-
-}
-
 struct ContentView:View {
     let items = ["1","2","3"]
     var body:View{

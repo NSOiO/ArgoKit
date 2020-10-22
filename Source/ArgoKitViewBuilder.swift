@@ -57,12 +57,11 @@ public class BaseViewEmpty: View {
     public var body: View{
         self
     }
-    
     public var type: ArgoKitNodeType{
         .empty
     }
     public var node: ArgoKitNode?{
-        ArgoKitNode()
+        nil
     }
     
     
