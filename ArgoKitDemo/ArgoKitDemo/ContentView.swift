@@ -25,9 +25,7 @@ struct ContentView:View {
         Button(text: "buttom"){
             print("buttom1")
             
-        }.backgroundColor(.orange).width(point: 100).height(point: 100).tapButton {
-            print("buttom1")
-        }
+        }.backgroundColor(.orange).width(point: 100).height(point: 100)
         
         
     }

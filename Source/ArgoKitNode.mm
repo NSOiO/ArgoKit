@@ -253,6 +253,8 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 // 子node
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic, assign)BOOL  isCalculable;
+
+@property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
 @end
 
 @implementation ArgoKitNode
@@ -304,6 +306,20 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     }
 }
 
+- (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock{
+    self.actionBlock = actionBlock;
+}
+
+- (void)nodeTapAction:(id)action{
+    if(_actionBlock){
+        self.actionBlock(@[action]);
+    }
+}
+
+@end
+
+
+@implementation ArgoKitNode(Frame)
 - (void)direction:(YGDirection)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetDirection(node, value);
@@ -1119,4 +1135,3 @@ static CGFloat MMRoundPixelValue(CGFloat value)
      
 }
 @end
-

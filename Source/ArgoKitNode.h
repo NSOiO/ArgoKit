@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class ArgoKitLayout;
 
-
+typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 @interface ArgoKitNode : NSObject
 // 布局layout
 @property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithView:(UIView *)view;
 - (void)addChildNode:(ArgoKitNode *)node;
 - (void)done;
+
+- (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock;
+- (void)nodeTapAction:(id)action;
+@end
+
+@interface ArgoKitNode(Frame)
 /*
  Layout direction specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also effects what edge start and end refer to. By default Yoga lays out with LTR layout direction. In this mode start refers to left and end refers to right. When localizing your apps for markets with RTL languages you should customize this by either by passing a direction to the CalculateLayout call or by setting the direction on the root node.
  */
@@ -276,5 +282,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)maxHeightWithPercent:(CGFloat)value NS_SWIFT_NAME(maxHeight(percent:));
 - (void)maxHeightWithPoint:(CGFloat)value NS_SWIFT_NAME(maxHeight(point:));
+@end
+
+@interface ArgoKitNode(Action)
+
 @end
 NS_ASSUME_NONNULL_END
