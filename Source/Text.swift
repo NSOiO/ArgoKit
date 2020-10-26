@@ -28,77 +28,62 @@ public struct Text:View {
         pNode = ArgoKitNode(view: label)
         label.text = text;
     }
-    func setFont(_ value:UIFont) {
-        label.font = value
-    }
-    func setText(_ value:String?) {
-        label.text = value
-    }
-    func setTextColor(_ value:UIColor!) {
-        label.textColor = value
-    }
-    func setShadowColor(_ value:UIColor?){
-        label.shadowColor = value
-    }
-    func setShadowOffset(_ value:CGSize){
-        label.shadowOffset = value;
-    }
-    func setTextAlignment(_ value:NSTextAlignment){
-        label.textAlignment = value;
-    }
-    func setLineBreakMode(_ value:NSLineBreakMode){
-        label.lineBreakMode = value;
-    }
-    func setAttributedText(_ value:NSAttributedString?){
-        label.attributedText = value;
-    }
-    func setHighlightedTextColor(_ value:UIColor?){
-        label.highlightedTextColor = value;
-    }
-    func setHighlighted(_ value:Bool){
-        label.isHighlighted = value;
-    }
-    func setUserInteractionEnabled(_ value:Bool){
-        label.isUserInteractionEnabled = value;
-    }
-    func setEnabled(_ value:Bool){
-        label.isEnabled = value;
-    }
-    
+
 }
 
 extension Text{
     public func text(_ value:String?)->Self{
-        setText(value)
+        label.text = value
         return self
     }
     public func font(_ value:UIFont!)->Self{
-        setFont(value)
+        label.font = value
         return self
     }
     public func textColor(_ value:UIColor!)->Self{
-        setTextColor(value)
+        label.textColor = value
         return self
     }
     public func shadowColor(_ value:UIColor?)->Self{
-        setShadowColor(value)
+        label.shadowColor = value
         return self
     }
     public func shadowOffset(_ value:CGSize)->Self{
-        setShadowOffset(value)
+        label.shadowOffset = value
         return self
     }
     public func textAlignment(_ value:NSTextAlignment)->Self{
-        setTextAlignment(value)
+        label.textAlignment = value
         return self
     }
     public func lineBreakMode(_ value:NSLineBreakMode)->Self{
-        setLineBreakMode(value)
+        label.lineBreakMode = value
         return self
     }
     
     public func attributedText(_ value:NSAttributedString?)->Self{
-        setAttributedText(value)
+        label.attributedText = value
         return self
     }
+    
+    public func attributedText(_ value:UIColor?)->Self{
+        label.highlightedTextColor = value
+        return self
+    }
+    
+    public func isHighlighted(_ value:Bool)->Self{
+        label.isHighlighted = value
+        return self
+    }
+    
+    
+    public func setUserInteractionEnabled(_ value:Bool)->Self{
+        label.isUserInteractionEnabled = value
+        return self
+    }
+    public func isEnabled(_ value:Bool)->Self{
+        label.isEnabled = value;
+        return self
+    }
+    
 }

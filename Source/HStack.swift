@@ -26,6 +26,7 @@ public struct HStack:View {
         innerNode = ArgoKitNode(view: innerView);
     }
     
+    
     public init(@ArgoKitViewBuilder _ builder:()->View) {
         innerView = UIView();
         innerNode = ArgoKitNode(view: innerView);

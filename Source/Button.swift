@@ -23,6 +23,7 @@ public struct Button:View{
         button = UIButton(type:.custom);
         pNode = ArgoKitNode(view: button)
     }
+    
     public init(text:String?,action :@escaping ()->Void) {
         self.init()
         pAction = action
@@ -44,5 +45,4 @@ public struct Button:View{
             }
         }
     }
-
 }
