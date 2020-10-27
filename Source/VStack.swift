@@ -24,30 +24,12 @@ public struct VStack:View {
         pView = UIView();
         pNode = ArgoKitNode(view: pView);
     }
-    
-    public init(@ArgoKitViewBuilder _ builder:()->View) {
-        pView = UIView();
-        pNode = ArgoKitNode(view: pView);
-        pNode.column();
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                pNode.addChildNode(node)
-            }
-        }
-    }
-    
     //TODO:是否考虑支持兼容/混合布局
-    public init(_ view:UIView?,@ArgoKitViewBuilder _ builder:()->View) {
-        pView = view ?? UIView();
+    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
+        pView = view;
         pNode = ArgoKitNode(view: pView);
         pNode.column();
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                pNode.addChildNode(node)
-            }
-        }
+        addSubNodes(builder)
     }
 }
 
