@@ -1,5 +1,5 @@
 //
-//  Image.swift
+//  ImageView.swift
 //  ArgoKit
 //
 //  Created by MOMO on 2020/10/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Image : View {
+public struct ImageView : View {
     
     private var imageView : UIImageView
     private var pNode : ArgoKitNode
@@ -48,10 +48,10 @@ public struct Image : View {
         self.node?.width(point: imageView.frame.width)
         self.node?.height(point: imageView.frame.height)
     }
-    
 }
 
-extension Image {
+extension ImageView {
+    
     public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
         if let image = imageView.image {
             imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
@@ -67,7 +67,8 @@ extension Image {
     }
 }
 
-extension Image {
+extension ImageView {
+    
     public func image(_ value: UIImage?) -> Self {
         imageView.image = value
         self.node?.width(point: value?.size.width ?? 0)
@@ -116,7 +117,7 @@ extension Image {
         return self
     }
     
-    public func tintColor(_ value: UIColor) -> Self {
+    public func tintColor(_ value: UIColor!) -> Self {
         imageView.tintColor = value
         return self
     }

@@ -16,7 +16,7 @@ struct ContentView:View {
                 .left(point: 20).textColor(.red).marginRight(point:20)
         }.row()
         HStack{
-            Image("turtlerock")
+            ImageView("turtlerock")
             Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red)
         }
@@ -28,7 +28,7 @@ struct ContentView:View {
                 
             }.backgroundColor(.orange).width(point: 100).height(point: 100)
             
-            Image().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100).left(point: 20)
+            ImageView().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100).left(point: 20)
         }
     }
 }
