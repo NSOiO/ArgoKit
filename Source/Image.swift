@@ -33,6 +33,15 @@ public struct Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
+    @available(iOS 13.0, *)
+    public init(systemName: String) {
+        self.init(image: UIImage(systemName: systemName), highlightedImage: nil)
+    }
+    
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
+        self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
+    }
+    
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         imageView = UIImageView(image: image, highlightedImage: highlightedImage);
         pNode = ArgoKitNode(view: imageView)
@@ -40,6 +49,22 @@ public struct Image : View {
         self.node?.height(point: imageView.frame.height)
     }
     
+}
+
+extension Image {
+    public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
+        if let image = imageView.image {
+            imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
+        }
+        return self
+    }
+    
+    public func renderingMode(_ renderingMode: UIImage.RenderingMode?) -> Self {
+        if let image = imageView.image {
+            imageView.image = image.withRenderingMode(renderingMode ?? .automatic)
+        }
+        return self
+    }
 }
 
 extension Image {
