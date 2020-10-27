@@ -688,3 +688,10 @@ extension View{
     }
 }
 
+extension View {
+    
+    public func endEditing(_ force: Bool) -> Self {
+        self.node?.view?.endEditing(force)
+        return self
+    }
+}
