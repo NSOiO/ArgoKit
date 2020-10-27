@@ -8,10 +8,10 @@ podspec = Pod::Spec.new do |spec|
   spec.version = '1.0.0'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
-  spec.documentation_url = ''
+  spec.documentation_url = 'argokit'
 
   spec.summary = 'argokit'
-  spec.description = ''
+  spec.description = 'argokit'
 
   spec.authors = 'Facebook'
   spec.source = {
@@ -35,5 +35,5 @@ podspec = Pod::Spec.new do |spec|
 end
 
 # See https://github.com/facebook/yoga/pull/366
-podspec.attributes_hash["readme"] = "argokit/README.md"
+#podspec.attributes_hash["readme"] = "argokit/README.md"
 podspec

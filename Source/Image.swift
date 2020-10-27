@@ -43,7 +43,6 @@ public struct Image : View {
 }
 
 extension Image {
-    
     public func image(_ value: UIImage?) -> Self {
         imageView.image = value
         self.node?.width(point: value?.size.width ?? 0)
