@@ -16,17 +16,19 @@ struct ContentView:View {
                 .left(point: 20).textColor(.red).marginRight(point:20)
         }.row()
         HStack{
+            Image("turtlerock")
             Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red)
         }
         Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
             .left(point: 20).textColor(.red)
-        
-        Button(text: "buttom"){
-            print("buttom1")
+        HStack{
+            Button(text: "buttom"){
+                print("buttom1")
+                
+            }.backgroundColor(.orange).width(point: 100).height(point: 100)
             
-        }.backgroundColor(.orange).width(point: 100).height(point: 100)
-        
-        
+            Image().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100).left(point: 20)
+        }
     }
 }
