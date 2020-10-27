@@ -24,8 +24,12 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 - (void)addChildNode:(ArgoKitNode *)node;
 - (void)done;
 
+// node action
 - (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock;
+
+//node tap action
 - (void)nodeTapAction:(id)action;
+
 @end
 
 
