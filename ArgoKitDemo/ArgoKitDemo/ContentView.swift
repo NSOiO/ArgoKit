@@ -11,24 +11,49 @@ import ArgoKit
 struct ContentView:View {
     let items = ["1","2","3"]
     var body:View{
-        ForEach(items){item in
-            Text(item as? String).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 120)
-                .left(point: 20).textColor(.red).marginRight(point:20)
-        }.row()
+        Slider(value: 0.7,in:-1...1,onValueChanged: { value in
+            print("UISlider ", value)
+        }).width(point: 300).height(point: 10)
+        .marginTop(point: 100).left(point: 10)
+        
+        Toggle(true){ isOn in
+            print("Toggle :",isOn)
+        }.marginTop(point: 10)
+        
+        Stepper(value: 10, in: 0...100, step: 4) { value in
+            print("Stepper :",value)
+        }.width(point: 100).height(point: 30)
+//        ForEach(items){item in
+//            Text(item as? String).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 120)
+//                .left(point: 20).textColor(.red).marginRight(point:20)
+//        }.row()
         HStack{
             Image("turtlerock")
             Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red)
         }
-        Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
-            .left(point: 20).textColor(.red)
-        HStack{
-            Button(text: "buttom"){
-                print("buttom1")
-                
-            }.backgroundColor(.orange).width(point: 100).height(point: 100)
-            
-            Image().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100).left(point: 20)
-        }
+//        Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+//            .left(point: 20).textColor(.red)
+//        HStack{
+//            Button(text: "buttom"){
+//                print("buttom1")
+//
+//            }.backgroundColor(.orange).width(point: 100).height(point: 100)
+////
+//            Button("") {
+//                print("buttom1")
+//            } builder: {
+//                Text("sdshha").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+//                    .left(point: 20).textColor(.red).textAlignment(.center)
+//            }.alignItemsCenter()
+////
+////
+//////            Image().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100).left(point: 20)
+////
+//            Toggle(true){ isOn in
+//                print("Toggle :",isOn)
+//            }
+//
+//        }
     }
 }

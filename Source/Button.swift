@@ -24,26 +24,22 @@ public struct Button:View{
         pNode = ArgoKitNode(view: button)
     }
     
-    public init(text:String?,action :@escaping ()->Void) {
+    public init<S>(_ text:S,action :@escaping ()->Void,@ArgoKitViewBuilder builder:()->View) where S:StringProtocol {
+        self.init(text: text as? String, action: action)
+        addSubNodes(builder: builder)
+    }
+}
+
+extension Button{
+    public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
         pAction = action
-        button.setTitle(text, for: .normal)
-        button.addTarget(pNode, action:#selector(ArgoKitNode.nodeTapAction(_:)), for:.touchUpInside)
+        button.setTitle(text as? String, for: .normal)
         
-        pNode.setNodeActionBlock({
-            items in
+        button.addTarget(pNode, action:#selector(ArgoKitNode.nodeAction(_:)), for:.touchUpInside)
+        pNode.setNodeActionBlock{_ in
             action();
-        });
-    }
-
-    public init(text:String?,action :@escaping ()->Void,@ArgoKitViewBuilder builder:()->View) {
-        self.init(text: text, action: action)
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                pNode.addChildNode(node)
-            }
-        }
+        };
     }
 }
 

@@ -310,7 +310,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     self.actionBlock = actionBlock;
 }
 
-- (void)nodeTapAction:(id)action{
+- (void)nodeAction:(id)action{
     if(_actionBlock){
         self.actionBlock(@[action]);
     }

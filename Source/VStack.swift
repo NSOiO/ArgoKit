@@ -42,12 +42,7 @@ public struct VStack:View {
         pView = view ?? UIView();
         pNode = ArgoKitNode(view: pView);
         pNode.column();
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                pNode.addChildNode(node)
-            }
-        }
+        addSubNodes(builder: builder)
     }
 }
 
