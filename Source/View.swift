@@ -52,7 +52,16 @@ public extension View{
     var type: ArgoKitNodeType{.single(ArgoKitNode(view:UIView()))}
     var node:ArgoKitNode?{type.viewNode()}
 }
-
+extension View{
+    func addSubNodes(@ArgoKitViewBuilder _ builder:()->View){
+        let container = builder()
+        if let nodes = container.type.viewNodes() {
+            for node in nodes {
+                self.node!.addChildNode(node)
+            }
+        }
+    }
+}
 extension View{
     public func clipsToBounds(_ value:Bool)->Self{
         if let node = self.node {

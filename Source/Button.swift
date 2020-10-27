@@ -38,11 +38,6 @@ public struct Button:View{
 
     public init(text:String?,action :@escaping ()->Void,@ArgoKitViewBuilder builder:()->View) {
         self.init(text: text, action: action)
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                pNode.addChildNode(node)
-            }
-        }
+        addSubNodes(builder)
     }
 }

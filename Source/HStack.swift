@@ -26,30 +26,12 @@ public struct HStack:View {
         innerNode = ArgoKitNode(view: innerView);
     }
     
-    
-    public init(@ArgoKitViewBuilder _ builder:()->View) {
-        innerView = UIView();
-        innerNode = ArgoKitNode(view: innerView);
-        innerNode.row();
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                innerNode.addChildNode(node)
-            }
-        }
-    }
-    
     //TODO:是否考虑支持兼容/混合布局
-    public init(_ view:UIView?,@ArgoKitViewBuilder _ builder:()->View) {
-        innerView = view ?? UIView();
+    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
+        innerView = view;
         innerNode = ArgoKitNode(view: innerView);
         innerNode.row();
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                innerNode.addChildNode(node)
-            }
-        }
+        addSubNodes(builder)
     }
 }
 
