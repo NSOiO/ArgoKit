@@ -16,9 +16,10 @@ struct ContentView:View {
                 .left(point: 20).textColor(.red).marginRight(point:20)
         }.row()
         HStack{
-            ImageView("turtlerock")
-            Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
-                .left(point: 20).textColor(.red)
+            ImageView("turtlerock") { () -> View in
+                Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+                    .left(point: 20).textColor(.red)
+            }
         }
         Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
             .left(point: 20).textColor(.red)
