@@ -86,3 +86,49 @@ extension ProgressView {
         return self
     }
 }
+
+extension ProgressView {
+
+    public init?(_ configuration: ProgressViewStyleConfiguration) {
+        if let view = configuration.node.view as? UIProgressView {
+            progressView = view;
+            pNode = configuration.node
+        } else {
+            return nil
+        }
+    }
+}
+
+extension View {
+
+    public func progressViewStyle<S>(style: S) -> View where S : ProgressViewStyle {
+        if let nodes = self.type.viewNodes() {
+            self.remakeProgressView(style, nodes: nodes)
+        }
+        return self
+    }
+    
+    private func remakeProgressView<S>(_ style: S, nodes: [ArgoKitNode]) where S : ProgressViewStyle {
+        for node in nodes {
+            if (node.view != nil) && node.view!.isKind(of: UIProgressView.self) {
+                let _ = style.makeBody(configuration: ProgressViewStyleConfiguration(node: node))
+            } else if node.childs?.count != nil {
+                self.remakeProgressView(style, nodes: node.childs as! [ArgoKitNode])
+            }
+        }
+    }
+}
+
+public protocol ProgressViewStyle {
+
+    associatedtype Body : View
+
+    func makeBody(configuration: Self.Configuration) -> Self.Body?
+
+    typealias Configuration = ProgressViewStyleConfiguration
+}
+
+public struct ProgressViewStyleConfiguration {
+
+    public let node: ArgoKitNode
+}
