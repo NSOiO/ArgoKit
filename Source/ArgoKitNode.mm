@@ -316,6 +316,13 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     }
 }
 
+- (void)removeAllChildNodes {
+    for (ArgoKitNode *child in _childs) {
+        [child.view removeFromSuperview];
+    }
+    [_childs removeAllObjects];
+}
+
 @end
 
 
