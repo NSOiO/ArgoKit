@@ -70,6 +70,11 @@ struct ContentView:View {
         HStack{
             Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red)
+            BlurEffectView(style:.dark) {
+                Text("sds").backgroundColor(.yellow).width(percent: 50).height(percent: 50).marginTop(point: 5)
+                    .left(point: 20).textColor(.red)
+            }.width(point: 100).height(point: 100).marginTop(point: 50)
+            .left(point: 20)
         }.gesture(gesture: gestur)
 //
 //            Button("") {

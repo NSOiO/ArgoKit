@@ -18,5 +18,11 @@ public struct BlurEffectView:View{
     public var type: ArgoKitNodeType{
         .single(pNode)
     }
+    public init(style:UIBlurEffect.Style,@ArgoKitViewBuilder _ builder:()->View){
+        let blurEffect:UIBlurEffect = UIBlurEffect(style: style)
+        pEffectView = UIVisualEffectView(effect: blurEffect)
+        pNode = ArgoKitNode(view: pEffectView.contentView)
+        addSubNodes(builder)
+    }
 
 }
