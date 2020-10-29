@@ -146,66 +146,8 @@ extension View{
         self.node?.view?.removeGestureRecognizer(gesture.gesture)
         return self
     }
-    
-    @available(iOS 13.4, *)
-    public func tapGestureRecognizer(buttonMask:UIEvent.ButtonMask,numberOfTaps:Int,numberOfTouches: Int,onGesture:@escaping (_ gesture:UIGestureRecognizer)->Void)->Self{
-        let gesture = UITapGestureRecognizer(target: self.node, action: #selector(ArgoKitNode.nodeAction(_:)))
-        gesture.numberOfTapsRequired = numberOfTaps
-        gesture.numberOfTouchesRequired = numberOfTouches
-        gesture.buttonMaskRequired = buttonMask
-        self.node?.setTapGestureRecognizer(gesture)
-        self.node?.view?.addGestureRecognizer(gesture)
-        self.node?.setNodeActionBlock(gesture){items in
-            for item in items{
-                if item is UITapGestureRecognizer {
-                    onGesture(gesture)
-                }
-            }
-        }
-        return self
-    }
-    
-    public func tapGestureRecognizer(numberOfTaps:Int,numberOfTouches: Int,onGesture:@escaping (_ gesture:UIGestureRecognizer)->Void)->Self{
-        let gesture = UITapGestureRecognizer(target: self.node, action: #selector(ArgoKitNode.nodeAction(_:)))
-        gesture.numberOfTapsRequired = numberOfTaps
-        gesture.numberOfTouchesRequired = numberOfTouches
-        self.node?.setTapGestureRecognizer(gesture)
-        self.node?.view?.addGestureRecognizer(gesture)
-        self.node?.setNodeActionBlock(gesture){items in
-            for item in items{
-                if item is UITapGestureRecognizer {
-                    onGesture(gesture)
-                }
-            }
-        }
-        return self
-    }
-    public func removeTapGestureRecognizer()->Self{
-        if let gesture = self.node?.tapGestureRecognizer() {
-            self.node?.view?.removeGestureRecognizer(gesture)
-            self.node?.setTapGestureRecognizer(nil)
-        }
-        return self
-    }
 }
 
-extension View{
-    public func longPressGestureRecognizer(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval,allowableMovement:CGFloat,onGesture:@escaping (_ gesture:UIGestureRecognizer)->Void)->Self{
-        let gesture = UILongPressGestureRecognizer(target: self.node, action: #selector(ArgoKitNode.nodeAction(_:)))
-        gesture.numberOfTapsRequired = numberOfTaps
-        gesture.numberOfTouchesRequired = numberOfTouches
-        gesture.minimumPressDuration = minimumPressDuration
-        gesture.allowableMovement = allowableMovement
-        self.node?.setNodeActionBlock(gesture){items in
-            for item in items{
-                if item is UILongPressGestureRecognizer {
-                    onGesture(gesture)
-                }
-            }
-        }
-        return self
-    }
-}
 /*
  Layout direction specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also effects what edge start and end refer to. By default Yoga lays out with LTR layout direction. In this mode start refers to left and end refers to right. When localizing your apps for markets with RTL languages you should customize this by either by passing a direction to the CalculateLayout call or by setting the direction on the root node.
  */
@@ -251,8 +193,6 @@ extension View {
 /*
  ustify content describes how to align children within the main axis of their container. For example, you can use this property to center a child horizontally within a container with flex direction set to row or vertically within a container with flex direction set to column.
  */
-
-
 extension View{
     public func justifyContentStart()->Self{
         self.node?.justifyContentFlexStart();
@@ -780,4 +720,33 @@ extension View{
         return self;
     }
 }
+extension View{
+    public func width()->CGFloat{
+        return self.node?.width() ?? 0
+    }
+    public func height()->CGFloat{
+        return self.node?.height() ?? 0
+    }
+    
+    public func minWidth()->CGFloat{
+        return self.node?.minWidth() ?? 0
+    }
+    public func minHeight()->CGFloat{
+        return self.node?.minHeight() ?? 0
+    }
+    
+    public func maxWidth()->CGFloat{
+        return self.node?.maxWidth() ?? 0
+    }
+    public func maxHeight()->CGFloat{
+        return self.node?.maxHeight() ?? 0
+    }
+}
 
+extension View {
+    
+    public func endEditing(_ force: Bool) -> Self {
+        self.node?.view?.endEditing(force)
+        return self
+    }
+}

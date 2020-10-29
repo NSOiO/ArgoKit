@@ -1,5 +1,5 @@
 //
-//  Image.swift
+//  ImageView.swift
 //  ArgoKit
 //
 //  Created by MOMO on 2020/10/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Image : View {
+public struct ImageView : View {
     
     private var imageView : UIImageView
     private var pNode : ArgoKitNode
@@ -33,16 +33,56 @@ public struct Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
+    public init(_ name: String?, bundle: Bundle? = nil, @ArgoKitViewBuilder builder:()->View) {
+        let image: UIImage? = (name != nil) ? UIImage(named: name!, in: bundle, compatibleWith: nil) : nil
+        self.init(image: image, highlightedImage: nil, builder: builder)
+    }
+    
+    @available(iOS 13.0, *)
+    public init(systemName: String) {
+        self.init(image: UIImage(systemName: systemName), highlightedImage: nil)
+    }
+    
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
+        self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
+    }
+    
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up, @ArgoKitViewBuilder builder:()->View) {
+        self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil, builder: builder)
+    }
+    
+    public init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:()->View) {
+        self.init(image: image, highlightedImage: highlightedImage)
+        addSubNodes(builder)
+    }
+    
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         imageView = UIImageView(image: image, highlightedImage: highlightedImage);
         pNode = ArgoKitNode(view: imageView)
         self.node?.width(point: imageView.frame.width)
         self.node?.height(point: imageView.frame.height)
     }
-    
 }
 
-extension Image {
+extension ImageView {
+    
+    public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
+        if let image = imageView.image {
+            imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
+        }
+        return self
+    }
+    
+    public func renderingMode(_ renderingMode: UIImage.RenderingMode?) -> Self {
+        if let image = imageView.image {
+            imageView.image = image.withRenderingMode(renderingMode ?? .automatic)
+        }
+        return self
+    }
+}
+
+extension ImageView {
+    
     public func image(_ value: UIImage?) -> Self {
         imageView.image = value
         self.node?.width(point: value?.size.width ?? 0)
@@ -91,7 +131,7 @@ extension Image {
         return self
     }
     
-    public func tintColor(_ value: UIColor) -> Self {
+    public func tintColor(_ value: UIColor!) -> Self {
         imageView.tintColor = value
         return self
     }

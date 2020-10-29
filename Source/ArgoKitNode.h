@@ -23,40 +23,16 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 - (instancetype)initWithView:(UIView *)view;
 - (void)addChildNode:(ArgoKitNode *)node;
 - (void)removeFromSuperNode;
+- (void)removeAllChildNodes;
 - (void)done;
 
 //node tap action
 - (void)nodeAction:(id)action;
-
 // node action
 //- (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock;
 
 - (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action;
 @end
-
-@interface ArgoKitNode(Gesture)
-- (void)setTapGestureRecognizer:(nullable UITapGestureRecognizer * )tapGesture;
-- (nullable UITapGestureRecognizer *)tapGestureRecognizer;
-
-- (void)setPinchGestureRecognizer:(nullable UIPinchGestureRecognizer *)pinchGesture;
-- (nullable UIPinchGestureRecognizer *)pinchGestureRecognizer;
-
-- (void)setRotationGestureRecognizer:(nullable UIRotationGestureRecognizer *)rotationGesture;
-- (nullable UIRotationGestureRecognizer *)rotationGestureRecognizer;
-
-- (void)setSwipeGestureRecognizer:(nullable UISwipeGestureRecognizer *)swipeGesture;
-- (nullable UISwipeGestureRecognizer *)swipeGestureRecognizer;
-
-- (void)sePanGestureRecognizer:(nullable UIPanGestureRecognizer *)panGesture;
-- (nullable UIPanGestureRecognizer *)panGestureRecognizer;
-
-- (void)seScreenEdgePanGestureRecognizer:(nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGesture;
-- (nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGestureRecognizer;
-
-- (void)seLongPressGestureRecognizer:(nullable UISwipeGestureRecognizer *)longPressGesture;
-- (nullable UISwipeGestureRecognizer *)longPressGestureRecognizer;
-@end
-
 
 
 @interface ArgoKitNode(Frame)
@@ -296,23 +272,28 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 - (void)widthWithAuto;
 - (void)widthWithPercent:(CGFloat)value NS_SWIFT_NAME(width(percent:));
 - (void)widthWithPoint:(CGFloat)value NS_SWIFT_NAME(width(point:));
+- (CGFloat)width;
 
 - (void)heightAuto;
 - (void)heightWithPercent:(CGFloat)value NS_SWIFT_NAME(height(percent:));
 - (void)heightWithPoint:(CGFloat)value NS_SWIFT_NAME(height(point:));
+- (CGFloat)height;
 
 - (void)minWidthWithPercent:(CGFloat)value NS_SWIFT_NAME(minWidth(percent:));
 - (void)minWidthWithPoint:(CGFloat)value NS_SWIFT_NAME(minWidth(point:));
+- (CGFloat)minWidth;
 
 - (void)minHeightWithPercent:(CGFloat)value NS_SWIFT_NAME(minHeight(percent:));
 - (void)minHeightWithPoint:(CGFloat)value NS_SWIFT_NAME(minHeight(point:));
-
+- (CGFloat)minHeight;
 
 - (void)maxWidthWithPercent:(CGFloat)value NS_SWIFT_NAME(maxWidth(percent:));
 - (void)maxWidthWithPoint:(CGFloat)value NS_SWIFT_NAME(maxWidth(point:));
+- (CGFloat)maxWidth;
 
 - (void)maxHeightWithPercent:(CGFloat)value NS_SWIFT_NAME(maxHeight(percent:));
 - (void)maxHeightWithPoint:(CGFloat)value NS_SWIFT_NAME(maxHeight(point:));
+- (CGFloat)maxHeight;
 @end
 
 @interface ArgoKitNode(Action)

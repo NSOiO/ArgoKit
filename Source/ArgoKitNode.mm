@@ -343,58 +343,15 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     }
 }
 
+- (void)removeAllChildNodes {
+    for (ArgoKitNode *child in _childs) {
+        [child.view removeFromSuperview];
+    }
+    [_childs removeAllObjects];
+}
+
 @end
 
-@implementation ArgoKitNode(Gesture)
-- (void)setTapGestureRecognizer:(nullable UITapGestureRecognizer *)tapGesture{
-    self.tapGesture = tapGesture;
-}
-- (nullable UITapGestureRecognizer *)tapGestureRecognizer{
-    return self.tapGesture;
-}
-
-- (void)setPinchGestureRecognizer:(nullable UIPinchGestureRecognizer *)pinchGesture{
-    self.pinchGesture = pinchGesture;
-}
-- (nullable UIPinchGestureRecognizer *)pinchGestureRecognizer{
-    return self.pinchGesture;
-}
-
-- (void)setRotationGestureRecognizer:(nullable UIRotationGestureRecognizer *)rotationGesture{
-    self.rotationGesture = rotationGesture;
-}
-- (nullable UIRotationGestureRecognizer *)rotationGestureRecognizer{
-    return self.rotationGesture;
-}
-
-- (void)setSwipeGestureRecognizer:(nullable UISwipeGestureRecognizer *)swipeGesture{
-    self.swipeGesture = swipeGesture;
-}
-- (nullable UISwipeGestureRecognizer *)swipeGestureRecognizer{
-    return self.swipeGesture;
-}
-
-- (void)sePanGestureRecognizer:(nullable UIPanGestureRecognizer *)panGesture{
-    self.panGesture = panGesture;
-}
-- (nullable UIPanGestureRecognizer *)panGestureRecognizer{
-    return self.panGestureRecognizer;
-}
-
-- (void)seScreenEdgePanGestureRecognizer:(nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGesture{
-    self.screenEdgePanGesture = screenEdgePanGesture;
-}
-- (nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGestureRecognizer{
-    return self.screenEdgePanGesture;
-}
-
-- (void)seLongPressGestureRecognizer:(nullable UISwipeGestureRecognizer *)longPressGesture{
-    self.longPressGesture = longPressGesture;
-}
-- (nullable UISwipeGestureRecognizer *)longPressGestureRecognizer{
-    return self.longPressGesture;
-}
-@end
 
 @implementation ArgoKitNode(Frame)
 - (void)direction:(YGDirection)value{
@@ -1148,7 +1105,11 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)widthWithPoint:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetWidth(node, (float)value);
-     
+}
+
+- (CGFloat)width{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetWidth(node).value;
 }
 
 - (void)heightAuto{
@@ -1164,9 +1125,11 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)heightWithPoint:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetHeight(node, (float)value);
-     
 }
-
+- (CGFloat)height{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetHeight(node).value;
+}
 
 - (void)minWidthWithPercent:(CGFloat)value {
     YGNodeRef node = self.layout.ygnode;
@@ -1176,18 +1139,24 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)minWidthWithPoint:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetMinWidth(node, (float)value);
-     
+}
+- (CGFloat)minWidth{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetMinWidth(node).value;
 }
 
 - (void)minHeightWithPercent:(CGFloat)value {
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetMinHeightPercent(node,(float)value);
-     
 }
 - (void)minHeightWithPoint:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetMinHeight(node, (float)value);
-     
+}
+
+- (CGFloat)minHeight{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetMinHeight(node).value;
 }
 
 - (void)maxWidthWithPercent:(CGFloat)value {
@@ -1198,7 +1167,11 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)maxWidthWithPoint:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetMaxWidth(node, (float)value);
-     
+}
+
+- (CGFloat)maxWidth{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetMaxWidth(node).value;
 }
 
 - (void)maxHeightWithPercent:(CGFloat)value {
@@ -1209,6 +1182,9 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)maxHeightWithPoint:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetMaxHeight(node, (float)value);
-     
+}
+- (CGFloat)maxHeight{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetMaxHeight(node).value;
 }
 @end
