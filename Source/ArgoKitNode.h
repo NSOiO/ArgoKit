@@ -22,46 +22,40 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 @property (nonatomic, assign) CGPoint origin;
 - (instancetype)initWithView:(UIView *)view;
 - (void)addChildNode:(ArgoKitNode *)node;
+- (void)removeFromSuperNode;
 - (void)done;
-
-// node action
-- (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock;
 
 //node tap action
 - (void)nodeAction:(id)action;
 
+// node action
+//- (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock;
+
+- (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action;
 @end
 
+@interface ArgoKitNode(Gesture)
+- (void)setTapGestureRecognizer:(nullable UITapGestureRecognizer * )tapGesture;
+- (nullable UITapGestureRecognizer *)tapGestureRecognizer;
 
+- (void)setPinchGestureRecognizer:(nullable UIPinchGestureRecognizer *)pinchGesture;
+- (nullable UIPinchGestureRecognizer *)pinchGestureRecognizer;
 
+- (void)setRotationGestureRecognizer:(nullable UIRotationGestureRecognizer *)rotationGesture;
+- (nullable UIRotationGestureRecognizer *)rotationGestureRecognizer;
 
+- (void)setSwipeGestureRecognizer:(nullable UISwipeGestureRecognizer *)swipeGesture;
+- (nullable UISwipeGestureRecognizer *)swipeGestureRecognizer;
 
+- (void)sePanGestureRecognizer:(nullable UIPanGestureRecognizer *)panGesture;
+- (nullable UIPanGestureRecognizer *)panGestureRecognizer;
 
+- (void)seScreenEdgePanGestureRecognizer:(nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGesture;
+- (nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGestureRecognizer;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- (void)seLongPressGestureRecognizer:(nullable UISwipeGestureRecognizer *)longPressGesture;
+- (nullable UISwipeGestureRecognizer *)longPressGestureRecognizer;
+@end
 
 
 

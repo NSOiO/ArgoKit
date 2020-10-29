@@ -52,7 +52,16 @@ public extension View{
     var type: ArgoKitNodeType{.single(ArgoKitNode(view:UIView()))}
     var node:ArgoKitNode?{type.viewNode()}
 }
-
+extension View{
+    func addSubNodes(@ArgoKitViewBuilder _ builder:()->View){
+        let container = builder()
+        if let nodes = container.type.viewNodes() {
+            for node in nodes {
+                self.node!.addChildNode(node)
+            }
+        }
+    }
+}
 extension View{
     func addSubNodes(@ArgoKitViewBuilder builder:()->View){
         let container = builder()
@@ -113,6 +122,88 @@ extension View{
     public func cornerRadius(_ value:CGFloat)->Self{
         self.node?.view?.layer.cornerRadius = value
         return self;
+    }
+}
+
+extension View{
+}
+// UITapGestureRecognizer
+extension View{
+    public func gesture(gesture:Gesture)->Self{
+        gesture.gesture.isEnabled = true
+        gesture.gesture.addTarget(self.node!, action: #selector(ArgoKitNode.nodeAction(_:)))
+        self.node?.view?.addGestureRecognizer(gesture.gesture)
+        self.node?.setNodeActionBlock(gesture.gesture){items in
+            for item in items{
+                if item is UIGestureRecognizer {
+                    gesture.action(item as! UIGestureRecognizer)
+                }
+            }
+        }
+        return self
+    }
+    public func removeGesture(gesture:Gesture)->Self{
+        self.node?.view?.removeGestureRecognizer(gesture.gesture)
+        return self
+    }
+    
+    @available(iOS 13.4, *)
+    public func tapGestureRecognizer(buttonMask:UIEvent.ButtonMask,numberOfTaps:Int,numberOfTouches: Int,onGesture:@escaping (_ gesture:UIGestureRecognizer)->Void)->Self{
+        let gesture = UITapGestureRecognizer(target: self.node, action: #selector(ArgoKitNode.nodeAction(_:)))
+        gesture.numberOfTapsRequired = numberOfTaps
+        gesture.numberOfTouchesRequired = numberOfTouches
+        gesture.buttonMaskRequired = buttonMask
+        self.node?.setTapGestureRecognizer(gesture)
+        self.node?.view?.addGestureRecognizer(gesture)
+        self.node?.setNodeActionBlock(gesture){items in
+            for item in items{
+                if item is UITapGestureRecognizer {
+                    onGesture(gesture)
+                }
+            }
+        }
+        return self
+    }
+    
+    public func tapGestureRecognizer(numberOfTaps:Int,numberOfTouches: Int,onGesture:@escaping (_ gesture:UIGestureRecognizer)->Void)->Self{
+        let gesture = UITapGestureRecognizer(target: self.node, action: #selector(ArgoKitNode.nodeAction(_:)))
+        gesture.numberOfTapsRequired = numberOfTaps
+        gesture.numberOfTouchesRequired = numberOfTouches
+        self.node?.setTapGestureRecognizer(gesture)
+        self.node?.view?.addGestureRecognizer(gesture)
+        self.node?.setNodeActionBlock(gesture){items in
+            for item in items{
+                if item is UITapGestureRecognizer {
+                    onGesture(gesture)
+                }
+            }
+        }
+        return self
+    }
+    public func removeTapGestureRecognizer()->Self{
+        if let gesture = self.node?.tapGestureRecognizer() {
+            self.node?.view?.removeGestureRecognizer(gesture)
+            self.node?.setTapGestureRecognizer(nil)
+        }
+        return self
+    }
+}
+
+extension View{
+    public func longPressGestureRecognizer(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval,allowableMovement:CGFloat,onGesture:@escaping (_ gesture:UIGestureRecognizer)->Void)->Self{
+        let gesture = UILongPressGestureRecognizer(target: self.node, action: #selector(ArgoKitNode.nodeAction(_:)))
+        gesture.numberOfTapsRequired = numberOfTaps
+        gesture.numberOfTouchesRequired = numberOfTouches
+        gesture.minimumPressDuration = minimumPressDuration
+        gesture.allowableMovement = allowableMovement
+        self.node?.setNodeActionBlock(gesture){items in
+            for item in items{
+                if item is UILongPressGestureRecognizer {
+                    onGesture(gesture)
+                }
+            }
+        }
+        return self
     }
 }
 /*

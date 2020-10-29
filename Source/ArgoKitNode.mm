@@ -9,6 +9,7 @@
 #import <objc/runtime.h>
 #import "yoga/Yoga.h"
 #import "ArgoLayoutHelper.h"
+
 static YGConfigRef globalConfig;
 @interface ArgoKitLayout: NSObject
 @property (nonatomic, assign, readonly) YGNodeRef ygnode;
@@ -246,15 +247,25 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 
 
 @interface ArgoKitNode()
-//
 @property(nonatomic,strong,nullable)UIView *view;
 // 布局layout
 @property (nonatomic, strong) ArgoKitLayout *layout;
 // 子node
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic, assign)BOOL  isCalculable;
-
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
+
+//
+@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+
+// gesture
+@property (nonatomic, strong,nullable)UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong,nullable)UIPinchGestureRecognizer *pinchGesture;
+@property (nonatomic, strong,nullable)UIRotationGestureRecognizer *rotationGesture;
+@property (nonatomic, strong,nullable)UISwipeGestureRecognizer *swipeGesture;
+@property (nonatomic, strong,nullable)UIPanGestureRecognizer *panGesture;
+@property (nonatomic, strong,nullable)UIScreenEdgePanGestureRecognizer *screenEdgePanGesture;
+@property (nonatomic, strong,nullable)UISwipeGestureRecognizer *longPressGesture;
 @end
 
 @implementation ArgoKitNode
@@ -265,6 +276,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         _size = view.bounds.size;
         _frame = view.frame;
         _origin = _frame.origin;
+        _actionMap = [NSMutableDictionary new];
     }
     return self;
 }
@@ -305,19 +317,84 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         [self.childs addObject:node];
     }
 }
+- (void)removeFromSuperNode{
+    if(self.parentNode){
+        [self.view removeFromSuperview];
+        [self.parentNode.childs removeObject:self];
+    }
+}
 
 - (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock{
     self.actionBlock = actionBlock;
 }
 
+- (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action{
+    if (obj) {
+        NSString *keyString = [@([obj hash]) stringValue];
+        [_actionMap setObject:[action copy] forKey:keyString];
+    }
+}
+
 - (void)nodeAction:(id)action{
-    if(_actionBlock){
-        self.actionBlock(@[action]);
+    NSString *keyString = [@([action hash]) stringValue];
+    ArgoKitNodeBlock actionBlock = _actionMap[keyString];
+    if(actionBlock){
+        actionBlock(@[action]);
     }
 }
 
 @end
 
+@implementation ArgoKitNode(Gesture)
+- (void)setTapGestureRecognizer:(nullable UITapGestureRecognizer *)tapGesture{
+    self.tapGesture = tapGesture;
+}
+- (nullable UITapGestureRecognizer *)tapGestureRecognizer{
+    return self.tapGesture;
+}
+
+- (void)setPinchGestureRecognizer:(nullable UIPinchGestureRecognizer *)pinchGesture{
+    self.pinchGesture = pinchGesture;
+}
+- (nullable UIPinchGestureRecognizer *)pinchGestureRecognizer{
+    return self.pinchGesture;
+}
+
+- (void)setRotationGestureRecognizer:(nullable UIRotationGestureRecognizer *)rotationGesture{
+    self.rotationGesture = rotationGesture;
+}
+- (nullable UIRotationGestureRecognizer *)rotationGestureRecognizer{
+    return self.rotationGesture;
+}
+
+- (void)setSwipeGestureRecognizer:(nullable UISwipeGestureRecognizer *)swipeGesture{
+    self.swipeGesture = swipeGesture;
+}
+- (nullable UISwipeGestureRecognizer *)swipeGestureRecognizer{
+    return self.swipeGesture;
+}
+
+- (void)sePanGestureRecognizer:(nullable UIPanGestureRecognizer *)panGesture{
+    self.panGesture = panGesture;
+}
+- (nullable UIPanGestureRecognizer *)panGestureRecognizer{
+    return self.panGestureRecognizer;
+}
+
+- (void)seScreenEdgePanGestureRecognizer:(nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGesture{
+    self.screenEdgePanGesture = screenEdgePanGesture;
+}
+- (nullable UIScreenEdgePanGestureRecognizer *)screenEdgePanGestureRecognizer{
+    return self.screenEdgePanGesture;
+}
+
+- (void)seLongPressGestureRecognizer:(nullable UISwipeGestureRecognizer *)longPressGesture{
+    self.longPressGesture = longPressGesture;
+}
+- (nullable UISwipeGestureRecognizer *)longPressGestureRecognizer{
+    return self.longPressGesture;
+}
+@end
 
 @implementation ArgoKitNode(Frame)
 - (void)direction:(YGDirection)value{
