@@ -21,10 +21,12 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource 
     
     public var nodeList: Array<ArgoKitNode>?
     
-    public var nodeCahe: [IndexPath: ArgoKitNode]?
+    public var nodeCahe: NSCache<NSString, ArgoKitNode>?
     public var dataList: [Any]? {
         willSet {
-            self.nodeCahe = [:]
+            self.nodeCahe = NSCache()
+            self.nodeCahe?.name = "com.argo.tableNodeCache"
+            self.nodeCahe?.countLimit = 20
         }
     }
     public var buildNodeFunc: ((Any)->View)?
@@ -64,12 +66,14 @@ extension ArgoKitTableNode {
             return nil
         }
         
-        if let node = self.nodeCahe?[indexPath] {
+        let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
+        if let node = self.nodeCahe?.object(forKey: cacheKey) {
             return node
         } else if let view = self.buildNodeFunc?(self.dataList![indexPath.row]) {
-            let node = view.type.viewNode()
-            self.nodeCahe?[indexPath] = node
-            return node
+            if let node = view.type.viewNode() {
+                self.nodeCahe?.setObject(node, forKey: cacheKey)
+                return node
+            }
         }
         return nil
     }
