@@ -10,8 +10,8 @@ public struct Slider:View{
     public var body: View{
         self
     }
-    private var pSlider:UISlider
-    private var pNode:ArgoKitNode
+    private let pSlider:UISlider
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }

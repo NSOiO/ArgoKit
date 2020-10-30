@@ -22,10 +22,10 @@ public struct ForEach:View{
         .single(innerNode)
     }
     
-    public init(_ items:Array<Any>,@ArgoKitViewBuilder _ builder:(_ item:Any)->View) {
+    public init(_ data:Array<Any>,@ArgoKitViewBuilder _ builder:@escaping (Any)->View) {
         innerView = UIView();
         innerNode = ArgoKitNode(view: innerView);
-        for item in items {
+        for item in data {
             let container = builder(item)
             if let nodes = container.type.viewNodes() {
                 for node in nodes {
@@ -34,8 +34,19 @@ public struct ForEach:View{
             }
         }
     }
-    
-    // TODO:添加类swiftui foreach
-    
-    
+}
+
+extension ForEach{
+    public init(_ data:Range<Int>,@ArgoKitViewBuilder _ builder:@escaping (Int)->View) {
+        innerView = UIView();
+        innerNode = ArgoKitNode(view: innerView);
+        for item in data {
+            let container = builder(item)
+            if let nodes = container.type.viewNodes() {
+                for node in nodes {
+                    innerNode.addChildNode(node)
+                }
+            }
+        }
+    }
 }

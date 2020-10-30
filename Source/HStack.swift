@@ -11,12 +11,12 @@ public struct HStack:View {
     public var body: View{
         self
     }
-    private var innerNode:ArgoKitNode
+    private let innerNode:ArgoKitNode
+    private let innerView:UIView
     
     public var node: ArgoKitNode?{
         innerNode
     }
-    private var innerView:UIView
     public var type: ArgoKitNodeType{
         .single(innerNode)
     }
@@ -27,7 +27,7 @@ public struct HStack:View {
     }
     
     //TODO:是否考虑支持兼容/混合布局
-    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
+    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         innerView = view;
         innerNode = ArgoKitNode(view: innerView);
         innerNode.row();

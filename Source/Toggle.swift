@@ -10,8 +10,8 @@ public struct Toggle:View{
     public var body: View{
         self
     }
-    private var pSwitch:UISwitch
-    private var pNode:ArgoKitNode
+    private let pSwitch:UISwitch
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }

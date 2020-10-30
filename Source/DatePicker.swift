@@ -10,8 +10,8 @@ public struct DatePicker:View{
     public var body: View{
         self
     }
-    private var pDatePicker:UIDatePicker
-    private var pNode:ArgoKitNode
+    private let pDatePicker:UIDatePicker
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }

@@ -10,8 +10,8 @@ public struct SegmenteControl:View{
     public var body: View{
         self
     }
-    private var pSegment:UISegmentedControl
-    private var pNode:ArgoKitNode
+    private let pSegment:UISegmentedControl
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }

@@ -10,8 +10,8 @@ public struct PageControl:View{
     public var body: View{
         self
     }
-    private var pPageControl:UIPageControl
-    private var pNode:ArgoKitNode
+    private let pPageControl:UIPageControl
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }

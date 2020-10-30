@@ -53,7 +53,7 @@ public extension View{
     var node:ArgoKitNode?{type.viewNode()}
 }
 extension View{
-    func addSubNodes(@ArgoKitViewBuilder _ builder:()->View){
+    func addSubNodes(@ArgoKitViewBuilder _ builder:@escaping ()->View){
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
@@ -63,7 +63,7 @@ extension View{
     }
 }
 extension View{
-    func addSubNodes(@ArgoKitViewBuilder builder:()->View){
+    func addSubNodes(@ArgoKitViewBuilder builder:@escaping ()->View){
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {

@@ -10,8 +10,8 @@ public struct Stepper:View{
     public var body: View{
         self
     }
-    private var pStepper:UIStepper
-    private var pNode:ArgoKitNode
+    private let pStepper:UIStepper
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }

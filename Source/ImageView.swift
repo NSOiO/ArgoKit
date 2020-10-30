@@ -33,7 +33,7 @@ public struct ImageView : View {
         self.init(image: image, highlightedImage: nil)
     }
     
-    public init(_ name: String?, bundle: Bundle? = nil, @ArgoKitViewBuilder builder:()->View) {
+    public init(_ name: String?, bundle: Bundle? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
         let image: UIImage? = (name != nil) ? UIImage(named: name!, in: bundle, compatibleWith: nil) : nil
         self.init(image: image, highlightedImage: nil, builder: builder)
     }
@@ -47,11 +47,11 @@ public struct ImageView : View {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
     }
     
-    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up, @ArgoKitViewBuilder builder:()->View) {
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up, @ArgoKitViewBuilder builder:@escaping ()->View) {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil, builder: builder)
     }
     
-    public init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:()->View) {
+    public init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
         self.init(image: image, highlightedImage: highlightedImage)
         addSubNodes(builder)
     }

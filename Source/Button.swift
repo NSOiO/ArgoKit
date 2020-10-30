@@ -10,8 +10,8 @@ public struct Button:View{
     public var body: View{
         self
     }
-    private var button:UIButton
-    private var pNode:ArgoKitNode
+    private let button:UIButton
+    private let pNode:ArgoKitNode
     public var type: ArgoKitNodeType{
         .single(pNode)
     }
@@ -25,7 +25,7 @@ public struct Button:View{
         pNode = ArgoKitNode(view: button)
     }
     
-    public init<S>(_ text:S,action :@escaping ()->Void,@ArgoKitViewBuilder builder:()->View) where S:StringProtocol {
+    public init<S>(_ text:S,action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View) where S:StringProtocol {
         self.init(text: text as? String, action: action)
         addSubNodes(builder: builder)
     }

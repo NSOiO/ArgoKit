@@ -19,7 +19,7 @@ public struct TapGesture:Gesture {
     public var action: (UIGestureRecognizer) -> Void{
         pAction
     }
-    private var pTapGesture:UITapGestureRecognizer
+    private let pTapGesture:UITapGestureRecognizer
     public var gesture: UIGestureRecognizer{
         pTapGesture
     }
