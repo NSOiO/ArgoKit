@@ -27,8 +27,8 @@ podspec = Pod::Spec.new do |spec|
   spec.module_name = 'ArgoKit'
 
   spec.subspec "Core" do |ss|
-    ss.source_files = 'Source/Core/*.{h,m,mm}','Source/Core/*.{swift}'
-    ss.public_header_files = 'Source/*.h'
+    ss.source_files = 'Source/Core/**/*.{h,m,mm}','Source/Core/**/*.{swift}'
+    ss.public_header_files = 'Source/**/*.h'
 #    ss.private_header_files = 'ArgoKit/Source/*.h'
   end
   

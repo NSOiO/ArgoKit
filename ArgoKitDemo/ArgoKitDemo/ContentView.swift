@@ -53,7 +53,7 @@ struct ContentView:View {
         Button("") {
             print("buttom1")
         } builder: {
-            Text(model.$title).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+            Text(model.title).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red).textAlignment(.center)
         }.alignItemsCenter()
         
@@ -71,10 +71,10 @@ struct ContentView:View {
         }
         
 //        DatePicker { date in
-//            
+//
 //        }.width(percent: 100).height(point: 100).marginTop(point: 10).backgroundColor(.yellow)
-//        
-//        
+//
+//
 //        HStack{
 //            Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
 //                .left(point: 20).textColor(.red)
@@ -84,14 +84,6 @@ struct ContentView:View {
 //            }.width(point: 100).height(point: 100).marginTop(point: 50)
 //            .left(point: 20)
 //        }.gesture(gesture: gestur)
-//    
-    List(data: items) { item in
-        HStack{
-            ImageView().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100)
-            
-            Text(item as? String).backgroundColor(.yellow).width(point: 200).height(point: 100)
-        }
-    }.width(point: 414).height(point: 720)
 //
 //            Button("") {
 //                print("buttom1")
@@ -99,10 +91,7 @@ struct ContentView:View {
 //                Text("sdshha").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
 //                    .left(point: 20).textColor(.red).textAlignment(.center)
 //            }.alignItemsCenter()
-////
-////
-//////            Image().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100).left(point: 20)
-////
+//
 //            Toggle(true){ isOn in
 //                print("Toggle :",isOn)
 //            }

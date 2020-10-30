@@ -336,10 +336,14 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 }
 
 - (void)nodeAction:(id)action{
-    NSString *keyString = [@([action hash]) stringValue];
+    [self nodeActionList:@[action]];
+}
+
+- (void)nodeActionList:(NSArray *)paramter {
+    NSString *keyString = [@([paramter.firstObject hash]) stringValue];
     ArgoKitNodeBlock actionBlock = _actionMap[keyString];
     if(actionBlock){
-        actionBlock(@[action]);
+        actionBlock(paramter);
     }
 }
 
