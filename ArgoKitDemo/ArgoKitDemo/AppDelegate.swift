@@ -12,15 +12,24 @@ import ArgoKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after  application launch.
         let window = UIWindow()
-        window.rootViewController = UIHostingController(rootView: ContentView())
+        let model = TestModel(title: "is title")
+        
+        window.rootViewController = UIHostingController(rootView: ContentView(model: model))
         self.window = window
         window.makeKeyAndVisible()
+        self.testBind(model)
         return true
+    }
+    
+    func testBind(_ m: TestModel) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            m.title = "change ..."
+        }
     }
 
     // MARK: UISceneSession Lifecycle

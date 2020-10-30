@@ -17,9 +17,9 @@ public class ClosureCancelable: Cancellable {
         self.callback = callback
     }
     deinit {
-        if let block = self.callback {
-            block()
-        }
+//        if let block = self.callback {
+//            block()
+//        }
     }
     public func cancel() {
         guard let block = self.callback else {
