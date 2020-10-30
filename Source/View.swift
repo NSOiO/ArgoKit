@@ -131,9 +131,8 @@ extension View{
 extension View{
     public func gesture(gesture:Gesture)->Self{
         gesture.gesture.isEnabled = true
-        gesture.gesture.addTarget(self.node!, action: #selector(ArgoKitNode.nodeAction(_:)))
         self.node?.view?.addGestureRecognizer(gesture.gesture)
-        self.node?.setNodeActionBlock(gesture.gesture){items in
+        self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (items) in
             for item in items{
                 if item is UIGestureRecognizer {
                     gesture.action(item as! UIGestureRecognizer)

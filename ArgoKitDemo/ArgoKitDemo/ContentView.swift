@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 import ArgoKit
+struct model{
+    var iden:Any?
+}
 struct ContentView:View {
     let items = ["查查","cscs","122e"]
     var body:View{
@@ -18,11 +21,14 @@ struct ContentView:View {
             print("UISlider ", value)
         }).width(point: 200).height(point: 30)
         .marginTop(point: 100).left(point: 10)
+        .tap
+        .longPress
+        .swip
         
         
         Toggle(true){ isOn in
             print("Toggle :",isOn)
-        }.marginTop(point: 10)
+        }.marginTop(point: 10).id(model.en)
         
         
         Stepper(value: 10, in: 0...100, step: 4) { value in
@@ -33,9 +39,6 @@ struct ContentView:View {
             print("items :",index)
         } _: {
            Text("e")
-           Text("r")
-           Text("t")
-           Text("u")
            ImageView("turtlerock")
         }.width(percent: 100).height(point: 30).marginTop(point: 150)
         

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@propertyWrapper
+//@propertyWrapper
 //// TODO: Change to struct and use read/write reflection mechanism
 //public class State<Value> : ScopeHandleLinkable {
 //  private let valueProvider: () -> Value

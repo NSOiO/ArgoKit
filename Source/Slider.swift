@@ -26,14 +26,13 @@ public struct Slider:View{
         pSlider.minimumValue = Float(bounds.lowerBound)
         pSlider.maximumValue = Float(bounds.upperBound)
         
-        pSlider.addTarget(pNode, action: #selector(ArgoKitNode.nodeAction(_:)), for: UIControl.Event.valueChanged)
-        pNode.setNodeActionBlock(pSlider){items in
+        pNode.addTarget(pSlider, for: UIControl.Event.valueChanged) { (items) in
             for item in items{
                 if item is UISlider {
                     onValueChanged((item as! UISlider).value)
                 }
             }
-        };
+        }
     }
 }
 extension Slider{

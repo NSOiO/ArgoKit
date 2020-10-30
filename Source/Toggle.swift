@@ -23,8 +23,7 @@ public struct Toggle:View{
         pNode = ArgoKitNode(view: pSwitch);
         pSwitch.setOn(isOn, animated: false)
         
-        pSwitch.addTarget(pNode, action:#selector(ArgoKitNode.nodeAction(_:)), for: UIControl.Event.valueChanged)
-        pNode.setNodeActionBlock(pSwitch){items in
+        pNode.addTarget(pSwitch, for: UIControl.Event.valueChanged) { (items) in
             for item in items{
                 if item is UISwitch {
                     action((item as! UISwitch).isOn)

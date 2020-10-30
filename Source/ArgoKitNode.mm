@@ -52,7 +52,6 @@ static YGConfigRef globalConfig;
     [self applyLayoutPreservingOrigin:YES];
 }
 
-
 - (void)applyLayoutPreservingOrigin:(BOOL)preserveOrigin
 {
   [self calculateLayoutWithSize:self.argoNode.size];
@@ -324,10 +323,6 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     }
 }
 
-- (void)setNodeActionBlock:(ArgoKitNodeBlock)actionBlock{
-    self.actionBlock = actionBlock;
-}
-
 - (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
         NSString *keyString = [@([obj hash]) stringValue];
@@ -348,6 +343,13 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         [child.view removeFromSuperview];
     }
     [_childs removeAllObjects];
+}
+
+- (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action{
+    if ([target respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+        [target addTarget:self action:@selector(nodeAction:) forControlEvents:controlEvents];
+        [self setNodeActionBlock:target actionBlock:action];
+    }
 }
 
 @end

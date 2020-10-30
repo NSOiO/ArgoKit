@@ -26,11 +26,7 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 - (void)removeAllChildNodes;
 - (void)done;
 
-//node tap action
-- (void)nodeAction:(id)action;
-
-// node action
-- (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action;
+- (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
 @end
 
 

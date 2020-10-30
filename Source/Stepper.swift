@@ -25,14 +25,13 @@ public struct Stepper:View{
         pStepper.minimumValue = Double(bounds.lowerBound)
         pStepper.maximumValue = Double(bounds.upperBound)
         
-        pStepper.addTarget(pNode, action: #selector(ArgoKitNode.nodeAction(_:)), for: UIControl.Event.valueChanged)
-        pNode.setNodeActionBlock(pStepper){items in
+        pNode.addTarget(pStepper, for: UIControl.Event.valueChanged) { (items) in
             for item in items{
                 if item is UIStepper {
                     onValueChanged((item as! UIStepper).value)
                 }
             }
-        };
+        }
     }
 }
 extension Stepper{
