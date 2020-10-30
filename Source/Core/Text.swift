@@ -10,7 +10,7 @@ public struct Text:View {
     public var body: View{
         self
     }
-    private var label:UILabel
+    internal var label:UILabel
     private var pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode

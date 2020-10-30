@@ -8,9 +8,16 @@
 import Foundation
 import UIKit
 import ArgoKit
+
+struct TestModel {
+    @Property var title: String
+}
+
 struct ContentView:View {
     let items = ["查查","cscs","122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
+    var model: TestModel
+    
     var body:View{
         let gestur = TapGesture(numberOfTaps: 1, numberOfTouches: 1) { gesture in
         }
@@ -46,7 +53,7 @@ struct ContentView:View {
         Button("") {
             print("buttom1")
         } builder: {
-            Text("sdshha").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+            Text(model.$title).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red).textAlignment(.center)
         }.alignItemsCenter()
         
