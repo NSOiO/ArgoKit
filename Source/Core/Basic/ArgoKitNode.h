@@ -27,6 +27,11 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 - (void)done;
 
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
+
+- (void)nodeAction:(id)target paramter:(nullable NSArray *)paramter;
+
+- (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action;
+
 @end
 
 

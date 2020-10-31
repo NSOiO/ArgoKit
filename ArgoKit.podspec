@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
   spec.name = 'ArgoKit'
-  spec.version = '1.0.0'
+  spec.version = '1.0.1'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
   spec.documentation_url = 'argokit'
@@ -22,14 +22,18 @@ podspec = Pod::Spec.new do |spec|
   spec.platform = :ios
   spec.ios.deployment_target = '9.0'
   spec.ios.frameworks = 'UIKit'
-  spec.default_subspec = "Core"
+#  spec.default_subspec = "Core"
   spec.dependency 'Yoga', '~> 1.14'
   spec.module_name = 'ArgoKit'
 
   spec.subspec "Core" do |ss|
-    ss.source_files = 'Source/*.{h,m,mm}','Source/*.{swift}'
-    ss.public_header_files = 'Source/*.h'
+    ss.source_files = 'Source/Core/**/*.{h,m,mm}','Source/Core/**/*.{swift}'
+    ss.public_header_files = 'Source/**/*.h'
 #    ss.private_header_files = 'ArgoKit/Source/*.h'
+  end
+  
+  spec.subspec "Bind" do |s|
+    s.source_files = 'Source/Bind/*.{swift}'
   end
 
 end
