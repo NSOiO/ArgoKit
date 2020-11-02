@@ -36,6 +36,6 @@ class ArgoKitListCell: UITableViewCell {
     public func linkCellNode(_ node: ArgoKitNode) {
         
         self.contentNode?.addChildNode(node)
-        self.contentNode?.done()
+        self.contentNode?.applyLayout()
     }
 }

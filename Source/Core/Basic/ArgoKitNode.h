@@ -18,25 +18,77 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 @property (nonatomic, strong, readonly, nullable) UIView *view;
-/**
- Return's a BOOL indicating if a view is dirty. When a node is dirty it usually indicates that it will be remeasured on the next layout pass.
+/*
+ frame 相关
  */
-@property (nonatomic, readonly, assign) BOOL isDirty;
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
+
+/**
+ Returns the number of children that are using Flexbox.
+ */
+@property (nonatomic, readonly, assign) NSUInteger numberOfChildren;
+
+/**
+ Return a BOOL indiciating whether or not we this node contains any subviews that are included in
+ Yoga's layout.
+ */
+@property (nonatomic, readonly, assign) BOOL isLeaf;
+
+/**
+ Return's a BOOL indicating if a view is dirty. When a node is dirty
+ it usually indicates that it will be remeasured on the next layout pass.
+ */
+@property (nonatomic, readonly, assign) BOOL isDirty;
+
+/**
+ The property that decides during layout/sizing whether or not styling properties should be applied.
+ Defaults to YES.
+ */
+@property (nonatomic, readwrite, assign, setter=setEnabled:) BOOL isEnabled;
+
 - (instancetype)initWithView:(UIView *)view;
+
 - (Class)viewClass;
-- (void)done;
 
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
+
 - (void)registerAction:(id)target paramter:(nullable NSArray *)paramter;
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
 @end
 
+@interface ArgoKitNode(LayoutNode)
+/**
+ Mark that a view's layout needs to be recalculated. Only works for leaf views.
+ */
+- (void)markDirty;
+
+/// 用于测量叶子节点视图大小, 子类node应该覆盖该方法
+- (CGSize)sizeThatFits:(CGSize)size;
+
+/**
+ Perform a layout calculation and update the frames of the views in the hierarchy with the results.
+ If the origin is not preserved, the root view's layout results will applied from {0,0}.
+ */
+- (void)applyLayout NS_SWIFT_NAME(applyLayout());
+
+/**
+ Perform a layout calculation and update the frames of the views in the hierarchy with the results.
+ If the origin is not preserved, the root view's layout results will applied from {0,0}.
+ */
+- (void)applyLayoutPreservingOrigin:(BOOL)preserveOrigin  NS_SWIFT_NAME(applyLayout(preservingOrigin:));
+
+/**
+  Returns the size of the view based on provided constraints. Pass NaN for an unconstrained dimension.
+ */
+- (CGSize)calculateLayoutWithSize:(CGSize)size
+    NS_SWIFT_NAME(calculateLayout(with:));
+@end
 
 
-@interface ArgoKitNode(NodeLayer)
+@interface ArgoKitNode(Hierarchy)
 - (void)addChildNode:(ArgoKitNode *)node;
+- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index;
 - (void)removeFromSuperNode;
 - (void)removeAllChildNodes;
 @end

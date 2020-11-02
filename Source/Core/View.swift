@@ -152,7 +152,7 @@ extension View{
  */
 extension View {
     public func done(){
-        self.node?.done();
+        self.node?.applyLayout();
     }
     public func dirInherit()->Self{
         self.node?.directionInherit();

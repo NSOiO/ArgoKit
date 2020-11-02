@@ -100,12 +100,31 @@ static ArgoLayoutHelper* _instance;
     [[ArgoLayoutHelper sharedInstance] stopRunloop];
 }
 
++ (void)addLayoutNode:(ArgoKitNode *)node{
+    [[ArgoLayoutHelper sharedInstance] addLayoutNode:node];
+}
+
++ (void)removeLayoutNode:(ArgoKitNode *)node{
+    [[ArgoLayoutHelper sharedInstance] removeLayoutNode:node];
+}
+
++ (void)layout{
+    [[ArgoLayoutHelper sharedInstance] layout];
+}
+
 #pragma mark --- private methods ---
+- (NSMutableArray<ArgoKitNode *> *)layoutNodesPool{
+    if (!_layoutNodesPool) {
+        _layoutNodesPool = [NSMutableArray array];
+    }
+    return _layoutNodesPool;
+}
 - (void)startRunloop {
     // 监听主线程runloop操作
     CFRunLoopRef runloop = CFRunLoopGetMain();
+    __weak typeof(self)wealSelf = self;
     _observer = CFRunLoopObserverCreateWithHandler(CFAllocatorGetDefault(), kCFRunLoopBeforeWaiting | kCFRunLoopExit, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
-        ArgoExecuteAsyncTasks();
+        [wealSelf layout];
     });
     CFRunLoopAddObserver(runloop, _observer, kCFRunLoopCommonModes);
     
@@ -126,17 +145,23 @@ static ArgoLayoutHelper* _instance;
 }
 
 - (void)addLayoutNode:(ArgoKitNode *)node{
-    
+    if (node && ![self.layoutNodesPool containsObject:node]) {
+        [self.layoutNodesPool addObject:node];
+    }
 }
 
 - (void)removeLayoutNode:(ArgoKitNode *)node{
-    
+    if (node && [self.layoutNodesPool containsObject:node]) {
+        [self.layoutNodesPool removeObject:node];
+    }
+}
+- (void)layout{
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    for(ArgoKitNode *node in nodes){
+        if(node.isDirty){
+            [node applyLayout];
+        }
+    }
 }
 
-+ (void)argoLayoutCalculateTask:(dispatch_block_t)calculateTask onComplete:(dispatch_block_t)onComplete {
-    if (!calculateTask) {
-        return;
-    }
-    ArgoAddAsyncTaskBlockWithCompleteCallback(YES,calculateTask, onComplete);
-}
 @end
