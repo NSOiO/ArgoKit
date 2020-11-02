@@ -336,15 +336,15 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     }
 }
 
-- (void)nodeAction:(id)action {
-    [self sendActionToTarget:action paramter:nil];
+- (void)nodeAction:(id)sender {
+    [self sendActionWithObj:sender paramter:nil];
 }
 
-- (id)sendActionToTarget:(id)target paramter:(NSArray *)paramter {
-    NSString *keyString = [@([target hash]) stringValue];
+- (id)sendActionWithObj:(id)obj paramter:(NSArray *)paramter {
+    NSString *keyString = [@([obj hash]) stringValue];
     ArgoKitNodeBlock actionBlock = self.actionMap[keyString];
     if(actionBlock){
-        return actionBlock(target, paramter);
+        return actionBlock(obj, paramter);
     }
     return nil;
 }

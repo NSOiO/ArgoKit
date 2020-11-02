@@ -77,6 +77,6 @@ extension ArgoKitPickerNode {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.sendAction(toTarget: pickerView, paramter: [row,component])
+        self.sendAction(withObj: pickerView, paramter: [row,component])
     }
 }

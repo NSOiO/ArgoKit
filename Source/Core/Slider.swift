@@ -26,8 +26,8 @@ public struct Slider:View{
         pSlider.minimumValue = Float(bounds.lowerBound)
         pSlider.maximumValue = Float(bounds.upperBound)
         
-        pNode.addTarget(pSlider, for: UIControl.Event.valueChanged) { (target, paramter) in
-            if let slider = target as? UISlider {
+        pNode.addTarget(pSlider, for: UIControl.Event.valueChanged) { (obj, paramter) in
+            if let slider = obj as? UISlider {
                 onValueChanged(slider.value)
             }
             return nil

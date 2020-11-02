@@ -22,8 +22,8 @@ public struct DatePicker:View{
         pDatePicker = UIDatePicker()
         pNode = ArgoKitNode(view: pDatePicker)
         
-        pNode.addTarget(pDatePicker, for: UIControl.Event.valueChanged) { (target, paramter) in
-            if let dataPicker = target as? UIDatePicker {
+        pNode.addTarget(pDatePicker, for: UIControl.Event.valueChanged) { (obj, paramter) in
+            if let dataPicker = obj as? UIDatePicker {
                 onDateChange(dataPicker.date)
             }
             return nil

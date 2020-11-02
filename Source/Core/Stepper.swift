@@ -25,8 +25,8 @@ public struct Stepper:View{
         pStepper.minimumValue = Double(bounds.lowerBound)
         pStepper.maximumValue = Double(bounds.upperBound)
         
-        pNode.addTarget(pStepper, for: UIControl.Event.valueChanged) { (target, paramter) in
-            if let stepper = target as? UIStepper {
+        pNode.addTarget(pStepper, for: UIControl.Event.valueChanged) { (obj, paramter) in
+            if let stepper = obj as? UIStepper {
                 onValueChanged(stepper.value)
             }
             return nil

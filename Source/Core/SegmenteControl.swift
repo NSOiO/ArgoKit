@@ -41,8 +41,8 @@ public struct SegmenteControl:View{
         pSegment = UISegmentedControl(items: items)
         pNode = ArgoKitNode(view: pSegment)
         
-        pNode.addTarget(pSegment, for: UIControl.Event.valueChanged) { (target, paramter) in
-            if let segmentedControl = target as? UISegmentedControl {
+        pNode.addTarget(pSegment, for: UIControl.Event.valueChanged) { (obj, paramter) in
+            if let segmentedControl = obj as? UISegmentedControl {
                 onSegmentedChange(segmentedControl.selectedSegmentIndex)
             }
             return nil
