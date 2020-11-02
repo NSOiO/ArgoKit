@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ArgoKitUtils : NSObject
-
++ (void)runMainThreadBlock:(dispatch_block_t)block;
 @end
 
 NS_ASSUME_NONNULL_END

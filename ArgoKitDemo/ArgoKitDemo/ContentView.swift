@@ -52,7 +52,7 @@ struct ContentView:View {
         }.row()
         HStack{
             ImageView("turtlerock")
-            Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+            Text("sds1111").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red)
             Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
                 .left(point: 20).textColor(.red)

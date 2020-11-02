@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 #import "yoga/Yoga.h"
 #import "ArgoLayoutHelper.h"
-
+#import "ArgoKitUtils.h"
 @class ArgoKitLayout;
 @interface ArgoKitNode()
 @property(nonatomic,strong,nullable)UIView *view;
@@ -297,7 +297,11 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 
 #pragma mark --- property ---
 - (void)setFrame:(CGRect)frame{
-    
+    _frame = frame;
+    __weak typeof(self)wealSelf = self;
+    [ArgoKitUtils runMainThreadBlock:^{
+        wealSelf.view.frame = frame;
+    }];
 }
 - (NSMutableArray<ArgoKitNode *> *)childs{
     if (!_childs) {
