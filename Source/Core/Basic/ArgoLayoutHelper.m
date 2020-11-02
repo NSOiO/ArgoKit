@@ -86,6 +86,7 @@ static ArgoLayoutHelper* _instance;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         _instance = [[self alloc] init];
+        [_instance startRunloop];
     });
     return _instance;
 }

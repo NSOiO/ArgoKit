@@ -74,7 +74,7 @@ open class UIHostingController:UIViewController{
         self.view.backgroundColor = .white;
         RooView(self.view){
             rootView_.body
-        }.done()
+        }.applyLayout()
     }
     
 }

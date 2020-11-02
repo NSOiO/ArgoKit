@@ -81,7 +81,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
   Returns the size of the view based on provided constraints. Pass NaN for an unconstrained dimension.
  */
 - (CGSize)calculateLayoutWithSize:(CGSize)size
-    NS_SWIFT_NAME(calculateLayout(with:));
+    NS_SWIFT_NAME(calculateLayout(size:));
 @end
 
 

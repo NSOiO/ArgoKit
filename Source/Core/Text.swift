@@ -34,10 +34,12 @@ public struct Text:View {
 extension Text{
     public func text(_ value:String?)->Self{
         label.text = value
+        self.markNeedsLayout()
         return self
     }
     public func font(_ value:UIFont!)->Self{
         label.font = value
+        self.markNeedsLayout()
         return self
     }
     public func textColor(_ value:UIColor!)->Self{
@@ -63,10 +65,11 @@ extension Text{
     
     public func attributedText(_ value:NSAttributedString?)->Self{
         label.attributedText = value
+        self.markNeedsLayout()
         return self
     }
     
-    public func attributedText(_ value:UIColor?)->Self{
+    public func highlightedTextColor(_ value:UIColor?)->Self{
         label.highlightedTextColor = value
         return self
     }
@@ -88,6 +91,7 @@ extension Text{
     
     public func numberOfLines(_ value:Int)->Self{
         label.numberOfLines = value;
+        self.markNeedsLayout()
         return self
     }
 

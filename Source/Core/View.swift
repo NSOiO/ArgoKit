@@ -52,18 +52,16 @@ public extension View{
     var type: ArgoKitNodeType{.single(ArgoKitNode(view:UIView()))}
     var node:ArgoKitNode?{type.viewNode()}
 }
+
 extension View{
-    func addSubNodes(@ArgoKitViewBuilder _ builder:@escaping ()->View){
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                self.node!.addChildNode(node)
-            }
-        }
+    public func alias<T>(variable ptr:inout T?) -> Self where T: View{
+        ptr = self as? T
+        return self
     }
 }
+
 extension View{
-    func addSubNodes(@ArgoKitViewBuilder builder:@escaping ()->View){
+    public func addSubNodes(@ArgoKitViewBuilder builder:@escaping ()->View){
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
@@ -146,13 +144,47 @@ extension View{
     }
 }
 
+extension View{
+    
+    // 标记Node需要重新布局
+    public func markNeedsLayout(){
+        self.node?.markDirty()
+    }
+    
+    public func parentNode()->ArgoKitNode?{
+        var pNode:ArgoKitNode? = self.node?.parent
+        if (pNode == nil) {
+            return self.node
+        }else{
+            while (pNode?.parent != nil){
+                pNode = pNode?.parent
+            }
+        }
+        return pNode
+       
+    }
+    
+    public func applyLayout(){
+        if let parentNode = self.parentNode(){
+            ArgoLayoutHelper.addLayoutNode(parentNode)
+        }
+//        self.parentNode()?.applyLayout()
+    }
+    
+    public func applyLayout(preservingOrigin:Bool){
+        self.parentNode()?.applyLayout(preservingOrigin: preservingOrigin)
+    }
+    
+    public func calculateLayout(size:CGSize){
+        self.parentNode()?.calculateLayout(size:size)
+    }
+    
+}
 /*
  Layout direction specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also effects what edge start and end refer to. By default Yoga lays out with LTR layout direction. In this mode start refers to left and end refers to right. When localizing your apps for markets with RTL languages you should customize this by either by passing a direction to the CalculateLayout call or by setting the direction on the root node.
  */
 extension View {
-    public func done(){
-        self.node?.applyLayout();
-    }
+
     public func dirInherit()->Self{
         self.node?.directionInherit();
         return self;

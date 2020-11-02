@@ -22,7 +22,7 @@ public struct BlurEffectView:View{
         let blurEffect:UIBlurEffect = UIBlurEffect(style: style)
         pEffectView = UIVisualEffectView(effect: blurEffect)
         pNode = ArgoKitNode(view: pEffectView.contentView)
-        addSubNodes(builder)
+        addSubNodes(builder:builder)
     }
 
 }

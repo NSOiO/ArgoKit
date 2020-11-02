@@ -53,7 +53,7 @@ public struct ImageView : View {
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
         self.init(image: image, highlightedImage: highlightedImage)
-        addSubNodes(builder)
+        addSubNodes(builder:builder)
     }
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
