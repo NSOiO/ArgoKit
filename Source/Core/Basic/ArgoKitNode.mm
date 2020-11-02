@@ -332,7 +332,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
         NSString *keyString = [@([obj hash]) stringValue];
-        [_actionMap setObject:[action copy] forKey:keyString];
+        [self.actionMap setObject:[action copy] forKey:keyString];
     }
 }
 
