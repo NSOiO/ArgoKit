@@ -8,30 +8,36 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
-@class ArgoKitLayout;
+//@class ArgoKitLayout;
 
 typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 @interface ArgoKitNode : NSObject
-// 布局layout
-@property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
+//// 布局layout
+//@property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
 @property (nonatomic, strong,nullable)  ArgoKitNode  *parentNode;
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic, strong, readonly, nullable) UIView *view;
-@property (nonatomic, assign) CGRect frame;
+/**
+ Return's a BOOL indicating if a view is dirty. When a node is dirty it usually indicates that it will be remeasured on the next layout pass.
+ */
+@property (nonatomic, readonly, assign) BOOL isDirty;
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
 - (instancetype)initWithView:(UIView *)view;
-- (void)addChildNode:(ArgoKitNode *)node;
-- (void)removeFromSuperNode;
-- (void)removeAllChildNodes;
+- (Class)viewClass;
 - (void)done;
 
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
+- (void)registerAction:(id)target paramter:(nullable NSArray *)paramter;
+- (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
+@end
 
-- (void)nodeAction:(id)target paramter:(nullable NSArray *)paramter;
 
-- (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action;
 
+@interface ArgoKitNode(NodeLayer)
+- (void)addChildNode:(ArgoKitNode *)node;
+- (void)removeFromSuperNode;
+- (void)removeAllChildNodes;
 @end
 
 

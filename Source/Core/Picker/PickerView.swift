@@ -68,7 +68,7 @@ extension PickerView {
     }
     
     public func didSelectRowInComponent(_ action: @escaping (_ row: Int, _ component: Int)->Void) -> Self {
-        self.pNode.setNodeActionBlock(pickerView) { items in
+        self.pNode.observeAction(pickerView) { items in
             if items.count >= 2 {
                 let row: Int = items[0] as? Int ?? 0
                 let component: Int = items[1] as? Int ?? 0

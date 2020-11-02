@@ -10,6 +10,21 @@
 #import "yoga/Yoga.h"
 #import "ArgoLayoutHelper.h"
 
+@class ArgoKitLayout;
+@interface ArgoKitNode()
+@property(nonatomic,strong,nullable)UIView *view;
+// 布局layout
+@property (nonatomic, strong) ArgoKitLayout *layout;
+// 子node
+@property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
+@property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
+//
+@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+
+@property (nonatomic, assign) CGRect frame;
+@end
+
+
 static YGConfigRef globalConfig;
 @interface ArgoKitLayout: NSObject
 @property (nonatomic, assign, readonly) YGNodeRef ygnode;
@@ -92,9 +107,28 @@ static YGConfigRef globalConfig;
   };
 }
 
+- (BOOL)isDirty
+{
+  return YGNodeIsDirty(self.ygnode);
+}
+
+- (void)markDirty
+{
+  if (self.isDirty || !self.isLeaf) {
+    return;
+  }
+
+  // Yoga is not happy if we try to mark a node as "dirty" before we have set
+  // the measure function. Since we already know that this is a leaf,
+  // this *should* be fine. Forgive me Hack Gods.
+  const YGNodeRef node = self.ygnode;
+  if (!YGNodeHasMeasureFunc(node)) {
+    YGNodeSetMeasureFunc(node, argoMeasureView);
+  }
+  YGNodeMarkDirty(node);
+}
 
 #pragma mark - Private
-
 // 计算当前node
 static void argoApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigin)
 {
@@ -117,7 +151,7 @@ static void argoApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigi
   };
 
   const CGPoint origin = preserveOrigin ? node.origin : CGPointZero;
-  node.view.frame = (CGRect) {
+  node.frame = (CGRect) {
     .origin = {
       .x = MMRoundPixelValue(topLeft.x + origin.x),
       .y = MMRoundPixelValue(topLeft.y + origin.y),
@@ -135,7 +169,7 @@ static void argoApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigi
   }
 }
 
-static CGFloat MMSanitizeMeasurement(
+static CGFloat argoSanitizeMeasurement(
   CGFloat constrainedSize,
   CGFloat measuredSize,
   YGMeasureMode measureMode)
@@ -153,7 +187,7 @@ static CGFloat MMSanitizeMeasurement(
 }
 
 
-static YGSize MMMeasureView(
+static YGSize argoMeasureView(
   YGNodeRef node,
   float width,
   YGMeasureMode widthMode,
@@ -174,11 +208,10 @@ static YGSize MMMeasureView(
   }
 
   return (YGSize) {
-      .width = static_cast<float>(MMSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
-      .height = static_cast<float>(MMSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
+      .width = static_cast<float>(argoSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
+      .height = static_cast<float>(argoSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
   };
 }
-
 
 
 static void MMRemoveAllChildren(const YGNodeRef node)
@@ -210,7 +243,7 @@ static void argoAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
 
   if (layout.isLeaf) {
     MMRemoveAllChildren(node);
-    YGNodeSetMeasureFunc(node, MMMeasureView);
+    YGNodeSetMeasureFunc(node, argoMeasureView);
   } else {
     YGNodeSetMeasureFunc(node, NULL);
 
@@ -245,28 +278,6 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 @end
 
 
-@interface ArgoKitNode()
-@property(nonatomic,strong,nullable)UIView *view;
-// 布局layout
-@property (nonatomic, strong) ArgoKitLayout *layout;
-// 子node
-@property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
-@property (nonatomic, assign)BOOL  isCalculable;
-@property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
-
-//
-@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
-
-// gesture
-@property (nonatomic, strong,nullable)UITapGestureRecognizer *tapGesture;
-@property (nonatomic, strong,nullable)UIPinchGestureRecognizer *pinchGesture;
-@property (nonatomic, strong,nullable)UIRotationGestureRecognizer *rotationGesture;
-@property (nonatomic, strong,nullable)UISwipeGestureRecognizer *swipeGesture;
-@property (nonatomic, strong,nullable)UIPanGestureRecognizer *panGesture;
-@property (nonatomic, strong,nullable)UIScreenEdgePanGestureRecognizer *screenEdgePanGesture;
-@property (nonatomic, strong,nullable)UISwipeGestureRecognizer *longPressGesture;
-@end
-
 @implementation ArgoKitNode
 - (instancetype)initWithView:(UIView *)view{
     self = [super init];
@@ -275,11 +286,19 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         _size = view.bounds.size;
         _frame = view.frame;
         _origin = _frame.origin;
-        _actionMap = [NSMutableDictionary new];
     }
     return self;
 }
 
+- (Class)viewClass{
+    return [self.view class];
+}
+
+
+#pragma mark --- property ---
+- (void)setFrame:(CGRect)frame{
+    
+}
 - (NSMutableArray<ArgoKitNode *> *)childs{
     if (!_childs) {
         _childs = [[NSMutableArray<ArgoKitNode *> alloc] init];
@@ -287,21 +306,17 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     return _childs;
 }
 
-- (void)willCalculate{
-    self.isCalculable = YES;
-    for (ArgoKitNode *node in self.childs) {
-        node.isCalculable = YES;
+- (NSMutableDictionary<NSString *,ArgoKitNodeBlock> *)actionMap{
+    if (!_actionMap) {
+        _actionMap = [NSMutableDictionary new];
     }
+    return _actionMap;
 }
-- (void)didCalculate{
-    self.isCalculable = NO;
-    for (ArgoKitNode *node in self.childs) {
-        node.isCalculable = NO;
-    }
-}
+
 - (void)done{
     [self.layout done];
 }
+
 -(ArgoKitLayout *)layout{
     if (!_layout) {
         _layout = [[ArgoKitLayout alloc] initWithNode:self];
@@ -309,6 +324,35 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     return _layout;
 }
 
+- (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
+    if (obj) {
+        NSString *keyString = [@([obj hash]) stringValue];
+        [_actionMap setObject:[action copy] forKey:keyString];
+    }
+}
+
+- (void)nodeAction:(id)action{
+    [self registerAction:action paramter:nil];
+}
+
+- (void)registerAction:(id)target paramter:(nullable NSArray *)paramter{
+    NSString *keyString = [@([target hash]) stringValue];
+    ArgoKitNodeBlock actionBlock = self.actionMap[keyString];
+    if(actionBlock){
+        actionBlock(paramter);
+    }
+}
+
+- (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action{
+    if ([target respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+        [target addTarget:self action:@selector(nodeAction:) forControlEvents:controlEvents];
+        [self observeAction:target actionBlock:action];
+    }
+}
+
+@end
+
+@implementation ArgoKitNode(NodeLayer)
 - (void)addChildNode:(ArgoKitNode *)node{
     if (node) {
         node.parentNode = self;
@@ -322,47 +366,12 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         [self.parentNode.childs removeObject:self];
     }
 }
-
-- (void)setNodeActionBlock:(id)obj actionBlock:(ArgoKitNodeBlock)action{
-    if (obj) {
-        NSString *keyString = [@([obj hash]) stringValue];
-        [_actionMap setObject:[action copy] forKey:keyString];
-    }
-}
-
-- (void)nodeAction:(id)action{
-    [self nodeAction:action paramter:nil];
-}
-- (void)nodeAction:(id)target paramter:(nullable NSArray *)paramter{
-    NSString *keyString = [@([target hash]) stringValue];
-    ArgoKitNodeBlock actionBlock = _actionMap[keyString];
-    if(actionBlock){
-        actionBlock(paramter);
-    }
-}
-
-- (void)nodeActionList:(NSArray *)paramter {
-    NSString *keyString = [@([paramter.firstObject hash]) stringValue];
-    ArgoKitNodeBlock actionBlock = _actionMap[keyString];
-    if(actionBlock){
-        actionBlock(paramter);
-    }
-}
-
 - (void)removeAllChildNodes {
-    for (ArgoKitNode *child in _childs) {
+    for (ArgoKitNode *child in self.childs) {
         [child.view removeFromSuperview];
     }
-    [_childs removeAllObjects];
+    [self.childs removeAllObjects];
 }
-
-- (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action{
-    if ([target respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
-        [target addTarget:self action:@selector(nodeAction:) forControlEvents:controlEvents];
-        [self setNodeActionBlock:target actionBlock:action];
-    }
-}
-
 @end
 
 

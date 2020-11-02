@@ -6,10 +6,11 @@
 //
 
 #import "ArgoLayoutHelper.h"
+#import "ArgoKitNode.h"
 #import <os/lock.h>
 static NSMutableArray<dispatch_block_t> *_asyncTaskQueue = nil;
 static CFRunLoopSourceRef _runloopSource = NULL;
-@implementation ArgoLayoutHelper
+
 static void Argolock(dispatch_block_t callback) {
     if (!callback) {
         return;
@@ -71,25 +72,67 @@ static void ArgoExecuteAsyncTasks() {
 
 static void ArgoSourceContextCallBackLog(void *info) {
 }
-+ (void)initialize {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self setupRunloop];
-    });
+
+@interface ArgoLayoutHelper(){
+    CFRunLoopObserverRef _observer;
 }
-+ (void)setupRunloop {
+@property(nonatomic,strong)NSMutableArray<ArgoKitNode *> *layoutNodesPool;
+@end
+
+
+@implementation ArgoLayoutHelper
+static ArgoLayoutHelper* _instance;
++ (instancetype)sharedInstance{
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        _instance = [[self alloc] init];
+    });
+    return _instance;
+}
+-(void)dealloc{
+    [self startRunloop];
+}
+
++ (void)startRunloop{
+    [[ArgoLayoutHelper sharedInstance] stopRunloop];
+}
++ (void)stopRunloop{
+    [[ArgoLayoutHelper sharedInstance] stopRunloop];
+}
+
+#pragma mark --- private methods ---
+- (void)startRunloop {
+    // 监听主线程runloop操作
     CFRunLoopRef runloop = CFRunLoopGetMain();
-    CFRunLoopObserverRef observer = CFRunLoopObserverCreateWithHandler(CFAllocatorGetDefault(), kCFRunLoopBeforeWaiting | kCFRunLoopExit, true, INT_MAX, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
+    _observer = CFRunLoopObserverCreateWithHandler(CFAllocatorGetDefault(), kCFRunLoopBeforeWaiting | kCFRunLoopExit, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
         ArgoExecuteAsyncTasks();
     });
-    CFRunLoopAddObserver(runloop, observer, kCFRunLoopCommonModes);
-    CFRelease(observer);
+    CFRunLoopAddObserver(runloop, _observer, kCFRunLoopCommonModes);
+    
     
     CFRunLoopSourceContext *sourceContext = calloc(1, sizeof(CFRunLoopSourceContext));
     sourceContext->perform = ArgoSourceContextCallBackLog;
     _runloopSource = CFRunLoopSourceCreate(CFAllocatorGetDefault(), 0, sourceContext);
     CFRunLoopAddSource(runloop, _runloopSource, kCFRunLoopCommonModes);
 }
+- (void)stopRunloop{
+    if (_observer) {
+        if (CFRunLoopContainsObserver(CFRunLoopGetMain(), _observer, kCFRunLoopCommonModes)) {
+            CFRunLoopRemoveObserver(CFRunLoopGetMain(), _observer, kCFRunLoopCommonModes);
+        }
+        CFRelease(_observer);
+        _observer = nil;
+    }
+}
+
+- (void)addLayoutNode:(ArgoKitNode *)node{
+    
+}
+
+- (void)removeLayoutNode:(ArgoKitNode *)node{
+    
+}
+
 + (void)argoLayoutCalculateTask:(dispatch_block_t)calculateTask onComplete:(dispatch_block_t)onComplete {
     if (!calculateTask) {
         return;
