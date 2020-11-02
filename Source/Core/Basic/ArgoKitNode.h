@@ -16,6 +16,7 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 @property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
 @property (nonatomic, strong,nullable)  ArgoKitNode  *parentNode;
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
+@property (nonatomic, strong) NSMutableDictionary *bindProperties;
 @property (nonatomic, strong, readonly, nullable) UIView *view;
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic, assign) CGSize size;

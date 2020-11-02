@@ -11,13 +11,16 @@ import ArgoKit
 
 struct TestModel {
     @Property var title: String
+    @Alias var titleLabel: Text?
 }
 
-struct ContentView:View {
+class ContentView:View {
     let items = ["查查","cscs","122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     var model: TestModel
-    
+    init(model: TestModel) {
+        self.model = model
+    }
     var body:View{
         let gestur = TapGesture(numberOfTaps: 1, numberOfTouches: 1) { gesture in
         }
@@ -27,11 +30,9 @@ struct ContentView:View {
         }).width(point: 200).height(point: 30)
         .marginTop(point: 100).left(point: 10)
         
-        
         Toggle(true){ isOn in
             print("Toggle :",isOn)
         }.marginTop(point: 10)
-        
         
         Stepper(value: 10, in: 0...100, step: 4) { value in
             print("Stepper :",value)
@@ -53,8 +54,9 @@ struct ContentView:View {
         Button("") {
             print("buttom1")
         } builder: {
-            Text(model.title).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
-                .left(point: 20).textColor(.red).textAlignment(.center)
+//            Text(model.$title).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
+//                .left(point: 20).textColor(.red).textAlignment(.center)
+            Text(model.$title).width(point: 100).height(point: 100).alias(model.$titleLabel)
         }.alignItemsCenter()
         
 
