@@ -10,7 +10,7 @@ import Foundation
 
 fileprivate var internalID: Int = 1
 
-protocol DynamicProperty { }
+internal protocol DynamicProperty { }
 
 @propertyWrapper
 //@dynamicMemberLookup
@@ -23,6 +23,10 @@ public class Property<Value> : DynamicProperty {
     /// Initialize with the provided initial value.
     public init(wrappedValue value: Value) {
         self._value = value
+    }
+    
+    deinit {
+        print("deinit")
     }
     
     public var projectedValue: Property<Value> {
@@ -41,8 +45,9 @@ public class Property<Value> : DynamicProperty {
         }
         set {
             _value = newValue
-//            _ = self.subscribers.map { $0(newValue) }
-            _ = self.subscribersMap.mapValues { $0(newValue) }
+            for subscriber in self.subscribersMap.values {
+                subscriber(newValue)
+            }
         }
     }
     
