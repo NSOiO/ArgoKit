@@ -336,16 +336,17 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     }
 }
 
-- (void)nodeAction:(id)action{
-    [self registerAction:action paramter:nil];
+- (void)nodeAction:(id)action {
+    [self sendActionToTarget:action paramter:nil];
 }
 
-- (void)registerAction:(id)target paramter:(nullable NSArray *)paramter{
+- (id)sendActionToTarget:(id)target paramter:(NSArray *)paramter {
     NSString *keyString = [@([target hash]) stringValue];
     ArgoKitNodeBlock actionBlock = self.actionMap[keyString];
     if(actionBlock){
-        actionBlock(paramter);
+        return actionBlock(target, paramter);
     }
+    return nil;
 }
 
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action{

@@ -24,12 +24,11 @@ public struct PageControl:View{
         pPageControl.numberOfPages = numberOfPages
         pNode = ArgoKitNode(view: pPageControl)
         
-        pNode.addTarget(pPageControl, for: UIControl.Event.valueChanged) { (items) in
-            for item in items{
-                if item is UIPageControl {
-                    onPageChange((item as! UIPageControl).currentPage)
-                }
+        pNode.addTarget(pPageControl, for: UIControl.Event.valueChanged) { (target, paramter) in
+            if let pageControl = target as? UIPageControl {
+                onPageChange(pageControl.currentPage)
             }
+            return nil
         }
     }
 }

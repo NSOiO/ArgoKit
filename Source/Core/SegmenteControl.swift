@@ -41,12 +41,11 @@ public struct SegmenteControl:View{
         pSegment = UISegmentedControl(items: items)
         pNode = ArgoKitNode(view: pSegment)
         
-        pNode.addTarget(pSegment, for: UIControl.Event.valueChanged) { (items) in
-            for item in items{
-                if item is UISegmentedControl {
-                    onSegmentedChange((item as! UISegmentedControl).selectedSegmentIndex)
-                }
+        pNode.addTarget(pSegment, for: UIControl.Event.valueChanged) { (target, paramter) in
+            if let segmentedControl = target as? UISegmentedControl {
+                onSegmentedChange(segmentedControl.selectedSegmentIndex)
             }
+            return nil
         }
     }
 }
