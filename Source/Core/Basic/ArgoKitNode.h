@@ -16,6 +16,7 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 //@property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
 @property (nonatomic, strong,nullable)  ArgoKitNode  *parentNode;
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
+@property (nonatomic, strong) NSMutableDictionary *bindProperties;
 @property (nonatomic, strong, readonly, nullable) UIView *view;
 /**
  Return's a BOOL indicating if a view is dirty. When a node is dirty it usually indicates that it will be remeasured on the next layout pass.

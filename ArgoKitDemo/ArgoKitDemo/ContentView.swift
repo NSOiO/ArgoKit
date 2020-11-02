@@ -19,11 +19,9 @@ struct ContentView:View {
         }).width(point: 200).height(point: 30)
         .marginTop(point: 100).left(point: 10)
         
-        
         Toggle(true){ isOn in
             print("Toggle :",isOn)
         }.marginTop(point: 10)
-        
         
         Stepper(value: 10, in: 0...100, step: 4) { value in
             print("Stepper :",value)

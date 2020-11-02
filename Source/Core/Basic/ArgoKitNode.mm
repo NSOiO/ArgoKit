@@ -286,6 +286,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         _size = view.bounds.size;
         _frame = view.frame;
         _origin = _frame.origin;
+        _bindProperties = [NSMutableDictionary new];
     }
     return self;
 }
