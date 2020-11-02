@@ -35,7 +35,7 @@ extension Button{
         self.init()
         button.setTitle(text as? String, for: .normal)
         print("button:hash",button.hashValue)
-        pNode.addTarget(button, for: UIControl.Event.valueChanged) { (items) in
+        pNode.addTarget(button, for: UIControl.Event.touchUpInside) { (obj, paramter) in
             action();
         }
         

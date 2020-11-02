@@ -132,12 +132,11 @@ extension View{
     public func gesture(gesture:Gesture)->Self{
         gesture.gesture.isEnabled = true
         self.node?.view?.addGestureRecognizer(gesture.gesture)
-        self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (items) in
-            for item in items{
-                if item is UIGestureRecognizer {
-                    gesture.action(item as! UIGestureRecognizer)
-                }
+        self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (obj, paramter) in
+            if let gestureRecognizer = obj as? UIGestureRecognizer {
+                gesture.action(gestureRecognizer)
             }
+            return nil
         }
         return self
     }

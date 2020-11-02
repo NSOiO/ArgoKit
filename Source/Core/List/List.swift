@@ -7,13 +7,17 @@
 
 import Foundation
 
-public struct List : View {
+public struct List : ScrollView {
 
     private var tableView : UITableView
     private var pNode : ArgoKitTableNode
     
     public var body: View {
         self
+    }
+    
+    public var scrollView: UIScrollView {
+        tableView
     }
     
     public var type: ArgoKitNodeType {

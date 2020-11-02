@@ -14,6 +14,13 @@ struct Demo1ContentView:View {
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     var text:Text = Text("sds11111").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
         .left(point: 20).textColor(.red)
+    var stack: HStack = HStack{
+        ImageView("turtlerock")
+        Text("sds11111").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
+            .left(point: 20).textColor(.red)
+        Text("sds").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
+            .left(point: 20).textColor(.red)
+    }
     var body:View{
         let gestur = TapGesture(numberOfTaps: 1, numberOfTouches: 1) { gesture in
         }
@@ -46,22 +53,22 @@ struct Demo1ContentView:View {
         
         Button(text: "CESI"){
             print("buttom1")
-            text.text("buttom1")
+            text.text("buttom1buttom1buttom1buttom1").width(point:100).done()
         }.width(point: 50).height(point: 100).backgroundColor(.yellow).marginLeft(point: 10)
-//        Button("CESI") {
-//            print("buttom1")
-//            text.text("buttom1")
-//        } builder: {
-//            Text("CESI").backgroundColor(.yellow).width(point: 50).height(point: 100).marginTop(point: 50)
-//                .left(point: 20).textColor(.red).textAlignment(.center)
-//        }.alignItemsCenter().width(point: 50).height(point: 100)
+        Button("CESI") {
+            print("buttom1")
+            text.text("buttom1")
+        } builder: {
+            Text("CESI").backgroundColor(.yellow).width(point: 50).height(point: 100).marginTop(point: 50)
+                .left(point: 20).textColor(.red).textAlignment(.center)
+        }.alignItemsCenter().width(point: 50).height(point: 100)
         
-//        HStack{
-//            ImageView("turtlerock")
-//            text
-//            Text("sds").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
-//                .left(point: 20).textColor(.red)
-//        }
+        HStack{
+            ImageView("turtlerock")
+            text
+            Text("sds").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
+                .left(point: 20).textColor(.red)
+        }
    
     }
 }

@@ -7,13 +7,17 @@
 
 import Foundation
 
-public struct TextView : View {
+public struct TextView : ScrollView {
     
     private var textView : UITextView
     private var pNode : ArgoKitNode
     
     public var body: View {
         self
+    }
+    
+    public var scrollView: UIScrollView {
+        textView
     }
     
     public var type: ArgoKitNodeType {

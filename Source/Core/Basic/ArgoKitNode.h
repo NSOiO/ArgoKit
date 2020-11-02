@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 //@class ArgoKitLayout;
 
-typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
+typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter);
 @interface ArgoKitNode : NSObject
 //// 布局layout
 //@property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
@@ -52,8 +52,7 @@ typedef void(^ArgoKitNodeBlock)(NSArray<id> *paramter);
 - (Class)viewClass;
 
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
-
-- (void)registerAction:(id)target paramter:(nullable NSArray *)paramter;
+- (nullable id)sendActionWithObj:(id)obj paramter:(nullable NSArray *)paramter;
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
 @end
 

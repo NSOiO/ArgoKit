@@ -17,8 +17,8 @@ extension Text {
         self.node?.bindProperties.setObject(canel, forKey: "text" as NSString)
     }
     
-    public func alias(_ alias: Alias<Text?>) -> Text{
-        alias.wrappedValue = self
-        return self
-    }
+//    public func alias(_ alias: Alias<Text?>) -> Text{
+//        alias.wrappedValue = self
+//        return self
+//    }
 }
