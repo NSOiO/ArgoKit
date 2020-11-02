@@ -7,69 +7,54 @@
 
 #import "ArgoKitNode+ScrollViewDelegate.h"
 
-NSString * const ArgoKitScrollViewDidScrollActionKey = @"ArgoKitScrollViewDidScrollActionKey";
-NSString * const ArgoKitScrollViewDidZoomActionKey = @"ArgoKitScrollViewDidZoomActionKey";
-NSString * const ArgoKitScrollViewWillBeginDraggingActionKey = @"ArgoKitScrollViewWillBeginDraggingActionKey";
-NSString * const ArgoKitScrollViewWillEndDraggingWithVelocityTargetContentOffsetActionKey = @"ArgoKitScrollViewWillEndDraggingWithVelocityTargetContentOffsetActionKey";
-NSString * const ArgoKitScrollViewDidEndDraggingWillDecelerateActionKey = @"ArgoKitScrollViewDidEndDraggingWillDecelerateActionKey";
-NSString * const ArgoKitScrollViewWillBeginDeceleratingActionKey = @"ArgoKitScrollViewWillBeginDeceleratingActionKey";
-NSString * const ArgoKitScrollViewDidEndDeceleratingActionKey = @"ArgoKitScrollViewDidEndDeceleratingActionKey";
-NSString * const ArgoKitScrollViewDidEndScrollingAnimationActionKey = @"ArgoKitScrollViewDidEndScrollingAnimationActionKey";
-NSString * const ArgoKitScrollViewViewForZoomingActionKey = @"ArgoKitScrollViewViewForZoomingActionKey";
-NSString * const ArgoKitScrollViewWillBeginZoomingWithViewActionKey = @"ArgoKitScrollViewWillBeginZoomingWithViewActionKey";
-NSString * const ArgoKitScrollViewDidEndZoomingWithViewAtScaleActionKey = @"ArgoKitScrollViewDidEndZoomingWithViewAtScaleActionKey";
-NSString * const ArgoKitScrollViewShouldScrollToTopActionKey = @"ArgoKitScrollViewShouldScrollToTopActionKey";
-NSString * const ArgoKitScrollViewDidScrollToTopActionKey = @"ArgoKitScrollViewDidScrollToTopActionKey";
-NSString * const ArgoKitScrollViewDidChangeAdjustedContentInsetActionKey = @"ArgoKitScrollViewDidChangeAdjustedContentInsetActionKey";
-
 @implementation ArgoKitNode (ScrollViewDelegate)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView; {
-    [self sendActionWithObj:ArgoKitScrollViewDidScrollActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewDidZoomActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewWillBeginDraggingActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    [self sendActionWithObj:ArgoKitScrollViewWillEndDraggingWithVelocityTargetContentOffsetActionKey paramter:@[[NSValue valueWithCGPoint:velocity], [NSValue valueWithPointer:targetContentOffset]]];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:@[[NSValue valueWithCGPoint:velocity], [NSValue valueWithPointer:targetContentOffset]]];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [self sendActionWithObj:ArgoKitScrollViewDidEndDraggingWillDecelerateActionKey paramter:@[@(decelerate)]];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:@[@(decelerate)]];
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewWillBeginDeceleratingActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewDidEndDeceleratingActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewDidEndScrollingAnimationActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return [self sendActionWithObj:ArgoKitScrollViewViewForZoomingActionKey paramter:nil];
+    return [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view {
-    [self sendActionWithObj:ArgoKitScrollViewWillBeginZoomingWithViewActionKey paramter:view ? @[view] : nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:view ? @[view] : nil];
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale {
-    [self sendActionWithObj:ArgoKitScrollViewDidEndZoomingWithViewAtScaleActionKey paramter:view ? @[@(scale), view] : @[@(scale)]];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:view ? @[@(scale), view] : @[@(scale)]];
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    id vaule = [self sendActionWithObj:ArgoKitScrollViewShouldScrollToTopActionKey paramter:nil];
+    id vaule = [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
     if (vaule) {
         return [vaule boolValue];
     }
@@ -77,11 +62,11 @@ NSString * const ArgoKitScrollViewDidChangeAdjustedContentInsetActionKey = @"Arg
 }
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewDidScrollToTopActionKey paramter:nil];
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
-- (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView {
-    [self sendActionWithObj:ArgoKitScrollViewDidChangeAdjustedContentInsetActionKey paramter:nil];
+- (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0)) {
+    [self sendActionWithObj:NSStringFromSelector(_cmd) paramter:nil];
 }
 
 @end
