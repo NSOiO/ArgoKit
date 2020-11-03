@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 + (void)startRunloop;
 + (void)stopRunloop;
-+ (void)addLayoutNode:(ArgoKitNode *)node;
-+ (void)removeLayoutNode:(ArgoKitNode *)node;
++ (void)addLayoutNode:(nullable ArgoKitNode *)node;
++ (void)removeLayoutNode:(nullable ArgoKitNode *)node;
 @end
 
 NS_ASSUME_NONNULL_END

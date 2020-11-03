@@ -24,18 +24,18 @@ struct ContentView:View {
         
         Slider(value: 0.7,in:-1...1,onValueChanged: { value in
             print("UISlider ", value)
-        }).width(point: 200).height(point: 30)
-        .marginTop(point: 100).left(point: 10)
+        }).width(200).height(30)
+        .margin(edge: .top, value: 30)
         
         
         Toggle(true){ isOn in
             print("Toggle :",isOn)
-        }.marginTop(point: 10)
+        }.margin(edge: .top, value: 10)
         
         
         Stepper(value: 10, in: 0...100, step: 4) { value in
             print("Stepper :",value)
-    }.width(point: 100).height(point: 30).marginLeft(point: 150)
+    }.width(100).height(30).margin(edge: .left, value: 30)
         
 
         SegmenteControl { index in
@@ -46,16 +46,16 @@ struct ContentView:View {
            Text("t")
            Text("u")
            ImageView("turtlerock")
-        }.width(percent: 100).height(point: 30).marginTop(point: 150)
+        }.width(100%).height(30).margin(edge: .top, value: 50)
         
         
         //
         Button("") {
             print("buttom1")
         } builder: {
-            Text(model.title).backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
-                .left(point: 20).textColor(.red).textAlignment(.center)
-        }.alignItemsCenter()
+            Text(model.title).backgroundColor(.yellow).width(100).height(100).margin(edge: .top, value: 50)
+                .position(edge: .left, value: 20).textColor(.red).textAlignment(.center)
+        }.alignItems(.center)
         
 
 //        ForEach(items){item in
@@ -64,10 +64,11 @@ struct ContentView:View {
 ////        }.row()
         HStack{
             ImageView("turtlerock")
-            Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
-                .left(point: 20).textColor(.red)
-            Text("sds").backgroundColor(.yellow).width(point: 100).height(point: 100).marginTop(point: 50)
-                .left(point: 20).textColor(.red)
+            Text("sds").backgroundColor(.yellow).width(100).height(100).margin(edge: .top, value: 50)
+                .position(edge: .left, value: 30)
+                .textColor(.red)
+            Text("sds").backgroundColor(.yellow).width(100).height(100).margin(edge: .top, value: 50)
+                .position(edge: .left, value: 20).textColor(.red)
         }
         
 //        DatePicker { date in

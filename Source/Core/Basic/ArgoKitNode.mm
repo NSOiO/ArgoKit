@@ -12,6 +12,7 @@
 #import "ArgoKitUtils.h"
 @class ArgoKitLayout;
 @interface ArgoKitNode()
+
 @property(nonatomic,strong,nullable)UIView *view;
 // 布局layout
 @property (nonatomic, strong) ArgoKitLayout *layout;
@@ -361,6 +362,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @end
 
 @implementation ArgoKitNode(LayoutNode)
+
+- (BOOL)isRootNode{
+    return (self.parentNode == nil);
+}
 - (void)markDirty{
     [self.layout markDirty];
 }
@@ -558,7 +563,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)alignSelfCenter{
     return [self alignSelf:YGAlignCenter];
 }
-- (void)alignSelFlexEnd{
+- (void)alignSelfFlexEnd{
     return [self alignSelf:YGAlignFlexEnd];
 }
 - (void)alignSelfStretch{

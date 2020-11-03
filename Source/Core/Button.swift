@@ -28,18 +28,17 @@ public struct Button:View{
         self.init(text: text as? String, action: action)
         addSubNodes(builder: builder)
     }
+    
 }
 
 extension Button{
     public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
-        button.setTitle(text as? String, for: .normal)
+        button.setTitle(text as? String, for: UIControl.State.normal)
         print("button:hash",button.hashValue)
         pNode.addTarget(button, for: UIControl.Event.touchUpInside) { (obj, paramter) in
             action();
         }
-        
-
     }
 }
 

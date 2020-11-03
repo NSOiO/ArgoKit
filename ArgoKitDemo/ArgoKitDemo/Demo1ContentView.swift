@@ -27,18 +27,17 @@ struct Demo1ContentView:View {
         
         Slider(value: 0.7,in:-1...1,onValueChanged: { value in
             print("UISlider ", value)
-        }).width(point: 200).height(point: 30)
-        .marginTop(point: 100).left(point: 10)
+        }).width(200).height(30).margin(edge: .top, value: 60)
         
         
         Toggle(true){ isOn in
             print("Toggle :",isOn)
-        }.marginTop(point: 10)
+        }.margin(edge: .top, value: 10)
         
         
         Stepper(value: 10, in: 0...100, step: 4) { value in
             print("Stepper :",value)
-        }.width(point: 100).height(point: 30).marginLeft(point: 150)
+        }.width(100).height(30).margin(edge: .left, value: 150)
         
 
         SegmenteControl { index in
@@ -49,18 +48,19 @@ struct Demo1ContentView:View {
            Text("t")
            Text("u")
            ImageView("turtlerock")
-        }.width(percent: 100).height(point: 30).marginTop(point: 150)
+        }.width(100%).height(30).margin(edge: .top, value: 150)
         
         Button(text: "buttom1buttom1buttom1buttom1"){
             print("buttom1")
-            model.text1?.text("buttom1buttom1buttom1buttom1").applyLayout()
+            model.text1?.width(60).text("buttom1buttom1buttom1buttom1").numberOfLines(2)
             
-        }.width(point: 50).height(point: 100).backgroundColor(.yellow).marginLeft(point: 10)
+        }.titleColor(.red, for: UIControl.State.normal)
+        .width(150).height(100).backgroundColor(.yellow).margin(edge: .top, value: 10)
         
         HStack{
             ImageView("turtlerock")
-            Text("11").backgroundColor(.yellow).height(point: 100).marginTop(point: 50)
-                .left(point: 20).textColor(.red).alias(variable: &model.text1)
+            Text("11").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
+                .textColor(.red).alias(variable: &model.text1)
         }.alias(variable: &model.stack1)
    
     }

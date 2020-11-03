@@ -12,15 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter);
 @interface ArgoKitNode : NSObject
-//// 布局layout
-//@property (nonatomic, strong, readonly, nullable) ArgoKitLayout *layout;
+/* node父节点*/
 @property (nonatomic, strong,nullable)  ArgoKitNode  *parentNode;
+/* node包含的子节点*/
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
+/* 是否为根节点*/
+@property (nonatomic, assign, readonly)BOOL isRootNode;
+
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 @property (nonatomic, strong, readonly, nullable) UIView *view;
-/*
- frame 相关
- */
+
+/* frame 相关 */
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
 
@@ -103,7 +105,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 /// Text and children and laid out from right to left. Margin and padding applied the start of an element are applied on the right side.
 - (void)directionRTL;
-
 
 /*
  Flex direction controls the direction in which children of a node are laid out. This is also referred to as the main axis. The main axis is the direction in which children are laid out. The cross axis the the axis perpendicular to the main axis, or the axis which wrapping lines are laid out in.
@@ -197,7 +198,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (void)alignSelfAuto;
 - (void)alignSelfFlexStart;
 - (void)alignSelfCenter;
-- (void)alignSelFlexEnd;
+- (void)alignSelfFlexEnd;
 - (void)alignSelfStretch;
 - (void)alignSelfBaseline;
 - (void)alignSelfSpaceBetween;
