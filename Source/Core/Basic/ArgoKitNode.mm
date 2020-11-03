@@ -356,6 +356,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if ([target respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
         [target addTarget:self action:@selector(nodeAction:) forControlEvents:controlEvents];
         [self observeAction:target actionBlock:action];
+    }else if([target respondsToSelector:@selector(addTarget:action:)]){
+        [target addTarget:self action:@selector(nodeAction:)];
+        [self observeAction:target actionBlock:action];
     }
 }
 

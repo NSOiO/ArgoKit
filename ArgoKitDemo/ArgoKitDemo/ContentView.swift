@@ -69,6 +69,8 @@ struct ContentView:View {
                 .textColor(.red)
             Text("sds").backgroundColor(.yellow).width(100).height(100).margin(edge: .top, value: 50)
                 .position(edge: .left, value: 20).textColor(.red)
+        }.tapAction {
+            print("tapAction")
         }
         
 //        DatePicker { date in

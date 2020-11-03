@@ -71,6 +71,62 @@ extension View{
     }
 }
 
+// modifier
+
+extension View {
+
+
+    public func isUserInteractionEnabled(_ value:Bool)->Self{
+        self.node?.view?.isUserInteractionEnabled = value
+        return self
+    }
+
+    public func tag(_ value:Int)->Self{
+        self.node?.view?.tag = value
+        return self
+    }
+    public func tag()->Int?{
+        return self.node?.view?.tag
+    }
+    public func layer()-> CALayer? {
+        return self.node?.view?.layer
+    }
+
+    @available(iOS 9.0, *)
+    public func canBecomeFocused()-> Bool? {
+        return self.node?.view?.canBecomeFocused
+    }
+
+    @available(iOS 9.0, *)
+    public func isFocused()-> Bool? {
+        return self.node?.view?.isFocused
+    }
+
+    /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
+    @available(iOS 14.0, *)
+    public func focusGroupIdentifier(_ value:String?)->Self{
+        self.node?.view?.focusGroupIdentifier = value
+        return self
+    }
+    
+    @available(iOS 14.0, *)
+    public func focusGroupIdentifier()-> String? {
+        return self.node?.view?.focusGroupIdentifier
+    }
+
+    @available(iOS 9.0, *)
+    public func semanticContentAttribute(_ value:UISemanticContentAttribute)->Self{
+        self.node?.view?.semanticContentAttribute = value
+        return self
+    }
+    public func semanticContentAttribute()->UISemanticContentAttribute?{
+        return self.node?.view?.semanticContentAttribute
+    }
+    @available(iOS 10.0, *)
+    public func effectiveUserInterfaceLayoutDirection()-> UIUserInterfaceLayoutDirection? {
+        return self.node?.view?.effectiveUserInterfaceLayoutDirection
+    }
+}
 extension View{
     public func clipsToBounds(_ value:Bool)->Self{
         if let node = self.node {
@@ -123,9 +179,10 @@ extension View{
     }
 }
 
-extension View{
-}
-// UITapGestureRecognizer
+
+
+
+// UIGestureRecognizer
 extension View{
     public func gesture(gesture:Gesture)->Self{
         gesture.gesture.isEnabled = true
@@ -144,6 +201,24 @@ extension View{
     }
 }
 
+extension View{
+    public func tapAction(numberOfTaps: Int = 1, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
+        let gesture = TapGesture(numberOfTaps: numberOfTaps, numberOfTouches: numberOfTouches) { gesture in
+            action()
+        }
+        return self.gesture(gesture:gesture)
+    }
+    
+    public func longPressAction(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
+        let gesture = LongPressGesture(numberOfTaps:numberOfTaps,numberOfTouches:numberOfTouches,minimumPressDuration:minimumPressDuration,allowableMovement:allowableMovement) { gesture in
+            action()
+        }
+        return self.gesture(gesture:gesture)
+    }
+}
+
+
+// layout
 extension View{
     
     // 标记Node需要重新布局
