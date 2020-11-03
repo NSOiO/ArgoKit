@@ -67,6 +67,7 @@ extension ArgoKitDataSourceNode {
             return node
         } else if let view = self.buildNodeFunc?(self.dataList![section][row]) {
             if let node = view.type.viewNode() {
+                node.done()
                 self.nodeCahe?.setObject(node, forKey: cacheKey)
                 return node
             }

@@ -19,7 +19,7 @@
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
 //
-@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+@property (nonatomic, strong) NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 
 @property (nonatomic, assign) CGRect frame;
 @end
@@ -370,11 +370,13 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     if(self.parentNode){
         [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
+        self.parentNode = nil;
     }
 }
 - (void)removeAllChildNodes {
     for (ArgoKitNode *child in self.childs) {
         [child.view removeFromSuperview];
+        child.parentNode = nil;
     }
     [self.childs removeAllObjects];
 }

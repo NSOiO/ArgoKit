@@ -208,3 +208,626 @@ extension List {
         return self
     }
 }
+
+extension List {
+    
+    public func titlesForHeaderInSection(_ value: [Int:String]?) -> Self {
+        pNode.titlesForHeaderInSection = value;
+        return self
+    }
+    
+    public func titlesForFooterInSection(_ value: [Int:String]?) -> Self {
+        pNode.titlesForFooterInSection = value;
+        return self
+    }
+    
+    public func canEditRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:canEditRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return true
+        })
+        return self
+    }
+    
+    public func canMoveRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:canMoveRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return true
+        })
+        return self
+    }
+    
+    public func titlesForSection(_ value: [String]?) -> Self {
+        pNode.titlesForSection = value;
+        return self
+    }
+    
+    public func commitEditingStyleForRowAtIndexPath(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:commit:forRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let editingStyle: UITableViewCell.EditingStyle = paramter![0] as! UITableViewCell.EditingStyle
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                action(editingStyle, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func moveRowAtIndexPathToIndexPath(_ action: @escaping (_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:moveRowAt:to:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let sourceIndexPath: IndexPath = paramter![0] as! IndexPath
+                let destinationIndexPath: IndexPath = paramter![1] as! IndexPath
+                action(sourceIndexPath, destinationIndexPath)
+            }
+            return nil
+        })
+        return self
+    }
+}
+
+extension List {
+    
+    public func prefetchRowsAtIndexPaths(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:prefetchRowsAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPaths: [IndexPath] = paramter![0] as! [IndexPath]
+                action(indexPaths)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func cancelPrefetchingForRowsAtIndexPaths(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:cancelPrefetchingForRowsAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPaths: [IndexPath] = paramter![0] as! [IndexPath]
+                action(indexPaths)
+            }
+            return nil
+        })
+        return self
+    }
+}
+
+extension List {
+    
+    public func willDisplayCellForRowAtIndexPath(_ action: @escaping (_ node: ArgoKitNode, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willDisplay:forRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let node: ArgoKitNode = paramter![0] as! ArgoKitNode
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                action(node, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+//
+//    }
+
+    public func didEndDisplayingCellForRowAtIndexPath(_ action: @escaping (_ node: ArgoKitNode, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplaying:forRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let node: ArgoKitNode = paramter![0] as! ArgoKitNode
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                action(node, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+//    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+//
+//    }
+    
+    public func shouldHighlightRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:shouldHighlightRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return true
+        })
+        return self
+    }
+
+    public func didHighlightRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didHighlightRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func didUnhighlightRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didUnhighlightRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func willSelectRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> IndexPath?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willSelectRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func willDeselectRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> IndexPath?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willDeselectRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func didSelectRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didSelectRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func didDeselectRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didDeselectRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func editingStyleForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> UITableViewCell.EditingStyle) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:editingStyleForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return UITableViewCell.EditingStyle.delete
+        })
+        return self
+    }
+
+    public func titleForDeleteConfirmationButtonForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> String?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    @available(iOS, introduced: 8.0, deprecated: 13.0)
+    public func editActionsForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> [UITableViewRowAction]?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:editActionsForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 11.0, *)
+    public func leadingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> UISwipeActionsConfiguration?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 11.0, *)
+    public func trailingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> UISwipeActionsConfiguration?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func shouldIndentWhileEditingRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:shouldIndentWhileEditingRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func willBeginEditingRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willBeginEditingRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func didEndEditingRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath?) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didEndEditingRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            } else {
+                action(nil)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func targetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath(_ action: @escaping (_ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let sourceIndexPath: IndexPath = paramter![0] as! IndexPath
+                let proposedDestinationIndexPath: IndexPath = paramter![1] as! IndexPath
+                return action(sourceIndexPath, proposedDestinationIndexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func indentationLevelForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Int) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:indentationLevelForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS, introduced: 5.0, deprecated: 13.0)
+    public func shouldShowMenuForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:shouldShowMenuForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS, introduced: 5.0, deprecated: 13.0)
+    public func canPerformActionForRowAtIndexPathWithSender(_ action: @escaping (_ action: Selector, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:canPerformAction:forRowAt:withSender:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let act: Selector = paramter![0] as! Selector
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                var sender: Any? = nil
+                if paramter?.count ?? 0 >= 3 {
+                    sender = paramter![2]
+                }
+                return action(act, indexPath, sender)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS, introduced: 5.0, deprecated: 13.0)
+    public func performActionForRowAtIndexPathWithSender(_ action: @escaping (_ action: Selector, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:performAction:forRowAt:withSender:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let act: Selector = paramter![0] as! Selector
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                var sender: Any? = nil
+                if paramter?.count ?? 0 >= 3 {
+                    sender = paramter![2]
+                }
+                action(act, indexPath, sender)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func canFocusRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:canFocusRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func shouldUpdateFocusInContext(_ action: @escaping (_ context: UITableViewFocusUpdateContext) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:shouldUpdateFocusIn:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let context: UITableViewFocusUpdateContext = paramter![0] as! UITableViewFocusUpdateContext
+                return action(context)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func didUpdateFocusInContextWithCoordinator(_ action: @escaping (_ context: UITableViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didUpdateFocusIn:with:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let context: UITableViewFocusUpdateContext = paramter![0] as! UITableViewFocusUpdateContext
+                let coordinator: UIFocusAnimationCoordinator = paramter![1] as! UIFocusAnimationCoordinator
+                action(context, coordinator)
+            }
+            return nil
+        })
+        return self
+    }
+
+    public func indexPathForPreferredFocusedView(_ action: @escaping () -> IndexPath?) -> Self {
+        let sel = #selector(ArgoKitTableNode.indexPathForPreferredFocusedView(in:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            return action()
+        })
+        return self
+    }
+
+    @available(iOS 11.0, *)
+    public func shouldSpringLoadRowAtIndexPathWithContext(_ action: @escaping (_ context: UISpringLoadedInteractionContext) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:shouldSpringLoadRowAt:with:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let context: UISpringLoadedInteractionContext = paramter![0] as! UISpringLoadedInteractionContext
+                return action(context)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func shouldBeginMultipleSelectionInteractionAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:shouldBeginMultipleSelectionInteractionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                return action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func didBeginMultipleSelectionInteractionAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:didBeginMultipleSelectionInteractionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                action(indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func didEndMultipleSelectionInteraction(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableViewDidEndMultipleSelectionInteraction(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            action()
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func contextMenuConfigurationForRowAtIndexPathWithPoint(_ action: @escaping (_ indexPath: IndexPath, _ point: CGPoint) -> UIContextMenuConfiguration?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:contextMenuConfigurationForRowAt:point:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let indexPath: IndexPath = paramter![0] as! IndexPath
+                let point: CGPoint = paramter![1] as! CGPoint
+                return action(indexPath, point)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func previewForHighlightingContextMenuWithConfiguration(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:previewForHighlightingContextMenuWithConfiguration:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let configuration: UIContextMenuConfiguration = paramter![0] as! UIContextMenuConfiguration
+                return action(configuration)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func previewForDismissingContextMenuWithConfiguration(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:previewForDismissingContextMenuWithConfiguration:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let configuration: UIContextMenuConfiguration = paramter![0] as! UIContextMenuConfiguration
+                return action(configuration)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 13.0, *)
+    public func willPerformPreviewActionForMenuWithConfigurationAndAnimator(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionCommitAnimating) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willPerformPreviewActionForMenuWith:animator:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 {
+                let configuration: UIContextMenuConfiguration = paramter![0] as! UIContextMenuConfiguration
+                let animator: UIContextMenuInteractionCommitAnimating = paramter![1] as! UIContextMenuInteractionCommitAnimating
+                action(configuration, animator)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 14.0, *)
+    public func willDisplayContextMenuWithConfigurationAndAnimator(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayContextMenu:animator:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let configuration: UIContextMenuConfiguration = paramter![0] as! UIContextMenuConfiguration
+                var animator: UIContextMenuInteractionAnimating? = nil
+                if paramter?.count ?? 0 >= 2 {
+                    animator = paramter![1] as? UIContextMenuInteractionAnimating
+                }
+                action(configuration, animator)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS 14.0, *)
+    public func willEndContextMenuInteractionWithConfigurationAndAnimator(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
+        let sel = #selector(ArgoKitTableNode.tableView(_:willEndContextMenuInteraction:animator:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let configuration: UIContextMenuConfiguration = paramter![0] as! UIContextMenuConfiguration
+                var animator: UIContextMenuInteractionAnimating? = nil
+                if paramter?.count ?? 0 >= 2 {
+                    animator = paramter![1] as? UIContextMenuInteractionAnimating
+                }
+                action(configuration, animator)
+            }
+            return nil
+        })
+        return self
+    }
+}

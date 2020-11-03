@@ -35,7 +35,9 @@ class ArgoKitListCell: UITableViewCell {
     
     public func linkCellNode(_ node: ArgoKitNode) {
         
+        node.removeFromSuperNode()
         self.contentNode?.addChildNode(node)
-        self.contentNode?.done()
+        node.view?.frame = self.contentView.bounds // TODO
+//        self.contentNode?.done()
     }
 }
