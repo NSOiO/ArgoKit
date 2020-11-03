@@ -49,6 +49,9 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
  */
 @property (nonatomic, readwrite, assign, setter=setEnabled:) BOOL isEnabled;
 
+/*If the origin is reset, the root view's layout results will applied from {0,0} when Perform a layout calculation and update the frames of the views in the hierarchy with the results*/
+@property (nonatomic, readwrite, assign) BOOL resetOrigin;
+
 - (instancetype)initWithView:(UIView *)view;
 
 - (Class)viewClass;
@@ -73,11 +76,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
  */
 - (void)applyLayout NS_SWIFT_NAME(applyLayout());
 
-/**
- Perform a layout calculation and update the frames of the views in the hierarchy with the results.
- If the origin is not preserved, the root view's layout results will applied from {0,0}.
- */
-- (void)applyLayoutPreservingOrigin:(BOOL)preserveOrigin  NS_SWIFT_NAME(applyLayout(preservingOrigin:));
+- (void)applyLayout:(CGSize)size
+    NS_SWIFT_NAME(applyLayout(size:));
 
 /**
   Returns the size of the view based on provided constraints. Pass NaN for an unconstrained dimension.

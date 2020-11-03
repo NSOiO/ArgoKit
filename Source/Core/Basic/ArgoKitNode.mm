@@ -59,11 +59,10 @@ static YGConfigRef globalConfig;
 }
 
 #pragma mark --- 完成数据采集后计算 ---
-
-- (void)applyLayoutPreservingOrigin:(BOOL)preserveOrigin
+- (void)applyLayoutWithsize:(CGSize)size
 {
-  [self calculateLayoutWithSize:self.argoNode.size];
-  YGApplyLayoutToNodeHierarchy(self.argoNode, preserveOrigin);
+  [self calculateLayoutWithSize:size];
+  YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
 
 // 视图是否为
@@ -131,7 +130,7 @@ static YGConfigRef globalConfig;
 
 #pragma mark - Private
 // 计算当前node
-static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigin)
+static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
 {
   const ArgoKitLayout *layout = node.layout;
   YGNodeRef ygnode = layout.ygnode;
@@ -148,7 +147,7 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigin)
     topLeft.y + YGNodeLayoutGetHeight(ygnode),
   };
 
-  const CGPoint origin = preserveOrigin ? node.origin : CGPointZero;
+  const CGPoint origin = node.resetOrigin ? CGPointZero:node.origin;
   CGRect frame = (CGRect) {
       .origin = {
         .x = YGRoundPixelValue(topLeft.x + origin.x),
@@ -166,7 +165,7 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigin)
 
   if (![layout isLeaf]) {
     for (NSUInteger i=0; i<node.childs.count; i++) {
-        YGApplyLayoutToNodeHierarchy(node.childs[i], NO);
+        YGApplyLayoutToNodeHierarchy(node.childs[i]);
     }
   }
 }
@@ -285,6 +284,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     self = [super init];
     if (self) {
         _view = view;
+        _resetOrigin = NO;
         _isEnabled = YES;
         _isUIView = [view isMemberOfClass:[UIView class]];
         _size = view.bounds.size;
@@ -386,15 +386,16 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (void)applyLayout{
     if (self.layout) {
-        [self.layout applyLayoutPreservingOrigin:YES];
+        [self.layout applyLayoutWithsize:self.size];
     }
 }
 
-- (void)applyLayoutPreservingOrigin:(BOOL)preserveOrigin{
+- (void)applyLayout:(CGSize)size{
     if (self.layout) {
-        [self.layout applyLayoutPreservingOrigin:preserveOrigin];
+        [self.layout applyLayoutWithsize:self.size];
     }
 }
+
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
     if (self.layout) {
         return [self.layout calculateLayoutWithSize:size];

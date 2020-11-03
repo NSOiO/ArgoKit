@@ -244,8 +244,9 @@ extension View{
         ArgoLayoutHelper.addLayoutNode(self.node)
     }
     
-    public func applyLayout(preservingOrigin:Bool){
-        self.node?.applyLayout(preservingOrigin: preservingOrigin)
+    public func applyLayout(size:CGSize){
+        self.node?.applyLayout(size:size)
+        ArgoLayoutHelper.addLayoutNode(self.node)
     }
     
     public func calculateLayout(size:CGSize){
