@@ -6,14 +6,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class ArgoKitNode;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ArgoLayoutHelper : NSObject
 - (instancetype)init NS_UNAVAILABLE;
-+ (void)argoLayoutCalculateTask:(dispatch_block_t)calculateTask onComplete:(dispatch_block_t)onComplete;
 + (void)startRunloop;
 + (void)stopRunloop;
++ (void)addLayoutNode:(nullable ArgoKitNode *)node;
++ (void)removeLayoutNode:(nullable ArgoKitNode *)node;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -28,19 +28,17 @@ public struct Button:View{
         self.init(text: text as? String, action: action)
         addSubNodes(builder: builder)
     }
+    
 }
 
 extension Button{
     public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
-        button.setTitle(text as? String, for: .normal)
+        button.setTitle(text as? String, for: UIControl.State.normal)
         print("button:hash",button.hashValue)
-        
-        pNode.addTarget(button, for: UIControl.Event.valueChanged) { (obj, paramter) in
+        pNode.addTarget(button, for: UIControl.Event.touchUpInside) { (obj, paramter) in
             action();
         }
-        
-
     }
 }
 
@@ -59,38 +57,38 @@ extension Button{
         return self
     }
     
-    public func setTitle(_ title: String?, for state: UIControl.State)->Self{
+    public func title(_ title: String?, for state: UIControl.State)->Self{
         button.setTitle(title, for: state)
         return self
     }
     
-    public func setTitleColor(_ color: UIColor?, for state: UIControl.State)->Self{
+    public func titleColor(_ color: UIColor?, for state: UIControl.State)->Self{
         button.setTitleColor(color, for: state)
         return self
     }
     
-    public func setTitleShadowColor(_ color: UIColor?, for state: UIControl.State)->Self{
+    public func titleShadowColor(_ color: UIColor?, for state: UIControl.State)->Self{
         button.setTitleShadowColor(color, for: state)
         return self
     }
     
-    public func setImage(_ image: UIImage?, for state: UIControl.State)->Self{
+    public func image(_ image: UIImage?, for state: UIControl.State)->Self{
         button.setImage(image, for: state)
         return self
     }
-    public func setBackgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
+    public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
         button.setBackgroundImage(image, for: state)
         return self
     }
 
     @available(iOS 13.0, *)
-    public func setPreferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?, forImageIn state: UIControl.State)->Self{
+    public func preferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?, forImageIn state: UIControl.State)->Self{
         button.setPreferredSymbolConfiguration(configuration, forImageIn: state)
         return self
     }
 
     @available(iOS 6.0, *)
-    public func setAttributedTitle(_ title: NSAttributedString?, for state: UIControl.State)->Self{
+    public func attributedTitle(_ title: NSAttributedString?, for state: UIControl.State)->Self{
         button.setAttributedTitle(title, for: state)
         return self
     }

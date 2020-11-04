@@ -29,7 +29,7 @@ public struct VStack:View {
         pView = view;
         pNode = ArgoKitNode(view: pView);
         pNode.column();
-        addSubNodes(builder)
+        addSubNodes(builder:builder)
     }
 }
 

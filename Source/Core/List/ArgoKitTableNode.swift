@@ -21,14 +21,14 @@ class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewD
     
     public var tableHeaderNode: ArgoKitNode? {
         didSet {
-            tableHeaderNode?.done()
+            tableHeaderNode?.applyLayout()
             self.tableView?.tableHeaderView = tableHeaderNode?.view
         }
     }
     
     public var tableFooterNode: ArgoKitNode? {
         didSet {
-            tableFooterNode?.done()
+            tableFooterNode?.applyLayout()
             self.tableView?.tableFooterView = tableFooterNode?.view
         }
     }

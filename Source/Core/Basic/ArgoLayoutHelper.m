@@ -8,67 +8,7 @@
 #import "ArgoLayoutHelper.h"
 #import "ArgoKitNode.h"
 #import <os/lock.h>
-static NSMutableArray<dispatch_block_t> *_asyncTaskQueue = nil;
 static CFRunLoopSourceRef _runloopSource = NULL;
-
-static void Argolock(dispatch_block_t callback) {
-    if (!callback) {
-        return;
-    }
-    if (@available(iOS 10.0, *)) {
-        static os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
-        os_unfair_lock_lock(&lock);
-        callback();
-        os_unfair_lock_unlock(&lock);
-    }
-    else {
-        static dispatch_semaphore_t lock = NULL;
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            lock = dispatch_semaphore_create(1);
-        });
-        dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
-        callback();
-        dispatch_semaphore_signal(lock);
-    }
-}
-
-static dispatch_queue_t ArgoLayoutCalculateQueue() {
-    static dispatch_queue_t calculateQueue = NULL;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        calculateQueue = dispatch_queue_create("queue.layout.calculate.argo", dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INTERACTIVE, 0));
-    });
-    return calculateQueue;
-}
-
-static void ArgoAddAsyncTaskBlockWithCompleteCallback(bool isAsync,dispatch_block_t task, dispatch_block_t complete) {
-    if (task == nil) return;
-    _asyncTaskQueue = [[NSMutableArray alloc] init];
-    if (isAsync) {
-        dispatch_async(ArgoLayoutCalculateQueue(), ^{
-            task();
-            if (complete == nil) {
-                return;
-            }
-            Argolock(^{
-                [_asyncTaskQueue addObject:complete];
-                CFRunLoopSourceSignal(_runloopSource);
-                CFRunLoopWakeUp(CFRunLoopGetMain());
-            });
-        });
-    }
-}
-
-static void ArgoExecuteAsyncTasks() {
-    Argolock(^{
-        // onComplete block
-        for (dispatch_block_t task in _asyncTaskQueue) {
-            task();
-        }
-        [_asyncTaskQueue removeAllObjects];
-    });
-}
 
 static void ArgoSourceContextCallBackLog(void *info) {
 }
@@ -86,6 +26,7 @@ static ArgoLayoutHelper* _instance;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         _instance = [[self alloc] init];
+        [_instance startRunloop];
     });
     return _instance;
 }
@@ -100,12 +41,31 @@ static ArgoLayoutHelper* _instance;
     [[ArgoLayoutHelper sharedInstance] stopRunloop];
 }
 
++ (void)addLayoutNode:(ArgoKitNode *)node{
+    [[ArgoLayoutHelper sharedInstance] addLayoutNode:node];
+}
+
++ (void)removeLayoutNode:(ArgoKitNode *)node{
+    [[ArgoLayoutHelper sharedInstance] removeLayoutNode:node];
+}
+
++ (void)layout{
+    [[ArgoLayoutHelper sharedInstance] layout];
+}
+
 #pragma mark --- private methods ---
+- (NSMutableArray<ArgoKitNode *> *)layoutNodesPool{
+    if (!_layoutNodesPool) {
+        _layoutNodesPool = [NSMutableArray array];
+    }
+    return _layoutNodesPool;
+}
 - (void)startRunloop {
     // 监听主线程runloop操作
     CFRunLoopRef runloop = CFRunLoopGetMain();
+    __weak typeof(self)wealSelf = self;
     _observer = CFRunLoopObserverCreateWithHandler(CFAllocatorGetDefault(), kCFRunLoopBeforeWaiting | kCFRunLoopExit, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
-        ArgoExecuteAsyncTasks();
+        [wealSelf layout];
     });
     CFRunLoopAddObserver(runloop, _observer, kCFRunLoopCommonModes);
     
@@ -125,18 +85,24 @@ static ArgoLayoutHelper* _instance;
     }
 }
 
-- (void)addLayoutNode:(ArgoKitNode *)node{
-    
-}
-
-- (void)removeLayoutNode:(ArgoKitNode *)node{
-    
-}
-
-+ (void)argoLayoutCalculateTask:(dispatch_block_t)calculateTask onComplete:(dispatch_block_t)onComplete {
-    if (!calculateTask) {
-        return;
+- (void)addLayoutNode:(nullable ArgoKitNode *)node{
+    if (node.isRootNode && ![self.layoutNodesPool containsObject:node]) {
+        [self.layoutNodesPool addObject:node];
     }
-    ArgoAddAsyncTaskBlockWithCompleteCallback(YES,calculateTask, onComplete);
 }
+
+- (void)removeLayoutNode:(nullable ArgoKitNode *)node{
+    if (node.isRootNode && [self.layoutNodesPool containsObject:node]) {
+        [self.layoutNodesPool removeObject:node];
+    }
+}
+- (void)layout{
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    for(ArgoKitNode *node in nodes){
+        if(node.isDirty){
+            [node applyLayout];
+        }
+    }
+}
+
 @end

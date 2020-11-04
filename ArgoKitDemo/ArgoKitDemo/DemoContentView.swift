@@ -10,22 +10,22 @@ import UIKit
 import ArgoKit
 
 struct DemoContentView: View {
-    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e"]
+    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     
     var body:View{
         
         List(data: items) { item in
             HStack{
-                ImageView().image(UIImage(named: "turtlerock")).width(point: 100).height(point: 100)
+                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100)
 
-                Text(item as? String).backgroundColor(.yellow).width(point: 200).height(point: 100)
+                Text(item as? String).backgroundColor(.yellow).width(200).height(100)
             }
-        }.width(point: 375).height(point: 812)
+        }.width(100%).height(100%)
         .tableHeaderView { () -> View in
-            Text("Header").backgroundColor(.yellow).width(point: 200).height(point: 100)
+            Text("Header").backgroundColor(.yellow).width(200).height(100)
         }.tableFooterView { () -> View in
-            Text("Footer").backgroundColor(.yellow).width(point: 200).height(point: 100)
+            Text("Footer").backgroundColor(.yellow).width(200).height(100)
         }.contentInset(UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
         
 //        PickerView(items) { item -> View in

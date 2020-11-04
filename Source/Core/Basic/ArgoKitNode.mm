@@ -12,16 +12,16 @@
 #import "ArgoKitUtils.h"
 @class ArgoKitLayout;
 @interface ArgoKitNode()
+
 @property(nonatomic,strong,nullable)UIView *view;
 // 布局layout
 @property (nonatomic, strong) ArgoKitLayout *layout;
 // 子node
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
-//
-@property (nonatomic, strong) NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
-
+@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 @property (nonatomic, assign) CGRect frame;
+@property (nonatomic,assign)BOOL isUIView;
 @end
 
 
@@ -30,8 +30,6 @@ static YGConfigRef globalConfig;
 @property (nonatomic, assign, readonly) YGNodeRef ygnode;
 @property (nonatomic, weak, readonly) ArgoKitNode *argoNode;
 @property(nonatomic, assign, readonly) BOOL isBaseNode;
-@property (nonatomic, readwrite, assign, setter=setIncludedInLayout:) BOOL isIncludedInLayout;
-@property (nonatomic, readwrite, assign, setter=setEnabled:) BOOL isEnabled;
 - (instancetype)initWithNode:(ArgoKitNode *)node;
 @end
 @implementation ArgoKitLayout
@@ -52,8 +50,6 @@ static YGConfigRef globalConfig;
         _ygnode= YGNodeNewWithConfig(globalConfig);
         YGNodeSetContext(_ygnode, (__bridge void *) node);
         _isBaseNode = [node isMemberOfClass:[ArgoKitNode class]];
-        _isEnabled = YES;
-        _isIncludedInLayout = YES;
     }
     return self;
 }
@@ -63,23 +59,22 @@ static YGConfigRef globalConfig;
 }
 
 #pragma mark --- 完成数据采集后计算 ---
-- (void)done{
-    [self applyLayoutPreservingOrigin:YES];
-}
-
-- (void)applyLayoutPreservingOrigin:(BOOL)preserveOrigin
+- (void)applyLayoutWithsize:(CGSize)size
 {
-  [self calculateLayoutWithSize:self.argoNode.size];
-  argoApplyLayoutToNodeHierarchy(self.argoNode, preserveOrigin);
+  [self calculateLayoutWithSize:size];
+  YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
 
 // 视图是否为
 - (BOOL)isLeaf{
     NSAssert([NSThread isMainThread], @"This method must be called on the main thread.");
-    if (self.isEnabled) {
+    if (self.argoNode.childs.count == 0) {
+        return YES;
+    }
+    if (self.argoNode.isEnabled) {
       for (ArgoKitNode *childNode in self.argoNode.childs) {
         ArgoKitLayout *const layout = childNode.layout;
-        if (layout.isEnabled && layout.isIncludedInLayout) {
+        if (layout.argoNode.isEnabled) {
           return NO;
         }
       }
@@ -90,9 +85,9 @@ static YGConfigRef globalConfig;
 - (CGSize)calculateLayoutWithSize:(CGSize)size
 {
   NSAssert([NSThread isMainThread], @"Yoga calculation must be done on main.");
-  NSAssert(self.isEnabled, @"Yoga is not enabled for this view.");
+  NSAssert(self.argoNode.isEnabled, @"Yoga is not enabled for this view.");
 
-  argoAttachNodesFromNodeHierachy(self.argoNode);
+  YGAttachNodesFromNodeHierachy(self.argoNode);
 
   const YGNodeRef node = self.ygnode;
   YGNodeCalculateLayout(
@@ -123,23 +118,25 @@ static YGConfigRef globalConfig;
   // this *should* be fine. Forgive me Hack Gods.
   const YGNodeRef node = self.ygnode;
   if (!YGNodeHasMeasureFunc(node)) {
-    YGNodeSetMeasureFunc(node, argoMeasureView);
+    YGNodeSetMeasureFunc(node, YGMeasureView);
   }
   YGNodeMarkDirty(node);
 }
 
+- (NSUInteger)numberOfChildren
+{
+  return YGNodeGetChildCount(self.ygnode);
+}
+
 #pragma mark - Private
 // 计算当前node
-static void argoApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigin)
+static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
 {
-  NSCAssert([NSThread isMainThread], @"Framesetting should only be done on the main thread.");
-
   const ArgoKitLayout *layout = node.layout;
-
-  if (!layout.isIncludedInLayout) {
-     return;
-  }
   YGNodeRef ygnode = layout.ygnode;
+  if (!ygnode || isnan(YGNodeLayoutGetWidth(ygnode)) || isnan(YGNodeLayoutGetHeight(ygnode))) {
+      return;
+  }
   const CGPoint topLeft = {
     YGNodeLayoutGetLeft(ygnode),
     YGNodeLayoutGetTop(ygnode),
@@ -150,26 +147,30 @@ static void argoApplyLayoutToNodeHierarchy(ArgoKitNode *node, BOOL preserveOrigi
     topLeft.y + YGNodeLayoutGetHeight(ygnode),
   };
 
-  const CGPoint origin = preserveOrigin ? node.origin : CGPointZero;
-  node.frame = (CGRect) {
-    .origin = {
-      .x = MMRoundPixelValue(topLeft.x + origin.x),
-      .y = MMRoundPixelValue(topLeft.y + origin.y),
-    },
-    .size = {
-      .width = MMRoundPixelValue(bottomRight.x) - MMRoundPixelValue(topLeft.x),
-      .height = MMRoundPixelValue(bottomRight.y) - MMRoundPixelValue(topLeft.y),
-    },
-  };
+  const CGPoint origin = node.resetOrigin ? CGPointZero:node.origin;
+  CGRect frame = (CGRect) {
+      .origin = {
+        .x = YGRoundPixelValue(topLeft.x + origin.x),
+        .y = YGRoundPixelValue(topLeft.y + origin.y),
+      },
+      .size = {
+        .width = YGRoundPixelValue(bottomRight.x) - YGRoundPixelValue(topLeft.x),
+        .height = YGRoundPixelValue(bottomRight.y) - YGRoundPixelValue(topLeft.y),
+      },
+    };
+    
+  if (!CGRectEqualToRect(node.frame, frame)) {
+      node.frame = frame;
+  }
 
-  if (![node.layout isLeaf]) {
+  if (![layout isLeaf]) {
     for (NSUInteger i=0; i<node.childs.count; i++) {
-        argoApplyLayoutToNodeHierarchy(node.childs[i], NO);
+        YGApplyLayoutToNodeHierarchy(node.childs[i]);
     }
   }
 }
 
-static CGFloat argoSanitizeMeasurement(
+static CGFloat YGSanitizeMeasurement(
   CGFloat constrainedSize,
   CGFloat measuredSize,
   YGMeasureMode measureMode)
@@ -187,7 +188,7 @@ static CGFloat argoSanitizeMeasurement(
 }
 
 
-static YGSize argoMeasureView(
+static YGSize YGMeasureView(
   YGNodeRef node,
   float width,
   YGMeasureMode widthMode,
@@ -200,28 +201,28 @@ static YGSize argoMeasureView(
   ArgoKitNode *argoNode = (__bridge ArgoKitNode*) YGNodeGetContext(node);
   CGSize sizeThatFits = CGSizeZero;
 
-  if (!argoNode.layout.isBaseNode || [argoNode.childs count] > 0) {
-    sizeThatFits = [argoNode.view sizeThatFits:(CGSize){
+  if (!argoNode.isUIView || [argoNode.childs count] > 0) {
+    sizeThatFits = [argoNode sizeThatFits:(CGSize){
                                           .width = constrainedWidth,
                                           .height = constrainedHeight,
                                       }];
   }
 
   return (YGSize) {
-      .width = static_cast<float>(argoSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
-      .height = static_cast<float>(argoSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
+      .width = static_cast<float>(YGSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
+      .height = static_cast<float>(YGSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
   };
 }
 
 
-static void MMRemoveAllChildren(const YGNodeRef node)
+static void YGRemoveAllChildren(const YGNodeRef node)
 {
   if (node == NULL) {
     return;
   }
   YGNodeRemoveAllChildren(node);
 }
-static BOOL MMNodeHasExactSameChildren(const YGNodeRef node, NSArray<ArgoKitNode *> *childs)
+static BOOL YGNodeHasExactSameChildren(const YGNodeRef node, NSArray<ArgoKitNode *> *childs)
 {
   if (YGNodeGetChildCount(node) != childs.count) {
     return NO;
@@ -236,37 +237,37 @@ static BOOL MMNodeHasExactSameChildren(const YGNodeRef node, NSArray<ArgoKitNode
   return YES;
 }
 
-static void argoAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
+static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
 {
   ArgoKitLayout * layout = argoNode.layout;
   const YGNodeRef node = layout.ygnode;
 
   if (layout.isLeaf) {
-    MMRemoveAllChildren(node);
-    YGNodeSetMeasureFunc(node, argoMeasureView);
+    YGRemoveAllChildren(node);
+    YGNodeSetMeasureFunc(node, YGMeasureView);
   } else {
     YGNodeSetMeasureFunc(node, NULL);
 
     NSMutableArray<ArgoKitNode *> *subviewsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
     for (ArgoKitNode *node in argoNode.childs) {
-      if (node.layout.isEnabled && node.layout.isIncludedInLayout) {
+      if (node.isEnabled) {
           [subviewsToInclude addObject:node];
       }
     }
       
-    if (!MMNodeHasExactSameChildren(node, subviewsToInclude)) {
-      MMRemoveAllChildren(node);
+    if (!YGNodeHasExactSameChildren(node, subviewsToInclude)) {
+      YGRemoveAllChildren(node);
       for (int i=0; i<subviewsToInclude.count; i++) {
         YGNodeInsertChild(node, subviewsToInclude[i].layout.ygnode, i);
       }
     }
     for (ArgoKitNode *const childNode in subviewsToInclude) {
-        argoAttachNodesFromNodeHierachy(childNode);
+        YGAttachNodesFromNodeHierachy(childNode);
     }
   }
 }
 
-static CGFloat MMRoundPixelValue(CGFloat value)
+static CGFloat YGRoundPixelValue(CGFloat value)
 {
   static CGFloat scale;
   static dispatch_once_t onceToken;
@@ -283,6 +284,9 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     self = [super init];
     if (self) {
         _view = view;
+        _resetOrigin = NO;
+        _isEnabled = YES;
+        _isUIView = [view isMemberOfClass:[UIView class]];
         _size = view.bounds.size;
         _frame = view.frame;
         _origin = _frame.origin;
@@ -296,7 +300,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 }
 
 
-#pragma mark --- property ---
+#pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     __weak typeof(self)wealSelf = self;
@@ -318,9 +322,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     return _actionMap;
 }
 
-- (void)done{
-    [self.layout done];
-}
+
 
 -(ArgoKitLayout *)layout{
     if (!_layout) {
@@ -329,6 +331,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     return _layout;
 }
 
+#pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
         NSString *keyString = [@([obj hash]) stringValue];
@@ -353,12 +356,55 @@ static CGFloat MMRoundPixelValue(CGFloat value)
     if ([target respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
         [target addTarget:self action:@selector(nodeAction:) forControlEvents:controlEvents];
         [self observeAction:target actionBlock:action];
+    }else if([target respondsToSelector:@selector(addTarget:action:)]){
+        [target addTarget:self action:@selector(nodeAction:)];
+        [self observeAction:target actionBlock:action];
     }
 }
 
 @end
 
-@implementation ArgoKitNode(NodeLayer)
+@implementation ArgoKitNode(LayoutNode)
+
+- (BOOL)isRootNode{
+    return (self.parentNode == nil);
+}
+- (void)markDirty{
+    [self.layout markDirty];
+}
+- (BOOL)isDirty{
+    return [self.layout isDirty];
+}
+
+- (NSUInteger)numberOfChildren{
+    return [self.layout numberOfChildren];
+}
+
+- (CGSize)sizeThatFits:(CGSize)size{
+    return [self.view sizeThatFits:size];
+}
+
+- (void)applyLayout{
+    if (self.layout) {
+        [self.layout applyLayoutWithsize:self.size];
+    }
+}
+
+- (void)applyLayout:(CGSize)size{
+    if (self.layout) {
+        [self.layout applyLayoutWithsize:self.size];
+    }
+}
+
+- (CGSize)calculateLayoutWithSize:(CGSize)size{
+    if (self.layout) {
+        return [self.layout calculateLayoutWithSize:size];
+    }
+    return CGSizeMake(0, 0);
+}
+@end
+
+@implementation ArgoKitNode(Hierarchy)
 - (void)addChildNode:(ArgoKitNode *)node{
     if (node) {
         node.parentNode = self;
@@ -379,6 +425,11 @@ static CGFloat MMRoundPixelValue(CGFloat value)
         child.parentNode = nil;
     }
     [self.childs removeAllObjects];
+}
+- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
+    if (node) {
+        [self.childs insertObject:node atIndex:index];
+    }
 }
 @end
 
@@ -518,7 +569,7 @@ static CGFloat MMRoundPixelValue(CGFloat value)
 - (void)alignSelfCenter{
     return [self alignSelf:YGAlignCenter];
 }
-- (void)alignSelFlexEnd{
+- (void)alignSelfFlexEnd{
     return [self alignSelf:YGAlignFlexEnd];
 }
 - (void)alignSelfStretch{

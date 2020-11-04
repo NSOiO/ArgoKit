@@ -53,7 +53,7 @@ public struct ImageView : View {
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
         self.init(image: image, highlightedImage: highlightedImage)
-        addSubNodes(builder)
+        addSubNodes(builder:builder)
     }
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
@@ -87,11 +87,13 @@ extension ImageView {
         imageView.image = value
         self.node?.width(point: value?.size.width ?? 0)
         self.node?.height(point: value?.size.height ?? 0)
+        self.node?.markDirty()
         return self
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {
         imageView.highlightedImage = value
+        self.node?.markDirty()
         return self
     }
     

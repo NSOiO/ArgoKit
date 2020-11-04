@@ -31,7 +31,7 @@ public struct HStack:View {
         innerView = view;
         innerNode = ArgoKitNode(view: innerView);
         innerNode.row();
-        addSubNodes(builder)
+        addSubNodes(builder:builder)
     }
 }
 
