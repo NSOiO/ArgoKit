@@ -13,7 +13,7 @@ public struct List : ScrollView {
     private var pNode : ArgoKitTableNode
     
     public var body: View {
-        self
+        ViewEmpty()
     }
     
     public var scrollView: UIScrollView {

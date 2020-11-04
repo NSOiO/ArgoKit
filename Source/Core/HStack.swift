@@ -9,7 +9,7 @@ import UIKit
 
 public struct HStack:View {
     public var body: View{
-        self
+        ViewEmpty()
     }
     private let innerNode:ArgoKitNode
     private let innerView:UIView

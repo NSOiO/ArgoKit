@@ -24,8 +24,7 @@ public struct Text:View {
         pNode = ArgoKitNode(view: label)
     }
     public init(_ text:String?) {
-        label = UILabel()
-        pNode = ArgoKitNode(view: label)
+        self.init()
         label.text = text;
     }
 

@@ -16,7 +16,7 @@ public struct ArgoKitViewBuilder {
 
 public struct ArgoNodeContainer: View {
     public var body: View{
-        BaseViewEmpty()
+        ViewEmpty()
     }
     
     private var nodeType:ArgoKitNodeType
@@ -53,7 +53,7 @@ public struct ArgoNodeContainer: View {
     }
 }
 
-public class BaseViewEmpty: View {
+public class ViewEmpty: View {
     public var body: View{
         self
     }

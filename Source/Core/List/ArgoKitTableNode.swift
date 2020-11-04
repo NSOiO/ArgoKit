@@ -64,10 +64,16 @@ extension ArgoKitTableNode {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! ArgoKitListCell
-        if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-            cell.linkCellNode(node)
+        if  (cell.contentNode?.childs?.count != 0) {
+            print("")
+            print("cell.contentNode?.childs?.count11 :",cell.contentNode?.childs?.count ?? 100)
+        }else{
+            print("cell.contentNode?.childs?.count22 :",cell.contentNode?.childs?.count ?? 100)
+            if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+                cell.linkCellNode(node)
+            }
+         
         }
         return cell
     }

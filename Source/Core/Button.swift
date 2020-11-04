@@ -20,7 +20,7 @@ public struct Button:View{
     }
     
     private init(){
-        button = UIButton(type:.custom);
+        button = UIButton(type:.custom)
         pNode = ArgoKitNode(view: button)
     }
     
@@ -35,7 +35,6 @@ extension Button{
     public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
         button.setTitle(text as? String, for: UIControl.State.normal)
-        print("button:hash",button.hashValue)
         pNode.addTarget(button, for: UIControl.Event.touchUpInside) { (obj, paramter) in
             action();
         }

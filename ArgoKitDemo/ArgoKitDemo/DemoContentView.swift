@@ -10,7 +10,7 @@ import UIKit
 import ArgoKit
 
 struct DemoContentView: View {
-    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e"]
+    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e666", "122e555", "122e444", "122e333", "122e222", "122e111"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     
     var body:View{
@@ -18,7 +18,6 @@ struct DemoContentView: View {
         List(data: items) { item in
             HStack{
                 ImageView().image(UIImage(named: "turtlerock")).width(100).height(100)
-
                 Text(item as? String).backgroundColor(.yellow).width(200).height(100)
             }
         }.width(100%).height(100%)
