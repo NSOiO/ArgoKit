@@ -27,11 +27,6 @@ struct DemoContentView: View {
         }.tableFooterView { () -> View in
             Text("Footer").backgroundColor(.yellow).width(point: 200).height(point: 100)
         }.contentInset(UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
-        .scrollViewWillEndDraggingWithVelocityTargetContentOffset { (velocity, targetContentOffset) in
-            print("velocity x:\(velocity.x) y:\(velocity.y) targetContentOffset x:\(targetContentOffset.pointee.x) y:\(targetContentOffset.pointee.y)")
-        }.scrollViewDidEndDraggingWillDecelerate { (decelerate) in
-            print("WillDecelerate \(decelerate)")
-        }
         
 //        PickerView(items) { item -> View in
 //            Text(item as? String)
