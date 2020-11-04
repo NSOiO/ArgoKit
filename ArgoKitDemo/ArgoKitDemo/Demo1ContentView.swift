@@ -53,7 +53,7 @@ struct Demo1ContentView:View {
         
         Button(text: "buttom1buttom1buttom1buttom1"){
             print("buttom1")
-            model.text1?.width(60).text("buttom1buttom1buttom1buttom1").numberOfLines(2)
+            model.text1?.width(60).text("buttom1but").numberOfLines(2)
             
         }.titleColor(.red, for: UIControl.State.normal)
         .width(150).height(100).backgroundColor(.yellow).margin(edge: .top, value: 10)
@@ -62,6 +62,8 @@ struct Demo1ContentView:View {
 //            ImageView("turtlerock")
             Text("11").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
                 .textColor(.red).alias(variable: &model.text1)
+            Text("111111").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
+                .textColor(.red)
         }.isUserInteractionEnabled(true)
         .alias(variable: &model.stack1).longPressAction(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
             print("longPressAction")

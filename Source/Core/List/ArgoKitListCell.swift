@@ -15,6 +15,7 @@ class ArgoKitListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentNode = ArgoKitNode(view: contentView)
+        
         self.contentNode?.width(point: contentView.frame.size.width)
         self.contentNode?.height(point: contentView.frame.size.height)
     }
@@ -36,6 +37,6 @@ class ArgoKitListCell: UITableViewCell {
     public func linkCellNode(_ node: ArgoKitNode) {
         
         self.contentNode?.addChildNode(node)
-        self.contentNode?.applyLayout()
+        ArgoLayoutHelper.addLayoutNode(self.contentNode);
     }
 }

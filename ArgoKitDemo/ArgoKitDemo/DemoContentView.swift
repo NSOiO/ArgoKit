@@ -10,7 +10,7 @@ import UIKit
 import ArgoKit
 
 struct DemoContentView: View {
-    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e"]
+    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     
     var body:View{
@@ -21,7 +21,7 @@ struct DemoContentView: View {
 
                 Text(item as? String).backgroundColor(.yellow).width(200).height(100)
             }
-        }.width(375).height(812)
+        }.width(100%).height(100%)
         .tableHeaderView { () -> View in
             Text("Header").backgroundColor(.yellow).width(200).height(100)
         }.tableFooterView { () -> View in
