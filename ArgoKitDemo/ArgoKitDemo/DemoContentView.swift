@@ -10,7 +10,7 @@ import UIKit
 import ArgoKit
 
 struct DemoContentView: View {
-    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e666", "122e555", "122e444", "122e333", "122e222", "122e111"]
+    let items = ["查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e666", "122e555", "122e444", "122e333", "122e222", "122e111","查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e666", "122e555", "122e444", "122e333", "122e222", "122e111","查查","cscs","122e", "122e", "122e", "122e", "122e", "122e", "122e", "122e666", "122e555", "122e444", "122e333", "122e222", "122e111"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     
     var body:View{
@@ -35,3 +35,5 @@ struct DemoContentView: View {
         
     }
 }
+
+

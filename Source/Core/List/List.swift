@@ -48,6 +48,7 @@ public struct List : ScrollView {
         } else {
             self.pNode.dataList = [data]
         }
+    
         self.pNode.buildNodeFunc = rowContent
     }
 }

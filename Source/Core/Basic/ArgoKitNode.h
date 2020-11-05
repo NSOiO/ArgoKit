@@ -20,6 +20,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @property (nonatomic, assign, readonly)BOOL isRootNode;
 
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
+
+/* 根节点持有的视图 */
 @property (nonatomic, strong, readonly, nullable) UIView *view;
 
 /* frame 相关 */

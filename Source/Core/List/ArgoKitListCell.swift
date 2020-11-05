@@ -28,14 +28,17 @@ class ArgoKitListCell: UITableViewCell {
         self.contentNode?.height(point: contentView.frame.size.height)
     }
     
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
-//        self.contentNode?.removeAllChildNodes()
+        self.contentNode?.removeAllChildNodes()
     }
     
     public func linkCellNode(_ node: ArgoKitNode) {
         self.contentNode?.addChildNode(node)
+        
+        
         ArgoLayoutHelper.addLayoutNode(self.contentNode);
     }
 }

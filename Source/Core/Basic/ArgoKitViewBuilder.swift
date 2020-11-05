@@ -41,7 +41,6 @@ public struct ArgoNodeContainer: View {
                 ()
             }
         }
-        
         if container.count == 0 {
             nodeType = .empty
         }else if container.count == 1 {

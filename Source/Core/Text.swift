@@ -22,6 +22,7 @@ public struct Text:View {
     public init() {
         label = UILabel()
         pNode = ArgoKitNode(view: label)
+        
     }
     public init(_ text:String?) {
         self.init()
@@ -33,6 +34,7 @@ public struct Text:View {
 extension Text{
     public func text(_ value:String?)->Self{
         label.text = value
+        
         self.markNeedsLayout()
         return self
     }
