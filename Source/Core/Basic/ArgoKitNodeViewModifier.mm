@@ -84,7 +84,6 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 + (void)nodeViewAttributeWithView:(id)obj attributes:(NSArray<ViewAttribute *> *)attributes{
     for (ViewAttribute *attribute in attributes) {
         performSelector(obj,attribute.selector,attribute.paramter);
-        NSLog(@" @encode(CGRect)%s",@encode(NSDictionary *));
     }
 }
 @end

@@ -38,7 +38,7 @@ class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewD
         if let tableView = view as? UITableView {
             tableView.delegate = self
             tableView.dataSource = self
-            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
+//            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
         }
     }
 }
@@ -64,10 +64,16 @@ extension ArgoKitTableNode {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! ArgoKitListCell
+        let cell:ArgoKitListCell? = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier) as! ArgoKitListCell'
         if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-            cell.linkCellNode(node)
+            if (cell != nil) {
+                
+            }else{
+                cell?.linkCellNode(node)
+            }
         }
+        
+       
         return cell
     }
     
