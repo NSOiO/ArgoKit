@@ -412,6 +412,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self.childs addObject:node];
     }
 }
+- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
+    if (node) {
+        [self.childs insertObject:node atIndex:index];
+    }
+}
 - (void)removeFromSuperNode{
     if(self.parentNode){
         [self.view removeFromSuperview];
@@ -420,15 +425,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 - (void)removeAllChildNodes {
-    for (ArgoKitNode *child in self.childs) {
+    for (ArgoKitNode *child in _childs) {
         [child.view removeFromSuperview];
         child.parentNode = nil;
     }
-    [self.childs removeAllObjects];
-}
-- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
-    if (node) {
-        [self.childs insertObject:node atIndex:index];
+    if (_childs.count) {
+        [_childs removeAllObjects];
     }
 }
 @end

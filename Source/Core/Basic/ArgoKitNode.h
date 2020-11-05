@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter);
 @interface ArgoKitNode : NSObject
 /* node父节点*/
-@property (nonatomic, strong,nullable)  ArgoKitNode  *parentNode;
+@property (nonatomic, weak, nullable)  ArgoKitNode  *parentNode;
 /* node包含的子节点*/
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 /* 是否为根节点*/

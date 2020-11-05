@@ -7,24 +7,24 @@
 
 import Foundation
 
-class ArgoKitDataSourceNode: ArgoKitNode {
+class ArgoKitDataSourceHelper: NSObject {
   
+    private var nodeCahe: NSCache<NSString, ArgoKitNode>?
+    
     public var nodeList: [[ArgoKitNode]]?
     
-    public var nodeCahe: NSCache<NSString, ArgoKitNode>?
     public var dataList: [[Any]]? {
         willSet {
             self.nodeCahe = NSCache()
             self.nodeCahe?.name = "com.\(type(of: self).description())Cache"
-            self.nodeCahe?.countLimit = 20
         }
     }
     public var buildNodeFunc: ((Any)->View)?
 }
 
-extension ArgoKitDataSourceNode {
+extension ArgoKitDataSourceHelper {
     
-    func numberOfSection() -> Int {
+    open func numberOfSection() -> Int {
         
         if nodeList != nil {
             return nodeList?.count ?? 1
@@ -32,7 +32,7 @@ extension ArgoKitDataSourceNode {
         return dataList?.count ?? 1
     }
     
-    func numberOfRowsInSection(section: Int) -> Int {
+    open func numberOfRowsInSection(section: Int) -> Int {
         
         if nodeList != nil {
             if section < nodeList!.count {
@@ -47,7 +47,7 @@ extension ArgoKitDataSourceNode {
         return 0
     }
     
-    func nodeForRowAtSection(_ row: Int, at section: Int) -> ArgoKitNode? {
+    open func nodeForRowAtSection(_ row: Int, at section: Int) -> ArgoKitNode? {
         
         if nodeList != nil {
             if section < nodeList!.count
@@ -72,5 +72,19 @@ extension ArgoKitDataSourceNode {
             }
         }
         return nil
+    }
+}
+
+extension ArgoKitDataSourceHelper {
+    
+    func removeAllCache() {
+        
+        self.nodeCahe?.removeAllObjects()
+    }
+    
+    func removeCacheForRowAtSection(_ row: Int, at section: Int) {
+        
+        let cacheKey = NSString(format: "cache_%d_%d", section, row)
+        self.nodeCahe?.removeObject(forKey: cacheKey)
     }
 }

@@ -31,11 +31,11 @@ static ArgoLayoutHelper* _instance;
     return _instance;
 }
 -(void)dealloc{
-    [self startRunloop];
+    [self stopRunloop];
 }
 
 + (void)startRunloop{
-    [[ArgoLayoutHelper sharedInstance] stopRunloop];
+    [[ArgoLayoutHelper sharedInstance] startRunloop];
 }
 + (void)stopRunloop{
     [[ArgoLayoutHelper sharedInstance] stopRunloop];

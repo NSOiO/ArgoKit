@@ -9,7 +9,9 @@ import Foundation
 
 private let kCellReuseIdentifier = "ArgoKitListCell"
 
-class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    
+    public var dataSourceHelper: ArgoKitDataSourceHelper = ArgoKitDataSourceHelper()
     
     public var tableView: UITableView? {
         
@@ -53,7 +55,7 @@ class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewD
 extension ArgoKitTableNode {
     
     open func reloadData() {
-        self.nodeCahe?.removeAllObjects()
+        self.dataSourceHelper.removeAllCache()
         self.tableView?.reloadData()
     }
 }
@@ -62,18 +64,18 @@ extension ArgoKitTableNode {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return self.numberOfSection()
+        return self.dataSourceHelper.numberOfSection()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.numberOfRowsInSection(section: section)
+        return self.dataSourceHelper.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! ArgoKitListCell
-        if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+        if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
             cell.linkCellNode(node)
         }
         return cell
@@ -139,7 +141,7 @@ extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
-        let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
+        let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
         self.sendAction(withObj: String(_sel: sel), paramter: [node, indexPath])
     }
 
@@ -153,7 +155,7 @@ extension ArgoKitTableNode {
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
-        let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
+        let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
         self.sendAction(withObj: String(_sel: sel), paramter: [node, indexPath])
     }
 
@@ -166,7 +168,7 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+        if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
 //            return node.height() // TODO 高度有问题
             return 100
         }
