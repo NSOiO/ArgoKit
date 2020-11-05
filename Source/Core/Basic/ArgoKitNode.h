@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
 //@class ArgoKitLayout;
-
+@interface ViewAttribute : NSObject
+@property(nonatomic,assign,readonly)SEL selector;
+@property(nonatomic,copy,readonly)NSArray<id> *paramter;
+- (instancetype)initWithSelector:(nullable SEL)selector paramter:(nullable NSArray<id> *)paramter;
+@end
+ 
 typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter);
 @interface ArgoKitNode : NSObject
 /* node父节点*/
@@ -21,8 +26,14 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 
+//存储View属性
+@property (nonatomic, strong)NSMutableArray<ViewAttribute *>* viewAttributes;
+
 /* 根节点持有的视图 */
 @property (nonatomic, strong, readonly, nullable) UIView *view;
+
+/* 根节点持有的视图 */
+@property (nonatomic, assign)Class viewClass;
 
 /* frame 相关 */
 @property (nonatomic, assign) CGSize size;
@@ -56,7 +67,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 - (instancetype)initWithView:(UIView *)view;
 
-- (Class)viewClass;
+- (instancetype)initWithViewClass:(Class)viewClass;
+
 
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
 - (nullable id)sendActionWithObj:(id)obj paramter:(nullable NSArray *)paramter;

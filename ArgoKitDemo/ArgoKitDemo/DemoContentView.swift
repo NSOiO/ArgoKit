@@ -17,15 +17,15 @@ struct DemoContentView: View {
         
         List(data: items) { item in
             HStack{
-                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100)
-                Text(item as? String).backgroundColor(.yellow).width(200).height(100)
-            }
+//                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100)
+                Text(item as? String).backgroundColor(.yellow).width(100).height(100).isEnabled(true)
+            }.width(100%).height(100%).backgroundColor(.cyan)
         }.width(100%).height(100%)
-        .tableHeaderView { () -> View in
-            Text("Header").backgroundColor(.yellow).width(200).height(100)
-        }.tableFooterView { () -> View in
-            Text("Footer").backgroundColor(.yellow).width(200).height(100)
-        }.contentInset(UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
+//        .tableHeaderView { () -> View in
+//            Text("Header").backgroundColor(.yellow).width(200).height(100)
+//        }.tableFooterView { () -> View in
+//            Text("Footer").backgroundColor(.yellow).width(200).height(100)
+//        }.contentInset(UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
         
 //        PickerView(items) { item -> View in
 //            Text(item as? String)

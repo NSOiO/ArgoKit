@@ -10,6 +10,18 @@
 #import "yoga/Yoga.h"
 #import "ArgoLayoutHelper.h"
 #import "ArgoKitUtils.h"
+#import "ArgoKitNodeViewModifier.h"
+@implementation ViewAttribute : NSObject
+- (instancetype)initWithSelector:(SEL)selector paramter:(NSArray<id> *)paramter{
+    self = [super init];
+    if(self){
+        _selector = selector;
+        _paramter = paramter;
+    }
+    return self;
+}
+@end
+
 @class ArgoKitLayout;
 @interface ArgoKitNode()
 
@@ -284,6 +296,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     self = [super init];
     if (self) {
         _view = view;
+        _viewClass = view.class;
         _resetOrigin = NO;
         _isEnabled = YES;
         _isUIView = [view isMemberOfClass:[UIView class]];
@@ -295,17 +308,35 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self;
 }
 
-- (Class)viewClass{
-    return [self.view class];
+- (instancetype)initWithViewClass:(Class)viewClass{
+    self = [super init];
+    if (self) {
+        _resetOrigin = NO;
+        _isEnabled = YES;
+        _isUIView = [viewClass isMemberOfClass:[UIView class]];
+        _origin = _frame.origin;
+        _bindProperties = [NSMutableDictionary new];
+        _viewClass = viewClass;
+    }
+    return self;
 }
-
 
 #pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadBlock:^{
-        wealSelf.view.frame = frame;
+        if (!self.view) {
+            self.view = [self.viewClass new];
+            wealSelf.view.frame = frame;
+            [ArgoKitNodeViewModifier nodeViewAttributeWithView:self.view attributes:self.viewAttributes];
+            if (self.parentNode.view) {
+                [self.parentNode.view addSubview:self.view];
+            }
+        }else{
+            self.view.frame = frame;
+        }
+        
     }];
 }
 - (NSMutableArray<ArgoKitNode *> *)childs{
@@ -322,7 +353,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return _actionMap;
 }
 
-
+- (NSMutableArray<ViewAttribute *> *)viewAttributes{
+    if (!_viewAttributes) {
+        _viewAttributes = [[NSMutableArray alloc] init];
+    }
+    return _viewAttributes;
+}
 
 -(ArgoKitLayout *)layout{
     if (!_layout) {
@@ -408,7 +444,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)addChildNode:(ArgoKitNode *)node{
     if (node) {
         node.parentNode = self;
-        [self.view addSubview:node.view];
+        if (node.view) {
+            [self.view addSubview:node.view];
+        }
         [self.childs addObject:node];
     }
 }

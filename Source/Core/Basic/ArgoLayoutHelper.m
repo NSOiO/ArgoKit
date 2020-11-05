@@ -16,7 +16,7 @@ static void ArgoSourceContextCallBackLog(void *info) {
 @interface ArgoLayoutHelper(){
     CFRunLoopObserverRef _observer;
 }
-@property(nonatomic,strong)NSMutableArray<ArgoKitNode *> *layoutNodesPool;
+@property(nonatomic,strong)NSHashTable<ArgoKitNode *> *layoutNodesPool;
 @end
 
 
@@ -54,9 +54,9 @@ static ArgoLayoutHelper* _instance;
 }
 
 #pragma mark --- private methods ---
-- (NSMutableArray<ArgoKitNode *> *)layoutNodesPool{
+- (NSHashTable<ArgoKitNode *> *)layoutNodesPool{
     if (!_layoutNodesPool) {
-        _layoutNodesPool = [NSMutableArray array];
+        _layoutNodesPool = [NSHashTable weakObjectsHashTable];
     }
     return _layoutNodesPool;
 }
