@@ -23,10 +23,11 @@ public class Property<Value> : DynamicProperty {
     /// Initialize with the provided initial value.
     public init(wrappedValue value: Value) {
         self._value = value
+        print("Property init ",self.wrappedValue)
     }
     
     deinit {
-        print("deinit")
+        print("Property deinit ",self.wrappedValue)
     }
     
     public var projectedValue: Property<Value> {

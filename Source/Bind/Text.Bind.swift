@@ -12,7 +12,7 @@ extension Text {
     init(_ textProperty: Property<String>) {
         self.init(textProperty.wrappedValue)
         let canel = textProperty.watch({[self] (new) in
-//            label.text = new
+            _ = self.text(new)
         })
         self.node?.bindProperties.setObject(canel, forKey: "text" as NSString)
     }
