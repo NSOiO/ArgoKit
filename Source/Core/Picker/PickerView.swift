@@ -27,8 +27,6 @@ public struct PickerView : View {
     private init() {
         pickerView = UIPickerView();
         pNode = ArgoKitPickerNode(view: pickerView)
-        self.node?.width(point: pickerView.frame.width)
-        self.node?.height(point: pickerView.frame.height)
     }
     
     public init(@ArgoKitViewBuilder content: () -> View) {
