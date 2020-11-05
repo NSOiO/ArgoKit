@@ -7,11 +7,15 @@
 
 import Foundation
 
-private let kCellReuseIdentifier = "ArgoKitListCell"
+fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
+fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
+fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
 class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
-    public var dataSourceHelper: ArgoKitDataSourceHelper = ArgoKitDataSourceHelper()
+    lazy var dataSourceHelper = ArgoKitDataSourceHelper()
+    lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()
+    lazy var sectionFooterSourceHelper = ArgoKitDataSourceHelper()
     
     public var tableView: UITableView? {
         
@@ -48,6 +52,8 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
                 tableView.prefetchDataSource = self
             }
             tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
+            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kHeaderReuseIdentifier)
+            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kFooterReuseIdentifier)
         }
     }
 }
@@ -141,72 +147,79 @@ extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
-        let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
-        self.sendAction(withObj: String(_sel: sel), paramter: [node, indexPath])
+        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:willDisplayHeaderView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:willDisplayFooterView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
-        let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
-        self.sendAction(withObj: String(_sel: sel), paramter: [node, indexPath])
+        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:didEndDisplayingHeaderView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:didEndDisplayingFooterView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-//            return node.height() // TODO 高度有问题
-            return 100
+        if let height = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)?.height() {
+            if !height.isNaN {
+                return height
+            }
         }
         return 0
     }
 
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//
-//    }
-//
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let height = sectionHeaderSourceHelper.nodeForRowAtSection(section, at: 0)?.height() {
+            if !height.isNaN {
+                return height
+            }
+        }
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let height = sectionFooterSourceHelper.nodeForRowAtSection(section, at: 0)?.height() {
+            if !height.isNaN {
+                return height
+            }
+        }
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: kHeaderReuseIdentifier) as! ArgoKitListHeaderFooterView
+        if let node = sectionHeaderSourceHelper.nodeForRowAtSection(section, at: 0) {
+            header.linkCellNode(node)
+        }
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: kFooterReuseIdentifier) as! ArgoKitListHeaderFooterView
+        if let node = sectionFooterSourceHelper.nodeForRowAtSection(section, at: 0) {
+            footer.linkCellNode(node)
+        }
+        return footer
+    }
+
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let sel = #selector(self.tableView(_:shouldHighlightRowAt:))
         return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? Bool ?? true

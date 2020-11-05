@@ -27,8 +27,6 @@ public struct ActivityIndicatorView : View {
     public init(style: UIActivityIndicatorView.Style) {
         activityIndicatorView = UIActivityIndicatorView(style: style);
         pNode = ArgoKitNode(view: activityIndicatorView)
-        self.node?.width(point: activityIndicatorView.frame.width)
-        self.node?.height(point: activityIndicatorView.frame.height)
     }
 }
 

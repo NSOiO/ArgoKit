@@ -59,8 +59,6 @@ public struct ImageView : View {
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         imageView = UIImageView(image: image, highlightedImage: highlightedImage);
         pNode = ArgoKitNode(view: imageView)
-        self.node?.width(point: imageView.frame.width)
-        self.node?.height(point: imageView.frame.height)
     }
 }
 

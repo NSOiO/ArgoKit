@@ -1,19 +1,18 @@
 //
-//  ArgoKitListCell.swift
+//  ArgoKitListHeaderFooterView.swift
 //  ArgoKit
 //
-//  Created by MOMO on 2020/10/28.
+//  Created by MOMO on 2020/11/5.
 //
 
 import Foundation
 
-class ArgoKitListCell: UITableViewCell {
+class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
   
     var contentNode: ArgoKitNode?
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         self.contentNode = ArgoKitNode(view: contentView)
     }
     

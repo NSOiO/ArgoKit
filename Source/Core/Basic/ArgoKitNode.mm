@@ -214,7 +214,6 @@ static YGSize YGMeasureView(
   };
 }
 
-
 static void YGRemoveAllChildren(const YGNodeRef node)
 {
   if (node == NULL) {

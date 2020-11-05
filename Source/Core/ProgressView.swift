@@ -38,8 +38,6 @@ public struct ProgressView : View {
     public init(progressViewStyle style: UIProgressView.Style) {
         progressView = UIProgressView(progressViewStyle: style);
         pNode = ArgoKitNode(view: progressView)
-        self.node?.width(point: progressView.frame.width)
-        self.node?.height(point: progressView.frame.height)
     }
 }
 
