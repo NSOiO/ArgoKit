@@ -22,13 +22,19 @@ class ArgoKitListCell: UITableViewCell {
         self.contentNode = ArgoKitNode(view: contentView)
     }
     
-    deinit {
-        self.contentNode?.removeAllChildNodes()
-        self.contentNode = nil
+    override var frame: CGRect {
+        didSet {
+            self.contentNode?.width(point: frame.width)
+            self.contentNode?.height(point: frame.height)
+        }
     }
     
-    public func linkCellNode(_ node: ArgoKitNode) {
-        self.contentNode?.addChildNode(node)
-        node.applyLayout()
+    public func linkCellNodes(_ nodes: [ArgoKitNode]) {
+        if ((self.contentNode?.childs?.count) != 0) {
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as! [ArgoKitNode], reuse: nodes);
+        } else {
+            self.contentNode?.addChildNodes(nodes)
+            self.contentNode?.applyLayout()
+        }
     }
 }

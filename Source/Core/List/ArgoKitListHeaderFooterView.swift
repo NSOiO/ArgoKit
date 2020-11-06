@@ -19,22 +19,22 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.contentNode = ArgoKitNode(view: contentView)
+        self.contentNode?.width()
     }
     
-    deinit {
-        self.contentNode?.removeAllChildNodes()
-        self.contentNode = nil
+    override var frame: CGRect {
+        didSet {
+            self.contentNode?.width(point: frame.width)
+            self.contentNode?.height(point: frame.height)
+        }
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.contentNode?.removeAllChildNodes()
-    }
-    
-    public func linkCellNode(_ node: ArgoKitNode) {
         
-        node.removeFromSuperNode()
-        self.contentNode?.addChildNode(node)
-        node.applyLayout()
+    public func linkCellNodes(_ nodes: [ArgoKitNode]) {
+        if ((self.contentNode?.childs?.count) != 0) {
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as! [ArgoKitNode], reuse: nodes);
+        } else {
+            self.contentNode?.addChildNodes(nodes)
+            self.contentNode?.applyLayout()
+        }
     }
 }

@@ -51,9 +51,6 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
             if #available(iOS 10.0, *) {
                 tableView.prefetchDataSource = self
             }
-            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
-            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kHeaderReuseIdentifier)
-            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kFooterReuseIdentifier)
         }
     }
 }
@@ -75,14 +72,19 @@ extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.dataSourceHelper.numberOfRowsInSection(section: section)
+        return 10// self.dataSourceHelper.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! ArgoKitListCell
-        if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-            cell.linkCellNode(node)
+        let identifier = self.dataSourceHelper.reuseIdForRowAtSection(indexPath.row, at: indexPath.section) ?? kCellReuseIdentifier
+        if !self.dataSourceHelper.registedReuseIdSet.contains(identifier) {
+            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: identifier)
+            self.dataSourceHelper.registedReuseIdSet.add(identifier)
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ArgoKitListCell
+        if let nodes = self.dataSourceHelper.nodesForRowAtSection(indexPath.row, at: indexPath.section) {
+            cell.linkCellNodes(nodes)
         }
         return cell
     }
@@ -176,46 +178,71 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let height = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)?.height() {
-            if !height.isNaN {
-                return height
+        if let nodes = self.dataSourceHelper.nodesForRowAtSection(indexPath.row, at: indexPath.section) {
+            var height: CGFloat = 0.0
+            for node in nodes {
+                let s_height = node.height()
+                if !s_height.isNaN {
+                    height += CGFloat(s_height)
+                }
             }
+            return height
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let height = sectionHeaderSourceHelper.nodeForRowAtSection(section, at: 0)?.height() {
-            if !height.isNaN {
-                return height
+        if let nodes = self.sectionHeaderSourceHelper.nodesForRowAtSection(section, at: 0) {
+            var height: CGFloat = 0.0
+            for node in nodes {
+                let s_height = node.height()
+                if !s_height.isNaN {
+                    height += CGFloat(s_height)
+                }
             }
+            return height
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let height = sectionFooterSourceHelper.nodeForRowAtSection(section, at: 0)?.height() {
-            if !height.isNaN {
-                return height
+        if let nodes = self.sectionFooterSourceHelper.nodesForRowAtSection(section, at: 0) {
+            var height: CGFloat = 0.0
+            for node in nodes {
+                let s_height = node.height()
+                if !s_height.isNaN {
+                    height += CGFloat(s_height)
+                }
             }
+            return height
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: kHeaderReuseIdentifier) as! ArgoKitListHeaderFooterView
-        if let node = sectionHeaderSourceHelper.nodeForRowAtSection(section, at: 0) {
-            header.linkCellNode(node)
+        let identifier = self.sectionHeaderSourceHelper.reuseIdForRowAtSection(section, at: 0) ?? kHeaderReuseIdentifier
+        if !self.sectionHeaderSourceHelper.registedReuseIdSet.contains(identifier) {
+            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
+            self.sectionHeaderSourceHelper.registedReuseIdSet.add(identifier)
+        }
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! ArgoKitListHeaderFooterView
+        if let nodes = sectionHeaderSourceHelper.nodesForRowAtSection(section, at: 0) {
+            header.linkCellNodes(nodes)
         }
         return header
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: kFooterReuseIdentifier) as! ArgoKitListHeaderFooterView
-        if let node = sectionFooterSourceHelper.nodeForRowAtSection(section, at: 0) {
-            footer.linkCellNode(node)
+        let identifier = self.sectionFooterSourceHelper.reuseIdForRowAtSection(section, at: 0) ?? kFooterReuseIdentifier
+        if !self.sectionFooterSourceHelper.registedReuseIdSet.contains(identifier) {
+            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
+            self.sectionFooterSourceHelper.registedReuseIdSet.add(identifier)
+        }
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! ArgoKitListHeaderFooterView
+        if let nodes = sectionFooterSourceHelper.nodesForRowAtSection(section, at: 0) {
+            footer.linkCellNodes(nodes)
         }
         return footer
     }

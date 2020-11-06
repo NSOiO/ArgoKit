@@ -367,6 +367,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             }
         }else{
             wealSelf.view.frame = frame;
+            if ([self.view isKindOfClass:[UITableView class]]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [(UITableView *)self.view reloadData];
+                });
+            }
         }
     }];
 }
@@ -495,6 +500,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self.childs addObject:node];
     }
 }
+- (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes {
+    for (ArgoKitNode *node in nodes) {
+        [self addChildNode:node];
+    }
+}
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (node) {
         [self.childs insertObject:node atIndex:index];
@@ -515,6 +525,16 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (_childs.count) {
         [_childs removeAllObjects];
     }
+}
+- (NSString *)hierarchyKey {
+    if (!_childs.count) {
+        return NSStringFromClass(_viewClass) ? : @"";
+    }
+    NSMutableString *key = [NSMutableString string];
+    for (ArgoKitNode *child in _childs) {
+        [key appendString:[child hierarchyKey]];
+    }
+    return key.copy;
 }
 @end
 
