@@ -27,14 +27,7 @@ class ArgoKitListCell: UITableViewCell {
         self.contentNode = nil
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.contentNode?.removeAllChildNodes()
-    }
-    
     public func linkCellNode(_ node: ArgoKitNode) {
-        
-        node.removeFromSuperNode()
         self.contentNode?.addChildNode(node)
         node.applyLayout()
     }

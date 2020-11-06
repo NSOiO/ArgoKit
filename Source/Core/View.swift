@@ -77,12 +77,20 @@ extension View {
 
 
     public func isUserInteractionEnabled(_ value:Bool)->Self{
-        self.node?.view?.isUserInteractionEnabled = value
+        if let view = self.node?.view {
+            view.isUserInteractionEnabled = value
+        }else{
+            addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
+        }
         return self
     }
 
     public func tag(_ value:Int)->Self{
-        self.node?.view?.tag = value
+        if let view = self.node?.view {
+            view.tag = value
+        }else{
+            addAttribute(#selector(setter:UIView.tag),value)
+        }
         return self
     }
     public func tag()->Int?{
@@ -105,7 +113,11 @@ extension View {
     /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
     @available(iOS 14.0, *)
     public func focusGroupIdentifier(_ value:String?)->Self{
-        self.node?.view?.focusGroupIdentifier = value
+        if let view = self.node?.view {
+            view.focusGroupIdentifier = value
+        }else{
+            addAttribute(#selector(setter:UIView.focusGroupIdentifier),value)
+        }
         return self
     }
     
@@ -116,7 +128,11 @@ extension View {
 
     @available(iOS 9.0, *)
     public func semanticContentAttribute(_ value:UISemanticContentAttribute)->Self{
-        self.node?.view?.semanticContentAttribute = value
+        if let view = self.node?.view {
+            view.semanticContentAttribute = value
+        }else{
+            addAttribute(#selector(setter:UIView.semanticContentAttribute),value)
+        }
         return self
     }
     public func semanticContentAttribute()->UISemanticContentAttribute?{
@@ -127,61 +143,108 @@ extension View {
         return self.node?.view?.effectiveUserInterfaceLayoutDirection
     }
 }
+
+// modifier
 extension View{
+    public func addAttribute(_ selector:Selector, _ patamter:Any? ...) {
+        if let node = self.node{
+            // 获取参数
+            var patamters:Array<Any> = Array()
+            for item in patamter {
+                patamters.append(item!)
+            }
+            let attibute = ViewAttribute(selector:selector,paramter:patamters)
+            if node.view != nil {
+                ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attibute])
+            }else{
+                node.viewAttributes.add(attibute)
+            }
+            if selector == #selector(setter:UILabel.text) {
+                node.text = patamters.first as! String
+            }
+        }
+    }
     public func clipsToBounds(_ value:Bool)->Self{
-        if let node = self.node {
-            node.view?.clipsToBounds = value;
+        if let view = self.node?.view {
+            view.clipsToBounds = value
+        }else{
+            addAttribute(#selector(setter:UIView.clipsToBounds),value)
         }
         return self;
     }
     public func backgroundColor(_ value:UIColor)->Self{
-        if let node = self.node {
-            node.view?.backgroundColor = value;
+        if let view = self.node?.view {
+            view.backgroundColor = value
+        }else{
+            addAttribute(#selector(setter:UIView.backgroundColor),value)
         }
         return self;
     }
     public func alpha(_ value:CGFloat)->Self{
-        if let node = self.node {
-            node.view?.alpha = value;
+        if let view = self.node?.view {
+            view.alpha = value
+        }else{
+            addAttribute(#selector(setter:UIView.alpha),value)
         }
         return self;
     }
     public func opaque(_ value:Bool)->Self{
-        if let node = self.node {
-            node.view?.isOpaque = value;
+        if let view = self.node?.view {
+            view.isOpaque = value
+        }else{
+            addAttribute(#selector(setter:UIView.isOpaque),value)
         }
         return self;
     }
     public func clearsContextBeforeDrawing(_ value:Bool)->Self{
-        self.node?.view?.clearsContextBeforeDrawing = value;
+        if let view = self.node?.view {
+            view.clearsContextBeforeDrawing = value
+        }else{
+            addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
+        }
         return self;
     }
     public func hidden(_ value:Bool)->Self{
-        self.node?.view?.isHidden = value;
+        if let view = self.node?.view {
+            view.isHidden = value
+        }else{
+            addAttribute(#selector(setter:UIView.isHidden),value)
+        }
         return self;
     }
     public func contentMode(_ value:UIView.ContentMode)->Self{
-        self.node?.view?.contentMode = value;
+        if let view = self.node?.view {
+            view.contentMode = value
+        }else{
+            addAttribute(#selector(setter:UIView.contentMode),value)
+        }
         return self;
     }
     public func tintColor(_ value:UIColor)->Self{
-        self.node?.view?.tintColor = value;
+        if let view = self.node?.view {
+            view.tintColor = value
+        }else{
+            addAttribute(#selector(setter:UIView.tintColor),value)
+        }
         return self;
     }
     public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
-        self.node?.view?.tintAdjustmentMode = value;
-        
+        if let view = self.node?.view {
+            view.tintAdjustmentMode = value
+        }else{
+            addAttribute(#selector(setter:UIView.tintAdjustmentMode),value)
+        }
         return self;
     }
     public func cornerRadius(_ value:CGFloat)->Self{
-        self.node?.view?.layer.cornerRadius = value
+        if let view = self.node?.view {
+            view.layer.cornerRadius = value
+        }else{
+            addAttribute(#selector(setter:CALayer.cornerRadius),value)
+        }
         return self;
     }
 }
-
-
-
-
 // UIGestureRecognizer
 extension View{
     public func gesture(gesture:Gesture)->Self{

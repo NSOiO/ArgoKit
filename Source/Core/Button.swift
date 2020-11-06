@@ -20,7 +20,7 @@ public struct Button:View{
     }
     
     private init(){
-        button = UIButton(type:.custom);
+        button = UIButton(type:.custom)
         pNode = ArgoKitNode(view: button)
     }
     
@@ -35,7 +35,6 @@ extension Button{
     public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
         button.setTitle(text as? String, for: UIControl.State.normal)
-        print("button:hash",button.hashValue)
         pNode.addTarget(button, for: UIControl.Event.touchUpInside) { (obj, paramter) in
             action();
         }
@@ -44,11 +43,11 @@ extension Button{
 
 extension Button{
     public func imageEdgeInsets(_ value:UIEdgeInsets)->Self{
-        button.imageEdgeInsets = value
+        addAttribute(#selector(setter:UIButton.imageEdgeInsets),value)
         return self
     }
     public func UIEdgeInsets(_ value:UIColor!)->Self {
-        button.tintColor = value
+        addAttribute(#selector(setter:UIButton.tintColor),value)
         return self
     }
     @available(iOS 14.0, *)
