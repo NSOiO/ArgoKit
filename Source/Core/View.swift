@@ -130,6 +130,32 @@ extension View {
 
 // modifier
 extension View{
+    func isDirty(_ selector:Selector) -> Bool {
+        var isDirty_ = false
+        if selector == #selector(setter:UILabel.text) {
+            isDirty_ = true
+        }
+        if selector == #selector(setter:UILabel.attributedText) {
+            isDirty_ = true
+        }
+        if selector == #selector(setter:UILabel.numberOfLines) {
+            isDirty_ = true
+        }
+        
+        if selector == #selector(setter:UILabel.font) {
+            isDirty_ = true
+        }
+        
+        if selector == #selector(setter:UIImageView.image) {
+            isDirty_ = true
+        }
+        
+        if selector == #selector(setter:UIImageView.highlightedImage) {
+            isDirty_ = true
+        }
+        
+        return isDirty_;
+    }
     public func addAttribute(_ selector:Selector, _ patamter:Any? ...) {
         if let node = self.node{
             // 获取参数
@@ -138,6 +164,7 @@ extension View{
                 patamters.append(item!)
             }
             let attibute = ViewAttribute(selector:selector,paramter:patamters)
+            attibute.isDirty = isDirty(selector)
             if node.view != nil {
                 ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attibute])
             }else{
@@ -149,83 +176,43 @@ extension View{
         }
     }
     public func clipsToBounds(_ value:Bool)->Self{
-        if let view = self.node?.view {
-            view.clipsToBounds = value
-        }else{
-            addAttribute(#selector(setter:UIView.clipsToBounds),value)
-        }
+        addAttribute(#selector(setter:UIView.clipsToBounds),value)
         return self;
     }
     public func backgroundColor(_ value:UIColor)->Self{
-        if let view = self.node?.view {
-            view.backgroundColor = value
-        }else{
-            addAttribute(#selector(setter:UIView.backgroundColor),value)
-        }
+        addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
     }
     public func alpha(_ value:CGFloat)->Self{
-        if let view = self.node?.view {
-            view.alpha = value
-        }else{
-            addAttribute(#selector(setter:UIView.alpha),value)
-        }
+        addAttribute(#selector(setter:UIView.alpha),value)
         return self;
     }
     public func opaque(_ value:Bool)->Self{
-        if let view = self.node?.view {
-            view.isOpaque = value
-        }else{
-            addAttribute(#selector(setter:UIView.isOpaque),value)
-        }
+        addAttribute(#selector(setter:UIView.isOpaque),value)
         return self;
     }
     public func clearsContextBeforeDrawing(_ value:Bool)->Self{
-        if let view = self.node?.view {
-            view.clearsContextBeforeDrawing = value
-        }else{
-            addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
-        }
+        addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
         return self;
     }
     public func hidden(_ value:Bool)->Self{
-        if let view = self.node?.view {
-            view.isHidden = value
-        }else{
-            addAttribute(#selector(setter:UIView.isHidden),value)
-        }
+        addAttribute(#selector(setter:UIView.isHidden),value)
         return self;
     }
     public func contentMode(_ value:UIView.ContentMode)->Self{
-        if let view = self.node?.view {
-            view.contentMode = value
-        }else{
-            addAttribute(#selector(setter:UIView.contentMode),value)
-        }
+        addAttribute(#selector(setter:UIView.contentMode),value)
         return self;
     }
     public func tintColor(_ value:UIColor)->Self{
-        if let view = self.node?.view {
-            view.tintColor = value
-        }else{
-            addAttribute(#selector(setter:UIView.tintColor),value)
-        }
+        addAttribute(#selector(setter:UIView.tintColor),value)
         return self;
     }
     public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
-        if let view = self.node?.view {
-            view.tintAdjustmentMode = value
-        }else{
-            addAttribute(#selector(setter:UIView.tintAdjustmentMode),value)
-        }
+        addAttribute(#selector(setter:UIView.tintAdjustmentMode),value)
         return self;
     }
     public func cornerRadius(_ value:CGFloat)->Self{
-        if let view = self.node?.view {
-            view.layer.cornerRadius = value
-        }else{
-            addAttribute(#selector(setter:CALayer.cornerRadius),value)
-        }
+        addAttribute(#selector(setter:CALayer.cornerRadius),value)
         return self;
     }
 }
@@ -255,7 +242,6 @@ extension View{
         }
         return self.gesture(gesture:gesture)
     }
-    
     public func longPressAction(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
         let gesture = LongPressGesture(numberOfTaps:numberOfTaps,numberOfTouches:numberOfTouches,minimumPressDuration:minimumPressDuration,allowableMovement:allowableMovement) { gesture in
             action()

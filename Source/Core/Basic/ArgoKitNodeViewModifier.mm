@@ -88,9 +88,10 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         if (node.view) {
             if ([node.view respondsToSelector:attribute.selector]) {
                 performSelector(node.view,attribute.selector,attribute.paramter);
-                [node markDirty];
+                if (attribute.isDirty) {
+                    [node markDirty];
+                }
             }
-          
         }
        
     }

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ViewAttribute : NSObject
 @property(nonatomic,assign,readonly)SEL selector;
 @property(nonatomic,copy,readonly)NSArray<id> *paramter;
+@property(nonatomic,assign)BOOL isDirty;
 - (instancetype)initWithSelector:(nullable SEL)selector paramter:(nullable NSArray<id> *)paramter;
 @end
  
