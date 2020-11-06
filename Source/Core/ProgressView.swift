@@ -9,7 +9,6 @@ import Foundation
 
 public struct ProgressView : View {
     
-    private var progressView : UIProgressView
     private var pNode : ArgoKitNode
     
     public var body: View {
@@ -26,61 +25,61 @@ public struct ProgressView : View {
     
     public init(_ progress: Float?) {
         self.init(progressViewStyle: .default)
-        progressView.progress = progress ?? 0.0
+        addAttribute(#selector(setter:UIProgressView.progress),progress ?? 0.0)
     }
     
     @available(iOS 9.0, *)
     public init(_ observedProgress: Progress) {
         self.init(progressViewStyle: .default)
-        progressView.observedProgress = observedProgress
+        addAttribute(#selector(setter:UIProgressView.observedProgress),observedProgress)
     }
     
     public init(progressViewStyle style: UIProgressView.Style) {
-        progressView = UIProgressView(progressViewStyle: style);
-        pNode = ArgoKitNode(view: progressView)
+        pNode = ArgoKitNode(viewClass:UIProgressView.self)
+        addAttribute(#selector(setter:UIProgressView.progressViewStyle),style.rawValue)
     }
 }
 
 extension ProgressView {
     
     public func progressViewStyle(_ value: UIProgressView.Style) -> Self {
-        progressView.progressViewStyle = value
+        addAttribute(#selector(setter:UIProgressView.progressViewStyle),value.rawValue)
         return self
     }
     
     public func progress(_ value: Float) -> Self {
-        progressView.progress = value
+        addAttribute(#selector(setter:UIProgressView.progress),value)
         return self
     }
     
     public func progressTintColor(_ value: UIColor?) -> Self {
-        progressView.progressTintColor = value
+        addAttribute(#selector(setter:UIProgressView.progressTintColor),value)
         return self
     }
     
     public func trackTintColor(_ value: UIColor?) -> Self {
-        progressView.trackTintColor = value
+        addAttribute(#selector(setter:UIProgressView.trackTintColor),value)
         return self
     }
     
     public func progressImage(_ value: UIImage?) -> Self {
-        progressView.progressImage = value
+        addAttribute(#selector(setter:UIProgressView.progressImage),value)
         return self
     }
     
     public func trackImage(_ value: UIImage?) -> Self {
-        progressView.trackImage = value
+        addAttribute(#selector(setter:UIProgressView.trackImage),value)
         return self
     }
     
     public func setProgress(_ value: Float, animated: Bool) -> Self {
-        progressView.setProgress(value, animated: animated)
+        addAttribute(#selector(UIProgressView.setProgress),value,animated)
         return self
     }
     
     @available(iOS 9.0, *)
     public func observedProgress(_ value: Progress?) -> Self {
-        progressView.observedProgress = value
+        addAttribute(#selector(setter:UIProgressView.observedProgress),value)
         return self
     }
 }
@@ -88,8 +87,7 @@ extension ProgressView {
 extension ProgressView {
 
     public init?(_ configuration: ProgressViewStyleConfiguration) {
-        if let view = configuration.node.view as? UIProgressView {
-            progressView = view;
+        if (configuration.node.view as? UIProgressView) != nil {
             pNode = configuration.node
         } else {
             return nil

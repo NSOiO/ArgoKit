@@ -13,7 +13,7 @@ public struct List : ScrollView {
     private var pNode : ArgoKitTableNode
     
     public var body: View {
-        self
+        ViewEmpty()
     }
     
     public var scrollView: UIScrollView {
@@ -30,6 +30,7 @@ public struct List : ScrollView {
     
     private init(style: UITableView.Style?) {
         tableView = UITableView(frame: .zero, style: style ?? .plain)
+        tableView.backgroundColor = UIColor.cyan
         pNode = ArgoKitTableNode(view: tableView)
     }
     

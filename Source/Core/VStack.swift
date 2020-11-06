@@ -19,15 +19,19 @@ public struct VStack:View {
         .single(pNode)
     }
     
-    private var pView:UIView
     public init(){
-        pView = UIView();
-        pNode = ArgoKitNode(view: pView);
+        pNode = ArgoKitNode(viewClass:UIView.self);
     }
+    
+    public init(@ArgoKitViewBuilder _ builder:@escaping ()->View) {
+        pNode = ArgoKitNode(viewClass: UIView.self);
+        pNode.column();
+        addSubNodes(builder:builder)
+    }
+    
     //TODO:是否考虑支持兼容/混合布局
-    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pView = view;
-        pNode = ArgoKitNode(view: pView);
+    public init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
+        pNode = ArgoKitNode(view:view);
         pNode.column();
         addSubNodes(builder:builder)
     }

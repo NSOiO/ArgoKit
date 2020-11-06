@@ -9,7 +9,7 @@ import Foundation
 
 class ArgoKitListCell: UITableViewCell {
   
-    var contentNode: ArgoKitNode?
+    public var contentNode: ArgoKitNode?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,14 +27,13 @@ class ArgoKitListCell: UITableViewCell {
         self.contentNode = nil
     }
     
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.contentNode?.removeAllChildNodes()
     }
     
     public func linkCellNode(_ node: ArgoKitNode) {
-        
-        node.removeFromSuperNode()
         self.contentNode?.addChildNode(node)
         node.applyLayout()
     }

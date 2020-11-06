@@ -10,7 +10,6 @@ public struct Button:View{
     public var body: View{
         self
     }
-    private let button:UIButton
     private let pNode:ArgoKitNode
     public var type: ArgoKitNodeType{
         .single(pNode)
@@ -20,8 +19,7 @@ public struct Button:View{
     }
     
     private init(){
-        button = UIButton(type:.custom);
-        pNode = ArgoKitNode(view: button)
+        pNode = ArgoKitNode(viewClass: UIButton.self)
     }
     
     public init<S>(_ text:S,action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View) where S:StringProtocol {
@@ -34,62 +32,62 @@ public struct Button:View{
 extension Button{
     public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
-        button.setTitle(text as? String, for: UIControl.State.normal)
-        print("button:hash",button.hashValue)
-        pNode.addTarget(button, for: UIControl.Event.touchUpInside) { (obj, paramter) in
+        addAttribute(#selector(UIButton.setTitle(_:for:)),text as? String,UIControl.State.normal.rawValue)
+        
+        pNode.addAction({ (obj, paramter) -> Any? in
             action();
-        }
+        }, for: UIControl.Event.touchUpInside)
     }
 }
 
 extension Button{
     public func imageEdgeInsets(_ value:UIEdgeInsets)->Self{
-        button.imageEdgeInsets = value
+        addAttribute(#selector(setter:UIButton.imageEdgeInsets),value)
         return self
     }
     public func UIEdgeInsets(_ value:UIColor!)->Self {
-        button.tintColor = value
+        addAttribute(#selector(setter:UIButton.tintColor),value)
         return self
     }
     @available(iOS 14.0, *)
     public func role(_ value:UIButton.Role)->Self{
-        button.role = value
+        addAttribute(#selector(setter:UIButton.role),value)
         return self
     }
     
     public func title(_ title: String?, for state: UIControl.State)->Self{
-        button.setTitle(title, for: state)
+        addAttribute(#selector(UIButton.setTitle(_:for:)),title,state.rawValue)
         return self
     }
     
     public func titleColor(_ color: UIColor?, for state: UIControl.State)->Self{
-        button.setTitleColor(color, for: state)
+        addAttribute(#selector(UIButton.setTitleColor(_:for:)),color,state.rawValue)
         return self
     }
     
     public func titleShadowColor(_ color: UIColor?, for state: UIControl.State)->Self{
-        button.setTitleShadowColor(color, for: state)
+        addAttribute(#selector(UIButton.setTitleShadowColor(_:for:)),color,state.rawValue)
         return self
     }
     
     public func image(_ image: UIImage?, for state: UIControl.State)->Self{
-        button.setImage(image, for: state)
+        addAttribute(#selector(UIButton.setImage(_:for:)),image,state.rawValue)
         return self
     }
     public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
-        button.setBackgroundImage(image, for: state)
+        addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
         return self
     }
 
     @available(iOS 13.0, *)
     public func preferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?, forImageIn state: UIControl.State)->Self{
-        button.setPreferredSymbolConfiguration(configuration, forImageIn: state)
+        addAttribute(#selector(UIButton.setPreferredSymbolConfiguration(_:forImageIn:)),configuration,state.rawValue)
         return self
     }
 
     @available(iOS 6.0, *)
     public func attributedTitle(_ title: NSAttributedString?, for state: UIControl.State)->Self{
-        button.setAttributedTitle(title, for: state)
+        addAttribute(#selector(UIButton.setAttributedTitle(_:for:)),title,state.rawValue)
         return self
     }
     

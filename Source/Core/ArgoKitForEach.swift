@@ -9,7 +9,7 @@ import Foundation
 
 public struct ForEach:View{
     public var body: View{
-        BaseViewEmpty()
+        ViewEmpty()
     }
     
     private var innerNode:ArgoKitNode

@@ -9,7 +9,6 @@ import Foundation
 
 public struct ImageView : View {
     
-    private var imageView : UIImageView
     private var pNode : ArgoKitNode
     
     public var body: View {
@@ -57,24 +56,31 @@ public struct ImageView : View {
     }
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
-        imageView = UIImageView(image: image, highlightedImage: highlightedImage);
-        pNode = ArgoKitNode(view: imageView)
+        pNode = ArgoKitNode(viewClass: UIImageView.self)
+        self.node?.width(point: image?.size.width ?? 0)
+        self.node?.height(point: image?.size.height ?? 0)
+        if let img = image {
+            addAttribute(#selector(setter:UIImageView.image),img)
+        }
+        if let hightImg = highlightedImage{
+            addAttribute(#selector(setter:UIImageView.highlightedImage),hightImg)
+        }
     }
 }
 
 extension ImageView {
     
     public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
-        if let image = imageView.image {
-            imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
-        }
+//        if let image = se.image {
+//            imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
+//        }
         return self
     }
     
     public func renderingMode(_ renderingMode: UIImage.RenderingMode?) -> Self {
-        if let image = imageView.image {
-            imageView.image = image.withRenderingMode(renderingMode ?? .automatic)
-        }
+//        if let image = imageView.image {
+//            imageView.image = image.withRenderingMode(renderingMode ?? .automatic)
+//        }
         return self
     }
 }
@@ -82,7 +88,7 @@ extension ImageView {
 extension ImageView {
     
     public func image(_ value: UIImage?) -> Self {
-        imageView.image = value
+        addAttribute(#selector(setter:UIImageView.image),value)
         self.node?.width(point: value?.size.width ?? 0)
         self.node?.height(point: value?.size.height ?? 0)
         self.node?.markDirty()
@@ -90,59 +96,58 @@ extension ImageView {
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {
-        imageView.highlightedImage = value
-        self.node?.markDirty()
+        addAttribute(#selector(setter:UIImageView.image),value)
         return self
     }
     
     @available(iOS 13.0, *)
     public func preferredSymbolConfiguration(_ value: UIImage.SymbolConfiguration?) -> Self {
-        imageView.preferredSymbolConfiguration = value
+        addAttribute(#selector(setter:UIImageView.preferredSymbolConfiguration),value)
         return self
     }
     
     public func isUserInteractionEnabled(_ value: Bool) -> Self {
-        imageView.isUserInteractionEnabled = value
+        addAttribute(#selector(setter:UIImageView.isUserInteractionEnabled),value)
         return self
     }
     
     public func isHighlighted(_ value: Bool) -> Self {
-        imageView.isHighlighted = value
+        addAttribute(#selector(setter:UIImageView.isHighlighted),value)
         return self
     }
     
     public func animationImages(_ value: [UIImage]?) -> Self {
-        imageView.animationImages = value
+        addAttribute(#selector(setter:UIImageView.animationImages),value)
         return self
     }
     
     public func highlightedAnimationImages(_ value: [UIImage]?) -> Self {
-        imageView.highlightedAnimationImages = value
+        addAttribute(#selector(setter:UIImageView.highlightedAnimationImages),value)
         return self
     }
     
     public func animationDuration(_ value: TimeInterval) -> Self {
-        imageView.animationDuration = value
+        addAttribute(#selector(setter:UIImageView.animationDuration),value)
         return self
     }
     
     public func animationRepeatCount(_ value: Int) -> Self {
-        imageView.animationRepeatCount = value
+        addAttribute(#selector(setter:UIImageView.animationRepeatCount),value)
         return self
     }
     
     public func tintColor(_ value: UIColor!) -> Self {
-        imageView.tintColor = value
+        addAttribute(#selector(setter:UIImageView.tintColor),value)
         return self
     }
     
     public func startAnimating() -> Self {
-        imageView.startAnimating()
+        addAttribute(#selector(UIImageView.startAnimating))
         return self
     }
     
     public func stopAnimating() -> Self {
-        imageView.stopAnimating()
+        addAttribute(#selector(UIImageView.stopAnimating))
         return self
     }
 }

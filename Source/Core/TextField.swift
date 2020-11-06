@@ -9,7 +9,6 @@ import Foundation
 
 public struct TextField : View {
     
-    private var textField : UITextField
     private var pNode : ArgoKitNode
     
     public var body: View {
@@ -29,136 +28,135 @@ public struct TextField : View {
     }
     
     public init(_ text: String?) {
-        textField = UITextField()
-        pNode = ArgoKitNode(view: textField)
-        textField.text = text;
+        pNode = ArgoKitNode(viewClass:UITextField.self)
+        addAttribute(#selector(setter:UITextField.text),text)
     }
 }
 
 extension TextField {
     
     public func text(_ value: String?) -> Self {
-        textField.text = value
+        addAttribute(#selector(setter:UITextField.text),value)
         return self
     }
     
     public func attributedText(_ value: NSAttributedString?) -> Self {
-        textField.attributedText = value
+        addAttribute(#selector(setter:UITextField.attributedText),value)
         return self
     }
     
     public func textColor(_ value: UIColor?) -> Self {
-        textField.textColor = value
+        addAttribute(#selector(setter:UITextField.textColor),value)
         return self
     }
     
     public func font(_ value: UIFont?) -> Self {
-        textField.font = value
+        addAttribute(#selector(setter:UITextField.font),value)
         return self
     }
     
     public func textAlignment(_ value: NSTextAlignment) -> Self {
-        textField.textAlignment = value
+        addAttribute(#selector(setter:UITextField.textAlignment),value)
         return self
     }
     
     public func borderStyle(_ value: UITextField.BorderStyle) -> Self {
-        textField.borderStyle = value
+        addAttribute(#selector(setter:UITextField.borderStyle),value)
         return self
     }
     
     public func defaultTextAttributes(_ value: [NSAttributedString.Key : Any]) -> Self {
-        textField.defaultTextAttributes = value
+        addAttribute(#selector(setter:UITextField.defaultTextAttributes),value)
         return self
     }
     
     public func placeholder(_ value: String?) -> Self {
-        textField.placeholder = value
+        addAttribute(#selector(setter:UITextField.placeholder),value)
         return self
     }
     
     public func attributedPlaceholder(_ value: NSAttributedString?) -> Self {
-        textField.attributedPlaceholder = value
+        addAttribute(#selector(setter:UITextField.attributedPlaceholder),value)
         return self
     }
     
     public func clearsOnBeginEditing(_ value: Bool) -> Self {
-        textField.clearsOnBeginEditing = value
+        addAttribute(#selector(setter:UITextField.clearsOnBeginEditing),value)
         return self
     }
     
     public func adjustsFontSizeToFitWidth(_ value: Bool) -> Self {
-        textField.adjustsFontSizeToFitWidth = value
+        addAttribute(#selector(setter:UITextField.adjustsFontSizeToFitWidth),value)
         return self
     }
     
     public func minimumFontSize(_ value: CGFloat) -> Self {
-        textField.minimumFontSize = value
+        addAttribute(#selector(setter:UITextField.minimumFontSize),value)
         return self
     }
     
     public func delegate(_ value: UITextFieldDelegate?) -> Self {
-        textField.delegate = value
+        addAttribute(#selector(setter:UITextField.delegate),value)
         return self
     }
     
     public func background(_ value: UIImage?) -> Self {
-        textField.background = value
+        addAttribute(#selector(setter:UITextField.background),value)
         return self
     }
     
     public func disabledBackground(_ value: UIImage?) -> Self {
-        textField.disabledBackground = value
+        addAttribute(#selector(setter:UITextField.disabledBackground),value)
         return self
     }
     
     public func allowsEditingTextAttributes(_ value: Bool) -> Self {
-        textField.allowsEditingTextAttributes = value
+        addAttribute(#selector(setter:UITextField.allowsEditingTextAttributes),value)
         return self
     }
     
     public func typingAttributes(_ value: [NSAttributedString.Key : Any]?) -> Self {
-        textField.typingAttributes = value
+        addAttribute(#selector(setter:UITextField.typingAttributes),value)
         return self
     }
     
     public func clearButtonMode(_ value: UITextField.ViewMode) -> Self {
-        textField.clearButtonMode = value
+        addAttribute(#selector(setter:UITextField.clearButtonMode),value)
         return self
     }
     
     public func leftView(_ value: UIView?) -> Self {
-        textField.leftView = value
+        addAttribute(#selector(setter:UITextField.leftView),value)
         return self
     }
     
     public func leftViewMode(_ value: UITextField.ViewMode) -> Self {
-        textField.leftViewMode = value
+        addAttribute(#selector(setter:UITextField.leftViewMode),value)
         return self
     }
     
     public func rightView(_ value: UIView?) -> Self {
-        textField.rightView = value
+        addAttribute(#selector(setter:UITextField.rightView),value)
         return self
     }
     
     public func rightViewMode(_ value: UITextField.ViewMode) -> Self {
-        textField.rightViewMode = value
+        addAttribute(#selector(setter:UITextField.rightViewMode),value)
         return self
     }
     
     public func inputView(_ value: UIView?) -> Self {
-        textField.inputView = value
+        addAttribute(#selector(setter:UITextField.inputView),value)
         return self
     }
     
     public func inputAccessoryView(_ value: UIView?) -> Self {
-        textField.inputAccessoryView = value
+        addAttribute(#selector(setter:UITextField.inputAccessoryView),value)
         return self
     }
     
     public func clearsOnInsertion(_ value: Bool) -> Self {
-        textField.clearsOnInsertion = value
+        addAttribute(#selector(setter:UITextField.clearsOnInsertion),value)
         return self
     }
 }
