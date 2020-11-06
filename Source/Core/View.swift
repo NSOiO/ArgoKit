@@ -74,8 +74,6 @@ extension View{
 // modifier
 
 extension View {
-
-
     public func isUserInteractionEnabled(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
         return self
