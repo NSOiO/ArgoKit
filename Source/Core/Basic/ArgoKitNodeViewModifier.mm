@@ -81,9 +81,33 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 @implementation ArgoKitNodeViewModifier
-+ (void)nodeViewAttributeWithView:(id)obj attributes:(NSArray<ViewAttribute *> *)attributes{
++ (void)nodeViewAttributeWithNode:(ArgoKitNode *)node attributes:(NSArray<ViewAttribute *> *)attributes{
     for (ViewAttribute *attribute in attributes) {
-        performSelector(obj,attribute.selector,attribute.paramter);
+        if (node.view) {
+            if ([node.view respondsToSelector:attribute.selector]) {
+                performSelector(node.view,attribute.selector,attribute.paramter);
+                [node markDirty];
+            }
+          
+        }
+       
+    }
+}
+
++ (void)reuseNodeViewAttribute:(NSArray<ArgoKitNode*> *)nodes reuseNodes:(NSArray<ArgoKitNode*> *)reuseNodes{
+    NSInteger nodeCount = nodes.count;
+    if (nodeCount != reuseNodes.count) {
+        return;
+    }
+    for (int i = 0; i < nodeCount; i++) {
+        ArgoKitNode *node = nodes[i];
+        ArgoKitNode *resueNode = reuseNodes[i];
+        node.text = resueNode.text;
+        [self nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes];
+        
+        if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
+            [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs];
+        }
     }
 }
 @end

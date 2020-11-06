@@ -31,39 +31,79 @@ public struct Text:View {
 
 extension Text{
     public func text(_ value:String?)->Self{
-        addAttribute(#selector(setter:UILabel.text),value)
-        self.markNeedsLayout()
+        if let view = self.node?.view as? UILabel {
+            view.text = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.text),value)
+        }
+       
         return self
     }
     public func font(_ value:UIFont!)->Self{
-        addAttribute(#selector(setter:UILabel.font),value)
-        self.markNeedsLayout()
+        if let view = self.node?.view as? UILabel {
+            view.font = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.font),value)
+        }
         return self
     }
     public func textColor(_ value:UIColor!)->Self{
-        addAttribute(#selector(setter:UILabel.textColor),value)
+        if let view = self.node?.view as? UILabel {
+            view.textColor = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.textColor),value)
+        }
         return self
     }
     public func shadowColor(_ value:UIColor?)->Self{
-        addAttribute(#selector(setter:UILabel.shadowColor),value)
+        if let view = self.node?.view as? UILabel {
+            view.shadowColor = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.shadowColor),value)
+        }
+        
         return self
     }
     public func shadowOffset(_ value:CGSize)->Self{
-        addAttribute(#selector(setter:UILabel.shadowOffset),value)
+        if let view = self.node?.view as? UILabel {
+            view.shadowOffset = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.shadowOffset),value)
+        }
+       
         return self
     }
     public func textAlignment(_ value:NSTextAlignment)->Self{
-        addAttribute(#selector(setter:UILabel.textAlignment),value)
+        if let view = self.node?.view as? UILabel {
+            view.textAlignment = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.textAlignment),value)
+        }
         return self
     }
     public func lineBreakMode(_ value:NSLineBreakMode)->Self{
-        addAttribute(#selector(setter:UILabel.lineBreakMode),value)
+        if let view = self.node?.view as? UILabel {
+            view.lineBreakMode = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.lineBreakMode),value)
+        }
         return self
     }
     
     public func attributedText(_ value:NSAttributedString?)->Self{
-        addAttribute(#selector(setter:UILabel.attributedText),value)
-        self.markNeedsLayout()
+        if let view = self.node?.view as? UILabel {
+            view.attributedText = value
+            self.markNeedsLayout()
+        }else{
+            addAttribute(#selector(setter:UILabel.attributedText),value)
+        }
         return self
     }
     

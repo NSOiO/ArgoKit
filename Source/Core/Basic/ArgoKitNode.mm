@@ -329,14 +329,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         if (!self.view) {
             self.view = [self.viewClass new];
             wealSelf.view.frame = frame;
-            [ArgoKitNodeViewModifier nodeViewAttributeWithView:self.view attributes:self.viewAttributes];
+            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes];
             if (self.parentNode.view) {
                 [self.parentNode.view addSubview:self.view];
             }
         }else{
             self.view.frame = frame;
         }
-        
     }];
 }
 - (NSMutableArray<ArgoKitNode *> *)childs{
@@ -417,7 +416,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (CGSize)sizeThatFits:(CGSize)size{
-    return [self.view sizeThatFits:size];
+    UILabel *lable = [UILabel new];
+    lable.text = self.text;
+    return [lable sizeThatFits:size];
 }
 
 - (void)applyLayout{

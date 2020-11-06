@@ -72,7 +72,7 @@ public struct ImageView : View {
 extension ImageView {
     
     public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
-//        if let image = imageView.image {
+//        if let image = se.image {
 //            imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
 //        }
         return self
@@ -89,8 +89,11 @@ extension ImageView {
 extension ImageView {
     
     public func image(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UIImageView.image),value)
-        
+        if let view = self.node?.view as? UIImageView {
+            view.image = value
+        }else{
+            addAttribute(#selector(setter:UIImageView.image),value)
+        }
         self.node?.width(point: value?.size.width ?? 0)
         self.node?.height(point: value?.size.height ?? 0)
         self.node?.markDirty()
@@ -98,8 +101,12 @@ extension ImageView {
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UIImageView.highlightedImage),value)
-        self.node?.markDirty()
+        if let view = self.node?.view as? UIImageView {
+            view.highlightedImage = value
+            self.node?.markDirty()
+        }else{
+            addAttribute(#selector(setter:UIImageView.highlightedImage),value)
+        }
         return self
     }
     

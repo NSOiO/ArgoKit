@@ -10,7 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ArgoKitNodeViewModifier : NSObject
-+ (void)nodeViewAttributeWithView:(id)view attributes:(NSArray<ViewAttribute *> *)attributes;
++ (void)nodeViewAttributeWithNode:(ArgoKitNode *)node attributes:(NSArray<ViewAttribute *> *)attributes;
+
++ (void)reuseNodeViewAttribute:(NSArray<ArgoKitNode*> *)nodes reuseNodes:(NSArray<ArgoKitNode*> *)reuseNodes;
 @end
 
 NS_ASSUME_NONNULL_END

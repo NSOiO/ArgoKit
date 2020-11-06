@@ -43,11 +43,11 @@ extension Button{
 
 extension Button{
     public func imageEdgeInsets(_ value:UIEdgeInsets)->Self{
-        button.imageEdgeInsets = value
+        addAttribute(#selector(setter:UIButton.imageEdgeInsets),value)
         return self
     }
     public func UIEdgeInsets(_ value:UIColor!)->Self {
-        button.tintColor = value
+        addAttribute(#selector(setter:UIButton.tintColor),value)
         return self
     }
     @available(iOS 14.0, *)

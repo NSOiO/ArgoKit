@@ -38,6 +38,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 /* frame 相关 */
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, copy) NSString *text;
 
 /**
  Returns the number of children that are using Flexbox.
