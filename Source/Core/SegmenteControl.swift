@@ -20,7 +20,7 @@ public struct SegmenteControl:View{
     }
     /// Initializes the segmented control with the given items. Items may be NSStrings, UIImages, or (as of iOS 14.0) UIActions. When constructing from a UIAction segments will prefer images over titles when both are provided. The segmented control is automatically sized to fit content.
     public init(onSegmentedChange:@escaping(_ segmentIndex:Int)->Void,@ArgoKitViewBuilder _ builder:()->View){
-        var items:Array<Any> = []
+        var items:Array<Any> = ["1","2","3","4",]
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
@@ -41,12 +41,12 @@ public struct SegmenteControl:View{
         pSegment = UISegmentedControl(items: items)
         pNode = ArgoKitNode(view: pSegment)
         
-        pNode.addTarget(pSegment, for: UIControl.Event.valueChanged) { (obj, paramter) in
+        pNode.addAction({ (obj, paramter) -> Any? in
             if let segmentedControl = obj as? UISegmentedControl {
                 onSegmentedChange(segmentedControl.selectedSegmentIndex)
             }
             return nil
-        }
+        }, for: UIControl.Event.touchUpInside)
     }
 }
 

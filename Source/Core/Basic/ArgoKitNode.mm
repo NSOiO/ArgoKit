@@ -11,6 +11,27 @@
 #import "ArgoLayoutHelper.h"
 #import "ArgoKitUtils.h"
 #import "ArgoKitNodeViewModifier.h"
+
+@interface NodeAction:NSObject{
+    int actionTag;
+    ArgoKitNodeBlock action;
+    UIControlEvents  events;
+}
+@property(nonatomic, copy) ArgoKitNodeBlock actionBlock;
+@property(nonatomic, assign)  UIControlEvents  controlEvents;
+- (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents;
+@end
+
+@implementation NodeAction
+- (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
+    if (self = [super init]) {
+        _actionBlock = action;
+        _controlEvents = controlEvents;
+    }
+    return self;
+}
+@end
+
 @implementation ViewAttribute : NSObject
 - (instancetype)initWithSelector:(SEL)selector paramter:(NSArray<id> *)paramter{
     self = [super init];
@@ -34,6 +55,8 @@
 @property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic,assign)BOOL isUIView;
+
+@property (nonatomic,copy)NSMutableArray<NodeAction *> *nodeActions;
 @end
 
 
@@ -325,15 +348,25 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _frame = frame;
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadBlock:^{
-        if (!self.view) {
-            self.view = [self.viewClass new];
+        if (!wealSelf.view) {
+            wealSelf.view = [wealSelf.viewClass new];
             wealSelf.view.frame = frame;
-            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes];
-            if (self.parentNode.view) {
-                [self.parentNode.view addSubview:self.view];
+            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes];
+            if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+                NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];
+                for(NodeAction *action in copyActions){
+                    [wealSelf addTarget:wealSelf.view forControlEvents:action.controlEvents action:action.actionBlock];
+                }
+            }
+            
+            if (wealSelf.parentNode) {
+                NSInteger index = [wealSelf.parentNode.childs indexOfObject:wealSelf];
+                if (wealSelf.parentNode.view) {
+                    [wealSelf.parentNode.view insertSubview:wealSelf.view atIndex:index];
+                }
             }
         }else{
-            self.view.frame = frame;
+            wealSelf.view.frame = frame;
         }
     }];
 }
@@ -365,6 +398,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return _layout;
 }
 
+- (NSMutableArray<NodeAction *> *)nodeActions{
+    if (!_nodeActions) {
+        _nodeActions = [NSMutableArray array];
+    }
+    return _nodeActions;
+}
+
 #pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
@@ -394,6 +434,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [target addTarget:self action:@selector(nodeAction:)];
         [self observeAction:target actionBlock:action];
     }
+}
+
+- (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents{
+    NodeAction *action_ = [[NodeAction alloc] initWithAction:action controlEvents:controlEvents];
+    [self.nodeActions addObject:action_];
 }
 
 @end

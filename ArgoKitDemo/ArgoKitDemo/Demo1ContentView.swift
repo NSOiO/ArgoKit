@@ -21,26 +21,25 @@ var stack1:HStack?
 struct Demo1ContentView:View {
     let items = ["查查","cscs","122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
-    var body:View{
-        let gestur = TapGesture(numberOfTaps: 1, numberOfTouches: 1) { gesture in
-            print("tapAction111")
-        }
-        
-//        Slider(value: 0.7,in:-1...1,onValueChanged: { value in
-//            print("UISlider ", value)
-//        }).width(200).height(30).margin(edge: .top, value: 60)
+    var body:View{        
+        Slider(value: 0.7,in:-1...1,onValueChanged: { value in
+            print("UISlider ", value)
+        }).width(200).height(30).margin(edge: .top, value: 60)
 //
 //
-//        Toggle(true){ isOn in
-//            print("Toggle :",isOn)
-//        }.margin(edge: .top, value: 10)
+        Toggle(true){ isOn in
+            print("Toggle :",isOn)
+        }.margin(edge: .top, value: 50)
+
 //
+        Stepper(value: 10, in: 0...100, step: 4) { value in
+            print("Stepper :",value)
+        }.width(100).height(30).margin(edge: .left, value: 150).value(50).backgroundColor(.cyan)
 //
-//        Stepper(value: 10, in: 0...100, step: 4) { value in
-//            print("Stepper :",value)
-//        }.width(100).height(30).margin(edge: .left, value: 150)
-//
-//
+        PageControl(currentPage: 1, numberOfPages: 10){ index in
+            print("index:",index)
+        }.width(100%).height(50).backgroundColor(.red).margin(edge: .top, value: 100)
+////
 //        SegmenteControl { index in
 //            print("items :",index)
 //        } _: {
@@ -57,7 +56,7 @@ struct Demo1ContentView:View {
             
         }.titleColor(.red, for: UIControl.State.normal)
         .width(150).height(100).backgroundColor(.yellow).margin(edge: .top, value: 10)
-        ImageView("turtlerock").gesture(gesture: gestur).isUserInteractionEnabled(true)
+//        ImageView("turtlerock").gesture(gesture: gestur).isUserInteractionEnabled(true)
         HStack{
 //            ImageView("turtlerock")
             Text("11").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
@@ -67,6 +66,8 @@ struct Demo1ContentView:View {
         }.isUserInteractionEnabled(true)
         .alias(variable: &model.stack1).longPressAction(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
             print("longPressAction")
+        }.tapAction {
+            print("tapAction")
         }
    
     }

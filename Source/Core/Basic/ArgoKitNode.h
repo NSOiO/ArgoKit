@@ -69,8 +69,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (instancetype)initWithView:(UIView *)view;
 
 - (instancetype)initWithViewClass:(Class)viewClass;
-
-
+- (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents;
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
 - (nullable id)sendActionWithObj:(id)obj paramter:(nullable NSArray *)paramter;
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
