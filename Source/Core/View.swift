@@ -77,20 +77,12 @@ extension View {
 
 
     public func isUserInteractionEnabled(_ value:Bool)->Self{
-        if let view = self.node?.view {
-            view.isUserInteractionEnabled = value
-        }else{
-            addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
-        }
+        addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
         return self
     }
 
     public func tag(_ value:Int)->Self{
-        if let view = self.node?.view {
-            view.tag = value
-        }else{
-            addAttribute(#selector(setter:UIView.tag),value)
-        }
+        addAttribute(#selector(setter:UIView.tag),value)
         return self
     }
     public func tag()->Int?{
@@ -113,11 +105,7 @@ extension View {
     /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
     @available(iOS 14.0, *)
     public func focusGroupIdentifier(_ value:String?)->Self{
-        if let view = self.node?.view {
-            view.focusGroupIdentifier = value
-        }else{
-            addAttribute(#selector(setter:UIView.focusGroupIdentifier),value)
-        }
+        addAttribute(#selector(setter:UIView.focusGroupIdentifier),value)
         return self
     }
     
@@ -128,11 +116,7 @@ extension View {
 
     @available(iOS 9.0, *)
     public func semanticContentAttribute(_ value:UISemanticContentAttribute)->Self{
-        if let view = self.node?.view {
-            view.semanticContentAttribute = value
-        }else{
-            addAttribute(#selector(setter:UIView.semanticContentAttribute),value)
-        }
+        addAttribute(#selector(setter:UIView.semanticContentAttribute),value)
         return self
     }
     public func semanticContentAttribute()->UISemanticContentAttribute?{
@@ -249,7 +233,7 @@ extension View{
 extension View{
     public func gesture(gesture:Gesture)->Self{
         gesture.gesture.isEnabled = true
-        self.node?.view?.addGestureRecognizer(gesture.gesture)
+        addAttribute(#selector(UIView.addGestureRecognizer(_:)),gesture.gesture)
         self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (obj, paramter) in
             if let gestureRecognizer = obj as? UIGestureRecognizer {
                 gesture.action(gestureRecognizer)
@@ -283,7 +267,6 @@ extension View{
 
 // layout
 extension View{
-    
     // 标记Node需要重新布局
     public func markNeedsLayout(){
         self.node?.markDirty()

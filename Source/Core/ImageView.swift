@@ -60,10 +60,10 @@ public struct ImageView : View {
         self.node?.width(point: image?.size.width ?? 0)
         self.node?.height(point: image?.size.height ?? 0)
         if let img = image {
-            addAttribute(#selector(setter:UIImageView.image),[img])
+            addAttribute(#selector(setter:UIImageView.image),img)
         }
         if let hightImg = highlightedImage{
-            addAttribute(#selector(setter:UIImageView.highlightedImage),[hightImg])
+            addAttribute(#selector(setter:UIImageView.highlightedImage),hightImg)
         }
         
     }
@@ -89,11 +89,7 @@ extension ImageView {
 extension ImageView {
     
     public func image(_ value: UIImage?) -> Self {
-        if let view = self.node?.view as? UIImageView {
-            view.image = value
-        }else{
-            addAttribute(#selector(setter:UIImageView.image),value)
-        }
+        addAttribute(#selector(setter:UIImageView.image),value)
         self.node?.width(point: value?.size.width ?? 0)
         self.node?.height(point: value?.size.height ?? 0)
         self.node?.markDirty()
@@ -101,12 +97,7 @@ extension ImageView {
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {
-        if let view = self.node?.view as? UIImageView {
-            view.highlightedImage = value
-            self.node?.markDirty()
-        }else{
-            addAttribute(#selector(setter:UIImageView.highlightedImage),value)
-        }
+        addAttribute(#selector(setter:UIImageView.image),value)
         return self
     }
     

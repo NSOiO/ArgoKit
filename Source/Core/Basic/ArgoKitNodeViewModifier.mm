@@ -64,6 +64,8 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         } else if ([argumentTypeString isEqualToString:@"Q"]) { // unsigned long long
             unsigned long long objVaule = [obj unsignedLongLongValue];
             [invocation setArgument:&objVaule atIndex:i + 2];
+        }else if ([argumentTypeString isEqualToString:@":"]) { // unsigned long long
+            [invocation setArgument:&obj atIndex:i + 2];
         } else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(CGRect)]]) { // CGRect {CGRect={CGPoint=dd}{CGSize=dd}}
             CGRect objVaule = [obj CGRectValue];
             [invocation setArgument:&objVaule atIndex:i + 2];
@@ -95,6 +97,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 + (void)reuseNodeViewAttribute:(NSArray<ArgoKitNode*> *)nodes reuseNodes:(NSArray<ArgoKitNode*> *)reuseNodes{
+    
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {
         return;
