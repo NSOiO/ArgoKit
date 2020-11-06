@@ -21,7 +21,7 @@ public class ClosureCancelable: Cancellable {
         if let block = self.callback {
             block()
         }
-        print("Watcher deinit ",self.callback ?? nil)
+        print("Watcher deinit ",self.callback ?? "")
     }
     public func cancel() {
         guard let block = self.callback else {

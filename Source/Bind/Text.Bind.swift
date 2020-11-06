@@ -9,16 +9,14 @@ import Foundation
 
 extension Text {
     public //convenience
-    init(_ textProperty: Property<String>) {
-        self.init(textProperty.wrappedValue)
-        let canel = textProperty.watch({[self] (new) in
-            _ = self.text(new)
-        })
-        self.node?.bindProperties.setObject(canel, forKey: "text" as NSString)
+    init(_ textProperty: Property<String>?) {
+        self.init()
+        if let pro = textProperty {
+            _ = self.text(pro)
+        }
     }
     
-//    public func alias(_ alias: Alias<Text?>) -> Text{
-//        alias.wrappedValue = self
-//        return self
-//    }
+    public func text(_ property: Property<String>?)->Self{
+        return self.watch(property: property, f: self.text, key: #function)
+    }
 }
