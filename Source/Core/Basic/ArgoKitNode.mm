@@ -52,11 +52,13 @@
 // 子node
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
-@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic,assign)BOOL isUIView;
 
-@property (nonatomic,copy)NSMutableArray<NodeAction *> *nodeActions;
+//action 相关
+@property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+@property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
 @end
 
 
@@ -83,7 +85,7 @@ static YGConfigRef globalConfig;
     if (self) {
         _argoNode = node;
         _ygnode= YGNodeNewWithConfig(globalConfig);
-        YGNodeSetContext(_ygnode, (__bridge void *) node);
+        YGNodeSetContext(_ygnode, (__bridge void *)node);
         _isBaseNode = [node isMemberOfClass:[ArgoKitNode class]];
     }
     return self;
@@ -315,6 +317,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 
 @implementation ArgoKitNode
+-(void)dealloc{
+    NSLog(@"dealloc");
+}
 - (instancetype)initWithView:(UIView *)view{
     self = [super init];
     if (self) {
