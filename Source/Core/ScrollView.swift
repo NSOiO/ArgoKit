@@ -15,10 +15,7 @@ public protocol ScrollView: View {
 public extension ScrollView {
     
     var type: ArgoKitNodeType {
-        let view = UIScrollView()
-        let node = ArgoKitNode(view:view)
-        view.delegate = node
-        return .single(node)
+        return .single(ArgoKitNode(viewClass: UIScrollView.self))
     }
     
     var node: ArgoKitNode? {
@@ -37,108 +34,109 @@ public extension ScrollView {
 extension ScrollView {
     
     public func contentOffset(_ value: CGPoint) -> Self {
-        scrollView.contentOffset = value
+        addAttribute(#selector(setter:UIScrollView.contentOffset),value)
         return self
     }
 
     public func contentSize(_ value: CGSize) -> Self {
-        scrollView.contentSize = value
+        addAttribute(#selector(setter:UIScrollView.contentSize),value)
         return self
     }
 
     public func contentInset(_ value: UIEdgeInsets) -> Self {
-        scrollView.contentInset = value
+        addAttribute(#selector(setter:UIScrollView.contentInset),value)
         return self
     }
 
     
     @available(iOS 11.0, *)
     public func adjustedContentInsetDidChange() -> Self {
-        scrollView.adjustedContentInsetDidChange()
+       // scrollView.adjustedContentInsetDidChange()
+       // addAttribute(#selector(setter:UIScrollView.adjustedContentInsetDidChange))
         return self
     }
 
     @available(iOS 11.0, *)
     public func contentInsetAdjustmentBehavior(_ value: UIScrollView.ContentInsetAdjustmentBehavior) -> Self {
-        scrollView.contentInsetAdjustmentBehavior = value
+        addAttribute(#selector(setter:UIScrollView.contentInsetAdjustmentBehavior),value)
         return self
     }
 
     @available(iOS 13.0, *)
     public func automaticallyAdjustsScrollIndicatorInsets(_ value: Bool) -> Self {
-        scrollView.automaticallyAdjustsScrollIndicatorInsets = value
+        addAttribute(#selector(setter:UIScrollView.automaticallyAdjustsScrollIndicatorInsets),value)
         return self
     }
 
     public func isDirectionalLockEnabled(_ value: Bool) -> Self {
-        scrollView.isDirectionalLockEnabled = value
+        addAttribute(#selector(setter:UIScrollView.isDirectionalLockEnabled),value)
         return self
     }
 
     public func bounces(_ value: Bool) -> Self {
-        scrollView.bounces = value
+        addAttribute(#selector(setter:UIScrollView.bounces),value)
         return self
     }
 
     public func alwaysBounceVertical(_ value: Bool) -> Self {
-        scrollView.alwaysBounceVertical = value
+        addAttribute(#selector(setter:UIScrollView.alwaysBounceVertical),value)
         return self
     }
 
     public func alwaysBounceHorizontal(_ value: Bool) -> Self {
-        scrollView.alwaysBounceHorizontal = value
+        addAttribute(#selector(setter:UIScrollView.alwaysBounceHorizontal),value)
         return self
     }
 
     public func isPagingEnabled(_ value: Bool) -> Self {
-        scrollView.isPagingEnabled = value
+        addAttribute(#selector(setter:UIScrollView.isPagingEnabled),value)
         return self
     }
 
     public func isScrollEnabled(_ value: Bool) -> Self {
-        scrollView.isScrollEnabled = value
+        addAttribute(#selector(setter:UIScrollView.isScrollEnabled),value)
         return self
     }
 
     public func showsVerticalScrollIndicator(_ value: Bool) -> Self {
-        scrollView.showsVerticalScrollIndicator = value
+        addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
         return self
     }
 
     public func showsHorizontalScrollIndicator(_ value: Bool) -> Self {
-        scrollView.showsHorizontalScrollIndicator = value
+        addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
         return self
     }
 
     public func indicatorStyle(_ value: UIScrollView.IndicatorStyle) -> Self {
-        scrollView.indicatorStyle = value
+        addAttribute(#selector(setter:UIScrollView.indicatorStyle),value)
         return self
     }
     
     @available(iOS 11.1, *)
     public func verticalScrollIndicatorInsets(_ value: UIEdgeInsets) -> Self {
-        scrollView.verticalScrollIndicatorInsets = value
+        addAttribute(#selector(setter:UIScrollView.verticalScrollIndicatorInsets),value)
         return self
     }
 
     @available(iOS 11.1, *)
     public func horizontalScrollIndicatorInsets(_ value: UIEdgeInsets) -> Self {
-        scrollView.horizontalScrollIndicatorInsets = value
+        addAttribute(#selector(setter:UIScrollView.horizontalScrollIndicatorInsets),value)
         return self
     }
 
     public func scrollIndicatorInsets(_ value: UIEdgeInsets) -> Self {
-        scrollView.scrollIndicatorInsets = value
+        addAttribute(#selector(setter:UIScrollView.scrollIndicatorInsets),value)
         return self
     }
 
     public func decelerationRate(_ value: UIScrollView.DecelerationRate) -> Self {
-        scrollView.decelerationRate = value
+        addAttribute(#selector(setter:UIScrollView.decelerationRate),value)
         return self
     }
 
     public func indexDisplayMode(_ value: UIScrollView.IndexDisplayMode) -> Self {
-        scrollView.indexDisplayMode = value
+        addAttribute(#selector(setter:UIScrollView.indexDisplayMode),value)
         return self
     }
 
@@ -158,27 +156,27 @@ extension ScrollView {
     }
         
     public func delaysContentTouches(_ value: Bool) -> Self {
-        scrollView.delaysContentTouches = value
+        addAttribute(#selector(setter:UIScrollView.delaysContentTouches),value)
         return self
     }
 
     public func canCancelContentTouches(_ value: Bool) -> Self {
-        scrollView.canCancelContentTouches = value
+        addAttribute(#selector(setter:UIScrollView.canCancelContentTouches),value)
         return self
     }
 
     public func minimumZoomScale(_ value: CGFloat) -> Self {
-        scrollView.minimumZoomScale = value
+        addAttribute(#selector(setter:UIScrollView.minimumZoomScale),value)
         return self
     }
 
     public func maximumZoomScale(_ value: CGFloat) -> Self {
-        scrollView.maximumZoomScale = value
+        addAttribute(#selector(setter:UIScrollView.maximumZoomScale),value)
         return self
     }
 
     public func zoomScale(_ value: CGFloat) -> Self {
-        scrollView.zoomScale = value
+        addAttribute(#selector(setter:UIScrollView.zoomScale),value)
         return self
     }
 
@@ -193,23 +191,23 @@ extension ScrollView {
     }
 
     public func bouncesZoom(_ value: Bool) -> Self {
-        scrollView.bouncesZoom = value
+        addAttribute(#selector(setter:UIScrollView.bouncesZoom),value)
         return self
     }
 
     public func scrollsToTop(_ value: Bool) -> Self {
-        scrollView.scrollsToTop = value
+        addAttribute(#selector(setter:UIScrollView.scrollsToTop),value)
         return self
     }
 
     public func keyboardDismissMode(_ value: UIScrollView.KeyboardDismissMode) -> Self {
-        scrollView.keyboardDismissMode = value
+        addAttribute(#selector(setter:UIScrollView.keyboardDismissMode),value)
         return self
     }
 
     @available(iOS 10.0, *)
     public func refreshControl(_ value: UIRefreshControl) -> Self {
-        scrollView.refreshControl = value
+        addAttribute(#selector(setter:UIScrollView.refreshControl),value)
         return self
     }
 }
