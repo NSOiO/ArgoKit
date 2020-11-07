@@ -19,9 +19,6 @@ struct ContentView:View {
     var model: TestModel
     
     var body:View{
-        let gestur = TapGesture(numberOfTaps: 1, numberOfTouches: 1) { gesture in
-        }
-        
         Slider(value: 0.7,in:-1...1,onValueChanged: { value in
             print("UISlider ", value)
         }).width(200).height(30)
