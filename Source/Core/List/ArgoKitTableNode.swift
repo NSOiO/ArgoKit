@@ -92,7 +92,6 @@ extension ArgoKitTableNode {
             }
         }
         size = cell?.contentNode?.applyLayout(size: CGSize(width: tableView.frame.size.height,height: CGFloat(Float.nan))) ?? CGSize.zero
-        
         let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
         let height = self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey)
         if height == nil{

@@ -29,7 +29,7 @@ struct DemoContentView: View {
         
         List(data: [items, items, items]) { item in
             HStack{
-//                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
                 Text(item as? String).backgroundColor(.purple).numberOfLines(0).width(20)
             }.height(100%).width(100%)
         }.width(100%).height(100%).backgroundColor(.red)
