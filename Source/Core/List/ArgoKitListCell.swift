@@ -15,11 +15,13 @@ class ArgoKitListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
         self.contentNode = ArgoKitNode(view: contentView)
+        self.contentNode?.size = CGSize(width: contentView.frame.size.width , height: CGFloat.nan);
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.contentNode = ArgoKitNode(view: contentView)
+        self.contentNode?.size = CGSize(width: contentView.frame.size.width , height: CGFloat.nan);
     }
     
     deinit {
@@ -30,11 +32,9 @@ class ArgoKitListCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.contentNode?.removeAllChildNodes()
     }
     
     public func linkCellNode(_ node: ArgoKitNode) {
         self.contentNode?.addChildNode(node)
-        node.applyLayout()
     }
 }

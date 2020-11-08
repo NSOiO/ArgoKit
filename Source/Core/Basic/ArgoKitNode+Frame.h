@@ -268,6 +268,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)maxHeightWithPercent:(CGFloat)value NS_SWIFT_NAME(maxHeight(percent:));
 - (void)maxHeightWithPoint:(CGFloat)value NS_SWIFT_NAME(maxHeight(point:));
 - (CGFloat)maxHeight;
+
+- (void)aspectRatio:(CGFloat)value NS_SWIFT_NAME(aspect(ratio:));
+
 @end
 
 NS_ASSUME_NONNULL_END

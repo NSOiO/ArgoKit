@@ -148,12 +148,6 @@ open class UIHostingController:UIViewController{
         }
         
         rootView?.applyLayout()
-        
-        let button = UIButton(type: .custom)
-        button.frame = CGRect(x: 100,y: 100,width: 100,height: 100)
-        button.backgroundColor = UIColor.red
-        button.addTarget(self, action: #selector(UIHostingController.action), for: UIControl.Event.touchUpInside)
-        self.view.addSubview(button)
     }
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated);

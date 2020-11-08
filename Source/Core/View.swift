@@ -143,6 +143,9 @@ extension View{
         if selector == #selector(setter:UILabel.font) {
             isDirty_ = true
         }
+        if selector == #selector(setter:UILabel.numberOfLines) {
+            isDirty_ = true
+        }
         
         if selector == #selector(setter:UIImageView.image) {
             isDirty_ = true
@@ -161,16 +164,12 @@ extension View{
             for item in patamter {
                 patamters.append(item!)
             }
-            let attibute = ViewAttribute(selector:selector,paramter:patamters)
-            attibute.isDirty = isDirty(selector)
+            let attribute = ViewAttribute(selector:selector,paramter:patamters)
+            attribute.isDirty = isDirty(selector)
             if node.view != nil {
-                ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attibute])
-            }else{
-                node.viewAttributes.add(attibute)
+                ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attribute])
             }
-            if selector == #selector(setter:UILabel.text) {
-                node.text = patamters.first as! String
-            }
+            node.nodeAddView(attribute:attribute)
         }
     }
     public func clipsToBounds(_ value:Bool)->Self{
@@ -251,11 +250,6 @@ extension View{
 
 // layout
 extension View{
-    // 标记Node需要重新布局
-    public func markNeedsLayout(){
-        self.node?.markDirty()
-    }
-    
     public func parentNode()->ArgoKitNode?{
         var pNode:ArgoKitNode? = self.node?.parent
         if (pNode == nil) {
@@ -269,9 +263,9 @@ extension View{
        
     }
     
-    public func applyLayout(){
-        self.node?.applyLayout()
+    public func applyLayout()->CGSize{
         ArgoLayoutHelper.addLayoutNode(self.node)
+        return self.node?.applyLayout() ?? CGSize.zero
     }
     
     public func applyLayout(size:CGSize){
@@ -1044,7 +1038,13 @@ extension View{
         return self.node?.maxHeight() ?? 0
     }
 }
-
+extension View {
+    
+    public func aspect(ratio: CGFloat) -> Self {
+        self.node?.aspect(ratio:ratio)
+        return self
+    }
+}
 extension View {
     
     public func endEditing(_ force: Bool) -> Self {

@@ -47,7 +47,6 @@ public struct ArgoNodeContainer: View {
             nodeType = .single(container[0])
         }else {
             nodeType = .multiple(container)
-            pNode = nodeType.viewNode()
         }
     }
 }

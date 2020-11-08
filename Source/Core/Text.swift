@@ -6,11 +6,25 @@
 //
 
 import Foundation
+class ArgoKitTextNode: ArgoKitNode {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+//        if let view = self.view {
+//            return view.sizeThatFits(size)
+//        }
+        let lable:UILabel = UILabel()
+        lable.text = self.text()
+        lable.numberOfLines = self.numberOfLines()
+        lable.font = self.font()
+        let size:CGSize = lable.sizeThatFits(size)
+        print("sizeThatFits:height==",size.height)
+        return size
+    }
+}
 public struct Text:View {
     public var body: View{
         self
     }
-    private let pNode:ArgoKitNode
+    private let pNode:ArgoKitTextNode
     public var node: ArgoKitNode?{
         pNode
     }
@@ -19,7 +33,7 @@ public struct Text:View {
     }
 
     public init() {
-        pNode = ArgoKitNode(viewClass:UILabel.self)
+        pNode = ArgoKitTextNode(viewClass:UILabel.self)
         
     }
     public init(_ text:String?) {

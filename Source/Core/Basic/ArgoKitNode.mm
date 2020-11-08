@@ -96,15 +96,15 @@ static YGConfigRef globalConfig;
 }
 
 #pragma mark --- 完成数据采集后计算 ---
-- (void)applyLayoutWithsize:(CGSize)size
+- (CGSize)applyLayoutWithsize:(CGSize)size
 {
-  [self calculateLayoutWithSize:size];
+  CGSize result = [self calculateLayoutWithSize:size];
   YGApplyLayoutToNodeHierarchy(self.argoNode);
+  return result;
 }
 
-// 视图是否为
+// 视图是否为叶子
 - (BOOL)isLeaf{
-    NSAssert([NSThread isMainThread], @"This method must be called on the main thread.");
     if (self.argoNode.childs.count == 0) {
         return YES;
     }
@@ -199,7 +199,6 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
   if (!CGRectEqualToRect(node.frame, frame)) {
       node.frame = frame;
   }
-
   if (![layout isLeaf]) {
     for (NSUInteger i=0; i<node.childs.count; i++) {
         YGApplyLayoutToNodeHierarchy(node.childs[i]);
@@ -220,10 +219,8 @@ static CGFloat YGSanitizeMeasurement(
   } else {
     result = measuredSize;
   }
-
   return result;
 }
-
 
 static YGSize YGMeasureView(
   YGNodeRef node,
@@ -312,6 +309,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
   });
   return roundf(value * scale) / scale;
 }
+
 @end
 
 
@@ -324,7 +322,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (self) {
         _view = view;
         _viewClass = view.class;
-        _resetOrigin = NO;
+        _resetOrigin = YES;
         _isEnabled = YES;
         _isUIView = [view isMemberOfClass:[UIView class]];
         _size = view.bounds.size;
@@ -338,7 +336,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (instancetype)initWithViewClass:(Class)viewClass{
     self = [super init];
     if (self) {
-        _resetOrigin = NO;
+        _resetOrigin = YES;
         _isEnabled = YES;
         _isUIView = [viewClass isMemberOfClass:[UIView class]];
         _origin = _frame.origin;
@@ -351,6 +349,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 #pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
+    _size = frame.size;
+    _origin = frame.origin;
+    NSLog(@"frame.size.height == %f width = %f",frame.size.height,frame.size.width);
+    NSLog(@"frame.origin.x == %f y = %f",_origin.x,_origin.y);
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadBlock:^{
         if (!wealSelf.view) {
@@ -373,6 +375,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         }else{
             wealSelf.view.frame = frame;
         }
+ 
     }];
 }
 - (NSMutableArray<ArgoKitNode *> *)childs{
@@ -392,6 +395,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (NSMutableArray<ViewAttribute *> *)viewAttributes{
     if (!_viewAttributes) {
         _viewAttributes = [[NSMutableArray alloc] init];
+        _backupViewAttributes = _viewAttributes;
     }
     return _viewAttributes;
 }
@@ -409,7 +413,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return _nodeActions;
 }
-
 #pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
@@ -451,7 +454,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @implementation ArgoKitNode(LayoutNode)
 
 - (BOOL)isRootNode{
-    return (self.parentNode == nil);
+    BOOL result = self.parentNode == nil;
+//    if (result) {
+//        [self markDirty];
+//    }
+    return result;
 }
 - (void)markDirty{
     [self.layout markDirty];
@@ -465,28 +472,34 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (CGSize)sizeThatFits:(CGSize)size{
+    if(self.view){
+        return [self.view sizeThatFits:size];
+    }
     UILabel *lable = [UILabel new];
     lable.text = self.text;
     return [lable sizeThatFits:size];
 }
 
-- (void)applyLayout{
+- (CGSize)applyLayout{
     if (self.layout) {
-        [self.layout applyLayoutWithsize:self.size];
+        CGSize size = self.parentNode?CGSizeZero:self.size;
+        self.size = [self.layout applyLayoutWithsize:size];
     }
+    return self.size;
 }
 
-- (void)applyLayout:(CGSize)size{
+- (CGSize)applyLayout:(CGSize)size{
     if (self.layout) {
-        [self.layout applyLayoutWithsize:self.size];
+        self.size = [self.layout applyLayoutWithsize:size];
     }
+    return self.size;
 }
 
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
     if (self.layout) {
-        return [self.layout calculateLayoutWithSize:size];
+        self.size = [self.layout calculateLayoutWithSize:size];
     }
-    return CGSizeMake(0, 0);
+    return self.size;
 }
 @end
 
@@ -498,18 +511,27 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self.view addSubview:node.view];
         }
         [self.childs addObject:node];
+        if (!node) return;
+        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, YGNodeGetChildCount(self.layout.ygnode));
     }
 }
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (node) {
         [self.childs insertObject:node atIndex:index];
+        if (!node) return;
+        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
     }
 }
+
+
 - (void)removeFromSuperNode{
     if(self.parentNode){
         [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
         self.parentNode = nil;
+        YGNodeRemoveChild(self.parentNode.layout.ygnode, self.layout.ygnode);
     }
 }
 - (void)removeAllChildNodes {
@@ -520,9 +542,71 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (_childs.count) {
         [_childs removeAllObjects];
     }
+    YGNodeRemoveAllChildren(self.layout.ygnode);
 }
 @end
 
 
+@implementation ArgoKitNode(AttributeValue)
+- (void)nodeAddViewAttribute:(ViewAttribute *)attribute{
+    if (!attribute) {
+        return;
+    }
+    NSArray *viewAttributes = [self.viewAttributes copy];
+    BOOL isExist = NO;
+    for(ViewAttribute *oldattribute in viewAttributes){
+        if (sel_isEqual(oldattribute.selector, attribute.selector)) {
+            NSString *selName = @(sel_getName(attribute.selector));
+            if (![selName hasPrefix:@"set"]) {//不是set方法则排除在外
+                continue;
+            }
+            oldattribute.paramter = attribute.paramter;
+            isExist = YES;
+        }
+    }
+    if (!isExist) {
+        [self.viewAttributes addObject:attribute];
+    }
+    
+}
+
+- (nullable NSString *)text{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setText:)) {
+            return attribute.paramter.firstObject;
+        }
+    }
+    return nil;
+}
+- (UIFont *)font{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setFont:)) {
+            return attribute.paramter.firstObject;
+        }
+    }
+    return nil;
+}
+- (NSInteger)numberOfLines{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setNumberOfLines:)) {
+            id lines = attribute.paramter.firstObject;
+            if ([lines isKindOfClass:[NSNumber class]]) {
+                return [lines intValue];
+            }
+            return -1;
+        }
+    }
+    return -1;
+}
+- (nullable UIImage *)image{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setImage:)) {
+            return attribute.paramter.firstObject;
+        }
+    }
+    return nil;
+}
+
+@end
 
 

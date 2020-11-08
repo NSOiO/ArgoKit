@@ -51,7 +51,7 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
             if #available(iOS 10.0, *) {
                 tableView.prefetchDataSource = self
             }
-            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
+//            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
             tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kHeaderReuseIdentifier)
             tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kFooterReuseIdentifier)
         }
@@ -79,12 +79,28 @@ extension ArgoKitTableNode {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! ArgoKitListCell
-        if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-            cell.linkCellNode(node)
+        var cell:ArgoKitListCell? = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier) as? ArgoKitListCell
+        var size = CGSize.zero
+        if cell != nil{
+            if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+                ArgoKitNodeViewModifier.reuseNodeViewAttribute(cell?.contentNode?.childs as! [ArgoKitNode], reuse: [node])
+            }
+        }else{
+            cell = ArgoKitListCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: kCellReuseIdentifier)
+            if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+                cell?.linkCellNode(node)
+            }
         }
-        return cell
+        size = cell?.contentNode?.applyLayout(size: CGSize(width: tableView.frame.size.height,height: CGFloat(Float.nan))) ?? CGSize.zero
+        
+        let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
+        let height = self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey)
+        if height == nil{
+            size = cell?.contentNode?.size ?? CGSize.zero
+            let num = NSNumber(value: Float(size.height))
+            self.dataSourceHelper.nodeCellCahe?.setObject(num, forKey: cacheKey)
+        }
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -176,9 +192,11 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let height = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section)?.height() {
-            if !height.isNaN {
-                return height
+        let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
+        if let num:NSNumber =  self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey){
+            if !num.floatValue.isNaN {
+                print("num.floatValue",num.floatValue)
+                return CGFloat(num.floatValue)
             }
         }
         return 0

@@ -20,7 +20,28 @@ var text1:Text?
 var stack1:HStack?
 struct Demo1ContentView:View {
     let items = ["查查","cscs","122e"]
+    var node:ArgoKitNode!
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
+    var hstack = HStack{
+           ImageView("turtlerock")
+                    Text("11").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
+                        .textColor(.red).alias(variable: &model.text1)
+                    Text("111111").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
+                        .textColor(.red)
+    }.isUserInteractionEnabled(true).margin(edge: .top, value: 64)
+                .alias(variable: &model.stack1).longPressAction(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
+                    print("longPressAction")
+                }.tapAction {
+                    print("tapAction")
+                }.backgroundColor(.orange)
+  
+    init() {
+//        let size:CGSize = hstack.applyLayout()
+//        print("size--height:",size.height)
+//        node = hstack.node
+       
+
+    }
     var body:View{        
 //        Slider(value: 0.7,in:-1...1,onValueChanged: { value in
 //            print("UISlider ", value)
@@ -52,25 +73,13 @@ struct Demo1ContentView:View {
         
         Button(text: "buttom1buttom1buttom1buttom1"){
             print("buttom1")
-            model.text1?.width(60).text("buttom1but").numberOfLines(2)
-           
-            
+            model.text1?.text("buttom1but").numberOfLines(2)
+
+
         }.titleColor(.red, for: UIControl.State.normal)
-        .width(150).height(100).backgroundColor(.yellow).margin(edge: .top, value: 10)
-//        ImageView("turtlerock").gesture(gesture: gestur).isUserInteractionEnabled(true)
-//        HStack{
-////            ImageView("turtlerock")
-//            Text("11").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
-//                .textColor(.red).alias(variable: &model.text1)
-//            Text("111111").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
-//                .textColor(.red)
-//        }.isUserInteractionEnabled(true)
-//        .alias(variable: &model.stack1).longPressAction(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
-//            print("longPressAction")
-//        }.tapAction {
-//            print("tapAction")
-//        }
-   
+        .width(150).height(100).backgroundColor(.yellow).margin(edge: .top, value: 64)
+        ImageView("turtlerock").isUserInteractionEnabled(true)
+        hstack
     }
 }
 

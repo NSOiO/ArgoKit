@@ -78,6 +78,7 @@
 - (void)alignContent:(YGAlign)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetAlignContent(node, value);
+   
      
 }
 - (void)alignContentAuto{
@@ -848,5 +849,9 @@
 - (CGFloat)maxHeight{
     YGNodeRef node = self.layout.ygnode;
     return YGNodeStyleGetMaxHeight(node).value;
+}
+- (void)aspectRatio:(CGFloat)value{
+    YGNodeRef node = self.layout.ygnode;
+    YGNodeStyleSetAspectRatio(node,value);
 }
 @end

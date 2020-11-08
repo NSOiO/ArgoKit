@@ -10,6 +10,7 @@ import Foundation
 class ArgoKitDataSourceHelper: NSObject {
   
     private var nodeCahe: NSCache<NSString, ArgoKitNode>?
+    public var nodeCellCahe: NSCache<NSString, NSNumber>?
     
     public var nodeList: [[ArgoKitNode]]?
     
@@ -17,6 +18,9 @@ class ArgoKitDataSourceHelper: NSObject {
         willSet {
             self.nodeCahe = NSCache()
             self.nodeCahe?.name = "com.\(type(of: self).description())Cache"
+            
+            self.nodeCellCahe = NSCache()
+            self.nodeCellCahe?.name = "com.\(type(of: self).description())CellCahe"
         }
     }
     public var buildNodeFunc: ((Any)->View)?

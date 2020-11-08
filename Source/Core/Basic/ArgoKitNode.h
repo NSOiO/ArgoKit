@@ -8,10 +8,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
-//@class ArgoKitLayout;
 @interface ViewAttribute : NSObject
-@property(nonatomic,assign,readonly)SEL selector;
-@property(nonatomic,copy,readonly)NSArray<id> *paramter;
+@property(nonatomic,assign)SEL selector;
+@property(nonatomic,copy)NSArray<id> *paramter;
 @property(nonatomic,assign)BOOL isDirty;
 - (instancetype)initWithSelector:(nullable SEL)selector paramter:(nullable NSArray<id> *)paramter;
 @end
@@ -29,7 +28,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 //存储View属性
 @property (nonatomic, strong)NSMutableArray<ViewAttribute *>* viewAttributes;
-
+//存储Backup View属性
+@property (nonatomic, copy)NSArray<ViewAttribute *>* backupViewAttributes;
 /* 节点持有的视图 */
 @property (nonatomic, strong, readonly, nullable) UIView *view;
 
@@ -39,7 +39,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 /* frame 相关 */
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
-@property (nonatomic, copy) NSString *text;
 
 /**
  Returns the number of children that are using Flexbox.
@@ -90,9 +89,9 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
  Perform a layout calculation and update the frames of the views in the hierarchy with the results.
  If the origin is not preserved, the root view's layout results will applied from {0,0}.
  */
-- (void)applyLayout NS_SWIFT_NAME(applyLayout());
+- (CGSize)applyLayout NS_SWIFT_NAME(applyLayout());
 
-- (void)applyLayout:(CGSize)size
+- (CGSize)applyLayout:(CGSize)size
     NS_SWIFT_NAME(applyLayout(size:));
 
 /**
@@ -113,7 +112,11 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 
 
-@interface ArgoKitNode(Action)
-
+@interface ArgoKitNode(AttributeValue)
+- (void)nodeAddViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(nodeAddView(attribute:));
+- (nullable NSString *)text;
+- (nullable UIFont *)font;
+- (NSInteger)numberOfLines NS_SWIFT_NAME(numberOfLines());
+- (nullable UIImage *)image;
 @end
 NS_ASSUME_NONNULL_END
