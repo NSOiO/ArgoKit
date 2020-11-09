@@ -35,6 +35,6 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
         
         node.removeFromSuperNode()
         self.contentNode?.addChildNode(node)
-        node.applyLayout()
+        self.contentNode?.applyLayout()
     }
 }
