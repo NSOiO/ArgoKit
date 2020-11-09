@@ -34,7 +34,7 @@ class ArgoKitListCell: UITableViewCell {
             ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as! [ArgoKitNode], reuse: nodes);
         } else {
             self.contentNode?.addChildNodes(nodes)
-            self.contentNode?.applyLayout()
+            self.contentNode?.applyLayout(size: self.contentView.frame.size)
         }
     }
 }

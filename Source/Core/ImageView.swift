@@ -93,8 +93,6 @@ extension ImageView {
     
     public func image(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.image),value)
-//        self.node?.width(point: value?.size.width ?? 0)
-//        self.node?.height(point: value?.size.height ?? 0)
         return self
     }
     

@@ -178,45 +178,15 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let nodes = self.dataSourceHelper.nodesForRowAtSection(indexPath.row, at: indexPath.section) {
-            var height: CGFloat = 0.0
-            for node in nodes {
-                let s_height = node.height()
-                if !s_height.isNaN {
-                    height += CGFloat(s_height)
-                }
-            }
-            return height
-        }
-        return 0
+        return self.dataSourceHelper.heightForRowAtSection(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let nodes = self.sectionHeaderSourceHelper.nodesForRowAtSection(section, at: 0) {
-            var height: CGFloat = 0.0
-            for node in nodes {
-                let s_height = node.height()
-                if !s_height.isNaN {
-                    height += CGFloat(s_height)
-                }
-            }
-            return height
-        }
-        return 0
+        return self.sectionHeaderSourceHelper.heightForRowAtSection(section, at: 0, maxWidth: tableView.frame.width)
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let nodes = self.sectionFooterSourceHelper.nodesForRowAtSection(section, at: 0) {
-            var height: CGFloat = 0.0
-            for node in nodes {
-                let s_height = node.height()
-                if !s_height.isNaN {
-                    height += CGFloat(s_height)
-                }
-            }
-            return height
-        }
-        return 0
+        return self.sectionFooterSourceHelper.heightForRowAtSection(section, at: 0, maxWidth: tableView.frame.width)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

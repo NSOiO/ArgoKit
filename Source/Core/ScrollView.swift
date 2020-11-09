@@ -9,7 +9,7 @@ import Foundation
 
 public protocol ScrollView: View {
     
-    var scrollView: UIScrollView {get}
+    var scrollView: UIScrollView? {get}
 }
 
 public extension ScrollView {
@@ -26,8 +26,8 @@ public extension ScrollView {
         self
     }
     
-    var scrollView: UIScrollView {
-        type.viewNode()?.view as! UIScrollView
+    var scrollView: UIScrollView? {
+        type.viewNode()?.view as? UIScrollView
     }
 }
 
