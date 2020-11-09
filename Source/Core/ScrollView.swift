@@ -15,7 +15,10 @@ public protocol ScrollView: View {
 public extension ScrollView {
     
     var type: ArgoKitNodeType {
-        .single(ArgoKitNode(view:UIScrollView()))
+        let view = UIScrollView()
+        let node = ArgoKitNode(view:view)
+        view.delegate = node
+        return .single(node)
     }
     
     var node: ArgoKitNode? {
@@ -207,6 +210,153 @@ extension ScrollView {
     @available(iOS 10.0, *)
     public func refreshControl(_ value: UIRefreshControl) -> Self {
         scrollView.refreshControl = value
+        return self
+    }
+}
+
+extension ScrollView {
+    
+    public func didScroll(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidScroll(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action();
+            return nil
+        })
+        return self
+    }
+    
+    public func didZoom(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidZoom(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action();
+            return nil
+        })
+        return self
+    }
+    
+    public func willBeginDragging(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewWillBeginDragging(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action();
+            return nil
+        })
+        return self
+    }
+    
+    public func willEndDraggingWithVelocityTargetContentOffset(_ action: @escaping (_ velocity: CGPoint, _ targetContentOffset:  UnsafeMutablePointer<CGPoint>) -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewWillEndDragging(_:withVelocity:targetContentOffset:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2 {
+                let velocity: CGPoint = paramter![0] as! CGPoint
+                let targetContentOffset: UnsafeMutableRawPointer = (paramter![1] as! NSValue).pointerValue!
+                action(velocity, targetContentOffset.assumingMemoryBound(to: CGPoint.self))
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func didEndDraggingWillDecelerate(_ action: @escaping (_ decelerate: Bool) -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidEndDragging(_:willDecelerate:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1 {
+                let decelerate: Bool = paramter![0] as! Bool
+                action(decelerate)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func willBeginDecelerating(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewWillBeginDecelerating(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action()
+            return nil
+        })
+        return self
+    }
+    
+    public func didEndDecelerating(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidEndDecelerating(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action()
+            return nil
+        })
+        return self
+    }
+    
+    public func didEndScrollingAnimation(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidEndScrollingAnimation(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action()
+            return nil
+        })
+        return self
+    }
+    
+    public func viewForZoomingInScrollView(_ action: @escaping () -> UIView?) -> Self {
+        let sel = #selector(ArgoKitNode.viewForZooming(in:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            return action()
+        })
+        return self
+    }
+    
+    public func willBeginZoomingWithView(_ action: @escaping (_ view: UIView?) -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewWillBeginZooming(_:with:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1 {
+                let view: UIView = paramter![0] as! UIView
+                action(view)
+            } else {
+                action(nil)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func didEndZoomingWithViewAtScale(_ action: @escaping (_ view: UIView?, _ atScale: Float) -> Void?) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidEndZooming(_:with:atScale:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2 {
+                let scale: Float = paramter![0] as! Float
+                let view: UIView = paramter![1] as! UIView
+                action(view, scale)
+            } else if paramter?.count ?? 0 >= 1 {
+                let scale: Float = paramter![0] as! Float
+                action(nil, scale)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func shouldScrollToTop(_ action: @escaping () -> Bool) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewShouldScrollToTop(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            return action()
+        })
+        return self
+    }
+    
+    public func didScrollToTop(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidScrollToTop(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action()
+            return nil
+        })
+        return self
+    }
+    
+    @available(iOS 11.0, *)
+    public func didChangeAdjustedContentInset(_ action: @escaping () -> Void) -> Self {
+        let sel = #selector(ArgoKitNode.scrollViewDidChangeAdjustedContentInset(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            action()
+            return nil
+        })
         return self
     }
 }

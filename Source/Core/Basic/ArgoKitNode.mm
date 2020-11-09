@@ -416,11 +416,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if(self.parentNode){
         [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
+        self.parentNode = nil;
     }
 }
 - (void)removeAllChildNodes {
     for (ArgoKitNode *child in self.childs) {
         [child.view removeFromSuperview];
+        child.parentNode = nil;
     }
     [self.childs removeAllObjects];
 }

@@ -15,11 +15,13 @@ public class ClosureCancelable: Cancellable {
     var callback: (() -> Void)?
     public init(callback: @escaping () -> Void) {
         self.callback = callback
+        print("Watcher init ", callback)
     }
     deinit {
         if let block = self.callback {
             block()
         }
+        print("Watcher deinit ",self.callback ?? "")
     }
     public func cancel() {
         guard let block = self.callback else {
