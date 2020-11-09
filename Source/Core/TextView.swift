@@ -15,8 +15,8 @@ public struct TextView : ScrollView {
         self
     }
     
-    public var scrollView: UIScrollView {
-        UIScrollView()
+    public var scrollView: UIScrollView? {
+        type.viewNode()?.view as? UITextView
     }
     
     public var type: ArgoKitNodeType {

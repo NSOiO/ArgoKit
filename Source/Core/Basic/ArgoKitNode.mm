@@ -12,6 +12,8 @@
 #import "ArgoKitUtils.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
+#import "ArgoKitNode+ScrollViewDelegate.h"
+
 @interface NodeAction:NSObject{
     int actionTag;
     ArgoKitNodeBlock action;
@@ -342,6 +344,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self;
 }
 
+- (void)configView:(UIView *)view {
+    if ([view isKindOfClass:[UIScrollView class]]) {
+        ((UIScrollView *)view).delegate = self;
+    }
+}
+
 #pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
@@ -352,6 +360,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf.viewClass new];
             wealSelf.view.frame = frame;
+            [wealSelf configView:wealSelf.view];
             [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes];
             if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
                 NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];
@@ -505,6 +514,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self insertYGNode:node atIndex:YGNodeGetChildCount(self.layout.ygnode)];
     }
 }
+- (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes {
+    for (ArgoKitNode *node in nodes) {
+        [self addChildNode:node];
+    }
+}
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (node) {
         [self.childs insertObject:node atIndex:index];
@@ -536,6 +550,16 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [_childs removeAllObjects];
     }
     YGNodeRemoveAllChildren(self.layout.ygnode);
+}
+- (NSString *)hierarchyKey {
+    if (!_childs.count) {
+        return NSStringFromClass(_viewClass) ? : @"";
+    }
+    NSMutableString *key = [NSMutableString string];
+    for (ArgoKitNode *child in _childs) {
+        [key appendString:[child hierarchyKey]];
+    }
+    return key.copy;
 }
 @end
 

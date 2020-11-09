@@ -73,6 +73,10 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 - (nullable id)sendActionWithObj:(id)obj paramter:(nullable NSArray *)paramter;
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
+
+// 子类可重载
+- (void)configView:(UIView *)view; // 在创建了View之后调用
+
 @end
 
 @interface ArgoKitNode(LayoutNode)
@@ -107,9 +111,11 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 @interface ArgoKitNode(Hierarchy)
 - (void)addChildNode:(ArgoKitNode *)node;
+- (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes;
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index;
 - (void)removeFromSuperNode;
 - (void)removeAllChildNodes;
+- (NSString *)hierarchyKey;
 @end
 
 

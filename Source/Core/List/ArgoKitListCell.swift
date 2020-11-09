@@ -9,32 +9,32 @@ import Foundation
 
 class ArgoKitListCell: UITableViewCell {
   
-    public var contentNode: ArgoKitNode?
+    var contentNode: ArgoKitNode?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
         self.contentNode = ArgoKitNode(view: contentView)
-        self.contentNode?.size = CGSize(width: contentView.frame.size.width , height: CGFloat.nan);
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.contentNode = ArgoKitNode(view: contentView)
-        self.contentNode?.size = CGSize(width: contentView.frame.size.width , height: CGFloat.nan);
     }
     
-    deinit {
-        self.contentNode?.removeAllChildNodes()
-        self.contentNode = nil
+    override var frame: CGRect {
+        didSet {
+            self.contentNode?.width(point: frame.width)
+            self.contentNode?.height(point: frame.height)
+        }
     }
     
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    public func linkCellNode(_ node: ArgoKitNode) {
-        self.contentNode?.addChildNode(node)
+    public func linkCellNodes(_ nodes: [ArgoKitNode]) {
+        if ((self.contentNode?.childs?.count) != 0) {
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as! [ArgoKitNode], reuse: nodes);
+        } else {
+            self.contentNode?.addChildNodes(nodes)
+            self.contentNode?.applyLayout(size: self.contentView.frame.size)
+        }
     }
 }
