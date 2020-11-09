@@ -11,17 +11,6 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
   
     var contentNode: ArgoKitNode?
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        self.contentNode = ArgoKitNode(view: contentView)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.contentNode = ArgoKitNode(view: contentView)
-        self.contentNode?.width()
-    }
-    
     override var frame: CGRect {
         didSet {
             self.contentNode?.width(point: frame.width)
@@ -29,12 +18,13 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
         }
     }
         
-    public func linkCellNodes(_ nodes: [ArgoKitNode]) {
-        if ((self.contentNode?.childs?.count) != 0) {
-            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as! [ArgoKitNode], reuse: nodes);
+    public func linkCellNode(_ node: ArgoKitNode) {
+        if self.contentNode != nil {
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
         } else {
-            self.contentNode?.addChildNodes(nodes)
-            self.contentNode?.applyLayout(size: self.contentView.frame.size)
+            node.bindView(self.contentView)
+            self.contentNode = node
+            self.contentNode?.applyLayoutAferCalculation()
         }
     }
 }

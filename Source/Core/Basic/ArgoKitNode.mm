@@ -320,15 +320,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (instancetype)initWithView:(UIView *)view{
     self = [super init];
     if (self) {
-        _view = view;
-        _viewClass = view.class;
-        _resetOrigin = YES;
-        _isEnabled = YES;
-        _isUIView = [view isMemberOfClass:[UIView class]];
-        _size = view.bounds.size;
-        _frame = view.frame;
-        _origin = _frame.origin;
-        _bindProperties = [NSMutableDictionary new];
+        [self bindView:view];
     }
     return self;
 }
@@ -336,14 +328,26 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (instancetype)initWithViewClass:(Class)viewClass{
     self = [super init];
     if (self) {
+        _viewClass = viewClass;
         _resetOrigin = YES;
         _isEnabled = YES;
         _isUIView = [viewClass isMemberOfClass:[UIView class]];
         _origin = _frame.origin;
         _bindProperties = [NSMutableDictionary new];
-        _viewClass = viewClass;
     }
     return self;
+}
+
+- (void)bindView:(UIView *)view {
+    _view = view;
+    _viewClass = view.class;
+    _resetOrigin = YES;
+    _isEnabled = YES;
+    _isUIView = [view isMemberOfClass:[UIView class]];
+    _size = view.bounds.size;
+    _frame = view.frame;
+    _origin = _frame.origin;
+    _bindProperties = [NSMutableDictionary new];
 }
 
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
@@ -568,6 +572,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     for (ArgoKitNode *child in _childs) {
         [key appendString:[child hierarchyKey]];
     }
+    [key appendString:NSStringFromClass(_viewClass) ? : @""];
     return key.copy;
 }
 @end

@@ -27,8 +27,16 @@ struct DemoContentView: View {
                 ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
                 Text(item as? String).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
             }.height(100%).width(100%)
-        }.height(100%).width(100%)
-        
+        }.width(100%).height(100%).backgroundColor(.red)
+        .tableHeaderView { () -> View in
+            Text("TableHeader").backgroundColor(.yellow).height(100)
+        }.tableFooterView { () -> View in
+            Text("TableFooter").backgroundColor(.yellow).height(100)
+        }.sectionHeader(["SectionHeader"]) { (item) -> View in
+            Text(item as! String).backgroundColor(.yellow).width(100%).height(44)
+        }.sectionFooter(["SectionFooter"]) { (item) -> View in
+            Text(item as! String).backgroundColor(.yellow).width(200%).height(44)
+        }
         
     }
 }
