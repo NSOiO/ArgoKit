@@ -344,10 +344,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self;
 }
 
-- (void)configView:(UIView *)view {
+- (UIView *)createNodeViewWithFrame:(CGRect)frame {
+    UIView *view = [self.viewClass new];
+    view.frame = frame;
     if ([view isKindOfClass:[UIScrollView class]]) {
         ((UIScrollView *)view).delegate = self;
     }
+    return view;
 }
 
 #pragma mark --- property setter/getter ---
@@ -358,9 +361,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
-            wealSelf.view = [wealSelf.viewClass new];
-            wealSelf.view.frame = frame;
-            [wealSelf configView:wealSelf.view];
+            wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
             [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes];
             if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
                 NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];

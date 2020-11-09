@@ -57,7 +57,7 @@ extension ScrollView {
 
     @available(iOS 11.0, *)
     public func contentInsetAdjustmentBehavior(_ value: UIScrollView.ContentInsetAdjustmentBehavior) -> Self {
-        addAttribute(#selector(setter:UIScrollView.contentInsetAdjustmentBehavior),value)
+        addAttribute(#selector(setter:UIScrollView.contentInsetAdjustmentBehavior),value.rawValue)
         return self
     }
 
@@ -108,7 +108,7 @@ extension ScrollView {
     }
 
     public func indicatorStyle(_ value: UIScrollView.IndicatorStyle) -> Self {
-        addAttribute(#selector(setter:UIScrollView.indicatorStyle),value)
+        addAttribute(#selector(setter:UIScrollView.indicatorStyle),value.rawValue)
         return self
     }
     
@@ -130,12 +130,12 @@ extension ScrollView {
     }
 
     public func decelerationRate(_ value: UIScrollView.DecelerationRate) -> Self {
-        addAttribute(#selector(setter:UIScrollView.decelerationRate),value)
+        addAttribute(#selector(setter:UIScrollView.decelerationRate),value.rawValue)
         return self
     }
 
     public func indexDisplayMode(_ value: UIScrollView.IndexDisplayMode) -> Self {
-        addAttribute(#selector(setter:UIScrollView.indexDisplayMode),value)
+        addAttribute(#selector(setter:UIScrollView.indexDisplayMode),value.rawValue)
         return self
     }
 
@@ -200,7 +200,7 @@ extension ScrollView {
     }
 
     public func keyboardDismissMode(_ value: UIScrollView.KeyboardDismissMode) -> Self {
-        addAttribute(#selector(setter:UIScrollView.keyboardDismissMode),value)
+        addAttribute(#selector(setter:UIScrollView.keyboardDismissMode),value.rawValue)
         return self
     }
 

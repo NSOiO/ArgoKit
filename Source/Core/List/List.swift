@@ -9,7 +9,6 @@ import Foundation
 
 public struct List : ScrollView {
 
-    private var tableView : UITableView
     private var pNode : ArgoKitTableNode
     
     public var body: View {
@@ -17,6 +16,10 @@ public struct List : ScrollView {
     }
     
     public var scrollView: UIScrollView? {
+        type.viewNode()?.view as? UITableView
+    }
+    
+    public var tableView: UITableView? {
         type.viewNode()?.view as? UITableView
     }
     
@@ -29,8 +32,8 @@ public struct List : ScrollView {
     }
     
     private init(style: UITableView.Style?) {
-        tableView = UITableView(frame: .zero, style: style ?? .plain)
-        pNode = ArgoKitTableNode(view: tableView)
+        pNode = ArgoKitTableNode(viewClass: UITableView.self)
+        pNode.style = style ?? .plain
     }
     
     public init(style: UITableView.Style? = .plain, @ArgoKitViewBuilder content: () -> View) {
@@ -55,126 +58,126 @@ public struct List : ScrollView {
 extension List {
     
     public func estimatedRowHeight(_ value: CGFloat) -> Self {
-        tableView.estimatedRowHeight = value;
+        addAttribute(#selector(setter:UITableView.estimatedRowHeight),value)
         return self
     }
 
     public func estimatedSectionHeaderHeight(_ value: CGFloat) -> Self {
-        tableView.estimatedSectionHeaderHeight = value;
+        addAttribute(#selector(setter:UITableView.estimatedSectionHeaderHeight),value)
         return self
     }
     
     public func estimatedSectionFooterHeight(_ value: CGFloat) -> Self {
-        tableView.estimatedSectionFooterHeight = value;
+        addAttribute(#selector(setter:UITableView.estimatedSectionFooterHeight),value)
         return self
     }
 
     public func separatorInset(_ value: UIEdgeInsets) -> Self {
-        tableView.separatorInset = value;
+        addAttribute(#selector(setter:UITableView.separatorInset),value)
         return self
     }
 
     @available(iOS 11.0, *)
     public func separatorInsetReference(_ value: UITableView.SeparatorInsetReference) -> Self {
-        tableView.separatorInsetReference = value;
+        addAttribute(#selector(setter:UITableView.separatorInsetReference),value.rawValue)
         return self
     }
 
     public func backgroundView(_ value: UIView?) -> Self {
-        tableView.backgroundView = value;
+        addAttribute(#selector(setter:UITableView.backgroundView),value)
         return self
     }
     
     public func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) -> Self {
-        tableView.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+        addAttribute(#selector(UITableView.scrollToRow(at:at:animated:)),indexPath, scrollPosition.rawValue, animated)
         return self
     }
 
     public func scrollToNearestSelectedRow(at scrollPosition: UITableView.ScrollPosition, animated: Bool) -> Self {
-        tableView.scrollToNearestSelectedRow(at: scrollPosition, animated: animated)
+        addAttribute(#selector(UITableView.scrollToNearestSelectedRow(at:animated:)), scrollPosition.rawValue, animated)
         return self
     }
     
     public func setEditing(_ editing: Bool, animated: Bool) -> Self {
-        tableView.setEditing(editing, animated: animated)
+        addAttribute(#selector(UITableView.setEditing(_:animated:)), editing, animated)
         return self
     }
 
     public func allowsSelection(_ value: Bool) -> Self {
-        tableView.allowsSelection = value;
+        addAttribute(#selector(setter:UITableView.allowsSelection),value)
         return self
     }
 
     public func allowsSelectionDuringEditing(_ value: Bool) -> Self {
-        tableView.allowsSelectionDuringEditing = value;
+        addAttribute(#selector(setter:UITableView.allowsSelectionDuringEditing),value)
         return self
     }
     
     public func allowsMultipleSelection(_ value: Bool) -> Self {
-        tableView.allowsMultipleSelection = value;
+        addAttribute(#selector(setter:UITableView.allowsMultipleSelection),value)
         return self
     }
 
     public func allowsMultipleSelectionDuringEditing(_ value: Bool) -> Self {
-        tableView.allowsMultipleSelectionDuringEditing = value;
+        addAttribute(#selector(setter:UITableView.allowsMultipleSelectionDuringEditing),value)
         return self
     }
     
     public func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) -> Self {
-        tableView.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition);
+        addAttribute(#selector(UITableView.selectRow(at:animated:scrollPosition:)), indexPath, animated, scrollPosition.rawValue)
         return self
     }
 
     public func deselectRow(at indexPath: IndexPath, animated: Bool) -> Self {
-        tableView.deselectRow(at: indexPath, animated: animated);
+        addAttribute(#selector(UITableView.deselectRow(at:animated:)), indexPath, animated)
         return self
     }
 
     public func sectionIndexMinimumDisplayRowCount(_ value: Int) -> Self {
-        tableView.sectionIndexMinimumDisplayRowCount = value;
+        addAttribute(#selector(setter:UITableView.sectionIndexMinimumDisplayRowCount),value)
         return self
     }
 
     public func sectionIndexColor(_ value: UIColor?) -> Self {
-        tableView.sectionIndexColor = value;
+        addAttribute(#selector(setter:UITableView.sectionIndexColor),value)
         return self
     }
 
     public func sectionIndexBackgroundColor(_ value: UIColor?) -> Self {
-        tableView.sectionIndexBackgroundColor = value;
+        addAttribute(#selector(setter:UITableView.sectionIndexBackgroundColor),value)
         return self
     }
 
     public func sectionIndexTrackingBackgroundColor(_ value: UIColor?) -> Self {
-        tableView.sectionIndexTrackingBackgroundColor = value;
+        addAttribute(#selector(setter:UITableView.sectionIndexTrackingBackgroundColor),value)
         return self
     }
 
     public func separatorStyle(_ value: UITableViewCell.SeparatorStyle) -> Self {
-        tableView.separatorStyle = value;
+        addAttribute(#selector(setter:UITableView.separatorStyle),value.rawValue)
         return self
     }
 
     public func separatorColor(_ value: UIColor?) -> Self {
-        tableView.separatorColor = value;
+        addAttribute(#selector(setter:UITableView.separatorColor),value)
         return self
     }
     
     @available(iOS 8.0, *)
     public func separatorEffect(_ value: UIVisualEffect?) -> Self {
-        tableView.separatorEffect = value;
+        addAttribute(#selector(setter:UITableView.separatorEffect),value)
         return self
     }
 
     @available(iOS 9.0, *)
     public func cellLayoutMarginsFollowReadableWidth(_ value: Bool) -> Self {
-        tableView.cellLayoutMarginsFollowReadableWidth = value;
+        addAttribute(#selector(setter:UITableView.cellLayoutMarginsFollowReadableWidth),value)
         return self
     }
 
     @available(iOS 11.0, *)
     public func insetsContentViewsToSafeArea(_ value: Bool) -> Self {
-        tableView.insetsContentViewsToSafeArea = value;
+        addAttribute(#selector(setter:UITableView.insetsContentViewsToSafeArea),value)
         return self
     }
     
@@ -204,19 +207,19 @@ extension List {
     
     @available(iOS 9.0, *)
     public func remembersLastFocusedIndexPath(_ value: Bool) -> Self {
-        tableView.remembersLastFocusedIndexPath = value;
+        addAttribute(#selector(setter:UITableView.remembersLastFocusedIndexPath),value)
         return self
     }
 
     @available(iOS 14.0, *)
     public func selectionFollowsFocus(_ value: Bool) -> Self {
-        tableView.selectionFollowsFocus = value;
+        addAttribute(#selector(setter:UITableView.selectionFollowsFocus),value)
         return self
     }
     
     @available(iOS 11.0, *)
     public func dragInteractionEnabled(_ value: Bool) -> Self {
-        tableView.dragInteractionEnabled = value;
+        addAttribute(#selector(setter:UITableView.dragInteractionEnabled),value)
         return self
     }
 }

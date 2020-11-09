@@ -17,6 +17,8 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
     lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionFooterSourceHelper = ArgoKitDataSourceHelper()
     
+    public var style: UITableView.Style = .plain
+    
     public var tableView: UITableView? {
         
         if let tableView = self.view as? UITableView {
@@ -42,16 +44,15 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
     public var titlesForHeaderInSection: [Int: String]?
     public var titlesForFooterInSection: [Int: String]?
     public var titlesForSection: [String]?
-    
-    override init(view: UIView) {
-        super.init(view: view)
-        if let tableView = view as? UITableView {
-            tableView.delegate = self
-            tableView.dataSource = self
-            if #available(iOS 10.0, *) {
-                tableView.prefetchDataSource = self
-            }
+        
+    override func createNodeView(withFrame frame: CGRect) -> UIView {
+        let tableView = UITableView(frame: frame, style: style)
+        tableView.delegate = self
+        tableView.dataSource = self
+        if #available(iOS 10.0, *) {
+            tableView.prefetchDataSource = self
         }
+        return tableView
     }
 }
 

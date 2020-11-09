@@ -75,7 +75,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
 
 // 子类可重载
-- (void)configView:(UIView *)view; // 在创建了View之后调用
+- (UIView *)createNodeViewWithFrame:(CGRect)frame; // 自定义创建View
 
 @end
 
