@@ -1,27 +1,24 @@
 //
-//  ArgoKitListCell.swift
+//  ArgoKitListHeaderFooterView.swift
 //  ArgoKit
 //
-//  Created by MOMO on 2020/10/28.
+//  Created by MOMO on 2020/11/5.
 //
 
 import Foundation
 
-class ArgoKitListCell: UITableViewCell {
+class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
   
-    public var contentNode: ArgoKitNode?
+    var contentNode: ArgoKitNode?
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         self.contentNode = ArgoKitNode(view: contentView)
-        self.contentNode?.size = CGSize(width: contentView.frame.size.width , height: CGFloat.nan);
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.contentNode = ArgoKitNode(view: contentView)
-        self.contentNode?.size = CGSize(width: contentView.frame.size.width , height: CGFloat.nan);
     }
     
     deinit {
@@ -29,12 +26,15 @@ class ArgoKitListCell: UITableViewCell {
         self.contentNode = nil
     }
     
-    
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.contentNode?.removeAllChildNodes()
     }
     
     public func linkCellNode(_ node: ArgoKitNode) {
+        
+        node.removeFromSuperNode()
         self.contentNode?.addChildNode(node)
+        self.contentNode?.applyLayout()
     }
 }

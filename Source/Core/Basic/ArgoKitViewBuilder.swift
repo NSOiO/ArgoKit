@@ -41,14 +41,12 @@ public struct ArgoNodeContainer: View {
                 ()
             }
         }
-        
         if container.count == 0 {
             nodeType = .empty
         }else if container.count == 1 {
             nodeType = .single(container[0])
         }else {
             nodeType = .multiple(container)
-            pNode = nodeType.viewNode()
         }
     }
 }

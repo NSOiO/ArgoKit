@@ -27,26 +27,24 @@ public struct PickerView : View {
     private init() {
         pickerView = UIPickerView();
         pNode = ArgoKitPickerNode(view: pickerView)
-        self.node?.width(point: pickerView.frame.width)
-        self.node?.height(point: pickerView.frame.height)
     }
     
     public init(@ArgoKitViewBuilder content: () -> View) {
         self.init()
         let container = content()
         if let nodes = container.type.viewNodes() {
-            self.pNode.nodeList = [nodes]
+            self.pNode.dataSourceHelper.nodeList = [nodes]
         }
     }
 
     public init(_ data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
         self.init()
         if (data.first as? Array<Any>) != nil {
-            self.pNode.dataList = data as? [[Any]]
+            self.pNode.dataSourceHelper.dataList = data as? [[Any]]
         } else {
-            self.pNode.dataList = [data]
+            self.pNode.dataSourceHelper.dataList = [data]
         }
-        self.pNode.buildNodeFunc = rowContent
+        self.pNode.dataSourceHelper.buildNodeFunc = rowContent
     }
 }
 

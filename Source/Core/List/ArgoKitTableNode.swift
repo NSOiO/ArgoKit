@@ -7,9 +7,15 @@
 
 import Foundation
 
-private let kCellReuseIdentifier = "ArgoKitListCell"
+fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
+fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
+fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
-class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    
+    lazy var dataSourceHelper = ArgoKitDataSourceHelper()
+    lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()
+    lazy var sectionFooterSourceHelper = ArgoKitDataSourceHelper()
     
     public var tableView: UITableView? {
         
@@ -45,7 +51,9 @@ class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewD
             if #available(iOS 10.0, *) {
                 tableView.prefetchDataSource = self
             }
-            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
+//            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: kCellReuseIdentifier)
+            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kHeaderReuseIdentifier)
+            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: kFooterReuseIdentifier)
         }
     }
 }
@@ -53,7 +61,7 @@ class ArgoKitTableNode: ArgoKitDataSourceNode, UITableViewDelegate, UITableViewD
 extension ArgoKitTableNode {
     
     open func reloadData() {
-        self.nodeCahe?.removeAllObjects()
+        self.dataSourceHelper.removeAllCache()
         self.tableView?.reloadData()
     }
 }
@@ -62,27 +70,36 @@ extension ArgoKitTableNode {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return self.numberOfSection()
+        return self.dataSourceHelper.numberOfSection()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.numberOfRowsInSection(section: section)
+        return self.dataSourceHelper.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier, for: indexPath) as! ArgoKitListCell
-        if  (cell.contentNode?.childs?.count != 0) {
-            print("")
-            print("cell.contentNode?.childs?.count11 :",cell.contentNode?.childs?.count ?? 100)
-        }else{
-            print("cell.contentNode?.childs?.count22 :",cell.contentNode?.childs?.count ?? 100)
-            if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-                cell.linkCellNode(node)
+        var cell:ArgoKitListCell? = tableView.dequeueReusableCell(withIdentifier: kCellReuseIdentifier) as? ArgoKitListCell
+        var size = CGSize.zero
+        if cell != nil{
+            if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+                ArgoKitNodeViewModifier.reuseNodeViewAttribute(cell?.contentNode?.childs as! [ArgoKitNode], reuse: [node])
             }
-         
+        }else{
+            cell = ArgoKitListCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: kCellReuseIdentifier)
+            if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
+                cell?.linkCellNode(node)
+            }
         }
-        return cell
+        size = cell?.contentNode?.applyLayout(size: CGSize(width: tableView.frame.size.width,height: CGFloat(Float.nan))) ?? CGSize.zero
+        let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
+        let height = self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey)
+        if height == nil{
+            size = cell?.contentNode?.size ?? CGSize.zero
+            let num = NSNumber(value: Float(size.height))
+            self.dataSourceHelper.nodeCellCahe?.setObject(num, forKey: cacheKey)
+        }
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -145,72 +162,80 @@ extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
-        let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
-        self.sendAction(withObj: String(_sel: sel), paramter: [node, indexPath])
+        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:willDisplayHeaderView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:willDisplayFooterView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
-        let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section)!
-        self.sendAction(withObj: String(_sel: sel), paramter: [node, indexPath])
+        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:didEndDisplayingHeaderView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        
+        let sel = #selector(self.tableView(_:didEndDisplayingFooterView:forSection:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let node = self.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-//            return node.height() // TODO 高度有问题
-            return 100
+        let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
+        if let num:NSNumber =  self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey){
+            if !num.floatValue.isNaN {
+                return CGFloat(num.floatValue)
+            }
         }
         return 0
     }
 
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//
-//    }
-//
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let height = sectionHeaderSourceHelper.nodeForRowAtSection(section, at: 0)?.height() {
+            if !height.isNaN {
+                return height
+            }
+        }
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let height = sectionFooterSourceHelper.nodeForRowAtSection(section, at: 0)?.height() {
+            if !height.isNaN {
+                return height
+            }
+        }
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: kHeaderReuseIdentifier) as! ArgoKitListHeaderFooterView
+        if let node = sectionHeaderSourceHelper.nodeForRowAtSection(section, at: 0) {
+            header.linkCellNode(node)
+        }
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: kFooterReuseIdentifier) as! ArgoKitListHeaderFooterView
+        if let node = sectionFooterSourceHelper.nodeForRowAtSection(section, at: 0) {
+            footer.linkCellNode(node)
+        }
+        return footer
+    }
+
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let sel = #selector(self.tableView(_:shouldHighlightRowAt:))
         return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? Bool ?? true

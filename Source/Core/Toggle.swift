@@ -10,7 +10,6 @@ public struct Toggle:View{
     public var body: View{
         self
     }
-    private let pSwitch:UISwitch
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
@@ -19,58 +18,57 @@ public struct Toggle:View{
         .single(pNode)
     }
     public init(_ isOn:Bool,action:@escaping (_ isOn:Bool)->Void){
-        pSwitch = UISwitch()
-        pNode = ArgoKitNode(view: pSwitch);
-        pSwitch.setOn(isOn, animated: false)
+        pNode = ArgoKitNode(viewClass:UISwitch.self);
+        addAttribute(#selector(UISwitch.setOn(_:animated:)),isOn,false)
         
-        pNode.addTarget(pSwitch, for: UIControl.Event.valueChanged) { (obj, paramter) in
+        pNode.addAction({ (obj, paramter) -> Any? in
             if let swit = obj as? UISwitch {
                 action(swit.isOn)
             }
             return nil
-        }
+        }, for: UIControl.Event.valueChanged)
     }
 }
 
 extension Toggle{
     public func onTintColor(_ value:UIColor?)->Self{
-        pSwitch.onTintColor = value
+        addAttribute(#selector(setter:UISwitch.onTintColor),value)
         return self
     }
     public func thumbTintColor(_ value:UIColor?)->Self{
-        pSwitch.thumbTintColor = value
+        addAttribute(#selector(setter:UISwitch.thumbTintColor),value)
         return self
     }
     
     public func onImage(_ value:UIImage?)->Self{
-        pSwitch.onImage = value
+        addAttribute(#selector(setter:UISwitch.onImage),value)
         return self
     }
     
     public func offImage(_ value:UIImage?)->Self{
-        pSwitch.offImage = value
+        addAttribute(#selector(setter:UISwitch.offImage),value)
         return self
     }
     
     @available(iOS 14.0, *)
     public func title(_ value:String?)->Self{
-        pSwitch.title = value
+        addAttribute(#selector(setter:UISwitch.title),value)
         return self
     }
     
     @available(iOS 14.0, *)
     public func preferredStyle(_ value:UISwitch.Style)->Self{
-        pSwitch.preferredStyle = value
+        addAttribute(#selector(setter:UISwitch.preferredStyle),value.rawValue)
         return self
     }
     
     public func isOn(_ value:Bool)->Self{
-        pSwitch.isOn = value
+        addAttribute(#selector(setter:UISwitch.isOn),value)
         return self
     }
     
     public func setOn(_ on: Bool, animated: Bool)->Self{
-        pSwitch.setOn(on,animated: animated)
+        addAttribute(#selector(UISwitch.setOn(_:animated:)),isOn,animated)
         return self
     }
 }

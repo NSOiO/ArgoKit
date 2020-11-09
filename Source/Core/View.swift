@@ -74,15 +74,13 @@ extension View{
 // modifier
 
 extension View {
-
-
     public func isUserInteractionEnabled(_ value:Bool)->Self{
-        self.node?.view?.isUserInteractionEnabled = value
+        addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
         return self
     }
 
     public func tag(_ value:Int)->Self{
-        self.node?.view?.tag = value
+        addAttribute(#selector(setter:UIView.tag),value)
         return self
     }
     public func tag()->Int?{
@@ -105,7 +103,7 @@ extension View {
     /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
     @available(iOS 14.0, *)
     public func focusGroupIdentifier(_ value:String?)->Self{
-        self.node?.view?.focusGroupIdentifier = value
+        addAttribute(#selector(setter:UIView.focusGroupIdentifier),value)
         return self
     }
     
@@ -116,7 +114,7 @@ extension View {
 
     @available(iOS 9.0, *)
     public func semanticContentAttribute(_ value:UISemanticContentAttribute)->Self{
-        self.node?.view?.semanticContentAttribute = value
+        addAttribute(#selector(setter:UIView.semanticContentAttribute),value)
         return self
     }
     public func semanticContentAttribute()->UISemanticContentAttribute?{
@@ -127,66 +125,97 @@ extension View {
         return self.node?.view?.effectiveUserInterfaceLayoutDirection
     }
 }
+
+// modifier
 extension View{
-    public func clipsToBounds(_ value:Bool)->Self{
-        if let node = self.node {
-            node.view?.clipsToBounds = value;
+    func isDirty(_ selector:Selector) -> Bool {
+        var isDirty_ = false
+        if selector == #selector(setter:UILabel.text) {
+            isDirty_ = true
         }
+        
+        if selector == #selector(setter:UILabel.attributedText) {
+            isDirty_ = true
+        }
+        if selector == #selector(setter:UILabel.numberOfLines) {
+            isDirty_ = true
+        }
+        
+        if selector == #selector(setter:UILabel.font) {
+            isDirty_ = true
+        }
+        
+        if selector == #selector(setter:UIImageView.image) {
+            isDirty_ = true
+        }
+        
+        if selector == #selector(setter:UIImageView.highlightedImage) {
+            isDirty_ = true
+        }
+        
+        return isDirty_;
+    }
+    public func addAttribute(_ selector:Selector, _ patamter:Any? ...) {
+        if let node = self.node{
+            // 获取参数
+            var patamters:Array<Any> = Array()
+            for item in patamter {
+                patamters.append(item!)
+            }
+            let attribute = ViewAttribute(selector:selector,paramter:patamters)
+            attribute.isDirty = isDirty(selector)
+            if node.view != nil {
+                ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attribute])
+            }
+            node.nodeAddView(attribute:attribute)
+        }
+    }
+    public func clipsToBounds(_ value:Bool)->Self{
+        addAttribute(#selector(setter:UIView.clipsToBounds),value)
         return self;
     }
     public func backgroundColor(_ value:UIColor)->Self{
-        if let node = self.node {
-            node.view?.backgroundColor = value;
-        }
+        addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
     }
     public func alpha(_ value:CGFloat)->Self{
-        if let node = self.node {
-            node.view?.alpha = value;
-        }
+        addAttribute(#selector(setter:UIView.alpha),value)
         return self;
     }
     public func opaque(_ value:Bool)->Self{
-        if let node = self.node {
-            node.view?.isOpaque = value;
-        }
+        addAttribute(#selector(setter:UIView.isOpaque),value)
         return self;
     }
     public func clearsContextBeforeDrawing(_ value:Bool)->Self{
-        self.node?.view?.clearsContextBeforeDrawing = value;
+        addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
         return self;
     }
     public func hidden(_ value:Bool)->Self{
-        self.node?.view?.isHidden = value;
+        addAttribute(#selector(setter:UIView.isHidden),value)
         return self;
     }
     public func contentMode(_ value:UIView.ContentMode)->Self{
-        self.node?.view?.contentMode = value;
+        addAttribute(#selector(setter:UIView.contentMode),value)
         return self;
     }
     public func tintColor(_ value:UIColor)->Self{
-        self.node?.view?.tintColor = value;
+        addAttribute(#selector(setter:UIView.tintColor),value)
         return self;
     }
     public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
-        self.node?.view?.tintAdjustmentMode = value;
-        
+        addAttribute(#selector(setter:UIView.tintAdjustmentMode),value)
         return self;
     }
     public func cornerRadius(_ value:CGFloat)->Self{
-        self.node?.view?.layer.cornerRadius = value
+        addAttribute(#selector(setter:CALayer.cornerRadius),value)
         return self;
     }
 }
-
-
-
-
 // UIGestureRecognizer
 extension View{
     public func gesture(gesture:Gesture)->Self{
         gesture.gesture.isEnabled = true
-        self.node?.view?.addGestureRecognizer(gesture.gesture)
+        addAttribute(#selector(UIView.addGestureRecognizer(_:)),gesture.gesture)
         self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (obj, paramter) in
             if let gestureRecognizer = obj as? UIGestureRecognizer {
                 gesture.action(gestureRecognizer)
@@ -208,7 +237,6 @@ extension View{
         }
         return self.gesture(gesture:gesture)
     }
-    
     public func longPressAction(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
         let gesture = LongPressGesture(numberOfTaps:numberOfTaps,numberOfTouches:numberOfTouches,minimumPressDuration:minimumPressDuration,allowableMovement:allowableMovement) { gesture in
             action()
@@ -220,12 +248,6 @@ extension View{
 
 // layout
 extension View{
-    
-    // 标记Node需要重新布局
-    public func markNeedsLayout(){
-        self.node?.markDirty()
-    }
-    
     public func parentNode()->ArgoKitNode?{
         var pNode:ArgoKitNode? = self.node?.parent
         if (pNode == nil) {
@@ -239,9 +261,9 @@ extension View{
        
     }
     
-    public func applyLayout(){
-        self.node?.applyLayout()
+    public func applyLayout()->CGSize{
         ArgoLayoutHelper.addLayoutNode(self.node)
+        return self.node?.applyLayout() ?? CGSize.zero
     }
     
     public func applyLayout(size:CGSize){
@@ -1014,7 +1036,13 @@ extension View{
         return self.node?.maxHeight() ?? 0
     }
 }
-
+extension View {
+    
+    public func aspect(ratio: CGFloat) -> Self {
+        self.node?.aspect(ratio:ratio)
+        return self
+    }
+}
 extension View {
     
     public func endEditing(_ force: Bool) -> Self {

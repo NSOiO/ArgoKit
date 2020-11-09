@@ -7,9 +7,32 @@
 
 import Foundation
 
-class ArgoKitPickerNode: ArgoKitDataSourceNode, UIPickerViewDataSource, UIPickerViewDelegate {
+class ArgoKitPickerRowView: UIView {
+    
+    var contentNode: ArgoKitNode?
+    
+    public func prepareForReuse() {
+        self.subviews.first?.removeFromSuperview()
+        self.contentNode = nil
+    }
 
-    public var pickerView : UIPickerView? {
+    public func linkCellNode(_ node: ArgoKitNode) {
+
+        node.removeFromSuperNode()
+        self.contentNode = node
+        if let nodeView = node.view {
+            self.addSubview(nodeView)
+        }
+        self.contentNode?.markDirty()
+        self.contentNode?.applyLayout()
+    }
+}
+
+class ArgoKitPickerNode: ArgoKitNode, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    var dataSourceHelper: ArgoKitDataSourceHelper = ArgoKitDataSourceHelper()
+
+    public var pickerView: UIPickerView? {
         
         if let pickerView = self.view as? UIPickerView {
             return pickerView
@@ -29,12 +52,12 @@ class ArgoKitPickerNode: ArgoKitDataSourceNode, UIPickerViewDataSource, UIPicker
 extension ArgoKitPickerNode {
     
     open func reloadAllComponents() {
-        self.nodeCahe?.removeAllObjects()
+        self.dataSourceHelper.removeAllCache()
         self.pickerView?.reloadAllComponents()
     }
 
     open func reloadComponent(_ component: Int) {
-        self.nodeCahe?.removeAllObjects()
+        self.dataSourceHelper.removeAllCache()
         self.pickerView?.reloadComponent(component)
     }
 }
@@ -42,38 +65,40 @@ extension ArgoKitPickerNode {
 extension ArgoKitPickerNode {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return self.numberOfSection()
+        return self.dataSourceHelper.numberOfSection()
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.numberOfRowsInSection(section: component)
+        return self.dataSourceHelper.numberOfRowsInSection(section: component)
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        if let node = self.nodeForRowAtSection(0, at: component) {
-            //TODO
-//            return node.width()
-            return 100
+        if let width = self.dataSourceHelper.nodeForRowAtSection(0, at: component)?.width() {
+            if !width.isNaN {
+                return width
+            }
         }
         return 0
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        if let node = self.nodeForRowAtSection(0, at: component) {
-            //TODO
-//            return node.height()
-            return 44
+        if let height = self.dataSourceHelper.nodeForRowAtSection(0, at: component)?.height() {
+            if !height.isNaN {
+                return height
+            }
         }
         return 0
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        // TODO 不能正常展示
-        if let node = self.nodeForRowAtSection(row, at: component) {
-            return node.view ?? view ?? UIView()
+        if let node = self.dataSourceHelper.nodeForRowAtSection(row, at: component) {
+            let rowView = view as? ArgoKitPickerRowView ?? ArgoKitPickerRowView()
+            rowView.prepareForReuse()
+            rowView.linkCellNode(node)
+            return rowView
         }
-        return view ?? UIView()
+        return view ?? ArgoKitPickerRowView()
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

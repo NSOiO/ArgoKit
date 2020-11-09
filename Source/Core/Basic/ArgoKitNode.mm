@@ -10,6 +10,39 @@
 #import "yoga/Yoga.h"
 #import "ArgoLayoutHelper.h"
 #import "ArgoKitUtils.h"
+#import "ArgoKitNodeViewModifier.h"
+#import "ArgoKitNode+Frame.h"
+@interface NodeAction:NSObject{
+    int actionTag;
+    ArgoKitNodeBlock action;
+    UIControlEvents  events;
+}
+@property(nonatomic, copy) ArgoKitNodeBlock actionBlock;
+@property(nonatomic, assign)  UIControlEvents  controlEvents;
+- (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents;
+@end
+
+@implementation NodeAction
+- (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
+    if (self = [super init]) {
+        _actionBlock = action;
+        _controlEvents = controlEvents;
+    }
+    return self;
+}
+@end
+
+@implementation ViewAttribute : NSObject
+- (instancetype)initWithSelector:(SEL)selector paramter:(NSArray<id> *)paramter{
+    self = [super init];
+    if(self){
+        _selector = selector;
+        _paramter = paramter;
+    }
+    return self;
+}
+@end
+
 @class ArgoKitLayout;
 @interface ArgoKitNode()
 
@@ -19,9 +52,13 @@
 // 子node
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
-@property (nonatomic,copy)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic,assign)BOOL isUIView;
+
+//action 相关
+@property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+@property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
 @end
 
 
@@ -48,7 +85,7 @@ static YGConfigRef globalConfig;
     if (self) {
         _argoNode = node;
         _ygnode= YGNodeNewWithConfig(globalConfig);
-        YGNodeSetContext(_ygnode, (__bridge void *) node);
+        YGNodeSetContext(_ygnode, (__bridge void *)node);
         _isBaseNode = [node isMemberOfClass:[ArgoKitNode class]];
     }
     return self;
@@ -59,15 +96,15 @@ static YGConfigRef globalConfig;
 }
 
 #pragma mark --- 完成数据采集后计算 ---
-- (void)applyLayoutWithsize:(CGSize)size
+- (CGSize)applyLayoutWithsize:(CGSize)size
 {
-  [self calculateLayoutWithSize:size];
+  CGSize result = [self calculateLayoutWithSize:size];
   YGApplyLayoutToNodeHierarchy(self.argoNode);
+  return result;
 }
 
-// 视图是否为
+// 视图是否为叶子
 - (BOOL)isLeaf{
-    NSAssert([NSThread isMainThread], @"This method must be called on the main thread.");
     if (self.argoNode.childs.count == 0) {
         return YES;
     }
@@ -162,7 +199,6 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
   if (!CGRectEqualToRect(node.frame, frame)) {
       node.frame = frame;
   }
-
   if (![layout isLeaf]) {
     for (NSUInteger i=0; i<node.childs.count; i++) {
         YGApplyLayoutToNodeHierarchy(node.childs[i]);
@@ -183,10 +219,8 @@ static CGFloat YGSanitizeMeasurement(
   } else {
     result = measuredSize;
   }
-
   return result;
 }
-
 
 static YGSize YGMeasureView(
   YGNodeRef node,
@@ -213,7 +247,6 @@ static YGSize YGMeasureView(
       .height = static_cast<float>(YGSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
   };
 }
-
 
 static void YGRemoveAllChildren(const YGNodeRef node)
 {
@@ -248,20 +281,20 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
   } else {
     YGNodeSetMeasureFunc(node, NULL);
 
-    NSMutableArray<ArgoKitNode *> *subviewsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
+    NSMutableArray<ArgoKitNode *> *childsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
-          [subviewsToInclude addObject:node];
+          [childsToInclude addObject:node];
       }
     }
       
-    if (!YGNodeHasExactSameChildren(node, subviewsToInclude)) {
+    if (!YGNodeHasExactSameChildren(node, childsToInclude)) {
       YGRemoveAllChildren(node);
-      for (int i=0; i<subviewsToInclude.count; i++) {
-        YGNodeInsertChild(node, subviewsToInclude[i].layout.ygnode, i);
+      for (int i=0; i<childsToInclude.count; i++) {
+        YGNodeInsertChild(node, childsToInclude[i].layout.ygnode, i);
       }
     }
-    for (ArgoKitNode *const childNode in subviewsToInclude) {
+    for (ArgoKitNode *const childNode in childsToInclude) {
         YGAttachNodesFromNodeHierachy(childNode);
     }
   }
@@ -276,15 +309,20 @@ static CGFloat YGRoundPixelValue(CGFloat value)
   });
   return roundf(value * scale) / scale;
 }
+
 @end
 
 
 @implementation ArgoKitNode
+-(void)dealloc{
+    NSLog(@"dealloc");
+}
 - (instancetype)initWithView:(UIView *)view{
     self = [super init];
     if (self) {
         _view = view;
-        _resetOrigin = NO;
+        _viewClass = view.class;
+        _resetOrigin = YES;
         _isEnabled = YES;
         _isUIView = [view isMemberOfClass:[UIView class]];
         _size = view.bounds.size;
@@ -295,17 +333,47 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self;
 }
 
-- (Class)viewClass{
-    return [self.view class];
+- (instancetype)initWithViewClass:(Class)viewClass{
+    self = [super init];
+    if (self) {
+        _resetOrigin = YES;
+        _isEnabled = YES;
+        _isUIView = [viewClass isMemberOfClass:[UIView class]];
+        _origin = _frame.origin;
+        _bindProperties = [NSMutableDictionary new];
+        _viewClass = viewClass;
+    }
+    return self;
 }
-
 
 #pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
+    _size = frame.size;
+    _origin = frame.origin;
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadBlock:^{
-        wealSelf.view.frame = frame;
+        if (!wealSelf.view) {
+            wealSelf.view = [wealSelf.viewClass new];
+            wealSelf.view.frame = frame;
+            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes];
+            if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+                NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];
+                for(NodeAction *action in copyActions){
+                    [wealSelf addTarget:wealSelf.view forControlEvents:action.controlEvents action:action.actionBlock];
+                }
+            }
+            
+            if (wealSelf.parentNode) {
+                NSInteger index = [wealSelf.parentNode.childs indexOfObject:wealSelf];
+                if (wealSelf.parentNode.view) {
+                    [wealSelf.parentNode.view insertSubview:wealSelf.view atIndex:index];
+                }
+            }
+        }else{
+            wealSelf.view.frame = frame;
+        }
+ 
     }];
 }
 - (NSMutableArray<ArgoKitNode *> *)childs{
@@ -322,7 +390,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return _actionMap;
 }
 
-
+- (NSMutableArray<ViewAttribute *> *)viewAttributes{
+    if (!_viewAttributes) {
+        _viewAttributes = [[NSMutableArray alloc] init];
+        _backupViewAttributes = _viewAttributes;
+    }
+    return _viewAttributes;
+}
 
 -(ArgoKitLayout *)layout{
     if (!_layout) {
@@ -331,6 +405,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return _layout;
 }
 
+- (NSMutableArray<NodeAction *> *)nodeActions{
+    if (!_nodeActions) {
+        _nodeActions = [NSMutableArray array];
+    }
+    return _nodeActions;
+}
 #pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
@@ -362,12 +442,21 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
+- (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents{
+    NodeAction *action_ = [[NodeAction alloc] initWithAction:action controlEvents:controlEvents];
+    [self.nodeActions addObject:action_];
+}
+
 @end
 
 @implementation ArgoKitNode(LayoutNode)
 
 - (BOOL)isRootNode{
-    return (self.parentNode == nil);
+    BOOL result = self.parentNode == nil;
+//    if (result) {
+//        [self markDirty];
+//    }
+    return result;
 }
 - (void)markDirty{
     [self.layout markDirty];
@@ -381,26 +470,34 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (CGSize)sizeThatFits:(CGSize)size{
-    return [self.view sizeThatFits:size];
+    if(self.view){
+        return [self.view sizeThatFits:size];
+    }
+    UILabel *lable = [UILabel new];
+    lable.text = self.text;
+    return [lable sizeThatFits:size];
 }
 
-- (void)applyLayout{
+- (CGSize)applyLayout{
     if (self.layout) {
-        [self.layout applyLayoutWithsize:self.size];
+        CGSize size = self.parentNode?CGSizeZero:self.size;
+        self.size = [self.layout applyLayoutWithsize:size];
     }
+    return self.size;
 }
 
-- (void)applyLayout:(CGSize)size{
+- (CGSize)applyLayout:(CGSize)size{
     if (self.layout) {
-        [self.layout applyLayoutWithsize:self.size];
+        self.size = [self.layout applyLayoutWithsize:size];
     }
+    return self.size;
 }
 
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
     if (self.layout) {
-        return [self.layout calculateLayoutWithSize:size];
+        self.size = [self.layout calculateLayoutWithSize:size];
     }
-    return CGSizeMake(0, 0);
+    return self.size;
 }
 @end
 
@@ -408,864 +505,106 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)addChildNode:(ArgoKitNode *)node{
     if (node) {
         node.parentNode = self;
-        [self.view addSubview:node.view];
+        if (node.view) {
+            [self.view addSubview:node.view];
+        }
         [self.childs addObject:node];
+        if (!node) return;
+        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, YGNodeGetChildCount(self.layout.ygnode));
     }
 }
+- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
+    if (node) {
+        [self.childs insertObject:node atIndex:index];
+        if (!node) return;
+        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
+    }
+}
+
+
 - (void)removeFromSuperNode{
     if(self.parentNode){
         [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
         self.parentNode = nil;
+        YGNodeRemoveChild(self.parentNode.layout.ygnode, self.layout.ygnode);
     }
 }
 - (void)removeAllChildNodes {
-    for (ArgoKitNode *child in self.childs) {
+    for (ArgoKitNode *child in _childs) {
         [child.view removeFromSuperview];
         child.parentNode = nil;
     }
-    [self.childs removeAllObjects];
-}
-- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
-    if (node) {
-        [self.childs insertObject:node atIndex:index];
+    if (_childs.count) {
+        [_childs removeAllObjects];
     }
+    YGNodeRemoveAllChildren(self.layout.ygnode);
 }
 @end
 
 
-@implementation ArgoKitNode(Frame)
-- (void)direction:(YGDirection)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetDirection(node, value);
-     
-}
-- (void)directionInherit{
-    return [self direction:YGDirectionInherit];
-}
-- (void)directionLTR{
-    return [self direction:YGDirectionLTR];
-}
-- (void)directionRTL{
-    return [self direction:YGDirectionRTL];
-}
-
-- (void)flexDirection:(YGFlexDirection)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlexDirection(node, value);
-     
-}
-
-- (void)column{
-    return [self flexDirection:YGFlexDirectionColumn];
-}
-- (void)columnREV{
-    return [self flexDirection:YGFlexDirectionColumnReverse];
-}
-- (void)row{
-    return [self flexDirection:YGFlexDirectionRow];
-}
-- (void)rowREV{
-    return [self flexDirection:YGFlexDirectionRowReverse];
-}
-
-- (void)justifyContent:(YGJustify)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetJustifyContent(node, value);
-     
-}
-
-- (void)justifyContentFlexStart{
-    return [self justifyContent:YGJustifyFlexStart];
-}
-- (void)justifyContentCenter{
-    return [self justifyContent:YGJustifyCenter];
-}
-- (void)justifyContentFlexEnd{
-    return [self justifyContent:YGJustifyFlexEnd];
-}
-- (void)justifyContentSpaceBetween{
-    return [self justifyContent:YGJustifySpaceBetween];
-}
-- (void)justifyContentSpaceAround{
-    return [self justifyContent:YGJustifySpaceAround];
-}
-- (void)justifyContentSpaceEvenly{
-    return [self justifyContent:YGJustifySpaceEvenly];
-}
-
-- (void)alignContent:(YGAlign)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetAlignContent(node, value);
-     
-}
-- (void)alignContentAuto{
-    return [self alignContent:YGAlignAuto];
-}
-- (void)alignContentFlexStart{
-    return [self alignContent:YGAlignFlexStart];
-}
-- (void)alignContentCenter{
-    return [self alignContent:YGAlignCenter];
-}
-- (void)alignContentFlexEnd{
-    return [self alignContent:YGAlignFlexEnd];
-}
-- (void)alignContentStretch{
-    return [self alignContent:YGAlignStretch];
-}
-- (void)alignContentBaseline{
-    return [self alignContent:YGAlignBaseline];
-}
-- (void)alignContentSpaceBetween{
-    return [self alignContent:YGAlignSpaceBetween];
-}
-- (void)alignContentSpaceAround{
-    return [self alignContent:YGAlignSpaceAround];
-}
-
-
-- (void)alignItems:(YGAlign)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetAlignItems(node, value);
-     
-}
-- (void)alignItemsAuto{
-    return [self alignItems:YGAlignAuto];
-}
-- (void)alignItemsFlexStart{
-    return [self alignItems:YGAlignFlexStart];
-}
-- (void)alignItemsCenter{
-    return [self alignItems:YGAlignCenter];
-}
-- (void)alignItemsFlexEnd{
-    return [self alignItems:YGAlignFlexEnd];
-}
-- (void)alignItemsStretch{
-    return [self alignItems:YGAlignStretch];
-}
-- (void)alignItemsBaseline{
-    return [self alignItems:YGAlignBaseline];
-}
-- (void)alignItemsSpaceBetween{
-    return [self alignItems:YGAlignSpaceBetween];
-}
-- (void)alignItemsSpaceAround{
-    return [self alignItems:YGAlignSpaceAround];
-}
-
-- (void)alignSelf:(YGAlign)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetAlignSelf(node, value);
-     
-}
-- (void)alignSelfAuto{
-    return [self alignSelf:YGAlignAuto];
-}
-- (void)alignSelfFlexStart{
-    return [self alignSelf:YGAlignFlexStart];
-}
-- (void)alignSelfCenter{
-    return [self alignSelf:YGAlignCenter];
-}
-- (void)alignSelfFlexEnd{
-    return [self alignSelf:YGAlignFlexEnd];
-}
-- (void)alignSelfStretch{
-    return [self alignSelf:YGAlignStretch];
-}
-- (void)alignSelfBaseline{
-    return [self alignSelf:YGAlignBaseline];
-}
-- (void)alignSelfSpaceBetween{
-    return [self alignSelf:YGAlignSpaceBetween];
-}
-- (void)alignSelfSpaceAround{
-    return [self alignSelf:YGAlignSpaceAround];
-}
-
-- (void)position:(YGPositionType)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetPositionType(node, value);
-     
-}
-- (void)positionRelative{
-    return [self position:YGPositionTypeRelative];
-}
-- (void)positionAbsolute{
-    return [self position:YGPositionTypeAbsolute];
-}
-
-- (void)flexWrap:(YGWrap)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlexWrap(node, value);
-     
-}
-- (void)flexWrapNoWrap{
-    return [self flexWrap:YGWrapNoWrap];
-}
-- (void)flexWrapWrap{
-    return [self flexWrap:YGWrapWrap];
-}
-- (void)flexWrapWrapREV{
-    return [self flexWrap:YGWrapWrapReverse];
-}
-
-- (void)overflow:(YGOverflow)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetOverflow(node, value);
-     
-}
-- (void)overflowVisible{
-    return [self overflow:YGOverflowVisible];
-}
-- (void)overflowHidden{
-    return [self overflow:YGOverflowHidden];
-}
-- (void)overflowScroll{
-    return [self overflow:YGOverflowScroll];
-}
-
-- (void)display:(YGDisplay)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetDisplay(node, value);
-    
-     
-}
-- (void)displayFlex{
-    return [self display:YGDisplayFlex];
-}
-- (void)displayNone{
-    return [self display:YGDisplayNone];
-}
-
-- (void)flex:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlex(node, value);
-     
-}
-- (void)flexGrow:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlexGrow(node, value);
-     
-}
-- (void)flexShrink:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlexShrink(node, value);
-    
-     
-}
-
-- (void)flexBasis:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitAuto:
-            YGNodeStyleSetFlexBasisAuto(node);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetFlexBasisPercent(node, value.value);
-            break;
-        case YGUnitPoint:
-            YGNodeStyleSetFlexBasis(node, value.value);
-            break;
-        default:
-            break;
+@implementation ArgoKitNode(AttributeValue)
+- (void)nodeAddViewAttribute:(ViewAttribute *)attribute{
+    if (!attribute) {
+        return;
     }
-     
-}
-- (void)flexBasisAuto{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlexBasisAuto(node);
-     
-}
-- (void)flexBasisWithPercent:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    if(value > 100.0){
-        value = 100.0;
+    NSArray *viewAttributes = [self.viewAttributes copy];
+    BOOL isExist = NO;
+    for(ViewAttribute *oldattribute in viewAttributes){
+        if (sel_isEqual(oldattribute.selector, attribute.selector)) {
+            NSString *selName = @(sel_getName(attribute.selector));
+            if (![selName hasPrefix:@"set"]) {//不是set方法则排除在外
+                continue;
+            }
+            oldattribute.paramter = attribute.paramter;
+            isExist = YES;
+        }
     }
-    YGNodeStyleSetFlexBasisPercent(node, (float)value);
-     
-}
-- (void)flexBasisWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetFlexBasis(node, (float)value);
-     
-}
-
-- (void)left:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeLeft, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeLeft, value.value);
-            break;
-        default:
-            break;
+    if (!isExist) {
+        [self.viewAttributes addObject:attribute];
     }
     
-     
-}
-- (void)positionWithPercent:(CGFloat)value edge:(YGEdge)edge{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetPositionPercent(node, edge, (float)value);
-     
-}
-- (void)positionWithPoint:(CGFloat)value edge:(YGEdge)edge{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetPosition(node, edge, (float)value);
-     
-}
-- (void)leftWithPercent:(CGFloat)value{
-    return [self positionWithPercent:value edge:YGEdgeLeft];
-}
-- (void)leftWithPoint:(CGFloat)value{
-    return [self positionWithPoint:value edge:YGEdgeLeft];
 }
 
-- (void)topWithPercent:(CGFloat)value{
-    return [self positionWithPercent:value edge:YGEdgeTop];
-}
-- (void)topWithPoint:(CGFloat)value{
-    return [self positionWithPoint:value edge:YGEdgeTop];
-}
-
-- (void)top:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeTop, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeTop, value.value);
-            break;
-        default:
-            break;
+- (nullable NSString *)text{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setText:)) {
+            return attribute.paramter.firstObject;
+        }
     }
-     
+    return nil;
 }
-
-- (void)right:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeRight, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeRight, value.value);
-            break;
-        default:
-            break;
+- (UIFont *)font{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setFont:)) {
+            return attribute.paramter.firstObject;
+        }
     }
-     
+    return nil;
 }
-- (void)rightWithPercent:(CGFloat)value{
-    return [self positionWithPercent:value edge:YGEdgeRight];
-}
-- (void)rightWithPoint:(CGFloat)value{
-    return [self positionWithPoint:value edge:YGEdgeRight];
-}
-- (void)bottom:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeBottom, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeBottom, value.value);
-            break;
-        default:
-            break;
+- (NSInteger)numberOfLines{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setNumberOfLines:)) {
+            id lines = attribute.paramter.firstObject;
+            if ([lines isKindOfClass:[NSNumber class]]) {
+                return [lines intValue];
+            }
+            return -1;
+        }
     }
-    
-     
+    return -1;
 }
-- (void)bottomWithPercent:(CGFloat)value{
-    return [self positionWithPercent:value edge:YGEdgeBottom];
-}
-- (void)bottomWithPoint:(CGFloat)value{
-    return [self positionWithPoint:value edge:YGEdgeBottom];
-}
-- (void)start:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeStart, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeStart, value.value);
-            break;
-        default:
-            break;
+- (nullable UIImage *)image{
+    for(ViewAttribute *attribute in self.backupViewAttributes){
+        if (attribute.selector == @selector(setImage:)) {
+            return attribute.paramter.firstObject;
+        }
     }
-    
-     
-}
-- (void)startWithPercent:(CGFloat)value{
-    return [self positionWithPercent:value edge:YGEdgeStart];
-}
-- (void)startWithPoint:(CGFloat)value{
-    return [self positionWithPoint:value edge:YGEdgeStart];
-}
-- (void)end:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeEnd, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeEnd, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)endWithPercent:(CGFloat)value{
-    return [self positionWithPercent:value edge:YGEdgeEnd];
-}
-- (void)endWithPoint:(CGFloat)value{
-    return [self positionWithPoint:value edge:YGEdgeEnd];
+    return nil;
 }
 
-
-- (void)marginWithPercent:(CGFloat)value edge:(YGEdge)edge{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMarginPercent(node, edge, (float)value);
-     
-}
-- (void)marginWithPoint:(CGFloat)value edge:(YGEdge)edge{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMargin(node, edge, (float)value);
-     
-}
-
-
-- (void)marginLeft:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeLeft, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeLeft, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginLeftWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeLeft];
-}
-- (void)marginLeftWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeLeft];
-}
-
-- (void)marginTop:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeTop, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeTop, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginTopWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeTop];
-}
-- (void)marginTopWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeTop];
-}
-- (void)marginRight:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeRight, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeRight, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginRightWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeRight];
-}
-- (void)marginRightWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeRight];
-}
-- (void)marginBottom:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeBottom, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeBottom, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginBottomWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeBottom];
-}
-- (void)marginBottomWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeBottom];
-}
-- (void)marginStart:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeStart, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeStart, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginStartWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeStart];
-}
-- (void)marginStartWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeStart];
-}
-
-- (void)marginEnd:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeEnd, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeEnd, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginEndWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeEnd];
-}
-- (void)marginEndWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeEnd];
-}
-
-- (void)marginHorizontal:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeHorizontal, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeHorizontal, value.value);
-            break;
-        default:
-            break;
-    }
-     
-}
-- (void)marginHWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeHorizontal];
-}
-- (void)marginHWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeHorizontal];
-}
-
-- (void)marginVertical:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeVertical, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeVertical, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
-- (void)marginVWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeVertical];
-}
-- (void)marginVWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeVertical];
-}
-
-- (void)margin:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeAll, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeAll, value.value);
-            break;
-        default:
-            break;
-    }
-     
-}
-
-- (void)marginAllWithPoint:(CGFloat)value{
-    return [self marginWithPoint:value edge:YGEdgeAll];
-}
-- (void)marginAllWithPercent:(CGFloat)value{
-    return [self marginWithPercent:value edge:YGEdgeAll];
-}
-
-
-- (void)paddingWithPercent:(CGFloat)value edge:(YGEdge)edge{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetPaddingPercent(node, edge, (float)value);
-     
-}
-- (void)paddingWithPoint:(CGFloat)value edge:(YGEdge)edge{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetPadding(node, edge, (float)value);
-     
-}
-
-
-- (void)paddingLeftWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeLeft];
-}
-- (void)paddingLeftWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeLeft];
-}
-
-- (void)paddingTopWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeTop];
-}
-- (void)paddingTopWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeTop];
-}
-
-- (void)paddingRightWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeRight];
-}
-- (void)paddingRightWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeRight];
-}
-
-- (void)paddingBottomWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeBottom];
-}
-- (void)paddingBottomWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeBottom];
-}
-
-- (void)paddingStartWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeStart];
-}
-- (void)paddingStartWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeStart];
-}
-
-- (void)paddingEndWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeEnd];
-}
-- (void)paddingEndWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeEnd];
-}
-
-- (void)paddingHWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeHorizontal];
-}
-- (void)paddingHWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeHorizontal];
-}
-
-- (void)paddingVWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeVertical];
-}
-- (void)paddingVWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeVertical];
-}
-
-- (void)paddingAllWithPercent:(CGFloat)value {
-    return [self paddingWithPercent:value edge:YGEdgeAll];
-}
-- (void)paddingAllWithPoint:(CGFloat)value{
-    return [self paddingWithPoint:value edge:YGEdgeAll];
-}
-
-
-- (void)borderLeftWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeLeft, value);
-    
-     
-}
-- (void)borderTopWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeTop, value);
-    
-     
-}
-- (void)borderRightWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeRight, value);
-    
-     
-}
-- (void)borderBottomWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeBottom, value);
-    
-     
-}
-- (void)borderStartWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeStart, value);
-    
-     
-}
-- (void)borderEndWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeEnd, value);
-
-     
-}
-- (void)borderWidth:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetBorder(node, YGEdgeAll, value);
-    
-     
-}
-
-- (void)widthWithAuto{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetWidthAuto(node);
-     
-}
-- (void)widthWithPercent:(CGFloat)value {
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetWidthPercent(node,(float)value);
-     
-}
-- (void)widthWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetWidth(node, (float)value);
-}
-
-- (CGFloat)width{
-    YGNodeRef node = self.layout.ygnode;
-    return YGNodeStyleGetWidth(node).value;
-}
-
-- (void)heightAuto{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetHeightAuto(node);
-     
-}
-- (void)heightWithPercent:(CGFloat)value {
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetHeightPercent(node,(float)value);
-     
-}
-- (void)heightWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetHeight(node, (float)value);
-}
-- (CGFloat)height{
-    YGNodeRef node = self.layout.ygnode;
-    return YGNodeStyleGetHeight(node).value;
-}
-
-- (void)minWidthWithPercent:(CGFloat)value {
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMinWidthPercent(node,(float)value);
-     
-}
-- (void)minWidthWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMinWidth(node, (float)value);
-}
-- (CGFloat)minWidth{
-    YGNodeRef node = self.layout.ygnode;
-    return YGNodeStyleGetMinWidth(node).value;
-}
-
-- (void)minHeightWithPercent:(CGFloat)value {
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMinHeightPercent(node,(float)value);
-}
-- (void)minHeightWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMinHeight(node, (float)value);
-}
-
-- (CGFloat)minHeight{
-    YGNodeRef node = self.layout.ygnode;
-    return YGNodeStyleGetMinHeight(node).value;
-}
-
-- (void)maxWidthWithPercent:(CGFloat)value {
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMaxWidthPercent(node,(float)value);
-     
-}
-- (void)maxWidthWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMaxWidth(node, (float)value);
-}
-
-- (CGFloat)maxWidth{
-    YGNodeRef node = self.layout.ygnode;
-    return YGNodeStyleGetMaxWidth(node).value;
-}
-
-- (void)maxHeightWithPercent:(CGFloat)value {
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMaxHeightPercent(node,(float)value);
-     
-}
-- (void)maxHeightWithPoint:(CGFloat)value{
-    YGNodeRef node = self.layout.ygnode;
-    YGNodeStyleSetMaxHeight(node, (float)value);
-}
-- (CGFloat)maxHeight{
-    YGNodeRef node = self.layout.ygnode;
-    return YGNodeStyleGetMaxHeight(node).value;
-}
 @end
+
+
