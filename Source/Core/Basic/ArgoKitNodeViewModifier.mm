@@ -98,7 +98,6 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 + (void)reuseNodeViewAttribute:(NSArray<ArgoKitNode*> *)nodes reuseNodes:(NSArray<ArgoKitNode*> *)reuseNodes{
-    
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {
         return;
@@ -106,7 +105,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
         ArgoKitNode *resueNode = reuseNodes[i];
-        node.text = resueNode.text;
+        node.backupViewAttributes = resueNode.viewAttributes;
         [self nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes];
         
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {

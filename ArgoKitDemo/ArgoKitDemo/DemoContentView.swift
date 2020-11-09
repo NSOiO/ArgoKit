@@ -12,28 +12,31 @@ import ArgoKit
 struct DemoContentView: View {
     var items: [String] {
         var temp = [String]()
-        for index in 0..<1000 {
+        for index in 100..<10000 {
             temp.append(String(index))
         }
         return temp
     }
-    
+
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     
     var body:View{
         
         List(data: items) { item in
             HStack{
-                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100)
-                Text(item as? String).backgroundColor(.yellow).width(200).height(100)
-            }.height(100).width(100%).backgroundColor(.red)
-        }.width(100%).height(100%)
-        .tableHeaderView { () -> View in
-            Text("TableHeader").backgroundColor(.yellow).height(100)
-        }.tableFooterView { () -> View in
-            Text("TableFooter").backgroundColor(.yellow).height(100)
-        }
-        
+                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+                Text(item as? String).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
+            }.height(100%).width(100%)
+        }.width(100%).height(100%).backgroundColor(.red)
+//        .tableHeaderView { () -> View in
+//            Text("TableHeader").backgroundColor(.yellow).height(100)
+//        }.tableFooterView { () -> View in
+//            Text("TableFooter").backgroundColor(.yellow).height(100)
+//        }.sectionHeader(["SectionHeader"]) { (item) -> View in
+//            Text(item as! String).backgroundColor(.yellow).width(200).height(44)
+//        }.sectionFooter(["SectionFooter"]) { (item) -> View in
+//            Text(item as! String).backgroundColor(.yellow).width(200).height(44)
+//        }
         
 //        PickerView(items) { item -> View in
 //            Text(item as? String).width(100).height(44)
