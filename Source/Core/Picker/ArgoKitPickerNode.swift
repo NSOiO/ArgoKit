@@ -11,20 +11,21 @@ class ArgoKitPickerRowView: UIView {
     
     var contentNode: ArgoKitNode?
     
-    public func prepareForReuse() {
-        self.subviews.first?.removeFromSuperview()
-        self.contentNode = nil
+    override var frame: CGRect {
+        didSet {
+            self.contentNode?.width(point: frame.width)
+            self.contentNode?.height(point: frame.height)
+        }
     }
-
+    
     public func linkCellNode(_ node: ArgoKitNode) {
 
-        node.removeFromSuperNode()
-        self.contentNode = node
-        if let nodeView = node.view {
-            self.addSubview(nodeView)
+        if ((self.contentNode?.childs?.count) != 0) {
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: [node]);
+        } else {
+            self.contentNode?.addChildNode(node)
+            self.contentNode?.applyLayout(size: CGSize(width: node.width(), height: node.height()))
         }
-        self.contentNode?.markDirty()
-        self.contentNode?.applyLayout()
     }
 }
 
@@ -69,11 +70,11 @@ extension ArgoKitPickerNode {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.dataSourceHelper.numberOfRowsInSection(section: component)
+        return self.dataSourceHelper.numberOfRows(section: component)
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        if let width = self.dataSourceHelper.nodesForRowAtSection(0, at: component)?.first?.width() {
+        if let width = self.dataSourceHelper.nodeForRow(0, at: component)?.width() {
             if !width.isNaN {
                 return width
             }
@@ -82,7 +83,7 @@ extension ArgoKitPickerNode {
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        if let height = self.dataSourceHelper.nodesForRowAtSection(0, at: component)?.first?.height() {
+        if let height = self.dataSourceHelper.nodeForRow(0, at: component)?.height() {
             if !height.isNaN {
                 return height
             }
@@ -92,9 +93,8 @@ extension ArgoKitPickerNode {
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        if let node = self.dataSourceHelper.nodesForRowAtSection(row, at: component)?.first {
+        if let node = self.dataSourceHelper.nodeForRow(row, at: component) {
             let rowView = view as? ArgoKitPickerRowView ?? ArgoKitPickerRowView()
-            rowView.prepareForReuse()
             rowView.linkCellNode(node)
             return rowView
         }

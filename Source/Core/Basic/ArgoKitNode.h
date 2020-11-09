@@ -66,8 +66,10 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @property (nonatomic, readwrite, assign) BOOL resetOrigin;
 
 - (instancetype)initWithView:(UIView *)view;
-
 - (instancetype)initWithViewClass:(Class)viewClass;
+
+- (void)bindView:(UIView *)view;
+
 - (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents;
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
 

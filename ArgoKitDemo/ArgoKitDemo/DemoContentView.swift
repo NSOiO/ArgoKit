@@ -33,9 +33,9 @@ struct DemoContentView: View {
         }.tableFooterView { () -> View in
             Text("TableFooter").backgroundColor(.yellow).height(100)
         }.sectionHeader(["SectionHeader"]) { (item) -> View in
-            Text(item as! String).backgroundColor(.yellow).width(200).height(44)
+            Text(item as! String).backgroundColor(.yellow).width(100%).height(44)
         }.sectionFooter(["SectionFooter"]) { (item) -> View in
-            Text(item as! String).backgroundColor(.yellow).width(200).height(44)
+            Text(item as! String).backgroundColor(.yellow).width(200%).height(44)
         }
         
 //        PickerView(items) { item -> View in
