@@ -266,7 +266,6 @@ static BOOL YGNodeHasExactSameChildren(const YGNodeRef node, NSArray<ArgoKitNode
       return NO;
     }
   }
-
   return YES;
 }
 
@@ -352,7 +351,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _size = frame.size;
     _origin = frame.origin;
     __weak typeof(self)wealSelf = self;
-    [ArgoKitUtils runMainThreadBlock:^{
+    [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf.viewClass new];
             wealSelf.view.frame = frame;
@@ -363,7 +362,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
                     [wealSelf addTarget:wealSelf.view forControlEvents:action.controlEvents action:action.actionBlock];
                 }
             }
-            
             if (wealSelf.parentNode) {
                 NSInteger index = [wealSelf.parentNode.childs indexOfObject:wealSelf];
                 if (wealSelf.parentNode.view) {
@@ -452,11 +450,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @implementation ArgoKitNode(LayoutNode)
 
 - (BOOL)isRootNode{
-    BOOL result = self.parentNode == nil;
-//    if (result) {
-//        [self markDirty];
-//    }
-    return result;
+    return self.parentNode == nil;
 }
 - (void)markDirty{
     [self.layout markDirty];
@@ -488,6 +482,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (CGSize)applyLayout:(CGSize)size{
     if (self.layout) {
+        [ArgoLayoutHelper addLayoutNode:self];
         self.size = [self.layout applyLayoutWithsize:size];
     }
     return self.size;
@@ -509,18 +504,21 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self.view addSubview:node.view];
         }
         [self.childs addObject:node];
-        if (!node) return;
-        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
-        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, YGNodeGetChildCount(self.layout.ygnode));
+        
+        [self insertYGNode:node atIndex:YGNodeGetChildCount(self.layout.ygnode)];
     }
 }
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (node) {
         [self.childs insertObject:node atIndex:index];
-        if (!node) return;
-        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
-        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
+        [self insertYGNode:node atIndex:index];
     }
+}
+
+- (void)insertYGNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
+    if (!node) return;
+    YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+    YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
 }
 
 
@@ -576,7 +574,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return nil;
 }
-- (UIFont *)font{
+- (nullable UIFont *)font{
     for(ViewAttribute *attribute in self.backupViewAttributes){
         if (attribute.selector == @selector(setFont:)) {
             return attribute.paramter.firstObject;

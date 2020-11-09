@@ -83,9 +83,25 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 @implementation ArgoKitNodeViewModifier
-+ (void)nodeViewAttributeWithNode:(ArgoKitNode *)node attributes:(NSArray<ViewAttribute *> *)attributes{
-    for (ViewAttribute *attribute in attributes) {
-        if (node.view) {
++ (void)nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes{
+    if (!node) {
+        return;
+    }
+    if (node.view) {
+        [self _nodeViewAttributeWithNode:node attributes:attributes];
+    }else{
+        if (node.linkNode.revLinkNode == node) {
+            [self _nodeViewAttributeWithNode:node.linkNode attributes:attributes];
+        }
+    }
+}
+
++ (void)_nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes{
+    if (!node) {
+        return;
+    }
+    if (node.view) {
+        for (ViewAttribute *attribute in attributes) {
             if ([node.view respondsToSelector:attribute.selector]) {
                 performSelector(node.view,attribute.selector,attribute.paramter);
                 if (attribute.isDirty) {
@@ -93,11 +109,10 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
                 }
             }
         }
-       
     }
 }
 
-+ (void)reuseNodeViewAttribute:(NSArray<ArgoKitNode*> *)nodes reuseNodes:(NSArray<ArgoKitNode*> *)reuseNodes{
++ (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes{
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {
         return;
@@ -105,6 +120,8 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
         ArgoKitNode *resueNode = reuseNodes[i];
+        resueNode.linkNode = node;
+        node.revLinkNode = resueNode;
         node.backupViewAttributes = resueNode.viewAttributes;
         [self nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes];
         

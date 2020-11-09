@@ -83,22 +83,23 @@ extension ArgoKitTableNode {
         var size = CGSize.zero
         if cell != nil{
             if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
-                ArgoKitNodeViewModifier.reuseNodeViewAttribute(cell?.contentNode?.childs as! [ArgoKitNode], reuse: [node])
+                ArgoKitNodeViewModifier.reuseNodeViewAttribute(cell?.contentNode?.childs as? [ArgoKitNode], reuse: [node])
             }
         }else{
             cell = ArgoKitListCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: kCellReuseIdentifier)
             if let node = self.dataSourceHelper.nodeForRowAtSection(indexPath.row, at: indexPath.section) {
                 cell?.linkCellNode(node)
             }
+           
         }
         size = cell?.contentNode?.applyLayout(size: CGSize(width: tableView.frame.size.width,height: CGFloat(Float.nan))) ?? CGSize.zero
         let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
-        let height = self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey)
-        if height == nil{
+//        let height = self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey)
+//        if height == nil{
             size = cell?.contentNode?.size ?? CGSize.zero
             let num = NSNumber(value: Float(size.height))
             self.dataSourceHelper.nodeCellCahe?.setObject(num, forKey: cacheKey)
-        }
+//        }
         return cell!
     }
     

@@ -27,30 +27,29 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 
 //存储View属性
-@property (nonatomic, strong)NSMutableArray<ViewAttribute *>* viewAttributes;
-//存储Backup View属性
-@property (nonatomic, copy)NSArray<ViewAttribute *>* backupViewAttributes;
+@property (nonatomic, strong,nullable)NSMutableArray<ViewAttribute *>* viewAttributes;
+//备份存储View属性
+@property (nonatomic, copy,nullable)NSArray<ViewAttribute *>* backupViewAttributes;
+//链接次node被复用到的node节点
+@property (nonatomic, weak,nullable)ArgoKitNode *linkNode;
+@property (nonatomic, weak,nullable)ArgoKitNode *revLinkNode;
 /* 节点持有的视图 */
 @property (nonatomic, strong, readonly, nullable) UIView *view;
-
 /* 节点持有的视图 */
 @property (nonatomic, assign)Class viewClass;
 
 /* frame 相关 */
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
-
 /**
  Returns the number of children that are using Flexbox.
  */
 @property (nonatomic, readonly, assign) NSUInteger numberOfChildren;
-
 /**
  Return a BOOL indiciating whether or not we this node contains any subviews that are included in
  Yoga's layout.
  */
 @property (nonatomic, readonly, assign) BOOL isLeaf;
-
 /**
  Return's a BOOL indicating if a view is dirty. When a node is dirty
  it usually indicates that it will be remeasured on the next layout pass.
@@ -91,6 +90,10 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
  */
 - (CGSize)applyLayout NS_SWIFT_NAME(applyLayout());
 
+/**
+ Perform a layout calculation and update the frames of the views in the hierarchy with the results.
+ Returns the size of the view based on provided constraints. Pass NaN for an unconstrained dimension.
+ */
 - (CGSize)applyLayout:(CGSize)size
     NS_SWIFT_NAME(applyLayout(size:));
 
@@ -114,6 +117,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 @interface ArgoKitNode(AttributeValue)
 - (void)nodeAddViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(nodeAddView(attribute:));
+
+// 获取对应属性值
 - (nullable NSString *)text;
 - (nullable UIFont *)font;
 - (NSInteger)numberOfLines NS_SWIFT_NAME(numberOfLines());
