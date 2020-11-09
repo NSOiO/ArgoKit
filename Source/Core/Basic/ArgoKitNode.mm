@@ -43,6 +43,9 @@
 }
 @end
 
+
+
+
 @class ArgoKitLayout;
 @interface ArgoKitNode()
 
@@ -66,7 +69,6 @@ static YGConfigRef globalConfig;
 @interface ArgoKitLayout: NSObject
 @property (nonatomic, assign, readonly) YGNodeRef ygnode;
 @property (nonatomic, weak, readonly) ArgoKitNode *argoNode;
-@property(nonatomic, assign, readonly) BOOL isBaseNode;
 - (instancetype)initWithNode:(ArgoKitNode *)node;
 @end
 @implementation ArgoKitLayout
@@ -86,7 +88,6 @@ static YGConfigRef globalConfig;
         _argoNode = node;
         _ygnode= YGNodeNewWithConfig(globalConfig);
         YGNodeSetContext(_ygnode, (__bridge void *)node);
-        _isBaseNode = [node isMemberOfClass:[ArgoKitNode class]];
     }
     return self;
 }
@@ -231,17 +232,14 @@ static YGSize YGMeasureView(
 {
   const CGFloat constrainedWidth = (widthMode == YGMeasureModeUndefined) ? CGFLOAT_MAX : width;
   const CGFloat constrainedHeight = (heightMode == YGMeasureModeUndefined) ? CGFLOAT_MAX: height;
-
   ArgoKitNode *argoNode = (__bridge ArgoKitNode*) YGNodeGetContext(node);
   CGSize sizeThatFits = CGSizeZero;
-
   if (!argoNode.isUIView || [argoNode.childs count] > 0) {
     sizeThatFits = [argoNode sizeThatFits:(CGSize){
                                           .width = constrainedWidth,
                                           .height = constrainedHeight,
                                       }];
   }
-
   return (YGSize) {
       .width = static_cast<float>(YGSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
       .height = static_cast<float>(YGSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
@@ -260,7 +258,6 @@ static BOOL YGNodeHasExactSameChildren(const YGNodeRef node, NSArray<ArgoKitNode
   if (YGNodeGetChildCount(node) != childs.count) {
     return NO;
   }
-
   for (int i=0; i<childs.count; i++) {
     if (YGNodeGetChild(node, i) != childs[i].layout.ygnode) {
       return NO;
