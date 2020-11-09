@@ -51,8 +51,7 @@ extension ScrollView {
     
     @available(iOS 11.0, *)
     public func adjustedContentInsetDidChange() -> Self {
-       // scrollView.adjustedContentInsetDidChange()
-       // addAttribute(#selector(setter:UIScrollView.adjustedContentInsetDidChange))
+        addAttribute(#selector(UIScrollView.adjustedContentInsetDidChange))
         return self
     }
 
@@ -141,17 +140,17 @@ extension ScrollView {
     }
 
     public func setContentOffset(_ contentOffset: CGPoint, animated: Bool) -> Self {
-        scrollView.setContentOffset(contentOffset, animated: animated)
+        addAttribute(#selector(UIScrollView.setContentOffset(_:animated:)), contentOffset, animated)
         return self
     }
 
     public func scrollRectToVisible(_ rect: CGRect, animated: Bool) -> Self {
-        scrollView.scrollRectToVisible(rect, animated: animated)
+        addAttribute(#selector(UIScrollView.scrollRectToVisible(_:animated:)), rect, animated)
         return self
     }
 
     public func flashScrollIndicators() -> Self {
-        scrollView.flashScrollIndicators()
+        addAttribute(#selector(UIScrollView.flashScrollIndicators))
         return self
     }
         
@@ -181,12 +180,12 @@ extension ScrollView {
     }
 
     public func setZoomScale(_ scale: CGFloat, animated: Bool) -> Self {
-        scrollView.setZoomScale(scale, animated: animated)
+        addAttribute(#selector(UIScrollView.setZoomScale(_:animated:)), scale, animated)
         return self
     }
 
     public func zoom(to rect: CGRect, animated: Bool) -> Self {
-        scrollView.zoom(to: rect, animated: animated)
+        addAttribute(#selector(UIScrollView.zoom(to:animated:)), rect, animated)
         return self
     }
 

@@ -82,7 +82,6 @@ extension ArgoKitDataSourceHelper {
     }
     
     open func reuseIdForRowAtSection(_ row: Int, at section: Int) -> String? {
-        print("row : \(row)")
         let cacheKey = NSString(format: "cache_%d_%d", section, row)
         if let resuseId = self.reuseIdCahe.object(forKey: cacheKey) {
             return String( resuseId)

@@ -72,7 +72,7 @@ extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 10// self.dataSourceHelper.numberOfRowsInSection(section: section)
+        return self.dataSourceHelper.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

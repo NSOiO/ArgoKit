@@ -12,6 +12,8 @@
 #import "ArgoKitUtils.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
+#import "ArgoKitNode+ScrollViewDelegate.h"
+
 @interface NodeAction:NSObject{
     int actionTag;
     ArgoKitNodeBlock action;
@@ -348,6 +350,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self;
 }
 
+- (void)configView:(UIView *)view {
+    if ([view isKindOfClass:[UIScrollView class]]) {
+        ((UIScrollView *)view).delegate = self;
+    }
+}
+
 #pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
@@ -356,6 +364,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf.viewClass new];
             wealSelf.view.frame = frame;
+            [wealSelf configView:wealSelf.view];
             [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes];
             if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
                 NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];
@@ -372,11 +381,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             }
         }else{
             wealSelf.view.frame = frame;
-            if ([self.view isKindOfClass:[UITableView class]]) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [(UITableView *)self.view reloadData];
-                });
-            }
         }
     }];
 }
