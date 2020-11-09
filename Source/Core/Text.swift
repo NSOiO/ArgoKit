@@ -69,6 +69,7 @@ extension Text{
     }
     public func lineBreakMode(_ value:NSLineBreakMode)->Self{
         addAttribute(#selector(setter:UILabel.lineBreakMode),value)
+        
         return self
     }
     

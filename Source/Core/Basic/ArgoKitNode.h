@@ -27,9 +27,10 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 
 //存储View属性
-@property (nonatomic, strong,nullable)NSMutableArray<ViewAttribute *>* viewAttributes;
+@property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 //备份存储View属性
-@property (nonatomic, copy,nullable)NSArray<ViewAttribute *>* backupViewAttributes;
+@property (nonatomic, copy,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* backupViewAttributes;
+
 //链接次node被复用到的node节点
 @property (nonatomic, weak,nullable)ArgoKitNode *linkNode;
 @property (nonatomic, weak,nullable)ArgoKitNode *revLinkNode;

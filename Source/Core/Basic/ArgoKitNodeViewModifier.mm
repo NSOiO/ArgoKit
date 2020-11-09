@@ -123,7 +123,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         resueNode.linkNode = node;
         node.revLinkNode = resueNode;
         node.backupViewAttributes = resueNode.viewAttributes;
-        [self nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes];
+        [self nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues];
         
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
             [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs];

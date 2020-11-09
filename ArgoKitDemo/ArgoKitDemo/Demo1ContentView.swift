@@ -32,7 +32,7 @@ struct Demo1ContentView:View {
                 .alias(variable: &model.stack1).longPressAction(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
                     print("longPressAction")
                 }.tapAction {
-                    print("tapAction")
+                    model.text1?.text("hjdjhfbdhjbfd").width(1000)
                 }.backgroundColor(.orange)
   
     init() {

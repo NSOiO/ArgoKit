@@ -364,7 +364,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
-            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes];
+            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes.allValues];
             if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
                 NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];
                 for(NodeAction *action in copyActions){
@@ -396,10 +396,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return _actionMap;
 }
-
-- (NSMutableArray<ViewAttribute *> *)viewAttributes{
+- (NSMutableDictionary<NSString *,ViewAttribute *> *)viewAttributes{
     if (!_viewAttributes) {
-        _viewAttributes = [[NSMutableArray alloc] init];
+        _viewAttributes = [[NSMutableDictionary alloc] init];
         _backupViewAttributes = _viewAttributes;
     }
     return _viewAttributes;
@@ -579,57 +578,46 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (!attribute) {
         return;
     }
-    NSArray *viewAttributes = [self.viewAttributes copy];
-    BOOL isExist = NO;
-    for(ViewAttribute *oldattribute in viewAttributes){
-        if (sel_isEqual(oldattribute.selector, attribute.selector)) {
-            NSString *selName = @(sel_getName(attribute.selector));
-            if (![selName hasPrefix:@"set"]) {//不是set方法则排除在外
-                continue;
-            }
+    NSString *selector_name;
+    if (attribute.selector) {
+        selector_name = @(sel_getName(attribute.selector));
+    }
+    ViewAttribute *oldattribute = self.viewAttributes[selector_name];
+    if (![selector_name hasPrefix:@"set"]) {//不是set方法则排除在外
+        selector_name = [NSString stringWithFormat:@"%@:%@",selector_name,@([attribute.paramter.firstObject hash])];
+        [self.viewAttributes setObject:attribute forKey:selector_name];
+    }else{
+        if (oldattribute) {
             oldattribute.paramter = attribute.paramter;
-            isExist = YES;
+        }else{
+            [self.viewAttributes setObject:attribute forKey:selector_name];
         }
     }
-    if (!isExist) {
-        [self.viewAttributes addObject:attribute];
-    }
-    
 }
 
 - (nullable NSString *)text{
-    for(ViewAttribute *attribute in self.backupViewAttributes){
-        if (attribute.selector == @selector(setText:)) {
-            return attribute.paramter.firstObject;
-        }
-    }
-    return nil;
+    return [self valueWithSelector:@selector(setText:)];
 }
 - (nullable UIFont *)font{
-    for(ViewAttribute *attribute in self.backupViewAttributes){
-        if (attribute.selector == @selector(setFont:)) {
-            return attribute.paramter.firstObject;
-        }
-    }
-    return nil;
+    return [self valueWithSelector:@selector(setFont:)];
+   
 }
 - (NSInteger)numberOfLines{
-    for(ViewAttribute *attribute in self.backupViewAttributes){
-        if (attribute.selector == @selector(setNumberOfLines:)) {
-            id lines = attribute.paramter.firstObject;
-            if ([lines isKindOfClass:[NSNumber class]]) {
-                return [lines intValue];
-            }
-            return -1;
-        }
+    id lines = [self valueWithSelector:@selector(setNumberOfLines:)];
+    if ([lines isKindOfClass:[NSNumber class]]) {
+        return [lines intValue];
     }
-    return -1;
+    return 1;
 }
 - (nullable UIImage *)image{
-    for(ViewAttribute *attribute in self.backupViewAttributes){
-        if (attribute.selector == @selector(setImage:)) {
-            return attribute.paramter.firstObject;
-        }
+    return [self valueWithSelector:@selector(setImage:)];
+}
+
+- (nullable id)valueWithSelector:(SEL)selector{
+    NSString *selector_name =  @(sel_getName(selector));
+    ViewAttribute *attribute = self.viewAttributes[selector_name];
+    if (attribute) {
+        return attribute.paramter.firstObject;
     }
     return nil;
 }
