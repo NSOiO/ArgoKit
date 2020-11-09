@@ -105,7 +105,9 @@ static YGConfigRef globalConfig;
   YGApplyLayoutToNodeHierarchy(self.argoNode);
   return result;
 }
-
+- (void)applyLayoutAferCalculation{
+    YGApplyLayoutToNodeHierarchy(self.argoNode);
+}
 // 视图是否为叶子
 - (BOOL)isLeaf{
     if (self.argoNode.childs.count == 0) {
@@ -494,7 +496,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return self.size;
 }
-
+- (void)applyLayoutAferCalculation{
+    if (self.layout) {
+        [self.layout applyLayoutAferCalculation];
+    }
+}
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
     if (self.layout) {
         self.size = [self.layout calculateLayoutWithSize:size];
@@ -529,8 +535,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (void)insertYGNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (!node) return;
-    YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
-    YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
+    if(!(YGNodeGetChild(self.layout.ygnode, index) ==  node.layout.ygnode)){
+        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+        YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
+    }
+   
 }
 
 
