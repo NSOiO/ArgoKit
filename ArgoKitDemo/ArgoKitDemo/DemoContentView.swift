@@ -12,13 +12,8 @@ import ArgoKit
 struct DemoContentView: View {
     var items: [String] {
         var temp = [String]()
-        for index in 100..<1000 {
-//            if (index > 1 && index < 3) {
-//                temp.append(String(index + 100000) + "ahahahahahahadasda")
-//            }else{
-                temp.append(String(index))
-//            }
-            
+        for index in 100..<10000 {
+            temp.append(String(index))
         }
         return temp
     }
@@ -27,10 +22,10 @@ struct DemoContentView: View {
     
     var body:View{
         
-        List(data: [items, items, items]) { item in
+        List(data: items) { item in
             HStack{
                 ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
-                Text(item as? String).backgroundColor(.purple).numberOfLines(0).width(20)
+                Text(item as? String).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
             }.height(100%).width(100%)
         }.width(100%).height(100%).backgroundColor(.red)
 //        .tableHeaderView { () -> View in

@@ -8,15 +8,14 @@
 import Foundation
 class ArgoKitTextNode: ArgoKitNode {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-//        if let view = self.view {
-//            return view.sizeThatFits(size)
-//        }
+        if let view = self.view {
+            return view.sizeThatFits(size)
+        }
         let lable:UILabel = UILabel()
         lable.text = self.text()
         lable.numberOfLines = self.numberOfLines()
         lable.font = self.font()
         let size:CGSize = lable.sizeThatFits(size)
-        print("sizeThatFits:height==",size.height)
         return size
     }
 }

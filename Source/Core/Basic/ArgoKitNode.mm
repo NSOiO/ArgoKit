@@ -281,20 +281,20 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
   } else {
     YGNodeSetMeasureFunc(node, NULL);
 
-    NSMutableArray<ArgoKitNode *> *subviewsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
+    NSMutableArray<ArgoKitNode *> *childsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
-          [subviewsToInclude addObject:node];
+          [childsToInclude addObject:node];
       }
     }
       
-    if (!YGNodeHasExactSameChildren(node, subviewsToInclude)) {
+    if (!YGNodeHasExactSameChildren(node, childsToInclude)) {
       YGRemoveAllChildren(node);
-      for (int i=0; i<subviewsToInclude.count; i++) {
-        YGNodeInsertChild(node, subviewsToInclude[i].layout.ygnode, i);
+      for (int i=0; i<childsToInclude.count; i++) {
+        YGNodeInsertChild(node, childsToInclude[i].layout.ygnode, i);
       }
     }
-    for (ArgoKitNode *const childNode in subviewsToInclude) {
+    for (ArgoKitNode *const childNode in childsToInclude) {
         YGAttachNodesFromNodeHierachy(childNode);
     }
   }
@@ -351,8 +351,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _frame = frame;
     _size = frame.size;
     _origin = frame.origin;
-    NSLog(@"frame.size.height == %f width = %f",frame.size.height,frame.size.width);
-    NSLog(@"frame.origin.x == %f y = %f",_origin.x,_origin.y);
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadBlock:^{
         if (!wealSelf.view) {

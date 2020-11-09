@@ -194,7 +194,6 @@ extension ArgoKitTableNode {
         let cacheKey = NSString(format: "cache_%d_%d", indexPath.section, indexPath.row)
         if let num:NSNumber =  self.dataSourceHelper.nodeCellCahe?.object(forKey: cacheKey){
             if !num.floatValue.isNaN {
-                print("num.floatValue",num.floatValue)
                 return CGFloat(num.floatValue)
             }
         }

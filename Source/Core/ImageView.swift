@@ -6,10 +6,16 @@
 //
 
 import Foundation
-
+class ArgoKitImageNode: ArgoKitNode {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let image = self.image()
+        let temp_size:CGSize = image?.size ?? CGSize.zero
+        return temp_size
+    }
+}
 public struct ImageView : View {
     
-    private var pNode : ArgoKitNode
+    private var pNode : ArgoKitImageNode
     
     public var body: View {
         self
@@ -56,9 +62,9 @@ public struct ImageView : View {
     }
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
-        pNode = ArgoKitNode(viewClass: UIImageView.self)
-        self.node?.width(point: image?.size.width ?? 0)
-        self.node?.height(point: image?.size.height ?? 0)
+        pNode = ArgoKitImageNode(viewClass: UIImageView.self)
+//        self.node?.width(point: image?.size.width ?? 0)
+//        self.node?.height(point: image?.size.height ?? 0)
         if let img = image {
             addAttribute(#selector(setter:UIImageView.image),img)
         }
@@ -89,8 +95,8 @@ extension ImageView {
     
     public func image(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.image),value)
-        self.node?.width(point: value?.size.width ?? 0)
-        self.node?.height(point: value?.size.height ?? 0)
+//        self.node?.width(point: value?.size.width ?? 0)
+//        self.node?.height(point: value?.size.height ?? 0)
         return self
     }
     

@@ -133,6 +133,7 @@ extension View{
         if selector == #selector(setter:UILabel.text) {
             isDirty_ = true
         }
+        
         if selector == #selector(setter:UILabel.attributedText) {
             isDirty_ = true
         }
@@ -141,9 +142,6 @@ extension View{
         }
         
         if selector == #selector(setter:UILabel.font) {
-            isDirty_ = true
-        }
-        if selector == #selector(setter:UILabel.numberOfLines) {
             isDirty_ = true
         }
         
