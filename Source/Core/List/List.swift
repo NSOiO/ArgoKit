@@ -36,7 +36,7 @@ public struct List : ScrollView {
         pNode.style = style ?? .plain
     }
     
-    public init(style: UITableView.Style? = .plain, @ArgoKitViewBuilder content: () -> View) {
+    public init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
@@ -44,10 +44,10 @@ public struct List : ScrollView {
         }
     }
 
-    public init(_ style: UITableView.Style? = .plain, data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
+    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T:ArgoKitModelProtocol{
         self.init(style: style)
         if (data.first as? Array<Any>) != nil {
-            self.pNode.dataSourceHelper.dataList = data as? [[Any]]
+            self.pNode.dataSourceHelper.dataList = data as? [[ArgoKitModelProtocol]]
         } else {
             self.pNode.dataSourceHelper.dataList = [data]
         }
@@ -193,13 +193,13 @@ extension List {
         return self
     }
     
-    public func sectionHeader(_ data: [Any], @ArgoKitViewBuilder headerContent: @escaping (Any) -> View) -> Self {
+    public func sectionHeader<T>(_ data: [T], @ArgoKitViewBuilder headerContent: @escaping (Any) -> View) -> Self where T:ArgoKitModelProtocol{
         self.pNode.sectionHeaderSourceHelper.dataList = [data]
         self.pNode.sectionHeaderSourceHelper.buildNodeFunc = headerContent
         return self
     }
     
-    public func sectionFooter(_ data: [Any], @ArgoKitViewBuilder footerContent: @escaping (Any) -> View) -> Self {
+    public func sectionFooter<T>(_ data: [T], @ArgoKitViewBuilder footerContent: @escaping (Any) -> View) -> Self where T:ArgoKitModelProtocol{
         self.pNode.sectionFooterSourceHelper.dataList = [data]
         self.pNode.sectionFooterSourceHelper.buildNodeFunc = footerContent
         return self
