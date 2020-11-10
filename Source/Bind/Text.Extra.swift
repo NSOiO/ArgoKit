@@ -17,6 +17,6 @@ extension Text {
     }
     
     public func text(_ property: Property<String>?)->Self{
-        return self.watch(property: property, f: self.text, key: #function)
+        return self.watch(property: property, function: self.text, key: #function)
     }
 }
