@@ -44,13 +44,15 @@ public struct List : ScrollView {
         }
     }
 
-    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T:ArgoKitModelProtocol{
+    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T : ArgoKitModelProtocol {
         self.init(style: style)
-        if (data.first as? Array<Any>) != nil {
-            self.pNode.dataSourceHelper.dataList = data as? [[ArgoKitModelProtocol]]
-        } else {
-            self.pNode.dataSourceHelper.dataList = [data]
-        }
+        self.pNode.dataSourceHelper.dataList = [data]
+        self.pNode.dataSourceHelper.buildNodeFunc = rowContent
+    }
+    
+    public init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T : ArgoKitModelProtocol {
+        self.init(style: style)
+        self.pNode.dataSourceHelper.dataList = sectionData
         self.pNode.dataSourceHelper.buildNodeFunc = rowContent
     }
 }
@@ -193,13 +195,13 @@ extension List {
         return self
     }
     
-    public func sectionHeader<T>(_ data: [T], @ArgoKitViewBuilder headerContent: @escaping (Any) -> View) -> Self where T:ArgoKitModelProtocol{
+    public func sectionHeader<T>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (Any) -> View) -> Self where T : ArgoKitModelProtocol {
         self.pNode.sectionHeaderSourceHelper.dataList = [data]
         self.pNode.sectionHeaderSourceHelper.buildNodeFunc = headerContent
         return self
     }
     
-    public func sectionFooter<T>(_ data: [T], @ArgoKitViewBuilder footerContent: @escaping (Any) -> View) -> Self where T:ArgoKitModelProtocol{
+    public func sectionFooter<T>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (Any) -> View) -> Self where T : ArgoKitModelProtocol {
         self.pNode.sectionFooterSourceHelper.dataList = [data]
         self.pNode.sectionFooterSourceHelper.buildNodeFunc = footerContent
         return self

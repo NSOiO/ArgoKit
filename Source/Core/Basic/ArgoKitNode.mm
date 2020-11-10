@@ -354,6 +354,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _size = view.bounds.size;
     _frame = view.frame;
     _bindProperties = [NSMutableDictionary new];
+    if (_childs.count) {
+        for (ArgoKitNode *child in _childs) {
+            if (child.view) {
+                [view addSubview:child.view];
+            }
+        }
+    }
 }
 
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
@@ -576,17 +583,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [_childs removeAllObjects];
     }
     YGNodeRemoveAllChildren(self.layout.ygnode);
-}
-- (NSString *)hierarchyKey {
-    if (!_childs.count) {
-        return NSStringFromClass(_viewClass) ? : @"";
-    }
-    NSMutableString *key = [NSMutableString string];
-    for (ArgoKitNode *child in _childs) {
-        [key appendString:[child hierarchyKey]];
-    }
-    [key appendString:NSStringFromClass(_viewClass) ? : @""];
-    return key.copy;
 }
 @end
 

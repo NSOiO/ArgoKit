@@ -8,13 +8,7 @@
 import Foundation
 
 class ArgoKitDataSourceHelper: NSObject {
-    
-    lazy var reuseIdCache: NSCache<NSString, NSString> = { () -> NSCache<NSString, NSString> in
-        let cahe = NSCache<NSString, NSString>()
-        cahe.name = "com.\(type(of: self).description()).reuseId.cache"
-        return cahe
-    }()
-  
+      
     lazy var nodeCache: NSCache<NSString, ArgoKitNode> = { () -> NSCache<NSString, ArgoKitNode> in
         let cahe = NSCache<NSString, ArgoKitNode>()
         cahe.name = "com.\(type(of: self).description()).node.cache"
@@ -75,13 +69,23 @@ extension ArgoKitDataSourceHelper {
     
     open func reuseIdForRow(_ row: Int, at section: Int) -> String? {
         
-        let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        if let resuseId = self.reuseIdCache.object(forKey: cacheKey) {
-            return String(resuseId)
-        } else if let node = self.nodeForRow(row, at: section) {
-            let resuseId = node.hierarchyKey()
-            self.reuseIdCache.setObject(resuseId as NSString, forKey: cacheKey)
-            return resuseId
+        if nodeList != nil {
+            if section < nodeList!.count
+                && row < nodeList![section].count {
+                if let node = nodeList![section][row] as? ArgoKitModelProtocol {
+                    return node.rowid
+                }
+            }
+            return nil
+        }
+        
+        if section >= dataList?.count ?? 0
+            || row >= dataList?[section].count ?? 0 {
+            return nil
+        }
+        
+        if let node = dataList![section][row] as? ArgoKitModelProtocol {
+            return node.rowid
         }
         return nil
     }
@@ -115,6 +119,31 @@ extension ArgoKitDataSourceHelper {
         return nil
     }
     
+    open func nodeForRowNoCache(_ row: Int, at section: Int) -> ArgoKitNode? {
+        
+        if nodeList != nil {
+            if section < nodeList!.count
+                && row < nodeList![section].count {
+                return nodeList![section][row]
+            }
+            return nil
+        }
+        
+        if section >= dataList?.count ?? 0
+            || row >= dataList?[section].count ?? 0 {
+            return nil
+        }
+        
+        if let view = self.buildNodeFunc?(self.dataList![section][row]) {
+            if let nodes = view.type.viewNodes() {
+                let contentNode = ArgoKitNode(viewClass: UIView.self)
+                contentNode.addChildNodes(nodes)
+                return contentNode
+            }
+        }
+        return nil
+    }
+    
     open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
         if let node = self.nodeForRow(row, at: section) {
             if node.size.width != maxWidth || node.size.height == 0 {
@@ -131,14 +160,12 @@ extension ArgoKitDataSourceHelper {
     func removeAllCache() {
         
         self.nodeCache.removeAllObjects()
-        self.reuseIdCache.removeAllObjects()
     }
     
     func removeCache(_ row: Int, at section: Int) {
         
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
         self.nodeCache.removeObject(forKey: cacheKey)
-        self.reuseIdCache.removeObject(forKey: cacheKey)
     }
     
     func deleteRow(_ row: Int, at section: Int) {

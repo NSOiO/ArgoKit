@@ -127,7 +127,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index;
 - (void)removeFromSuperNode;
 - (void)removeAllChildNodes;
-- (NSString *)hierarchyKey;
 @end
 
 

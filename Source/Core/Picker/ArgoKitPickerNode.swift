@@ -10,21 +10,41 @@ import Foundation
 class ArgoKitPickerRowView: UIView {
     
     var contentNode: ArgoKitNode?
+    var contentView: UIView?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView = UIView(frame: self.bounds)
+        contentView?.backgroundColor = .red
+        addSubview(contentView!)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        contentView = UIView(frame: self.bounds)
+        contentView?.backgroundColor = .red
+        addSubview(contentView!)
+    }
     
     override var frame: CGRect {
         didSet {
-            self.contentNode?.width(point: frame.width)
-            self.contentNode?.height(point: frame.height)
+            contentView?.frame = self.bounds
         }
     }
     
     public func linkCellNode(_ node: ArgoKitNode) {
-
-        if ((self.contentNode?.childs?.count) != 0) {
-            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: [node]);
+        if node.size.width == 0 || node.size.height == 0 {
+            node.calculateLayout(size: CGSize(width: node.width(), height: node.height()))
+        }
+        if self.contentNode != nil {
+            if node.frame.equalTo(.zero) {
+                node.applyLayoutAferCalculationForReused()
+            }
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
         } else {
-            self.contentNode?.addChildNode(node)
-            self.contentNode?.applyLayout(size: CGSize(width: node.width(), height: node.height()))
+            node.bindView(self.contentView!)
+            self.contentNode = node
+            self.contentNode?.applyLayoutAferCalculation()
         }
     }
 }
@@ -74,26 +94,28 @@ extension ArgoKitPickerNode {
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        if let width = self.dataSourceHelper.nodeForRow(0, at: component)?.width() {
-            if !width.isNaN {
-                return width
+        if let node = self.dataSourceHelper.nodeForRow(0, at: component) {
+            if node.size.width == 0 || node.size.height == 0 {
+                node.calculateLayout(size: CGSize(width: CGFloat.nan, height: CGFloat.nan))
             }
+            return node.size.width
         }
         return 0
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        if let height = self.dataSourceHelper.nodeForRow(0, at: component)?.height() {
-            if !height.isNaN {
-                return height
+        if let node = self.dataSourceHelper.nodeForRow(0, at: component) {
+            if node.size.width == 0 || node.size.height == 0 {
+                node.calculateLayout(size: CGSize(width: CGFloat.nan, height: CGFloat.nan))
             }
+            return node.size.height
         }
         return 0
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        if let node = self.dataSourceHelper.nodeForRow(row, at: component) {
+        // TODO: 有bug
+        if let node = self.dataSourceHelper.nodeForRowNoCache(row, at: component) {
             let rowView = view as? ArgoKitPickerRowView ?? ArgoKitPickerRowView()
             rowView.linkCellNode(node)
             return rowView

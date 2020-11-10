@@ -29,15 +29,7 @@ public struct PickerView : View {
         pNode = ArgoKitPickerNode(view: pickerView)
     }
     
-    public init(@ArgoKitViewBuilder content: () -> View) {
-        self.init()
-        let container = content()
-        if let nodes = container.type.viewNodes() {
-            self.pNode.dataSourceHelper.nodeList = [nodes]
-        }
-    }
-
-    public init<T>(_ data: [T], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) where T:ArgoKitModelProtocol{
+    public init(_ data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
         self.init()
         if (data.first as? Array<Any>) != nil {
             self.pNode.dataSourceHelper.dataList = data as? [[ArgoKitModelProtocol]]
