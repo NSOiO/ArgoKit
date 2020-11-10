@@ -32,7 +32,7 @@ class ArgoKitDataSourceHelper: NSObject {
     public var nodeList: [[ArgoKitNode]]?
     
     public var dataList: [[ArgoKitModelProtocol]]?
-    public var buildNodeFunc: ((Any)->View)?
+    public var buildNodeFunc: ((ArgoKitModelProtocol)->View)?
 }
 
 extension ArgoKitDataSourceHelper {

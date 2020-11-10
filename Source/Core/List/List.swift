@@ -44,7 +44,7 @@ public struct List : ScrollView {
         }
     }
 
-    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T:ArgoKitModelProtocol{
+    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (ArgoKitModelProtocol) -> View) where T:ArgoKitModelProtocol{
         self.init(style: style)
         if (data.first as? Array<Any>) != nil {
             self.pNode.dataSourceHelper.dataList = data as? [[ArgoKitModelProtocol]]
