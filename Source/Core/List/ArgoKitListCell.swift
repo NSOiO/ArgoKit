@@ -29,6 +29,7 @@ class ArgoKitListCell: UITableViewCell {
     
     public func linkCellNode(_ node: ArgoKitNode) {
         if self.contentNode != nil {
+            node.applyLayoutAferCalculationNoView()
             ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
         } else {
             node.bindView(self.contentView)

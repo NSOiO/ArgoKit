@@ -24,7 +24,7 @@ struct DemoContentView: View {
         
         List(data: items) { item in
             HStack{
-                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+//                ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
                 Text(item as? String).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
             }.height(100%).width(100%)
         }.width(100%).height(100%).backgroundColor(.red)

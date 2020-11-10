@@ -108,6 +108,10 @@ static YGConfigRef globalConfig;
 - (void)applyLayoutAferCalculation{
     YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
+- (void)applyLayoutAferCalculationNoView{
+    self.argoNode.isReused = YES;
+    YGApplyLayoutToNodeHierarchy(self.argoNode);
+}
 // 视图是否为叶子
 - (BOOL)isLeaf{
     if (self.argoNode.childs.count == 0) {
@@ -206,9 +210,13 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
   }
   if (![layout isLeaf]) {
     for (NSUInteger i=0; i<node.childs.count; i++) {
+        ArgoKitNode *chiledNode = node.childs[i];
+        chiledNode.isReused = YES;
         YGApplyLayoutToNodeHierarchy(node.childs[i]);
+        chiledNode.isReused = NO;
     }
   }
+  node.isReused = NO;
 }
 
 static CGFloat YGSanitizeMeasurement(
@@ -502,6 +510,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)applyLayoutAferCalculation{
     if (self.layout) {
         [self.layout applyLayoutAferCalculation];
+    }
+}
+- (void)applyLayoutAferCalculationNoView{
+    if (self.layout) {
+        [self.layout applyLayoutAferCalculationNoView];
     }
 }
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
