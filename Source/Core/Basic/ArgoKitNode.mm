@@ -58,7 +58,6 @@
 @property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
 
-@property (nonatomic, assign) CGRect frame;
 @property (nonatomic,assign)BOOL isUIView;
 @property (nonatomic, assign) BOOL isReused;
 //action 相关
@@ -194,7 +193,7 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
     topLeft.y + YGNodeLayoutGetHeight(ygnode),
   };
 
-  const CGPoint origin = node.resetOrigin ? CGPointZero:node.origin;
+  const CGPoint origin = node.resetOrigin ? CGPointZero:node.frame.origin;
   CGRect frame = (CGRect) {
       .origin = {
         .x = YGRoundPixelValue(topLeft.x + origin.x),
@@ -341,7 +340,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         _resetOrigin = YES;
         _isEnabled = YES;
         _isUIView = [viewClass isMemberOfClass:[UIView class]];
-        _origin = _frame.origin;
         _bindProperties = [NSMutableDictionary new];
     }
     return self;
@@ -355,7 +353,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _isUIView = [view isMemberOfClass:[UIView class]];
     _size = view.bounds.size;
     _frame = view.frame;
-    _origin = _frame.origin;
     _bindProperties = [NSMutableDictionary new];
 }
 
@@ -372,7 +369,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     _size = frame.size;
-    _origin = frame.origin;
     if (_isReused) {
         return;
     }
@@ -517,10 +513,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 - (void)applyLayoutAferCalculationForReused{
-    if (CGRectEqualToRect(self.frame, CGRectZero)) {
-        if (self.layout) {
-            [self.layout applyLayoutAferCalculationForReused];
-        }
+    if (self.layout) {
+        [self.layout applyLayoutAferCalculationForReused];
     }
 }
 - (CGSize)calculateLayoutWithSize:(CGSize)size{

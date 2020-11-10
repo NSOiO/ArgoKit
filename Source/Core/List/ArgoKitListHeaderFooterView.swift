@@ -13,7 +13,9 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
         
     public func linkCellNode(_ node: ArgoKitNode) {
         if self.contentNode != nil {
-            node.applyLayoutAferCalculationForReused()
+            if node.frame.equalTo(.zero) {
+                node.applyLayoutAferCalculationForReused()
+            }
             ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
         } else {
             node.bindView(self.contentView)

@@ -40,8 +40,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @property (nonatomic, assign)Class viewClass;
 
 /* frame 相关 */
-@property (nonatomic, assign) CGSize size;
-@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGRect frame; // 调用 applyLayout 相关方法后会更新 frame, 更新 frame 同时会更新 size
+@property (nonatomic, assign) CGSize size; // 调用 [ArgoKitNode calculateLayoutWithSize:] 后会更新 size
 /**
  Returns the number of children that are using Flexbox.
  */
