@@ -100,6 +100,16 @@ extension List {
         return self
     }
     
+    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) -> Self {
+        pNode.reloadSections(sections, with: animation)
+        return self
+    }
+
+    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self {
+        pNode.reloadRows(at: indexPaths, with: animation)
+        return self
+    }
+    
     public func setEditing(_ editing: Bool, animated: Bool) -> Self {
         addAttribute(#selector(UITableView.setEditing(_:animated:)), editing, animated)
         return self

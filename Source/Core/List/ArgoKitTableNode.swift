@@ -59,6 +59,22 @@ extension ArgoKitTableNode {
         self.dataSourceHelper.removeAllCache()
         self.tableView?.reloadData()
     }
+    
+    open func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        for section in sections {
+            self.dataSourceHelper.removeCache(at: section)
+            self.sectionHeaderSourceHelper.removeCache(at: section)
+            self.sectionFooterSourceHelper.removeCache(at: section)
+        }
+        self.tableView?.reloadSections(sections, with: animation)
+    }
+
+    open func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        for indexPath in indexPaths {
+            self.dataSourceHelper.removeCache(indexPath.row, at: indexPath.section)
+        }
+        self.tableView?.reloadRows(at: indexPaths, with: animation)
+    }
 }
 
 extension ArgoKitTableNode {

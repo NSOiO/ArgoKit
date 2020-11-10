@@ -159,10 +159,56 @@ extension ArgoKitDataSourceHelper {
     
     func removeAllCache() {
         
+        if nodeList != nil {
+            for section in nodeList! {
+                for node in section {
+                    node.size = .zero
+                    node.markDirty()
+                }
+            }
+            return
+        }
+        
         self.nodeCache.removeAllObjects()
     }
     
+    func removeCache(at section: Int) {
+        
+        if nodeList != nil {
+            if section < nodeList!.count {
+                let nodeSection = nodeList![section]
+                for node in nodeSection {
+                    node.size = .zero
+                    node.markDirty()
+                }
+            }
+            return
+        }
+        
+        if section >= dataList?.count ?? 0 {
+            return
+        }
+    
+        let itemSection = dataList![section]
+        if itemSection.count > 0 {
+            for row in 0..<itemSection.count {
+                let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
+                self.nodeCache.removeObject(forKey: cacheKey)
+            }
+        }
+    }
+    
     func removeCache(_ row: Int, at section: Int) {
+        
+        if nodeList != nil {
+            if section < nodeList!.count
+                && row < nodeList![section].count {
+                let node = nodeList![section][row]
+                node.size = .zero
+                node.markDirty()
+            }
+            return
+        }
         
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
         self.nodeCache.removeObject(forKey: cacheKey)
@@ -173,7 +219,6 @@ extension ArgoKitDataSourceHelper {
         if nodeList != nil {
             if section < nodeList!.count
                 && row < nodeList![section].count {
-                removeCache(row, at: section)
                 nodeList![section].remove(at: row)
             }
             return
