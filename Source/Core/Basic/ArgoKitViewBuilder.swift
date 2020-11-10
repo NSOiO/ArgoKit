@@ -14,6 +14,25 @@ public struct ArgoKitViewBuilder {
     }
 }
 
+@_functionBuilder
+public struct ArgoKitListBuilder {
+    public static func buildBlock(_ items:View...) -> View{
+        return ArgoNodeContainer(withNodes: items);
+    }
+    public static func buildDo(_ value: View) -> View{
+        return value
+    }
+    public static func buildIf(_ view: View?) -> View{
+        view ?? ViewEmpty()
+    }
+    public static func buildEither(first:View) -> View{
+      return first
+    }
+    public static func buildEither(second: View) ->View {
+      return second
+    }
+}
+
 public struct ArgoNodeContainer: View {
     public var body: View{
         ViewEmpty()
