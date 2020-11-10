@@ -20,12 +20,6 @@ class ArgoKitDataSourceHelper: NSObject {
         cahe.name = "com.\(type(of: self).description()).node.cache"
         return cahe
     }()
-
-    lazy var cellHeightCache: NSCache<NSString, NSNumber> = { () -> NSCache<NSString, NSNumber> in
-        let cahe = NSCache<NSString, NSNumber>()
-        cahe.name = "com.\(type(of: self).description()).cellHeight.cache"
-        return cahe
-    }()
     
     lazy var registedReuseIdSet = NSMutableSet()
     
@@ -65,7 +59,7 @@ extension ArgoKitDataSourceHelper {
             if section < nodeList!.count
                 && row < nodeList![section].count {
                 let node = nodeList![section][row]
-                return String(ObjectIdentifier(node).hashValue)
+                return String("\(node)".hashValue)
             }
             return "defualt"
         }
@@ -122,15 +116,11 @@ extension ArgoKitDataSourceHelper {
     }
     
     open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
-        
-        let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        if let height = self.cellHeightCache.object(forKey: cacheKey) {
-            return CGFloat(truncating: height)
-        } else if let node = self.nodeForRow(row, at: section) {
-            node.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
-            let height = node.size.height
-            self.cellHeightCache.setObject(NSNumber(value: height.native), forKey: cacheKey)
-            return height
+        if let node = self.nodeForRow(row, at: section) {
+            if node.size.width != maxWidth || node.size.height == 0 {
+                node.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
+            }
+            return node.size.height
         }
         return 0.0
     }
@@ -142,7 +132,6 @@ extension ArgoKitDataSourceHelper {
         
         self.nodeCache.removeAllObjects()
         self.reuseIdCache.removeAllObjects()
-        self.cellHeightCache.removeAllObjects()
     }
     
     func removeCache(_ row: Int, at section: Int) {
@@ -150,7 +139,6 @@ extension ArgoKitDataSourceHelper {
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
         self.nodeCache.removeObject(forKey: cacheKey)
         self.reuseIdCache.removeObject(forKey: cacheKey)
-        self.cellHeightCache.removeObject(forKey: cacheKey)
     }
     
     func deleteRow(_ row: Int, at section: Int) {

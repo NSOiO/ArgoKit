@@ -20,16 +20,9 @@ class ArgoKitListCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    override var frame: CGRect {
-        didSet {
-            self.contentNode?.width(point: frame.width)
-            self.contentNode?.height(point: frame.height)
-        }
-    }
-    
     public func linkCellNode(_ node: ArgoKitNode) {
         if self.contentNode != nil {
-            node.applyLayoutAferCalculationNoView()
+            node.applyLayoutAferCalculationForReused()
             ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
         } else {
             node.bindView(self.contentView)

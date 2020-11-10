@@ -60,10 +60,11 @@
 
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic,assign)BOOL isUIView;
-
+@property (nonatomic, assign) BOOL isReused;
 //action 相关
 @property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 @property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
+
 @end
 
 
@@ -108,7 +109,7 @@ static YGConfigRef globalConfig;
 - (void)applyLayoutAferCalculation{
     YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
-- (void)applyLayoutAferCalculationNoView{
+- (void)applyLayoutAferCalculationForReused{
     self.argoNode.isReused = YES;
     YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
@@ -211,7 +212,7 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
   if (![layout isLeaf]) {
     for (NSUInteger i=0; i<node.childs.count; i++) {
         ArgoKitNode *chiledNode = node.childs[i];
-        chiledNode.isReused = YES;
+        chiledNode.isReused = node.isReused;
         YGApplyLayoutToNodeHierarchy(node.childs[i]);
         chiledNode.isReused = NO;
     }
@@ -372,6 +373,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _frame = frame;
     _size = frame.size;
     _origin = frame.origin;
+    if (_isReused) {
+        return;
+    }
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
@@ -512,9 +516,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self.layout applyLayoutAferCalculation];
     }
 }
-- (void)applyLayoutAferCalculationNoView{
-    if (self.layout) {
-        [self.layout applyLayoutAferCalculationNoView];
+- (void)applyLayoutAferCalculationForReused{
+    if (CGRectEqualToRect(self.frame, CGRectZero)) {
+        if (self.layout) {
+            [self.layout applyLayoutAferCalculationForReused];
+        }
     }
 }
 - (CGSize)calculateLayoutWithSize:(CGSize)size{

@@ -34,7 +34,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 //链接次node被复用到的node节点
 @property (nonatomic, weak,nullable)ArgoKitNode *linkNode;
 @property (nonatomic, weak,nullable)ArgoKitNode *revLinkNode;
-@property (nonatomic, assign)BOOL isReused;
 /* 节点持有的视图 */
 @property (nonatomic, strong, readonly, nullable) UIView *view;
 /* 节点持有的视图 */
@@ -117,9 +116,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
  update the frames of the views in the hierarchy with the results of Calculation.
  */
 - (void)applyLayoutAferCalculation;
+- (void)applyLayoutAferCalculationForReused;
 
-
-- (void)applyLayoutAferCalculationNoView;
 @end
 
 
