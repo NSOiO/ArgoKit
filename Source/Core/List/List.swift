@@ -44,16 +44,20 @@ public struct List : ScrollView {
         }
     }
 
-    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T : ArgoKitModelProtocol {
+    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitModelProtocol {
         self.init(style: style)
         self.pNode.dataSourceHelper.dataList = [data]
-        self.pNode.dataSourceHelper.buildNodeFunc = rowContent
+        self.pNode.dataSourceHelper.buildNodeFunc = { item in
+            return rowContent(item as! T)
+        }
     }
     
-    public init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) where T : ArgoKitModelProtocol {
+    public init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitModelProtocol {
         self.init(style: style)
         self.pNode.dataSourceHelper.dataList = sectionData
-        self.pNode.dataSourceHelper.buildNodeFunc = rowContent
+        self.pNode.dataSourceHelper.buildNodeFunc = { item in
+            return rowContent(item as! T)
+        }
     }
 }
 
@@ -205,15 +209,19 @@ extension List {
         return self
     }
     
-    public func sectionHeader<T>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (Any) -> View) -> Self where T : ArgoKitModelProtocol {
+    public func sectionHeader<T>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self where T : ArgoKitModelProtocol {
         self.pNode.sectionHeaderSourceHelper.dataList = [data]
-        self.pNode.sectionHeaderSourceHelper.buildNodeFunc = headerContent
+        self.pNode.sectionHeaderSourceHelper.buildNodeFunc = { item in
+            return headerContent(item as! T)
+        }
         return self
     }
     
-    public func sectionFooter<T>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (Any) -> View) -> Self where T : ArgoKitModelProtocol {
+    public func sectionFooter<T>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self where T : ArgoKitModelProtocol {
         self.pNode.sectionFooterSourceHelper.dataList = [data]
-        self.pNode.sectionFooterSourceHelper.buildNodeFunc = footerContent
+        self.pNode.sectionFooterSourceHelper.buildNodeFunc = { item in
+            return footerContent(item as! T)
+        }
         return self
     }
     

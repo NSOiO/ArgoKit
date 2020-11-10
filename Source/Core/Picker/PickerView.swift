@@ -32,7 +32,7 @@ public struct PickerView : View {
     public init(_ data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
         self.init()
         if (data.first as? Array<Any>) != nil {
-            self.pNode.dataSourceHelper.dataList = data as? [[ArgoKitModelProtocol]]
+            self.pNode.dataSourceHelper.dataList = data as? [[Any]]
         } else {
             self.pNode.dataSourceHelper.dataList = [data]
         }

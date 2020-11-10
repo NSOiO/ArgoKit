@@ -42,7 +42,7 @@ struct DemoContentView: View {
     var body:View{
         
         List(data: items) { item in
-            if (item as! ArgoKitItem).rowid == "15"{
+            if item.rowid == "15"{
                 HStack{
                     ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
                     Text((item as! ArgoKitItem).text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10)
