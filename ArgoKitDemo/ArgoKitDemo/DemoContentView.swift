@@ -10,14 +10,17 @@ import UIKit
 import ArgoKit
 
 struct ArgoKitItem:ArgoKitIdentifiable {
-    var rowid: String
+    var identifier: String
+    var reuseIdentifier: String
     var text:String
     init() {
-        self.rowid = "ArgoKitItem"
+        self.reuseIdentifier = "ArgoKitItem"
+        self.identifier = "identifier"
         self.text = ""
     }
     init(rowid:String,text:String) {
-        self.rowid = rowid
+        self.reuseIdentifier = rowid
+        self.identifier = "\(rowid)\(text)"
         self.text = text
     }
 }
@@ -28,10 +31,11 @@ struct DemoContentView: View {
             var item:ArgoKitItem = ArgoKitItem()
             item.text = String(index)
             if index == 15 {
-                item.rowid = "15"
+                item.reuseIdentifier = "15"
             }else{
-                item.rowid = "200"
+                item.reuseIdentifier = "200"
             }
+            item.identifier = "\(index)"
             temp.append(item)
         }
         return temp
@@ -42,14 +46,14 @@ struct DemoContentView: View {
     var body:View{
         
         List(data: items) { item in
-            if item.rowid == "15"{
+            if item.reuseIdentifier == "15"{
                 HStack{
                     ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
-                    Text((item as! ArgoKitItem).text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10)
+                    Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10)
                 }.height(100%).width(100%)
             }else{
                 HStack{
-                    Text((item as! ArgoKitItem).text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
+                    Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
                     ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
                 }.height(100%).width(100%)
             }
@@ -60,9 +64,9 @@ struct DemoContentView: View {
         }.tableFooterView { () -> View in
             Text("TableFooter").backgroundColor(.yellow).height(100)
         }.sectionHeader([ArgoKitItem(rowid: "sectionHeader", text: "sectionHeader")]) { (item) -> View in
-            Text((item as! ArgoKitItem).text).backgroundColor(.yellow).width(100%).height(44)
+            Text(item.text).backgroundColor(.yellow).width(100%).height(44)
         }.sectionFooter([ArgoKitItem(rowid: "SectionFooter", text: "sectionHeader")]) { (item) -> View in
-            Text((item as! ArgoKitItem).text).backgroundColor(.yellow).width(200%).height(44)
+            Text(item.text).backgroundColor(.yellow).width(200%).height(44)
         }
         
     }

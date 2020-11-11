@@ -52,8 +52,12 @@ extension ArgoKitDataSourceHelper {
         if nodeList != nil {
             if section < nodeList!.count
                 && row < nodeList![section].count {
-                let node = nodeList![section][row]
-                return String("\(node)".hashValue)
+                if let node = nodeList![section][row] as? ArgoKitIdentifiable {
+                    return node.identifier
+                } else {
+                    let node = nodeList![section][row]
+                    return String("\(node)".hashValue)
+                }
             }
             return "defualt"
         }
@@ -63,8 +67,12 @@ extension ArgoKitDataSourceHelper {
             return "defualt"
         }
         
-        let node = self.dataList![section][row]
-        return String("\(node)".hashValue)
+        if let item = dataList![section][row] as? ArgoKitIdentifiable {
+            return item.identifier
+        }
+        
+        let item = dataList![section][row]
+        return String("\(item)".hashValue)
     }
     
     open func reuseIdForRow(_ row: Int, at section: Int) -> String? {
@@ -73,7 +81,7 @@ extension ArgoKitDataSourceHelper {
             if section < nodeList!.count
                 && row < nodeList![section].count {
                 if let node = nodeList![section][row] as? ArgoKitIdentifiable {
-                    return node.rowid
+                    return node.reuseIdentifier
                 }
             }
             return nil
@@ -84,8 +92,8 @@ extension ArgoKitDataSourceHelper {
             return nil
         }
         
-        if let node = dataList![section][row] as? ArgoKitIdentifiable {
-            return node.rowid
+        if let item = dataList![section][row] as? ArgoKitIdentifiable {
+            return item.reuseIdentifier
         }
         return nil
     }
