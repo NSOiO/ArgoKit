@@ -27,7 +27,8 @@ extension View {
         }
     }
     */
-    func watch<R: View, V>(property: Property<V>?, function: @escaping (V?) -> R, key: String, triggerImmediately: Bool = true) -> Self{
+    
+    func watch<R: View, V>(property: Property<V?>?, function: @escaping (V?) -> R, key: String, triggerImmediately: Bool = true) -> Self{
         if let pro = property {
             if triggerImmediately {
                 _ = function(pro.wrappedValue)
@@ -43,20 +44,12 @@ extension View {
     }
     
     func watch<R: View, V>(property: Property<V>?, function: @escaping (V) -> R, key: String, triggerImmediately: Bool = true) -> Self{
-//        if triggerImmediately {
-//            _ = function(property.wrappedValue)
-//        }
-//        self.p_watch(property: property, function: function, key: key)
-//        return self
         if let pro = property {
             if triggerImmediately {
                 _ = function(pro.wrappedValue)
             }
             self.p_watch(property: pro, function: function, key: key)
         } else {
-//            if triggerImmediately {
-//                _ = function(nil)
-//            }
             self.p_unwatch(key: key)
         }
         return self
