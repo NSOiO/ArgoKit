@@ -18,7 +18,7 @@ public struct ImageView : View {
     private var pNode : ArgoKitImageNode
     
     public var body: View {
-        self
+        ViewEmpty()
     }
     
     public var type: ArgoKitNodeType {

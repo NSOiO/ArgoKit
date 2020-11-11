@@ -12,7 +12,7 @@ public struct ProgressView : View {
     private var pNode : ArgoKitNode
     
     public var body: View {
-        self
+        ViewEmpty()
     }
     
     public var type: ArgoKitNodeType {

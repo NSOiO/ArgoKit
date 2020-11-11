@@ -77,7 +77,7 @@ open class UIHostingController:UIViewController{
         self.view.backgroundColor = .white;
         
         rootView = RooView(self.view){
-            rootView_.body
+            rootView_!
         }.isUserInteractionEnabled(true)
         .tapAction {[weak self] in
             let viewContraller:UIHostingController = UIHostingController(rootView: self!.rootView_)

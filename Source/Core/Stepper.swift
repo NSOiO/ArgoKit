@@ -8,7 +8,7 @@
 import Foundation
 public struct Stepper:View{
     public var body: View{
-        self
+        ViewEmpty()
     }
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{

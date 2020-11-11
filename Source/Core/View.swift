@@ -50,7 +50,7 @@ public protocol View {
 
 public extension View{
     var type: ArgoKitNodeType{.single(ArgoKitNode(view:UIView()))}
-    var node:ArgoKitNode?{type.viewNode()}
+    var node:ArgoKitNode?{nil}
 }
 
 extension View{

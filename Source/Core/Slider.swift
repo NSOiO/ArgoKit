@@ -8,7 +8,7 @@
 import Foundation
 public struct Slider:View{
     public var body: View{
-        self
+        ViewEmpty()
     }
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{

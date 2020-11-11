@@ -8,7 +8,7 @@
 import Foundation
 public struct BlurEffectView:View{
     public var body: View{
-        self
+        ViewEmpty()
     }
     private var pEffectView:UIVisualEffectView
     private var pNode:ArgoKitNode

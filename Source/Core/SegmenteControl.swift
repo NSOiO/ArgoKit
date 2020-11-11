@@ -8,7 +8,7 @@
 import Foundation
 public struct SegmenteControl:View{
     public var body: View{
-        self
+        ViewEmpty()
     }
     private let pSegment:UISegmentedControl
     private let pNode:ArgoKitNode

@@ -9,7 +9,7 @@ import UIKit
 
 public struct VStack:View {
     public var body: View{
-        self
+        ViewEmpty()
     }
     private var pNode:ArgoKitNode
     public var node: ArgoKitNode?{

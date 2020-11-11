@@ -13,7 +13,7 @@ public struct PickerView : View {
     private var pNode : ArgoKitPickerNode
     
     public var body: View {
-        self
+        ViewEmpty()
     }
     
     public var type: ArgoKitNodeType {

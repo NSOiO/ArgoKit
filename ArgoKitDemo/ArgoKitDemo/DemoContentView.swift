@@ -40,11 +40,8 @@ struct DemoContentView: View {
         }
         return temp
     }
-
-    let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     
     var body:View{
-        
         List(data: items) { item in
             if item.reuseIdentifier == "15"{
                 HStack{

@@ -10,14 +10,38 @@ import UIKit
 @_functionBuilder
 public struct ArgoKitViewBuilder {
     public static func buildBlock(_ items:View...) -> View{
-        return ArgoNodeContainer(withNodes: items);
+        var results = [View]()
+         for item in items {
+            if item is ArgoNodeContainer{
+                results.append(item)
+                continue
+            }
+             if (item.node == nil) {
+                 results.append(item.body)
+             }else{
+                 results.append(item)
+             }
+         }
+        return ArgoNodeContainer(withNodes: results);
     }
 }
 
 @_functionBuilder
 public struct ArgoKitListBuilder {
     public static func buildBlock(_ items:View...) -> View{
-        return ArgoNodeContainer(withNodes: items);
+        var results = [View]()
+         for item in items {
+            if item is ArgoNodeContainer{
+                results.append(item)
+                continue
+            }
+             if (item.node == nil) {
+                results.append(item.body)
+             }else{
+                 results.append(item)
+             }
+         }
+        return ArgoNodeContainer(withNodes: results);
     }
     public static func buildDo(_ value: View) -> View{
         return value
@@ -72,7 +96,7 @@ public struct ArgoNodeContainer: View {
 
 public class ViewEmpty: View {
     public var body: View{
-        self
+        ViewEmpty()
     }
     public var type: ArgoKitNodeType{
         .empty

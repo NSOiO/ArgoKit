@@ -21,7 +21,7 @@ class ArgoKitTextNode: ArgoKitNode {
 }
 public struct Text:View {
     public var body: View{
-        self
+        ViewEmpty()
     }
     private let pNode:ArgoKitTextNode
     public var node: ArgoKitNode?{

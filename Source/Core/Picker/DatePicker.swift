@@ -8,7 +8,7 @@
 import Foundation
 public struct DatePicker:View{
     public var body: View{
-        self
+        ViewEmpty()
     }
     private let pDatePicker:UIDatePicker
     private let pNode:ArgoKitNode

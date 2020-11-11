@@ -12,7 +12,7 @@ public struct TextView : ScrollView {
     private var pNode : ArgoKitNode
     
     public var body: View {
-        self
+        ViewEmpty()
     }
     
     public var scrollView: UIScrollView? {
