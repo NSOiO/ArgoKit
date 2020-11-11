@@ -24,6 +24,20 @@ struct ArgoKitItem:ArgoKitIdentifiable {
         self.text = text
     }
 }
+struct row: View{
+    var pNode = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode?{
+        pNode
+    }
+    var item: ArgoKitItem
+    var body:View{
+        HStack{
+            ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+            Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10)
+        }.height(100%).width(100%)
+    }
+    
+}
 struct DemoContentView: View {
     var items: [ArgoKitItem] {
         var temp = [ArgoKitItem]()
@@ -40,20 +54,23 @@ struct DemoContentView: View {
         }
         return temp
     }
+    var pNode = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode?{
+        pNode
+    }
     
     var body:View{
+           ImageView().image(UIImage(named: "turtlerock")).backgroundColor(.orange)
         List(data: items) { item in
-            if item.reuseIdentifier == "15"{
-                HStack{
-                    ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
-                    Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10)
-                }.height(100%).width(100%)
-            }else{
-                HStack{
-                    Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
-                    ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
-                }.height(100%).width(100%)
-            }
+            row(item: item).padding(edge: .left, value: 10)
+//            if item.reuseIdentifier == "15"{
+//               row(item: item)
+//            }else{
+//                HStack{
+//                    Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
+//                    ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+//                }.height(100%).width(100%)
+//            }
 
         }.width(100%).height(100%).backgroundColor(.red)
         .tableHeaderView { () -> View in
@@ -65,6 +82,6 @@ struct DemoContentView: View {
         }.sectionFooter([ArgoKitItem(rowid: "SectionFooter", text: "sectionHeader")]) { (item) -> View in
             Text(item.text).backgroundColor(.yellow).width(200%).height(44)
         }
-        
+//
     }
 }

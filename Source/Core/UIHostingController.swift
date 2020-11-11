@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RooView:View {
+struct HostView:View {
     var body: View{
         self
     }
@@ -27,8 +27,7 @@ struct RooView:View {
     
     init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
         pView = view
-        weak var weakView = view
-        pNode = ArgoKitNode(view: weakView ?? view);
+        pNode = ArgoKitNode(view:view);
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
@@ -71,17 +70,17 @@ open class UIHostingController:UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
 
-    var rootView:RooView?
+    var rootView:HostView?
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
         
-        rootView = RooView(self.view){
-            rootView_!
+        rootView = HostView(self.view){
+            rootView_!.backgroundColor(.red).width(100%).height(100%)
         }.isUserInteractionEnabled(true)
         .tapAction {[weak self] in
-            let viewContraller:UIHostingController = UIHostingController(rootView: self!.rootView_)
-            self?.navigationController?.pushViewController(viewContraller, animated: true)
+//            let viewContraller:UIHostingController = UIHostingController(rootView: self!.rootView_)
+//            self?.navigationController?.pushViewController(viewContraller, animated: true)
         }
         
         let _ = rootView?.applyLayout()

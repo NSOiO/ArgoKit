@@ -19,8 +19,12 @@ var model:DemoModel1 = DemoModel1()
 var text1:Text?
 var stack1:HStack?
 struct Demo1ContentView:View {
+    var pNode = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode?{
+        pNode
+    }
+    
     let items = ["查查","cscs","122e"]
-    var node:ArgoKitNode!
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     var hstack = HStack{
            ImageView("turtlerock")

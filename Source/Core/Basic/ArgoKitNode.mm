@@ -534,15 +534,18 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode(Hierarchy)
 - (void)addChildNode:(ArgoKitNode *)node{
-    if (node) {
-        node.parentNode = self;
-        if (node.view) {
-            [self.view addSubview:node.view];
-        }
-        [self.childs addObject:node];
-        
-        [self insertYGNode:node atIndex:YGNodeGetChildCount(self.layout.ygnode)];
+    if (!node) {
+        return;
     }
+    if ([self.childs containsObject:node]) {
+        [node removeFromSuperNode];
+    }
+    node.parentNode = self;
+    [self.childs addObject:node];
+    if (node.view) {
+        [self.view addSubview:node.view];
+    }
+    [self insertYGNode:node atIndex:YGNodeGetChildCount(self.layout.ygnode)];
 }
 - (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes {
     for (ArgoKitNode *node in nodes) {
@@ -550,15 +553,22 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
-    if (node) {
-        [self.childs insertObject:node atIndex:index];
-        [self insertYGNode:node atIndex:index];
+    if (!node) {
+        return;
+    }
+    if ([self.childs containsObject:node]) {
+        return;
+    }
+    [self.childs insertObject:node atIndex:index];
+    [self insertYGNode:node atIndex:index];
+    if (node.view) {
+        [self.view insertSubview:node.view atIndex:index];
     }
 }
 
 - (void)insertYGNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (!node) return;
-    if(!(YGNodeGetChild(self.layout.ygnode, index) ==  node.layout.ygnode)){
+    if(!(YGNodeGetChild(self.layout.ygnode, (int)index) ==  node.layout.ygnode)){
         YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
         YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
     }

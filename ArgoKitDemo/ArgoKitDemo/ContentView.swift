@@ -14,6 +14,10 @@ struct TestModel {
 }
 
 struct ContentView:View {
+    var pNode = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode?{
+        pNode
+    }
     let items = ["查查","cscs","122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     var model: TestModel

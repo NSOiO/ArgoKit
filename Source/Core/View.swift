@@ -46,11 +46,19 @@ public protocol View {
     var node:ArgoKitNode?{get}
     
     @ArgoKitViewBuilder var body: View { get }
+    
 }
 
 public extension View{
-    var type: ArgoKitNodeType{.single(ArgoKitNode(view:UIView()))}
-    var node:ArgoKitNode?{nil}
+
+    var type: ArgoKitNodeType{
+        if let _node:ArgoKitNode = node {
+            return .single(_node)
+        }else{
+            return .empty
+        }
+        
+    }
 }
 
 extension View{
