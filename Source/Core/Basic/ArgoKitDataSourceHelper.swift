@@ -72,7 +72,7 @@ extension ArgoKitDataSourceHelper {
         if nodeList != nil {
             if section < nodeList!.count
                 && row < nodeList![section].count {
-                if let node = nodeList![section][row] as? ArgoKitModelProtocol {
+                if let node = nodeList![section][row] as? ArgoKitIdentifiable {
                     return node.rowid
                 }
             }
@@ -84,7 +84,7 @@ extension ArgoKitDataSourceHelper {
             return nil
         }
         
-        if let node = dataList![section][row] as? ArgoKitModelProtocol {
+        if let node = dataList![section][row] as? ArgoKitIdentifiable {
             return node.rowid
         }
         return nil

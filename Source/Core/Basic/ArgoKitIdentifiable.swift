@@ -6,10 +6,10 @@
 //
 
 import Foundation
-public protocol ArgoKitModelProtocol {
+public protocol ArgoKitIdentifiable {
     var rowid: String { get set }
 }
-extension ArgoKitModelProtocol{
+extension ArgoKitIdentifiable{
     var rowid: String {
         "argokitmodel"
     }

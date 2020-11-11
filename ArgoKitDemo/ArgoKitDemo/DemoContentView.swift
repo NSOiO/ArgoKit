@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import ArgoKit
 
-struct ArgoKitItem:ArgoKitModelProtocol {
+struct ArgoKitItem:ArgoKitIdentifiable {
     var rowid: String
     var text:String
     init() {
