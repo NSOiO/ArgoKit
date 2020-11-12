@@ -33,7 +33,7 @@ struct Demo1ContentView:View {
                     Text("111111").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
                         .textColor(.red)
     }.isUserInteractionEnabled(true).margin(edge: .top, value: 64)
-                .alias(variable: &model.stack1).longPressAction(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
+                .alias(variable: &model.stack1).onLongPressGesture(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
                     print("longPressAction")
                 }.onTapGesture {
                     model.text1?.text("hjdjhfbdhjbfd").width(1000)
