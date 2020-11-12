@@ -689,6 +689,11 @@ extension View{
 }
 
 extension View{
+    
+    public func size(width: ArgoValue, height: ArgoValue) -> Self {
+        return self.width(width).height(height)
+    }
+    
     public func width(_ value:ArgoValue)->Self{
         switch value.type {
         case .point:

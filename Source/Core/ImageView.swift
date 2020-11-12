@@ -67,16 +67,16 @@ public class ImageView : View {
 extension ImageView {
     
     public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
-//        if let image = se.image {
-//            imageView.image = image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
-//        }
+        if let image = pNode.image() {
+            return self.image(image.resizableImage(withCapInsets: capInsets, resizingMode: resizingMode))
+        }
         return self
     }
     
     public func renderingMode(_ renderingMode: UIImage.RenderingMode?) -> Self {
-//        if let image = imageView.image {
-//            imageView.image = image.withRenderingMode(renderingMode ?? .automatic)
-//        }
+        if let image = pNode.image() {
+            return self.image(image.withRenderingMode(renderingMode ?? .automatic))
+        }
         return self
     }
 }
@@ -142,5 +142,12 @@ extension ImageView {
     public func stopAnimating() -> Self {
         addAttribute(#selector(UIImageView.stopAnimating))
         return self
+    }
+}
+
+extension ImageView {
+    
+    public func imageSize() -> CGSize {
+        return pNode.image()?.size ?? .zero
     }
 }
