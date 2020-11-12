@@ -95,7 +95,7 @@ open class UIHostingController:UIViewController{
         rootView = HostView(self.view){
             rootView_!.backgroundColor(.red).width(80%).height(80%)
         }.isUserInteractionEnabled(true)
-        .tapAction {[weak self] in
+        .onTapGesture {[weak self] in
 //            let viewContraller:UIHostingController = UIHostingController(rootView: DemoContentView3())
 //            self?.navigationController?.pushViewController(viewContraller, animated: true)
         }
