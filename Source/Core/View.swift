@@ -49,8 +49,8 @@ public protocol View {
     
 }
 
-private struct AssociatedKey {
-       static var midKey:Void?
+private struct AssociatedNodeKey {
+       static var nodeKey:Void?
 }
 public extension View{
 
@@ -64,10 +64,10 @@ public extension View{
     
     var node:ArgoKitNode?{
         get{
-            var obj = objc_getAssociatedObject(self, &AssociatedKey.midKey) as? ArgoKitNode
+            var obj = objc_getAssociatedObject(self, &AssociatedNodeKey.nodeKey) as? ArgoKitNode
             if (obj == nil) {
                 obj = ArgoKitNode(viewClass: UIView.self)
-                objc_setAssociatedObject(self, &AssociatedKey.midKey, obj, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                objc_setAssociatedObject(self, &AssociatedNodeKey.nodeKey, obj, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             }
             return obj
         }
