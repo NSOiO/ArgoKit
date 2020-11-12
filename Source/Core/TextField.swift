@@ -10,15 +10,6 @@ import Foundation
 public class TextField : View {
     
     private var pNode : ArgoKitNode
-    
-    public var body: View {
-        ViewEmpty()
-    }
-    
-    public var type: ArgoKitNodeType {
-        .single(pNode)
-    }
-    
     public var node: ArgoKitNode? {
         pNode
     }

@@ -22,10 +22,6 @@ public extension ScrollView {
         type.viewNode()
     }
     
-    var body: View {
-        self
-    }
-    
     var scrollView: UIScrollView? {
         type.viewNode()?.view as? UIScrollView
     }

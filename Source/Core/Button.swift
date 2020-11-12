@@ -7,13 +7,7 @@
 
 import Foundation
 public class Button:View{
-    public var body: View{
-        ViewEmpty()
-    }
     private let pNode:ArgoKitNode
-    public var type: ArgoKitNodeType{
-        .single(pNode)
-    }
     public var node: ArgoKitNode?{
         pNode
     }

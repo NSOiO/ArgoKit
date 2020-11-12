@@ -20,15 +20,9 @@ class ArgoKitTextNode: ArgoKitNode {
     }
 }
 public class Text:View {
-    public var body: View{
-        ViewEmpty()
-    }
     private let pNode:ArgoKitTextNode
     public var node: ArgoKitNode?{
         pNode
-    }
-    public var type: ArgoKitNodeType{
-        .single(pNode)
     }
 
     public init() {

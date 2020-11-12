@@ -11,10 +11,6 @@ public class TextView : ScrollView {
     
     private var pNode : ArgoKitNode
     
-    public var body: View {
-        ViewEmpty()
-    }
-    
     public var scrollView: UIScrollView? {
         type.viewNode()?.view as? UITextView
     }

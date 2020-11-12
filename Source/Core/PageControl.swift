@@ -7,15 +7,9 @@
 
 import Foundation
 public class PageControl:View{
-    public var body: View{
-        ViewEmpty()
-    }
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
-    }
-    public var type: ArgoKitNodeType{
-        .single(pNode)
     }
     public init(currentPage:Int,numberOfPages:Int,onPageChange:@escaping(_ currentPage:Int)->Void){
         pNode = ArgoKitNode(viewClass: UIPageControl.self)

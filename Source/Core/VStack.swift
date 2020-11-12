@@ -8,17 +8,11 @@
 import UIKit
 
 public class VStack:View {
-    public var body: View{
-        ViewEmpty()
-    }
+  
     private var pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }
-    public var type: ArgoKitNodeType{
-        .single(pNode)
-    }
-    
     public init(){
         pNode = ArgoKitNode(viewClass:UIView.self);
     }

@@ -17,14 +17,6 @@ public class ImageView : View {
     
     private var pNode : ArgoKitImageNode
     
-    public var body: View {
-        ViewEmpty()
-    }
-    
-    public var type: ArgoKitNodeType {
-        .single(pNode)
-    }
-    
     public var node: ArgoKitNode? {
         pNode
     }

@@ -8,16 +8,10 @@
 import UIKit
 
 public class HStack:View {
-    public var body: View{
-        ViewEmpty()
-    }
     private let innerNode:ArgoKitNode
     
     public var node: ArgoKitNode?{
         innerNode
-    }
-    public var type: ArgoKitNodeType{
-        .single(innerNode)
     }
 
     public init(){

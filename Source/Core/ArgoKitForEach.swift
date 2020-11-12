@@ -8,19 +8,12 @@
 import Foundation
 
 public class ForEach:View{
-    public var body: View{
-        ViewEmpty()
-    }
-    
     private var innerNode:ArgoKitNode
     
     public var node: ArgoKitNode?{
         innerNode
     }
     private var innerView:UIView
-    public var type: ArgoKitNodeType{
-        .single(innerNode)
-    }
     
     public init(_ data:Array<Any>,@ArgoKitViewBuilder _ builder:@escaping (Any)->View) {
         innerView = UIView();

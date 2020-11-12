@@ -11,9 +11,6 @@ public class List : ScrollView {
 
     private var pNode : ArgoKitTableNode
     
-    public var body: View {
-        ViewEmpty()
-    }
     
     public var scrollView: UIScrollView? {
         type.viewNode()?.view as? UITableView

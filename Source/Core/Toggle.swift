@@ -7,15 +7,9 @@
 
 import Foundation
 public class Toggle:View{
-    public var body: View{
-        ViewEmpty()
-    }
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
-    }
-    public var type: ArgoKitNodeType{
-        .single(pNode)
     }
     public init(_ isOn:Bool,action:@escaping (_ isOn:Bool)->Void){
         pNode = ArgoKitNode(viewClass:UISwitch.self);

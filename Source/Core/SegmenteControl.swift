@@ -7,16 +7,10 @@
 
 import Foundation
 public class SegmenteControl:View{
-    public var body: View{
-        ViewEmpty()
-    }
     private let pSegment:UISegmentedControl
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
-    }
-    public var type: ArgoKitNodeType{
-        .single(pNode)
     }
     /// Initializes the segmented control with the given items. Items may be NSStrings, UIImages, or (as of iOS 14.0) UIActions. When constructing from a UIAction segments will prefer images over titles when both are provided. The segmented control is automatically sized to fit content.
     public init(onSegmentedChange:@escaping(_ segmentIndex:Int)->Void,@ArgoKitViewBuilder _ builder:()->View){

@@ -7,15 +7,9 @@
 
 import Foundation
 public class Stepper:View{
-    public var body: View{
-        ViewEmpty()
-    }
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
-    }
-    public var type: ArgoKitNodeType{
-        .single(pNode)
     }
     public init<V>(value: V, in bounds: ClosedRange<V> = 0...1,step:Double = 1.0, onValueChanged: @escaping (_ value:Double) -> Void = { _ in })where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{
         pNode = ArgoKitNode(viewClass:UIStepper.self)
