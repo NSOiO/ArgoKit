@@ -13,7 +13,7 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
 }
-public struct ImageView : View {
+public class ImageView : View {
     
     private var pNode : ArgoKitImageNode
     
@@ -29,34 +29,34 @@ public struct ImageView : View {
         pNode
     }
     
-    public init() {
+    public convenience init() {
         self.init(image: nil, highlightedImage: nil)
     }
     
-    public init(_ name: String?, bundle: Bundle? = nil) {
+    public convenience init(_ name: String?, bundle: Bundle? = nil) {
         let image: UIImage? = (name != nil) ? UIImage(named: name!, in: bundle, compatibleWith: nil) : nil
         self.init(image: image, highlightedImage: nil)
     }
     
-    public init(_ name: String?, bundle: Bundle? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
+    public convenience init(_ name: String?, bundle: Bundle? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
         let image: UIImage? = (name != nil) ? UIImage(named: name!, in: bundle, compatibleWith: nil) : nil
         self.init(image: image, highlightedImage: nil, builder: builder)
     }
     
     @available(iOS 13.0, *)
-    public init(systemName: String) {
+    public convenience init(systemName: String) {
         self.init(image: UIImage(systemName: systemName), highlightedImage: nil)
     }
     
-    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
+    public convenience init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
     }
     
-    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up, @ArgoKitViewBuilder builder:@escaping ()->View) {
+    public convenience init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up, @ArgoKitViewBuilder builder:@escaping ()->View) {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil, builder: builder)
     }
     
-    public init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
+    public convenience init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
         self.init(image: image, highlightedImage: highlightedImage)
         addSubNodes(builder:builder)
     }

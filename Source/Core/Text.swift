@@ -19,7 +19,7 @@ class ArgoKitTextNode: ArgoKitNode {
         return size
     }
 }
-public struct Text:View {
+public class Text:View {
     public var body: View{
         ViewEmpty()
     }
@@ -35,7 +35,7 @@ public struct Text:View {
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
         
     }
-    public init(_ text:String?) {
+    public convenience init(_ text:String?) {
         self.init()
         addAttribute(#selector(setter:UILabel.text),text!)
     }

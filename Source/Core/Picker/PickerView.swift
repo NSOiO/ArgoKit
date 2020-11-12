@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PickerView : View {
+public class PickerView : View {
     
     private var pickerView : UIPickerView
     private var pNode : ArgoKitPickerNode
@@ -29,7 +29,7 @@ public struct PickerView : View {
         pNode = ArgoKitPickerNode(view: pickerView)
     }
     
-    public init(_ data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
+    public convenience init(_ data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
         self.init()
         if (data.first as? Array<Any>) != nil {
             self.pNode.dataSourceHelper.dataList = data as? [[Any]]

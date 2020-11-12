@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct SegmenteControl:View{
+public class SegmenteControl:View{
     public var body: View{
         ViewEmpty()
     }

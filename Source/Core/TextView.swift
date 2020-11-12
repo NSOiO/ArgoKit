@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TextView : ScrollView {
+public class TextView : ScrollView {
     
     private var pNode : ArgoKitNode
     
@@ -27,7 +27,7 @@ public struct TextView : ScrollView {
         pNode
     }
     
-    public init() {
+    public convenience init() {
         self.init(nil)
     }
     

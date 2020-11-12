@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ActivityIndicatorView : View {
+public class ActivityIndicatorView : View {
     
     private var activityIndicatorView : UIActivityIndicatorView
     private var pNode : ArgoKitNode

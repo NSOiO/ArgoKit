@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct Toggle:View{
+public class Toggle:View{
     public var body: View{
         ViewEmpty()
     }

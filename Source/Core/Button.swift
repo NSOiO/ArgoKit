@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct Button:View{
+public class Button:View{
     public var body: View{
         ViewEmpty()
     }
@@ -22,7 +22,7 @@ public struct Button:View{
         pNode = ArgoKitNode(viewClass: UIButton.self)
     }
     
-    public init<S>(_ text:S,action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View) where S:StringProtocol {
+    public convenience init<S>(_ text:S,action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View) where S:StringProtocol {
         self.init(text: text as? String, action: action)
         addSubNodes(builder: builder)
     }
@@ -30,7 +30,7 @@ public struct Button:View{
 }
 
 extension Button{
-    public init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
+    public convenience init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
         addAttribute(#selector(UIButton.setTitle(_:for:)),text as? String,UIControl.State.normal.rawValue)
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct List : ScrollView {
+public class List : ScrollView {
 
     private var pNode : ArgoKitTableNode
     
@@ -36,7 +36,7 @@ public struct List : ScrollView {
         pNode.style = style ?? .plain
     }
     
-    public init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) {
+    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
@@ -44,7 +44,7 @@ public struct List : ScrollView {
         }
     }
 
-    public init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
+    public convenience init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
         self.init(style: style)
         self.pNode.dataSourceHelper.dataList = [data]
         self.pNode.dataSourceHelper.buildNodeFunc = { item in
@@ -52,7 +52,7 @@ public struct List : ScrollView {
         }
     }
     
-    public init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
+    public convenience init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
         self.init(style: style)
         self.pNode.dataSourceHelper.dataList = sectionData
         self.pNode.dataSourceHelper.buildNodeFunc = { item in

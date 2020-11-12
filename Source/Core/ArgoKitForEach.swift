@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ForEach:View{
+public class ForEach:View{
     public var body: View{
         ViewEmpty()
     }
@@ -34,9 +34,7 @@ public struct ForEach:View{
             }
         }
     }
-}
-
-extension ForEach{
+    
     public init(_ data:Range<Int>,@ArgoKitViewBuilder _ builder:@escaping (Int)->View) {
         innerView = UIView();
         innerNode = ArgoKitNode(view: innerView);
@@ -50,3 +48,4 @@ extension ForEach{
         }
     }
 }
+

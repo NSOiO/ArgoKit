@@ -24,21 +24,21 @@ struct ArgoKitItem:ArgoKitIdentifiable {
         self.text = text
     }
 }
-struct row: View{
-    var pNode = ArgoKitNode(viewClass: UIView.self)
-    var node: ArgoKitNode?{
-        pNode
-    }
+class row: View{
+//    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var item: ArgoKitItem
+    init(item:ArgoKitItem) {
+        self.item = item
+    }
     var body:View{
-        HStack{
+        HStack{ [self] in
             ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
             Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10)
         }.height(100%).width(100%)
     }
     
 }
-struct DemoContentView: View {
+class DemoContentView: View {
     var items: [ArgoKitItem] {
         var temp = [ArgoKitItem]()
         for index in 10..<20 {
@@ -54,24 +54,11 @@ struct DemoContentView: View {
         }
         return temp
     }
-    var pNode = ArgoKitNode(viewClass: UIView.self)
-    var node: ArgoKitNode?{
-        pNode
-    }
-    
+//    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var body:View{
            ImageView().image(UIImage(named: "turtlerock")).backgroundColor(.orange)
         List(data: items) { item in
-            row(item: item).padding(edge: .left, value: 10)
-//            if item.reuseIdentifier == "15"{
-//               row(item: item)
-//            }else{
-//                HStack{
-//                    Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.start).width(10)
-//                    ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
-//                }.height(100%).width(100%)
-//            }
-
+            row(item: item).padding(edge: .left, value: 10).backgroundColor(.orange)
         }.width(100%).height(100%).backgroundColor(.red)
         .tableHeaderView { () -> View in
             Text("TableHeader").backgroundColor(.yellow).height(100)

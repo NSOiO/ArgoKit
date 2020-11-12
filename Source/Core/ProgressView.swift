@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ProgressView : View {
+public class ProgressView : View {
     
     private var pNode : ArgoKitNode
     
@@ -23,13 +23,13 @@ public struct ProgressView : View {
         pNode
     }
     
-    public init(_ progress: Float?) {
+    public convenience init(_ progress: Float?) {
         self.init(progressViewStyle: .default)
         addAttribute(#selector(setter:UIProgressView.progress),progress ?? 0.0)
     }
     
     @available(iOS 9.0, *)
-    public init(_ observedProgress: Progress) {
+    public convenience init(_ observedProgress: Progress) {
         self.init(progressViewStyle: .default)
         addAttribute(#selector(setter:UIProgressView.observedProgress),observedProgress)
     }
@@ -37,6 +37,14 @@ public struct ProgressView : View {
     public init(progressViewStyle style: UIProgressView.Style) {
         pNode = ArgoKitNode(viewClass:UIProgressView.self)
         addAttribute(#selector(setter:UIProgressView.progressViewStyle),style.rawValue)
+    }
+    
+    public init?(_ configuration: ProgressViewStyleConfiguration) {
+        if (configuration.node.view as? UIProgressView) != nil {
+            pNode = configuration.node
+        } else {
+            return nil
+        }
     }
 }
 
@@ -84,16 +92,6 @@ extension ProgressView {
     }
 }
 
-extension ProgressView {
-
-    public init?(_ configuration: ProgressViewStyleConfiguration) {
-        if (configuration.node.view as? UIProgressView) != nil {
-            pNode = configuration.node
-        } else {
-            return nil
-        }
-    }
-}
 
 extension View {
 
@@ -124,7 +122,10 @@ public protocol ProgressViewStyle {
     typealias Configuration = ProgressViewStyleConfiguration
 }
 
-public struct ProgressViewStyleConfiguration {
+public class ProgressViewStyleConfiguration {
 
     public let node: ArgoKitNode
+    init(node:ArgoKitNode) {
+        self.node = node
+    }
 }

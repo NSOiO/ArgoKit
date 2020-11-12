@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct BlurEffectView:View{
+public class BlurEffectView:View{
     public var body: View{
         ViewEmpty()
     }

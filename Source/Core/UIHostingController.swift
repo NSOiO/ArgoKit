@@ -7,7 +7,24 @@
 
 import Foundation
 
-struct HostView:View {
+
+struct ArgoKitItem:ArgoKitIdentifiable {
+    var identifier: String
+    var reuseIdentifier: String
+    var text:String
+    init() {
+        self.reuseIdentifier = "ArgoKitItem"
+        self.identifier = "identifier"
+        self.text = ""
+    }
+    init(rowid:String,text:String) {
+        self.reuseIdentifier = rowid
+        self.identifier = "\(rowid)\(text)"
+        self.text = text
+    }
+}
+
+class HostView:View {
     var body: View{
         self
     }
@@ -36,6 +53,7 @@ struct HostView:View {
         }
     }
 }
+
 
 open class UIHostingController:UIViewController{
     private var rootView_:View!
@@ -74,12 +92,11 @@ open class UIHostingController:UIViewController{
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
-        
         rootView = HostView(self.view){
-            rootView_!.backgroundColor(.red).width(100%).height(100%)
+            rootView_!.backgroundColor(.red).width(80%).height(80%)
         }.isUserInteractionEnabled(true)
         .tapAction {[weak self] in
-//            let viewContraller:UIHostingController = UIHostingController(rootView: self!.rootView_)
+//            let viewContraller:UIHostingController = UIHostingController(rootView: DemoContentView3())
 //            self?.navigationController?.pushViewController(viewContraller, animated: true)
         }
         

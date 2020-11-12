@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct DatePicker:View{
+public class DatePicker:View{
     public var body: View{
         ViewEmpty()
     }

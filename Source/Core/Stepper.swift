@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct Stepper:View{
+public class Stepper:View{
     public var body: View{
         ViewEmpty()
     }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct Slider:View{
+public class Slider:View{
     public var body: View{
         ViewEmpty()
     }

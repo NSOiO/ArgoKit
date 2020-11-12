@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TextField : View {
+public class TextField : View {
     
     private var pNode : ArgoKitNode
     
@@ -23,7 +23,7 @@ public struct TextField : View {
         pNode
     }
     
-    public init() {
+    public convenience init() {
         self.init(nil)
     }
     

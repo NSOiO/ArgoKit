@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct PageControl:View{
+public class PageControl:View{
     public var body: View{
         ViewEmpty()
     }

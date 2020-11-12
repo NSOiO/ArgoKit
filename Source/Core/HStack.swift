@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct HStack:View {
+public class HStack:View {
     public var body: View{
         ViewEmpty()
     }
