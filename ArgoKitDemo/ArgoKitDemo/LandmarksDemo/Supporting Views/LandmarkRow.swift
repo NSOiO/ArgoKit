@@ -16,7 +16,9 @@ struct LandmarkRow: View {
         HStack {
             landmark.image
                 .resizable()
-                .size(width: 50, height: 50)
+                .size(width: 50, height: 50).cornerRadius(10).clipsToBounds(true)
+            Spacer()
+            Text(landmark.name)
             Spacer()
             Text(landmark.name)
         }

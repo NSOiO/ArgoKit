@@ -107,6 +107,8 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
                 if (attribute.isDirty) {
                     [node markDirty];
                 }
+            }else if([node.view.layer respondsToSelector:attribute.selector]){
+                performSelector(node.view.layer,attribute.selector,attribute.paramter);
             }
         }
     }

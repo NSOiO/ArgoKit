@@ -27,7 +27,6 @@ extension Button{
     public convenience init<S>(text:S?,action :@escaping ()->Void) where S:StringProtocol{
         self.init()
         addAttribute(#selector(UIButton.setTitle(_:for:)),text as? String,UIControl.State.normal.rawValue)
-        
         pNode.addAction({ (obj, paramter) -> Any? in
             action();
         }, for: UIControl.Event.touchUpInside)
