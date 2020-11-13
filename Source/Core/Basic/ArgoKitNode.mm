@@ -178,45 +178,43 @@ static YGConfigRef globalConfig;
 // 计算当前node
 static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
 {
-  const ArgoKitLayout *layout = node.layout;
-  YGNodeRef ygnode = layout.ygnode;
-  if (!ygnode || isnan(YGNodeLayoutGetWidth(ygnode)) || isnan(YGNodeLayoutGetHeight(ygnode))) {
-      return;
-  }
-  const CGPoint topLeft = {
-    YGNodeLayoutGetLeft(ygnode),
-    YGNodeLayoutGetTop(ygnode),
-  };
-
-  const CGPoint bottomRight = {
-    topLeft.x + YGNodeLayoutGetWidth(ygnode),
-    topLeft.y + YGNodeLayoutGetHeight(ygnode),
-  };
-
-  const CGPoint origin = node.resetOrigin ? CGPointZero:node.frame.origin;
-  CGRect frame = (CGRect) {
-      .origin = {
-        .x = YGRoundPixelValue(topLeft.x + origin.x),
-        .y = YGRoundPixelValue(topLeft.y + origin.y),
-      },
-      .size = {
-        .width = YGRoundPixelValue(bottomRight.x) - YGRoundPixelValue(topLeft.x),
-        .height = YGRoundPixelValue(bottomRight.y) - YGRoundPixelValue(topLeft.y),
-      },
+    const ArgoKitLayout *layout = node.layout;
+    YGNodeRef ygnode = layout.ygnode;
+    if (!ygnode || isnan(YGNodeLayoutGetWidth(ygnode)) || isnan(YGNodeLayoutGetHeight(ygnode))) {
+        return;
+    }
+    const CGPoint topLeft = {
+        YGNodeLayoutGetLeft(ygnode),
+        YGNodeLayoutGetTop(ygnode),
     };
     
-  if (!CGRectEqualToRect(node.frame, frame)) {
-      node.frame = frame;
-  }
-  if (![layout isLeaf]) {
-    for (NSUInteger i=0; i<node.childs.count; i++) {
-        ArgoKitNode *chiledNode = node.childs[i];
-        chiledNode.isReused = node.isReused;
-        YGApplyLayoutToNodeHierarchy(node.childs[i]);
-        chiledNode.isReused = NO;
+    const CGPoint bottomRight = {
+        topLeft.x + YGNodeLayoutGetWidth(ygnode),
+        topLeft.y + YGNodeLayoutGetHeight(ygnode),
+    };
+    
+    const CGPoint origin = node.resetOrigin ? CGPointZero:node.frame.origin;
+    CGRect frame = (CGRect) {
+        .origin = {
+            .x = YGRoundPixelValue(topLeft.x + origin.x),
+            .y = YGRoundPixelValue(topLeft.y + origin.y),
+        },
+        .size = {
+            .width = YGRoundPixelValue(bottomRight.x) - YGRoundPixelValue(topLeft.x),
+            .height = YGRoundPixelValue(bottomRight.y) - YGRoundPixelValue(topLeft.y),
+        },
+    };
+    
+    node.frame = frame;
+    if (![layout isLeaf]) {
+        for (NSUInteger i=0; i<node.childs.count; i++) {
+            ArgoKitNode *chiledNode = node.childs[i];
+            chiledNode.isReused = node.isReused;
+            YGApplyLayoutToNodeHierarchy(node.childs[i]);
+            chiledNode.isReused = NO;
+        }
     }
-  }
-  node.isReused = NO;
+    node.isReused = NO;
 }
 
 static CGFloat YGSanitizeMeasurement(
@@ -325,10 +323,16 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 -(void)dealloc{
     NSLog(@"dealloc");
 }
+
+- (instancetype)init {
+    return [self initWithViewClass:[UIView class]];
+}
+
 - (instancetype)initWithView:(UIView *)view{
-    self = [super init];
+    self = [self initWithViewClass:[view class]];
     if (self) {
-        [self bindView:view];
+        _view = view;
+        _size = view.bounds.size;
     }
     return self;
 }
@@ -346,14 +350,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)bindView:(UIView *)view {
+    if (![view isKindOfClass:_viewClass]) {
+        return;
+    }
     _view = view;
-    _viewClass = view.class;
-    _resetOrigin = YES;
-    _isEnabled = YES;
-    _isUIView = [view isMemberOfClass:[UIView class]];
     _size = view.bounds.size;
-    _frame = view.frame;
-    _bindProperties = [NSMutableDictionary new];
     if (_childs.count) {
         for (ArgoKitNode *child in _childs) {
             if (child.view) {

@@ -12,6 +12,7 @@ class ArgoKitDataSourceHelper: NSObject {
     lazy var nodeCache: NSCache<NSString, ArgoKitNode> = { () -> NSCache<NSString, ArgoKitNode> in
         let cahe = NSCache<NSString, ArgoKitNode>()
         cahe.name = "com.\(type(of: self).description()).node.cache"
+        cahe.countLimit = 500
         return cahe
     }()
     
