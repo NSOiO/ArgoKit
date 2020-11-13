@@ -9,15 +9,12 @@ import Foundation
 
 public class ForEach:View{
     private var innerNode:ArgoKitNode
-    
     public var node: ArgoKitNode?{
         innerNode
     }
-    private var innerView:UIView
     
     public init(_ data:Array<Any>,@ArgoKitViewBuilder _ builder:@escaping (Any)->View) {
-        innerView = UIView();
-        innerNode = ArgoKitNode(view: innerView);
+        innerNode = ArgoKitNode(viewClass: UIView.self);
         for item in data {
             let container = builder(item)
             if let nodes = container.type.viewNodes() {
@@ -29,8 +26,7 @@ public class ForEach:View{
     }
     
     public init(_ data:Range<Int>,@ArgoKitViewBuilder _ builder:@escaping (Int)->View) {
-        innerView = UIView();
-        innerNode = ArgoKitNode(view: innerView);
+        innerNode = ArgoKitNode(viewClass: UIView.self);
         for item in data {
             let container = builder(item)
             if let nodes = container.type.viewNodes() {

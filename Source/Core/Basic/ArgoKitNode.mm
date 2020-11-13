@@ -393,7 +393,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             if (wealSelf.parentNode) {
                 NSInteger index = [wealSelf.parentNode.childs indexOfObject:wealSelf];
                 if (wealSelf.parentNode.view) {
-                    [wealSelf.parentNode.view insertSubview:wealSelf.view atIndex:index];
+                    if ([wealSelf.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
+                        [((UIVisualEffectView *)wealSelf.parentNode.view).contentView insertSubview:wealSelf.view atIndex:index];
+                    }else{
+                        [wealSelf.parentNode.view insertSubview:wealSelf.view atIndex:index];
+                    }
+                    
                 }
             }
         }else{

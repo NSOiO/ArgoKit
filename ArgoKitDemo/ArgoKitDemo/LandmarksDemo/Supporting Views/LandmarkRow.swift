@@ -18,13 +18,16 @@ struct LandmarkRow: View {
                 .resizable()
                 .size(width: 50, height: 50).cornerRadius(10).clipsToBounds(true)
             Spacer()
-            Text(landmark.name)
+            HStack{
+                Text(landmark.name).alignSelf(.center)
+            }.backgroundColor(.yellow)
             Spacer()
             Text(landmark.name)
+           
         }
         HStack {
             Text(landmark.name)
-            Text("👌")
+            Text("👌").margin(ArgoEdgeValue(top: 10,left: 10,bottom: 10,right: 10))
             Text("👌")
             Text("👌")
             Text("👌")
