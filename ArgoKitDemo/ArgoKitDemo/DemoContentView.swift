@@ -25,7 +25,6 @@ struct ArgoKitItem:ArgoKitIdentifiable {
     }
 }
 class row: View{
-//    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var item: ArgoKitItem
     init(item:ArgoKitItem) {
         self.item = item
