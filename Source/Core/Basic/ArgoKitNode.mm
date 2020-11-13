@@ -362,6 +362,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             }
         }
     }
+    [self commitAttributes];
 }
 
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
@@ -371,6 +372,22 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         ((UIScrollView *)view).delegate = self;
     }
     return view;
+}
+
+- (void)commitAttributes {
+    if (_viewAttributes.count) {
+        [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes.allValues];
+    }
+    if (_nodeActions.count && [self.view isKindOfClass:[UIControl class]] && [self.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+        NSArray<NodeAction *> *copyActions = [self.nodeActions mutableCopy];
+        for(NodeAction *action in copyActions){
+            [self addTarget:self.view forControlEvents:action.controlEvents action:action.actionBlock];
+        }
+    }
+    if (self.parentNode.view) {
+        NSInteger index = [self.parentNode.childs indexOfObject:self];
+        [self.parentNode.view insertSubview:self.view atIndex:index];
+    }
 }
 
 #pragma mark --- property setter/getter ---
@@ -384,23 +401,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
-            [ArgoKitNodeViewModifier nodeViewAttributeWithNode:wealSelf attributes:wealSelf.viewAttributes.allValues];
-            if ([wealSelf.view isKindOfClass:[UIControl class]] && [wealSelf.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
-                NSArray<NodeAction *> *copyActions = [wealSelf.nodeActions mutableCopy];
-                for(NodeAction *action in copyActions){
-                    [wealSelf addTarget:wealSelf.view forControlEvents:action.controlEvents action:action.actionBlock];
-                }
-            }
-            if (wealSelf.parentNode) {
-                NSInteger index = [wealSelf.parentNode.childs indexOfObject:wealSelf];
-                if (wealSelf.parentNode.view) {
-                    [wealSelf.parentNode.view insertSubview:wealSelf.view atIndex:index];
-                }
-            }
+            [wealSelf commitAttributes];
         }else{
             wealSelf.view.frame = frame;
         }
- 
     }];
 }
 - (NSMutableArray<ArgoKitNode *> *)childs{
