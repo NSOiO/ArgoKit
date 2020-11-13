@@ -8,15 +8,16 @@
 import Foundation
 
 extension Text {
-    public //convenience
-    convenience init(_ textProperty: Property<String>?) {
+    public convenience
+    init(_ textProperty: Property<String>?) {
         self.init()
         if let pro = textProperty {
             _ = self.text(pro)
         }
     }
     
-    public init(_ textProperty: Property<String?>?) {
+    public convenience
+    init(_ textProperty: Property<String?>?) {
         self.init()
         if let pro = textProperty {
             _ = self.text(pro)
