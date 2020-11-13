@@ -54,7 +54,6 @@ class DemoContentView: View {
         }
         return temp
     }
-//    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var body:View{
            ImageView().image(UIImage(named: "turtlerock")).backgroundColor(.orange)
         List(data: items) { item in

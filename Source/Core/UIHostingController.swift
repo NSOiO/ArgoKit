@@ -93,7 +93,7 @@ open class UIHostingController:UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white;
         rootView = HostView(self.view){
-            rootView_!.backgroundColor(.red).width(80%).height(80%)
+            rootView_!.backgroundColor(.red)
         }.isUserInteractionEnabled(true)
         .onTapGesture {[weak self] in
 //            let viewContraller:UIHostingController = UIHostingController(rootView: DemoContentView3())
