@@ -531,6 +531,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
     if (self.layout) {
+        [ArgoLayoutHelper addLayoutNode:self];
         self.size = [self.layout calculateLayoutWithSize:size];
     }
     return self.size;
