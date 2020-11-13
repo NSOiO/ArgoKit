@@ -23,6 +23,5 @@ struct LandmarkList: View {
 
         }
         
-//        Text("\(landmarkData)")
     }
 }

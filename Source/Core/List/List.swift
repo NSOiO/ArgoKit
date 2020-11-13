@@ -8,53 +8,42 @@
 import Foundation
 
 public class List : ScrollView {
-
-    private var pNode : ArgoKitTableNode
     
-    
-    public var scrollView: UIScrollView? {
-        type.viewNode()?.view as? UITableView
-    }
-    
-    public var tableView: UITableView? {
-        type.viewNode()?.view as? UITableView
-    }
-    
-    public var type: ArgoKitNodeType {
-        .single(pNode)
-    }
-    
-    public var node: ArgoKitNode? {
-        pNode
+    private var tableNode: ArgoKitTableNode {
+        pNode as! ArgoKitTableNode
     }
     
     private init(style: UITableView.Style?) {
-        pNode = ArgoKitTableNode(viewClass: UITableView.self)
-        pNode.style = style ?? .plain
+        super.init()
+        tableNode.style = style ?? .plain
     }
     
     public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
-            self.pNode.dataSourceHelper.nodeList = [nodes]
+            tableNode.dataSourceHelper.nodeList = [nodes]
         }
     }
 
     public convenience init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
         self.init(style: style)
-        self.pNode.dataSourceHelper.dataList = [data]
-        self.pNode.dataSourceHelper.buildNodeFunc = { item in
+        tableNode.dataSourceHelper.dataList = [data]
+        tableNode.dataSourceHelper.buildNodeFunc = { item in
             return rowContent(item as! T)
         }
     }
     
     public convenience init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
         self.init(style: style)
-        self.pNode.dataSourceHelper.dataList = sectionData
-        self.pNode.dataSourceHelper.buildNodeFunc = { item in
+        tableNode.dataSourceHelper.dataList = sectionData
+        tableNode.dataSourceHelper.buildNodeFunc = { item in
             return rowContent(item as! T)
         }
+    }
+    
+    override func createNode() {
+        pNode = ArgoKitTableNode(viewClass: UITableView.self)
     }
 }
 
@@ -102,12 +91,12 @@ extension List {
     }
     
     public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) -> Self {
-        pNode.reloadSections(sections, with: animation)
+        tableNode.reloadSections(sections, with: animation)
         return self
     }
 
     public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self {
-        pNode.reloadRows(at: indexPaths, with: animation)
+        tableNode.reloadRows(at: indexPaths, with: animation)
         return self
     }
     
@@ -196,27 +185,27 @@ extension List {
     
     public func tableHeaderView(@ArgoKitViewBuilder headerContent: () -> View) -> Self {
         let container = headerContent()
-        self.pNode.tableHeaderNode = container.type.viewNode()
+        tableNode.tableHeaderNode = container.type.viewNode()
         return self
     }
     
     public func tableFooterView(@ArgoKitViewBuilder footerContent: () -> View) -> Self {
         let container = footerContent()
-        self.pNode.tableFooterNode = container.type.viewNode()
+        tableNode.tableFooterNode = container.type.viewNode()
         return self
     }
     
     public func sectionHeader<T>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self where T : ArgoKitIdentifiable {
-        self.pNode.sectionHeaderSourceHelper.dataList = [data]
-        self.pNode.sectionHeaderSourceHelper.buildNodeFunc = { item in
+        tableNode.sectionHeaderSourceHelper.dataList = [data]
+        tableNode.sectionHeaderSourceHelper.buildNodeFunc = { item in
             return headerContent(item as! T)
         }
         return self
     }
     
     public func sectionFooter<T>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self where T : ArgoKitIdentifiable {
-        self.pNode.sectionFooterSourceHelper.dataList = [data]
-        self.pNode.sectionFooterSourceHelper.buildNodeFunc = { item in
+        tableNode.sectionFooterSourceHelper.dataList = [data]
+        tableNode.sectionFooterSourceHelper.buildNodeFunc = { item in
             return footerContent(item as! T)
         }
         return self
@@ -244,12 +233,12 @@ extension List {
 extension List {
     
     public func titlesForHeaderInSection(_ value: [Int:String]?) -> Self {
-        pNode.titlesForHeaderInSection = value;
+        tableNode.titlesForHeaderInSection = value;
         return self
     }
     
     public func titlesForFooterInSection(_ value: [Int:String]?) -> Self {
-        pNode.titlesForFooterInSection = value;
+        tableNode.titlesForFooterInSection = value;
         return self
     }
     
@@ -280,7 +269,7 @@ extension List {
     }
     
     public func titlesForSection(_ value: [String]?) -> Self {
-        pNode.titlesForSection = value;
+        tableNode.titlesForSection = value;
         return self
     }
     

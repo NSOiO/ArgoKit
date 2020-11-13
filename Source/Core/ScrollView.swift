@@ -7,23 +7,24 @@
 
 import Foundation
 
-public protocol ScrollView: View {
+public class ScrollView: View {
     
-    var scrollView: UIScrollView? {get}
-}
-
-public extension ScrollView {
+    public var pNode : ArgoKitNode?
     
-    var type: ArgoKitNodeType {
-        return .single(ArgoKitNode(viewClass: UIScrollView.self))
+    public var type: ArgoKitNodeType {
+        .single(pNode!)
     }
     
-    var node: ArgoKitNode? {
-        type.viewNode()
+    public var node: ArgoKitNode? {
+        pNode
     }
     
-    var scrollView: UIScrollView? {
-        type.viewNode()?.view as? UIScrollView
+    init() {
+        createNode()
+    }
+    
+    func createNode() {
+        pNode = ArgoKitNode(viewClass: UIScrollView.self)
     }
 }
 
