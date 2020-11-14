@@ -7,9 +7,12 @@
 
 #import "ArgoKitNodeViewModifier.h"
 #import <objc/runtime.h>
-
+#import "ArgoReusedLayoutHelper.h"
 static void performSelector(id object, SEL selector, NSArray<id> *values)
 {
+    if (object == nil) {
+        return;
+    }
     NSMethodSignature *methodSignate = [[object class] instanceMethodSignatureForSelector:selector];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignate];
     invocation.target = object;
@@ -75,11 +78,6 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         }
   }
     [invocation invoke];
-    //TODO: 获取返回值，暂不支持
-//    id returnValue = nil;
-//    if (methodSignate.methodReturnLength != 0) {
-//        [invocation getReturnValue:&returnValue];
-//  }
 }
 
 @implementation ArgoKitNodeViewModifier
@@ -87,29 +85,22 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     if (!node) {
         return;
     }
-    if (node.view) {
-        [self _nodeViewAttributeWithNode:node attributes:attributes];
-    }else{
-        if (node.linkNode.revLinkNode == node) {
-            [self _nodeViewAttributeWithNode:node.linkNode attributes:attributes];
-        }
-    }
+    [self _nodeViewAttributeWithNode:node attributes:attributes markDirty:YES];
 }
 
-+ (void)_nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes{
++ (void)_nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
     if (!node) {
         return;
     }
-    if (node.view) {
-        for (ViewAttribute *attribute in attributes) {
-            if ([node.view respondsToSelector:attribute.selector]) {
-                performSelector(node.view,attribute.selector,attribute.paramter);
-                if (attribute.isDirty) {
-                    [node markDirty];
-                }
-            }else if([node.view.layer respondsToSelector:attribute.selector]){
-                performSelector(node.view.layer,attribute.selector,attribute.paramter);
-            }
+    UIView *view = node.view;
+    for (ViewAttribute *attribute in attributes) {
+        if (view && [view respondsToSelector:attribute.selector]) {
+            performSelector(view,attribute.selector,attribute.paramter);
+        }else if([view.layer respondsToSelector:attribute.selector]){
+            performSelector(view.layer,attribute.selector,attribute.paramter);
+        }
+        if (attribute.isDirty && markDirty) {
+            [node markDirty];
         }
     }
 }
@@ -122,14 +113,20 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
         ArgoKitNode *resueNode = reuseNodes[i];
+        
         resueNode.linkNode = node;
-        node.revLinkNode = resueNode;
+        
         node.backupViewAttributes = resueNode.viewAttributes;
-        [self nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues];
+        [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
         node.view.frame = resueNode.frame;
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
             [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs];
         }
     }
+}
+
++ (void)reuseNodeViewAttribute:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
+    reuseNode.linkNode = node;
+    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs];
 }
 @end
