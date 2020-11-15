@@ -13,6 +13,7 @@ class ArgoKitItem:ArgoKitIdentifiable {
     var identifier: String
     var reuseIdentifier: String
     var text:String
+    var index:Int = 0
     init() {
         self.reuseIdentifier = "ArgoKitItem"
         self.identifier = "identifier"
@@ -32,9 +33,9 @@ class row: View{
     }
     var body:View{
         HStack{ [self] in
-            ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+//            ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
             Text(item.text).backgroundColor(.purple).numberOfLines(0).alignSelf(ArgoAlign.center).width(10).alias(variable: &self.item.textCom)
-        }.width(100%).height(200)
+        }.width(100%)
     }
     
 }
@@ -45,6 +46,7 @@ class DemoContentView: View {
         for index in 1..<100 {
             let item:ArgoKitItem = ArgoKitItem()
             item.text = String(index * index)
+            item.index = index
             if index == 15 {
                 item.reuseIdentifier = "15"
             }else{
@@ -57,11 +59,16 @@ class DemoContentView: View {
     
     var body:View{
         List(data:items) { item in
-            row(item: item).padding(edge: .left, value: 10).backgroundColor(.orange)
+            if item.index % 2 == 0{
+                row(item: item).padding(edge: .left, value: 10).backgroundColor(.orange)
+            }else{
+                row(item: item).padding(edge: .left, value: 10).backgroundColor(.cyan)
+            }
+           
         }.width(100%).height(100%).backgroundColor(.red)
         .didSelectRowAtIndexPath {[weak self] indexPath in
             let item:ArgoKitItem? = self?.items[indexPath.row]
-            item?.textCom?.text("haha"+item!.text)
+            item?.textCom?.text("haha11"+item!.text)
         }
     }
 }

@@ -6,10 +6,12 @@
 //
 
 import Foundation
-
+class ArgoKitCellNode: ArgoKitNode {
+    public var indexPath:IndexPath = IndexPath(row: 0, section: 0)
+}
 class ArgoKitListCell: UITableViewCell {
   
-    var contentNode: ArgoKitNode?
+    var contentNode: ArgoKitCellNode?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,8 +21,11 @@ class ArgoKitListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    deinit {
+        print("cell deinit")
+    }
     
-    public func linkCellNode(_ node: ArgoKitNode) {
+    public func linkCellNode(_ node: ArgoKitCellNode) {
         if let contentNode =  self.contentNode{
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculationWithoutView()
