@@ -338,7 +338,36 @@ public enum ArgoEdge{
     case vertical
     case all
 }
+public struct ArgoEdgeValue{
+    public var top: ArgoValue
+
+    public var left: ArgoValue
+
+    public var bottom: ArgoValue
+
+    public var right: ArgoValue
+
+    public init(){
+        self.top = 0
+        self.left = 0
+        self.bottom = 0
+        self.right = 0
+    }
+
+    public init(top: ArgoValue, left: ArgoValue, bottom: ArgoValue, right: ArgoValue){
+        self.top = top
+        self.left = left
+        self.bottom = bottom
+        self.right = right
+    }
+}
 extension View{
+    public func position(_ value:ArgoEdgeValue)->Self{
+        return position(edge: .top, value: value.top)
+            .position(edge: .left, value: value.left)
+            .position(edge: .bottom, value: value.bottom)
+            .position(edge: .right, value: value.right)
+    }
     public func position(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:
@@ -422,6 +451,12 @@ extension View{
 }
 
 extension View{
+    public func margin(_ value:ArgoEdgeValue)->Self{
+        return margin(edge: .top, value: value.top)
+            .margin(edge: .left, value: value.left)
+            .margin(edge: .bottom, value: value.bottom)
+            .margin(edge: .right, value: value.right)
+    }
     public func margin(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:
@@ -540,6 +575,12 @@ extension View{
 
 
 extension View{
+    public func padding(_ value:ArgoEdgeValue)->Self{
+        return margin(edge: .top, value: value.top)
+            .margin(edge: .left, value: value.left)
+            .margin(edge: .bottom, value: value.bottom)
+            .margin(edge: .right, value: value.right)
+    }
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:

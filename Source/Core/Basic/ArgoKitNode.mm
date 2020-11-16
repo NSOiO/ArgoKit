@@ -386,7 +386,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     if (self.parentNode.view) {
         NSInteger index = [self.parentNode.childs indexOfObject:self];
-        [self.parentNode.view insertSubview:self.view atIndex:index];
+        if ([self.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
+            [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
+        }else{
+            [self.parentNode.view insertSubview:self.view atIndex:index];
+        }
     }
 }
 
@@ -524,7 +528,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self.layout applyLayoutAferCalculation];
     }
 }
-- (void)applyLayoutAferCalculationForReused{
+- (void)applyLayoutAferCalculationWithoutView{
     if (self.layout) {
         [self.layout applyLayoutAferCalculationForReused];
     }
@@ -644,7 +648,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (nullable id)valueWithSelector:(SEL)selector{
     NSString *selector_name =  @(sel_getName(selector));
-    ViewAttribute *attribute = self.viewAttributes[selector_name];
+    ViewAttribute *attribute = self.backupViewAttributes[selector_name];
     if (attribute) {
         return attribute.paramter.firstObject;
     }

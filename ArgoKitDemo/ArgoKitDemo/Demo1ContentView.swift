@@ -78,9 +78,7 @@ struct Demo1ContentView:View {
         Button(text: "buttom1buttom1buttom1buttom1"){
             print("buttom1")
             model.text1?.text("buttom1but").numberOfLines(2)
-
-
-        }.titleColor(.red, for: UIControl.State.normal)
+        }.titleColor(nil, for: UIControl.State.normal)
         .width(150).height(100).backgroundColor(.yellow).margin(edge: .top, value: 64)
         ImageView("turtlerock").isUserInteractionEnabled(true)
         hstack

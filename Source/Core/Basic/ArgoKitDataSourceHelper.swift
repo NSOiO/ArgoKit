@@ -119,7 +119,7 @@ extension ArgoKitDataSourceHelper {
             return node
         } else if let view = self.buildNodeFunc?(self.dataList![section][row]) {
             if let nodes = view.type.viewNodes() {
-                let contentNode = ArgoKitNode(viewClass: UIView.self)
+                let contentNode = ArgoKitCellNode(viewClass: UIView.self)
                 contentNode.addChildNodes(nodes)
                 self.nodeCache.setObject(contentNode, forKey: cacheKey)
                 return contentNode
@@ -145,7 +145,7 @@ extension ArgoKitDataSourceHelper {
         
         if let view = self.buildNodeFunc?(self.dataList![section][row]) {
             if let nodes = view.type.viewNodes() {
-                let contentNode = ArgoKitNode(viewClass: UIView.self)
+                let contentNode = ArgoKitCellNode(viewClass: UIView.self)
                 contentNode.addChildNodes(nodes)
                 return contentNode
             }

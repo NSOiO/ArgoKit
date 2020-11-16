@@ -6,10 +6,12 @@
 //
 
 import Foundation
-
+class ArgoKitCellNode: ArgoKitNode {
+    public var indexPath:IndexPath = IndexPath(row: 0, section: 0)
+}
 class ArgoKitListCell: UITableViewCell {
   
-    var contentNode: ArgoKitNode?
+    var contentNode: ArgoKitCellNode?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,17 +21,21 @@ class ArgoKitListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    deinit {
+        print("cell deinit")
+    }
     
-    public func linkCellNode(_ node: ArgoKitNode) {
-        if self.contentNode != nil {
+    public func linkCellNode(_ node: ArgoKitCellNode) {
+        if let contentNode =  self.contentNode{
             if node.frame.equalTo(.zero) || node.isDirty {
-                node.applyLayoutAferCalculationForReused()
+                node.applyLayoutAferCalculationWithoutView()
             }
-            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
-        } else {
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(contentNode, reuse: node)
+        }else{
             node.bindView(self.contentView)
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation()
         }
+        ArgoReusedLayoutHelper.addLayoutNode(node)
     }
 }

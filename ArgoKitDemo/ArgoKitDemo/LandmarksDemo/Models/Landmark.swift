@@ -7,7 +7,6 @@ The model for an individual landmark.
 
 import ArgoKit
 import CoreLocation
-
 class Landmark: Hashable, Codable, ArgoKitIdentifiable {
     static func == (lhs: Landmark, rhs: Landmark) -> Bool {
         if lhs.identifier == rhs.identifier
@@ -55,3 +54,4 @@ struct Coordinates: Hashable, Codable {
     var latitude: Double
     var longitude: Double
 }
+

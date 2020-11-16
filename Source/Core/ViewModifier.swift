@@ -37,11 +37,17 @@ extension View{
     public func addAttribute(_ selector:Selector, _ patamter:Any? ...) {
         if let node = self.node{
             // 获取参数
-            var patamters:Array<Any> = Array()
+            var paraList:Array<Any> = Array()
             for item in patamter {
-                patamters.append(item!)
+                if let innerItem =  item{
+                    paraList.append(innerItem)
+                }
             }
-            let attribute = ViewAttribute(selector:selector,paramter:patamters)
+            if patamter.count !=  paraList.count{
+                return
+            }
+            
+            let attribute = ViewAttribute(selector:selector,paramter:paraList)
             attribute.isDirty = isDirty(selector)
             ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attribute])
             
