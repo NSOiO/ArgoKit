@@ -41,11 +41,11 @@ class ArgoKitListCell: UITableViewCell {
     }
     
     public func linkCellNode(_ node: ArgoKitCellNode) {
-        if let contentNode =  self.contentNode{
+        if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculationWithoutView()
             }
-            ArgoKitNodeViewModifier.reuseNodeViewAttribute(contentNode, reuse: node)
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!, reuse: node)
         }else{
             node.bindView(self.contentView)
             self.contentNode = node

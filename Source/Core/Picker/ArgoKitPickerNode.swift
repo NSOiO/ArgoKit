@@ -36,16 +36,17 @@ class ArgoKitPickerRowView: UIView {
         if node.size.width == 0 || node.size.height == 0 {
             node.calculateLayout(size: CGSize(width: node.width(), height: node.height()))
         }
-        if self.contentNode != nil {
+        if self.contentView?.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) {
                 node.applyLayoutAferCalculationWithoutView()
             }
-            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!.childs as? [ArgoKitNode], reuse: node.childs as? [ArgoKitNode]);
+            ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!, reuse: node)
         } else {
             node.bindView(self.contentView!)
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation()
         }
+        ArgoReusedLayoutHelper.addLayoutNode(node)
     }
 }
 

@@ -39,12 +39,10 @@ extension ArgoKitTextFieldNode: UITextFieldDelegate {
         self.sendAction(withObj: String(_sel: sel), paramter: [reason])
     }
     
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let sel = #selector(self.textField(_:shouldChangeCharactersIn:replacementString:))
         return self.sendAction(withObj: String(_sel: sel), paramter: [range, string]) as? Bool ?? true
     }
-    
     
     @available(iOS 13.0, *)
     func textFieldDidChangeSelection(_ textField: UITextField) {
