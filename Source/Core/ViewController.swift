@@ -8,24 +8,16 @@
 import Foundation
 extension View{
     public func viewController()->UIViewController?{
-        if let view = self.node?.view {
-            var next = view.next
-            repeat{
-                if let _ = next?.isKind(of: UIViewController.self) {
-                    return next as? UIViewController
-                }
-                next = view.next
-            }while next != nil
+        if let tempview = self.node?.view {
+            for view in sequence(first: tempview.superview, next: {$0?.superview}){
+                        if let responder = view?.next{
+                            if responder.isKind(of: UIViewController.self){
+                                return responder as? UIViewController
+                            }
+                        }
+                    }
+            return nil
         }
         return nil
-    }
-}
-
-extension View{
-    public func alert(title: String?, message: String?, preferredStyle: UIAlertController.Style){
-        var alerView = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        var action:UIAlertAction = UIAlertAction(title: title, style: style) { (<#UIAlertAction#>) in
-            
-        }
     }
 }

@@ -65,7 +65,7 @@ class DemoContentView: View {
                 row(item: item).padding(edge: .left, value: 10).backgroundColor(.cyan)
             }
            
-        }.width(100%).height(100%).backgroundColor(.red)
+        }.width(100%).height(100%).backgroundColor(.white)
         .didSelectRowAtIndexPath {[weak self] indexPath in
             let item:ArgoKitItem? = self?.items[indexPath.row]
             item?.textCom?.text("haha11"+item!.text)
