@@ -18,9 +18,10 @@ public class TextField : View {
         self.init(nil)
     }
     
-    public init(_ text: String?) {
+    public init(_ text: String?, placeholder: String? = nil) {
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
         addAttribute(#selector(setter:UITextField.text),text)
+        addAttribute(#selector(setter:UITextField.placeholder),placeholder)
     }
 }
 
@@ -154,7 +155,7 @@ extension TextField {
 
 extension TextField {
     
-    func shouldBeginEditing(_ action: @escaping () -> Bool) -> Self {
+    public func shouldBeginEditing(_ action: @escaping () -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldBeginEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return action()
@@ -162,7 +163,7 @@ extension TextField {
         return self
     }
     
-    func didBeginEditing(_ action: @escaping () -> Void) -> Self {
+    public func didBeginEditing(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldDidBeginEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             action()
@@ -171,7 +172,7 @@ extension TextField {
         return self
     }
     
-    func shouldEndEditing(_ action: @escaping () -> Bool) -> Self {
+    public func shouldEndEditing(_ action: @escaping () -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldEndEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return action()
@@ -180,7 +181,7 @@ extension TextField {
     }
     
     @available(iOS 10.0, *)
-    func didEndEditing(_ action: @escaping (_ reason: UITextField.DidEndEditingReason) -> Void) -> Self {
+    public func didEndEditing(_ action: @escaping (_ reason: UITextField.DidEndEditingReason) -> Void) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldDidEndEditing(_:reason:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -193,8 +194,7 @@ extension TextField {
         return self
     }
     
-    
-    func shouldChangeCharactersInRangeWithReplacementString(_ action: @escaping (_ range: NSRange, _ replacementString: String) -> Bool) -> Self {
+    public func shouldChangeCharactersInRangeWithReplacementString(_ action: @escaping (_ range: NSRange, _ replacementString: String) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textField(_:shouldChangeCharactersIn:replacementString:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -208,9 +208,8 @@ extension TextField {
         return self
     }
     
-    
     @available(iOS 13.0, *)
-    func didChangeSelection(_ action: @escaping () -> Void) -> Self {
+    public func didChangeSelection(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldDidChangeSelection(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             action()
@@ -219,7 +218,7 @@ extension TextField {
         return self
     }
         
-    func shouldClear(_ action: @escaping () -> Bool) -> Self {
+    public func shouldClear(_ action: @escaping () -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldClear(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return action()
@@ -227,7 +226,7 @@ extension TextField {
         return self
     }
     
-    func shouldReturn(_ action: @escaping () -> Bool) -> Self {
+    public func shouldReturn(_ action: @escaping () -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldReturn(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return action()
