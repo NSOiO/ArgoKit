@@ -101,10 +101,19 @@ extension ArgoKitDataSourceHelper {
     
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitNode? {
         
+        let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
+        if let node = self.nodeCache.object(forKey: cacheKey) {
+            return node
+        }
+        
         if nodeList != nil {
             if section < nodeList!.count
                 && row < nodeList![section].count {
-                return nodeList![section][row]
+                let node = nodeList![section][row]
+                let contentNode = ArgoKitCellNode(viewClass: UIView.self)
+                contentNode.addChildNode(node)
+                self.nodeCache.setObject(contentNode, forKey: cacheKey)
+                return contentNode
             }
             return nil
         }
@@ -113,11 +122,8 @@ extension ArgoKitDataSourceHelper {
             || row >= dataList?[section].count ?? 0 {
             return nil
         }
-        
-        let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        if let node = self.nodeCache.object(forKey: cacheKey) {
-            return node
-        } else if let view = self.buildNodeFunc?(self.dataList![section][row]) {
+
+        if let view = self.buildNodeFunc?(self.dataList![section][row]) {
             if let nodes = view.type.viewNodes() {
                 let contentNode = ArgoKitCellNode(viewClass: UIView.self)
                 contentNode.addChildNodes(nodes)

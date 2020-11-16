@@ -12,6 +12,7 @@ fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
 class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    
     var cellList:[ArgoKitListCell] = [ArgoKitListCell]();
     lazy var dataSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()
@@ -51,11 +52,16 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
         }
         return tableView
     }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let node = object as? ArgoKitCellNode {
+            let indexPath = node.indexPath
+            tableView?.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
 extension ArgoKitTableNode {
-    
-   
     
     open func reloadData() {
         self.dataSourceHelper.removeAllCache()
@@ -104,22 +110,7 @@ extension ArgoKitTableNode {
         }
         return cell
     }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        if let node = object as? ArgoKitCellNode {
-            node.removeObserver(self, forKeyPath: "frame")
-            let indexPath = node.indexPath
-            let cell:ArgoKitListCell = tableView?.cellForRow(at:indexPath) as! ArgoKitListCell
-            
-            tableView?.beginUpdates()
-            UIView.animate(withDuration: 0.3) {
-                cell.frame = node.frame;
-            }
-            tableView?.endUpdates()
-        }
-        
-    }
-    
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titlesForHeaderInSection?[section]
     }
@@ -184,9 +175,8 @@ extension ArgoKitTableNode {
 extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-            (node as! ArgoKitCellNode).indexPath = indexPath
-            node.addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) as? ArgoKitCellNode {
+            node.observeFrameChanged(self, indexPath: indexPath)
         }
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
@@ -203,6 +193,9 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) as? ArgoKitCellNode {
+            node.removeObservingFrameChanged(self)
+        }
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
     }

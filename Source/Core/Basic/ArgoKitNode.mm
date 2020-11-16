@@ -205,7 +205,10 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
         },
     };
     
-    node.frame = frame;
+    [node createNodeViewIfNeed:frame];
+    if (!CGRectEqualToRect(node.frame, frame)) {
+        node.frame = frame;
+    }
     if (![layout isLeaf]) {
         for (NSUInteger i=0; i<node.childs.count; i++) {
             ArgoKitNode *chiledNode = node.childs[i];
@@ -394,10 +397,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
-#pragma mark --- property setter/getter ---
-- (void)setFrame:(CGRect)frame{
-    _frame = frame;
-    _size = frame.size;
+- (void)createNodeViewIfNeed:(CGRect)frame {
     if (_isReused) {
         return;
     }
@@ -406,11 +406,18 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
             [wealSelf commitAttributes];
-        }else{
+        }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
             wealSelf.view.frame = frame;
         }
     }];
 }
+
+#pragma mark --- property setter/getter ---
+- (void)setFrame:(CGRect)frame{
+    _frame = frame;
+    _size = frame.size;
+}
+
 - (NSMutableArray<ArgoKitNode *> *)childs{
     if (!_childs) {
         _childs = [[NSMutableArray<ArgoKitNode *> alloc] init];
