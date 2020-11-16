@@ -198,7 +198,8 @@ extension TextView {
 
     @available(iOS 10.0, *)
     public func shouldInteractWithURLInCharacterRangeInteraction(_ action: @escaping (_ URL: URL, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
-        node?.observeAction("textView:shouldInteractWithURL:in:interaction:", actionBlock: { (obj, paramter) -> Any? in
+        let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, URL, NSRange, UITextItemInteraction) -> Bool)
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
                 let URL: URL = paramter![0] as! URL
@@ -213,7 +214,8 @@ extension TextView {
 
     @available(iOS 10.0, *)
     public func shouldInteractWithTextAttachmentInCharacterRangeInteraction(_ action: @escaping (_ textAttachment: NSTextAttachment, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
-        node?.observeAction("textView:shouldInteractWithTextAttachment:in:interaction:", actionBlock: { (obj, paramter) -> Any? in
+        let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool);
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
                 let textAttachment: NSTextAttachment = paramter![0] as! NSTextAttachment

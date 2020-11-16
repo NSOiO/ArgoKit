@@ -57,11 +57,13 @@ extension ArgoKitTextViewNode: UITextViewDelegate {
 
     @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return self.sendAction(withObj: "textView:shouldInteractWithURL:in:interaction:", paramter: [URL, characterRange, interaction]) as? Bool ?? true
+        let sel = #selector(self.textView(_:shouldInteractWith:in:interaction:) as (UITextView, URL, NSRange, UITextItemInteraction) -> Bool)
+        return self.sendAction(withObj: String(_sel: sel), paramter: [URL, characterRange, interaction]) as? Bool ?? true
     }
 
     @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return self.sendAction(withObj: "textView:shouldInteractWithTextAttachment:in:interaction:", paramter: [textAttachment, characterRange, interaction]) as? Bool ?? true
+        let sel = #selector(self.textView(_:shouldInteractWith:in:interaction:) as (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)
+        return self.sendAction(withObj: String(_sel: sel), paramter: [textAttachment, characterRange, interaction]) as? Bool ?? true
     }
 }
