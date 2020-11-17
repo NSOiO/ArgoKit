@@ -8,15 +8,8 @@
 import Foundation
 
 class ArgoKitCellNode: ArgoKitNode {
-    
-    private var in_indexPath : IndexPath = IndexPath(row: 0, section: 0)
-    
-    public var indexPath: IndexPath {
-        in_indexPath
-    }
-    
-    public func observeFrameChanged(_ observer: NSObject, indexPath: IndexPath) {
-        in_indexPath = indexPath
+        
+    public func observeFrameChanged(_ observer: NSObject) {
         addObserver(observer, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
     }
     

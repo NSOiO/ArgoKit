@@ -54,9 +54,9 @@ class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource,
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let node = object as? ArgoKitCellNode {
-            let indexPath = node.indexPath
-            tableView?.reloadRows(at: [indexPath], with: .automatic)
+        if (object as? ArgoKitCellNode) != nil {
+            tableView?.beginUpdates()
+            tableView?.endUpdates()
         }
     }
 }
@@ -176,18 +176,24 @@ extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) as? ArgoKitCellNode {
-            node.observeFrameChanged(self, indexPath: indexPath)
+            node.observeFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+            node.observeFrameChanged(self)
+        }
         let sel = #selector(self.tableView(_:willDisplayHeaderView:forSection:))
         self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+            node.observeFrameChanged(self)
+        }
         let sel = #selector(self.tableView(_:willDisplayFooterView:forSection:))
         self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
@@ -201,11 +207,17 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+            node.removeObservingFrameChanged(self)
+        }
         let sel = #selector(self.tableView(_:didEndDisplayingHeaderView:forSection:))
         self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+            node.removeObservingFrameChanged(self)
+        }
         let sel = #selector(self.tableView(_:didEndDisplayingFooterView:forSection:))
         self.sendAction(withObj: String(_sel: sel), paramter: [section])
     }
