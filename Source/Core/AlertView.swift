@@ -14,9 +14,9 @@ import Foundation
         self.alertController = alertController
         super.init(viewClass: UIView.self)
         
-        observer = self.observe(\.isPresented, options: [.new, .initial]) { (object, change) in
-           print(change)
-        }
+//        observer = self.observe(\.isPresented, options: [.new, .initial]) { (object, change) in
+//           print(change)
+//        }
     }
 }
 public class AlertView: View {
@@ -60,6 +60,7 @@ extension AlertView{
     }
     
     public func show()->Self{
+        print(pNode.isPresented)
         if let viewController = self.viewController(){
             viewController.present(alerView, animated: true, completion: nil)
         }
@@ -68,18 +69,14 @@ extension AlertView{
 }
 
 extension View{
-   /* public func alert(isPresented:inout Bool,@ArgoKitViewBuilder _ builder:@escaping ()->View) -> Self{
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                if let _node_ = node as? ArgokitAlertViewNode {
-                    isPresented = _node_.isPresented
-                }
-                self.node!.addChildNode(node)
-            }
-        }
-        return self
-    }*/
+//   public func alert(isPresented:inout Bool,_ content:()->AlertView) -> Self{
+//        let alertView = content()
+//        if let node = alertView.node as? ArgokitAlertViewNode{
+//            isPresented = node.isPresented
+//            self.node!.addChildNode(node)
+//        }
+//        return self
+//    }
     
     public func alert(_ content:()->AlertView) -> Self{
         let alertView = content()

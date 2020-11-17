@@ -27,6 +27,14 @@ class Demo1ContentView:View {
     }
     var showAlert:Bool = false
     var body:View{
+        
+        TextView("hehe").didBeginEditing {
+            print("didBeginEditing")
+        }.height(10%).width(50%).shouldChangeTextInRangeReplacementText { (rang, text) -> Bool in
+            print(text)
+            return true
+        }.margin(edge: .top, value: 64)
+        
         Button(text: "buttom1buttom1buttom1buttom1"){[weak self] in
             print("buttom1")
             model.text1?.text("buttom1but").numberOfLines(2)
@@ -34,7 +42,7 @@ class Demo1ContentView:View {
             self?.showAlert = true
         }.titleColor(nil, for: UIControl.State.normal)
         .width(150).height(100).backgroundColor(.green).margin(edge: .top, value: 64)
-        .alert() {
+        .alert(){
             AlertView(title: "main title", message: "sub message", preferredStyle: UIAlertController.Style.actionSheet).default(title: "取消") { text in
                 print(text)
             }
@@ -57,6 +65,7 @@ class Demo1ContentView:View {
                     }.onTapGesture {
                         model.text1?.text("hjdjhfbdhjbfd").width(1000)
                     }.backgroundColor(.orange)
+       
     }
 }
 
