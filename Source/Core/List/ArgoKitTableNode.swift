@@ -346,20 +346,35 @@ extension ArgoKitTableNode {
 
     @available(iOS, introduced: 8.0, deprecated: 13.0)
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         let sel = #selector(self.tableView(_:editActionsForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? [UITableViewRowAction]
+        if data != nil {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [data!, indexPath]) as? [UITableViewRowAction]
+        } else {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? [UITableViewRowAction]
+        }
     }
 
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         let sel = #selector(self.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? UISwipeActionsConfiguration
+        if data != nil {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [data!, indexPath]) as? UISwipeActionsConfiguration
+        } else {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? UISwipeActionsConfiguration
+        }
     }
 
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         let sel = #selector(self.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? UISwipeActionsConfiguration
+        if data != nil {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [data!, indexPath]) as? UISwipeActionsConfiguration
+        } else {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? UISwipeActionsConfiguration
+        }
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {

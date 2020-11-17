@@ -553,13 +553,17 @@ extension List {
     }
     
     @available(iOS, introduced: 8.0, deprecated: 13.0)
-    public func editActionsForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> [UITableViewRowAction]?) -> Self {
+    public func editActionsForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> [ListRowAction]?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:editActionsForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                return action(data, indexPath)
+            } else if paramter?.count ?? 0 >= 1 {
                 let indexPath: IndexPath = paramter![0] as! IndexPath
-                return action(indexPath)
+                return action(nil, indexPath)
             }
             return nil
         })
@@ -567,13 +571,17 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func leadingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> UISwipeActionsConfiguration?) -> Self {
+    public func leadingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                return action(data, indexPath)
+            } else if paramter?.count ?? 0 >= 1 {
                 let indexPath: IndexPath = paramter![0] as! IndexPath
-                return action(indexPath)
+                return action(nil, indexPath)
             }
             return nil
         })
@@ -581,13 +589,17 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func trailingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> UISwipeActionsConfiguration?) -> Self {
+    public func trailingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                return action(data, indexPath)
+            } else if paramter?.count ?? 0 >= 1 {
                 let indexPath: IndexPath = paramter![0] as! IndexPath
-                return action(indexPath)
+                return action(nil, indexPath)
             }
             return nil
         })
