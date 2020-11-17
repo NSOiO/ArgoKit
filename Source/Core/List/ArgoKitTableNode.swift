@@ -18,6 +18,7 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
     lazy var sectionFooterSourceHelper = ArgoKitDataSourceHelper()
     
     public var style: UITableView.Style = .plain
+    public var selectionStyle: UITableViewCell.SelectionStyle = .none
     
     public var tableView: UITableView? {
         
@@ -105,6 +106,7 @@ extension ArgoKitTableNode {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ArgoKitListCell
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
         return cell
@@ -123,7 +125,7 @@ extension ArgoKitTableNode {
         if let result = self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? Bool {
             return result
         }
-        return true
+        return false
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -131,7 +133,7 @@ extension ArgoKitTableNode {
         if let result = self.sendAction(withObj: String(_sel: sel), paramter: [indexPath]) as? Bool {
             return result
         }
-        return true
+        return false
     }
 
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -177,48 +179,78 @@ extension ArgoKitTableNode {
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             node.observeFrameChanged(self)
         }
+        let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, indexPath])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
             node.observeFrameChanged(self)
         }
+        let data = self.sectionHeaderSourceHelper.dataForRow(section, at: 0)
         let sel = #selector(self.tableView(_:willDisplayHeaderView:forSection:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, section])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) {
             node.observeFrameChanged(self)
         }
+        let data = self.sectionFooterSourceHelper.dataForRow(section, at: 0)
         let sel = #selector(self.tableView(_:willDisplayFooterView:forSection:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, section])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        }
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             node.removeObservingFrameChanged(self)
         }
+        let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, indexPath])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
+        }
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
             node.removeObservingFrameChanged(self)
         }
+        let data = self.sectionHeaderSourceHelper.dataForRow(section, at: 0)
         let sel = #selector(self.tableView(_:didEndDisplayingHeaderView:forSection:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, section])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        }
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) {
             node.removeObservingFrameChanged(self)
         }
+        let data = self.sectionFooterSourceHelper.dataForRow(section, at: 0)
         let sel = #selector(self.tableView(_:didEndDisplayingFooterView:forSection:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, section])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [section])
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -287,8 +319,14 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         let sel = #selector(self.tableView(_:didSelectRowAt:))
-        self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
+        if data != nil {
+            self.sendAction(withObj: String(_sel: sel), paramter: [data!, indexPath])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [indexPath])
+        }
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

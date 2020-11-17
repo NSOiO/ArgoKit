@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class List : ScrollView {
+public class List<T>: ScrollView where T : ArgoKitIdentifiable {
     
     private var tableNode: ArgoKitTableNode {
         pNode as! ArgoKitTableNode
@@ -26,7 +26,7 @@ public class List : ScrollView {
         }
     }
 
-    public convenience init<T>(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
+    public convenience init(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
         self.init(style: style)
         tableNode.dataSourceHelper.dataList = [data]
         tableNode.dataSourceHelper.buildNodeFunc = { item in
@@ -34,7 +34,7 @@ public class List : ScrollView {
         }
     }
     
-    public convenience init<T>(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable {
+    public convenience init(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
         self.init(style: style)
         tableNode.dataSourceHelper.dataList = sectionData
         tableNode.dataSourceHelper.buildNodeFunc = { item in
@@ -48,6 +48,11 @@ public class List : ScrollView {
 }
 
 extension List {
+    
+    public func selectionStyle(_ value: UITableViewCell.SelectionStyle) -> Self {
+        tableNode.selectionStyle = value
+        return self
+    }
     
     public func estimatedRowHeight(_ value: CGFloat) -> Self {
         addAttribute(#selector(setter:UITableView.estimatedRowHeight),value)
@@ -195,7 +200,7 @@ extension List {
         return self
     }
     
-    public func sectionHeader<T>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self where T : ArgoKitIdentifiable {
+    public func sectionHeader(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
         tableNode.sectionHeaderSourceHelper.dataList = [data]
         tableNode.sectionHeaderSourceHelper.buildNodeFunc = { item in
             return headerContent(item as! T)
@@ -203,7 +208,7 @@ extension List {
         return self
     }
     
-    public func sectionFooter<T>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self where T : ArgoKitIdentifiable {
+    public func sectionFooter(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
         tableNode.sectionFooterSourceHelper.dataList = [data]
         tableNode.sectionFooterSourceHelper.buildNodeFunc = { item in
             return footerContent(item as! T)
@@ -333,78 +338,92 @@ extension List {
 
 extension List {
     
-    public func willDisplayCellForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+    // 当使用 init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) 方法构建时，data 为 nil
+    public func willDisplayCellForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplay:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                action(data, indexPath)
+            } else if paramter?.count ?? 0 >= 1 {
                 let indexPath: IndexPath = paramter![0] as! IndexPath
-                action(indexPath)
+                action(nil, indexPath)
             }
             return nil
         })
         return self
     }
 
-    public func willDisplayHeaderViewForSection(_ action: @escaping (_ section: Int) -> Void) -> Self {
+    public func willDisplayHeaderViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
-                let section: Int = paramter![0] as! Int
-                action(section)
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let section: Int = paramter![1] as! Int
+                action(data, section)
             }
             return nil
         })
         return self
     }
 
-    public func willDisplayFooterViewForSection(_ action: @escaping (_ section: Int) -> Void) -> Self {
+    public func willDisplayFooterViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
-                let section: Int = paramter![0] as! Int
-                action(section)
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let section: Int = paramter![1] as! Int
+                action(data, section)
             }
             return nil
         })
         return self
     }
 
-    public func didEndDisplayingCellForRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+    // 当使用 init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) 方法构建时，data 为 nil
+    public func didEndDisplayingCellForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplaying:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                action(data, indexPath)
+            } else if paramter?.count ?? 0 >= 1 {
                 let indexPath: IndexPath = paramter![0] as! IndexPath
-                action(indexPath)
+                action(nil, indexPath)
             }
             return nil
         })
         return self
     }
 
-    public func didEndDisplayingHeaderViewForSection(_ action: @escaping (_ section: Int) -> Void) -> Self {
+    public func didEndDisplayingHeaderViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplayingHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
-                let section: Int = paramter![0] as! Int
-                action(section)
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let section: Int = paramter![1] as! Int
+                action(data, section)
             }
             return nil
         })
         return self
     }
 
-    public func didEndDisplayingFooterViewForSection(_ action: @escaping (_ section: Int) -> Void) -> Self {
+    public func didEndDisplayingFooterViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplayingFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
-                let section: Int = paramter![0] as! Int
-                action(section)
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let section: Int = paramter![1] as! Int
+                action(data, section)
             }
             return nil
         })
@@ -476,13 +495,18 @@ extension List {
         return self
     }
 
-    public func didSelectRowAtIndexPath(_ action: @escaping (_ indexPath: IndexPath) -> Void) -> Self {
+    // 当使用 init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) 方法构建时，data 为 nil
+    public func didSelectRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 1 {
+            if paramter?.count ?? 0 >= 2 {
+                let data: T = paramter![0] as! T
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                action(data, indexPath)
+            } else if paramter?.count ?? 0 >= 1 {
                 let indexPath: IndexPath = paramter![0] as! IndexPath
-                action(indexPath)
+                action(nil, indexPath)
             }
             return nil
         })

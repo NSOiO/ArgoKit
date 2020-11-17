@@ -70,8 +70,8 @@ class Demo1ContentView:View {
             SessionRow(item: item).width(100%).height(100%).positionRelative()
         }.width(100%).height(100%).canEditRowAtIndexPath { (indexPath) -> Bool in
             return false
-        }.didSelectRowAtIndexPath {[weak self] indexPath in
-            _ = self?.alertView1?.titile(self?.items[indexPath.row].imagePath).message(self?.items[indexPath.row].lastMessage).show()
+        }.didSelectRowAtIndexPath {[weak self] item, indexPath in
+            _ = self?.alertView1?.titile(item!.imagePath).message(item!.lastMessage).show()
         }.alert {
             AlertView(title: "", message: "", preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
                 print(text ?? "")
