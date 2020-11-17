@@ -44,7 +44,7 @@ public enum ArgoDirection{
     case RTL
 }
 extension View {
-    public func direction(_ value:ArgoDirection)->Self{
+    fileprivate func direction(_ value:ArgoDirection)->Self{
         switch value{
         case .Inherit:
             self.node?.directionInherit()
@@ -69,7 +69,7 @@ public enum ArgoFlexDirection{
     case rowReverse
 }
 extension View {
-    public func flexDirection(_ value:ArgoFlexDirection)->Self{
+    fileprivate func flexDirection(_ value:ArgoFlexDirection)->Self{
         switch value{
         case .column:
             self.node?.column()
@@ -239,17 +239,32 @@ extension View{
         return self
     }
 }
+public enum ArgoPositionType{
+    case relative
+    case absolute
+}
+extension View{
+    public func positionType(_ value:ArgoPositionType)->Self{
+        switch value {
+        case .relative:
+            self.node?.positionRelative();
+            break
+        case .absolute:
+            self.node?.positionAbsolute();
+            break
+        }
+        return self;
+    }
+}
+
+public enum ArgoWrapType{
+    case noWrap
+    case wrap
+    case wrapReverse
+}
 
 extension View{
-    public func positionRelative()->Self{
-        self.node?.positionRelative();
-        return self;
-    }
-    public func positionAbsolute()->Self{
-        self.node?.positionAbsolute();
-        return self;
-    }
-    public func noWrap()->Self{
+    public func wrap()->Self{
         self.node?.flexWrapNoWrap();
         return self;
     }
@@ -261,6 +276,8 @@ extension View{
         self.node?.flexWrapWrapREV();
         return self;
     }
+}
+extension View{
     public func overflowVisible()->Self{
         self.node?.overflowVisible();
         return self;
@@ -273,6 +290,8 @@ extension View{
         self.node?.overflowScroll();
         return self;
     }
+}
+extension View{
     public func displayFlex()->Self{
         self.node?.displayFlex();
         return self;
