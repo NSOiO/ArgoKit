@@ -11,7 +11,7 @@ fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
 fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
-class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     lazy var dataSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()

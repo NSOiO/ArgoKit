@@ -12,7 +12,6 @@
 #import "ArgoKitUtils.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
-#import "ArgoKitNode+ScrollViewDelegate.h"
 
 @interface NodeAction:NSObject{
     int actionTag;
@@ -371,9 +370,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
     UIView *view = [self.viewClass new];
     view.frame = frame;
-    if ([view isKindOfClass:[UIScrollView class]]) {
-        ((UIScrollView *)view).delegate = self;
-    }
     return view;
 }
 

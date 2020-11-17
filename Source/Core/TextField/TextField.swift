@@ -155,53 +155,69 @@ extension TextField {
 
 extension TextField {
     
-    public func shouldBeginEditing(_ action: @escaping () -> Bool) -> Self {
+    public func shouldBeginEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldBeginEditing(_:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
-        })
-        return self
-    }
-    
-    public func didBeginEditing(_ action: @escaping () -> Void) -> Self {
-        let sel = #selector(ArgoKitTextFieldNode.textFieldDidBeginEditing(_:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            action()
-            return nil
-        })
-        return self
-    }
-    
-    public func shouldEndEditing(_ action: @escaping () -> Bool) -> Self {
-        let sel = #selector(ArgoKitTextFieldNode.textFieldShouldEndEditing(_:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
-        })
-        return self
-    }
-    
-    @available(iOS 10.0, *)
-    public func didEndEditing(_ action: @escaping (_ reason: UITextField.DidEndEditingReason) -> Void) -> Self {
-        let sel = #selector(ArgoKitTextFieldNode.textFieldDidEndEditing(_:reason:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1 {
-                let reason: UITextField.DidEndEditingReason = paramter![0] as! UITextField.DidEndEditingReason
-                action(reason)
+                let textField: UITextField = paramter![0] as! UITextField
+                return action(textField.text)
             }
             return nil
         })
         return self
     }
     
-    public func shouldChangeCharactersInRangeWithReplacementString(_ action: @escaping (_ range: NSRange, _ replacementString: String) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTextFieldNode.textField(_:shouldChangeCharactersIn:replacementString:))
+    public func didBeginEditing(_ action: @escaping (_ text: String?) -> Void) -> Self {
+        let sel = #selector(ArgoKitTextFieldNode.textFieldDidBeginEditing(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textField: UITextField = paramter![0] as! UITextField
+                action(textField.text)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func shouldEndEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTextFieldNode.textFieldShouldEndEditing(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textField: UITextField = paramter![0] as! UITextField
+                return action(textField.text)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    @available(iOS 10.0, *)
+    public func didEndEditing(_ action: @escaping (_ text: String?, _ reason: UITextField.DidEndEditingReason) -> Void) -> Self {
+        let sel = #selector(ArgoKitTextFieldNode.textFieldDidEndEditing(_:reason:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let range: NSRange = paramter![0] as! NSRange
-                let replacementString: String = paramter![1] as! String
-                return action(range, replacementString)
+                let textField: UITextField = paramter![0] as! UITextField
+                let reason: UITextField.DidEndEditingReason = paramter![1] as! UITextField.DidEndEditingReason
+                action(textField.text, reason)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    public func shouldChangeCharactersInRangeWithReplacementString(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementString: String) -> Bool) -> Self {
+        let sel = #selector(ArgoKitTextFieldNode.textField(_:shouldChangeCharactersIn:replacementString:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 3 {
+                let textField: UITextField = paramter![0] as! UITextField
+                let range: NSRange = paramter![1] as! NSRange
+                let replacementString: String = paramter![2] as! String
+                return action(textField.text, range, replacementString)
             }
             return nil
         })
@@ -209,27 +225,41 @@ extension TextField {
     }
     
     @available(iOS 13.0, *)
-    public func didChangeSelection(_ action: @escaping () -> Void) -> Self {
+    public func didChangeSelection(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldDidChangeSelection(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textField: UITextField = paramter![0] as! UITextField
+                action(textField.text)
+            }
             return nil
         })
         return self
     }
         
-    public func shouldClear(_ action: @escaping () -> Bool) -> Self {
+    public func shouldClear(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldClear(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textField: UITextField = paramter![0] as! UITextField
+                return action(textField.text)
+            }
+            return nil
         })
         return self
     }
     
-    public func shouldReturn(_ action: @escaping () -> Bool) -> Self {
+    public func shouldReturn(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldReturn(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textField: UITextField = paramter![0] as! UITextField
+                return action(textField.text)
+            }
+            return nil
         })
         return self
     }

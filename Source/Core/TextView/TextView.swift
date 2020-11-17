@@ -130,82 +130,110 @@ extension TextView {
 
 extension TextView {
     
-    public func shouldBeginEditing(_ action: @escaping () -> Bool) -> Self {
+    public func shouldBeginEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewShouldBeginEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textView: UITextView = paramter![0] as! UITextView
+                return action(textView.text)
+            }
+            return nil
         })
         return self
     }
 
-    public func shouldEndEditing(_ action: @escaping () -> Bool) -> Self {
+    public func shouldEndEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewShouldEndEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textView: UITextView = paramter![0] as! UITextView
+                return action(textView.text)
+            }
+            return nil
         })
         return self
     }
 
-    public func didBeginEditing(_ action: @escaping () -> Void) -> Self {
+    public func didBeginEditing(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidBeginEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textView: UITextView = paramter![0] as! UITextView
+                action(textView.text)
+            }
             return nil
         })
         return self
     }
 
-    public func didEndEditing(_ action: @escaping () -> Void) -> Self {
+    public func didEndEditing(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidEndEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textView: UITextView = paramter![0] as! UITextView
+                action(textView.text)
+            }
             return nil
         })
         return self
     }
 
-    public func shouldChangeTextInRangeReplacementText(_ action: @escaping (_ range: NSRange, _ text: String) -> Bool) -> Self {
+    public func shouldChangeTextInRangeReplacementText(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementText: String) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textView(_:shouldChangeTextIn:replacementText:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 2 {
-                let range: NSRange = paramter![0] as! NSRange
-                let text: String = paramter![1] as! String
-                return action(range, text)
+            if paramter?.count ?? 0 >= 3 {
+                let textView: UITextView = paramter![0] as! UITextView
+                let range: NSRange = paramter![1] as! NSRange
+                let replacementText: String = paramter![2] as! String
+                return action(textView.text, range, replacementText)
             }
             return nil
         })
         return self
     }
 
-    public func didChange(_ action: @escaping () -> Void) -> Self {
+    public func didChange(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidChange(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textView: UITextView = paramter![0] as! UITextView
+                action(textView.text)
+            }
             return nil
         })
         return self
     }
 
-    public func didChangeSelection(_ action: @escaping () -> Void) -> Self {
+    public func didChangeSelection(_ action: @escaping (_ text: String?, _ selectedRange: NSRange) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidChangeSelection(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            action()
+            
+            if paramter?.count ?? 0 >= 1 {
+                let textView: UITextView = paramter![0] as! UITextView
+                action(textView.text, textView.selectedRange)
+            }
             return nil
         })
         return self
     }
 
     @available(iOS 10.0, *)
-    public func shouldInteractWithURLInCharacterRangeInteraction(_ action: @escaping (_ URL: URL, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
+    public func shouldInteractWithURLInCharacterRangeInteraction(_ action: @escaping (_ text: String?, _ URL: URL, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
         let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, URL, NSRange, UITextItemInteraction) -> Bool)
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 3 {
-                let URL: URL = paramter![0] as! URL
-                let characterRange: NSRange = paramter![1] as! NSRange
-                let interaction: UITextItemInteraction = paramter![2] as! UITextItemInteraction
-                return action(URL, characterRange, interaction)
+            if paramter?.count ?? 0 >= 4 {
+                let textView: UITextView = paramter![0] as! UITextView
+                let URL: URL = paramter![1] as! URL
+                let characterRange: NSRange = paramter![2] as! NSRange
+                let interaction: UITextItemInteraction = paramter![3] as! UITextItemInteraction
+                return action(textView.text, URL, characterRange, interaction)
             }
             return nil
         })
@@ -213,15 +241,16 @@ extension TextView {
     }
 
     @available(iOS 10.0, *)
-    public func shouldInteractWithTextAttachmentInCharacterRangeInteraction(_ action: @escaping (_ textAttachment: NSTextAttachment, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
+    public func shouldInteractWithTextAttachmentInCharacterRangeInteraction(_ action: @escaping (_ text: String?, _ textAttachment: NSTextAttachment, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
         let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool);
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
-            if paramter?.count ?? 0 >= 3 {
-                let textAttachment: NSTextAttachment = paramter![0] as! NSTextAttachment
-                let characterRange: NSRange = paramter![1] as! NSRange
-                let interaction: UITextItemInteraction = paramter![2] as! UITextItemInteraction
-                return action(textAttachment, characterRange, interaction)
+            if paramter?.count ?? 0 >= 4 {
+                let textView: UITextView = paramter![0] as! UITextView
+                let textAttachment: NSTextAttachment = paramter![1] as! NSTextAttachment
+                let characterRange: NSRange = paramter![2] as! NSRange
+                let interaction: UITextItemInteraction = paramter![3] as! UITextItemInteraction
+                return action(textView.text, textAttachment, characterRange, interaction)
             }
             return nil
         })
