@@ -21,7 +21,9 @@ struct ContentView:View {
     let items = ["查查","cscs","122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     var model: TestModel
-    
+    init() {
+        model = TestModel(title: "hahah")
+    }
     var body:View{
         Slider(value: 0.7,in:-1...1,onValueChanged: { value in
             print("UISlider ", value)

@@ -58,11 +58,11 @@ extension Text{
         return self
     }
     public func textAlignment(_ value:NSTextAlignment)->Self{
-        addAttribute(#selector(setter:UILabel.textAlignment),value)
+        addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
         return self
     }
     public func lineBreakMode(_ value:NSLineBreakMode)->Self{
-        addAttribute(#selector(setter:UILabel.lineBreakMode),value)
+        addAttribute(#selector(setter:UILabel.lineBreakMode),value.rawValue)
         
         return self
     }
