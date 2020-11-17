@@ -182,15 +182,15 @@ extension TextView {
         return self
     }
 
-    public func shouldChangeTextInRangeReplacementText(_ action: @escaping (_ text: String?, _ range: NSRange, _ text: String) -> Bool) -> Self {
+    public func shouldChangeTextInRangeReplacementText(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementText: String) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textView(_:shouldChangeTextIn:replacementText:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
                 let textView: UITextView = paramter![0] as! UITextView
                 let range: NSRange = paramter![1] as! NSRange
-                let text: String = paramter![2] as! String
-                return action(textView.text, range, text)
+                let replacementText: String = paramter![2] as! String
+                return action(textView.text, range, replacementText)
             }
             return nil
         })

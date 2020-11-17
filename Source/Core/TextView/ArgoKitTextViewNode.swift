@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArgoKitTextViewNode: ArgoKitNode {
+class ArgoKitTextViewNode: ArgoKitScrollViewNode {
     
     var textContainer: NSTextContainer?
     

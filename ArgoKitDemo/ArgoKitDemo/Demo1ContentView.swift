@@ -28,9 +28,9 @@ class Demo1ContentView:View {
     var showAlert:Bool = false
     var body:View{
         
-        TextView("hehe").didBeginEditing {
+        TextView("hehe").didBeginEditing { text in
             print("didBeginEditing")
-        }.height(10%).width(50%).shouldChangeTextInRangeReplacementText { (rang, text) -> Bool in
+        }.height(10%).width(50%).shouldChangeTextInRangeReplacementText { (text, rang, replacementText) -> Bool in
             print(text)
             return true
         }.margin(edge: .top, value: 64)

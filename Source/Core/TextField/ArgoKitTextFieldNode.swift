@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArgoKitTextFieldNode: ArgoKitNode {
+class ArgoKitTextFieldNode: ArgoKitNode, UITextFieldDelegate {
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let textView = UITextField(frame: frame)
@@ -16,7 +16,7 @@ class ArgoKitTextFieldNode: ArgoKitNode {
     }
 }
 
-extension ArgoKitTextFieldNode: UITextFieldDelegate {
+extension ArgoKitTextFieldNode {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let sel = #selector(self.textFieldShouldBeginEditing(_:))
