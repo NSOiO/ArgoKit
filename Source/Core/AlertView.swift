@@ -60,7 +60,6 @@ extension AlertView{
     }
     
     public func show()->Self{
-//        pNode.isPresented = true
         if let viewController = self.viewController(){
             viewController.present(alerView, animated: true, completion: nil)
         }
@@ -82,12 +81,10 @@ extension View{
         return self
     }*/
     
-    public func alert(@ArgoKitViewBuilder _ builder:@escaping ()->View) -> Self{
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                self.node!.addChildNode(node)
-            }
+    public func alert(_ content:()->AlertView) -> Self{
+        let alertView = content()
+        if let node = alertView.node {
+            self.node!.addChildNode(node)
         }
         return self
     }
