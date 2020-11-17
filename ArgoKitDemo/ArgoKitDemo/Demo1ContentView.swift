@@ -8,64 +8,87 @@
 import Foundation
 import UIKit
 import ArgoKit
-public struct DemoModel1 {
-    var text1:Text?
-    var stack1:HStack?
-    var alert1:AlertView?
-    var showAlert:Bool = false
-    init() {
-    }
+
+public struct SessionItem:ArgoKitIdentifiable{
+    public var identifier: String
+    public var reuseIdentifier: String
+    var imagePath:String?
+    var sessionName:String?
+    var lastMessage:String?
+    var timeLabel:String?
+    var unreadCount:String?
+    
 }
-var model:DemoModel1 = DemoModel1()
-class Demo1ContentView:View {
-    let items = ["查查","cscs","122e"]
-    let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
-  
-    init() {
-
-
+class SessionRow:View{
+    var item:SessionItem
+    init(item:SessionItem) {
+        self.item = item
     }
-    var showAlert:Bool = false
-    var body:View{
-        
-        TextView("hehe").didBeginEditing {
-            print("didBeginEditing")
-        }.height(10%).width(50%).shouldChangeTextInRangeReplacementText { (rang, text) -> Bool in
-            print(text)
-            return true
-        }.margin(edge: .top, value: 64)
-        
-        Button(text: "buttom1buttom1buttom1buttom1"){[weak self] in
-            print("buttom1")
-            model.text1?.text("buttom1but").numberOfLines(2)
-            model.alert1?.show()
-            self?.showAlert = true
-        }.titleColor(nil, for: UIControl.State.normal)
-        .width(150).height(100).backgroundColor(.green).margin(edge: .top, value: 64)
-        .alert(){
-            AlertView(title: "main title", message: "sub message", preferredStyle: UIAlertController.Style.actionSheet).default(title: "取消") { text in
-                print(text)
+    var body: View{
+        HStack{
+            ImageView(self.item.imagePath)
+                .clipsToBounds(true)
+                .cornerRadius(5.0)
+                .backgroundColor(.clear)
+                .width(60.0)
+                .height(60.0)
+                .margin(ArgoEdgeValue(top: 10, left: 10, bottom: 10, right: 0))
+            VStack{
+                Text(self.item.sessionName).maxWidth(300)
+                Text(self.item.lastMessage)
+                    .margin(edge: .top, value: 15).maxWidth(230)
             }
-            .default(title: "确定", handler: { text in
-                print(text)
-            })
-            .backgroundColor(.clear).alias(variable: &model.alert1)
+            .margin(ArgoEdgeValue(top: 10, left: 10, bottom: 10, right: 0))
+            Spacer()
+            VStack{
+                Text(self.item.timeLabel).numberOfLines(0).textAlignment(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)
+                Text(self.item.unreadCount).alignSelf(.center).textColor(.red).backgroundColor(.yellow).margin(edge: .top, value: 15).margin(edge: .right, value: 5)
+            }.width(100)
         }
         
-        ImageView("turtlerock").isUserInteractionEnabled(true)
-        HStack{
-               ImageView("turtlerock")
-                        Text("11").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
-                            .textColor(.red).alias(variable: &model.text1)
-                        Text("111111").backgroundColor(.yellow).height(100).margin(edge: .top, value: 50).position(edge: .left, value: 20)
-                            .textColor(.red)
-        }.isUserInteractionEnabled(true).margin(edge: .top, value: 64)
-                    .alias(variable: &model.stack1).onLongPressGesture(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5){
-                        print("longPressAction")
-                    }.onTapGesture {
-                        model.text1?.text("hjdjhfbdhjbfd").width(1000)
-                    }.backgroundColor(.orange)
+    }
+}
+
+class Demo1ContentView:View {
+    var items = [SessionItem]()
+    init() {
+        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+        let messages = ["chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","icybaysadadadada","silversalmoncreeksdasaxa","vcfdvfdvdfvumbagog","hiddenlake.qdaswdwsad"]
+        for index in 1..<100{
+            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            item.sessionName = images[index%5]
+            item.lastMessage = messages[index%5]
+            item.timeLabel = getTimeLabel()
+            item.unreadCount = String(index)
+            items.append(item)
+        }
+    }
+    var alertView1:AlertView?
+    var body:View{
+        List(data:items){ item in
+            SessionRow(item: item).width(100%).height(100%).positionRelative()
+        }.width(100%).height(100%).canEditRowAtIndexPath { (indexPath) -> Bool in
+            return false
+        }.didSelectRowAtIndexPath {[weak self] indexPath in
+            _ = self?.alertView1?.titile(self?.items[indexPath.row].imagePath).message(self?.items[indexPath.row].lastMessage).show()
+        }.alert {
+            AlertView(title: "", message: "", preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+                print(text ?? "")
+            }.cancel(title: "取消") {}
+            .textField()
+            .alias(variable: &alertView1)
+        }
        
     }
+    
+    func getTimeLabel()->String{
+        let formatter:DateFormatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+        formatter.dateFormat = "HH:mm:ss"
+        let str:String = formatter.string(from: NSDate() as Date)
+        return str
+    }
+   
 }
 

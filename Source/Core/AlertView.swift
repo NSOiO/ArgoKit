@@ -13,57 +13,78 @@ import Foundation
     public init(alertController:UIAlertController) {
         self.alertController = alertController
         super.init(viewClass: UIView.self)
-        
-//        observer = self.observe(\.isPresented, options: [.new, .initial]) { (object, change) in
-//           print(change)
-//        }
     }
 }
 public class AlertView: View {
     let pNode:ArgokitAlertViewNode
     let alerView:UIAlertController
+    var pTextField:UITextField?
     public var node: ArgoKitNode?{
         pNode
     }
-    public init(title: String?, message: String?, preferredStyle: UIAlertController.Style){
+    public init(title: String? = "", message: String? = "", preferredStyle: UIAlertController.Style){
         alerView = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         pNode = ArgokitAlertViewNode(alertController: alerView)
     }
 }
 extension AlertView{
     public func `default`(title:String?,handler:((String?)->Void)?)->Self{
-        let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.default) { action in
+        let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.default) {[weak self] action in
             if let block = handler{
-                block(action.title)
+                block(self?.pTextField?.text)
             }
         }
         alerView.addAction(alertAction)
         return self
     }
-    public func cancel(title:String?,handler:((String?)->Void)?)->Self{
+    public func cancel(title:String?,handler:(()->Void)?)->Self{
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.cancel) { action in
             if let block = handler{
-                block(action.title)
+                block()
             }
         }
         alerView.addAction(alertAction)
+        
         return self
     }
     public func destructive(title:String?,handler:((String?)->Void)?)->Self{
-        let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.destructive) { action in
+        let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.destructive) { [weak self] action in
             if let block = handler{
-                block(action.title)
+                block(self?.pTextField?.text)
             }
         }
         alerView.addAction(alertAction)
         return self
     }
     
+    public func textField()->Self{
+        alerView.addTextField { [weak self] textFiled in
+            self?.pTextField = textFiled
+        }
+        return self
+    }
+    
     public func show()->Self{
-        print(pNode.isPresented)
         if let viewController = self.viewController(){
             viewController.present(alerView, animated: true, completion: nil)
         }
+        return self
+    }
+}
+/*
+@available(iOS 9.0, *)
+open var preferredAction: UIAlertAction?
+
+
+open func addTextField(configurationHandler: ((UITextField) -> Void)? = nil)
+ */
+extension AlertView{
+    public func titile(_ value: String?)->Self{
+        alerView.title = value
+        return self
+    }
+    public func message(_ value: String?)->Self{
+        alerView.message = value
         return self
     }
 }

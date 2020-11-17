@@ -31,9 +31,8 @@ public class Text:View {
     }
     public convenience init(_ text:String?) {
         self.init()
-        addAttribute(#selector(setter:UILabel.text),text!)
+        addAttribute(#selector(setter:UILabel.text),text)
     }
-
 }
 
 extension Text{
