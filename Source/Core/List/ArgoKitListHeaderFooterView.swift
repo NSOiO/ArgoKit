@@ -9,9 +9,9 @@ import Foundation
 
 class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
   
-    var contentNode: ArgoKitNode?
+    var contentNode: ArgoKitCellNode?
         
-    public func linkCellNode(_ node: ArgoKitNode) {
+    public func linkCellNode(_ node: ArgoKitCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculationWithoutView()

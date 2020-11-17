@@ -9,8 +9,8 @@ import Foundation
 
 class ArgoKitDataSourceHelper {
       
-    lazy var nodeCache: NSCache<NSString, ArgoKitNode> = { () -> NSCache<NSString, ArgoKitNode> in
-        let cahe = NSCache<NSString, ArgoKitNode>()
+    lazy var nodeCache: NSCache<NSString, ArgoKitCellNode> = { () -> NSCache<NSString, ArgoKitCellNode> in
+        let cahe = NSCache<NSString, ArgoKitCellNode>()
         cahe.name = "com.\(type(of: self)).node.cache"
         cahe.countLimit = 500
         return cahe
@@ -99,7 +99,7 @@ extension ArgoKitDataSourceHelper {
         return nil
     }
     
-    open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitNode? {
+    open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
         
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
         if let node = self.nodeCache.object(forKey: cacheKey) {

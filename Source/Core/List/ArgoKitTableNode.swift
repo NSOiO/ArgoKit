@@ -13,7 +13,6 @@ fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
 class ArgoKitTableNode: ArgoKitNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
-    var cellList:[ArgoKitListCell] = [ArgoKitListCell]();
     lazy var dataSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionFooterSourceHelper = ArgoKitDataSourceHelper()
@@ -106,7 +105,7 @@ extension ArgoKitTableNode {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ArgoKitListCell
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-            cell.linkCellNode(node as! ArgoKitCellNode)
+            cell.linkCellNode(node)
         }
         return cell
     }
@@ -175,7 +174,7 @@ extension ArgoKitTableNode {
 extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) as? ArgoKitCellNode {
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             node.observeFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
@@ -183,7 +182,7 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+        if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
             node.observeFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:willDisplayHeaderView:forSection:))
@@ -191,7 +190,7 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+        if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) {
             node.observeFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:willDisplayFooterView:forSection:))
@@ -199,7 +198,7 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) as? ArgoKitCellNode {
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             node.removeObservingFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
@@ -207,7 +206,7 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+        if let node = self.sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
             node.removeObservingFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:didEndDisplayingHeaderView:forSection:))
@@ -215,7 +214,7 @@ extension ArgoKitTableNode {
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) as? ArgoKitCellNode {
+        if let node = self.sectionFooterSourceHelper.nodeForRow(section, at: 0) {
             node.removeObservingFrameChanged(self)
         }
         let sel = #selector(self.tableView(_:didEndDisplayingFooterView:forSection:))
