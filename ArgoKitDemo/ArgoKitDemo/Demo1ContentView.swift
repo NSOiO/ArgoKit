@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import ArgoKit
-public class DemoModel1 {
+public struct DemoModel1 {
     var text1:Text?
     var stack1:HStack?
     var alert1:AlertView?
@@ -25,17 +25,23 @@ class Demo1ContentView:View {
 
 
     }
+    var showAlert:Bool = false
     var body:View{
-        Button(text: "buttom1buttom1buttom1buttom1"){
+        Button(text: "buttom1buttom1buttom1buttom1"){[weak self] in
             print("buttom1")
             model.text1?.text("buttom1but").numberOfLines(2)
             model.alert1?.show()
+            self?.showAlert = true
         }.titleColor(nil, for: UIControl.State.normal)
         .width(150).height(100).backgroundColor(.green).margin(edge: .top, value: 64)
-        .alert(isPresented: &model.showAlert) {
-            AlertView(title: "main title", message: "sub message", preferredStyle: UIAlertController.Style.alert).default(title: "text") { text in
-                
-            }.backgroundColor(.clear).alias(variable: &model.alert1)
+        .alert() {
+            AlertView(title: "main title", message: "sub message", preferredStyle: UIAlertController.Style.actionSheet).default(title: "取消") { text in
+                print(text)
+            }
+            .default(title: "确定", handler: { text in
+                print(text)
+            })
+            .backgroundColor(.clear).alias(variable: &model.alert1)
         }
         
         ImageView("turtlerock").isUserInteractionEnabled(true)
