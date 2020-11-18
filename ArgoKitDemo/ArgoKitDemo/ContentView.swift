@@ -26,7 +26,7 @@ struct ContentView:View {
     }
     var body:View{
         
-        Text(model.title).textAlignment(.center)
+        Text(model.title).textAlign(.center)
 //        Slider(value: 0.7,in:-1...1,onValueChanged: { value in
 //            print("UISlider ", value)
 //        }).width(200).height(30)

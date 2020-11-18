@@ -20,12 +20,19 @@ class ArgoKitTextNode: ArgoKitNode {
     }
 }
 public class Text:View {
+    private var fontSize:CGFloat
+    private var fontStyle:AKFontStyle
+    private var font:UIFont
+    private var fontName:String?
     private let pNode:ArgoKitTextNode
     public var node: ArgoKitNode?{
         pNode
     }
 
     public init() {
+        fontStyle = .default
+        fontSize = UIFont.systemFontSize
+        font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
         
     }
@@ -44,6 +51,27 @@ extension Text{
         addAttribute(#selector(setter:UILabel.font),value)
         return self
     }
+    
+    public func fontName(_ value:String?)->Self{
+        fontName = value
+        let font = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
+        addAttribute(#selector(setter:UILabel.font),font)
+        return self
+    }
+    
+    public func fontSize(_ value:CGFloat)->Self{
+        fontSize = value
+        let font = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
+        addAttribute(#selector(setter:UILabel.font),font)
+        return self
+    }
+    
+    public func fontStyle(_ value:AKFontStyle)->Self{
+        let font = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
+        addAttribute(#selector(setter:UILabel.font),font)
+        return self
+    }
+    
     public func textColor(_ value:UIColor!)->Self{
         addAttribute(#selector(setter:UILabel.textColor),value)
         return self
@@ -56,11 +84,11 @@ extension Text{
         addAttribute(#selector(setter:UILabel.shadowOffset),value)
         return self
     }
-    public func textAlignment(_ value:NSTextAlignment)->Self{
+    public func textAlign(_ value:NSTextAlignment)->Self{
         addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
         return self
     }
-    public func lineBreakMode(_ value:NSLineBreakMode)->Self{
+    public func breakMode(_ value:NSLineBreakMode)->Self{
         addAttribute(#selector(setter:UILabel.lineBreakMode),value.rawValue)
         
         return self
@@ -91,7 +119,7 @@ extension Text{
         return self
     }
     
-    public func numberOfLines(_ value:Int)->Self{
+    public func lineLimit(_ value:Int)->Self{
         addAttribute(#selector(setter:UILabel.numberOfLines),value)
         return self
     }

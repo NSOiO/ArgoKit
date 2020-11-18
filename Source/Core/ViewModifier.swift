@@ -151,4 +151,10 @@ extension View{
         addAttribute(#selector(setter:CALayer.cornerRadius),value)
         return self;
     }
+    public func borderColor(_ value:CGColor)->Self{
+        addAttribute(#selector(setter:CALayer.borderColor),value)
+        return self;
+    }
+    
+    
 }

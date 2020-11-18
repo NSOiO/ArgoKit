@@ -264,34 +264,35 @@ public enum ArgoWrapType{
 }
 
 extension View{
-    public func wrap()->Self{
-        self.node?.flexWrapNoWrap();
-        return self;
-    }
-    public func wrap()->Self{
-        self.node?.flexWrapWrap();
-        return self;
-    }
-    public func wrapREV()->Self{
-        self.node?.flexWrapWrapREV();
+    public func wrap(_ value:ArgoWrapType)->Self{
+        switch value {
+        case .noWrap:
+            self.node?.flexWrapNoWrap();
+            break
+        case .wrap:
+            self.node?.flexWrapWrap();
+            break
+        case .wrapReverse:
+            self.node?.flexWrapWrapREV();
+            break
+        }
         return self;
     }
 }
+
 extension View{
-    public func overflowVisible()->Self{
+    fileprivate func overflowVisible()->Self{
         self.node?.overflowVisible();
         return self;
     }
-    public func overflowHidden()->Self{
+    fileprivate func overflowHidden()->Self{
         self.node?.overflowHidden();
         return self;
     }
-    public func overflowScroll()->Self{
+    fileprivate func overflowScroll()->Self{
         self.node?.overflowScroll();
         return self;
     }
-}
-extension View{
     public func displayFlex()->Self{
         self.node?.displayFlex();
         return self;
@@ -314,7 +315,7 @@ public struct ArgoValue {
     
 }
 extension View{
-    public func flex(_ value:CGFloat)->Self{
+    fileprivate func flex(_ value:CGFloat)->Self{
         self.node?.flex(value);
         return self;
     }
@@ -456,6 +457,24 @@ extension View{
                 break
             case .percent:
                 self.node?.end(percent: value.value)
+                break
+            default:
+                break
+            }
+            break
+        case .all:
+            switch value.type {
+            case .point:
+                self.node?.top(point: value.value)
+                self.node?.left(point: value.value)
+                self.node?.bottom(point: value.value)
+                self.node?.right(point: value.value)
+                break
+            case .percent:
+                self.node?.top(percent: value.value)
+                self.node?.left(percent: value.value)
+                self.node?.bottom(percent: value.value)
+                self.node?.right(percent: value.value)
                 break
             default:
                 break

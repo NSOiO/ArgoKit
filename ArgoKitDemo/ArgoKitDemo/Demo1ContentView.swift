@@ -34,14 +34,14 @@ class SessionRow:View{
                 .height(60.0)
                 .margin(ArgoEdgeValue(top: 10, left: 10, bottom: 10, right: 0))
             VStack{
-                Text(self.item.sessionName).maxWidth(300)
+                Text(self.item.sessionName).maxWidth(300).fontSize(20).fontStyle(.bolditalic)
                 Text(self.item.lastMessage)
                     .margin(edge: .top, value: 15).maxWidth(230)
             }
             .margin(ArgoEdgeValue(top: 10, left: 10, bottom: 10, right: 0))
             Spacer()
             VStack{
-                Text(self.item.timeLabel).numberOfLines(0).textAlignment(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)
+                Text(self.item.timeLabel).lineLimit(0).textAlign(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)
                 Text(self.item.unreadCount).alignSelf(.center).textColor(.red).backgroundColor(.yellow).margin(edge: .top, value: 15).margin(edge: .right, value: 5)
             }.width(100)
         }
@@ -67,7 +67,7 @@ class Demo1ContentView:View {
     var alertView1:AlertView?
     var body:View{
         List(data:items){ item in
-            SessionRow(item: item).width(100%).height(100%).positionRelative()
+            SessionRow(item: item).width(100%).height(100%).positionType(.relative)
         }.width(100%).height(100%).canEditRowAtIndexPath { (indexPath) -> Bool in
             return false
         }.didSelectRowAtIndexPath {[weak self] indexPath in
