@@ -119,14 +119,18 @@ public class AKAnimation {
                 assertionFailure("The from value of ArgoKit's animation is invalid.")
                 return nil
             }
-            return UIColor(red: CastToCGFloat(values[0]) / 255.0, green: CastToCGFloat(values[1]) / 255.0, blue: CastToCGFloat(values[2]) / 255.0, alpha: CastToCGFloat(values[3]))
+            return UIColor(red: CastToCGFloat(values[0]) / 255.0,
+                           green: CastToCGFloat(values[1]) / 255.0,
+                           blue: CastToCGFloat(values[2]) / 255.0,
+                           alpha: CastToCGFloat(values[3]))
             
         case .position, .scale, .contentOffset:
             guard values.count == 2 else {
                 assertionFailure("The from value of ArgoKit's animation is invalid.")
                 return nil
             }
-            return CGPoint(x: CastToCGFloat(values[0]), y: CastToCGFloat(values[1]))
+            return CGPoint(x: CastToCGFloat(values[0]),
+                           y: CastToCGFloat(values[1]))
             
         default:
             break
@@ -200,19 +204,19 @@ public class AKAnimation {
     
     private func configSpringAnimation(_ anim: MLASpringAnimation) {
         if let bounce = springAnimConfig[AKTimingConfigBounciness] {
-            anim.springBounciness = bounce as! CGFloat
+            anim.springBounciness = CastToCGFloat(bounce)
         }
         if let speed = springAnimConfig[AKTimingConfigSpeed] {
-            anim.springSpeed = speed as! CGFloat
+            anim.springSpeed = CastToCGFloat(speed)
         }
         if let tension = springAnimConfig[AKTimingConfigTension] {
-            anim.dynamicsTension = tension as! CGFloat
+            anim.dynamicsTension = CastToCGFloat(tension)
         }
         if let friction = springAnimConfig[AKTimingConfigFriction] {
-            anim.dynamicsFriction = friction as! CGFloat
+            anim.dynamicsFriction = CastToCGFloat(friction)
         }
         if let mass = springAnimConfig[AKTimingConfigMass] {
-            anim.dynamicsMass = mass as! CGFloat
+            anim.dynamicsMass = CastToCGFloat(mass)
         }
         if let velocity = springAnimConfig[AKTimingConfigVelocity] {
             guard velocity is Array<AnyObject> else {
@@ -224,7 +228,8 @@ public class AKAnimation {
             case 1:
                 anim.velocity = array[0]
             case 2:
-                anim.velocity = CGPoint(x: array[0] as! CGFloat, y: array[1] as! CGFloat)
+                anim.velocity = CGPoint(x: CastToCGFloat(array[0]),
+                                        y: CastToCGFloat(array[1]))
             default:
                 break
             }
