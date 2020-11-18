@@ -137,8 +137,12 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 // 获取对应属性值
 - (nullable NSString *)text;
+- (nullable NSAttributedString *)attributedText;
 - (nullable UIFont *)font;
+- (nullable UIColor *)textColor;
 - (NSInteger)numberOfLines NS_SWIFT_NAME(numberOfLines());
+- (NSTextAlignment)textAlignment;
+- (NSLineBreakMode)lineBreakMode;
 - (nullable UIImage *)image;
 @end
 NS_ASSUME_NONNULL_END

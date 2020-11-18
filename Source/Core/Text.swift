@@ -7,16 +7,97 @@
 
 import Foundation
 class ArgoKitTextNode: ArgoKitNode {
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        if let view = self.view {
-            return view.sizeThatFits(size)
+    var lineSpacing:CGFloat = 0
+    
+    func lineSpacing(_ value:CGFloat){
+        self.lineSpacing = value
+        self.handleLineSpacing()
+    }
+    
+    func handleLineSpacing() {
+        if self.lineSpacing == 0 {
+            return
         }
-        let lable:UILabel = UILabel()
-        lable.text = self.text()
-        lable.numberOfLines = self.numberOfLines()
-        lable.font = self.font()
-        let size:CGSize = lable.sizeThatFits(size)
-        return size
+        let lableText:String = self.text() ?? ""
+        if lableText.count == 0 {
+            return
+        }
+        
+        let range:NSRange = NSRange(location: 0, length: lableText.count)
+        let attributedString = NSMutableAttributedString(string: lableText)
+        if let font:UIFont = self.font(){
+            attributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
+        }
+        if let textColor:UIColor = self.textColor() {
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: textColor, range: range)
+        }
+        attributedText(attri: attributedString)
+    }
+    
+    func attributedText(attri:NSAttributedString?) {
+        if let attriText = attri {
+            let attributedString = NSMutableAttributedString(attributedString: attriText)
+            let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+            if self.lineSpacing == 0 {
+                paragraphStyle.lineSpacing = 2
+            }else{
+                paragraphStyle.lineSpacing = self.lineSpacing
+            }
+            paragraphStyle.lineBreakMode = self.lineBreakMode()
+            paragraphStyle.alignment = self.textAlignment()
+            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attriText.length))
+            
+            ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedString)
+        }
+    }
+    
+    
+    func cleanLineSpacing() {
+        if let attriText = self.attributedText() {
+            let attributedString = NSMutableAttributedString(attributedString: attriText)
+            let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 0
+            paragraphStyle.lineBreakMode = self.lineBreakMode()
+            paragraphStyle.alignment = self.textAlignment()
+            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attriText.length))
+            ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedString)
+        }
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var result:CGSize = size
+        if let view = self.view {
+            result = view.sizeThatFits(size)
+        }else{
+            let lable:UILabel = UILabel()
+            if let text =  self.text(){
+                if text.count > 0 {
+                    lable.text = text
+                }
+            }
+            if let attribut =  self.attributedText(){
+                if attribut.length > 0 {
+                    lable.attributedText = attribut
+                }
+            }
+
+            lable.numberOfLines = self.numberOfLines()
+            lable.font = self.font()
+            lable.numberOfLines = self.numberOfLines()
+            lable.lineBreakMode = self.lineBreakMode()
+            result = lable.sizeThatFits(size)
+        }
+        let lineHeight:Float = Float(self.font()?.lineHeight ?? 0)
+        if lineSpacing > 0 && floor(result.height) <= CGFloat(ceilf(lineHeight)) + lineSpacing {
+            let oldLineSpacing = lineSpacing;
+            lineSpacing = 0
+            cleanLineSpacing()
+            lineSpacing = oldLineSpacing;
+            result.height -= lineSpacing;
+        }
+        result.width = ceil(result.width)
+        result.height = ceil(result.height)
+        return result
     }
 }
 public class Text:View {
@@ -45,16 +126,19 @@ public class Text:View {
 extension Text{
     public func text(_ value:String?)->Self{
         addAttribute(#selector(setter:UILabel.text),value)
+        pNode.handleLineSpacing()
         return self
     }
     public func font(_ value:UIFont!)->Self{
         addAttribute(#selector(setter:UILabel.font),value)
+        pNode.handleLineSpacing()
         return self
     }
     
     public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
         let font = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
+        pNode.handleLineSpacing()
         return self
     }
     
@@ -62,22 +146,26 @@ extension Text{
         fontName = value
         let font = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
+        pNode.handleLineSpacing()
         return self
     }
     public func fontSize(_ value:CGFloat)->Self{
         fontSize = value
         let font = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         addAttribute(#selector(setter:UILabel.font),font)
+        pNode.handleLineSpacing()
         return self
     }
     public func fontStyle(_ value:AKFontStyle)->Self{
         let font = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
+        pNode.handleLineSpacing()
         return self
     }
     
     public func textColor(_ value:UIColor!)->Self{
         addAttribute(#selector(setter:UILabel.textColor),value)
+        pNode.handleLineSpacing()
         return self
     }
     public func shadowColor(_ value:UIColor?)->Self{
@@ -90,6 +178,7 @@ extension Text{
     }
     public func textAlign(_ value:NSTextAlignment)->Self{
         addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
+        pNode.handleLineSpacing()
         return self
     }
     public func breakMode(_ value:NSLineBreakMode)->Self{
@@ -99,7 +188,7 @@ extension Text{
     }
     
     public func attributedText(_ value:NSAttributedString?)->Self{
-        addAttribute(#selector(setter:UILabel.attributedText),value)
+        pNode.attributedText(attri: value)
         return self
     }
     
@@ -127,10 +216,11 @@ extension Text{
         addAttribute(#selector(setter:UILabel.numberOfLines),value)
         return self
     }
+    public func LineSpacing(_ value:CGFloat)->Self{
+        pNode.lineSpacing(value)
+        return self
+    }
 
-    // these next 3 properties allow the label to be autosized to fit a certain width by scaling the font size(s) by a scaling factor >= the minimum scaling factor
-    // and to specify how the text baseline moves when it needs to shrink the font.
-    // default is NO
     public func adjustsFontSizeToFitWidth(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.adjustsFontSizeToFitWidth),value)
         return self
@@ -187,6 +277,12 @@ extension Text{
     public func preferredMaxLayoutWidth(in value: CGFloat)->Self{
         addAttribute(#selector(setter:UILabel.preferredMaxLayoutWidth),value)
         return self
+    }
+    
+    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat = 0,shadowOpacity:CGFloat = 0)->Self{
+        addAttribute(#selector(setter:UILabel.shadowColor),shadowColor)
+        addAttribute(#selector(setter:UILabel.shadowOffset),shadowOffset)
+        return self;
     }
     
 }

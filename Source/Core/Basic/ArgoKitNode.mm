@@ -634,9 +634,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (nullable NSString *)text{
     return [self valueWithSelector:@selector(setText:)];
 }
+- (nullable NSAttributedString *)attributedText{
+    return [self valueWithSelector:@selector(setAttributedText:)];
+}
 - (nullable UIFont *)font{
     return [self valueWithSelector:@selector(setFont:)];
-   
+}
+- (nullable UIColor *)textColor{
+    return [self valueWithSelector:@selector(setTextColor:)];
 }
 - (NSInteger)numberOfLines{
     id lines = [self valueWithSelector:@selector(setNumberOfLines:)];
@@ -644,6 +649,21 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         return [lines intValue];
     }
     return 1;
+}
+
+- (NSTextAlignment)textAlignment{
+    id textAlignment = [self valueWithSelector:@selector(setTextAlignment:)];
+    if ([textAlignment isKindOfClass:[NSNumber class]]) {
+        return (NSTextAlignment)[textAlignment intValue];
+    }
+    return NSTextAlignmentLeft;
+}
+- (NSLineBreakMode)lineBreakMode{
+    id breakMode = [self valueWithSelector:@selector(setLineBreakMode:)];
+    if ([breakMode isKindOfClass:[NSNumber class]]) {
+        return (NSLineBreakMode)[breakMode intValue];
+    }
+    return NSLineBreakByWordWrapping;
 }
 - (nullable UIImage *)image{
     return [self valueWithSelector:@selector(setImage:)];

@@ -381,11 +381,11 @@ public struct ArgoEdgeValue{
     }
 }
 extension View{
-    public func position(_ value:ArgoEdgeValue)->Self{
-        return position(edge: .top, value: value.top)
-            .position(edge: .left, value: value.left)
-            .position(edge: .bottom, value: value.bottom)
-            .position(edge: .right, value: value.right)
+    public func position(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return position(edge: .top, value: top)
+            .position(edge: .left, value: left)
+            .position(edge: .bottom, value: bottom)
+            .position(edge: .right, value:right)
     }
     public func position(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {

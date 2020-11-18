@@ -6,8 +6,8 @@
 //
 
 import Foundation
-extension View{
-    func isDirty(_ selector:Selector) -> Bool {
+extension ArgoKitNodeViewModifier{
+    class func isDirty(_ selector:Selector) -> Bool {
         var isDirty_ = false
         if selector == #selector(setter:UILabel.text) {
             isDirty_ = true
@@ -34,8 +34,11 @@ extension View{
         
         return isDirty_;
     }
-    public func addAttribute(_ selector:Selector, _ patamter:Any? ...) {
-        if let node = self.node{
+    public class func addAttribute(_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
+        ArgoKitNodeViewModifier._addAttribute_(outNode, selector, patamter)
+    }
+    public class func _addAttribute_(_ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+        if let node = outNode{
             // 获取参数
             var paraList:Array<Any> = Array()
             for item in patamter {
@@ -49,12 +52,20 @@ extension View{
             
             let attribute = ViewAttribute(selector:selector,paramter:paraList)
             attribute.isDirty = isDirty(selector)
-            ArgoKitNodeViewModifier.nodeViewAttribute(with:node, attributes: [attribute])
+            self.nodeViewAttribute(with:node, attributes: [attribute])
             
             node.nodeAddView(attribute:attribute)
         }
     }
 }
+
+extension View{
+   
+    public func addAttribute(_ selector:Selector, _ patamter:Any? ...) {
+        ArgoKitNodeViewModifier._addAttribute_(self.node, selector, patamter)
+    }
+}
+
 // modifier
 extension View {
     public func isUserInteractionEnabled(_ value:Bool)->Self{
@@ -151,9 +162,31 @@ extension View{
         addAttribute(#selector(setter:CALayer.cornerRadius),value)
         return self;
     }
-    public func borderColor(_ value:CGColor)->Self{
-        addAttribute(#selector(setter:CALayer.borderColor),value)
+    public func borderColor(_ value:UIColor)->Self{
+        addAttribute(#selector(setter:CALayer.borderColor),value.cgColor)
+        return self;
+    }
+    
+    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat)->Self{
+        let operation = ArgoKitViewShadowOperation(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, viewNode: self.node)
+        ArgoKitViewReaderHelper.shared.addRenderOperation(operation: operation)
         return self;
     }
 }
 
+private struct AssociatedNodeRenderKey {
+       static var renderKey:Void?
+}
+extension ArgoKitNode{
+    var operation: ArgoKitViewReaderOperation? {
+           set {
+            objc_setAssociatedObject(self, &AssociatedNodeRenderKey.renderKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+           }
+           get {
+               if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.renderKey) as? ArgoKitViewReaderOperation {
+                   return rs
+               }
+               return nil
+           }
+       }
+}
