@@ -93,11 +93,14 @@ open class UIHostingController:UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white;
         rootView = HostView(self.view){
-            rootView_!.backgroundColor(.red).width(80%).height(80%)
+            rootView_!.backgroundColor(.red).width(100%).height(80%)
         }.isUserInteractionEnabled(true)
         .onTapGesture {[weak self] in
 //            let viewContraller:UIHostingController = UIHostingController(rootView: DemoContentView3())
 //            self?.navigationController?.pushViewController(viewContraller, animated: true)
+            
+            print("--->> ArgoKit: click tap gesture\(String(describing: self))")
+            self?.testAnimation()
         }
         
         let _ = rootView?.applyLayout()
@@ -105,6 +108,49 @@ open class UIHostingController:UIViewController{
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated);
     }
+    
+    func testAnimation() -> Void {
+        let root = (rootView?.node?.view)!
+        if let target = root.viewWithTag(2020) {
+            doAniamtion(target: target)
+        } else {
+            let view = UIView()
+            view.akLayoutFrame = CGRect(x:60, y: 120, width: 100, height: 100)
+            view.backgroundColor = UIColor.green
+            view.tag = 2020
+            root.addSubview(view)
+            
+            doAniamtion(target: view)
+        }
+        print("--->> ArgoKit: start animation \(root)")
+    }
+    
+    func doAniamtion(target: UIView) {
+//        let anim = AKAnimation(animType: AKAnimationType.positionX, targetView: target)
+//        anim.duration = 2
+//        anim.from(60)
+//        anim.to(60 + 100)
+//        anim.start()
+        
+//        let anim = AKAnimation(animType: AKAnimationType.color, targetView: target)
+//        anim.duration = 2
+//        anim.from(UIColor.green)
+//        anim.to(UIColor.red)
+//        anim.start()
+        
+//        let anim = AKAnimation(animType: AKAnimationType.color, targetView: target)
+//        anim.duration = 2
+//        anim.from(UIColor.green)
+//        anim.to(0, 255, 255, 1)
+//        anim.start()
+        
+        let anim = AKAnimation(type: AKAnimationType.scale, view: target)
+        anim.duration = 2
+        anim.from(1, 1.0)
+        anim.to(1.2, 1.2)
+        anim.start()
+    }
+
     
     deinit {
         print("deinit")
