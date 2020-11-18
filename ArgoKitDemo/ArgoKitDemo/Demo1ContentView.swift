@@ -32,13 +32,13 @@ class SessionRow:View{
                 .backgroundColor(.clear)
                 .width(60.0)
                 .height(60.0)
-                .margin(ArgoEdgeValue(top: 10, left: 10, bottom: 10, right: 0))
+                .margin(top: 10, right: 0, bottom: 10, left: 10)
             VStack{
-                Text(self.item.sessionName).maxWidth(300).fontSize(20).fontStyle(.bolditalic)
+                Text(self.item.sessionName).maxWidth(300).font(fontStyle:.bold, fontSize: 14)
                 Text(self.item.lastMessage)
                     .margin(edge: .top, value: 15).maxWidth(230)
             }
-            .margin(ArgoEdgeValue(top: 10, left: 10, bottom: 10, right: 0))
+            .margin(top: 30, right: 40, bottom: 20, left: 10)
             Spacer()
             VStack{
                 Text(self.item.timeLabel).lineLimit(0).textAlign(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)

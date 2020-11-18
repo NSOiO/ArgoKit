@@ -302,17 +302,16 @@ extension View{
         return self;
     }
 }
-
+public enum ValueType {
+    case undefined
+    case point
+    case percent
+    case auto
+}
 public struct ArgoValue {
-    enum ValueType {
-        case undefined
-        case point
-        case percent
-        case auto
-    }
+
     var value:CGFloat
     var type:ValueType
-    
 }
 extension View{
     fileprivate func flex(_ value:CGFloat)->Self{
@@ -489,12 +488,12 @@ extension View{
 }
 
 extension View{
-    public func margin(_ value:ArgoEdgeValue)->Self{
-        return margin(edge: .top, value: value.top)
-            .margin(edge: .left, value: value.left)
-            .margin(edge: .bottom, value: value.bottom)
-            .margin(edge: .right, value: value.right)
-    }
+    public func margin(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return margin(edge: .top, value: top)
+            .margin(edge: .left, value: left)
+            .margin(edge: .bottom, value: bottom)
+            .margin(edge: .right, value:right)
+    } 
     public func margin(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:
@@ -613,12 +612,13 @@ extension View{
 
 
 extension View{
-    public func padding(_ value:ArgoEdgeValue)->Self{
-        return margin(edge: .top, value: value.top)
-            .margin(edge: .left, value: value.left)
-            .margin(edge: .bottom, value: value.bottom)
-            .margin(edge: .right, value: value.right)
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return padding(edge: .top, value: top)
+            .padding(edge: .left, value: left)
+            .padding(edge: .bottom, value: bottom)
+            .padding(edge: .right, value:right)
     }
+    
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:

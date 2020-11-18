@@ -28,18 +28,35 @@ extension CGFloat {
 
 extension ArgoValue : ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral {
     public init(integerLiteral value: Int) {
-        self = ArgoValue(value: CGFloat(value), type: .point)
+        if(value < 0){
+            self = ArgoValue(value: CGFloat(value), type: .auto)
+        }else{
+            self = ArgoValue(value: CGFloat(value), type: .point)
+        }
     }
 
     public init(floatLiteral value: Float) {
-        self = ArgoValue(value: CGFloat(value), type:  .point)
+        if(value < 0){
+            self = ArgoValue(value: CGFloat(value), type: .auto)
+        }else{
+            self = ArgoValue(value: CGFloat(value), type:  .point)
+        }
+        
     }
 
     public init(_ value: Float) {
-        self = ArgoValue(value: CGFloat(value), type:  .point)
+        if(value < 0){
+            self = ArgoValue(value: CGFloat(value), type: .auto)
+        }else{
+            self = ArgoValue(value: CGFloat(value), type:  .point)
+        }
     }
 
     public init(_ value: CGFloat) {
-        self = ArgoValue(value: CGFloat(value), type:  .point)
+        if(value < 0){
+            self = ArgoValue(value: CGFloat(value), type: .auto)
+        }else{
+            self = ArgoValue(value: CGFloat(value), type:  .point)
+        }
     }
 }

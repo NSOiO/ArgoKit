@@ -52,20 +52,24 @@ extension Text{
         return self
     }
     
+    public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
+        let font = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
+        addAttribute(#selector(setter:UILabel.font),font)
+        return self
+    }
+    
     public func fontName(_ value:String?)->Self{
         fontName = value
         let font = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
         return self
     }
-    
     public func fontSize(_ value:CGFloat)->Self{
         fontSize = value
         let font = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         addAttribute(#selector(setter:UILabel.font),font)
         return self
     }
-    
     public func fontStyle(_ value:AKFontStyle)->Self{
         let font = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
         addAttribute(#selector(setter:UILabel.font),font)

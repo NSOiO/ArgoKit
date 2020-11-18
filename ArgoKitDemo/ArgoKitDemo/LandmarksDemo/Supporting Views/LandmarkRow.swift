@@ -27,7 +27,7 @@ struct LandmarkRow: View {
         }
         HStack {
             Text(landmark.name)
-            Text("👌").margin(ArgoEdgeValue(top: 10,left: 10,bottom: 10,right: 10))
+            Text("👌").margin(top: 30, right: 40, bottom: 20, left: 10)
             Text("👌")
             Text("👌")
             Text("👌")
