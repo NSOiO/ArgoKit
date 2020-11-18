@@ -59,6 +59,22 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
             tableView?.endUpdates()
         }
     }
+    
+    deinit {
+        if let indexPaths = tableView?.indexPathsForVisibleRows {
+            for indexPath in indexPaths {
+                if let node = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+                    node.removeObservingFrameChanged(self)
+                }
+                if let node = sectionHeaderSourceHelper.nodeForRow(indexPath.section, at: 0) {
+                    node.removeObservingFrameChanged(self)
+                }
+                if let node = sectionFooterSourceHelper.nodeForRow(indexPath.section, at: 0) {
+                    node.removeObservingFrameChanged(self)
+                }
+            }
+        }
+    }
 }
 
 extension ArgoKitTableNode {
