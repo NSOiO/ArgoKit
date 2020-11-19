@@ -1,7 +1,10 @@
 PODS:
   - ArgoKit (1.0.1):
+    - ArgoKit/AnimationKit (= 1.0.1)
     - ArgoKit/Bind (= 1.0.1)
     - ArgoKit/Core (= 1.0.1)
+    - Yoga (~> 1.14)
+  - ArgoKit/AnimationKit (1.0.1):
     - Yoga (~> 1.14)
   - ArgoKit/Bind (1.0.1):
     - Yoga (~> 1.14)
@@ -21,9 +24,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ArgoKit: 485c276dfff780dcb902d286452475c33e2fb540
+  ArgoKit: 5bf2a26ee1597bc259786b8611decee478b889fe
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: dbabed8749ac811ccf9eae7467f9b2fccbb9aed6
+PODFILE CHECKSUM: 0c5300b6c942f09b2ae10172bc64c70f04d097b9
 
 COCOAPODS: 1.10.0

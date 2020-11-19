@@ -102,6 +102,52 @@ open class UIHostingController:UIViewController{
         super.viewDidDisappear(animated);
     }
     
+    func testAnimation() -> Void {
+        let root = (rootView?.node?.view)!
+        if let target = root.viewWithTag(2020) {
+            doAniamtion(target: target)
+        } else {
+            let view = UIView()
+            view.akLayoutFrame = CGRect(x:60, y: 120, width: 100, height: 100)
+            view.backgroundColor = UIColor.green
+            view.tag = 2020
+            root.addSubview(view)
+            
+            doAniamtion(target: view)
+        }
+        print("--->> ArgoKit: start animation \(root)")
+    }
+    
+    func doAniamtion(target: UIView) {
+//        let anim = AKAnimation(type: AKAnimationType.positionX)
+//        anim.duration(2).from(60).to(160)
+//        anim.attach(target)
+//        anim.start()
+        
+//        let anim = AKAnimation(type: AKAnimationType.color)
+//        anim.duration(2).from(UIColor.green).to(UIColor.red)
+//        anim.attach(target)
+//        anim.start()
+        
+//        let anim = AKAnimation(type: AKAnimationType.color)
+//        anim.duration(2).from(UIColor.green).to(0, 255, 255, 1)
+//        anim.attach(target)
+//        anim.start()
+        
+//        let anim = AKAnimation(type: AKAnimationType.scale)
+//        anim.duration(2).from(1, 1.0).to(1.2, 1.2)
+////        anim.attach(target)
+//        target.addAnimation(anim)
+//        anim.start()
+        
+        let anim = AKSpringAnimation(type: AKAnimationType.positionX)
+        anim.springMass(20).springSpeed(100)
+        anim.duration(0.2).from(60).to(160)
+        anim.attach(target)
+        anim.start()
+    }
+
+    
     deinit {
         print("deinit")
     }
