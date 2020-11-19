@@ -126,28 +126,25 @@ open class UIHostingController:UIViewController{
     }
     
     func doAniamtion(target: UIView) {
-//        let anim = AKAnimation(animType: AKAnimationType.positionX, targetView: target)
-//        anim.duration = 2
-//        anim.from(60)
-//        anim.to(60 + 100)
+//        let anim = AKAnimation(type: AKAnimationType.positionX)
+//        anim.duration(2).from(60).to(160)
+//        anim.attach(target)
 //        anim.start()
         
-//        let anim = AKAnimation(animType: AKAnimationType.color, targetView: target)
-//        anim.duration = 2
-//        anim.from(UIColor.green)
-//        anim.to(UIColor.red)
+//        let anim = AKAnimation(type: AKAnimationType.color)
+//        anim.duration(2).from(UIColor.green).to(UIColor.red)
+//        anim.attach(target)
 //        anim.start()
         
-//        let anim = AKAnimation(animType: AKAnimationType.color, targetView: target)
-//        anim.duration = 2
-//        anim.from(UIColor.green)
-//        anim.to(0, 255, 255, 1)
+//        let anim = AKAnimation(type: AKAnimationType.color)
+//        anim.duration(2).from(UIColor.green).to(0, 255, 255, 1)
+//        anim.attach(target)
 //        anim.start()
         
-        let anim = AKAnimation(type: AKAnimationType.scale, view: target)
-        anim.duration = 2
-        anim.from(1, 1.0)
-        anim.to(1.2, 1.2)
+        let anim = AKAnimation(type: AKAnimationType.scale)
+        anim.duration(2).from(1, 1.0).to(1.2, 1.2)
+//        anim.attach(target)
+        target.addAnimation(anim)
         anim.start()
     }
 

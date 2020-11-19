@@ -36,17 +36,17 @@ public let AKTimingConfigTension: AKTimingConfigKey = "Tension"
 public let AKTimingConfigFriction: AKTimingConfigKey = "Friction"
 public let AKTimingConfigMass: AKTimingConfigKey = "Mass"
 
+extension UIView {
+    
+    public func addAnimation(_ animation: AKAnimation) {
+        animation.attach(self)
+    }
+}
+
 public class AKAnimation {
 
     // MARK: - Public
-    public var timingFunc = AKAnimationTimingFunc.defaultValue
-    public var duration = 0.0
-    public var delay = 0.0
-    public var repeatCount = 0
-    public var repeatForever = false
-    public var autoReverse = false
     public var springAnimConfig = [AKTimingConfigKey: AKTimingConfigValue]()
-    
     public var startCallback: MLAAnimationStartBlock?
     public var pauseCallback: MLAAnimationPauseBlock?
     public var resumeCallback: MLAAnimationResumeBlock?
@@ -54,28 +54,91 @@ public class AKAnimation {
     public var finishCallback: MLAAnimationFinishBlock?
     
     // MARK: - Private
+    private var duration: Double = 0.0
+    private var delay: Double = 0.0
+    private var repeatCount: Int = 0
+    private var repeatForever: Bool = false
+    private var autoReverse: Bool = false
+    private var timingFunc = AKAnimationTimingFunc.defaultValue
     private let type: AKAnimationType!
-    private let target: UIView!
+    private weak var target: UIView!
     private var from: Any?, to: Any?
     private var animation: MLAValueAnimation?
     private var animPaused = false
 
-    init(type: AKAnimationType, view: UIView) {
+    init(type: AKAnimationType) {
         self.type = type
-        target = view
     }
     
     // MARK: - Public
-    public func from(_ values: Any ...) {
+    @discardableResult
+    public func duration(_ duration: Double) -> Self {
+        self.duration = duration
+        return self
+    }
+    
+    @discardableResult
+    public func delay(_ delay: Double) -> Self {
+        self.delay = delay
+        return self
+    }
+    
+    @discardableResult
+    public func repeatCount(_ count: Int) -> Self {
+        self.repeatCount = count
+        return self
+    }
+    
+    @discardableResult
+    public func repeatForever(_ forever: Bool) -> Self {
+        self.repeatForever = forever
+        return self
+    }
+    
+    @discardableResult
+    public func autoReverse(_ reverse: Bool) -> Self {
+        self.autoReverse = reverse
+        return self
+    }
+    
+    @discardableResult
+    public func timingFunc(_ timing: AKAnimationTimingFunc) -> Self {
+        self.timingFunc = timing
+        return self
+    }
+    
+    @discardableResult
+    public func from(_ values: Any ...) -> Self {
         if let fromValue = handleValues(values) {
             from = fromValue
         }
+        return self
     }
     
-    public func to(_ values: Any ...) {
+    @discardableResult
+    public func to(_ values: Any ...) -> Self {
         if let toValue = handleValues(values) {
             to = toValue
         }
+        return self
+    }
+    
+    @discardableResult
+    public func attach(_ view: View) -> Self {
+        if let actualView = view.node?.view {
+            attach(actualView)
+        }
+        return self
+    }
+    
+    @discardableResult
+    public func attach(_ view: UIView) -> Self {
+        guard target == nil else {
+            assertionFailure("You cann't attach an animaion to multiple views.")
+            return self
+        }
+        target = view
+        return self
     }
     
     public func start() {
@@ -154,6 +217,11 @@ public class AKAnimation {
     }
     
     private func prepareAnimation() {
+        guard target != nil else {
+            assertionFailure("The animation has not yet been added to the view.")
+            return
+        }
+        
         if animation == nil {
             if timingFunc == AKAnimationTimingFunc.spring {
                 animation = MLASpringAnimation(valueName: animationTypeValue(type), tartget: target)
@@ -161,6 +229,7 @@ public class AKAnimation {
                 animation = MLAObjectAnimation(valueName: animationTypeValue(type), tartget: target)
             }
         }
+        
         let anim = animation!
         anim.fromValue = from
         anim.toValue = to
