@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PickerView : View {
+public class PickerView<T>: View {
     
     private var pickerView : UIPickerView
     private var pNode : ArgoKitPickerNode
@@ -29,14 +29,20 @@ public class PickerView : View {
         pNode = ArgoKitPickerNode(view: pickerView)
     }
     
-    public convenience init(_ data: [Any], @ArgoKitViewBuilder rowContent: @escaping (Any) -> View) {
+    public convenience init(_ data: [T], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
         self.init()
-        if (data.first as? Array<Any>) != nil {
-            self.pNode.dataSourceHelper.dataList = data as? [[Any]]
-        } else {
-            self.pNode.dataSourceHelper.dataList = [data]
+        self.pNode.dataSourceHelper.dataList = [data]
+        self.pNode.dataSourceHelper.buildNodeFunc = { item in
+            return rowContent(item as! T)
         }
-        self.pNode.dataSourceHelper.buildNodeFunc = rowContent
+    }
+    
+    public convenience init(_ data: [[T]], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
+        self.init()
+        self.pNode.dataSourceHelper.dataList = data
+        self.pNode.dataSourceHelper.buildNodeFunc = { item in
+            return rowContent(item as! T)
+        }
     }
 }
 
@@ -57,12 +63,13 @@ extension PickerView {
         return self
     }
     
-    public func didSelectRowInComponent(_ action: @escaping (_ row: Int, _ component: Int)->Void) -> Self {
+    public func didSelectRowInComponent(_ action: @escaping (_ data: T, _ row: Int, _ component: Int) -> Void) -> Self {
         self.pNode.observeAction(pickerView) { target, paramter in
-            if paramter?.count ?? 0 >= 2 {
-                let row: Int = paramter![0] as? Int ?? 0
-                let component: Int = paramter![1] as? Int ?? 0
-                action(row, component)
+            if paramter?.count ?? 0 >= 3 {
+                let data: T = paramter![0] as! T
+                let row: Int = paramter![1] as! Int
+                let component: Int = paramter![2] as! Int
+                action(data, row, component)
             }
             return nil
         }
