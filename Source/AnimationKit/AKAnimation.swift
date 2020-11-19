@@ -52,7 +52,7 @@ public class AKAnimation {
     private var repeatCallback: MLAAnimationRepeatBlock?
     private var finishCallback: MLAAnimationFinishBlock?
 
-    init(type: AKAnimationType) {
+    public init(type: AKAnimationType) {
         self.type = type
     }
     
@@ -94,19 +94,81 @@ public class AKAnimation {
     }
     
     @discardableResult
-    public func from(_ values: Any ...) -> Self {
+    func from(_ values: [Any]) -> Self {
         if let fromValue = handleValues(values) {
             from = fromValue
         }
         return self
     }
     
+    
     @discardableResult
-    public func to(_ values: Any ...) -> Self {
+    public func from(_ v1: Double) -> Self {
+        return from([v1])
+    }
+    
+    @discardableResult
+    public func from(_ v1: Double, _ v2: Double) -> Self {
+        return from([v1, v2])
+    }
+    
+    @discardableResult
+    public func from(_ tuple:(Double, Double)) -> Self {
+        return from([tuple.0, tuple.1])
+    }
+
+    @discardableResult
+    public func from(_ tuple:(Double, Double, Double, Double)) -> Self {
+        return from([tuple.0, tuple.1, tuple.2, tuple.3])
+    }
+    
+    @discardableResult
+    public func from(_ v1: Double, _ v2: Double, _ v3: Double, _ v4: Double) -> Self {
+        return from([v1, v2, v3, v4])
+    }
+    
+    @discardableResult
+    public func from(_ color: UIColor) -> Self {
+        return from([color])
+    }
+    
+    
+    @discardableResult
+    func to(_ values: [Any]) -> Self {
         if let toValue = handleValues(values) {
             to = toValue
         }
         return self
+    }
+    
+    @discardableResult
+    public func to(_ v1: Double) -> Self {
+        return to([v1])
+    }
+    
+    @discardableResult
+    public func to(_ v1: Double, _ v2: Double) -> Self {
+        return to([v1, v2])
+    }
+    
+    @discardableResult
+    public func to(_ tuple:(Double, Double)) -> Self {
+        return to([tuple.0, tuple.1])
+    }
+    
+    @discardableResult
+    public func to(_ tuple:(Double, Double, Double, Double)) -> Self {
+        return to([tuple.0, tuple.1, tuple.2, tuple.3])
+    }
+    
+    @discardableResult
+    public func to(_ v1: Double, _ v2: Double, _ v3: Double, _ v4: Double) -> Self {
+        return to([v1, v2, v3, v4])
+    }
+    
+    @discardableResult
+    public func to(_ color: UIColor) -> Self {
+        return to([color])
     }
     
     @discardableResult

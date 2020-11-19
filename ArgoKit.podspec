@@ -34,7 +34,7 @@ podspec = Pod::Spec.new do |spec|
   end
   
   spec.subspec "Bind" do |s|
-    s.source_files = 'Source/Bind/*.{swift}'
+    s.source_files = 'Source/Bind/**/*.{swift}'
   end
   
   spec.subspec 'AnimationKit' do |ani|

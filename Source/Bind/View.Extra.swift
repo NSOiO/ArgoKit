@@ -8,9 +8,9 @@
 import Foundation
 
 extension View {
-    private func p_watch<R: View,V>(property: Property<V>, f:@escaping (V) -> R, key: String) {
+    private func p_watch<R: View,V>(property: Property<V>, function:@escaping (V) -> R, key: String) {
         let cancel = property.watch { (new) in
-            _ = f(new)
+            _ = function(new)
         }
         self.node?.bindProperties.setObject(cancel, forKey: key as NSString)
     }
@@ -27,12 +27,29 @@ extension View {
         }
     }
     */
-    func watch<R: View, V>(property: Property<V>?, f: @escaping (V?) -> R, key: String) -> Self{
+    
+    func watch<R: View, V>(property: Property<V?>?, function: @escaping (V?) -> R, key: String, triggerImmediately: Bool = true) -> Self{
         if let pro = property {
-            _ = f(pro.wrappedValue)
-            self.p_watch(property: pro, f: f, key: key)
+            if triggerImmediately {
+                _ = function(pro.wrappedValue)
+            }
+            self.p_watch(property: pro, function: function, key: key)
         } else {
-            _ = f(nil)
+            if triggerImmediately {
+                _ = function(nil)
+            }
+            self.p_unwatch(key: key)
+        }
+        return self
+    }
+    
+    func watch<R: View, V>(property: Property<V>?, function: @escaping (V) -> R, key: String, triggerImmediately: Bool = true) -> Self{
+        if let pro = property {
+            if triggerImmediately {
+                _ = function(pro.wrappedValue)
+            }
+            self.p_watch(property: pro, function: function, key: key)
+        } else {
             self.p_unwatch(key: key)
         }
         return self
