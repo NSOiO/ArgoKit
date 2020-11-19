@@ -162,6 +162,10 @@ extension View{
         addAttribute(#selector(setter:CALayer.cornerRadius),value)
         return self;
     }
+//    public func cornerRadius(_ value:CGFloat,corners:ArgoKitCornerRadius)->Self{
+//        addAttribute(#selector(setter:CALayer.cornerRadius),value)
+//        return self;
+//    }
     public func borderColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:CALayer.borderColor),value.cgColor)
         return self;

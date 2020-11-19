@@ -6,6 +6,12 @@
 //
 
 import Foundation
+struct ArgoKitRectCorner{
+    var topLeft:CGFloat
+    var topRight:CGFloat
+    var bottomLeft:CGFloat
+    var bottomRight:CGFloat
+}
 struct ArgoKitCornerRadius{
     var topLeft:CGFloat
     var topRight:CGFloat

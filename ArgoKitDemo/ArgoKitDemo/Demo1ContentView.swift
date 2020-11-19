@@ -31,13 +31,13 @@ class SessionRow:View{
                 .cornerRadius(5.0)
                 .backgroundColor(.clear)
                 .width(60.0)
-                .height(60.0)
+                .height(.auto)
                 .margin(top: 10, right: 0, bottom: 10, left: 10)
                 
             VStack{
                 Text(self.item.sessionName).maxWidth(300)
                 Text(self.item.lastMessage)
-                    .margin(edge: .top, value: 15).maxWidth(230).LineSpacing(30)
+                    .margin(edge: .top, value: 15).maxWidth(200).LineSpacing(10).lineLimit(2)
             }
             .margin(top: 30, right: 40, bottom: 20, left: 10)
             Spacer()
@@ -54,7 +54,7 @@ class Demo1ContentView:View {
     var items = [SessionItem]()
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
+        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
         for index in 1..<100{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]

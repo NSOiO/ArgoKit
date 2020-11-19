@@ -76,6 +76,7 @@ class ArgoKitViewShadowOperation: ArgoKitViewReaderOperation {
 class ArgoKitViewReaderHelper{
     static var shared: ArgoKitViewReaderHelper = {
         let instance = ArgoKitViewReaderHelper()
+        instance.startRunloop()
         return instance
     }()
     private init() {}
