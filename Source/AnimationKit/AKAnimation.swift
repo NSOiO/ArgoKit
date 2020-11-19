@@ -152,7 +152,6 @@ public class AKAnimation {
         guard values.count > 0 else {
             return nil
         }
-        
         switch type {
         case .alpha, .positionX, .positionY, .scaleX, .scaleY:
             return values[0]
@@ -179,10 +178,8 @@ public class AKAnimation {
                 assertionFailure("The from value of ArgoKit's animation is invalid.")
                 return nil
             }
-            return CGPoint(x: CastToCGFloat(values[0]),
-                           y: CastToCGFloat(values[1]))
-        default:
-            break
+            return CGPoint(x: CastToCGFloat(values[0]), y: CastToCGFloat(values[1]))
+        default: break
         }
         return nil
     }
@@ -195,8 +192,7 @@ public class AKAnimation {
             return CGFloat(x)
         case let x as Int:
             return CGFloat(x)
-        default:
-            break
+        default: break
         }
         return 0
     }
@@ -206,14 +202,12 @@ public class AKAnimation {
             assertionFailure("The animation has not yet been added to the view.")
             return
         }
-        
         if animation == nil {
             animation = createAnimation(type: animationTypeValue(type), view: target)
             if animPaused { // 在调用start前，先调用了pause的情况
                 animation!.pause()
             }
         }
-        
         let anim = animation!
         anim.fromValue = from
         anim.toValue = to
@@ -243,10 +237,7 @@ public class AKAnimation {
             anim.timingFunction = MLATimingFunction.easeOut
         case .easeInEaseOut:
             anim.timingFunction = MLATimingFunction.easeInEaseOut
-        default:
-            break
         }
-        
         return anim
     }
     
@@ -278,8 +269,6 @@ public class AKAnimation {
             return kMLAViewRotationY
         case .contentOffset:
             return kMLAViewContentOffset
-        default:
-            break
         }
     }
     

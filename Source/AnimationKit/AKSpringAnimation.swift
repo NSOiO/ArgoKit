@@ -17,12 +17,6 @@ public class AKSpringAnimation: AKAnimation {
     private var mass: CGFloat?
     
     // MARK: - Override
-    @discardableResult
-    public override func timingFunc(_ timing: AKAnimationTimingFunc) -> Self {
-        // do nothing
-        return self
-    }
-    
     override func createAnimation(type: String, view: UIView) -> MLAValueAnimation {
         let anim = MLASpringAnimation(valueName: type, tartget: view)!
         configAnimation(anim)
@@ -89,18 +83,19 @@ public class AKSpringAnimation: AKAnimation {
             anim.dynamicsMass = m
         }
         if let v = self.velocity {
-            guard v is Array<CGFloat> else {
-                assertionFailure("The velocity value type of ArgoKit's springAnimation should be Array.")
-                return
-            }
-            let array = (v as! Array<CGFloat>)
-            switch array.count {
-            case 1:
-                anim.velocity = array[0]
-            case 2:
-                anim.velocity = CGPoint(x: array[0],
-                                        y: array[1])
+            switch v {
+            case let v1 as CGFloat:
+                anim.velocity = v1
+            case let v2 as Array<CGFloat>:
+                switch v2.count {
+                case 1:
+                    anim.velocity = v2[0]
+                case 2:
+                    anim.velocity = CGPoint(x: v2[0], y: v2[1])
+                default: break
+                }
             default:
+                assertionFailure("The velocity value type of ArgoKit's springAnimation is invalid.")
                 break
             }
         }
