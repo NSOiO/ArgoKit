@@ -6,26 +6,62 @@
 //
 
 import Foundation
-struct ArgoKitRectCorner{
+public struct ArgoKitRectCorner{
     var topLeft:CGFloat
     var topRight:CGFloat
     var bottomLeft:CGFloat
     var bottomRight:CGFloat
 }
 struct ArgoKitCornerRadius{
-    var topLeft:CGFloat
-    var topRight:CGFloat
-    var bottomLeft:CGFloat
-    var bottomRight:CGFloat
+    var topLeft:CGFloat = 0
+    var topRight:CGFloat = 0
+    var bottomLeft:CGFloat = 0
+    var bottomRight:CGFloat = 0
 }
 
 class ArgoKitCornerManagerTool {
+    
+    class func multiRadius(multiRadius:ArgoKitCornerRadius,corner:UIRectCorner,cornerRadius:CGFloat)->ArgoKitCornerRadius{
+        var radius:ArgoKitCornerRadius = multiRadius
+        if corner == UIRectCorner.allCorners{
+            if (radius.topLeft != cornerRadius || radius.topRight != cornerRadius || radius.bottomLeft != cornerRadius || radius.bottomRight != cornerRadius) {
+                radius.topLeft = cornerRadius;
+                radius.topRight = cornerRadius;
+                radius.bottomLeft = cornerRadius;
+                radius.bottomRight = cornerRadius;
+            }
+        }
+        if corner.contains(UIRectCorner.topLeft) {
+            if radius.topLeft != cornerRadius {
+                radius.topLeft = cornerRadius
+            }
+        }
+        if corner.contains(UIRectCorner.topRight){
+            if radius.topRight != cornerRadius {
+                radius.topRight = cornerRadius
+            }
+        }
+        if corner.contains(UIRectCorner.bottomLeft) {
+            if radius.bottomLeft != cornerRadius {
+                radius.bottomLeft = cornerRadius;
+            }
+        }
+        if corner.contains(UIRectCorner.bottomRight){
+            if radius.bottomRight != cornerRadius{
+                radius.bottomRight = cornerRadius
+            }
+        }
+        return radius;
+        
+    }
+    
     class func bezierPath(frame:CGRect,multiRadius:ArgoKitCornerRadius) -> UIBezierPath {
         let width:CGFloat = frame.size.width
         let height:CGFloat = frame.size.height
         let minRadius = CGFloat.minimum(width * 0.5, height * 0.5)
         var radius:CGFloat = multiRadius.topLeft
         radius = CGFloat.maximum(CGFloat.minimum(minRadius, radius), 0)
+        
         let path:UIBezierPath = UIBezierPath()
         path.move(to: CGPoint(x: 0.0, y: height/2.0))
         if radius > 0 {
@@ -70,4 +106,6 @@ class ArgoKitCornerManagerTool {
         
        return path
     }
+    
+    
 }

@@ -26,25 +26,34 @@ class SessionRow:View{
     }
     var body: View{
         HStack{
-            ImageView(self.item.imagePath)
-                .clipsToBounds(true)
-                .cornerRadius(5.0)
-                .backgroundColor(.clear)
-                .width(60.0)
-                .height(.auto)
-                .margin(top: 10, right: 0, bottom: 10, left: 10)
+//            ImageView(self.item.imagePath)
+//                .clipsToBounds(true)
+//                .backgroundColor(.clear)
+//                .width(60.0)
+//                .height(60.0)
+//                .margin(top: 10, right: 0, bottom: 10, left: 10)
+//                .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
                 
             VStack{
-                Text(self.item.sessionName).maxWidth(300)
+                Text(self.item.sessionName)
+                    .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0).backgroundColor(.blue)
+//                
                 Text(self.item.lastMessage)
-                    .margin(edge: .top, value: 15).maxWidth(200).LineSpacing(10).lineLimit(2)
+                    .backgroundColor(.red)
+                    .margin(edge: .top, value: 15).LineSpacing(10).lineLimit(2)
+                    .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
+//
+//                VStack{
+//                    Text("cdcsc")
+//                }.backgroundColor(.red).width(100).height(60).margin(edge: .top, value: 3)
+//                .cornerRadius(topLeft: 4, topRight: 5, bottomLeft: 4, bottomRight: 4)
             }
-            .margin(top: 30, right: 40, bottom: 20, left: 10)
-            Spacer()
-            VStack{
-                Text(self.item.timeLabel).lineLimit(0).textAlign(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)
-                Text(self.item.unreadCount).alignSelf(.center).textColor(.red).backgroundColor(.yellow).margin(edge: .top, value: 15).margin(edge: .right, value: 5)
-            }.width(100)
+            .margin(top: 10, right: 40, bottom: 10, left: 10)
+//            Spacer()
+//            VStack{
+//                Text(self.item.timeLabel).lineLimit(0).textAlign(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)
+//                Text(self.item.unreadCount).alignSelf(.center).textColor(.red).backgroundColor(.yellow).margin(edge: .top, value: 15).margin(edge: .right, value: 5)
+//            }.width(100)
         }
         
     }
@@ -55,7 +64,7 @@ class Demo1ContentView:View {
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        for index in 1..<100{
+        for index in 1..<2{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5]
@@ -67,6 +76,17 @@ class Demo1ContentView:View {
     }
     var alertView1:AlertView?
     var body:View{
+//        Button("ed") {
+//            print("Button")
+//        } builder: { () -> View in
+//            Text("hehe")
+//            VStack{
+//                Text("hehscdscsde")
+//            }.height(100%).width(100%)
+//        }.margin(edge: .top, value: 80).backgroundColor(.yellow).height(30)
+//        .onTapGesture {
+//            print("qqqq")
+//        }
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).positionType(.relative)
         }.width(100%).height(100%).canEditRowAtIndexPath { (indexPath) -> Bool in

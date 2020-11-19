@@ -66,12 +66,10 @@ class ArgoKitTextNode: ArgoKitNode {
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var result:CGSize = size
-        var lineHeight:Float = 0
-        let linenumber = self.numberOfLines()
-        if let view = self.view {
-            lineHeight = Float((view as! UILabel).font.lineHeight)
-            result = view.sizeThatFits(size)
-        }else{
+//        if let view = self.view {
+//            lineHeight = Float((view as! UILabel).font.lineHeight)
+//            result = view.sizeThatFits(size)
+//        }else{
             let lable:UILabel = UILabel()
             if let text =  self.text(){
                 if text.count > 0 {
@@ -90,9 +88,8 @@ class ArgoKitTextNode: ArgoKitNode {
             
             lable.numberOfLines = self.numberOfLines()
             lable.lineBreakMode = self.lineBreakMode()
-            lineHeight = Float(lable.font.lineHeight)
             result = lable.sizeThatFits(size)
-        }
+//        }
 //        if lineSpacing > 0 && linenumber != 1 && floor(result.height) <= CGFloat(ceilf(lineHeight)) + lineSpacing {
 //            let oldLineSpacing = lineSpacing;
 //            lineSpacing = 0
@@ -100,8 +97,9 @@ class ArgoKitTextNode: ArgoKitNode {
 //            lineSpacing = oldLineSpacing;
 //            result.height -= lineSpacing;
 //        }
-        result.width = ceil(result.width)
-        result.height = ceil(result.height)
+//        result.width = ceil(result.width)
+//        result.height = ceil(result.height)
+        print(result)
         return result
     }
 }
@@ -282,12 +280,6 @@ extension Text{
     public func preferredMaxLayoutWidth(in value: CGFloat)->Self{
         addAttribute(#selector(setter:UILabel.preferredMaxLayoutWidth),value)
         return self
-    }
-    
-    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat = 0,shadowOpacity:CGFloat = 0)->Self{
-        addAttribute(#selector(setter:UILabel.shadowColor),shadowColor)
-        addAttribute(#selector(setter:UILabel.shadowOffset),shadowOffset)
-        return self;
     }
     
 }

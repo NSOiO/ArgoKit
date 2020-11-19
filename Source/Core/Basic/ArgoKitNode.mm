@@ -253,7 +253,7 @@ static YGSize YGMeasureView(
                                       }];
   }
   return (YGSize) {
-      .width = static_cast<float>(YGSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
+      .width = static_cast<float>(YGSanitizeMeasurement(sizeThatFits.width, sizeThatFits.width, widthMode)),
       .height = static_cast<float>(YGSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
   };
 }
@@ -401,6 +401,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
+            NSLog(@"frame width %lf",frame.size.width);
             [wealSelf commitAttributes];
         }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
             wealSelf.view.frame = frame;

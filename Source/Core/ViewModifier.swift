@@ -122,10 +122,6 @@ extension View {
 
 extension View{
    
-    public func clipsToBounds(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.clipsToBounds),value)
-        return self;
-    }
     public func backgroundColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
@@ -158,39 +154,76 @@ extension View{
         addAttribute(#selector(setter:UIView.tintAdjustmentMode),value)
         return self;
     }
+    
+    public func clipsToBounds(_ value:Bool)->Self{
+        addAttribute(#selector(setter:UIView.clipsToBounds),value)
+        return self;
+    }
+    
     public func cornerRadius(_ value:CGFloat)->Self{
         addAttribute(#selector(setter:CALayer.cornerRadius),value)
         return self;
     }
-//    public func cornerRadius(_ value:CGFloat,corners:ArgoKitCornerRadius)->Self{
-//        addAttribute(#selector(setter:CALayer.cornerRadius),value)
-//        return self;
-//    }
+    
+    public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
+        if topLeft == topRight &&
+            topLeft ==  bottomLeft &&
+            topLeft ==  bottomRight{
+            addAttribute(#selector(setter:CALayer.cornerRadius),topLeft)
+        }else{
+            self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
+        }
+        return self;
+    }
+    
+    public func cornerRadius(_ value:CGFloat,corners:UIRectCorner)->Self{
+        if corners.contains(.allCorners) {
+            addAttribute(#selector(setter:CALayer.cornerRadius),value)
+        }else{
+            self.node?.maskLayerOperation?.updateCornersRadius( radius: value,corners: corners)
+        }
+        return self;
+    }
+    
     public func borderColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:CALayer.borderColor),value.cgColor)
         return self;
     }
     
     public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat)->Self{
-        let operation = ArgoKitViewShadowOperation(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, viewNode: self.node)
-        ArgoKitViewReaderHelper.shared.addRenderOperation(operation: operation)
+       
         return self;
     }
 }
 
 private struct AssociatedNodeRenderKey {
-       static var renderKey:Void?
+       static var shadowKey:Void?
+       static var maskLayerKey:Void?
 }
 extension ArgoKitNode{
-    var operation: ArgoKitViewReaderOperation? {
-           set {
-            objc_setAssociatedObject(self, &AssociatedNodeRenderKey.renderKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-           }
+    var shadowOperation: ArgoKitViewShadowOperation? {
            get {
-               if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.renderKey) as? ArgoKitViewReaderOperation {
+               if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.shadowKey) as? ArgoKitViewShadowOperation {
                    return rs
+               }else{
+                    let rs = ArgoKitViewShadowOperation(viewNode: self)
+                    objc_setAssociatedObject(self, &AssociatedNodeRenderKey.shadowKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                    ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
+                    return rs
                }
-               return nil
            }
        }
+    
+    var maskLayerOperation: ArgoKitViewLayerOperation? {
+        get {
+            if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey) as? ArgoKitViewLayerOperation {
+                return rs
+            }else{
+                 let rs = ArgoKitViewLayerOperation(viewNode: self)
+                objc_setAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
+                 return rs
+            }
+        }
+    }
 }
