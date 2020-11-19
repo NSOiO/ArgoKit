@@ -13,7 +13,6 @@ public enum AKAnimationTimingFunc {
     case easeIn
     case easeOut
     case easeInEaseOut
-    case spring
 }
 
 public enum AKAnimationType {
@@ -25,17 +24,6 @@ public enum AKAnimationType {
     case contentOffset
 }
 
-public typealias AKTimingConfigKey = String
-public typealias AKTimingConfigValue = AnyObject
-
-public let AKTimingConfigDuration: AKTimingConfigKey = "Duration"
-public let AKTimingConfigVelocity: AKTimingConfigKey = "Velocity"
-public let AKTimingConfigBounciness: AKTimingConfigKey = "Bounciness"
-public let AKTimingConfigSpeed: AKTimingConfigKey = "Speed"
-public let AKTimingConfigTension: AKTimingConfigKey = "Tension"
-public let AKTimingConfigFriction: AKTimingConfigKey = "Friction"
-public let AKTimingConfigMass: AKTimingConfigKey = "Mass"
-
 extension UIView {
     
     public func addAnimation(_ animation: AKAnimation) {
@@ -46,7 +34,6 @@ extension UIView {
 public class AKAnimation {
 
     // MARK: - Public
-    public var springAnimConfig = [AKTimingConfigKey: AKTimingConfigValue]()
     public var startCallback: MLAAnimationStartBlock?
     public var pauseCallback: MLAAnimationPauseBlock?
     public var resumeCallback: MLAAnimationResumeBlock?
@@ -194,11 +181,9 @@ public class AKAnimation {
             }
             return CGPoint(x: CastToCGFloat(values[0]),
                            y: CastToCGFloat(values[1]))
-            
         default:
             break
         }
-        
         return nil
     }
     
@@ -223,11 +208,7 @@ public class AKAnimation {
         }
         
         if animation == nil {
-            if timingFunc == AKAnimationTimingFunc.spring {
-                animation = MLASpringAnimation(valueName: animationTypeValue(type), tartget: target)
-            } else {
-                animation = MLAObjectAnimation(valueName: animationTypeValue(type), tartget: target)
-            }
+            animation = createAnimation(type: animationTypeValue(type), view: target)
             if animPaused { // 在调用start前，先调用了pause的情况
                 animation!.pause()
             }
@@ -245,19 +226,12 @@ public class AKAnimation {
         anim.resumeBlock = resumeCallback
         anim.repeatBlock = repeatCallback
         anim.finishBlock = finishCallback
-        
-        switch anim {
-        case let objectAnim as MLAObjectAnimation:
-            configObjectAnimation(objectAnim)
-        case let springAnim as MLASpringAnimation:
-            configSpringAnimation(springAnim)
-        default:
-            break
-        }
     }
     
-    private func configObjectAnimation(_ anim: MLAObjectAnimation) {
+    internal func createAnimation(type: String, view: UIView) -> MLAValueAnimation {
+        let anim = MLAObjectAnimation(valueName: type, tartget: view)!
         anim.duration = CGFloat(duration)
+        
         switch timingFunc {
         case .defaultValue:
             anim.timingFunction = MLATimingFunction.default
@@ -272,40 +246,8 @@ public class AKAnimation {
         default:
             break
         }
-    }
-    
-    private func configSpringAnimation(_ anim: MLASpringAnimation) {
-        if let bounce = springAnimConfig[AKTimingConfigBounciness] {
-            anim.springBounciness = CastToCGFloat(bounce)
-        }
-        if let speed = springAnimConfig[AKTimingConfigSpeed] {
-            anim.springSpeed = CastToCGFloat(speed)
-        }
-        if let tension = springAnimConfig[AKTimingConfigTension] {
-            anim.dynamicsTension = CastToCGFloat(tension)
-        }
-        if let friction = springAnimConfig[AKTimingConfigFriction] {
-            anim.dynamicsFriction = CastToCGFloat(friction)
-        }
-        if let mass = springAnimConfig[AKTimingConfigMass] {
-            anim.dynamicsMass = CastToCGFloat(mass)
-        }
-        if let velocity = springAnimConfig[AKTimingConfigVelocity] {
-            guard velocity is Array<AnyObject> else {
-                assertionFailure("The velocity value type of ArgoKit's springAnimation should be Array.")
-                return
-            }
-            let array = (velocity as! Array<AnyObject>)
-            switch array.count {
-            case 1:
-                anim.velocity = array[0]
-            case 2:
-                anim.velocity = CGPoint(x: CastToCGFloat(array[0]),
-                                        y: CastToCGFloat(array[1]))
-            default:
-                break
-            }
-        }
+        
+        return anim
     }
     
     private func animationTypeValue(_ type: AKAnimationType) -> String {
