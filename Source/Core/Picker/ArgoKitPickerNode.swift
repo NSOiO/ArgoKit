@@ -69,6 +69,13 @@ class ArgoKitPickerNode: ArgoKitNode, UIPickerViewDataSource, UIPickerViewDelega
             pickerView.dataSource = self
         }
     }
+    
+    override func createNodeView(withFrame frame: CGRect) -> UIView {
+        let pickerView = UIPickerView(frame: frame)
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }
 }
 
 extension ArgoKitPickerNode {
@@ -115,7 +122,7 @@ extension ArgoKitPickerNode {
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        // TODO: 有bug
+        // TODO: 有bug view 始终是nil 没有复用
         if let node = self.dataSourceHelper.nodeForRowNoCache(row, at: component) {
             let rowView = view as? ArgoKitPickerRowView ?? ArgoKitPickerRowView()
             rowView.linkCellNode(node)
@@ -125,6 +132,8 @@ extension ArgoKitPickerNode {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.sendAction(withObj: pickerView, paramter: [row,component])
+        if let node = self.dataSourceHelper.dataForRow(row, at: component) {
+            self.sendAction(withObj: pickerView, paramter: [node, row, component])
+        }
     }
 }
