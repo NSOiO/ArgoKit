@@ -33,13 +33,6 @@ extension UIView {
 
 public class AKAnimation {
 
-    // MARK: - Public
-    public var startCallback: MLAAnimationStartBlock?
-    public var pauseCallback: MLAAnimationPauseBlock?
-    public var resumeCallback: MLAAnimationResumeBlock?
-    public var repeatCallback: MLAAnimationRepeatBlock?
-    public var finishCallback: MLAAnimationFinishBlock?
-    
     // MARK: - Private
     private var duration: Double = 0.0
     private var delay: Double = 0.0
@@ -48,10 +41,16 @@ public class AKAnimation {
     private var autoReverse: Bool = false
     private var timingFunc = AKAnimationTimingFunc.defaultValue
     private let type: AKAnimationType!
-    private weak var target: UIView!
+    private weak var target: UIView?
     private var from: Any?, to: Any?
     private var animation: MLAValueAnimation?
     private var animPaused = false
+    
+    private var startCallback: MLAAnimationStartBlock?
+    private var pauseCallback: MLAAnimationPauseBlock?
+    private var resumeCallback: MLAAnimationResumeBlock?
+    private var repeatCallback: MLAAnimationRepeatBlock?
+    private var finishCallback: MLAAnimationFinishBlock?
 
     init(type: AKAnimationType) {
         self.type = type
@@ -146,6 +145,41 @@ public class AKAnimation {
     public func stop() {
         animation?.finish()
     }
+
+    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) {
+        startCallback = callback
+        if let anim = animation {
+            anim.startBlock = callback
+        }
+    }
+    
+    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) {
+        pauseCallback = callback
+        if let anim = animation {
+            anim.pauseBlock = callback
+        }
+    }
+    
+    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) {
+        resumeCallback = callback
+        if let anim = animation {
+            anim.resumeBlock = callback
+        }
+    }
+    
+    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) {
+        repeatCallback = callback
+        if let anim = animation {
+            anim.repeatBlock = callback
+        }
+    }
+    
+    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) {
+        finishCallback = callback
+        if let anim = animation {
+            anim.finishBlock = callback
+        }
+    }
     
     // MARK: - Private
     private func handleValues(_ values: [Any]) -> Any? {
@@ -198,12 +232,12 @@ public class AKAnimation {
     }
     
     private func prepareAnimation() {
-        guard target != nil else {
+        guard let view = target else {
             assertionFailure("The animation has not yet been added to the view.")
             return
         }
         if animation == nil {
-            animation = createAnimation(type: animationTypeValue(type), view: target)
+            animation = createAnimation(type: animationTypeValue(type), view: view)
             if animPaused { // 在调用start前，先调用了pause的情况
                 animation!.pause()
             }
