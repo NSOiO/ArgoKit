@@ -228,6 +228,9 @@ public class AKAnimation {
             } else {
                 animation = MLAObjectAnimation(valueName: animationTypeValue(type), tartget: target)
             }
+            if animPaused { // 在调用start前，先调用了pause的情况
+                animation!.pause()
+            }
         }
         
         let anim = animation!
