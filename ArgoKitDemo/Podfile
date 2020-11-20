@@ -3,6 +3,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'ArgoKitDemo' do
-#  pod 'YogaKit', '~> 1.5'
   pod 'ArgoKit', :path=>'../'
+#  pod 'ArgoUI/Kit/AnimationCPP', :git => 'https://github.com/mmdongxin/MLN', :branch => 'dev_iOS_dx_temp'
+#  pod 'ArgoUI/Kit/AnimationKit', :path => '../../MLN/ArgoUI.podspec'
 end

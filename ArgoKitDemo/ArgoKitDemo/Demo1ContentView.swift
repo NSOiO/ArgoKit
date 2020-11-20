@@ -89,13 +89,39 @@ class Demo1ContentView:View {
 //            print("qqqq")
 //        }
         List(data:items){ item in
-            SessionRow(item: item).width(100%).height(100%).positionType(.relative)
-        }.width(100%).height(100%).canEditRowAtIndexPath { (indexPath) -> Bool in
-            return false
-        }.didSelectRowAtIndexPath {[weak self] indexPath in
-            _ = self?.alertView1?.titile(self?.items[indexPath.row].imagePath).message(self?.items[indexPath.row].lastMessage).show()
+            SessionRow(item: item).width(100%).height(100%)
+        }.width(100%).height(100%).didSelectRowAtIndexPath {[weak self] item, indexPath in
+            _ = self?.alertView1?.titile(item!.imagePath).message(item!.lastMessage).show()
+        }.alert {
+            AlertView(title: "", message: "", preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+                print(text ?? "")
+            }.cancel(title: "取消") {}
+            .textField()
+            .alias(variable: &alertView1)
         }
-       
+        .canEditRowAtIndexPath({ item, indexPath -> Bool in
+            return true
+        })
+        .trailingSwipeActionsConfigurationForRowAtIndexPath { (item, indexPath) -> ListSwipeActionsConfiguration? in
+            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+                print("trailing 菜鸡")
+                complation(true)
+            }),
+            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+                print("trailing  互啄")
+                complation(true)
+            }),].swipeActionsConfiguration()
+        }
+        .leadingSwipeActionsConfigurationForRowAtIndexPath { (item, indexPath) -> ListSwipeActionsConfiguration? in
+            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+                print("leading 菜鸡")
+                complation(true)
+            }),
+            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+                print("leading 互啄")
+                complation(true)
+            }),].swipeActionsConfiguration()
+        }
     }
     
     func getTimeLabel()->String{

@@ -136,3 +136,13 @@ extension View {
         return self
     }
 }
+
+extension View {
+    
+    public func addAnimation(_ animation: AKAnimation) -> Self {
+        if let view = self.node?.view {
+            animation.attach(view)
+        }
+        return self
+    }
+}

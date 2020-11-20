@@ -330,9 +330,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return [self initWithViewClass:[UIView class]];
 }
 
-- (instancetype)initWithView:(UIView *)view{
-    self = [self initWithViewClass:[view class]];
+- (instancetype)initWithView:(UIView *)view {
+    self = [super init];
     if (self) {
+        [self setUpNode:[view class]];
         _view = view;
         _size = view.bounds.size;
     }
@@ -342,13 +343,17 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (instancetype)initWithViewClass:(Class)viewClass{
     self = [super init];
     if (self) {
-        _viewClass = viewClass;
-        _resetOrigin = YES;
-        _isEnabled = YES;
-        _isUIView = [viewClass isMemberOfClass:[UIView class]];
-        _bindProperties = [NSMutableDictionary new];
+        [self setUpNode:viewClass];
     }
     return self;
+}
+
+- (void)setUpNode:(Class)viewClass {
+    _viewClass = viewClass;
+    _resetOrigin = YES;
+    _isEnabled = YES;
+    _isUIView = [viewClass isMemberOfClass:[UIView class]];
+    _bindProperties = [NSMutableDictionary new];
 }
 
 - (void)bindView:(UIView *)view {
@@ -384,12 +389,16 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         }
     }
     if (self.parentNode.view) {
-        NSInteger index = [self.parentNode.childs indexOfObject:self];
-        if ([self.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
-            [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
-        }else{
-            [self.parentNode.view insertSubview:self.view atIndex:index];
-        }
+        [self insertViewToParentNodeView];
+    }
+}
+
+- (void)insertViewToParentNodeView {
+    NSInteger index = [self.parentNode.childs indexOfObject:self];
+    if ([self.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
+        [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
+    }else{
+        [self.parentNode.view insertSubview:self.view atIndex:index];
     }
 }
 
@@ -405,6 +414,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [wealSelf commitAttributes];
         }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
             wealSelf.view.frame = frame;
+            if (!wealSelf.view.superview && wealSelf.parentNode.view) {
+                [wealSelf insertViewToParentNodeView];
+            }
         }
     }];
 }
@@ -555,7 +567,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     node.parentNode = self;
     [self.childs addObject:node];
-    if (node.view) {
+    if (node.view && self.view) {
         [self.view addSubview:node.view];
     }
     [self insertYGNode:node atIndex:YGNodeGetChildCount(self.layout.ygnode)];

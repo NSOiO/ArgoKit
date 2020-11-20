@@ -23,7 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let contentView = Demo1ContentView()
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
+            let vc = ViewController()
             let nav:UINavigationController = UINavigationController(rootViewController: UIHostingController(rootView: contentView))
+//            let nav = UINavigationController(rootViewController: vc)
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = nav
             self.window = window

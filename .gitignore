@@ -24,6 +24,6 @@ DerivedData/
 **/.DS_Store
 ## IDE
 .idea/
-ArgoKitDemo/Pods/
+# ArgoKitDemo/Pods/
 ArgoKitDemo/Pods
 ArgoVersionDemo/

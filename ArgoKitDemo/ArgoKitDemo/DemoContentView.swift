@@ -69,8 +69,7 @@ class DemoContentView: View {
             }
            
         }.width(100%).height(100%).backgroundColor(.white)
-        .didSelectRowAtIndexPath {[weak self] indexPath in
-            let item:ArgoKitItem? = self?.items[indexPath.row]
+        .didSelectRowAtIndexPath { item, indexPath in
             item?.textCom?.text("haha11"+item!.text)
         }
     }

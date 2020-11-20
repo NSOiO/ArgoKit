@@ -99,6 +99,16 @@ extension ArgoKitDataSourceHelper {
         return nil
     }
     
+    open func dataForRow(_ row: Int, at section: Int) -> Any? {
+                
+        if section >= dataList?.count ?? 0
+            || row >= dataList?[section].count ?? 0 {
+            return nil
+        }
+        
+        return dataList![section][row]
+    }
+    
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
         
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString

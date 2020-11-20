@@ -19,9 +19,6 @@ class LandmarkList: View {
                 LandmarkRow(landmark: landmark)
             }
         }.size(width: 100%, height: 100%)
-        .willDisplayCellForRowAtIndexPath { (indexPath) in
-
-        }
         
     }
 }
