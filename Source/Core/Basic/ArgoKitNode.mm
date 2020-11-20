@@ -410,7 +410,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
             wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
-            NSLog(@"frame width %lf",frame.size.width);
             [wealSelf commitAttributes];
         }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
             wealSelf.view.frame = frame;

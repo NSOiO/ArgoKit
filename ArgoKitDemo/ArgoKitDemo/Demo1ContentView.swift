@@ -17,6 +17,7 @@ public struct SessionItem:ArgoKitIdentifiable{
     var lastMessage:String?
     var timeLabel:String?
     var unreadCount:String?
+    var textCom:Text?
     
 }
 class SessionRow:View{
@@ -33,6 +34,9 @@ class SessionRow:View{
                 .height(60.0)
                 .margin(top: 10, right: 0, bottom: 10, left: 10)
                 .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+                .onTapGesture {
+                    self.item.textCom?.text("sfcsvddfvdvscdsfcsdfcscscscs")
+                }.isUserInteractionEnabled(true)
                 
             VStack{
                 Text(self.item.sessionName).shrink(1).grow(0).width(.auto)
@@ -43,14 +47,15 @@ class SessionRow:View{
                     .maxWidth(200)
                     .margin(edge: .top, value: 15).LineSpacing(10).lineLimit(2)
                     .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
+                    .alias(variable: &self.item.textCom)
                 
                 VStack{
-                    Text("cdcsc")
+                    Text("cdcsc").alignSelf(.center)
+                    .shadow(shadowColor: .red, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 2, shadowOpacity: 2, corners: .allCorners)
                 }
-//                .backgroundColor(.red)
                 .width(100).height(60).margin(edge: .top, value: 3)
 //                .cornerRadius(topLeft: 4, topRight: 5, bottomLeft: 4, bottomRight: 4)
-                .shadow(shadowColor: .red, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 5, shadowOpacity: 5, corners: .allCorners)
+//                .shadow(shadowColor: .red, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 5, shadowOpacity: 5, corners: .allCorners)
             }
             .margin(top: 10, right: 40, bottom: 10, left: 10)
             Spacer()

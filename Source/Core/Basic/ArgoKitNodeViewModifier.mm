@@ -94,12 +94,16 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     }
     UIView *view = node.view;
     for (ViewAttribute *attribute in attributes) {
-        if([view.layer respondsToSelector:attribute.selector]){
-            performSelector(view.layer,attribute.selector,attribute.paramter);
+        if(attribute.isCALayer){
+            if([view.layer respondsToSelector:attribute.selector]){
+                performSelector(view.layer,attribute.selector,attribute.paramter);
+            }
+        }else{
+            if (view && [view respondsToSelector:attribute.selector]) {
+                performSelector(view,attribute.selector,attribute.paramter);
+            }
         }
-        if (view && [view respondsToSelector:attribute.selector]) {
-            performSelector(view,attribute.selector,attribute.paramter);
-        }
+
         if (attribute.isDirty && markDirty) {
             [node markDirty];
         }

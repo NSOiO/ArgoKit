@@ -122,15 +122,15 @@ static ArgoReusedLayoutHelper* _instance;
 - (void)layout{
     NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
     for(ArgoKitNode *node in nodes){
-//        if(node.isDirty){
-//            [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
-//            [node applyLayoutAferCalculationWithoutView];
-//            if (node.linkNode) {
-//                [ArgoKitNodeViewModifier reuseNodeViewAttribute:node.linkNode reuseNode:node];
-//            }else{
-//                [ArgoKitNodeViewModifier reuseNodeViewAttribute:node reuseNode:node];
-//            }
-//        }
+        if(node.isDirty){
+            [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
+            [node applyLayoutAferCalculationWithoutView];
+            if (node.linkNode) {
+                [ArgoKitNodeViewModifier reuseNodeViewAttribute:node.linkNode reuseNode:node];
+            }else{
+                [ArgoKitNodeViewModifier reuseNodeViewAttribute:node reuseNode:node];
+            }
+        }
     }
 }
 

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)SEL selector;
 @property(nonatomic,copy)NSArray<id> *paramter;
 @property(nonatomic,assign)BOOL isDirty;
+@property(nonatomic,assign)BOOL isCALayer;
 - (instancetype)initWithSelector:(nullable SEL)selector paramter:(nullable NSArray<id> *)paramter;
 @end
  
