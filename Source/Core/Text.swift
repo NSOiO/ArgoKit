@@ -99,7 +99,6 @@ class ArgoKitTextNode: ArgoKitNode {
 //        }
 //        result.width = ceil(result.width)
 //        result.height = ceil(result.height)
-        print(result)
         return result
     }
 }
