@@ -98,17 +98,17 @@ class Demo1ContentView:View {
     var body:View{
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%)
-        }.width(100%).height(100%).didSelectRowAtIndexPath {item, indexPath in
+        }.width(100%).height(100%).didSelectRow {item, indexPath in
             AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
                 print(text ?? "")
             }.cancel(title: "取消") {}
             .textField()
             .show()
         }
-        .canEditRowAtIndexPath({ item, indexPath -> Bool in
+        .canEditRow({ item, indexPath -> Bool in
             return true
         })
-        .trailingSwipeActionsConfigurationForRowAtIndexPath { (item, indexPath) -> ListSwipeActionsConfiguration? in
+        .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
             [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
                 print("trailing 菜鸡")
                 complation(true)
@@ -119,7 +119,7 @@ class Demo1ContentView:View {
 //            }),
             ].swipeActionsConfiguration()
         }
-        .leadingSwipeActionsConfigurationForRowAtIndexPath { (item, indexPath) -> ListSwipeActionsConfiguration? in
+        .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
             [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
                 print("leading 菜鸡")
                 complation(true)

@@ -237,7 +237,7 @@ extension ScrollView {
         return self
     }
     
-    public func willEndDraggingWithVelocityTargetContentOffset(_ action: @escaping (_ velocity: CGPoint, _ targetContentOffset:  UnsafeMutablePointer<CGPoint>) -> Void) -> Self {
+    public func willEndDragging(_ action: @escaping (_ velocity: CGPoint, _ targetContentOffset:  UnsafeMutablePointer<CGPoint>) -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewWillEndDragging(_:withVelocity:targetContentOffset:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 3 {
@@ -250,7 +250,7 @@ extension ScrollView {
         return self
     }
     
-    public func didEndDraggingWillDecelerate(_ action: @escaping (_ decelerate: Bool) -> Void) -> Self {
+    public func didEndDragging(_ action: @escaping (_ decelerate: Bool) -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndDragging(_:willDecelerate:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 1 {
@@ -297,7 +297,7 @@ extension ScrollView {
         return self
     }
     
-    public func willBeginZoomingWithView(_ action: @escaping (_ view: UIView?) -> Void) -> Self {
+    public func willBeginZooming(_ action: @escaping (_ view: UIView?) -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewWillBeginZooming(_:with:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 {
@@ -311,7 +311,7 @@ extension ScrollView {
         return self
     }
     
-    public func didEndZoomingWithViewAtScale(_ action: @escaping (_ view: UIView?, _ atScale: Float) -> Void?) -> Self {
+    public func didEndZooming(_ action: @escaping (_ view: UIView?, _ atScale: Float) -> Void?) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndZooming(_:with:atScale:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 3 {

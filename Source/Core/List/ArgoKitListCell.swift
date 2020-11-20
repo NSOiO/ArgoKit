@@ -9,26 +9,17 @@ import Foundation
 
 class ArgoKitCellNode: ArgoKitNode {
     
-    weak var frameObserber: NSObject?
-        
-    public func observeFrameChanged(_ observer: NSObject) {
-        if frameObserber != nil {
-            self .removeObservingFrameChanged(frameObserber!)
-        }
-        addObserver(observer, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
-        frameObserber = observer
+    var frameObserber: NSKeyValueObservation?
+    
+    public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
+        removeObservingFrameChanged()
+        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
     }
     
-    public func removeObservingFrameChanged(_ observer: NSObject) {
-        if observationInfo != nil {
-            removeObserver(observer, forKeyPath: "frame")
-        }
-        frameObserber = nil
-    }
-    
-    deinit {
+    public func removeObservingFrameChanged() {
         if frameObserber != nil {
-            removeObservingFrameChanged(frameObserber!)
+            frameObserber?.invalidate()
+            frameObserber = nil
         }
     }
 }

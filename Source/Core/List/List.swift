@@ -247,7 +247,7 @@ extension List {
         return self
     }
     
-    public func canEditRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func canEditRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canEditRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -261,7 +261,7 @@ extension List {
         return self
     }
     
-    public func canMoveRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func canMoveRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canMoveRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -280,7 +280,7 @@ extension List {
         return self
     }
     
-    public func commitEditingStyleForRowAtIndexPath(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func commitEditingRow(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:commit:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -295,7 +295,7 @@ extension List {
         return self
     }
     
-    public func moveRowAtIndexPathToIndexPath(_ action: @escaping (_ sourceData: T?, _ destinationData: T?, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
+    public func moveRow(_ action: @escaping (_ sourceData: T?, _ destinationData: T?, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:moveRowAt:to:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -314,7 +314,7 @@ extension List {
 
 extension List {
     
-    public func prefetchRowsAtIndexPaths(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
+    public func prefetchRows(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:prefetchRowsAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -327,7 +327,7 @@ extension List {
         return self
     }
     
-    public func cancelPrefetchingForRowsAtIndexPaths(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
+    public func cancelPrefetchingRows(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:cancelPrefetchingForRowsAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -343,8 +343,7 @@ extension List {
 
 extension List {
     
-    // 当使用 init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) 方法构建时，data 为 nil
-    public func willDisplayCellForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func willDisplayRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplay:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -358,7 +357,7 @@ extension List {
         return self
     }
 
-    public func willDisplayHeaderViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func willDisplayHeaderView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -372,7 +371,7 @@ extension List {
         return self
     }
 
-    public func willDisplayFooterViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func willDisplayFooterView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -386,8 +385,7 @@ extension List {
         return self
     }
 
-    // 当使用 init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) 方法构建时，data 为 nil
-    public func didEndDisplayingCellForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didEndDisplayingRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplaying:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -401,7 +399,7 @@ extension List {
         return self
     }
 
-    public func didEndDisplayingHeaderViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func didEndDisplayingHeaderView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplayingHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -415,7 +413,7 @@ extension List {
         return self
     }
 
-    public func didEndDisplayingFooterViewForSection(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func didEndDisplayingFooterView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplayingFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -429,7 +427,7 @@ extension List {
         return self
     }
     
-    public func shouldHighlightRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldHighlightRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldHighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -443,7 +441,7 @@ extension List {
         return self
     }
 
-    public func didHighlightRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didHighlightRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didHighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -457,7 +455,7 @@ extension List {
         return self
     }
 
-    public func didUnhighlightRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didUnhighlightRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didUnhighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -471,7 +469,7 @@ extension List {
         return self
     }
 
-    public func willSelectRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+    public func willSelectRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> IndexPath?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -485,7 +483,7 @@ extension List {
         return self
     }
 
-    public func willDeselectRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+    public func willDeselectRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> IndexPath?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -499,8 +497,7 @@ extension List {
         return self
     }
 
-    // 当使用 init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) 方法构建时，data 为 nil
-    public func didSelectRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didSelectRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -517,7 +514,7 @@ extension List {
         return self
     }
 
-    public func didDeselectRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didDeselectRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -531,7 +528,7 @@ extension List {
         return self
     }
     
-    public func editingStyleForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> UITableViewCell.EditingStyle) -> Self {
+    public func editingStyle(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> UITableViewCell.EditingStyle) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:editingStyleForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -540,12 +537,12 @@ extension List {
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
-            return UITableViewCell.EditingStyle.delete
+            return nil
         })
         return self
     }
 
-    public func titleForDeleteConfirmationButtonForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> String?) -> Self {
+    public func titleForDeleteConfirmationButton(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> String?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -560,7 +557,7 @@ extension List {
     }
     
     @available(iOS, introduced: 8.0, deprecated: 13.0)
-    public func editActionsForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> [ListRowAction]?) -> Self {
+    public func editActions(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> [ListRowAction]?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:editActionsForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -575,7 +572,7 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func leadingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
+    public func leadingSwipeActions(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -590,7 +587,7 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func trailingSwipeActionsConfigurationForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
+    public func trailingSwipeActions(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -604,7 +601,7 @@ extension List {
         return self
     }
 
-    public func shouldIndentWhileEditingRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldIndentWhileEditingRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldIndentWhileEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -618,7 +615,7 @@ extension List {
         return self
     }
 
-    public func willBeginEditingRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func willBeginEditingRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willBeginEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -632,7 +629,7 @@ extension List {
         return self
     }
 
-    public func didEndEditingRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath?) -> Void) -> Self {
+    public func didEndEditingRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath?) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -648,7 +645,7 @@ extension List {
         return self
     }
 
-    public func targetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath(_ action: @escaping (_ sourceData: T?, _ proposedDestinationData: T?, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath) -> Self {
+    public func targetIndexPathForMove(_ action: @escaping (_ sourceData: T?, _ proposedDestinationData: T?, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -664,7 +661,7 @@ extension List {
         return self
     }
 
-    public func indentationLevelForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Int) -> Self {
+    public func indentationLevel(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Int) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:indentationLevelForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -679,7 +676,7 @@ extension List {
     }
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
-    public func shouldShowMenuForRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldShowMenu(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldShowMenuForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -694,7 +691,7 @@ extension List {
     }
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
-    public func canPerformActionForRowAtIndexPathWithSender(_ action: @escaping (_ action: Selector, _ data: T?, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
+    public func canPerformAction(_ action: @escaping (_ action: Selector, _ data: T?, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canPerformAction:forRowAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -714,7 +711,7 @@ extension List {
     }
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
-    public func performActionForRowAtIndexPathWithSender(_ action: @escaping (_ action: Selector, _ data: T?, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
+    public func performAction(_ action: @escaping (_ action: Selector, _ data: T?, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:performAction:forRowAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -733,7 +730,7 @@ extension List {
         return self
     }
 
-    public func canFocusRowAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func canFocusRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canFocusRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -747,7 +744,7 @@ extension List {
         return self
     }
 
-    public func shouldUpdateFocusInContext(_ action: @escaping (_ context: UITableViewFocusUpdateContext) -> Bool) -> Self {
+    public func shouldUpdateFocus(_ action: @escaping (_ context: UITableViewFocusUpdateContext) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldUpdateFocusIn:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -760,7 +757,7 @@ extension List {
         return self
     }
 
-    public func didUpdateFocusInContextWithCoordinator(_ action: @escaping (_ context: UITableViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void) -> Self {
+    public func didUpdateFocus(_ action: @escaping (_ context: UITableViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didUpdateFocusIn:with:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -784,7 +781,7 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func shouldSpringLoadRowAtIndexPathWithContext(_ action: @escaping (_ data: T?, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool) -> Self {
+    public func shouldSpringLoadRow(_ action: @escaping (_ data: T?, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldSpringLoadRowAt:with:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -800,7 +797,7 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func shouldBeginMultipleSelectionInteractionAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldBeginMultipleSelectionInteraction(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldBeginMultipleSelectionInteractionAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -815,7 +812,7 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func didBeginMultipleSelectionInteractionAtIndexPath(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didBeginMultipleSelectionInteraction(_ action: @escaping (_ data: T?, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didBeginMultipleSelectionInteractionAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -841,7 +838,7 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func contextMenuConfigurationForRowAtIndexPathWithPoint(_ action: @escaping (_ data: T?, _ indexPath: IndexPath, _ point: CGPoint) -> UIContextMenuConfiguration?) -> Self {
+    public func contextMenuConfiguration(_ action: @escaping (_ data: T?, _ indexPath: IndexPath, _ point: CGPoint) -> UIContextMenuConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:contextMenuConfigurationForRowAt:point:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -857,7 +854,7 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func previewForHighlightingContextMenuWithConfiguration(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
+    public func previewForHighlightingContextMenu(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:previewForHighlightingContextMenuWithConfiguration:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -871,7 +868,7 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func previewForDismissingContextMenuWithConfiguration(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
+    public func previewForDismissingContextMenu(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:previewForDismissingContextMenuWithConfiguration:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -885,7 +882,7 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func willPerformPreviewActionForMenuWithConfigurationAndAnimator(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionCommitAnimating) -> Void) -> Self {
+    public func willPerformPreviewAction(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionCommitAnimating) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willPerformPreviewActionForMenuWith:animator:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -900,7 +897,7 @@ extension List {
     }
 
     @available(iOS 14.0, *)
-    public func willDisplayContextMenuWithConfigurationAndAnimator(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
+    public func willDisplayContextMenu(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayContextMenu:animator:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -918,7 +915,7 @@ extension List {
     }
 
     @available(iOS 14.0, *)
-    public func willEndContextMenuInteractionWithConfigurationAndAnimator(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
+    public func willEndContextMenuInteraction(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willEndContextMenuInteraction:animator:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             

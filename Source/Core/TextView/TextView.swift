@@ -182,7 +182,7 @@ extension TextView {
         return self
     }
 
-    public func shouldChangeTextInRangeReplacementText(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementText: String) -> Bool) -> Self {
+    public func shouldChangeText(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementText: String) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textView(_:shouldChangeTextIn:replacementText:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -197,7 +197,7 @@ extension TextView {
         return self
     }
 
-    public func didChange(_ action: @escaping (_ text: String?) -> Void) -> Self {
+    public func didChangeText(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidChange(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -224,7 +224,7 @@ extension TextView {
     }
 
     @available(iOS 10.0, *)
-    public func shouldInteractWithURLInCharacterRangeInteraction(_ action: @escaping (_ text: String?, _ URL: URL, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
+    public func shouldInteractWithURL(_ action: @escaping (_ text: String?, _ URL: URL, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
         let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, URL, NSRange, UITextItemInteraction) -> Bool)
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -241,7 +241,7 @@ extension TextView {
     }
 
     @available(iOS 10.0, *)
-    public func shouldInteractWithTextAttachmentInCharacterRangeInteraction(_ action: @escaping (_ text: String?, _ textAttachment: NSTextAttachment, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
+    public func shouldInteractWithTextAttachment(_ action: @escaping (_ text: String?, _ textAttachment: NSTextAttachment, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
         let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool);
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
