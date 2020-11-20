@@ -20,4 +20,8 @@ extension View{
         }
         return nil
     }
+    
+    public func rootViewController()->UIViewController?{
+       return UIApplication.shared.keyWindow?.rootViewController
+    }
 }

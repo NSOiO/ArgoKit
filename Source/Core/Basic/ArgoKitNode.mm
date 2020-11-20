@@ -293,6 +293,8 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
           [childsToInclude addObject:node];
+      }else{
+          NSLog(@"");
       }
     }
       
@@ -399,6 +401,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
     }else{
         [self.parentNode.view insertSubview:self.view atIndex:index];
+        [self.parentNode.view layoutIfNeeded ];
     }
 }
 
@@ -617,6 +620,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [_childs removeAllObjects];
     }
     YGNodeRemoveAllChildren(self.layout.ygnode);
+}
+
+- (ArgoKitNode *)rootNode{
+    ArgoKitNode *node = self;
+    while (node.parentNode) {
+        node = node.parentNode;
+    }
+    return node;
 }
 @end
 

@@ -22,6 +22,7 @@ public struct SessionItem:ArgoKitIdentifiable{
 }
 class SessionRow:View{
     var item:SessionItem
+    var hidden:Bool = false
     init(item:SessionItem) {
         self.item = item
     }
@@ -32,38 +33,48 @@ class SessionRow:View{
                 .backgroundColor(.clear)
                 .width(60.0)
                 .height(60.0)
-                .margin(top: 10, right: 0, bottom: 10, left: 10)
+                .alignSelf(.center)
+                .margin(edge: .left, value: 10)
+                .margin(edge: .top, value: 10)
+                .margin(edge: .bottom, value: 10)
                 .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
                 .onTapGesture {
-                    self.item.textCom?.text("sfcsvddfvdvscdsfcsdfcscscscs")
+                    self.hidden = !self.hidden
+                    _ = self.item.textCom?.hidden(self.hidden).backgroundColor(.red)
                 }.isUserInteractionEnabled(true)
                 
             VStack{
-                Text(self.item.sessionName).shrink(1).grow(0).width(.auto)
-                    .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5).backgroundColor(.blue)
+                Text(self.item.sessionName)
+                    .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
+                    .backgroundColor(.gray)
+                    .textAlign(.center)
+//                    .borderWidth(top: 13, right: 13, bottom: 13, left: 50)
                 
                 Text(self.item.lastMessage)
                     .backgroundColor(.red)
-                    .maxWidth(200)
-                    .margin(edge: .top, value: 15).LineSpacing(10).lineLimit(2)
+                    .LineSpacing(10).lineLimit(0)
                     .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
                     .alias(variable: &self.item.textCom)
-                
-                VStack{
-                    Text("cdcsc").alignSelf(.center)
-                    .shadow(shadowColor: .red, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 2, shadowOpacity: 2, corners: .allCorners)
-                }
-                .width(100).height(60).margin(edge: .top, value: 3)
-//                .cornerRadius(topLeft: 4, topRight: 5, bottomLeft: 4, bottomRight: 4)
-//                .shadow(shadowColor: .red, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 5, shadowOpacity: 5, corners: .allCorners)
-            }
-            .margin(top: 10, right: 40, bottom: 10, left: 10)
+                    .margin(edge: .top, value: 3).hidden(self.hidden)
+            }.margin(top: 10, right: 0, bottom: 10, left: 10)
+//            .backgroundColor(.purple)
+            
             Spacer()
-            VStack{
-                Text(self.item.timeLabel).lineLimit(0).textAlign(.right).margin(edge: .top, value: 10).margin(edge: .right, value: 5)
-                Text(self.item.unreadCount).alignSelf(.center).textColor(.red).backgroundColor(.yellow).margin(edge: .top, value: 15).margin(edge: .right, value: 5)
-            }.width(100)
-        }
+            
+//            VStack{
+//                Text(self.item.timeLabel)
+////                    .textAlign(.left)
+//                    .margin(edge: .top, value: 10)
+////                    .margin(edge: .right, value: 50)
+//                    .backgroundColor(.yellow)
+////
+//                Text(self.item.unreadCount).alignSelf(.center)
+//                    .textColor(.red).backgroundColor(.yellow)
+//                    .margin(edge: .top, value: 15)
+//                    .margin(edge: .right, value: 5).shrink(1)
+//            }.backgroundColor(.orange)
+//            .margin(top: 10, right: 0, bottom: 10, left: 10)
+        }.backgroundColor(.cyan)
         
     }
 }
@@ -72,8 +83,8 @@ class Demo1ContentView:View {
     var items = [SessionItem]()
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        for index in 1..<100{
+        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
+        for index in 1..<2{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5]
@@ -87,14 +98,12 @@ class Demo1ContentView:View {
     var body:View{
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%)
-        }.width(100%).height(100%).didSelectRowAtIndexPath {[weak self] item, indexPath in
-            _ = self?.alertView1?.titile(item!.imagePath).message(item!.lastMessage).show()
-        }.alert {
-            AlertView(title: "", message: "", preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+        }.width(100%).height(100%).didSelectRowAtIndexPath {item, indexPath in
+            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
                 print(text ?? "")
             }.cancel(title: "取消") {}
             .textField()
-            .alias(variable: &alertView1)
+            .show()
         }
         .canEditRowAtIndexPath({ item, indexPath -> Bool in
             return true
@@ -104,20 +113,22 @@ class Demo1ContentView:View {
                 print("trailing 菜鸡")
                 complation(true)
             }),
-            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-                print("trailing  互啄")
-                complation(true)
-            }),].swipeActionsConfiguration()
+//            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+//                print("trailing  互啄")
+//                complation(true)
+//            }),
+            ].swipeActionsConfiguration()
         }
         .leadingSwipeActionsConfigurationForRowAtIndexPath { (item, indexPath) -> ListSwipeActionsConfiguration? in
             [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
                 print("leading 菜鸡")
                 complation(true)
             }),
-            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-                print("leading 互啄")
-                complation(true)
-            }),].swipeActionsConfiguration()
+//            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+//                print("leading 互啄")
+//                complation(true)
+//            }),
+            ].swipeActionsConfiguration()
         }
     }
     

@@ -117,7 +117,7 @@ public class Text:View {
         fontSize = UIFont.systemFontSize
         font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
-        
+        pNode.flexShrink(1.0)
     }
     public convenience init(_ text:String?) {
         self.init()

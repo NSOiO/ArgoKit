@@ -28,6 +28,7 @@ public class HStack:View {
     public init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = ArgoKitNode(view:view);
         pNode.row();
+        pNode.alignItemsFlexStart()
         addSubNodes(builder:builder)
     }
 }

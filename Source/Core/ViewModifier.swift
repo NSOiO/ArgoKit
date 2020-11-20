@@ -13,6 +13,10 @@ extension ArgoKitNodeViewModifier{
             isDirty_ = true
         }
         
+        if selector == #selector(setter:UIView.isHidden) {
+            isDirty_ = true
+        }
+        
         if selector == #selector(setter:UILabel.attributedText) {
             isDirty_ = true
         }
@@ -141,6 +145,14 @@ extension View{
     }
     public func hidden(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.isHidden),value)
+        if let enable = self.node?.isEnabled {
+            self.node?.isEnabled = !value
+            if !enable && !value {
+                if let node =  self.node?.root{
+                    node.applyLayout(size: CGSize(width: node.size.width, height: CGFloat.nan))
+                }
+            }
+        }
         return self;
     }
     public func contentMode(_ value:UIView.ContentMode)->Self{

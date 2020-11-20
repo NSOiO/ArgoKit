@@ -64,11 +64,10 @@ extension AlertView{
         return self
     }
     
-    public func show()->Self{
-        if let viewController = self.viewController(){
+    public func show(){
+        if let viewController = self.rootViewController(){
             viewController.present(alerView, animated: true, completion: nil)
         }
-        return self
     }
 }
 /*
