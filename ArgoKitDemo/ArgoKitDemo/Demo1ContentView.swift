@@ -46,8 +46,11 @@ class SessionRow:View{
                 
                 VStack{
                     Text("cdcsc")
-                }.backgroundColor(.red).width(100).height(60).margin(edge: .top, value: 3)
-                .cornerRadius(topLeft: 4, topRight: 5, bottomLeft: 4, bottomRight: 4)
+                }
+//                .backgroundColor(.red)
+                .width(100).height(60).margin(edge: .top, value: 3)
+//                .cornerRadius(topLeft: 4, topRight: 5, bottomLeft: 4, bottomRight: 4)
+                .shadow(shadowColor: .red, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 5, shadowOpacity: 5, corners: .allCorners)
             }
             .margin(top: 10, right: 40, bottom: 10, left: 10)
             Spacer()
@@ -77,17 +80,6 @@ class Demo1ContentView:View {
     }
     var alertView1:AlertView?
     var body:View{
-//        Button("ed") {
-//            print("Button")
-//        } builder: { () -> View in
-//            Text("hehe")
-//            VStack{
-//                Text("hehscdscsde")
-//            }.height(100%).width(100%)
-//        }.margin(edge: .top, value: 80).backgroundColor(.yellow).height(30)
-//        .onTapGesture {
-//            print("qqqq")
-//        }
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%)
         }.width(100%).height(100%).didSelectRowAtIndexPath {[weak self] item, indexPath in

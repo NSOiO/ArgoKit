@@ -34,6 +34,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     var shadowRadius:CGFloat
     var shadowOpacity:Float
     var multiRadius:ArgoKitCornerRadius
+    var corners:UIRectCorner = .allCorners
     var shadowPath:UIBezierPath? = nil
     weak var viewNode:ArgoKitNode?
     
@@ -47,12 +48,25 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     }
     
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
+        self.multiRadius = multiRadius
+        _needRemake = true
+    }
+    
+    func updateCornersRadius(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat,corners:UIRectCorner)->Void{
+        self.shadowColor = shadowColor
+        self.shadowOffset = CGSize(width: 0, height: 0)
+        self.shadowRadius = shadowRadius
+        self.shadowOpacity = Float(shadowOpacity)
+        self.shadowRadius = shadowRadius
+        self.corners = corners
+        let multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: shadowRadius)
+        self.multiRadius = multiRadius
         _needRemake = true
     }
     
     func remakeIfNeed() {
         if let node = self.viewNode {
-            shadowPath = ArgoKitCornerManagerTool.bezierPath(frame: node.frame, multiRadius: multiRadius)
+            shadowPath = ArgoKitCornerManagerTool.bezierPath(frame: node.frame, multiRadius: self.multiRadius)
             if let view = node.view {
                 view.layer.shadowColor = shadowColor?.cgColor
                 view.layer.shadowOffset = shadowOffset

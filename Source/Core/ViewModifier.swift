@@ -190,8 +190,8 @@ extension View{
         return self;
     }
     
-    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat)->Self{
-       
+    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat,corners:UIRectCorner = .allCorners)->Self{
+        self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
         return self;
     }
 }
