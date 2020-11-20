@@ -18,8 +18,9 @@ public class VStack:View {
     }
     
     public init(@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = ArgoKitNode(viewClass: UIView.self);
-        pNode.column();
+        pNode = ArgoKitNode(viewClass: UIView.self)
+        pNode.column()
+        pNode.alignItemsFlexStart()
         addSubNodes(builder:builder)
     }
     

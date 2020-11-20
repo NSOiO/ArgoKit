@@ -8,25 +8,26 @@
 import UIKit
 
 public class HStack:View {
-    private let innerNode:ArgoKitNode
+    private let pNode:ArgoKitNode
     
     public var node: ArgoKitNode?{
-        innerNode
+        pNode
     }
 
     public init(){
-        innerNode = ArgoKitNode(viewClass:UIView.self);
+        pNode = ArgoKitNode(viewClass:UIView.self);
     }
 
     public init(@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        innerNode = ArgoKitNode(viewClass:UIView.self);
-        innerNode.row();
+        pNode = ArgoKitNode(viewClass:UIView.self);
+        pNode.row();
+        pNode.alignItemsFlexStart()
         addSubNodes(builder:builder)
     }
     //TODO:是否考虑支持兼容/混合布局
     public init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        innerNode = ArgoKitNode(view:view);
-        innerNode.row();
+        pNode = ArgoKitNode(view:view);
+        pNode.row();
         addSubNodes(builder:builder)
     }
 }

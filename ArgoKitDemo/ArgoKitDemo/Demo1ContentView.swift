@@ -35,7 +35,7 @@ class SessionRow:View{
                 .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
                 
             VStack{
-                Text(self.item.sessionName).maxWidth(100)
+                Text(self.item.sessionName).shrink(1).grow(0).width(.auto)
                     .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5).backgroundColor(.blue)
                 
                 Text(self.item.lastMessage)
