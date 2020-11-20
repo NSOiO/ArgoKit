@@ -16,7 +16,7 @@ class ArgoKitDataSourceHelper {
         return cahe
     }()
     
-    lazy var registedReuseIdSet = NSMutableSet()
+    lazy var registedReuseIdSet = Set<String>()
     
     public var nodeList: [[ArgoKitNode]]?
     

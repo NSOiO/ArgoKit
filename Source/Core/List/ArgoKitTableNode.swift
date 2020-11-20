@@ -102,7 +102,7 @@ extension ArgoKitTableNode {
         let identifier = self.dataSourceHelper.reuseIdForRow(indexPath.row, at: indexPath.section) ?? kCellReuseIdentifier
         if !self.dataSourceHelper.registedReuseIdSet.contains(identifier) {
             tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: identifier)
-            self.dataSourceHelper.registedReuseIdSet.add(identifier)
+            self.dataSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ArgoKitListCell
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -273,7 +273,7 @@ extension ArgoKitTableNode {
         let identifier = "Header" + (self.sectionHeaderSourceHelper.reuseIdForRow(section, at: 0) ?? kHeaderReuseIdentifier)
         if !self.sectionHeaderSourceHelper.registedReuseIdSet.contains(identifier) {
             tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
-            self.sectionHeaderSourceHelper.registedReuseIdSet.add(identifier)
+            self.sectionHeaderSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! ArgoKitListHeaderFooterView
         if let node = sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
@@ -287,7 +287,7 @@ extension ArgoKitTableNode {
         let identifier = "Footer" + (self.sectionFooterSourceHelper.reuseIdForRow(section, at: 0) ?? kFooterReuseIdentifier)
         if !self.sectionFooterSourceHelper.registedReuseIdSet.contains(identifier) {
             tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
-            self.sectionFooterSourceHelper.registedReuseIdSet.add(identifier)
+            self.sectionFooterSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! ArgoKitListHeaderFooterView
         if let node = sectionFooterSourceHelper.nodeForRow(section, at: 0) {
