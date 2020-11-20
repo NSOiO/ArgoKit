@@ -47,6 +47,16 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         self.viewNode = viewNode
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
+        let rect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
+        if let shadowRadius = self.viewNode?.view?.layer.shadowRadius {
+            print(rect)
+            if shadowRadius > 0 {
+                self.needRemake = true
+            }
+        }
+    }
+    
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
         self.multiRadius = multiRadius
         self.needRemake = true
@@ -67,7 +77,12 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     func remakeIfNeed() {
         self.needRemake = false
         if let node = self.viewNode {
-            shadowPath = ArgoKitCornerManagerTool.bezierPath(frame: node.frame, multiRadius: self.multiRadius)
+            var frame:CGRect = node.frame
+            if let view = node.view{
+                view.addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+                frame = view.frame
+            }
+            shadowPath = ArgoKitCornerManagerTool.bezierPath(frame:frame, multiRadius: self.multiRadius)
             if let view = node.view {
                 view.layer.shadowColor = shadowColor?.cgColor
                 view.layer.shadowOffset = shadowOffset
@@ -89,8 +104,11 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
                 }
                 ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowPath),shadowPath?.cgPath)
             }
-        }else{
-            //节点不存在
+        }
+    }
+    deinit {
+        if let view = self.viewNode?.view{
+            view.removeObserver(self, forKeyPath: "frame")
         }
     }
 }
@@ -152,21 +170,25 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
                 frame = view.frame
             }
             let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)
-            let maskLayer:CAShapeLayer = node.view?.layer.mask as? CAShapeLayer ?? CAShapeLayer()
-            maskLayer.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
-            maskLayer.path = maskPath.cgPath
+            var maskLayer:CAShapeLayer? = nil
+            if let mask =  node.view?.layer.mask {
+                maskLayer = mask as? CAShapeLayer
+            }else{
+                maskLayer = CAShapeLayer()
+            }
+            maskLayer?.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+            maskLayer?.path = maskPath.cgPath
             if let view = node.view {
                 view.layer.mask = maskLayer
             }else{
                 ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.mask),maskLayer)
             }
-        }else{
-            //节点不存在
         }
     }
-    
     deinit {
-        self.viewNode?.removeObserver(self, forKeyPath: "frame")
+        if let view = self.viewNode?.view{
+            view.removeObserver(self, forKeyPath: "frame")
+        }
     }
 }
 
