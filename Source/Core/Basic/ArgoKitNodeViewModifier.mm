@@ -102,7 +102,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     UIView *view = node.view;
     for (ViewAttribute *attribute in attributes) {
         if(attribute.isCALayer){
-            if([view.layer respondsToSelector:attribute.selector]){
+            if(view &&  [view.layer respondsToSelector:attribute.selector]){
                 performSelector(view.layer,attribute.selector,attribute.paramter);
             }
         }else{
@@ -127,9 +127,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         ArgoKitNode *resueNode = reuseNodes[i];
         
         resueNode.linkNode = node;
-        if (!node.view){
-           [node createNodeViewIfNeed:resueNode.frame];
-        }
+        
         node.backupViewAttributes = resueNode.viewAttributes;
         [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
         node.view.frame = resueNode.frame;

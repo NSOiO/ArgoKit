@@ -50,7 +50,6 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
         let rect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
         if let shadowRadius = self.viewNode?.view?.layer.shadowRadius {
-            print(rect)
             if shadowRadius > 0 {
                 self.needRemake = true
             }
@@ -141,7 +140,6 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
         let rect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
         if let mask = self.viewNode?.view?.layer.mask {
-            print(rect)
             if !(mask.frame.equalTo(rect)) {
                 self.needRemake = true
             }

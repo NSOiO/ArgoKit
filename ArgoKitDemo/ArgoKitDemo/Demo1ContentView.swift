@@ -22,7 +22,7 @@ public struct SessionItem:ArgoKitIdentifiable{
 }
 class SessionRow:View{
     var item:SessionItem
-    var hidden:Bool = true
+    var hidden:Bool = false
     init(item:SessionItem) {
         self.item = item
     }
@@ -84,7 +84,7 @@ class Demo1ContentView:View {
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        for index in 1..<2{
+        for index in 1..<300{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5]

@@ -10,29 +10,29 @@
 @implementation NSObject(ArgoKitObserver)
 + (void)load
 {
-    [self switchMethod];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SEL removeSel = @selector(removeObserver:forKeyPath:);
+        SEL customRemoveSel = @selector(removeArgoKitObserver:forKeyPath:);
+        SEL addSel = @selector(addObserver:forKeyPath:options:context:);
+        SEL customAddSel = @selector(addArgoKitObserver:forKeyPath:options:context:);
+        
+        Method removeMethod = class_getClassMethod([self class],removeSel);
+        Method cRemoveMethod = class_getClassMethod([self class], customRemoveSel);
+        Method addMethod = class_getClassMethod([self class],addSel);
+        Method cAddMethod = class_getClassMethod([self class], customAddSel);
+        
+        method_exchangeImplementations(removeMethod, cRemoveMethod);
+        method_exchangeImplementations(addMethod, cAddMethod);
+    });
+   
 }
 
-+ (void)switchMethod
-{
-    SEL removeSel = @selector(removeObserver:forKeyPath:);
-    SEL customRemoveSel = @selector(removeArgoKitObserver:forKeyPath:);
-    SEL addSel = @selector(addObserver:forKeyPath:options:context:);
-    SEL customAddSel = @selector(addArgoKitObserver:forKeyPath:options:context:);
-    
-    Method systemRemoveMethod = class_getClassMethod([self class],removeSel);
-    Method DasenRemoveMethod = class_getClassMethod([self class], customRemoveSel);
-    Method systemAddMethod = class_getClassMethod([self class],addSel);
-    Method DasenAddMethod = class_getClassMethod([self class], customAddSel);
-    
-    method_exchangeImplementations(systemRemoveMethod, DasenRemoveMethod);
-    method_exchangeImplementations(systemAddMethod, DasenAddMethod);
-}
 #pragma mark - 第三种方案，利用私有属性
 // 交换后的方法
 - (void)removeArgoKitObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
-    if ([self observerKeyPath:keyPath observer:observer]) {
+    if ([self argokitObserverKeyPath:keyPath observer:observer]) {
         [self removeArgoKitObserver:observer forKeyPath:keyPath];
     }
 }
@@ -40,13 +40,13 @@
 // 交换后的方法
 - (void)addArgoKitObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
-    if (![self observerKeyPath:keyPath observer:observer]) {
+    if (![self argokitObserverKeyPath:keyPath observer:observer]) {
         [self addArgoKitObserver:observer forKeyPath:keyPath options:options context:context];
     }
 }
 
 // 进行检索获取Key
-- (BOOL)observerKeyPath:(NSString *)key observer:(id )observer
+- (BOOL)argokitObserverKeyPath:(NSString *)key observer:(id )observer
 {
     id info = self.observationInfo;
     NSArray *array = [info valueForKey:@"_observances"];

@@ -539,11 +539,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return self.size;
 }
-- (void)applyLayoutAferCalculation{
-    if (self.layout) {
-        [self.layout applyLayoutAferCalculation];
-    }
-}
 
 - (void)applyLayoutAferCalculationWithView:(BOOL)withView{
     if (self.layout) {
@@ -694,7 +689,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (nullable id)valueWithSelector:(SEL)selector{
     NSString *selector_name =  @(sel_getName(selector));
-    ViewAttribute *attribute = self.backupViewAttributes[selector_name];
+    ViewAttribute *attribute = self.viewAttributes[selector_name];
     if (attribute) {
         return attribute.paramter.firstObject;
     }
