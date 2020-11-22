@@ -11,9 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ArgoReusedLayoutHelper : NSObject
 - (instancetype)init NS_UNAVAILABLE;
-+ (void)preAddLayoutNode:(nullable ArgoKitNode *)node;
-+ (void)commitPreNodes;
 + (void)addLayoutNode:(nullable ArgoKitNode *)node;
++ (void)layout:(ArgoKitNode *)node createLinkNodeView:(BOOL)create;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -107,8 +107,8 @@ static YGConfigRef globalConfig;
 - (void)applyLayoutAferCalculation{
     YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
-- (void)applyLayoutAferCalculationForReused{
-    self.argoNode.isReused = YES;
+- (void)applyLayoutAferCalculationWithView:(BOOL)withView{
+    self.argoNode.isReused = !withView;
     YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
 // 视图是否为叶子
@@ -293,8 +293,6 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
           [childsToInclude addObject:node];
-      }else{
-          NSLog(@"");
       }
     }
       
@@ -382,7 +380,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (void)commitAttributes {
     if (_viewAttributes.count) {
-        [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes.allValues];
+        [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes.allValues markDirty:NO];
     }
     if (_nodeActions.count && [self.view isKindOfClass:[UIControl class]] && [self.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
         NSArray<NodeAction *> *copyActions = [self.nodeActions mutableCopy];
@@ -390,18 +388,18 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self addTarget:self.view forControlEvents:action.controlEvents action:action.actionBlock];
         }
     }
-    if (self.parentNode.view) {
-        [self insertViewToParentNodeView];
-    }
+    [self insertViewToParentNodeView];
 }
 
 - (void)insertViewToParentNodeView {
+    if (!self.parentNode.view) {
+        return;
+    }
     NSInteger index = [self.parentNode.childs indexOfObject:self];
     if ([self.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
         [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
     }else{
         [self.parentNode.view insertSubview:self.view atIndex:index];
-        [self.parentNode.view layoutIfNeeded ];
     }
 }
 
@@ -416,7 +414,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [wealSelf commitAttributes];
         }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
             wealSelf.view.frame = frame;
-            if (!wealSelf.view.superview && wealSelf.parentNode.view) {
+            if (!wealSelf.view.superview) {
                 [wealSelf insertViewToParentNodeView];
             }
         }
@@ -546,11 +544,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self.layout applyLayoutAferCalculation];
     }
 }
-- (void)applyLayoutAferCalculationWithoutView{
+
+- (void)applyLayoutAferCalculationWithView:(BOOL)withView{
     if (self.layout) {
-        [self.layout applyLayoutAferCalculationForReused];
+        [self.layout applyLayoutAferCalculationWithView:withView];
     }
 }
+
 - (CGSize)calculateLayoutWithSize:(CGSize)size{
     if (self.layout) {
         self.size = [self.layout calculateLayoutWithSize:size];

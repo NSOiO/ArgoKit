@@ -88,6 +88,13 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     [self _nodeViewAttributeWithNode:node attributes:attributes markDirty:YES];
 }
 
++ (void)nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
+    if (!node) {
+        return;
+    }
+    [self _nodeViewAttributeWithNode:node attributes:attributes markDirty:markDirty];
+}
+
 + (void)_nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
     if (!node) {
         return;
@@ -120,7 +127,9 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         ArgoKitNode *resueNode = reuseNodes[i];
         
         resueNode.linkNode = node;
-        
+        if (!node.view){
+           [node createNodeViewIfNeed:resueNode.frame];
+        }
         node.backupViewAttributes = resueNode.viewAttributes;
         [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
         node.view.frame = resueNode.frame;

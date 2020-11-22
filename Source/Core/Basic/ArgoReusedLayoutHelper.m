@@ -51,26 +51,11 @@ static ArgoReusedLayoutHelper* _instance;
     [[ArgoReusedLayoutHelper sharedInstance] removeLayoutNode:node];
 }
 
-+ (void)preAddLayoutNode:(nullable ArgoKitNode *)node{
-    [[ArgoReusedLayoutHelper sharedInstance] preAddLayoutNode:node];
-}
-
-+ (void)commitPreNodes{
-    [[ArgoReusedLayoutHelper sharedInstance] commitPreNodes];
++ (void)layout:(ArgoKitNode *)node createLinkNodeView:(BOOL)create{
+    [[ArgoReusedLayoutHelper sharedInstance] layout:node createLinkNodeView:create];
 }
 
 #pragma mark --- private methods ---
-- (void)preAddLayoutNode:(nullable ArgoKitNode *)node{
-    if (node.isRootNode && ![self.lazyLayoutNodesPool containsObject:node]) {
-        [self.lazyLayoutNodesPool addObject:node];
-    }
-}
-- (void)commitPreNodes{
-    for (id node in self.lazyLayoutNodesPool) {
-        [self.layoutNodesPool addObject:node];
-    }
-    [self.lazyLayoutNodesPool removeAllObjects];
-}
 - (NSHashTable<ArgoKitNode *> *)layoutNodesPool{
     if (!_layoutNodesPool) {
         _layoutNodesPool = [NSHashTable weakObjectsHashTable];
@@ -123,15 +108,18 @@ static ArgoReusedLayoutHelper* _instance;
     NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
     for(ArgoKitNode *node in nodes){
         if(node.isDirty){
-            [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
-            [node applyLayoutAferCalculationWithoutView];
-            if (node.linkNode) {
-                [ArgoKitNodeViewModifier reuseNodeViewAttribute:node.linkNode reuseNode:node];
-            }else{
-                [ArgoKitNodeViewModifier reuseNodeViewAttribute:node reuseNode:node];
-            }
+            [self layout:node createLinkNodeView:NO];
         }
     }
 }
-
+- (void)layout:(ArgoKitNode *)node createLinkNodeView:(BOOL)create{
+    [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
+    [node applyLayoutAferCalculationWithView:NO];
+    if (node.linkNode) {
+        [ArgoKitNodeViewModifier reuseNodeViewAttribute:node.linkNode reuseNode:node];
+    }else{
+        [ArgoKitNodeViewModifier reuseNodeViewAttribute:node reuseNode:node];
+    }
+    
+}
 @end

@@ -13,7 +13,7 @@ extension ArgoKitNodeViewModifier{
             isDirty_ = true
         }
         
-        if selector == #selector(setter:UIView.isHidden) {
+        if selector == #selector(setter:UILabel.isHidden) {
             isDirty_ = true
         }
         
@@ -57,7 +57,7 @@ extension ArgoKitNodeViewModifier{
             let attribute = ViewAttribute(selector:selector,paramter:paraList)
             attribute.isDirty = isDirty(selector)
             attribute.isCALayer = isCALayer
-            self.nodeViewAttribute(with:node, attributes: [attribute])
+            self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
             
             node.nodeAddView(attribute:attribute)
         }
@@ -149,7 +149,7 @@ extension View{
             self.node?.isEnabled = !value
             if !enable && !value {
                 if let node =  self.node?.root{
-                    node.applyLayout(size: CGSize(width: node.size.width, height: CGFloat.nan))
+                    ArgoReusedLayoutHelper.layout(node, createLinkNodeView: true)
                 }
             }
         }

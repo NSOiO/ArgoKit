@@ -14,13 +14,13 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
     public func linkCellNode(_ node: ArgoKitCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
-                node.applyLayoutAferCalculationWithoutView()
+                node.applyLayoutAferCalculation(withView:false)
             }
             ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!, reuse: node)
         }else{
             node.bindView(self.contentView)
             self.contentNode = node
-            self.contentNode?.applyLayoutAferCalculation()
+            self.contentNode?.applyLayoutAferCalculation(withView: true)
         }
         ArgoReusedLayoutHelper.addLayoutNode(node)
     }

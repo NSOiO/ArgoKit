@@ -22,7 +22,7 @@ public struct SessionItem:ArgoKitIdentifiable{
 }
 class SessionRow:View{
     var item:SessionItem
-    var hidden:Bool = false
+    var hidden:Bool = true
     init(item:SessionItem) {
         self.item = item
     }

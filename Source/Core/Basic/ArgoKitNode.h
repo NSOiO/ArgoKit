@@ -115,11 +115,10 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (CGSize)calculateLayoutWithSize:(CGSize)size
     NS_SWIFT_NAME(calculateLayout(size:));
 
-/*
- update the frames of the views in the hierarchy with the results of Calculation.
- */
-- (void)applyLayoutAferCalculation;
-- (void)applyLayoutAferCalculationWithoutView;
+///  update the frames of the nodes in the hierarchy with the results of Calculation.
+/// @param withView 更新完node是否创建对应的视图，YES 创建，NO不创建
+- (void)applyLayoutAferCalculationWithView:(BOOL)withView
+NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 
 @end
 
