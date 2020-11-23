@@ -37,6 +37,11 @@ class ArgoKitListCell: UITableViewCell {
         super.init(coder: coder)
     }
     
+    // 清空视图属性
+    override func prepareForReuse() {
+        ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
+    }
+    
     public func linkCellNode(_ node: ArgoKitCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
@@ -50,4 +55,6 @@ class ArgoKitListCell: UITableViewCell {
         }
         ArgoReusedLayoutHelper.addLayoutNode(node)
     }
+    
+    
 }

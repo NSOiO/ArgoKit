@@ -151,4 +151,17 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     reuseNode.linkNode = node;
     [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs resetFrame:YES];
 }
+
+
++ (void)prepareForReuseNode:(nullable ArgoKitNode*)node{
+    if (!node || !node.view) {
+        return;
+    }
+    for (UIGestureRecognizer *recognizer in node.view.gestureRecognizers) {
+        [node.view removeGestureRecognizer:recognizer];
+    }
+    for(ArgoKitNode *subNode in node.childs){
+        [self prepareForReuseNode:subNode];
+    }
+}
 @end
