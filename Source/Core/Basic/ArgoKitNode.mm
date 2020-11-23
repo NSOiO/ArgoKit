@@ -13,15 +13,6 @@
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
 
-@interface NodeAction:NSObject{
-    int actionTag;
-    ArgoKitNodeBlock action;
-    UIControlEvents  events;
-}
-@property(nonatomic, copy) ArgoKitNodeBlock actionBlock;
-@property(nonatomic, assign)  UIControlEvents  controlEvents;
-- (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents;
-@end
 
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{

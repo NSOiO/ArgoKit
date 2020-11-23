@@ -8,6 +8,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
+typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter);
+@interface NodeAction:NSObject{
+    int actionTag;
+    ArgoKitNodeBlock action;
+    UIControlEvents  events;
+}
+@property(nonatomic, copy) ArgoKitNodeBlock actionBlock;
+@property(nonatomic, assign)  UIControlEvents  controlEvents;
+- (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents;
+@end
+
 @interface ViewAttribute : NSObject
 @property(nonatomic,assign)SEL selector;
 @property(nonatomic,copy)NSArray<id> *paramter;
@@ -16,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSelector:(nullable SEL)selector paramter:(nullable NSArray<id> *)paramter;
 @end
  
-typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter);
 @interface ArgoKitNode : NSObject
 /* 顶层根节点*/
 @property (nonatomic, weak ,nullable)ArgoKitNode  *rootNode;
@@ -73,6 +83,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 - (void)bindView:(UIView *)view;
 
+
+@property (nonatomic,strong,readonly)NSMutableArray<NodeAction *> *nodeActions;
 - (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents;
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
 

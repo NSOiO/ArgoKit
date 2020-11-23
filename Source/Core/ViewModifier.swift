@@ -65,7 +65,6 @@ extension ArgoKitNodeViewModifier{
 //                self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
 //            }
             node.nodeAddView(attribute:attribute)
-            print("node",node)
             
             if attribute.isDirty == true {
                 node.markDirty()

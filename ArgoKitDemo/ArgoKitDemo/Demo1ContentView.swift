@@ -67,6 +67,13 @@ class SessionRow:View{
             
             Spacer()
             
+            Button(text: "Button"){
+                self.hidden = !self.hidden
+                _ = self.item.textCom?.hidden(self.hidden)
+            }.width(100)
+            .height(50)
+            .backgroundColor(.green)
+            .alignSelf(.center)
 //            VStack{
 //                Text(self.item.timeLabel)
 ////                    .textAlign(.left)
@@ -117,9 +124,9 @@ class Demo1ContentView:View {
 //                    .margin(edge: .bottom, value: 10)
 //                    .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
 //                    .onTapGesture {
-//                       
+//
 //                    }.isUserInteractionEnabled(true)
-//                    
+//
 //                VStack{
 //                    Text(item.sessionName)
 //                        .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
@@ -132,7 +139,7 @@ class Demo1ContentView:View {
 //                        .alias(variable: &item.textCom)
 //                        .margin(edge: .top, value: 3).hidden(item.hidden)
 //                }.margin(top: 10, right: 0, bottom: 10, left: 10)
-//                
+//
 //                Spacer()
 //            }.backgroundColor(.cyan)
             
@@ -142,10 +149,10 @@ class Demo1ContentView:View {
 //            }.cancel(title: "取消") {}
 //            .textField()
 //            .show()
-            if let hidden = item?.hidden{
-                item?.hidden = !hidden
-                _ = item?.textCom?.hidden(!hidden)
-            }
+//            if let hidden = item?.hidden{
+//                item?.hidden = !hidden
+//                _ = item?.textCom?.hidden(!hidden)
+//            }
            
             
         }
