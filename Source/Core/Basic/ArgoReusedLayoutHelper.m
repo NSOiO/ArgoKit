@@ -51,8 +51,8 @@ static ArgoReusedLayoutHelper* _instance;
     [[ArgoReusedLayoutHelper sharedInstance] removeLayoutNode:node];
 }
 
-+ (void)layout:(ArgoKitNode *)node createLinkNodeView:(BOOL)create{
-    [[ArgoReusedLayoutHelper sharedInstance] layout:node createLinkNodeView:create];
++ (void)appLayout:(ArgoKitNode *)node{
+    [[ArgoReusedLayoutHelper sharedInstance] layout:node];
 }
 
 #pragma mark --- private methods ---
@@ -108,11 +108,11 @@ static ArgoReusedLayoutHelper* _instance;
     NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
     for(ArgoKitNode *node in nodes){
         if(node.isDirty){
-            [self layout:node createLinkNodeView:NO];
+            [self layout:node];
         }
     }
 }
-- (void)layout:(ArgoKitNode *)node createLinkNodeView:(BOOL)create{
+- (void)layout:(ArgoKitNode *)node{
     [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
     [node applyLayoutAferCalculationWithView:NO];
     if (node.linkNode) {

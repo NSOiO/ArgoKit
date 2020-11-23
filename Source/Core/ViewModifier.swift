@@ -58,15 +58,18 @@ extension ArgoKitNodeViewModifier{
             attribute.isDirty = isDirty(selector)
             attribute.isCALayer = isCALayer
             
-            if let linkNode = node.link {
-                self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
-                if attribute.isDirty == true {
-                    node.markDirty()
-                }
-            }else{
-                self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
-            }
+//            if let linkNode = node.link {
+//                self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
+//                
+//            }else{
+//                self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
+//            }
             node.nodeAddView(attribute:attribute)
+            print("node",node)
+            
+            if attribute.isDirty == true {
+                node.markDirty()
+            }
         }
     }
 }
@@ -151,16 +154,20 @@ extension View{
         return self;
     }
     public func hidden(_ value:Bool)->Self{
-       
         addAttribute(#selector(setter:UIView.isHidden),value)
-//        if let enable = self.node?.isEnabled {
-//            if !enable && !value {
-//                self.node?.isEnabled = !value
-//                if let node =  self.node?.root{
-//                    ArgoReusedLayoutHelper.layout(node, createLinkNodeView: true)
-//                }
-//            }
-//        }
+        if let enable = self.node?.isEnabled {
+            if !enable && !value {
+                if let node =  self.node?.root{
+                    self.node?.isEnabled = !value
+                    ArgoReusedLayoutHelper.appLayout(node)
+                }
+            }else{
+                self.node?.isEnabled = !value
+            }
+        }else{
+            self.node?.isEnabled = !value
+        }
+      
         return self;
     }
     public func contentMode(_ value:UIView.ContentMode)->Self{

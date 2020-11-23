@@ -117,7 +117,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     }
 }
 
-+ (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes{
++ (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes resetFrame:(BOOL)only{
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {
         return;
@@ -127,18 +127,28 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         ArgoKitNode *resueNode = reuseNodes[i];
         
         resueNode.linkNode = node;
+        if (!node.view) {
+            [node createNodeViewIfNeed:node.frame];
+        }
         
         node.backupViewAttributes = resueNode.viewAttributes;
-        [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
+        if (!only) {
+            [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
+        }
         node.view.frame = resueNode.frame;
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
-            [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs];
+            [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs resetFrame:only];
         }
     }
 }
 
 + (void)reuseNodeViewAttribute:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
     reuseNode.linkNode = node;
-    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs];
+    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs resetFrame:NO];
+}
+
++ (void)resetNodeViewFrame:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
+    reuseNode.linkNode = node;
+    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs resetFrame:YES];
 }
 @end

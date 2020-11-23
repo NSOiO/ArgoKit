@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import ArgoKit
 
-public struct SessionItem:ArgoKitIdentifiable{
+public class SessionItem:ArgoKitIdentifiable{
     public var identifier: String
     public var reuseIdentifier: String
     var imagePath:String?
@@ -18,6 +18,12 @@ public struct SessionItem:ArgoKitIdentifiable{
     var timeLabel:String?
     var unreadCount:String?
     var textCom:Text?
+    var hidden:Bool = false
+    
+    init(identifier:String,reuseIdentifier:String) {
+        self.identifier = identifier
+        self.reuseIdentifier = reuseIdentifier
+    }
     
 }
 class SessionRow:View{
@@ -40,7 +46,7 @@ class SessionRow:View{
                 .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
                 .onTapGesture {
                     self.hidden = !self.hidden
-                    _ = self.item.textCom?.hidden(self.hidden).backgroundColor(.red)
+                    _ = self.item.textCom?.hidden(self.hidden)
                 }.isUserInteractionEnabled(true)
                 
             VStack{
@@ -87,23 +93,61 @@ class Demo1ContentView:View {
         for index in 1..<300{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
-            item.sessionName = images[index%5]
-            item.lastMessage = messages[index%5]
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
             items.append(item)
         }
     }
+    var hidden:Bool = false
     var alertView1:AlertView?
     var body:View{
         List(data:items){ item in
-            SessionRow(item: item).width(100%).height(100%)
+//            SessionRow(item: item).width(100%).height(100%)
+            HStack{
+                ImageView(item.imagePath)
+                    .clipsToBounds(true)
+                    .backgroundColor(.clear)
+                    .width(60.0)
+                    .height(60.0)
+                    .alignSelf(.center)
+                    .margin(edge: .left, value: 10)
+                    .margin(edge: .top, value: 10)
+                    .margin(edge: .bottom, value: 10)
+                    .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+                    .onTapGesture {
+                       
+                    }.isUserInteractionEnabled(true)
+                    
+                VStack{
+                    Text(item.sessionName)
+                        .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
+                        .backgroundColor(.gray)
+                        .textAlign(.center)
+                    Text(item.lastMessage)
+                        .backgroundColor(.red)
+                        .LineSpacing(10).lineLimit(0)
+                        .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
+                        .alias(variable: &item.textCom)
+                        .margin(edge: .top, value: 3).hidden(item.hidden)
+                }.margin(top: 10, right: 0, bottom: 10, left: 10)
+                
+                Spacer()
+            }.backgroundColor(.cyan)
+            
         }.width(100%).height(100%).didSelectRow {item, indexPath in
-            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
-                print(text ?? "")
-            }.cancel(title: "取消") {}
-            .textField()
-            .show()
+//            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+//                print(text ?? "")
+//            }.cancel(title: "取消") {}
+//            .textField()
+//            .show()
+            if let hidden = item?.hidden{
+                item?.hidden = !hidden
+                _ = item?.textCom?.hidden(!hidden)
+            }
+           
+            
         }
         .canEditRow({ item, indexPath -> Bool in
             return true

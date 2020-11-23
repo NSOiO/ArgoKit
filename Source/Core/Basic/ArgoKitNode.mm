@@ -293,6 +293,8 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
           [childsToInclude addObject:node];
+      }else{
+          NSLog(@"dvsd");
       }
     }
       
