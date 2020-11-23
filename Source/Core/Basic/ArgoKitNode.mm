@@ -284,8 +284,6 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
           [childsToInclude addObject:node];
-      }else{
-          NSLog(@"dvsd");
       }
     }
       
@@ -436,7 +434,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (NSMutableDictionary<NSString *,ViewAttribute *> *)viewAttributes{
     if (!_viewAttributes) {
         _viewAttributes = [[NSMutableDictionary alloc] init];
-        _backupViewAttributes = _viewAttributes;
     }
     return _viewAttributes;
 }

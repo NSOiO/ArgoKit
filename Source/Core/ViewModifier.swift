@@ -58,17 +58,20 @@ extension ArgoKitNodeViewModifier{
             attribute.isDirty = isDirty(selector)
             attribute.isCALayer = isCALayer
             
-//            if let linkNode = node.link {
-//                self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
-//                
-//            }else{
-//                self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
-//            }
+            self.setNodeAttribute(node, attribute)
             node.nodeAddView(attribute:attribute)
             
-            if attribute.isDirty == true {
-                node.markDirty()
-            }
+        }
+    }
+    
+    class func  setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
+        if let linkNode = node?.link {
+             self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
+         }else{
+             self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
+         }
+        if attribute.isDirty == true {
+            node?.markDirty()
         }
     }
 }

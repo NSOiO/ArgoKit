@@ -130,20 +130,20 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         if (!node.view) {
             [node createNodeViewIfNeed:node.frame];
         }
-        
-        node.backupViewAttributes = resueNode.viewAttributes;
         if (!only) {
+            // 处理UIView属性点击事件
             [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
-        }
-        
-        // 处理UIControl点击时间
-        if (node.nodeActions.count && [node.view isKindOfClass:[UIControl class]] && [node.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
-            NSArray<NodeAction *> *copyActions = [resueNode.nodeActions mutableCopy];
-            for(NodeAction *action in copyActions){
-                [node addTarget:node.view forControlEvents:action.controlEvents action:action.actionBlock];
+            // 处理UIControl点击事件
+            if (node.nodeActions.count && [node.view isKindOfClass:[UIControl class]] && [node.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+                NSArray<NodeAction *> *copyActions = [resueNode.nodeActions mutableCopy];
+                for(NodeAction *action in copyActions){
+                    [node addTarget:node.view forControlEvents:action.controlEvents action:action.actionBlock];
+                }
             }
         }
-        
+        if(!node.view){
+            [node createNodeViewIfNeed:node.frame];
+        }
         node.view.frame = resueNode.frame;
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
             [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs resetFrame:only];
@@ -166,11 +166,9 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     if (!node || !node.view) {
         return;
     }
-    
     for (UIGestureRecognizer *recognizer in node.view.gestureRecognizers) {
         [node.view removeGestureRecognizer:recognizer];
     }
-    
     for(ArgoKitNode *subNode in node.childs){
         [self prepareForReuseNode:subNode];
     }

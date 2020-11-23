@@ -116,10 +116,9 @@ static ArgoReusedLayoutHelper* _instance;
     [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
     [node applyLayoutAferCalculationWithView:NO];
     if (node.linkNode) {
-        [ArgoKitNodeViewModifier reuseNodeViewAttribute:node.linkNode reuseNode:node];
+        [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
     }else{
-        [ArgoKitNodeViewModifier reuseNodeViewAttribute:node reuseNode:node];
+        [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
     }
-    
 }
 @end
