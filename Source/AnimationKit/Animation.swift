@@ -1,5 +1,5 @@
 //
-//  AKAnimation.swift
+//  Animation.swift
 //  ArgoKit
 //
 //  Created by MOMO on 2020/11/17.
@@ -26,12 +26,12 @@ public enum AKAnimationType {
 
 extension UIView {
     
-    public func addAnimation(_ animation: AKAnimation) {
+    public func addAnimation(_ animation: Animation) {
         animation.attach(self)
     }
 }
 
-public class AKAnimation {
+public class Animation {
 
     // MARK: - Private
     private var duration: Double = 0.0

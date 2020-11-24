@@ -58,7 +58,7 @@ class ViewController: UIViewController {
                 .from(11, 22, 33, 44),
                 .to(.black)
             ]
-            let ani = AKAnimation.build(elements: popAnimation)
+            let ani = Animation.build(elements: popAnimation)
             
             ani.start()
             
@@ -91,23 +91,23 @@ class ViewController: UIViewController {
     
     
     func doAniamtion(target: UIView) {
-//        let anim = AKAnimation(type: AKAnimationType.positionX)
+//        let anim = Animation(type: AnimationType.positionX)
 //        anim.duration(2).from(60).to(160)
 //        anim.attach(target)
 //        anim.start()
 //        ttt("aa", "bb", "dd")
-//        let anim = AKAnimation(type: AKAnimationType.color)
+//        let anim = Animation(type: AnimationType.color)
 //        anim.duration(2).from(UIColor.green).to(UIColor.red)
 //        anim.attach(target)
 //        anim.start()
-//        let anim = AKAnimation(type: AKAnimationType.color)
+//        let anim = Animation(type: AnimationType.color)
 //        anim.duration(2).from(UIColor.green).to(0, 255, 255, 1)
 //        anim.attach(target)
 //        anim.start()
         
         
         
-        let anim = AKAnimation(type: AKAnimationType.scale)
+        let anim = Animation(type: AnimationType.scale)
         anim.duration(2)
             .from((1, 1)).to((3, 3))
 //        anim.attach(target)
@@ -116,7 +116,7 @@ class ViewController: UIViewController {
 //        anim.timingFunc(.linear)
         anim.start()
         
-//        let anim = AKSpringAnimation(type: AKAnimationType.positionX)
+//        let anim = SpringAnimation(type: AnimationType.positionX)
 //        anim.springMass(20).springSpeed(100)
 //        anim.duration(0.2).from(60).to(160)
 //        anim.attach(target)

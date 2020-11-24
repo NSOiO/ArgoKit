@@ -1,5 +1,5 @@
 //
-//  AKSpringAnimation.swift
+//  SpringAnimation.swift
 //  ArgoKit
 //
 //  Created by MOMO on 2020/11/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class AKSpringAnimation: AKAnimation {
+public class SpringAnimation: Animation {
     
     private var velocity: Any?
     private var speed: CGFloat?
