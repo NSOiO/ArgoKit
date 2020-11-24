@@ -284,7 +284,7 @@ public class Animation {
         switch value {
         case let x as Float:
             return CGFloat(x)
-        case let x as Float:
+        case let x as Double:
             return CGFloat(x)
         case let x as Int:
             return CGFloat(x)
