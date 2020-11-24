@@ -26,6 +26,7 @@ public class TextField : View {
         font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
         pNode.placeholder = placeholder
+        pNode.row()
         addAttribute(#selector(setter:UITextField.text),text)
         addAttribute(#selector(setter:UITextField.placeholder),placeholder)
     }
@@ -149,33 +150,49 @@ extension TextField {
         return self
     }
     
-    public func leftView(_ value: UIView?) -> Self {
-        addAttribute(#selector(setter:UITextField.leftView),value)
+    public func leftView(_ viewMode: UITextField.ViewMode,_ content:()->View) -> Self {
+        let lfView = content()
+        if let node = lfView.alignSelf(.start).node {
+            let width = node.width()
+            addAttribute(#selector(setter:ArgoKitTextField.leftPadding),width)
+            pNode.addChildNode(node)
+           
+
+        }
         return self
     }
     
-    public func leftViewMode(_ value: UITextField.ViewMode) -> Self {
-        addAttribute(#selector(setter:UITextField.leftViewMode),value)
+    public func rightView(_ viewMode: UITextField.ViewMode,_ content:()->View) -> Self {
+        let rtView = content()
+        if let node = rtView.alignSelf(.end).node {
+            let width = node.width()
+            addAttribute(#selector(setter:ArgoKitTextField.rightPadding),width)
+            pNode.addChildNode(node)
+        }
         return self
     }
     
-    public func rightView(_ value: UIView?) -> Self {
-        addAttribute(#selector(setter:UITextField.rightView),value)
+    public func inputView(_ content:()->View) -> Self {
+        let inView = content()
+        if let node = inView.node {
+            let width = node.width()
+            let height = node.height()
+            let frame = CGRect(x: 0, y: 0, width: width, height: height)
+            node.createNodeViewIfNeed(frame)
+            addAttribute(#selector(setter:UITextField.inputView),node.view)
+        }
         return self
     }
     
-    public func rightViewMode(_ value: UITextField.ViewMode) -> Self {
-        addAttribute(#selector(setter:UITextField.rightViewMode),value)
-        return self
-    }
-    
-    public func inputView(_ value: UIView?) -> Self {
-        addAttribute(#selector(setter:UITextField.inputView),value)
-        return self
-    }
-    
-    public func inputAccessoryView(_ value: UIView?) -> Self {
-        addAttribute(#selector(setter:UITextField.inputAccessoryView),value)
+    public func inputAccessoryView(_ content:()->View) -> Self {
+        let inAcView = content()
+        if let node = inAcView.node {
+            let width = node.width()
+            let height = node.height()
+            let frame = CGRect(x: 0, y: 0, width: width, height: height)
+            node.createNodeViewIfNeed(frame)
+            addAttribute(#selector(setter:UITextField.inputAccessoryView),node.view)
+        }
         return self
     }
     

@@ -48,7 +48,10 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
 }
 
 extension List {
-    
+    public func reloadData() -> Self {
+        tableNode.reloadData()
+        return self
+    }
     public func selectionStyle(_ value: UITableViewCell.SelectionStyle) -> Self {
         tableNode.selectionStyle = value
         return self

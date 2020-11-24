@@ -84,11 +84,15 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 
 @property (nonatomic,strong,readonly)NSMutableArray<NodeAction *> *nodeActions;
+
+- (void)prepareForUse;
+//action
 - (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents;
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
 
 - (nullable id)sendActionWithObj:(id)obj paramter:(nullable NSArray *)paramter;
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action;
+
 
 - (void)createNodeViewIfNeed:(CGRect)frame;
 // 子类可重载
@@ -146,6 +150,8 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 
 
 @interface ArgoKitNode(AttributeValue)
+
+- (void)prepareForUse;
 - (void)nodeAddViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(nodeAddView(attribute:));
 
 // 获取对应属性值
@@ -157,5 +163,6 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 - (NSTextAlignment)textAlignment;
 - (NSLineBreakMode)lineBreakMode;
 - (nullable UIImage *)image;
+- (nullable id)valueWithSelector:(SEL)selector;
 @end
 NS_ASSUME_NONNULL_END

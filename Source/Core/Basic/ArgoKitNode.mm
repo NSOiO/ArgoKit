@@ -451,6 +451,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return _nodeActions;
 }
+
+- (void)prepareForUse{
+}
+
 #pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
@@ -506,6 +510,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (CGSize)sizeThatFits:(CGSize)size{
+    if(self.view){
+        return [self.view sizeThatFits:size];
+    }
     return CGSizeZero;
 }
 

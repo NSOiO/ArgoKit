@@ -772,6 +772,9 @@
 
 - (CGFloat)width{
     YGNodeRef node = self.layout.ygnode;
+    if (isnan(YGNodeStyleGetWidth(node).value)) {
+        return 0;
+    }
     return YGNodeStyleGetWidth(node).value;
 }
 
@@ -791,6 +794,9 @@
 }
 - (CGFloat)height{
     YGNodeRef node = self.layout.ygnode;
+    if (isnan(YGNodeStyleGetHeight(node).value)) {
+        return 0;
+    }
     return YGNodeStyleGetHeight(node).value;
 }
 
@@ -805,6 +811,9 @@
 }
 - (CGFloat)minWidth{
     YGNodeRef node = self.layout.ygnode;
+    if (isnan(YGNodeStyleGetMinWidth(node).value)) {
+        return 0;
+    }
     return YGNodeStyleGetMinWidth(node).value;
 }
 
@@ -819,6 +828,9 @@
 
 - (CGFloat)minHeight{
     YGNodeRef node = self.layout.ygnode;
+    if (isnan(YGNodeStyleGetMinHeight(node).value)) {
+        return 0;
+    }
     return YGNodeStyleGetMinHeight(node).value;
 }
 
@@ -834,6 +846,9 @@
 
 - (CGFloat)maxWidth{
     YGNodeRef node = self.layout.ygnode;
+    if (isnan(YGNodeStyleGetMaxWidth(node).value)) {
+        return 0;
+    }
     return YGNodeStyleGetMaxWidth(node).value;
 }
 
@@ -848,6 +863,9 @@
 }
 - (CGFloat)maxHeight{
     YGNodeRef node = self.layout.ygnode;
+    if (isnan(YGNodeStyleGetMaxHeight(node).value)) {
+        return 0;
+    }
     return YGNodeStyleGetMaxHeight(node).value;
 }
 - (void)aspectRatio:(CGFloat)value{

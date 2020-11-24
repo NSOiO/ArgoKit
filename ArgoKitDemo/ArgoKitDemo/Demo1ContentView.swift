@@ -17,6 +17,7 @@ public class SessionItem:ArgoKitIdentifiable{
     var lastMessage:String?
     var timeLabel:String?
     var unreadCount:String?
+    
     var textCom:Text?
     var hidden:Bool = false
     
@@ -26,6 +27,25 @@ public class SessionItem:ArgoKitIdentifiable{
     }
     
 }
+ class itemView: View {
+    
+    var body: View{
+        ImageView("chincoteague.jpg")
+            .clipsToBounds(true)
+            .backgroundColor(.clear)
+            .width(60.0)
+            .height(60.0)
+            .alignSelf(.center)
+            .margin(edge: .left, value: 10)
+            .margin(edge: .top, value: 10)
+            .margin(edge: .bottom, value: 10)
+            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+            .onTapGesture {
+            }.isUserInteractionEnabled(true)
+        
+        Text("aaaa")
+    }
+}
 class SessionRow:View{
     var item:SessionItem
     var hidden:Bool = false
@@ -34,21 +54,9 @@ class SessionRow:View{
     }
     var body: View{
         HStack{
-            ImageView(self.item.imagePath)
-                .clipsToBounds(true)
-                .backgroundColor(.clear)
-                .width(60.0)
-                .height(60.0)
-                .alignSelf(.center)
-                .margin(edge: .left, value: 10)
-                .margin(edge: .top, value: 10)
-                .margin(edge: .bottom, value: 10)
-                .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-                .onTapGesture {
-                    self.hidden = !self.hidden
-                    _ = self.item.textCom?.hidden(self.hidden)
-                }.isUserInteractionEnabled(true)
-                
+            
+            itemView()
+            
             VStack{
                 Text(self.item.sessionName)
                     .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
@@ -67,29 +75,61 @@ class SessionRow:View{
             
             Spacer()
             
-            Button(text:"隐藏文本框"){
-                self.hidden = !self.hidden
-                _ = self.item.textCom?.hidden(self.hidden)
-            }
-            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
-            .width(100)
-            .height(50)
-            .backgroundColor(.green)
-            .alignSelf(.center)
-            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-            .margin(top: 0, right: 5, bottom: 0, left: 5)
-            .titleColor(.red, for: UIControl.State.normal)
-            
-            TextField(nil,placeholder: "隐藏文本框")
-                .width(100)
+//            Button(text:"隐藏文本框"){
+//                self.hidden = !self.hidden
+//                _ = self.item.textCom?.hidden(self.hidden).width(100)
+//            }
+//            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
+//            .width(100)
+//            .height(50)
+//            .backgroundColor(.green)
+//            .alignSelf(.center)
+//            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+//            .margin(top: 0, right: 5, bottom: 0, left: 5)
+//            .titleColor(.red, for: UIControl.State.normal)
+//            
+            TextField(nil,placeholder: "请输入文本")
+                .width(200)
                 .height(30)
                 .alignSelf(.center)
                 .margin(top: 0, right: 2, bottom: 0, left: 2)
-                .fontSize(20)
                 .placeholderColor(.orange)
                 .didChangeSelection { content in
-                    print(content)
                 }
+                .backgroundColor(.gray)
+//                .leftView(UITextField.ViewMode.always) {
+//                    Button(text:""){
+//                        self.hidden = !self.hidden
+//                        _ = self.item.textCom?.hidden(self.hidden)
+//                    }
+//                    .width(30)
+//                    .height(30)
+//                    .backgroundColor(.red)
+//                    .contentMode(.center)
+////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
+//                }
+                .rightView(UITextField.ViewMode.always) {
+                    Button(text:""){
+                        self.hidden = !self.hidden
+                        _ = self.item.textCom?.hidden(self.hidden)
+                    }
+                    .width(30)
+                    .height(30)
+                    .backgroundColor(.red)
+                    .contentMode(.center)
+//                    .image(path: self.item.imagePath, for: UIControl.State.normal)
+                }
+////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
+//                    .width(30)
+//                    .height(30)
+//                    .backgroundColor(.red)
+////                    .backgroundColor(.green)
+////                    .alignSelf(.center)
+////                    .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+////                    .margin(top: 0, right: 5, bottom: 0, left: 5)
+////                    .titleColor(.red, for: UIControl.State.normal)
+//
+//                }
 //            VStack{
 //                Text(self.item.timeLabel)
 ////                    .textAlign(.left)
@@ -126,14 +166,43 @@ class Demo1ContentView:View {
     var hidden:Bool = false
     var alertView1:AlertView?
     var body:View{
+//        VStack {
+////                            Text("hello aaa")
+////
+//                            Button() {
+//                                print("click1")
+//                            } builder: {
+//                                Text("buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0))
+//                                Text(" buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0))
+//                            }
+//                            .titleColor(.red, for: .normal)
+////                            .backgroundColor(.red)
+//
+//                            Button(text: "12345678eeee") {
+//                                print("click2")
+//                            }.titleShadowColor(.yellow, for: UIControl.State.normal)
+//                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 3, shadowOpacity: 3)
+//////                            .titleColor(.white, for: .normal)
+//////                            .backgroundColor(.red)
+//////                            .fontSize(30)
+////                            .titleShadowColor(.red, for: UIControl.State.normal)
+////
+////                            ArgoKit.Toggle(true) { value in
+////                                print("value is ",value)
+////                            }
+////
+////                            Text("hello bbb")
+////                            Text("hello ccc")
+//        }.margin(edge: .top, value: 164)
+       // /*
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }.width(100%).height(100%).didSelectRow {item, indexPath in
-//            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
-//                print(text ?? "")
-//            }.cancel(title: "取消") {}
-//            .textField()
-//            .show()
+            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+                print(text ?? "")
+            }.cancel(title: "取消") {}
+            .textField()
+            .show()
 //            if let hidden = item?.hidden{
 //                item?.hidden = !hidden
 //                _ = item?.textCom?.hidden(!hidden)
@@ -166,6 +235,7 @@ class Demo1ContentView:View {
 //            }),
             ].swipeActionsConfiguration()
         }
+ //*/
     }
     
     func getTimeLabel()->String{

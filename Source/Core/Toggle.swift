@@ -6,15 +6,20 @@
 //
 
 import Foundation
+class ArgoKitToggleNode: ArgoKitNode {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        // （IOS7,*)
+        return CGSize(width: 51, height: 31)
+    }
+}
 public class Toggle:View{
-    private let pNode:ArgoKitNode
+    private let pNode:ArgoKitToggleNode
     public var node: ArgoKitNode?{
         pNode
     }
     public init(_ isOn:Bool,action:@escaping (_ isOn:Bool)->Void){
-        pNode = ArgoKitNode(viewClass:UISwitch.self);
+        pNode = ArgoKitToggleNode(viewClass:UISwitch.self);
         addAttribute(#selector(UISwitch.setOn(_:animated:)),isOn,false)
-        
         pNode.addAction({ (obj, paramter) -> Any? in
             if let swit = obj as? UISwitch {
                 action(swit.isOn)

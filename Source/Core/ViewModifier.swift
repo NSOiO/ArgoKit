@@ -173,7 +173,7 @@ extension View{
         return self;
     }
     public func contentMode(_ value:UIView.ContentMode)->Self{
-        addAttribute(#selector(setter:UIView.contentMode),value)
+        addAttribute(#selector(setter:UIView.contentMode),value.rawValue)
         return self;
     }
     public func tintColor(_ value:UIColor)->Self{
@@ -181,7 +181,7 @@ extension View{
         return self;
     }
     public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
-        addAttribute(#selector(setter:UIView.tintAdjustmentMode),value)
+        addAttribute(#selector(setter:UIView.tintAdjustmentMode),value.rawValue)
         return self;
     }
     

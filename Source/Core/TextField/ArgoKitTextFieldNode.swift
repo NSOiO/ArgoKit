@@ -6,14 +6,34 @@
 //
 
 import Foundation
-
+class ArgoKitTextField: UITextField {
+    @objc var leftPadding:CGFloat = 1
+    @objc var rightPadding:CGFloat = 1
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        let inset = CGRect(x: bounds.origin.x+leftPadding, y: bounds.origin.y, width: bounds.size.width-leftPadding-rightPadding, height: bounds.size.height)
+        return inset
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        let inset = CGRect(x: bounds.origin.x+leftPadding, y: bounds.origin.y, width: bounds.size.width-leftPadding-rightPadding, height: bounds.size.height)
+        return inset
+    }
+}
 class ArgoKitTextFieldNode: ArgoKitNode, UITextFieldDelegate {
     var placeholder:String?
     var placeholderColor:UIColor?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        let textView = UITextField(frame: frame)
+        let textView = ArgoKitTextField(frame: frame)
         textView.delegate = self
         return textView
+    }
+    
+    override func prepareForUse() {
+        if let view = self.view as? ArgoKitTextField {
+            view.rightViewMode = .never
+            view.rightView = nil
+        }
     }
     
     func updateAttributePlaceholder() {

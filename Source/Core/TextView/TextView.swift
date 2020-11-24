@@ -12,7 +12,7 @@ public class TextView : ScrollView {
     private var textViewNode: ArgoKitTextViewNode {
         pNode as! ArgoKitTextViewNode
     }
-
+    
     override convenience init() {
         self.init(nil)
     }
@@ -96,13 +96,27 @@ extension TextView {
         return self
     }
     
-    public func inputView(_ value: UIView?) -> Self {
-        addAttribute(#selector(setter:UITextView.inputView),value)
+    public func inputView(_ content:()->View) -> Self {
+        let inView = content()
+        if let node = inView.node {
+            let width = node.width()
+            let height = node.height()
+            let frame = CGRect(x: 0, y: 0, width: width, height: height)
+            node.createNodeViewIfNeed(frame)
+            addAttribute(#selector(setter:UITextView.inputView),node.view)
+        }
         return self
     }
     
-    public func inputAccessoryView(_ value: UIView?) -> Self {
-        addAttribute(#selector(setter:UITextView.inputAccessoryView),value)
+    public func inputAccessoryView(_ content:()->View) -> Self {
+        let inAcView = content()
+        if let node = inAcView.node {
+            let width = node.width()
+            let height = node.height()
+            let frame = CGRect(x: 0, y: 0, width: width, height: height)
+            node.createNodeViewIfNeed(frame)
+            addAttribute(#selector(setter:UITextView.inputAccessoryView),node.view)
+        }
         return self
     }
     
