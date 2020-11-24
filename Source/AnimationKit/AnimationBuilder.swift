@@ -17,11 +17,11 @@ public enum AnimationValue {
 
 
 public enum AnimationElement {
-    case type(AKAnimationType)
+    case type(AnimationType)
     case duration(Float)
     case repeatCount(Int)
     case autoReverse(Bool)
-    case timingFunc(AKAnimationTimingFunc)
+    case timingFunc(AnimationTimingFunc)
     case from(AnimationValue)
     case to(AnimationValue)
     
@@ -52,9 +52,9 @@ public enum AnimationElement {
     }
 }
 
-extension AKAnimation {
-    public static func build(elements: [AnimationElement]) -> AKAnimation {
+extension Animation {
+    public static func build(elements: [AnimationElement]) -> Animation {
         // TODO...
-        return AKAnimation(type: .alpha)
+        return Animation(type: .alpha)
     }
 }
