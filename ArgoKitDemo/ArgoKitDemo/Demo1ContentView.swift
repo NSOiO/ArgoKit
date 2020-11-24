@@ -66,7 +66,7 @@ class SessionRow:View{
                 
                 Text(self.item.lastMessage)
                     .backgroundColor(.red)
-                    .LineSpacing(10).lineLimit(0)
+                    .lineSpacing(10).lineLimit(0)
                     .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
                     .alias(variable: &self.item.textCom)
                     .margin(edge: .top, value: 3).hidden(self.hidden)
