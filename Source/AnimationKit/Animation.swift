@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AKAnimationTimingFunc {
+public enum AnimationTimingFunc {
     case defaultValue
     case linear
     case easeIn
@@ -15,7 +15,7 @@ public enum AKAnimationTimingFunc {
     case easeInEaseOut
 }
 
-public enum AKAnimationType {
+public enum AnimationType {
     case alpha
     case color, textColor
     case position, positionX, positionY
@@ -34,13 +34,13 @@ extension UIView {
 public class Animation {
 
     // MARK: - Private
-    private var duration: Double = 0.0
-    private var delay: Double = 0.0
+    private var duration: Float = 0.0
+    private var delay: Float = 0.0
     private var repeatCount: Int = 0
     private var repeatForever: Bool = false
     private var autoReverse: Bool = false
-    private var timingFunc = AKAnimationTimingFunc.defaultValue
-    private let type: AKAnimationType!
+    private var timingFunc = AnimationTimingFunc.defaultValue
+    private let type: AnimationType!
     private weak var target: UIView?
     private var from: Any?, to: Any?
     private var animation: MLAValueAnimation?
@@ -52,19 +52,19 @@ public class Animation {
     private var repeatCallback: MLAAnimationRepeatBlock?
     private var finishCallback: MLAAnimationFinishBlock?
 
-    public init(type: AKAnimationType) {
+    public init(type: AnimationType) {
         self.type = type
     }
     
     // MARK: - Public
     @discardableResult
-    public func duration(_ duration: Double) -> Self {
+    public func duration(_ duration: Float) -> Self {
         self.duration = duration
         return self
     }
     
     @discardableResult
-    public func delay(_ delay: Double) -> Self {
+    public func delay(_ delay: Float) -> Self {
         self.delay = delay
         return self
     }
@@ -88,7 +88,7 @@ public class Animation {
     }
     
     @discardableResult
-    public func timingFunc(_ timing: AKAnimationTimingFunc) -> Self {
+    public func timingFunc(_ timing: AnimationTimingFunc) -> Self {
         self.timingFunc = timing
         return self
     }
@@ -103,27 +103,27 @@ public class Animation {
     
     
     @discardableResult
-    public func from(_ v1: Double) -> Self {
+    public func from(_ v1: Float) -> Self {
         return from([v1])
     }
     
     @discardableResult
-    public func from(_ v1: Double, _ v2: Double) -> Self {
+    public func from(_ v1: Float, _ v2: Float) -> Self {
         return from([v1, v2])
     }
     
     @discardableResult
-    public func from(_ tuple:(Double, Double)) -> Self {
+    public func from(_ tuple:(Float, Float)) -> Self {
         return from([tuple.0, tuple.1])
     }
 
     @discardableResult
-    public func from(_ tuple:(Double, Double, Double, Double)) -> Self {
+    public func from(_ tuple:(Float, Float, Float, Float)) -> Self {
         return from([tuple.0, tuple.1, tuple.2, tuple.3])
     }
     
     @discardableResult
-    public func from(_ v1: Double, _ v2: Double, _ v3: Double, _ v4: Double) -> Self {
+    public func from(_ v1: Float, _ v2: Float, _ v3: Float, _ v4: Float) -> Self {
         return from([v1, v2, v3, v4])
     }
     
@@ -142,27 +142,27 @@ public class Animation {
     }
     
     @discardableResult
-    public func to(_ v1: Double) -> Self {
+    public func to(_ v1: Float) -> Self {
         return to([v1])
     }
     
     @discardableResult
-    public func to(_ v1: Double, _ v2: Double) -> Self {
+    public func to(_ v1: Float, _ v2: Float) -> Self {
         return to([v1, v2])
     }
     
     @discardableResult
-    public func to(_ tuple:(Double, Double)) -> Self {
+    public func to(_ tuple:(Float, Float)) -> Self {
         return to([tuple.0, tuple.1])
     }
     
     @discardableResult
-    public func to(_ tuple:(Double, Double, Double, Double)) -> Self {
+    public func to(_ tuple:(Float, Float, Float, Float)) -> Self {
         return to([tuple.0, tuple.1, tuple.2, tuple.3])
     }
     
     @discardableResult
-    public func to(_ v1: Double, _ v2: Double, _ v3: Double, _ v4: Double) -> Self {
+    public func to(_ v1: Float, _ v2: Float, _ v3: Float, _ v4: Float) -> Self {
         return to([v1, v2, v3, v4])
     }
     
@@ -282,7 +282,7 @@ public class Animation {
     
     private func CastToCGFloat(_ value: Any) -> CGFloat {
         switch value {
-        case let x as Double:
+        case let x as Float:
             return CGFloat(x)
         case let x as Float:
             return CGFloat(x)
@@ -337,7 +337,7 @@ public class Animation {
         return anim
     }
     
-    private func animationTypeValue(_ type: AKAnimationType) -> String {
+    private func animationTypeValue(_ type: AnimationType) -> String {
         switch type {
         case .alpha:
             return kMLAViewAlpha
