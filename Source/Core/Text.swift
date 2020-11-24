@@ -218,7 +218,7 @@ extension Text{
         addAttribute(#selector(setter:UILabel.numberOfLines),value)
         return self
     }
-    public func LineSpacing(_ value:CGFloat)->Self{
+    public func lineSpacing(_ value:CGFloat)->Self{
         pNode.lineSpacing(value)
         return self
     }
