@@ -347,7 +347,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _bindProperties = [NSMutableDictionary new];
 }
 
-- (void)bindView:(UIView *)view {
+- (void) bindView:(UIView *)view {
     if (![view isKindOfClass:_viewClass]) {
         return;
     }
@@ -506,12 +506,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (CGSize)sizeThatFits:(CGSize)size{
-    if(self.view){
-        return [self.view sizeThatFits:size];
-    }
-    UILabel *lable = [UILabel new];
-    lable.text = self.text;
-    return [lable sizeThatFits:size];
+    return CGSizeZero;
 }
 
 - (CGSize)applyLayout{

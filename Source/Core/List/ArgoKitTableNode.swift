@@ -12,7 +12,9 @@ fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
 class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
-    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return size
+    }
     lazy var dataSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionFooterSourceHelper = ArgoKitDataSourceHelper()

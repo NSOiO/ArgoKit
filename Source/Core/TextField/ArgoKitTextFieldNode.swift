@@ -8,11 +8,28 @@
 import Foundation
 
 class ArgoKitTextFieldNode: ArgoKitNode, UITextFieldDelegate {
-        
+    var placeholder:String?
+    var placeholderColor:UIColor?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let textView = UITextField(frame: frame)
         textView.delegate = self
         return textView
+    }
+    
+    func updateAttributePlaceholder() {
+        if let pholder = placeholder{
+            var attribute:[NSAttributedString.Key : Any] = [NSAttributedString.Key : Any]()
+            if let color = self.placeholderColor {
+                attribute[NSAttributedString.Key.foregroundColor] = color
+            }
+            if let font = self.font() {
+                attribute[NSAttributedString.Key.font] = font
+            }
+            if attribute.count > 0 {
+                let placeholder = NSMutableAttributedString(string: pholder,attributes:attribute as [NSAttributedString.Key : Any])
+                ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UITextField.attributedPlaceholder),placeholder)
+            }
+        }
     }
 }
 

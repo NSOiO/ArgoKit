@@ -697,7 +697,6 @@ extension View{
                 break
             }
             break
-
         }
         return self;
     }

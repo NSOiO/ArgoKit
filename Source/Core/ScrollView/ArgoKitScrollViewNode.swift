@@ -8,7 +8,6 @@
 import Foundation
 
 class ArgoKitScrollViewNode: ArgoKitNode, UIScrollViewDelegate {
-        
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let scrollView = UIScrollView(frame: frame)
         scrollView.delegate = self

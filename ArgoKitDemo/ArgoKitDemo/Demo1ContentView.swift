@@ -28,7 +28,7 @@ public class SessionItem:ArgoKitIdentifiable{
 }
 class SessionRow:View{
     var item:SessionItem
-    var hidden:Bool = true
+    var hidden:Bool = false
     init(item:SessionItem) {
         self.item = item
     }
@@ -63,18 +63,33 @@ class SessionRow:View{
                     .alias(variable: &self.item.textCom)
                     .margin(edge: .top, value: 3).hidden(self.hidden)
             }.margin(top: 10, right: 0, bottom: 10, left: 10)
-            .backgroundColor(.purple)
+            .backgroundColor(.clear)
             
             Spacer()
             
-            Button(text:"Button"){
+            Button(text:"隐藏文本框"){
                 self.hidden = !self.hidden
                 _ = self.item.textCom?.hidden(self.hidden)
             }
+            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
             .width(100)
             .height(50)
             .backgroundColor(.green)
             .alignSelf(.center)
+            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+            .margin(top: 0, right: 5, bottom: 0, left: 5)
+            .titleColor(.red, for: UIControl.State.normal)
+            
+            TextField(nil,placeholder: "隐藏文本框")
+                .width(100)
+                .height(30)
+                .alignSelf(.center)
+                .margin(top: 0, right: 2, bottom: 0, left: 2)
+                .fontSize(20)
+                .placeholderColor(.orange)
+                .didChangeSelection { content in
+                    print(content)
+                }
 //            VStack{
 //                Text(self.item.timeLabel)
 ////                    .textAlign(.left)
@@ -88,7 +103,7 @@ class SessionRow:View{
 //                    .margin(edge: .right, value: 5).shrink(1)
 //            }.backgroundColor(.orange)
 //            .margin(top: 10, right: 0, bottom: 10, left: 10)
-        }.backgroundColor(.cyan)
+        }.backgroundColor(.clear)
         
     }
 }
@@ -112,7 +127,7 @@ class Demo1ContentView:View {
     var alertView1:AlertView?
     var body:View{
         List(data:items){ item in
-            SessionRow(item: item).width(100%).height(100%)
+            SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }.width(100%).height(100%).didSelectRow {item, indexPath in
 //            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
 //                print(text ?? "")

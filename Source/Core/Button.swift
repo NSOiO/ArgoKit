@@ -34,12 +34,16 @@ extension Button{
 }
 
 extension Button{
-    public func imageEdgeInsets(_ value:UIEdgeInsets)->Self{
+    public func imageEdgeInsets(_ value: UIEdgeInsets)->Self{
         addAttribute(#selector(setter:UIButton.imageEdgeInsets),value)
         return self
     }
-    public func UIEdgeInsets(_ value:UIColor!)->Self {
-        addAttribute(#selector(setter:UIButton.tintColor),value)
+    public func contentEdgeInsets(_ value: UIEdgeInsets)->Self{
+        addAttribute(#selector(setter:UIButton.contentEdgeInsets),value)
+        return self
+    }
+    public func titleEdgeInsets(_ value: UIEdgeInsets)->Self{
+        addAttribute(#selector(setter:UIButton.titleEdgeInsets),value)
         return self
     }
     @available(iOS 14.0, *)
@@ -47,28 +51,40 @@ extension Button{
         addAttribute(#selector(setter:UIButton.role),value)
         return self
     }
-    
     public func title(_ title: String?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setTitle(_:for:)),title,state.rawValue)
         return self
     }
-    
     public func titleColor(_ color: UIColor?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setTitleColor(_:for:)),color,state.rawValue)
         return self
     }
-    
     public func titleShadowColor(_ color: UIColor?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setTitleShadowColor(_:for:)),color,state.rawValue)
         return self
     }
-    
     public func image(_ image: UIImage?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setImage(_:for:)),image,state.rawValue)
         return self
     }
+    public func image(path: String?, for state: UIControl.State)->Self{
+        if let p =  path{
+            if let image =  UIImage(named:p){
+                addAttribute(#selector(UIButton.setImage(_:for:)),image,state.rawValue)
+            }
+        }
+        return self
+    }
     public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
+        return self
+    }
+    public func backgroundImage(path: String?, for state: UIControl.State)->Self{
+        if let p =  path{
+            if let image =  UIImage(named:p){
+                addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
+            }
+        }
         return self
     }
 
@@ -83,5 +99,42 @@ extension Button{
         addAttribute(#selector(UIButton.setAttributedTitle(_:for:)),title,state.rawValue)
         return self
     }
-    
+}
+
+extension Button{
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        var edgeInsets = UIEdgeInsets()
+        switch top {
+        case .point(let value):
+            edgeInsets.top = value
+        default:
+            break
+        }
+        switch right {
+        case .point(let value):
+            edgeInsets.right = value
+        default:
+            break
+        }
+        switch bottom {
+        case .point(let value):
+            edgeInsets.bottom = value
+        default:
+            break
+        }
+        switch left {
+        case .point(let value):
+            edgeInsets.left = value
+        default:
+            break
+        }
+        addAttribute(#selector(setter:UIButton.imageEdgeInsets),edgeInsets)
+        return padding(edge: .top, value: top)
+            .padding(edge: .left, value: left)
+            .padding(edge: .bottom, value: bottom)
+            .padding(edge: .right, value:right)
+    }
+    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
+        return self
+    }
 }

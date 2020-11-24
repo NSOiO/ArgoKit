@@ -6,13 +6,18 @@
 //
 
 import Foundation
+class ArgoKitPageControlNode: ArgoKitNode {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return size
+    }
+}
 public class PageControl:View{
-    private let pNode:ArgoKitNode
+    private let pNode:ArgoKitPageControlNode
     public var node: ArgoKitNode?{
         pNode
     }
     public init(currentPage:Int,numberOfPages:Int,onPageChange:@escaping(_ currentPage:Int)->Void){
-        pNode = ArgoKitNode(viewClass: UIPageControl.self)
+        pNode = ArgoKitPageControlNode(viewClass: UIPageControl.self)
         addAttribute(#selector(setter:UIPageControl.currentPage),currentPage)
         addAttribute(#selector(setter:UIPageControl.numberOfPages),numberOfPages)
         

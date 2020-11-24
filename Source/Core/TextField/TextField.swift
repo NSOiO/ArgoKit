@@ -8,7 +8,10 @@
 import Foundation
 
 public class TextField : View {
-    
+    private var fontSize:CGFloat
+    private var fontStyle:AKFontStyle
+    private var font:UIFont
+    private var fontName:String?
     private var pNode : ArgoKitTextFieldNode
     public var node: ArgoKitNode? {
         pNode
@@ -17,9 +20,12 @@ public class TextField : View {
     public convenience init() {
         self.init(nil)
     }
-    
     public init(_ text: String?, placeholder: String? = nil) {
+        fontStyle = .default
+        fontSize = UIFont.systemFontSize
+        font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
+        pNode.placeholder = placeholder
         addAttribute(#selector(setter:UITextField.text),text)
         addAttribute(#selector(setter:UITextField.placeholder),placeholder)
     }
@@ -39,11 +45,47 @@ extension TextField {
     
     public func textColor(_ value: UIColor?) -> Self {
         addAttribute(#selector(setter:UITextField.textColor),value)
+        pNode.updateAttributePlaceholder()
         return self
     }
     
     public func font(_ value: UIFont?) -> Self {
         addAttribute(#selector(setter:UITextField.font),value)
+        return self
+    }
+    
+    public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
+        let f = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
+        return font(f)
+    }
+    public func fontName(_ value:String?)->Self{
+        fontName = value
+        let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
+        return font(f)
+    }
+    public func fontSize(_ value:CGFloat)->Self{
+        fontSize = value
+        let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
+        return font(f)
+    }
+    public func fontStyle(_ value:AKFontStyle)->Self{
+        let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
+        return font(f)
+    }
+    
+    public func placeholder(_ value: String?) -> Self {
+        addAttribute(#selector(setter:UITextField.placeholder),value)
+        pNode.placeholder = value
+        return self
+    }
+    public func placeholderColor(_ value: UIColor?) -> Self {
+        pNode.placeholderColor = value
+        pNode.updateAttributePlaceholder()
+        return self
+    }
+    
+    public func attributedPlaceholder(_ value: NSAttributedString?) -> Self {
+        addAttribute(#selector(setter:UITextField.attributedPlaceholder),value)
         return self
     }
     
@@ -59,16 +101,6 @@ extension TextField {
     
     public func defaultTextAttributes(_ value: [NSAttributedString.Key : Any]) -> Self {
         addAttribute(#selector(setter:UITextField.defaultTextAttributes),value)
-        return self
-    }
-    
-    public func placeholder(_ value: String?) -> Self {
-        addAttribute(#selector(setter:UITextField.placeholder),value)
-        return self
-    }
-    
-    public func attributedPlaceholder(_ value: NSAttributedString?) -> Self {
-        addAttribute(#selector(setter:UITextField.attributedPlaceholder),value)
         return self
     }
     
