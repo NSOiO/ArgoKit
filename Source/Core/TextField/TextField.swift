@@ -166,6 +166,8 @@ extension TextField {
         let rtView = content()
         if let node = rtView.alignSelf(.end).node {
             let width = node.width()
+            node.positionAbsolute()
+            node.left(point: (pNode.width()-width))
             addAttribute(#selector(setter:ArgoKitTextField.rightPadding),width)
             pNode.addChildNode(node)
         }

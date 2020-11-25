@@ -97,24 +97,34 @@ class SessionRow:View{
                 .didChangeSelection { content in
                 }
                 .backgroundColor(.gray)
-//                .leftView(UITextField.ViewMode.always) {
-//                    Button(text:""){
-//                        self.hidden = !self.hidden
-//                        _ = self.item.textCom?.hidden(self.hidden)
-//                    }
-//                    .width(30)
-//                    .height(30)
-//                    .backgroundColor(.red)
-//                    .contentMode(.center)
-////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
-//                }
-                .rightView(UITextField.ViewMode.always) {
+                .leftView(UITextField.ViewMode.always) {
                     Button(text:""){
                         self.hidden = !self.hidden
                         _ = self.item.textCom?.hidden(self.hidden)
                     }
                     .width(30)
                     .height(30)
+                    .backgroundColor(.red)
+                    .contentMode(.center)
+//                    .image(path: self.item.imagePath, for: UIControl.State.normal)
+                }
+                .rightView(UITextField.ViewMode.always) {
+                    Button{
+                        self.hidden = !self.hidden
+                        _ = self.item.textCom?.hidden(self.hidden)
+                    }builder: {
+                        ImageView(self.item.imagePath)
+                    }
+                    .width(30)
+                    .height(30)
+                    .backgroundColor(.red)
+                    .contentMode(.center)
+//                    .image(path: self.item.imagePath, for: UIControl.State.normal)
+                }
+                .inputAccessoryView{
+                    Text("123456")
+                    .width(100%)
+                    .height(20)
                     .backgroundColor(.red)
                     .contentMode(.center)
 //                    .image(path: self.item.imagePath, for: UIControl.State.normal)
@@ -166,35 +176,37 @@ class Demo1ContentView:View {
     var hidden:Bool = false
     var alertView1:AlertView?
     var body:View{
-//        VStack {
-////                            Text("hello aaa")
-////
-//                            Button() {
-//                                print("click1")
-//                            } builder: {
-//                                Text("buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0))
-//                                Text(" buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0))
-//                            }
-//                            .titleColor(.red, for: .normal)
-////                            .backgroundColor(.red)
+        VStack {
+//                            Text("hello aaa")
 //
-//                            Button(text: "12345678eeee") {
-//                                print("click2")
-//                            }.titleShadowColor(.yellow, for: UIControl.State.normal)
-//                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 3, shadowOpacity: 3)
-//////                            .titleColor(.white, for: .normal)
-//////                            .backgroundColor(.red)
-//////                            .fontSize(30)
-////                            .titleShadowColor(.red, for: UIControl.State.normal)
-////
-////                            ArgoKit.Toggle(true) { value in
-////                                print("value is ",value)
-////                            }
-////
-////                            Text("hello bbb")
-////                            Text("hello ccc")
-//        }.margin(edge: .top, value: 164)
-       // /*
+                            Button() {
+                                print("click1")
+                            } builder: {
+                                Text("buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0)).font(size:20)
+                                Text("buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0))
+                            }
+                            .flexDirection(.column)
+                            .textColor(.white)
+                            .backgroundColor(.red)
+                            .font(size:30)
+
+                            Button(text: "12345678eeee") {
+                                print("click2")
+                            }.titleShadowColor(.yellow, for: UIControl.State.normal)
+                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 3, shadowOpacity: 3)
+////                            .titleColor(.white, for: .normal)
+////                            .backgroundColor(.red)
+////                            .fontSize(30)
+//                            .titleShadowColor(.red, for: UIControl.State.normal)
+//
+//                            ArgoKit.Toggle(true) { value in
+//                                print("value is ",value)
+//                            }
+//
+//                            Text("hello bbb")
+//                            Text("hello ccc")
+        }.margin(edge: .top, value: 164)
+       /*
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }.width(100%).height(100%).didSelectRow {item, indexPath in
@@ -235,7 +247,7 @@ class Demo1ContentView:View {
 //            }),
             ].swipeActionsConfiguration()
         }
- //*/
+*/
     }
     
     func getTimeLabel()->String{

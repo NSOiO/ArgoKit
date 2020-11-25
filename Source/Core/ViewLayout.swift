@@ -69,7 +69,7 @@ public enum ArgoFlexDirection{
     case rowReverse
 }
 extension View {
-    fileprivate func flexDirection(_ value:ArgoFlexDirection)->Self{
+    public func flexDirection(_ value:ArgoFlexDirection)->Self{
         switch value{
         case .column:
             self.node?.column()

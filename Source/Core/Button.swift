@@ -7,6 +7,12 @@
 
 import Foundation
 public class Button:View{
+    
+    private var fontSize:CGFloat
+    private var fontStyle:AKFontStyle
+    private var font:UIFont
+    private var fontName:String?
+    
     private let pNode:ArgoKitNode
     private var label:Text?
     public var node: ArgoKitNode?{
@@ -14,6 +20,10 @@ public class Button:View{
     }
     
     private init(){
+        fontStyle = .default
+        fontSize = UIFont.systemFontSize
+        font = UIFont.systemFont(ofSize:fontSize)
+        
         pNode = ArgoKitNode(viewClass: UIButton.self)
         pNode.row()
         pNode.alignItemsFlexStart()
@@ -34,81 +44,60 @@ public class Button:View{
         if let node = label?.node {
             pNode.addChildNode(node)
         }
+        setValue(pNode, #selector(setter: UILabel.text), text)
     }
 }
 
 
 extension Button{
-    
-    public func title(_ title: String?, for state: UIControl.State)->Self{
-        _ = label?.text(title)
-        return self
-    }
-    public func titleColor(_ color: UIColor?, for state: UIControl.State)->Self{
-        _ = label?.textColor(color)
+    public func textColor(_ color: UIColor?)->Self{
+        setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
     }
     public func titleShadowColor(_ color: UIColor?, for state: UIControl.State)->Self{
-        _ = label?.shadowColor(color).shadowOffset(CGSize(width: 0, height: 0))
+        setValue(pNode, #selector(setter: UILabel.shadowColor), color)
+        setValue(pNode, #selector(setter: UILabel.shadowOffset), CGSize(width: 0, height: 0))
         return self
     }
     
+    public func font(_ value:UIFont!)->Self{
+        setValue(pNode, #selector(setter: UILabel.font), value)
+        return self
+    }
     
+    public func font(name: String? = nil, style:AKFontStyle = .default,size:CGFloat = UIFont.systemFontSize)->Self{
+        let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
+        return font(f)
+    }
     
+    public func font(name value:String?)->Self{
+        fontName = value
+        let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
+        return font(f)
+    }
+    public func font(size value:CGFloat)->Self{
+        fontSize = value
+        let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
+        return font(f)
+    }
+    public func font(style value:AKFontStyle)->Self{
+        let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
+        return font(f)
+    }
     
-//    public func imageEdgeInsets(_ value: UIEdgeInsets)->Self{
-//        addAttribute(#selector(setter:UIButton.imageEdgeInsets),value)
-//        return self
-//    }
-//    public func contentEdgeInsets(_ value: UIEdgeInsets)->Self{
-//        addAttribute(#selector(setter:UIButton.contentEdgeInsets),value)
-//        return self
-//    }
-//    public func titleEdgeInsets(_ value: UIEdgeInsets)->Self{
-//        addAttribute(#selector(setter:UIButton.titleEdgeInsets),value)
-//        return self
-//    }
-//    @available(iOS 14.0, *)
-//    public func role(_ value:UIButton.Role)->Self{
-//        addAttribute(#selector(setter:UIButton.role),value)
-//        return self
-//    }
-//
-//    public func image(_ image: UIImage?, for state: UIControl.State)->Self{
-//        addAttribute(#selector(UIButton.setImage(_:for:)),image,state.rawValue)
-//        return self
-//    }
-//    public func image(path: String?, for state: UIControl.State)->Self{
-//        if let p =  path{
-//            if let image =  UIImage(named:p){
-//                addAttribute(#selector(UIButton.setImage(_:for:)),image,state.rawValue)
-//            }
-//        }
-//        return self
-//    }
-//    public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
-//        addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
-//        return self
-//    }
-//    public func backgroundImage(path: String?, for state: UIControl.State)->Self{
-//        if let p =  path{
-//            if let image =  UIImage(named:p){
-//                addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
-//            }
-//        }
-//        return self
-//    }
-//
-//    @available(iOS 13.0, *)
-//    public func preferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?, forImageIn state: UIControl.State)->Self{
-//        addAttribute(#selector(UIButton.setPreferredSymbolConfiguration(_:forImageIn:)),configuration,state.rawValue)
-//        return self
-//    }
-//
-//    @available(iOS 6.0, *)
-//    public func attributedTitle(_ title: NSAttributedString?, for state: UIControl.State)->Self{
-//        addAttribute(#selector(UIButton.setAttributedTitle(_:for:)),title,state.rawValue)
-//        return self
-//    }
+    func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
+        if let nodes = pNode.childs{
+            for node in nodes {
+                if node is ArgoKitTextNode {
+                    if let _ =  (node as! ArgoKitTextNode).value(with: selector){
+                    }else{
+                        ArgoKitNodeViewModifier.addAttribute(node as? ArgoKitTextNode, selector, value)
+                    }
+                }else{
+                    setValue(node as! ArgoKitNode, selector, value)
+                }
+            }
+        }
+    }
 }
 
