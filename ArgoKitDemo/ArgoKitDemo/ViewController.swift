@@ -32,36 +32,63 @@ class ViewController: UIViewController {
         b2.setTitle("Ani_2", for: .normal)
         
         
-        let a = AniTest()
-        a.go()
+        let view = UIView()
+        view.akLayoutFrame = CGRect(x:160, y: 400, width: 100, height: 100)
+        view.backgroundColor = UIColor.green
+        view.tag = 1125
+        self.view.addSubview(view)
         
     }
     
     @objc func buttonAction1(button: UIButton) {
-        self.testAnimation()
+        guard let view = self.view.viewWithTag(1125) else { return }
+        AnimGenerator.anim(.rotation, 3, .float(0), .float(180), view).start()
     }
     
     @objc func buttonAction2(button: UIButton) {
-        self.doAniamtion(target: self.view)
+        guard let view = self.view.viewWithTag(1125) else {
+            return
+        }
+        let anims = [AnimGenerator.anim(.color, 3, .color(.green), .color(.red), view),
+                     AnimGenerator.anim(.scale, 3, .float2(1.0, 1.0), .float2(1.5, 1.5), view),
+                     AnimGenerator.anim(.rotation, 3, .float(0), .float(180), view)]
+        let groups: [AnimationGroupElement] = [
+            .view(view),
+            .autoReverse(true),
+            .animations(anims)
+        ]
+        AnimationGroup.build(groups).startConcurrent()
     }
+    
+    
+    public struct AnimGenerator {
+        public static func anim(_ type: AnimationType, _ duration: Float, _ from: AnimationValue, _ to: AnimationValue, _ view: UIView?) -> Animation {
+            let config: [AnimationElement] = [
+                .type(type),
+                .duration(duration),
+                .from(from),
+                .to(to),
+                .view(view)
+            ]
+            return Animation.build(config)
+        }
+    }
+    
+    
+    // MARK: -
     
     public struct AniTest {
         public init() {}
-        public func go() {
-            let popAnimation: [AnimationElement] = [
-                .type(.alpha),
-                .duration(11),
+        public func go(_ view: UIView?) -> Animation {
+            let animConfig: [AnimationElement] = [
+                .type(.color),
+                .view(view),
+                .duration(3),
                 .autoReverse(false),
-                .from(11),
-                .from(.red),
-                .from(11, 12),
-                .from(11, 22, 33, 44),
-                .to(.black)
+                .from(.green),
+                .to(.red)
             ]
-            let ani = Animation.build(elements: popAnimation)
-            
-            ani.start()
-            
+            return Animation.build(animConfig)
         }
     }
     
@@ -108,13 +135,11 @@ class ViewController: UIViewController {
         
         
         let anim = Animation(type: AnimationType.scale)
-        anim.duration(2)
-            .from((1, 1)).to((3, 3))
-//        anim.attach(target)
-        target.addAnimation(anim)
-        anim.autoReverse(true)
+        anim.duration(2).from((1, 1)).to((3, 3))
+        anim.autoReverse(false)
+
 //        anim.timingFunc(.linear)
-        anim.start()
+//        anim.start()
         
 //        let anim = SpringAnimation(type: AnimationType.positionX)
 //        anim.springMass(20).springSpeed(100)
@@ -122,6 +147,15 @@ class ViewController: UIViewController {
 //        anim.attach(target)
 //        anim.start()
         
+        let anim1 = Animation(type: .color)
+        anim1.duration(2).to(UIColor.red)
+        anim1.autoReverse(false)
+        
+        let group = AnimationGroup()
+        group.animations([anim, anim1])
+        group.autoReverse(true)
+        group.attach(target)
+        group.startConcurrent()
     
     }
 
