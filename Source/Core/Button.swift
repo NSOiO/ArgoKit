@@ -40,11 +40,15 @@ public class Button:View{
             action();
         }, for: UIControl.Event.touchUpInside)
         
-        label = Text(text)
-        if let node = label?.node {
-            pNode.addChildNode(node)
+        
+        if let t = text {
+            label = Text(t).alignSelf(.center).width(100%).textAlign(.center)
+            if let node = label?.node {
+                pNode.addChildNode(node)
+            }
+            setValue(pNode, #selector(setter: UILabel.text), t)
         }
-        setValue(pNode, #selector(setter: UILabel.text), text)
+
     }
 }
 
@@ -54,7 +58,6 @@ extension Button{
         setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
     }
-    
     public func font(_ value:UIFont!)->Self{
         setValue(pNode, #selector(setter: UILabel.font), value)
         return self
@@ -78,6 +81,22 @@ extension Button{
         let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
         return font(f)
     }
+    
+    
+    public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
+        addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
+        return self
+    }
+    public func backgroundImage(path: String?, for state: UIControl.State)->Self{
+        if let p =  path{
+            if let image =  UIImage(named:p){
+                addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
+            }
+        }
+        return self
+    }
+    
+    
     
     func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
         if let nodes = pNode.childs{

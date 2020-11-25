@@ -75,19 +75,20 @@ class SessionRow:View{
             
             Spacer()
             
-//            Button(text:"隐藏文本框"){
-//                self.hidden = !self.hidden
-//                _ = self.item.textCom?.hidden(self.hidden).width(100)
-//            }
-//            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
-//            .width(100)
-//            .height(50)
-//            .backgroundColor(.green)
-//            .alignSelf(.center)
-//            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-//            .margin(top: 0, right: 5, bottom: 0, left: 5)
-//            .titleColor(.red, for: UIControl.State.normal)
-//            
+            Button(text:"隐藏文本框"){
+                self.hidden = !self.hidden
+                _ = self.item.textCom?.hidden(self.hidden)
+            }
+            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
+            .width(100)
+            .height(50)
+            .backgroundColor(.green)
+            .alignSelf(.center)
+            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+            .margin(top: 0, right: 5, bottom: 0, left: 5)
+            .textColor(.red)
+            
+            /*
             TextField(nil,placeholder: "请输入文本")
                 .width(200)
                 .height(30)
@@ -140,6 +141,7 @@ class SessionRow:View{
 ////                    .titleColor(.red, for: UIControl.State.normal)
 //
 //                }
+ */
 //            VStack{
 //                Text(self.item.timeLabel)
 ////                    .textAlign(.left)
@@ -163,7 +165,7 @@ class Demo1ContentView:View {
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        for index in 1..<300{
+        for index in 1..<200{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -176,8 +178,8 @@ class Demo1ContentView:View {
     var hidden:Bool = false
     var alertView1:AlertView?
     var body:View{
-        VStack {
-//                            Text("hello aaa")
+        /*    VStack {
+                         Text("hello aaa")
 //
                             Button() {
                                 print("click1")
@@ -190,24 +192,21 @@ class Demo1ContentView:View {
                             .textColor(.purple)
                             .backgroundColor(.clear)
                             .font(size:30)
-                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 26, height: 26), shadowRadius: 1.0, shadowOpacity: 1.0)
+                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
 
                             Button(text: "12345678eeee") {
                                 print("click2")
                             }
-////                            .titleColor(.white, for: .normal)
-////                            .backgroundColor(.red)
-////                            .fontSize(30)
-//                            .titleShadowColor(.red, for: UIControl.State.normal)
-//
-//                            ArgoKit.Toggle(true) { value in
-//                                print("value is ",value)
-//                            }
-//
-//                            Text("hello bbb")
-//                            Text("hello ccc")
+
+                            ArgoKit.Toggle(true) { value in
+                                print("value is ",value)
+                            }
+
+                            Text("hello bbb")
+                            Text("hello ccc")
         }.margin(edge: .top, value: 164)
-       /*
+ */
+      
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }.width(100%).height(100%).didSelectRow {item, indexPath in
@@ -248,7 +247,6 @@ class Demo1ContentView:View {
 //            }),
             ].swipeActionsConfiguration()
         }
-*/
     }
     
     func getTimeLabel()->String{
