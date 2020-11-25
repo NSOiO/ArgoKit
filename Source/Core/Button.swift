@@ -40,7 +40,6 @@ public class Button:View{
             action();
         }, for: UIControl.Event.touchUpInside)
         
-        
         if let t = text {
             label = Text(t).alignSelf(.center).width(100%).textAlign(.center)
             if let node = label?.node {

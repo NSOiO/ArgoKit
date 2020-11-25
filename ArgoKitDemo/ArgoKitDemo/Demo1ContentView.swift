@@ -75,20 +75,20 @@ class SessionRow:View{
             
             Spacer()
             
-            Button(text:"隐藏文本框"){
-                self.hidden = !self.hidden
-                _ = self.item.textCom?.hidden(self.hidden)
-            }
-            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
-            .width(100)
-            .height(50)
-            .backgroundColor(.green)
-            .alignSelf(.center)
-            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-            .margin(top: 0, right: 5, bottom: 0, left: 5)
-            .textColor(.red)
+//            Button(text:"隐藏文本框"){
+//                self.hidden = !self.hidden
+//                _ = self.item.textCom?.hidden(self.hidden)
+//            }
+//            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
+//            .width(100)
+//            .height(50)
+//            .backgroundColor(.green)
+//            .alignSelf(.center)
+//            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+//            .margin(top: 0, right: 5, bottom: 0, left: 5)
+//            .textColor(.red)
             
-            /*
+            
             TextField(nil,placeholder: "请输入文本")
                 .width(200)
                 .height(30)
@@ -122,14 +122,14 @@ class SessionRow:View{
                     .contentMode(.center)
 //                    .image(path: self.item.imagePath, for: UIControl.State.normal)
                 }
-                .inputAccessoryView{
-                    Text("123456")
-                    .width(100%)
-                    .height(20)
-                    .backgroundColor(.red)
-                    .contentMode(.center)
-//                    .image(path: self.item.imagePath, for: UIControl.State.normal)
-                }
+//                .inputAccessoryView{
+//                    Text("123456")
+//                    .width(100%)
+//                    .height(20)
+//                    .backgroundColor(.red)
+//                    .contentMode(.center)
+////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
+//                }
 ////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
 //                    .width(30)
 //                    .height(30)
@@ -141,7 +141,7 @@ class SessionRow:View{
 ////                    .titleColor(.red, for: UIControl.State.normal)
 //
 //                }
- */
+
 //            VStack{
 //                Text(self.item.timeLabel)
 ////                    .textAlign(.left)
@@ -178,49 +178,47 @@ class Demo1ContentView:View {
     var hidden:Bool = false
     var alertView1:AlertView?
     var body:View{
-        /*    VStack {
-                         Text("hello aaa")
-//
-                            Button() {
-                                print("click1")
-                            } builder: {
-                                Text("buttonscxdscsdcsd").font(size:20)
-                                Text("buttonscxdscsdcsd")
-                                   
-                            }
-                            .flexDirection(.column)
-                            .textColor(.purple)
-                            .backgroundColor(.clear)
-                            .font(size:30)
-                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
+          VStack {
+            Text("hello aaa")
+             Button() {
+                 print("click1")
+             } builder: {
+                 Text("buttonscxdscsdcsd").font(size:20)
+                 Text("buttonscxdscsdcsd")
+                    
+             }
+             .flexDirection(.column)
+             .textColor(.purple)
+             .backgroundColor(.clear)
+             .font(size:30)
+             .font(style: .bold)
+             .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
 
-                            Button(text: "12345678eeee") {
-                                print("click2")
-                            }
+             Button(text: "12345678eeee") {
+                 print("click2")
+             }
 
-                            ArgoKit.Toggle(true) { value in
-                                print("value is ",value)
-                            }
+             ArgoKit.Toggle(true) { value in
+                 print("value is ",value)
+             }
 
-                            Text("hello bbb")
-                            Text("hello ccc")
-        }.margin(edge: .top, value: 164)
- */
-      
+            Text("hello bbb")
+            Text("hello ccc").backgroundColor(.red)
+//            List(data:self.items){ item in
+//                SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
+//            }.grow(1)
+        }.margin(edge: .top, value: 96)
+//          .height(ArgoValue((UIWindow().frame.size.height - 96)))
+
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
-        }.width(100%).height(100%).didSelectRow {item, indexPath in
+        }.grow(1)
+        .didSelectRow {item, indexPath in
             AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
                 print(text ?? "")
             }.cancel(title: "取消") {}
             .textField()
             .show()
-//            if let hidden = item?.hidden{
-//                item?.hidden = !hidden
-//                _ = item?.textCom?.hidden(!hidden)
-//            }
-           
-            
         }
         .canEditRow({ item, indexPath -> Bool in
             return true
@@ -247,6 +245,7 @@ class Demo1ContentView:View {
 //            }),
             ].swipeActionsConfiguration()
         }
+
     }
     
     func getTimeLabel()->String{
