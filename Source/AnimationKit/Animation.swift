@@ -34,11 +34,11 @@ extension UIView {
 public class Animation {
 
     // MARK: - Private
-    private var duration: Float = 0.0
-    private var delay: Float = 0.0
-    private var repeatCount: Int = 0
-    private var repeatForever: Bool = false
-    private var autoReverse: Bool = false
+    private var duration: Float?
+    private var delay: Float?
+    private var repeatCount: Int?
+    private var repeatForever: Bool?
+    private var autoReverse: Bool?
     private var timingFunc = AnimationTimingFunc.defaultValue
     private let type: AnimationType!
     private weak var target: UIView?
@@ -182,7 +182,6 @@ public class Animation {
     @discardableResult
     public func attach(_ view: UIView) -> Self {
         guard target == nil else {
-            assertionFailure("You cann't attach an animaion to multiple views.")
             return self
         }
         target = view
@@ -191,7 +190,7 @@ public class Animation {
     
     public func start() {
         prepareAnimation()
-        animation!.start()
+        animation?.start()
     }
     
     public func pause() {
@@ -244,6 +243,10 @@ public class Animation {
     }
     
     // MARK: - Private
+    internal func rawAnimation() -> MLAAnimation? {
+        return animation
+    }
+    
     private func handleValues(_ values: [Any]) -> Any? {
         guard values.count > 0 else {
             return nil
@@ -253,8 +256,11 @@ public class Animation {
             return values[0]
             
         case .rotation, .rotationX, .rotationY:
-            return values[0]
-            
+            let angle = values[0]
+            if angle is Float {
+                return (angle as! Float) * Float.pi / 180
+            }
+    
         case .textColor, .color:
             let first = values[0]
             if first is UIColor {
@@ -293,7 +299,7 @@ public class Animation {
         return 0
     }
     
-    private func prepareAnimation() {
+    internal func prepareAnimation() {
         guard let view = target else {
             assertionFailure("The animation has not yet been added to the view.")
             return
@@ -307,21 +313,41 @@ public class Animation {
         let anim = animation!
         anim.fromValue = from
         anim.toValue = to
-        anim.beginTime = NSNumber(value: delay)
-        anim.repeatCount = NSNumber(value: repeatCount)
-        anim.repeatForever = repeatForever as NSNumber
-        anim.autoReverses = autoReverse as NSNumber
-        anim.startBlock = startCallback
-        anim.pauseBlock = pauseCallback
-        anim.resumeBlock = resumeCallback
-        anim.repeatBlock = repeatCallback
-        anim.finishBlock = finishCallback
+        
+        if let d = delay {
+            anim.beginTime = NSNumber(value: d)
+        }
+        if let r = repeatCount {
+            anim.repeatCount = NSNumber(value: r)
+        }
+        if let r = repeatForever {
+            anim.repeatForever = NSNumber(value: r)
+        }
+        if let a = autoReverse {
+            anim.autoReverses = NSNumber(value: a)
+        }
+        if let sc = startCallback {
+            anim.startBlock = sc
+        }
+        if let pc = pauseCallback {
+            anim.pauseBlock = pc
+        }
+        if let rc = resumeCallback {
+            anim.resumeBlock = rc
+        }
+        if let rc = repeatCallback {
+            anim.repeatBlock = rc
+        }
+        if let fb = finishCallback {
+            anim.finishBlock = fb
+        }
     }
     
     internal func createAnimation(type: String, view: UIView) -> MLAValueAnimation {
         let anim = MLAObjectAnimation(valueName: type, tartget: view)!
-        anim.duration = CGFloat(duration)
-        
+        if let d = duration {
+            anim.duration = CGFloat(d)
+        }
         switch timingFunc {
         case .defaultValue:
             anim.timingFunction = MLATimingFunction.default
