@@ -182,18 +182,19 @@ class Demo1ContentView:View {
                             Button() {
                                 print("click1")
                             } builder: {
-                                Text("buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0)).font(size:20)
-                                Text("buttonscxdscsdcsd").shadowColor(.yellow).shadowOffset(CGSize(width: 0, height: 0))
+                                Text("buttonscxdscsdcsd").font(size:20)
+                                Text("buttonscxdscsdcsd")
+                                   
                             }
                             .flexDirection(.column)
-                            .textColor(.white)
-                            .backgroundColor(.red)
+                            .textColor(.purple)
+                            .backgroundColor(.clear)
                             .font(size:30)
+                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 26, height: 26), shadowRadius: 1.0, shadowOpacity: 1.0)
 
                             Button(text: "12345678eeee") {
                                 print("click2")
-                            }.titleShadowColor(.yellow, for: UIControl.State.normal)
-                            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 3, shadowOpacity: 3)
+                            }
 ////                            .titleColor(.white, for: .normal)
 ////                            .backgroundColor(.red)
 ////                            .fontSize(30)

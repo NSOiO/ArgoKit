@@ -54,11 +54,6 @@ extension Button{
         setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
     }
-    public func titleShadowColor(_ color: UIColor?, for state: UIControl.State)->Self{
-        setValue(pNode, #selector(setter: UILabel.shadowColor), color)
-        setValue(pNode, #selector(setter: UILabel.shadowOffset), CGSize(width: 0, height: 0))
-        return self
-    }
     
     public func font(_ value:UIFont!)->Self{
         setValue(pNode, #selector(setter: UILabel.font), value)
@@ -69,7 +64,6 @@ extension Button{
         let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
         return font(f)
     }
-    
     public func font(name value:String?)->Self{
         fontName = value
         let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)

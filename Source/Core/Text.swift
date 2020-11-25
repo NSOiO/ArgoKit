@@ -170,14 +170,6 @@ extension Text{
         pNode.handleLineSpacing()
         return self
     }
-    public func shadowColor(_ value:UIColor?)->Self{
-        addAttribute(#selector(setter:UILabel.shadowColor),value)
-        return self
-    }
-    public func shadowOffset(_ value:CGSize)->Self{
-        addAttribute(#selector(setter:UILabel.shadowOffset),value)
-        return self
-    }
     public func textAlign(_ value:NSTextAlignment)->Self{
         addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
         pNode.handleLineSpacing()
