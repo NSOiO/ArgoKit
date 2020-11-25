@@ -33,5 +33,16 @@ public struct ArgoRender: UIViewRepresentable {
     }
 }
 
+
+@available(iOS 13.0.0, *)
+public struct Preview: SwiftUI.View {
+    private var render: ArgoRender
+    public var body: ArgoRender { render }
+    public init(@ArgoKitViewBuilder _ builder:@escaping () -> ArgoKit.View) {
+        self.render = ArgoRender(builder: builder)
+    }
+}
+
+
 #endif
 
