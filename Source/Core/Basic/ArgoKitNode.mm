@@ -519,7 +519,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (CGSize)applyLayout{
     if (self.layout) {
         CGSize size = self.parentNode?CGSizeZero:self.size;
-        self.size = [self.layout applyLayoutWithsize:size];
+        self.size = [self applyLayout:size];
     }
     return self.size;
 }
