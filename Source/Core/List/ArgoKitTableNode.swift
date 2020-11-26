@@ -13,7 +13,7 @@ fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
 class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return size
+        return CGSize(width: size.width, height: 0)
     }
     lazy var dataSourceHelper = ArgoKitDataSourceHelper()
     lazy var sectionHeaderSourceHelper = ArgoKitDataSourceHelper()

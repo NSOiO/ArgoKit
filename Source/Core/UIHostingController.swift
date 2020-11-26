@@ -40,11 +40,14 @@ class HostView:View {
     init(){
         pView = UIView();
         pNode = ArgoKitNode(view: pView);
+        pNode.column()
     }
     
     init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
         pView = view
         pNode = ArgoKitNode(view:view);
+        pNode.width(point: view.frame.size.width)
+        pNode.height(point: view.frame.size.height)
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
@@ -93,7 +96,7 @@ open class UIHostingController:UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white;
         rootView = HostView(self.view){
-            rootView_!
+            rootView_!.width(100%).height(100%)
         }
         
         let _ = rootView?.applyLayout()
