@@ -7,12 +7,33 @@
 
 import ArgoKit
 
+class PreviewModel {
+    var label:Text?
+}
+
 struct PreviewDemo: ArgoKit.View {
+    var model = PreviewModel()
+    
     typealias View = ArgoKit.View
     var body: View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            Text("Hello, World!")
+            Text("aabbbbbbbbfldjaflajsflajsflkjasfl;ads")
+                .lineLimit(0)
+                .width(100)
+                .alias(variable: &model.label)
+            Button {
+                print("click")
+                if let t = self.model.label?.node?.text() {
+                    _ = self.model.label?.text(t + "click ")
+                }
+//                self.model.text?.text("\(self.model.text?.text)" + "click  ")
+            } builder: { () -> View in
+                Text("Click")
+            }
+
+            Text("Hello, World! Second")
+                .lineLimit(0)
+//            Spacer()
         }
         .width(100%)
         .height(400)
@@ -29,9 +50,8 @@ import SwiftUI
 struct PreviewDemo_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoRender {
-            PreviewDemo().body
+            PreviewDemo()
         }
-        
     }
 }
 #endif
