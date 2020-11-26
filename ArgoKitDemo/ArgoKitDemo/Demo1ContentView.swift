@@ -9,6 +9,94 @@ import Foundation
 import UIKit
 import ArgoKit
 
+protocol Food { }
+class Meat: Food {
+    init() {
+        print("das")
+    }
+    convenience init(_ value:Bool){
+        self.init()
+    }
+}
+struct Grass: Food { }
+protocol Animal {
+    associatedtype F
+    func eat(_ food: F)
+}
+let meat = Meat()
+struct Tiger: Animal {
+    typealias F = Meat
+    func eat(_ food: Meat) {
+        print("eat \(meat)")
+    }
+}
+
+extension Array {
+    subscript(input: [Int]) -> ArraySlice<Element> {
+        get {
+            var result = ArraySlice<Element>()
+            for i in input {
+                assert(i < self.count, "Index out of range")
+                result.append(self[i])
+            }
+            return result
+        }
+
+        set {
+            for (index,i) in input.enumerated() {
+                assert(i < self.count, "Index out of range")
+                self[i] = newValue[index]
+            }
+        }
+    }
+}
+precedencegroup DotProductPrecedence {
+    associativity: none
+    higherThan: MultiplicationPrecedence
+}
+
+infix operator +*: DotProductPrecedence
+protocol Vehicle
+{
+    var numberOfWheels: Int {get}
+    var color: UIColor {get set}
+
+    mutating func changeColor()
+}
+
+struct MyCar: Vehicle {
+    let numberOfWheels = 4
+    var color = UIColor.blue
+
+    mutating func changeColor() {
+        // 因为 `color` 的类型是 `UIColor`，这里直接写 .red 就足以推断类型了
+        color = .red
+    }
+    
+    func incrementor2(variable:Int) -> Int {
+        var num = variable
+        num += 1
+        return num
+    }
+    
+    func logIfTrue(_ predicate: @autoclosure () -> Bool) {
+        if predicate() {
+            print("True")
+        }
+    }
+    
+    func makeIncrementor(addNumber: Int) -> ((inout Int) -> ()) {
+        func incrementor(variable: inout Int) -> () {
+            variable += addNumber;
+        }
+        return incrementor;
+    }
+
+}
+
+
+
+
 public class SessionItem:ArgoKitIdentifiable{
     public var identifier: String
     public var reuseIdentifier: String
@@ -111,8 +199,11 @@ class SessionRow:View{
                 }
                 .rightView(UITextField.ViewMode.always) {
                     Button{
-                        self.hidden = !self.hidden
-                        _ = self.item.textCom?.hidden(self.hidden)
+                        var myCar = MyCar()
+                        myCar.logIfTrue(2>1)
+                        print(myCar.incrementor2(variable: 4))
+//                        self.hidden = !self.hidden
+//                        _ = self.item.textCom?.hidden(self.hidden)
                     }builder: {
                         ImageView(self.item.imagePath)
                     }
