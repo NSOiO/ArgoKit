@@ -7,6 +7,8 @@
 
 import ArgoKit
 
+
+
 class itemView: ArgoKit.View {
    
    var body: ArgoKit.View {
@@ -55,74 +57,55 @@ class SessionRow:ArgoKit.View {
            
            Spacer()
            
-            Button(text:"隐藏文本框"){
-                self.hidden = !self.hidden
-                let s = "click + \( self.item.textCom?.node?.text())"
-                _ = self.item.textCom?.text(s)
-            }
-            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
-            .width(100)
-            .height(50)
-            .backgroundColor(.green)
-            .alignSelf(.center)
-            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-            .margin(top: 0, right: 5, bottom: 0, left: 5)
-            .textColor(.red)
+//            Button(text:"隐藏文本框"){
+//                self.hidden = !self.hidden
+//                let s = "click + \( self.item.textCom?.node?.text())"
+//                _ = self.item.textCom?.text(s)
+//            }
+//            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
+//            .width(100)
+//            .height(50)
+//            .backgroundColor(.green)
+//            .alignSelf(.center)
+//            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+//            .margin(top: 0, right: 5, bottom: 0, left: 5)
+//            .textColor(.red)
            
 //
-//           TextField(nil,placeholder: "请输入文本")
-//               .width(200)
-//               .height(30)
-//               .alignSelf(.center)
-//               .margin(top: 0, right: 2, bottom: 0, left: 2)
-//               .placeholderColor(.orange)
-//               .didChangeSelection { content in
-//               }
-//               .backgroundColor(.gray)
-//               .leftView(UITextField.ViewMode.always) {
-//                   Button(text:""){
-//                       self.hidden = !self.hidden
-//                       _ = self.item.textCom?.hidden(self.hidden)
-//                   }
-//                   .width(30)
-//                   .height(30)
-//                   .backgroundColor(.red)
-//                   .contentMode(.center)
-////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
-//               }
-//               .rightView(UITextField.ViewMode.always) {
-//                   Button{
-//                       var myCar = MyCar()
-//                       myCar.logIfTrue(2>1)
-//                       print(myCar.incrementor2(variable: 4))
-////                        self.hidden = !self.hidden
-////                        _ = self.item.textCom?.hidden(self.hidden)
-//                   }builder: {
-//                       ImageView(self.item.imagePath)
-//                   }
-//                   .width(30)
-//                   .height(30)
-//                   .backgroundColor(.red)
-//                   .contentMode(.center)
-////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
-//               }
-//                .inputAccessoryView{
-//                    Text("123456")
-//                    .width(100%)
-//                    .height(20)
-//                    .backgroundColor(.red)
-//                    .contentMode(.center)
-////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
-//                }
-////                    .image(path: self.item.imagePath, for: UIControl.State.normal)
-//                    .width(30)
-//                    .height(30)
-//                    .backgroundColor(.red)
-////                    .backgroundColor(.green)
-////                    .alignSelf(.center)
-////                    .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-////                    .margin(top: 0, right: 5, bottom: 0, left: 5)
-////                    .titleColor(.red, for: UIControl.State.normal)
+           TextField(nil,placeholder: "请输入文本")
+               .width(200)
+               .height(30)
+               .alignSelf(.center)
+               .margin(top: 0, right: 2, bottom: 0, left: 2)
+               .placeholderColor(.orange)
+               .didChangeSelection { content in
+               }
+               .backgroundColor(.gray)
+               .leftView(UITextField.ViewMode.always) {
+                   Button(text:""){
+                       self.hidden = !self.hidden
+                       _ = self.item.textCom?.hidden(self.hidden)
+                   }
+                   .width(30)
+                   .height(30)
+                   .backgroundColor(.red)
+                   .contentMode(.center)
+               }
+               .rightView(UITextField.ViewMode.always) {
+                   Button{
+                       var myCar = MyCar()
+                       myCar.logIfTrue(2>1)
+                       print(myCar.incrementor2(variable: 4))
+//                        self.hidden = !self.hidden
+//                        _ = self.item.textCom?.hidden(self.hidden)
+                   }builder: {
+                       ImageView(self.item.imagePath)
+                   }
+                   .width(30)
+                   .height(30)
+                   .backgroundColor(.red)
+                   .contentMode(.center)
+               }
 //
 //                }
 
@@ -199,41 +182,41 @@ class ArgoKitViewDemo:ArgoKit.View  {
          .width(300).backgroundColor(.cyan).grow(1)
 //          .height(ArgoValue((UIWindow().frame.size.height - 96)))
 
-//       List(data:items){ item in
-//           SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
-//       }.grow(1)
-//       .didSelectRow {item, indexPath in
-//           AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
-//               print(text ?? "")
-//           }.cancel(title: "取消") {}
-//           .textField()
-//           .show()
-//       }
-//       .canEditRow({ item, indexPath -> Bool in
-//           return true
-//       })
-//       .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-//           [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-//               print("trailing 菜鸡")
-//               complation(true)
-//           }),
-////            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-////                print("trailing  互啄")
-////                complation(true)
-////            }),
-//           ].swipeActionsConfiguration()
-//       }
-//       .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-//           [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-//               print("leading 菜鸡")
-//               complation(true)
-//           }),
-////            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-////                print("leading 互啄")
-////                complation(true)
-////            }),
-//           ].swipeActionsConfiguration()
-//       }
+       List(data:items){ item in
+           SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
+       }.grow(1)
+       .didSelectRow {item, indexPath in
+           AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+               print(text ?? "")
+           }.cancel(title: "取消") {}
+           .textField()
+           .show()
+       }
+       .canEditRow({ item, indexPath -> Bool in
+           return true
+       })
+       .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
+           [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+               print("trailing 菜鸡")
+               complation(true)
+           }),
+//            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+//                print("trailing  互啄")
+//                complation(true)
+//            }),
+           ].swipeActionsConfiguration()
+       }
+       .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
+           [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+               print("leading 菜鸡")
+               complation(true)
+           }),
+//            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+//                print("leading 互啄")
+//                complation(true)
+//            }),
+           ].swipeActionsConfiguration()
+       }
 
    }
    

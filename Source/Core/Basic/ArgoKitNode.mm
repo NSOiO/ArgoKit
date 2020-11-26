@@ -244,7 +244,7 @@ static YGSize YGMeasureView(
                                       }];
   }
   return (YGSize) {
-      .width = static_cast<float>(YGSanitizeMeasurement(sizeThatFits.width, sizeThatFits.width, widthMode)),
+      .width = static_cast<float>(YGSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
       .height = static_cast<float>(YGSanitizeMeasurement(constrainedHeight, sizeThatFits.height, heightMode)),
   };
 }
