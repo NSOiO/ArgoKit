@@ -44,6 +44,7 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
     
     override func createNode() {
         pNode = ArgoKitTableNode(viewClass: UITableView.self)
+        pNode?.flexGrow(1.0)
     }
 }
 

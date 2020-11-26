@@ -61,7 +61,7 @@ open class UIHostingController:UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white;
         rootView = HostView(self.view){
-            rootView_!.width(100%).height(100%)
+            rootView_!
         }
     }
     

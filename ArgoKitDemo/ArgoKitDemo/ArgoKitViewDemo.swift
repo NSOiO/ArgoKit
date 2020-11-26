@@ -93,11 +93,8 @@ class SessionRow:ArgoKit.View {
                }
                .rightView(UITextField.ViewMode.always) {
                    Button{
-                       var myCar = MyCar()
-                       myCar.logIfTrue(2>1)
-                       print(myCar.incrementor2(variable: 4))
-//                        self.hidden = !self.hidden
-//                        _ = self.item.textCom?.hidden(self.hidden)
+                     self.hidden = !self.hidden
+                     _ = self.item.textCom?.hidden(self.hidden)
                    }builder: {
                        ImageView(self.item.imagePath)
                    }
@@ -127,106 +124,117 @@ class SessionRow:ArgoKit.View {
    }
 }
 
+class ListDemo:ArgoKit.View{
+    var items = [SessionItem]()
+    init() {
+        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
+        for index in 1..<200{
+            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
+            item.timeLabel = getTimeLabel()
+            item.unreadCount = String(index)
+            items.append(item)
+        }
+    }
+    var hidden:Bool = false
+    var body: View{
+        List(data:items){ item in
+            SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
+        }.grow(1)
+        .didSelectRow {item, indexPath in
+            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
+                print(text ?? "")
+            }.cancel(title: "取消") {}
+            .textField()
+            .show()
+        }
+        .canEditRow({ item, indexPath -> Bool in
+            return true
+        })
+        .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
+            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+                print("trailing 菜鸡")
+                complation(true)
+            }),
+ //            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+ //                print("trailing  互啄")
+ //                complation(true)
+ //            }),
+            ].swipeActionsConfiguration()
+        }
+        .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
+            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+                print("leading 菜鸡")
+                complation(true)
+            }),
+ //            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+ //                print("leading 互啄")
+ //                complation(true)
+ //            }),
+            ].swipeActionsConfiguration()
+        }
+    }
+    
+    func getTimeLabel()->String{
+        let formatter:DateFormatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+        formatter.dateFormat = "HH:mm:ss"
+        let str:String = formatter.string(from: NSDate() as Date)
+        return str
+    }
+}
+
+class customView: ArgoKit.View  {
+    var hidden:Bool = false
+    var alertView1:AlertView?
+     var aText:ArgoKit.Text?
+    var body: View{
+        VStack {
+           Text("hello aaa")
+           Button() {
+               print("click1")
+           } builder: {
+               Text("buttonscxdscsdcsd").font(size:20)
+               Text("buttonscxdscsdcsd")
+                  
+           }
+           .flexDirection(.column)
+           .textColor(.purple)
+           .backgroundColor(.clear)
+           .font(size:30)
+           .font(style: .bold)
+           .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
+
+           Button(text: "12345678eeee") {
+               let s = "click + \( String(describing: self.aText?.node?.text()!))"
+               _ = self.aText?.text(s)
+               print("click2")
+           }
+
+           ArgoKit.Toggle(true) { value in
+               print("value is ",value)
+           }
+
+          Text("hello bbb")
+           Text("hello ccc").lineLimit(0)
+               .alias(variable: &self.aText)
+      }.margin(edge: .top, value: 96)
+        .width(200)
+        .backgroundColor(.cyan)
+    }
+}
+
 class ArgoKitViewDemo:ArgoKit.View  {
-   var items = [SessionItem]()
-   init() {
-       let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-       let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-       for index in 1..<200{
-           var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
-           item.imagePath = images[index%5]
-           item.sessionName = images[index%5] + "+\(String(index))"
-           item.lastMessage = messages[index%5] + "+\(String(index))"
-           item.timeLabel = getTimeLabel()
-           item.unreadCount = String(index)
-           items.append(item)
-       }
-   }
-   var hidden:Bool = false
-   var alertView1:AlertView?
-    var aText:ArgoKit.Text?
    var body:ArgoKit.View{
-         VStack {
-            Text("hello aaa")
-            Button() {
-                print("click1")
-            } builder: {
-                Text("buttonscxdscsdcsd").font(size:20)
-                Text("buttonscxdscsdcsd")
-                   
-            }
-            .flexDirection(.column)
-            .textColor(.purple)
-            .backgroundColor(.clear)
-            .font(size:30)
-            .font(style: .bold)
-            .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
-
-            Button(text: "12345678eeee") {
-                let s = "click + \( String(describing: self.aText?.node?.text()!))"
-                _ = self.aText?.text(s)
-                print("click2")
-            }
-
-            ArgoKit.Toggle(true) { value in
-                print("value is ",value)
-            }
-
-           Text("hello bbb")
-            Text("hello ccc").lineLimit(0)
-                .alias(variable: &self.aText)
-//            List(data:self.items){ item in
-//                SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
-//            }.grow(1)
-       }.margin(edge: .top, value: 96)
-         .width(300).backgroundColor(.cyan).grow(1)
-//          .height(ArgoValue((UIWindow().frame.size.height - 96)))
-
-       List(data:items){ item in
-           SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
-       }.grow(1)
-       .didSelectRow {item, indexPath in
-           AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
-               print(text ?? "")
-           }.cancel(title: "取消") {}
-           .textField()
-           .show()
-       }
-       .canEditRow({ item, indexPath -> Bool in
-           return true
-       })
-       .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-           [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-               print("trailing 菜鸡")
-               complation(true)
-           }),
-//            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-//                print("trailing  互啄")
-//                complation(true)
-//            }),
-           ].swipeActionsConfiguration()
-       }
-       .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-           [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-               print("leading 菜鸡")
-               complation(true)
-           }),
-//            ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-//                print("leading 互啄")
-//                complation(true)
-//            }),
-           ].swipeActionsConfiguration()
-       }
-
+    customView()
+//    Text("dsdsa")
+      ListDemo()
    }
    
-   func getTimeLabel()->String{
-       let formatter:DateFormatter = DateFormatter()
-       formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-       formatter.dateFormat = "HH:mm:ss"
-       let str:String = formatter.string(from: NSDate() as Date)
-       return str
-   }
+
   
 }
 
