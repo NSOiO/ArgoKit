@@ -52,12 +52,12 @@ class ViewController: UIViewController {
         let anims = [AnimGenerator.anim(.color, 3, .color(.green), .color(.red), view),
                      AnimGenerator.anim(.scale, 3, .float2(1.0, 1.0), .float2(1.5, 1.5), view),
                      AnimGenerator.anim(.rotation, 3, .float(0), .float(180), view)]
-//        let groups: [AnimationGroupElement] = [
-//            .view(view),
-//            .autoReverse(true),
-//            .animations(anims)
-//        ]
-//        AnimationGroup.build(groups).startConcurrent()
+        let groups: [AnimationGroupElement] = [
+            .view(view),
+            .autoReverse(true),
+            .animations(anims)
+        ]
+        AnimationGroup.build(groups).startConcurrent()
     }
     
     
@@ -151,11 +151,11 @@ class ViewController: UIViewController {
         anim1.duration(2).to(UIColor.red)
         anim1.autoReverse(false)
         
-//        let group = AnimationGroup()
-//        group.animations([anim, anim1])
-//        group.autoReverse(true)
-//        group.attach(target)
-//        group.startConcurrent()
+        let group = AnimationGroup()
+        group.animations([anim, anim1])
+        group.autoReverse(true)
+        group.attach(target)
+        group.startConcurrent()
     
     }
 
