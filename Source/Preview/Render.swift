@@ -22,9 +22,12 @@ public struct ArgoRender: UIViewRepresentable {
     public func makeUIView(context: Context) -> UIView {
         let content = self.builder()
         let controller = UIHostingController(rootView: content)
-//        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         host = controller
-        return controller.view
+
+        let view = controller.view!
+//      view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        view.backgroundColor = UIColor.init(red: 255, green: 0, blue: 0, alpha: 0.1)
+        return view
     }
     
     public func updateUIView(_ uiView: UIView, context: Context) {
