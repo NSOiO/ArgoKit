@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class Button:View{
+open class Button:View{
     
     private var fontSize:CGFloat
     private var fontStyle:AKFontStyle

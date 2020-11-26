@@ -12,7 +12,7 @@ class ArgoKitToggleNode: ArgoKitNode {
         return CGSize(width: 51, height: 31)
     }
 }
-public class Toggle:View{
+open class Toggle:View{
     private let pNode:ArgoKitToggleNode
     public var node: ArgoKitNode?{
         pNode

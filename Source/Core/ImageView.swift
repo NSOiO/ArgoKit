@@ -13,7 +13,7 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
 }
-public class ImageView : View {
+open class ImageView : View {
     
     private var pNode : ArgoKitImageNode
     

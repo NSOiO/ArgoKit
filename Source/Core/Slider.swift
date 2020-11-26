@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class Slider:View{
+open class Slider:View{
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode

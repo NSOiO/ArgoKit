@@ -11,7 +11,7 @@ class ArgoKitPageControlNode: ArgoKitNode {
         return size
     }
 }
-public class PageControl:View{
+open class PageControl:View{
     private let pNode:ArgoKitPageControlNode
     public var node: ArgoKitNode?{
         pNode

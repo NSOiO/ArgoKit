@@ -102,7 +102,7 @@ class ArgoKitTextNode: ArgoKitNode {
         return result
     }
 }
-public class Text:View {
+open class Text:View {
     private var fontSize:CGFloat
     private var fontStyle:AKFontStyle
     private var font:UIFont

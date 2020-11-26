@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class Stepper:View{
+open class Stepper:View{
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode

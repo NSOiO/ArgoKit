@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ProgressView : View {
+open class ProgressView : View {
     
     private var pNode : ArgoKitNode
     public var node: ArgoKitNode? {
