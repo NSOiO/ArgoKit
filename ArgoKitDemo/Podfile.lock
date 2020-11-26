@@ -10,10 +10,13 @@ PODS:
     - Yoga (~> 1.14)
   - ArgoKit/Core (1.0.1):
     - Yoga (~> 1.14)
+  - ArgoKitPreview (1.0.0):
+    - ArgoKit
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - ArgoKit (from `../`)
+  - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
   trunk:
@@ -22,11 +25,15 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   ArgoKit:
     :path: "../"
+  ArgoKitPreview:
+    :link_style: weak
+    :path: "../"
 
 SPEC CHECKSUMS:
   ArgoKit: 3f0408de52c9b5cf2a1418eda62ab86b500a42c5
+  ArgoKitPreview: c20a902a95bd3764af259e0087d9476d8a77b425
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 0c5300b6c942f09b2ae10172bc64c70f04d097b9
+PODFILE CHECKSUM: c3a46bac661f14c53a62eddd1ca38e06b0bbb7dc
 
 COCOAPODS: 1.10.0
