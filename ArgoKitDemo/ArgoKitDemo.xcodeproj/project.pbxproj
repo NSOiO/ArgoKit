@@ -41,6 +41,7 @@
 		FA51A0B0255D1804005BE240 /* LandmarkRow2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */; };
 		FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE290F9256F505A0012989F /* PreviewDemo.swift */; };
 		FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */; };
+		FAE29115256F54650012989F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE29114256F54650012989F /* Types.swift */; };
 		FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */; };
 		FAF6E61D254FB20E0028A5C7 /* Demo1ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow2.swift; sourceTree = "<group>"; };
 		FAE290F9256F505A0012989F /* PreviewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDemo.swift; sourceTree = "<group>"; };
 		FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitViewDemo.swift; sourceTree = "<group>"; };
+		FAE29114256F54650012989F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo1ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +162,7 @@
 		326335CC254133D20094676D /* ArgoKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FAE29113256F54570012989F /* Previews */,
 				FA5164D6255BB99D005BE240 /* LandmarksDemo */,
 				FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */,
 				326335CD254133D20094676D /* AppDelegate.swift */,
@@ -172,7 +175,6 @@
 				326335D8254133D30094676D /* LaunchScreen.storyboard */,
 				326335DB254133D30094676D /* Info.plist */,
 				FA4D581F254ABD1C002E2532 /* DemoContentView.swift */,
-				FAE290F9256F505A0012989F /* PreviewDemo.swift */,
 			);
 			path = ArgoKitDemo;
 			sourceTree = "<group>";
@@ -263,6 +265,15 @@
 				FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */,
 			);
 			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
+		FAE29113256F54570012989F /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				FAE290F9256F505A0012989F /* PreviewDemo.swift */,
+				FAE29114256F54650012989F /* Types.swift */,
+			);
+			name = Previews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,6 +466,7 @@
 				FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */,
 				FA516501255BB99E005BE240 /* LandmarkRow.swift in Sources */,
 				326335D2254133D20094676D /* ViewController.swift in Sources */,
+				FAE29115256F54650012989F /* Types.swift in Sources */,
 				FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
 				FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */,

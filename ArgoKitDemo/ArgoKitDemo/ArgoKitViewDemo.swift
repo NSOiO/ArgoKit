@@ -204,6 +204,7 @@ class ArgoKitViewDemo:ArgoKit.View  {
 //                SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
 //            }.grow(1)
        }.margin(edge: .top, value: 96)
+         .width(300).height(300).backgroundColor(.cyan)
 //          .height(ArgoValue((UIWindow().frame.size.height - 96)))
 
     /*
