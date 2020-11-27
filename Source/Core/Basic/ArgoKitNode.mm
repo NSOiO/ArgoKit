@@ -349,19 +349,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _bindProperties = [NSMutableDictionary new];
 }
 
-- (void) bindView:(UIView *)view {
+- (void)bindView:(UIView *)view {
     if (![view isKindOfClass:_viewClass]) {
         return;
     }
     _view = view;
     _size = view.bounds.size;
-    if (_childs.count) {
-        for (ArgoKitNode *child in _childs) {
-            if (child.view) {
-                [view addSubview:child.view];
-            }
-        }
-    }
     [self commitAttributes];
 }
 
@@ -378,9 +371,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     __weak typeof(self)wealSelf = self;
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
-            wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
-            [wealSelf commitAttributes];
-            NSArray *nodeObservers = [self.nodeObservers copy];
+            UIView *view = [wealSelf createNodeViewWithFrame:frame];
+            [wealSelf bindView:view];
+            NSArray *nodeObservers = [wealSelf.nodeObservers copy];
             for (ArgoKitNodeObserver *observer in nodeObservers) {
                 if (observer.createViewBlock) {
                     observer.createViewBlock(wealSelf.view);
