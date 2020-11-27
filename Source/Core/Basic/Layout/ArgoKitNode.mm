@@ -8,7 +8,7 @@
 #import "ArgoKitNode.h"
 #import <objc/runtime.h>
 #import "yoga/Yoga.h"
-#import "ArgoLayoutHelper.h"
+#import "ArgoKitLayoutHelper.h"
 #import "ArgoKitUtils.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
@@ -547,7 +547,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (CGSize)applyLayout:(CGSize)size{
     if (self.layout) {
-        [ArgoLayoutHelper addLayoutNode:self];
+        [ArgoKitLayoutHelper addLayoutNode:self];
         self.size = [self.layout applyLayoutWithsize:size];
     }
     return self.size;

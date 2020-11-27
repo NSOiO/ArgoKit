@@ -22,6 +22,6 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation(withView: true)
         }
-        ArgoReusedLayoutHelper.addLayoutNode(node)
+        ArgoKitReusedLayoutHelper.addLayoutNode(node)
     }
 }

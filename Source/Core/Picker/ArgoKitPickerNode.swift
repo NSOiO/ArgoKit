@@ -46,7 +46,7 @@ class ArgoKitPickerRowView: UIView {
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation(withView: true)
         }
-        ArgoReusedLayoutHelper.addLayoutNode(node)
+        ArgoKitReusedLayoutHelper.addLayoutNode(node)
     }
 }
 

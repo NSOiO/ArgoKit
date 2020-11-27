@@ -161,7 +161,7 @@ extension View{
             if !enable && !value {
                 if let node =  self.node?.root{
                     self.node?.isEnabled = !value
-                    ArgoReusedLayoutHelper.appLayout(node)
+                    ArgoKitReusedLayoutHelper.appLayout(node)
                 }
             }else{
                 self.node?.isEnabled = !value

@@ -56,7 +56,7 @@ class ArgoKitListCell: UITableViewCell {
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation(withView: true)
         }
-        ArgoReusedLayoutHelper.addLayoutNode(node)
+        ArgoKitReusedLayoutHelper.addLayoutNode(node)
     }
     
     

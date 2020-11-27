@@ -1,5 +1,5 @@
 //
-//  ArgoLayoutHelper.h
+//  ArgoKitLayoutHelper.h
 //  MMFlexUIKit
 //
 //  Created by Bruce on 2020/10/15.
@@ -9,7 +9,7 @@
 @class ArgoKitNode;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArgoLayoutHelper : NSObject
+@interface ArgoKitLayoutHelper : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (void)addLayoutNode:(nullable ArgoKitNode *)node;
 @end
