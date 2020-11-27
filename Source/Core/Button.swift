@@ -47,7 +47,6 @@ open class Button:View{
             }
             setValue(pNode, #selector(setter: UILabel.text), t)
         }
-
     }
 }
 
@@ -81,11 +80,11 @@ extension Button{
         return font(f)
     }
     
-    
     public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
         return self
     }
+    
     public func backgroundImage(path: String?, for state: UIControl.State)->Self{
         if let p =  path{
             if let image =  UIImage(named:p){
@@ -94,8 +93,6 @@ extension Button{
         }
         return self
     }
-    
-    
     
     func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
         if let nodes = pNode.childs{

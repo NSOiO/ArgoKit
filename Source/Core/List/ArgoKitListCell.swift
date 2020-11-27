@@ -27,7 +27,7 @@ class ArgoKitCellNode: ArgoKitNode {
 class ArgoKitListCell: UITableViewCell {
   
     var contentNode: ArgoKitCellNode?
-    
+    var tempNode: ArgoKitCellNode?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
@@ -40,6 +40,9 @@ class ArgoKitListCell: UITableViewCell {
     // 清空视图属性
     override func prepareForReuse() {
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
     
     public func linkCellNode(_ node: ArgoKitCellNode) {
