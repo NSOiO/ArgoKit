@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ImageView {
+extension Image {
     public func image(_ value: Property<UIImage?>?) -> Self {
         return self.watch(property: value, function: self.image, key: #function)
     }

@@ -7,6 +7,25 @@
 
 import Foundation
 import UIKit
+import ArgoKit
+public class SessionItem:ArgoKitIdentifiable{
+    public var identifier: String
+    public var reuseIdentifier: String
+    var imagePath:String?
+    var sessionName:String?
+    var lastMessage:String?
+    var timeLabel:String?
+    var unreadCount:String?
+
+    var textCom:Text?
+    var hidden:Bool = false
+
+    init(identifier:String,reuseIdentifier:String) {
+        self.identifier = identifier
+        self.reuseIdentifier = reuseIdentifier
+    }
+
+}
 class ArgokitDemoController:UIViewController{
     let contentView = ArgoKitViewDemo()
     open override func viewDidLoad() {

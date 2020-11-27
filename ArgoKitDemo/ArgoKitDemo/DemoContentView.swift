@@ -33,7 +33,7 @@ class row: View{
     }
     var body:View{
         HStack{ [self] in
-            ImageView().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
+            Image().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
             Spacer()
             Text(item.text).backgroundColor(.purple).lineLimit(0).alignSelf(ArgoAlign.center).width(10).alias(variable: &self.item.textCom)
             Spacer()

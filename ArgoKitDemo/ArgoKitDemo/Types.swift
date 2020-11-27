@@ -27,7 +27,7 @@ typealias PanPressGesture = ArgoKit.PanPressGesture
 typealias LongPressGesture = ArgoKit.LongPressGesture
 typealias ScreenEdgePanGesture = ArgoKit.ScreenEdgePanGesture
 
-typealias ImageView = ArgoKit.ImageView
+typealias Image = ArgoKit.Image
 typealias PageControl = ArgoKit.PageControl
 typealias ProgressView = ArgoKit.ProgressView
 typealias SegmenteControl = ArgoKit.SegmenteControl

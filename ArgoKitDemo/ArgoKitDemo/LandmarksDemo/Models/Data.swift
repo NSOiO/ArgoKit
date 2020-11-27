@@ -41,10 +41,10 @@ final class ImageStore {
     
     static var shared = ImageStore()
     
-    func image(name: String) -> ImageView {
+    func image(name: String) -> Image {
         let index = _guaranteeImage(name: name)
         
-        return ImageView(images.values[index], scale: CGFloat(ImageStore.scale))
+        return Image(images.values[index], scale: CGFloat(ImageStore.scale))
         
     }
 

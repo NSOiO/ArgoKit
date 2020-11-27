@@ -13,7 +13,7 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
 }
-open class ImageView : View {
+open class Image : View {
     
     private var pNode : ArgoKitImageNode
     
@@ -64,7 +64,7 @@ open class ImageView : View {
     }
 }
 
-extension ImageView {
+extension Image {
     
     public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
         if let image = pNode.image() {
@@ -81,7 +81,7 @@ extension ImageView {
     }
 }
 
-extension ImageView {
+extension Image {
     
     public func image(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.image),value)
@@ -145,7 +145,7 @@ extension ImageView {
     }
 }
 
-extension ImageView {
+extension Image {
     
     public func imageSize() -> CGSize {
         return pNode.image()?.size ?? .zero

@@ -12,7 +12,7 @@ import ArgoKit
 class itemView: ArgoKit.View {
     typealias View = ArgoKit.View
    var body: ArgoKit.View {
-       ImageView("chincoteague.jpg")
+       Image("chincoteague.jpg")
            .clipsToBounds(true)
            .backgroundColor(.clear)
            .width(60.0)

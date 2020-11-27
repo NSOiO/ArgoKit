@@ -45,7 +45,7 @@ class Landmark: Hashable, Codable, ArgoKitIdentifiable {
 }
 
 extension Landmark {
-    var image: ImageView {
+    var image: Image {
         ImageStore.shared.image(name: imageName)
     }
 }
