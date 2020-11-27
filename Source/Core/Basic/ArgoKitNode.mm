@@ -386,8 +386,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
                     observer.createViewBlock(wealSelf.view);
                 }
             }
-        }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
-            wealSelf.view.frame = frame;
+        }else {
+            if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
+                wealSelf.view.frame = frame;
+            }
             if (!wealSelf.view.superview) {
                 [wealSelf insertViewToParentNodeView];
             }
@@ -471,9 +473,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         _nodeObservers = [NSHashTable weakObjectsHashTable];
     }
     return _nodeObservers;
-}
-
-- (void)prepareForUse{
 }
 
 #pragma mark --- Action ---
@@ -641,6 +640,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 
 @implementation ArgoKitNode(AttributeValue)
+
+- (void)prepareForUse{
+}
+
 - (void)nodeAddViewAttribute:(ViewAttribute *)attribute{
     if (!attribute) {
         return;

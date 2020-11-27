@@ -85,7 +85,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 @property (nonatomic,strong,readonly)NSMutableArray<NodeAction *> *nodeActions;
 
-- (void)prepareForUse;
 //action
 - (void)addAction:(ArgoKitNodeBlock)action forControlEvents:(UIControlEvents)controlEvents;
 - (void)addTarget:(id)target forControlEvents:(UIControlEvents)controlEvents action:(ArgoKitNodeBlock)action;
