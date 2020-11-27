@@ -10,6 +10,7 @@ import Foundation
 
 protocol ArgoKitViewReaderOperation:AnyObject{
     var needRemake:Bool{get set}
+    var nodeObserver:ArgoKitNodeObserver{get}
     init(viewNode:ArgoKitNode)
     func remakeIfNeed() -> Void
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void
@@ -26,6 +27,13 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         }
         set{
             _needRemake = newValue
+        }
+    }
+    
+    private var _nodeObserver:ArgoKitNodeObserver = ArgoKitNodeObserver()
+    var nodeObserver: ArgoKitNodeObserver{
+        get{
+            _nodeObserver
         }
     }
    
@@ -45,10 +53,16 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         self.shadowRadius = 0
         self.shadowOpacity = 0
         self.viewNode = viewNode
+        super.init()
+        self.nodeObserver.setCreateViewBlock {[weak self] view in
+            if let strongSelf = self{
+                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+            }
+        }
+        self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        let rect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
         if let shadowRadius = self.viewNode?.view?.layer.shadowRadius {
             if shadowRadius > 0 {
                 self.needRemake = true
@@ -78,7 +92,6 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         if let node = self.viewNode {
             var frame:CGRect = node.frame
             if let view = node.view{
-                view.addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
                 frame = view.frame
             }
             shadowPath = ArgoKitCornerManagerTool.bezierPath(frame:frame, multiRadius: self.multiRadius)
@@ -123,6 +136,12 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
             _needRemake = newValue
         }
     }
+    private var _nodeObserver:ArgoKitNodeObserver = ArgoKitNodeObserver()
+    var nodeObserver: ArgoKitNodeObserver{
+        get{
+            _nodeObserver
+        }
+    }
     var radius:CGFloat
     var corners:UIRectCorner
     var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0)
@@ -135,6 +154,13 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
         self.corners = .allCorners
         self.viewNode = viewNode
         super.init()
+        
+        self.nodeObserver.setCreateViewBlock {[weak self] view in
+            if let strongSelf = self{
+                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+            }
+        }
+        self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
@@ -164,7 +190,6 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
         if let node = self.viewNode {
             var frame:CGRect = node.frame
             if let view = node.view{
-                view.addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
                 frame = view.frame
             }
             let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)

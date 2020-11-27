@@ -12,7 +12,7 @@
 #import "ArgoKitUtils.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
-
+#import "ArgoKitNode+Observer.h"
 
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
@@ -54,6 +54,8 @@
 @property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 @property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
 
+
+@property(nonatomic,strong)NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
 @end
 
 
@@ -369,6 +371,30 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return view;
 }
 
+- (void)createNodeViewIfNeed:(CGRect)frame {
+    if (_isReused) {
+        return;
+    }
+    __weak typeof(self)wealSelf = self;
+    [ArgoKitUtils runMainThreadAsyncBlock:^{
+        if (!wealSelf.view) {
+            wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
+            [wealSelf commitAttributes];
+            NSArray *nodeObservers = [self.nodeObservers copy];
+            for (ArgoKitNodeObserver *observer in nodeObservers) {
+                if (observer.createViewBlock) {
+                    observer.createViewBlock(wealSelf.view);
+                }
+            }
+        }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
+            wealSelf.view.frame = frame;
+            if (!wealSelf.view.superview) {
+                [wealSelf insertViewToParentNodeView];
+            }
+        }
+    }];
+}
+
 - (void)commitAttributes {
     if (_viewAttributes.count) {
         [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes.allValues markDirty:NO];
@@ -394,28 +420,17 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
-- (void)createNodeViewIfNeed:(CGRect)frame {
-    if (_isReused) {
-        return;
-    }
-    __weak typeof(self)wealSelf = self;
-    [ArgoKitUtils runMainThreadAsyncBlock:^{
-        if (!wealSelf.view) {
-            wealSelf.view = [wealSelf createNodeViewWithFrame:frame];
-            [wealSelf commitAttributes];
-        }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
-            wealSelf.view.frame = frame;
-            if (!wealSelf.view.superview) {
-                [wealSelf insertViewToParentNodeView];
-            }
-        }
-    }];
-}
-
 #pragma mark --- property setter/getter ---
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     _size = frame.size;
+    
+    NSArray *nodeObservers = [self.nodeObservers copy];
+    for (ArgoKitNodeObserver *observer in nodeObservers) {
+        if (observer.frameChangeBlock) {
+            observer.frameChangeBlock(frame);
+        }
+    }
 }
 
 - (NSMutableArray<ArgoKitNode *> *)childs{
@@ -450,6 +465,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         _nodeActions = [NSMutableArray array];
     }
     return _nodeActions;
+}
+- (NSHashTable<ArgoKitNodeObserver *> *)nodeObservers{
+    if (!_nodeObservers) {
+        _nodeObservers = [NSHashTable weakObjectsHashTable];
+    }
+    return _nodeObservers;
 }
 
 - (void)prepareForUse{

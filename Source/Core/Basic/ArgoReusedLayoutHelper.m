@@ -18,7 +18,6 @@ static void ArgoSourceContextCallBackLog(void *info) {
     CFRunLoopObserverRef _observer;
 }
 @property(nonatomic,strong)NSHashTable<ArgoKitNode *> *layoutNodesPool;
-@property(nonatomic,strong)NSHashTable<ArgoKitNode *> *lazyLayoutNodesPool;
 @end
 
 
@@ -61,12 +60,6 @@ static ArgoReusedLayoutHelper* _instance;
         _layoutNodesPool = [NSHashTable weakObjectsHashTable];
     }
     return _layoutNodesPool;
-}
-- (NSHashTable<ArgoKitNode *> *)lazyLayoutNodesPool{
-    if (!_lazyLayoutNodesPool) {
-        _lazyLayoutNodesPool = [NSHashTable weakObjectsHashTable];
-    }
-    return _lazyLayoutNodesPool;
 }
 - (void)startRunloop {
     // 监听主线程runloop操作

@@ -7,10 +7,12 @@
 
 import ArgoKit
 
-
-
 class itemView: ArgoKit.View {
-    typealias View = ArgoKit.View
+    
+    
+    
+    
+   typealias View = ArgoKit.View
    var body: ArgoKit.View {
        Image("chincoteague.jpg")
            .clipsToBounds(true)
@@ -28,33 +30,78 @@ class itemView: ArgoKit.View {
        Text("aaaa33dd")
    }
 }
+
+
+class TextFieldView: ArgoKit.View {
+    typealias View = ArgoKit.View
+   var body: ArgoKit.View {
+    TextField(nil,placeholder: "请输入文本")
+     .width(200)
+     .height(30)
+     .alignSelf(.center)
+     .margin(top: 0, right: 2, bottom: 0, left: 2)
+     .placeholderColor(.orange)
+     .didChangeSelection { content in
+     }
+     .backgroundColor(.gray)
+     .leftView(UITextField.ViewMode.always) {
+         Button(text:""){
+         }
+         .width(30)
+         .height(30)
+         .backgroundColor(.red)
+         .contentMode(.center)
+     }
+     .rightView(UITextField.ViewMode.always) {
+         Button{
+         }builder: {
+             Image("chincoteague.jpg")
+         }
+         .width(30)
+         .height(30)
+         .backgroundColor(.red)
+         .contentMode(.center)
+     }
+   }
+}
 class SessionRow:ArgoKit.View {
    typealias View = ArgoKit.View
    var item:SessionItem
-   var hidden:Bool = false
+   var hidden:Bool = true
    init(item:SessionItem) {
        self.item = item
    }
+    init() {
+        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
+        var item = SessionItem(identifier:String(1), reuseIdentifier:"reuseIdentifier")
+        item.imagePath = images[1]
+        item.sessionName = images[1] + "+\(String(1))"
+        item.lastMessage = messages[1] + "+\(String(1))"
+        self.item = item
+    }
+    
    var body: ArgoKit.View {
        HStack{
            
-//           itemView()
+           itemView()
            
-//           VStack{
-//               Text(self.item.sessionName)
-//                   .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
-//                   .backgroundColor(.gray)
-//                   .textAlign(.center)
-//                    .borderWidth(top: 13, right: 13, bottom: 13, left: 50)
+           VStack{
+               Text(self.item.sessionName)
+                   .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
+                   .backgroundColor(.gray)
+                   .textAlign(.center)
+                    .borderWidth(top: 13, right: 13, bottom: 13, left: 50)
                
                Text(self.item.lastMessage)
                    .backgroundColor(.red)
                    .lineSpacing(10).lineLimit(0)
                    .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
                    .alias(variable: &self.item.textCom)
-                   .margin(edge: .top, value: 3).hidden(self.hidden)
-//           }.margin(top: 10, right: 0, bottom: 10, left: 10)
-//           .backgroundColor(.clear)
+                   .margin(edge: .top, value: 3)
+                .hidden(self.hidden)
+           }.margin(top: 10, right: 0, bottom: 10, left: 10)
+           .backgroundColor(.clear)
            
            Spacer()
            
@@ -67,42 +114,11 @@ class SessionRow:ArgoKit.View {
             .width(100)
             .height(50)
             .alignSelf(.center)
-            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+//            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
             .margin(top: 0, right: 5, bottom: 0, left: 5)
             .textColor(.red)
            
-//
-//           TextField(nil,placeholder: "请输入文本")
-//               .width(200)
-//               .height(30)
-//               .alignSelf(.center)
-//               .margin(top: 0, right: 2, bottom: 0, left: 2)
-//               .placeholderColor(.orange)
-//               .didChangeSelection { content in
-//               }
-//               .backgroundColor(.gray)
-//               .leftView(UITextField.ViewMode.always) {
-//                   Button(text:""){
-//                       self.hidden = !self.hidden
-//                       _ = self.item.textCom?.hidden(self.hidden)
-//                   }
-//                   .width(30)
-//                   .height(30)
-//                   .backgroundColor(.red)
-//                   .contentMode(.center)
-//               }
-//               .rightView(UITextField.ViewMode.always) {
-//                   Button{
-//                     self.hidden = !self.hidden
-//                     _ = self.item.textCom?.hidden(self.hidden)
-//                   }builder: {
-//                       ImageView(self.item.imagePath)
-//                   }
-//                   .width(30)
-//                   .height(30)
-//                   .backgroundColor(.red)
-//                   .contentMode(.center)
-//               }
+
        }.backgroundColor(.clear)
        
    }
@@ -221,6 +237,7 @@ class ArgoKitViewDemo:ArgoKit.View  {
    var body:ArgoKit.View{
 //    customView().margin(edge: .left, value: 0)
      ListDemo()
+//    SessionRow().margin(edge: .top, value: 96)
    }
 
 }

@@ -28,27 +28,27 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @end
  
 @interface ArgoKitNode : NSObject
+/* 是否为根节点*/
+@property (nonatomic, assign, readonly)BOOL isRootNode;
 /* 顶层根节点*/
 @property (nonatomic, weak ,nullable)ArgoKitNode  *rootNode;
 /* node父节点*/
 @property (nonatomic, weak ,nullable)ArgoKitNode  *parentNode;
 /* node包含的子节点*/
 @property (nonatomic, strong, readonly,nullable)  NSMutableArray<ArgoKitNode *> *childs;
-/* 是否为根节点*/
-@property (nonatomic, assign, readonly)BOOL isRootNode;
+
+//链接此node被复用到的node节点
+@property (nonatomic, weak,nullable)ArgoKitNode *linkNode;
 
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 
 //存储View属性
 @property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 
-
-//链接次node被复用到的node节点
-@property (nonatomic, weak,nullable)ArgoKitNode *linkNode;
 /* 节点持有的视图 */
 @property (nonatomic, strong, readonly, nullable) UIView *view;
 /* 节点持有的视图 */
-@property (nonatomic, assign)Class viewClass;
+@property (nonatomic, assign, readonly)Class viewClass;
 
 /* frame 相关 */
 @property (nonatomic, assign) CGRect frame; // 调用 applyLayout 相关方法后会更新 frame, 更新 frame 同时会更新 size

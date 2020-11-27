@@ -141,9 +141,6 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
                 }
             }
         }
-        if(!node.view){
-            [node createNodeViewIfNeed:node.frame];
-        }
         node.view.frame = resueNode.frame;
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
             [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs resetFrame:only];
