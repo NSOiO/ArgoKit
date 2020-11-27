@@ -30,11 +30,6 @@ open class Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
-    public convenience init(_ name: String?, bundle: Bundle? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
-        let image: UIImage? = (name != nil) ? UIImage(named: name!, in: bundle, compatibleWith: nil) : nil
-        self.init(image: image, highlightedImage: nil, builder: builder)
-    }
-    
     @available(iOS 13.0, *)
     public convenience init(systemName: String) {
         self.init(image: UIImage(systemName: systemName), highlightedImage: nil)
@@ -42,15 +37,6 @@ open class Image : View {
     
     public convenience init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
-    }
-    
-    public convenience init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up, @ArgoKitViewBuilder builder:@escaping ()->View) {
-        self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil, builder: builder)
-    }
-    
-    public convenience init(image: UIImage?, highlightedImage: UIImage? = nil, @ArgoKitViewBuilder builder:@escaping ()->View) {
-        self.init(image: image, highlightedImage: highlightedImage)
-        addSubNodes(builder:builder)
     }
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
@@ -86,6 +72,24 @@ extension Image {
     public func image(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.image),value)
         return self
+    }
+    
+    public func image(_ value: UIImage?,placeHolder:UIImage?) -> Self {
+        return self.image(value ?? placeHolder)
+    }
+    
+    public func image(name:String?,placeHolderName:String?)->Self{
+        let imageName:String? = name ?? placeHolderName
+        let image: UIImage? = (imageName != nil) ? UIImage(named: imageName!, in: nil, compatibleWith: nil) : nil
+        return self.image(image)
+    }
+    
+    public func image(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?)->UIImage?)?)->Self{
+        var image:UIImage? = nil
+        if let callBack = loadImage {
+            image  = callBack(url,placeHolderURL)
+        }
+        return self.image(image)
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {
@@ -146,7 +150,6 @@ extension Image {
 }
 
 extension Image {
-    
     public func imageSize() -> CGSize {
         return pNode.image()?.size ?? .zero
     }
