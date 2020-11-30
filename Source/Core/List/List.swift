@@ -53,6 +53,13 @@ extension List {
         tableNode.reloadData()
         return self
     }
+    
+    public func reloadData(data:[T]) -> Self {
+        tableNode.dataSourceHelper.dataList = [data]
+        tableNode.reloadData()
+        return self
+    }
+    
     public func selectionStyle(_ value: UITableViewCell.SelectionStyle) -> Self {
         tableNode.selectionStyle = value
         return self

@@ -146,6 +146,7 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
     var corners:UIRectCorner
     var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0)
     var shadowPath:UIBezierPath? = nil
+    private var pcircle:Bool? = false
     weak var viewNode:ArgoKitNode?
     
     required init(viewNode:ArgoKitNode){
@@ -176,6 +177,10 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
         self.multiRadius = multiRadius
         self.needRemake = true
     }
+    func circle() {
+        pcircle = true
+        self.needRemake = true
+    }
     
     func updateCornersRadius(radius:CGFloat,corners:UIRectCorner)->Void{
         self.corners = corners
@@ -191,6 +196,9 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
             var frame:CGRect = node.frame
             if let view = node.view{
                 frame = view.frame
+            }
+            if pcircle == true{
+                self.multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: CGFloat.minimum(frame.size.width, frame.size.height)/2.0)
             }
             let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)
             var maskLayer:CAShapeLayer? = nil

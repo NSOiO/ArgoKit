@@ -19,6 +19,7 @@
     _frameChangeBlock= [frameChangeBlock copy];
 }
 @end
+
 @interface ArgoKitNode()
 @property(nonatomic,strong)NSMutableArray<ArgoKitNodeObserver *> *nodeObservers;
 @end

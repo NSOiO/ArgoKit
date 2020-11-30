@@ -14,6 +14,9 @@ class itemView: ArgoKit.View {
     
    typealias View = ArgoKit.View
    var body: ArgoKit.View {
+    Image(url: "", placeHolderURL: "") { (url1, url2) -> (Bool, UIImage?) in
+        return (true,UIImage())
+    }
        Image("chincoteague.jpg")
            .clipsToBounds(true)
            .backgroundColor(.clear)
@@ -23,7 +26,7 @@ class itemView: ArgoKit.View {
            .margin(edge: .left, value: 10)
            .margin(edge: .top, value: 10)
            .margin(edge: .bottom, value: 10)
-           .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
+           .circle()
            .onTapGesture {
            }.isUserInteractionEnabled(true)
        

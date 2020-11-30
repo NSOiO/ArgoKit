@@ -25,10 +25,34 @@ open class Image : View {
         self.init(image: nil, highlightedImage: nil)
     }
     
-    public convenience init(_ name: String?, bundle: Bundle? = nil) {
-        let image: UIImage? = (name != nil) ? UIImage(named: name!, in: bundle, compatibleWith: nil) : nil
+    public convenience init(_ name: String) {
+        let image: UIImage? =  UIImage(named: name, in: nil, compatibleWith: nil)
         self.init(image: image, highlightedImage: nil)
     }
+    
+    public convenience init(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?)->(Bool,UIImage?))?){
+        var image:UIImage? = nil
+        if let callBack = loadImage {
+            let (result,innerImage) = callBack(url,placeHolderURL)
+            if result == true {
+                image = innerImage
+            }
+        }
+        self.init(image: image, highlightedImage: nil)
+    }
+    
+    
+//    public convenience init(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?,()->(Bool,UIImage?)))->()?){
+//        var image:UIImage? = nil
+//        if let callBack = loadImage {
+//            let resultBlock = callBack(url,placeHolderURL)
+//            resultBlock =
+//            if result == true {
+//                image = innerImage
+//            }
+//        }
+//        self.init(image: image, highlightedImage: nil)
+//    }
     
     @available(iOS 13.0, *)
     public convenience init(systemName: String) {
@@ -84,10 +108,13 @@ extension Image {
         return self.image(image)
     }
     
-    public func image(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?)->UIImage?)?)->Self{
+    public func image(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?)->(Bool,UIImage?))?)->Self{
         var image:UIImage? = nil
         if let callBack = loadImage {
-            image  = callBack(url,placeHolderURL)
+            let (result,innerImage) = callBack(url,placeHolderURL)
+            if result == true {
+                image = innerImage
+            }
         }
         return self.image(image)
     }

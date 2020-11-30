@@ -372,8 +372,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				326335C9254133D20094676D /* ArgoKitDemo */,
 				326335DF254133D40094676D /* ArgoKitDemoTests */,
+				326335C9254133D20094676D /* ArgoKitDemo */,
 				326335EA254133D40094676D /* ArgoKitDemoUITests */,
 			);
 		};
@@ -648,6 +648,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -663,7 +664,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 36WT396TPZ;
+				DEVELOPMENT_TEAM = 4BXE593ED8;
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -682,7 +683,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wemomo.cosmos.hwphotonim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Xcode iOS Wildcard";
+				PROVISIONING_PROFILE_SPECIFIER = Photonimdemo;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

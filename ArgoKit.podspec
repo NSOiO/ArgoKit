@@ -1,4 +1,4 @@
-# Copyright (c) Facebook, Inc. and its affiliates.
+# Copyright (c) MoMo, Inc. and its affiliates.
 #
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ podspec = Pod::Spec.new do |spec|
   spec.summary = 'argokit'
   spec.description = 'argokit'
 
-  spec.authors = 'Facebook'
+  spec.authors = 'MoMo'
   spec.source = {
     :git => 'argokit',
     :tag => spec.version.to_s,
@@ -22,7 +22,6 @@ podspec = Pod::Spec.new do |spec|
   spec.platform = :ios
   spec.ios.deployment_target = '10.0'
   spec.ios.frameworks = 'UIKit'
-#  spec.default_subspec = "Core"
   spec.dependency 'Yoga'
   spec.module_name = 'ArgoKit'
   
@@ -30,7 +29,8 @@ podspec = Pod::Spec.new do |spec|
 
   spec.subspec "Core" do |ss|
     ss.source_files = 'Source/Core/**/*.{h,m,mm}','Source/Core/**/*.{swift}'
-    ss.private_header_files = 'ArgoKit/Source/*.h'
+#    ss.private_header_files = 'ArgoKit/Source/*.h'
+    ss.public_header_files = 'ArgoKit/Source/*.h'
   end
   
   spec.subspec "Bind" do |s|
