@@ -23,7 +23,7 @@ podspec = Pod::Spec.new do |spec|
   spec.ios.deployment_target = '10.0'
   spec.ios.frameworks = 'UIKit'
 #  spec.default_subspec = "Core"
-  spec.dependency 'Yoga', '~> 1.14'
+  spec.dependency 'Yoga'
   spec.module_name = 'ArgoKit'
   
   spec.libraries = 'z','c++'
@@ -37,12 +37,12 @@ podspec = Pod::Spec.new do |spec|
     s.source_files = 'Source/Bind/**/*.{swift}'
   end
   
-  spec.subspec 'AnimationKit' do |ani|
-    ani.name = 'AnimationKit'
-    ani.source_files = 'Source/AnimationKit/**/*.{h,m,mm,c,cpp,swift}'
-    ani.public_header_files = 'Source/AnimationKit/*.h', 'Source/AnimationKit/MLAnimator/*.h', 'Source/AnimationKit/MLAnimator/Animations/*.h'
-    ani.compiler_flags = '-x objective-c++'
-  end
+#  spec.subspec 'AnimationKit' do |ani|
+#    ani.name = 'AnimationKit'
+#    ani.source_files = 'Source/AnimationKit/**/*.{h,m,mm,c,cpp,swift}'
+#    ani.public_header_files = 'Source/AnimationKit/*.h', 'Source/AnimationKit/MLAnimator/*.h', 'Source/AnimationKit/MLAnimator/Animations/*.h'
+#    ani.compiler_flags = '-x objective-c++'
+#  end
 
 end
 

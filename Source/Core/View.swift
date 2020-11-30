@@ -140,10 +140,10 @@ extension View {
 
 extension View {
     
-    public func addAnimation(_ animation: Animation) -> Self {
-        if let view = self.node?.view {
-            animation.attach(view)
-        }
-        return self
-    }
+//    public func addAnimation(_ animation: Animation) -> Self {
+//        if let view = self.node?.view {
+//            animation.attach(view)
+//        }
+//        return self
+//    }
 }
