@@ -9,11 +9,9 @@ import Foundation
 
 class ArgoKitDataSourceHelper {
       
-    lazy var nodeCache: NSCache<NSString, ArgoKitCellNode> = { () -> NSCache<NSString, ArgoKitCellNode> in
-        let cahe = NSCache<NSString, ArgoKitCellNode>()
-        cahe.name = "com.\(type(of: self)).node.cache"
-        cahe.countLimit = 500
-        return cahe
+    lazy var nodeCache: [NSString: ArgoKitCellNode] = { () -> [NSString: ArgoKitCellNode] in
+        NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+        return [NSString: ArgoKitCellNode]()
     }()
     
     lazy var registedReuseIdSet = Set<String>()
@@ -22,6 +20,10 @@ class ArgoKitDataSourceHelper {
     
     public var dataList: [[Any]]?
     public var buildNodeFunc: ((Any)->View)?
+    
+    @objc func memoryWarning(notification : Notification) {
+        self.nodeCache.removeAll()
+    }
 }
 
 extension ArgoKitDataSourceHelper {
@@ -112,7 +114,7 @@ extension ArgoKitDataSourceHelper {
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
         
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        if let node = self.nodeCache.object(forKey: cacheKey) {
+        if let node = self.nodeCache[cacheKey] {
             return node
         }
         
@@ -122,7 +124,7 @@ extension ArgoKitDataSourceHelper {
                 let node = nodeList![section][row]
                 let contentNode = ArgoKitCellNode(viewClass: UIView.self)
                 contentNode.addChildNode(node)
-                self.nodeCache.setObject(contentNode, forKey: cacheKey)
+                self.nodeCache[cacheKey] = contentNode
                 return contentNode
             }
             return nil
@@ -137,7 +139,7 @@ extension ArgoKitDataSourceHelper {
             if let nodes = view.type.viewNodes() {
                 let contentNode = ArgoKitCellNode(viewClass: UIView.self)
                 contentNode.addChildNodes(nodes)
-                self.nodeCache.setObject(contentNode, forKey: cacheKey)
+                self.nodeCache[cacheKey] = contentNode
                 return contentNode
             }
         }
@@ -183,7 +185,7 @@ extension ArgoKitDataSourceHelper {
 extension ArgoKitDataSourceHelper {
     
     func removeAllCache() {
-        self.nodeCache.removeAllObjects()
+        self.nodeCache.removeAll()
     }
     
     func removeCache(at section: Int) {
@@ -198,7 +200,7 @@ extension ArgoKitDataSourceHelper {
         if itemSection != nil && itemSection!.count > 0 {
             for row in 0..<itemSection!.count {
                 let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-                self.nodeCache.removeObject(forKey: cacheKey)
+                self.nodeCache.removeValue(forKey: cacheKey)
             }
         }
     }
@@ -206,7 +208,7 @@ extension ArgoKitDataSourceHelper {
     func removeCache(_ row: Int, at section: Int) {
                 
         let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        self.nodeCache.removeObject(forKey: cacheKey)
+        self.nodeCache.removeValue(forKey: cacheKey)
     }
     
     func deleteRow(_ row: Int, at section: Int) {

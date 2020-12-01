@@ -190,11 +190,6 @@ extension View{
         return self;
     }
     
-    public func cornerRadius(_ value:CGFloat)->Self{
-        addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
-        return self;
-    }
-    
     public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
         if topLeft == topRight &&
             topLeft ==  bottomLeft &&
@@ -206,7 +201,7 @@ extension View{
         return self;
     }
     
-    public func cornerRadius(_ value:CGFloat,corners:UIRectCorner)->Self{
+    public func cornerRadius(_ value:CGFloat, corners:UIRectCorner = .allCorners)->Self{
         if corners.contains(.allCorners) {
             addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
         }else{
@@ -224,7 +219,17 @@ extension View{
         return self;
     }
     
-    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat,corners:UIRectCorner = .allCorners)->Self{
+    public func shadowColor(_ value: UIColor?) -> Self {
+        self.node?.shadowOperation?.updateShadowColor(value)
+        return self
+    }
+    
+    public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
+        self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
+        return self
+    }
+    
+    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner = .allCorners)->Self{
         self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
         return self;
     }

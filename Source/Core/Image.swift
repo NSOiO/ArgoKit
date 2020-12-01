@@ -64,9 +64,9 @@ extension Image {
         return self
     }
     
-    public func renderingMode(_ renderingMode: UIImage.RenderingMode?) -> Self {
+    public func renderingMode(_ renderingMode: UIImage.RenderingMode = .automatic) -> Self {
         if let image = pNode.image() {
-            return self.image(image.withRenderingMode(renderingMode ?? .automatic))
+            return self.image(image.withRenderingMode(renderingMode))
         }
         return self
     }
