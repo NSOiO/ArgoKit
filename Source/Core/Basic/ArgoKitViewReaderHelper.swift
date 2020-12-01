@@ -56,6 +56,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.needRemake = true
                 view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
             }
         }
@@ -158,6 +159,7 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
         
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.needRemake = true
                 view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
             }
         }

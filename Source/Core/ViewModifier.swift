@@ -191,25 +191,14 @@ extension View{
     }
     
     public func cornerRadius(_ value:CGFloat)->Self{
-//        _ = self.clipsToBounds(true)
-//        addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
         return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
     }
-    
     public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
-//        if topLeft == topRight &&
-//            topLeft ==  bottomLeft &&
-//            topLeft ==  bottomRight{
-//            _ = self.clipsToBounds(true)
-//            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),topLeft)
-//        }else{
-//           
-//        }
         self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
         return self;
     }
     
-    public func cornerRadius(_ value:CGFloat,corners:UIRectCorner)->Self{
+    public func cornerRadius(_ value:CGFloat, corners:UIRectCorner = .allCorners)->Self{
         if corners.contains(.allCorners) {
             _ = self.clipsToBounds(true)
             addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
@@ -228,8 +217,18 @@ extension View{
         return self;
     }
     
-    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat,corners:UIRectCorner = .allCorners)->Self{
-        self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
+    public func shadowColor(_ value: UIColor?) -> Self {
+//        self.node?.shadowOperation?.updateShadowColor(value)
+        return self
+    }
+    
+    public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
+//        self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
+        return self
+    }
+    
+    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner = .allCorners)->Self{
+//        self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
         return self;
     }
 }

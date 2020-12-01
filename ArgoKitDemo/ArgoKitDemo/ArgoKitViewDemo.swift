@@ -155,6 +155,8 @@ class TextFieldView: ArgoKit.View {
          Button{
          }builder: {
              Image("chincoteague.jpg")
+            Image()
+            Image("chincoteague.jpg", bundle: Bundle.main)
          }
          .width(30)
          .height(30)

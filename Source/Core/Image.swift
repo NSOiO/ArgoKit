@@ -30,6 +30,10 @@ open class Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
+    public convenience init(_ name: String, bundle: Bundle) {
+        let image: UIImage? =  UIImage(named: name, in: bundle, compatibleWith: nil)
+        self.init(image: image, highlightedImage: nil)
+    }
     
     @available(iOS 13.0, *)
     public convenience init(systemName: String) {
@@ -60,9 +64,9 @@ extension Image {
         return self
     }
     
-    public func renderingMode(_ renderingMode: UIImage.RenderingMode?) -> Self {
+    public func renderingMode(_ renderingMode: UIImage.RenderingMode = .automatic) -> Self {
         if let image = pNode.image() {
-            return self.image(image.withRenderingMode(renderingMode ?? .automatic))
+            return self.image(image.withRenderingMode(renderingMode))
         }
         return self
     }

@@ -2,7 +2,7 @@
 
 import ArgoKit
 
-struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
+class ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)

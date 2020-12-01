@@ -129,7 +129,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         resueNode.linkNode = node;
         if (!node.view) {
             [node createNodeViewIfNeed:node.frame];
-        }
+        }  
         if (!only) {
             // 处理UIView属性点击事件
             [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];

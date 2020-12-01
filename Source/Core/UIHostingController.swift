@@ -42,6 +42,7 @@ private class HostView:View {
 
 open class UIHostingController:UIViewController{
     private var rootView_:View!
+    private var frame:CGRect = CGRect.zero
     public init(rootView: View){
         super.init(nibName: nil, bundle: nil)
         rootView_ = rootView
@@ -71,18 +72,15 @@ open class UIHostingController:UIViewController{
     
     open override func viewDidLayoutSubviews() {
         let frame = self.view.frame
-        let width:CGFloat = frame.size.width as CGFloat
-        let height:CGFloat = frame.size.height as CGFloat
-        _ = rootView?.width(ArgoValue(width)).height(ArgoValue(height)).applyLayout()
+        if !frame.equalTo(self.frame) {
+            self.frame = frame
+            let width:CGFloat = frame.size.width as CGFloat
+            let height:CGFloat = frame.size.height as CGFloat
+            _ = rootView?.width(ArgoValue(width)).height(ArgoValue(height)).applyLayout()
+        }
         super.viewDidLayoutSubviews()
     }
     
-    open override func viewLayoutMarginsDidChange() {
-        if #available(iOS 11.0, *) {
-            super.viewLayoutMarginsDidChange()
-        } else {
-        }
-    }
     deinit {
         print("deinit")
     }
