@@ -228,7 +228,7 @@ extension View{
     }
     
     public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner = .allCorners)->Self{
-//        self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
+        self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
         return self;
     }
 }

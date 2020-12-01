@@ -76,12 +76,23 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         self.needRemake = true
     }
     
-    func updateCornersRadius(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat,corners:UIRectCorner)->Void{
+//    func updateCornersRadius(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:CGFloat,corners:UIRectCorner)->Void{
+//        self.shadowColor = shadowColor
+//        self.shadowOffset = CGSize(width: 0, height: 0)
+//        self.shadowRadius = shadowRadius
+//        self.shadowOpacity = Float(shadowOpacity)
+//        self.shadowRadius = shadowRadius
+//        self.corners = corners
+//        let multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: shadowRadius)
+//        self.multiRadius = multiRadius
+//        self.needRemake = true
+//    }
+    
+    func updateCornersRadius(shadowColor:UIColor?, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner)->Void{
         self.shadowColor = shadowColor
-        self.shadowOffset = CGSize(width: 0, height: 0)
+        self.shadowOffset = shadowOffset
         self.shadowRadius = shadowRadius
-        self.shadowOpacity = Float(shadowOpacity)
-        self.shadowRadius = shadowRadius
+        self.shadowOpacity = shadowOpacity
         self.corners = corners
         let multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: shadowRadius)
         self.multiRadius = multiRadius
