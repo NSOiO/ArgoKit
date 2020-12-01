@@ -42,6 +42,10 @@ struct PreviewDemo: ArgoKit.View {
 //                self.model.text?.text("\(self.model.text?.text)" + "click  ")
             } builder: { () -> View in
                 Text("Click")
+                Image(".iamge")
+                VStack {
+                    Text("")
+                }
             }
 
             Text("Hello, World! Second")
