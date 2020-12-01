@@ -52,6 +52,7 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
             tableFooterNode?.applyLayout()
             tableView.tableFooterView = tableFooterNode?.view
         }
+        tableView.separatorStyle = .none;
         return tableView
     }
 }

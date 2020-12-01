@@ -13,13 +13,15 @@ public class ForEach:View{
         innerNode
     }
     
-    public init(_ data:Array<Any>,@ArgoKitViewBuilder _ builder:@escaping (Any)->View) {
+    public init(_ data:Array<Any>?,@ArgoKitViewBuilder _ builder:@escaping (Any?)->View) {
         innerNode = ArgoKitNode(viewClass: UIView.self);
-        for item in data {
-            let container = builder(item)
-            if let nodes = container.type.viewNodes() {
-                for node in nodes {
-                    innerNode.addChildNode(node)
+        if let datas = data {
+            for item in datas {
+                let container = builder(item)
+                if let nodes = container.type.viewNodes() {
+                    for node in nodes {
+                        innerNode.addChildNode(node)
+                    }
                 }
             }
         }

@@ -191,23 +191,27 @@ extension View{
     }
     
     public func cornerRadius(_ value:CGFloat)->Self{
-        addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
-        return self;
+//        _ = self.clipsToBounds(true)
+//        addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
+        return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
     }
     
     public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
-        if topLeft == topRight &&
-            topLeft ==  bottomLeft &&
-            topLeft ==  bottomRight{
-            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),topLeft)
-        }else{
-            self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
-        }
+//        if topLeft == topRight &&
+//            topLeft ==  bottomLeft &&
+//            topLeft ==  bottomRight{
+//            _ = self.clipsToBounds(true)
+//            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),topLeft)
+//        }else{
+//           
+//        }
+        self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
         return self;
     }
     
     public func cornerRadius(_ value:CGFloat,corners:UIRectCorner)->Self{
         if corners.contains(.allCorners) {
+            _ = self.clipsToBounds(true)
             addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
         }else{
             self.node?.maskLayerOperation?.updateCornersRadius( radius: value,corners: corners)

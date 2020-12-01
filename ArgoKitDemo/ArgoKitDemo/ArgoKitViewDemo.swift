@@ -7,10 +7,107 @@
 
 import ArgoKit
 
-class itemView: ArgoKit.View {
-    
+extension UIColor{
+    public convenience init(_ r:CGFloat,_ g :CGFloat,_ b:CGFloat,_ a:CGFloat = 1){
+        self.init(red: CGFloat(r/255), green: CGFloat(g/255), blue: CGFloat(b/255), alpha: a)
+     
+    }
+}
+class MSUserInterractionHeaderView: ArgoKit.View {
+    typealias View = ArgoKit.View
+    var body: ArgoKit.View {
+         HStack{
+             // 头像
+             Image("icybay.jpg").width(50.0)
+             .height(50.0)
+             .margin(edge: .left, value: 15.0)
+             .circle()
+             .backgroundColor(.red)
+             
+             VStack{
+                 HStack{
+                     Text("姓名")
+                         .textColor(UIColor(50,51,51))
+                         .font(size: 16.0)
+                     
+                    Image("icybay.jpg")
+                        .margin(edge: .left, value: 4)
+                        .width(15.0)
+                        .height(15.0)
+                     
+                     Spacer()
+                     
+                     Text("10.0千米")
+                         .textAlign(.right)
+                         .font(size: 13)
+                         .textColor(UIColor(170,170,170))
+                         .margin(edge: .right, value: 15)
+                 }.margin(edge: .left, value: 4)
+                 .width(100%)
+                 
+                 Text("他在陌陌很有人气")
+                     .textAlign(.left)
+                     .font(size: 12)
+                     .textColor(UIColor(170,170,170))
+                     .margin(edge: .top, value: 5)
+                     .margin(edge: .right, value: 15)
+                     .margin(edge: .left, value: 4)
+             }.grow(1)
+         }
+    }
+}
 
-    
+
+class MSUserInterractionContentView: ArgoKit.View {
+    typealias View = ArgoKit.View
+    var body: ArgoKit.View {
+         HStack{
+             // 头像
+             Image("icybay.jpg")
+             .width(46.0)
+             .height(46.0)
+             .cornerRadius(4)
+            
+            Text("姓名sasd姓名sasd姓名sasd姓名")
+                .lineLimit(2)
+                .textColor(UIColor(50,51,51))
+                .font(size: 16.0)
+                .margin(edge: .left, value: 5)
+                .alignSelf(.center)
+            
+         }.margin(edge: .left, value: 10)
+         .margin(edge: .top, value: 10)
+
+        Spacer()
+            .height(0.5)
+            .backgroundColor(UIColor(235,235,235))
+            .margin(top: 10, right: 10, bottom: 0, left: 10)
+
+        HStack{
+            Image("icybay.jpg")
+            .width(15.0)
+            .height(15.0)
+            .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 4, bottomRight: 4)
+            Text("点赞了他")
+                .textColor(UIColor(50,51,51))
+                .font(size: 12.0)
+                .margin(edge: .left, value: 5)
+                .alignSelf(.center)
+        }
+        .margin(edge: .top, value: 12)
+        .margin(edge: .left, value: 10)
+        ForEach(0..<4){ index in
+            Text("点赞了他点赞了他")
+                .textColor(UIColor(170,170,170))
+                .font(size: 12.0)
+                .margin(edge: .top, value: 5)
+                .lineLimit(0)
+        }.margin(top:  10.5, right: 0, bottom: 13, left: 11)
+
+    }
+}
+
+class itemView: ArgoKit.View {
     
    typealias View = ArgoKit.View
    var body: ArgoKit.View {
@@ -82,47 +179,16 @@ class SessionRow:ArgoKit.View {
         item.lastMessage = messages[1] + "+\(String(1))"
         self.item = item
     }
+    var body: View{
+        MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+        MSUserInterractionContentView()
+            .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
+            .cornerRadius(5)
+            .backgroundColor(UIColor(250,250,250))
+            .grow(1)
+    }
     
-   var body: ArgoKit.View {
-       HStack{
-           
-           itemView()
-           
-           VStack{
-               Text(self.item.sessionName)
-                   .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
-                   .backgroundColor(.gray)
-                   .textAlign(.center)
-               
-               Text(self.item.lastMessage)
-                   .backgroundColor(.red)
-                   .lineSpacing(10).lineLimit(0)
-                   .cornerRadius(topLeft: 4, topRight: 3, bottomLeft: 3, bottomRight:3)
-                   .alias(variable: &self.item.textCom)
-                   .margin(edge: .top, value: 3)
-                .hidden(self.hidden)
-           }.margin(top: 10, right: 0, bottom: 10, left: 10)
-           .backgroundColor(.clear)
-           
-           Spacer()
-           
-            Button(text:"隐藏文本框"){
-                self.hidden = !self.hidden
-//                let s = "click + \( self.item.textCom?.node?.text())"
-                _ = self.item.textCom?.hidden(self.hidden)
-            }
-            .backgroundImage(path: self.item.imagePath, for: UIControl.State.normal)
-            .width(100)
-            .height(50)
-            .alignSelf(.center)
-//            .cornerRadius(topLeft: 5, topRight: 4, bottomLeft: 4, bottomRight:4)
-            .margin(top: 0, right: 5, bottom: 0, left: 5)
-            .textColor(.red)
-           
-
-       }.backgroundColor(.clear)
-       
-   }
+  
 }
 
 class ListDemo:ArgoKit.View{
@@ -145,7 +211,7 @@ class ListDemo:ArgoKit.View{
     var body: View{
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
-        }.grow(1)
+        }
         .didSelectRow {item, indexPath in
             AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
                 print(text ?? "")
@@ -236,9 +302,7 @@ class customView: ArgoKit.View  {
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-//    customView().margin(edge: .left, value: 0)
      ListDemo()
-//    SessionRow().margin(edge: .top, value: 96)
    }
 
 }
@@ -256,3 +320,4 @@ struct ArgoKitViewDemo_Previews: PreviewProvider {
     }
 }
 #endif
+
