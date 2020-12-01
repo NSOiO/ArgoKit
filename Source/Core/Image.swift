@@ -30,29 +30,6 @@ open class Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
-    public convenience init(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?)->(Bool,UIImage?))?){
-        var image:UIImage? = nil
-        if let callBack = loadImage {
-            let (result,innerImage) = callBack(url,placeHolderURL)
-            if result == true {
-                image = innerImage
-            }
-        }
-        self.init(image: image, highlightedImage: nil)
-    }
-    
-    
-//    public convenience init(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?,()->(Bool,UIImage?)))->()?){
-//        var image:UIImage? = nil
-//        if let callBack = loadImage {
-//            let resultBlock = callBack(url,placeHolderURL)
-//            resultBlock =
-//            if result == true {
-//                image = innerImage
-//            }
-//        }
-//        self.init(image: image, highlightedImage: nil)
-//    }
     
     @available(iOS 13.0, *)
     public convenience init(systemName: String) {
@@ -108,15 +85,20 @@ extension Image {
         return self.image(image)
     }
     
-    public func image(url:String?,placeHolderURL:String?,loadImage:((_ name:String?,_ placeHolderName:String?)->(Bool,UIImage?))?)->Self{
-        var image:UIImage? = nil
+    public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?)->Self{
         if let callBack = loadImage {
-            let (result,innerImage) = callBack(url,placeHolderURL)
-            if result == true {
-                image = innerImage
+            callBack(url,placeHolder){[weak self ]result,retImage in
+                if(result){
+                    if let img = retImage {
+                        if let strongSelf = self {
+                            strongSelf.addAttribute(#selector(setter:UIImageView.image),img)
+                        }
+                       
+                    }
+                }
             }
         }
-        return self.image(image)
+        return self
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {

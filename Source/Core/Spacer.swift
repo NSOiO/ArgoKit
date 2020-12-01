@@ -7,12 +7,12 @@
 
 import Foundation
 public class Spacer: View {
-    private let pNode:ArgoKitTextNode
+    private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
     }
     public init() {
-        pNode = ArgoKitTextNode(viewClass: UIView.self)
+        pNode = ArgoKitNode(viewClass: UIView.self)
         pNode.flexGrow(1.0)
         
     }

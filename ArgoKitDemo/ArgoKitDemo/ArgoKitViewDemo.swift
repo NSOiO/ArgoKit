@@ -9,14 +9,13 @@ import ArgoKit
 
 class itemView: ArgoKit.View {
     
-    
+
     
     
    typealias View = ArgoKit.View
    var body: ArgoKit.View {
-    Image(url: "", placeHolderURL: "") { (url1, url2) -> (Bool, UIImage?) in
-        return (true,UIImage())
-    }
+
+    
        Image("chincoteague.jpg")
            .clipsToBounds(true)
            .backgroundColor(.clear)
@@ -94,7 +93,6 @@ class SessionRow:ArgoKit.View {
                    .cornerRadius(topLeft: 4, topRight: 4, bottomLeft: 5, bottomRight: 5)
                    .backgroundColor(.gray)
                    .textAlign(.center)
-                    .borderWidth(top: 13, right: 13, bottom: 13, left: 50)
                
                Text(self.item.lastMessage)
                    .backgroundColor(.red)

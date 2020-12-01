@@ -10,21 +10,21 @@
 @implementation NSObject(ArgoKitObserver)
 + (void)load
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        SEL removeSel = @selector(removeObserver:forKeyPath:);
-        SEL customRemoveSel = @selector(removeArgoKitObserver:forKeyPath:);
-        SEL addSel = @selector(addObserver:forKeyPath:options:context:);
-        SEL customAddSel = @selector(addArgoKitObserver:forKeyPath:options:context:);
-        
-        Method removeMethod = class_getClassMethod([self class],removeSel);
-        Method cRemoveMethod = class_getClassMethod([self class], customRemoveSel);
-        Method addMethod = class_getClassMethod([self class],addSel);
-        Method cAddMethod = class_getClassMethod([self class], customAddSel);
-        
-        method_exchangeImplementations(removeMethod, cRemoveMethod);
-        method_exchangeImplementations(addMethod, cAddMethod);
-    });
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        SEL removeSel = @selector(removeObserver:forKeyPath:);
+//        SEL customRemoveSel = @selector(removeArgoKitObserver:forKeyPath:);
+//        SEL addSel = @selector(addObserver:forKeyPath:options:context:);
+//        SEL customAddSel = @selector(addArgoKitObserver:forKeyPath:options:context:);
+//
+//        Method removeMethod = class_getClassMethod([self class],removeSel);
+//        Method cRemoveMethod = class_getClassMethod([self class], customRemoveSel);
+//        Method addMethod = class_getClassMethod([self class],addSel);
+//        Method cAddMethod = class_getClassMethod([self class], customAddSel);
+//
+//        method_exchangeImplementations(removeMethod, cRemoveMethod);
+//        method_exchangeImplementations(addMethod, cAddMethod);
+//    });
    
 }
 

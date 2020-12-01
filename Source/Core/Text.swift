@@ -66,10 +66,9 @@ class ArgoKitTextNode: ArgoKitNode {
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var result:CGSize = size
-//        if let view = self.view {
-//            lineHeight = Float((view as! UILabel).font.lineHeight)
-//            result = view.sizeThatFits(size)
-//        }else{
+        if let view = self.view {
+            result = view.sizeThatFits(size)
+        }else{
             let lable:UILabel = UILabel()
             if let text =  self.text(){
                 if text.count > 0 {
@@ -89,7 +88,7 @@ class ArgoKitTextNode: ArgoKitNode {
             lable.numberOfLines = self.numberOfLines()
             lable.lineBreakMode = self.lineBreakMode()
             result = lable.sizeThatFits(size)
-//        }
+        }
 //        if lineSpacing > 0 && linenumber != 1 && floor(result.height) <= CGFloat(ceilf(lineHeight)) + lineSpacing {
 //            let oldLineSpacing = lineSpacing;
 //            lineSpacing = 0

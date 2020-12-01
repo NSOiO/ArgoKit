@@ -21,7 +21,6 @@ public class VStack:View {
         pNode = ArgoKitNode(viewClass: UIView.self)
         pNode.column()
         pNode.alignItemsFlexStart()
-        pNode.flexShrink(1.0)
         addSubNodes(builder:builder)
     }
     
