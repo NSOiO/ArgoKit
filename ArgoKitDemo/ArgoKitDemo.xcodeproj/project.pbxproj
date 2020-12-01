@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0FC3C988DB266B00C67C8312 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7976B6DC4DBCCAF2EF69103B /* Pods_ArgoKitDemo.framework */; };
 		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
-		326335D2254133D20094676D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
 		326335D5254133D20094676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D3254133D20094676D /* Main.storyboard */; };
 		326335D7254133D30094676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
 		326335DA254133D30094676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D8254133D30094676D /* LaunchScreen.storyboard */; };
@@ -468,7 +467,6 @@
 			files = (
 				FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */,
 				FA516501255BB99E005BE240 /* LandmarkRow.swift in Sources */,
-				326335D2254133D20094676D /* ViewController.swift in Sources */,
 				FAE29115256F54650012989F /* Types.swift in Sources */,
 				FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
