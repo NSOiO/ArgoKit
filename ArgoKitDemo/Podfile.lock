@@ -19,17 +19,16 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - ArgoAnimation (from `../../../MLNUI/MLN`)
   - ArgoKit (from `../`)
   - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - ArgoAnimation
   trunk:
     - Yoga
 
 EXTERNAL SOURCES:
-  ArgoAnimation:
-    :path: "../../../MLNUI/MLN"
   ArgoKit:
     :path: "../"
   ArgoKitPreview:
@@ -42,6 +41,6 @@ SPEC CHECKSUMS:
   ArgoKitPreview: c20a902a95bd3764af259e0087d9476d8a77b425
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 16dfafc0b91866e361ee6a184e711498257ab634
+PODFILE CHECKSUM: 0c7f9ed889cbfd24d528620309e6ddebd712dca8
 
 COCOAPODS: 1.10.0
