@@ -18,11 +18,11 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
         tableNode.style = style ?? .plain
     }
     
-    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) {
+    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
-            tableNode.dataSourceHelper.nodeList = [nodes]
+            tableNode.dataSourceHelper.dataList = [nodes]
         }
     }
 
@@ -49,14 +49,61 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
 }
 
 extension List {
+    
     public func reloadData() -> Self {
         tableNode.reloadData()
         return self
     }
     
-    public func reloadData(data:[T]) -> Self {
-        tableNode.dataSourceHelper.dataList = [data]
-        tableNode.reloadData()
+    public func reloadData(data:[T], sectionHeaderData: T? = nil, sectionFooterData: T? = nil) -> Self {
+        tableNode.reloadData(data: [data], sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
+        return self
+    }
+    
+    public func reloadData(sectionData:[[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil) -> Self {
+        tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
+        return self
+    }
+    
+    public func appendSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, with animation: UITableView.RowAnimation) -> Self {
+        
+        tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
+        return self
+    }
+    
+    public func appendRows(_ rowData: [T], at section: Int = 0, with animation: UITableView.RowAnimation) -> Self {
+        
+        tableNode.appendRows(rowData, at: section, with: animation)
+        return self
+    }
+    
+    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at start: Int, with animation: UITableView.RowAnimation) -> Self {
+        
+        tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: start, with: animation)
+        return self
+    }
+    
+    public func insertRows(_ rowData: [T], atStart start: Int, inSection section: Int, with animation: UITableView.RowAnimation) -> Self {
+        
+        tableNode.insertRows(rowData, atStart: start, inSection: section, with: animation)
+        return self
+    }
+    
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) -> Self {
+        
+        tableNode.deleteSections(sections, with: animation)
+        return self
+    }
+    
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self {
+        
+        tableNode.deleteRows(at: indexPaths, with: animation)
+        return self
+    }
+        
+    public func moveRow(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Self {
+        
+        tableNode.moveRow(sourceIndexPath, to: destinationIndexPath)
         return self
     }
     
@@ -199,13 +246,13 @@ extension List {
         return self
     }
     
-    public func tableHeaderView(@ArgoKitViewBuilder headerContent: () -> View) -> Self {
+    public func tableHeaderView(@ArgoKitViewBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         tableNode.tableHeaderNode = container.type.viewNode()
         return self
     }
     
-    public func tableFooterView(@ArgoKitViewBuilder footerContent: () -> View) -> Self {
+    public func tableFooterView(@ArgoKitViewBuilder footerContent: @escaping () -> View) -> Self {
         let container = footerContent()
         tableNode.tableFooterNode = container.type.viewNode()
         return self

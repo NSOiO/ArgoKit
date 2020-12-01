@@ -353,6 +353,17 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (![view isKindOfClass:_viewClass]) {
         return;
     }
+    [self linkView:view];
+    if (_childs.count) {
+        for (ArgoKitNode *child in _childs) {
+            if (child.view) {
+                [view addSubview:child.view];
+            }
+        }
+    }
+}
+
+- (void)linkView:(UIView *)view {
     _view = view;
     _size = view.bounds.size;
     [self commitAttributes];
@@ -372,7 +383,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [ArgoKitUtils runMainThreadAsyncBlock:^{
         if (!wealSelf.view) {
             UIView *view = [wealSelf createNodeViewWithFrame:frame];
-            [wealSelf bindView:view];
+            [wealSelf linkView:view];
             NSArray *nodeObservers = [wealSelf.nodeObservers copy];
             for (ArgoKitNodeObserver *observer in nodeObservers) {
                 if (observer.createViewBlock) {
