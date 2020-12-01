@@ -218,12 +218,12 @@ extension View{
     }
     
     public func shadowColor(_ value: UIColor?) -> Self {
-//        self.node?.shadowOperation?.updateShadowColor(value)
+        self.node?.shadowOperation?.updateShadowColor(value)
         return self
     }
     
     public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
-//        self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
+        self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
         return self
     }
     

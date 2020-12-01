@@ -88,6 +88,19 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         self.needRemake = true
     }
     
+    
+    func updateShadowColor(_ value: UIColor?) -> Void {
+        self.shadowColor = value
+        self.needRemake = true
+    }
+    
+    func updateShadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Void {
+        self.shadowOffset = offset
+        self.shadowRadius = radius
+        self.shadowOpacity = opacity
+        self.needRemake = true
+    }
+    
     func remakeIfNeed() {
         self.needRemake = false
         if let node = self.viewNode {
