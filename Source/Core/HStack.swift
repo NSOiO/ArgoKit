@@ -21,14 +21,12 @@ public class HStack:View {
     public init(@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = ArgoKitNode(viewClass:UIView.self);
         pNode.row();
-        pNode.alignItemsFlexStart()
         addSubNodes(builder:builder)
     }
     //TODO:是否考虑支持兼容/混合布局
     private init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = ArgoKitNode(view:view);
         pNode.row();
-        pNode.alignItemsFlexStart()
         addSubNodes(builder:builder)
     }
 }

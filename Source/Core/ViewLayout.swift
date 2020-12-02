@@ -754,6 +754,9 @@ extension View{
         case .percent(let value):
             self.node?.width(percent:value)
             break
+        case .auto:
+            self.node?.widthAuto()
+            break
         default:
             break
         }
@@ -766,6 +769,9 @@ extension View{
             break
         case .percent(let value):
             self.node?.height(percent: value)
+            break
+        case .auto:
+            self.node?.heightAuto()
             break
         default:
             break

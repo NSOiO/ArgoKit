@@ -13,9 +13,9 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
     
-    public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?){
+    public func image(url:String?,loadImage:((_ name:String?,_ block: @escaping (Bool,UIImage?)->())->())?){
         if let callBack = loadImage {
-            callBack(url,placeHolder){[weak self ]result,retImage in
+            callBack(url){[weak self ]result,retImage in
                 if(result){
                     if let img = retImage {
                         ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
@@ -108,8 +108,8 @@ extension Image {
         return self.image(image)
     }
     
-    public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?)->Self{
-        pNode.image(url: url, placeHolder: placeHolder, loadImage: loadImage)
+    public func image(url:String?,loadImage:((_ name:String?,_ block: @escaping (Bool,UIImage?)->())->())?)->Self{
+        pNode.image(url: url, loadImage: loadImage)
         return self
     }
     

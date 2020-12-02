@@ -17,12 +17,24 @@ class MSUserInterractionHeaderView: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
          HStack{
-             // 头像
-             Image("icybay.jpg").width(50.0)
-             .height(50.0)
-             .margin(edge: .left, value: 15.0)
-             .circle()
-             .backgroundColor(.red)
+            
+            VStack{
+                // 头像
+                Image("icybay.jpg").width(50.0)
+                .height(50.0)
+                .margin(edge: .left, value: 15.0)
+                .circle()
+                .backgroundColor(.red)
+                
+                Image("")
+                    .height(12.0)
+                .width(18.0)
+                .margin(top: -5, right: 0, bottom: 0, left: 33)
+                .circle()
+                .display(true)
+                .backgroundColor(.red)
+            }
+
              
              VStack{
                  HStack{
@@ -97,7 +109,7 @@ class MSUserInterractionContentView: ArgoKit.View {
         .margin(edge: .top, value: 12)
         .margin(edge: .left, value: 10)
         ForEach(0..<4){ index in
-            Text("点赞了他点赞了他")
+            Text("点赞了他点赞了他ccccxxxxxxss")
                 .textColor(UIColor(170,170,170))
                 .font(size: 12.0)
                 .margin(edge: .top, value: 5)
@@ -192,14 +204,15 @@ class SessionRow:ArgoKit.View {
     
   
 }
-
+var headerView:RefreshHeaderView?
+var footerView:RefreshFooterView?
 class ListDemo:ArgoKit.View{
     typealias View = ArgoKit.View
     var items = [SessionItem]()
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        for index in 1..<200{
+        let messages = ["11","22","33","44","55"]
+        for index in 1..<20{
             var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -210,7 +223,14 @@ class ListDemo:ArgoKit.View{
         }
     }
     var hidden:Bool = false
+    
     var body: View{
+//        MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+//        MSUserInterractionContentView()
+//            .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
+//            .cornerRadius(5)
+//            .backgroundColor(UIColor(250,250,250))
+        
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
@@ -221,31 +241,52 @@ class ListDemo:ArgoKit.View{
             .textField()
             .show()
         }
-        .canEditRow({ item, indexPath -> Bool in
-            return true
-        })
-        .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-                print("trailing 菜鸡")
-                complation(true)
-            }),
-             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-                 print("trailing  互啄")
-                 complation(true)
-             }),
-            ].swipeActionsConfiguration()
+        .refreshHeaderView {
+            RefreshHeaderView(startRefreshing: {
+                headerView?.endRefreshing()
+            })
+            {
+                Text("headerh").alignSelf(.center).lineLimit(0).font(size: 20)
+            }
+            .backgroundColor(.red)
+            .alias(variable: &headerView)
         }
-        .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-                print("leading 菜鸡")
-                complation(true)
-            }),
-             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-                 print("leading 互啄")
-                 complation(true)
-             }),
-            ].swipeActionsConfiguration()
+        .refreshFooterView{
+            RefreshFooterView(startRefreshing: {
+                footerView?.endRefreshing()
+            }){
+                Text("footerhead").alignSelf(.center).lineLimit(0).font(size: 20)
+            }
+            .backgroundColor(.red)
+            .alias(variable: &footerView)
+            
         }
+        
+//        .canEditRow({ item, indexPath -> Bool in
+//            return true
+//        })
+//        .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
+//            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+//                print("trailing 菜鸡")
+//                complation(true)
+//            }),
+//             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+//                 print("trailing  互啄")
+//                 complation(true)
+//             }),
+//            ].swipeActionsConfiguration()
+//        }
+//        .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
+//            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
+//                print("leading 菜鸡")
+//                complation(true)
+//            }),
+//             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
+//                 print("leading 互啄")
+//                 complation(true)
+//             }),
+//            ].swipeActionsConfiguration()
+//        }
     }
     
     func getTimeLabel()->String{
@@ -303,10 +344,23 @@ class customView: ArgoKit.View  {
 
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
+    var items = [SessionItem]()
+    init() {
+        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+        let messages = ["11","22","33","44","55"]
+        for index in 1..<20{
+            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
+            item.unreadCount = String(index)
+            items.append(item)
+        }
+    }
    var body:ArgoKit.View{
-     ListDemo()
+    ListDemo()
+    .grow(1)
    }
-
 }
 
 

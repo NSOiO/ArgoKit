@@ -8,7 +8,6 @@
 import Foundation
 
 public class ScrollView: View {
-    
     var pNode : ArgoKitScrollViewNode?
     
     public var type: ArgoKitNodeType {
