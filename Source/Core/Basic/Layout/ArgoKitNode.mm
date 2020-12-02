@@ -366,13 +366,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)linkView:(UIView *)view {
     _view = view;
     _size = view.bounds.size;
-    if (_childs.count) {
-        for (ArgoKitNode *child in _childs) {
-            if (child.view) {
-                [view addSubview:child.view];
-            }
-        }
-    }
     [self commitAttributes];
 }
 
