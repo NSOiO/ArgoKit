@@ -50,63 +50,6 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
 
 extension List {
     
-    public func reloadData() -> Self {
-        tableNode.reloadData()
-        return self
-    }
-    
-    public func reloadData(data:[T], sectionHeaderData: T? = nil, sectionFooterData: T? = nil) -> Self {
-        tableNode.reloadData(data: [data], sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
-        return self
-    }
-    
-    public func reloadData(sectionData:[[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil) -> Self {
-        tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
-        return self
-    }
-    
-    public func appendSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, with animation: UITableView.RowAnimation) -> Self {
-        
-        tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
-        return self
-    }
-    
-    public func appendRows(_ rowData: [T], at section: Int = 0, with animation: UITableView.RowAnimation) -> Self {
-        
-        tableNode.appendRows(rowData, at: section, with: animation)
-        return self
-    }
-    
-    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at start: Int, with animation: UITableView.RowAnimation) -> Self {
-        
-        tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: start, with: animation)
-        return self
-    }
-    
-    public func insertRows(_ rowData: [T], atStart start: Int, inSection section: Int, with animation: UITableView.RowAnimation) -> Self {
-        
-        tableNode.insertRows(rowData, atStart: start, inSection: section, with: animation)
-        return self
-    }
-    
-    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) -> Self {
-        
-        tableNode.deleteSections(sections, with: animation)
-        return self
-    }
-    
-    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self {
-        
-        tableNode.deleteRows(at: indexPaths, with: animation)
-        return self
-    }
-        
-    public func moveRow(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Self {
-        
-        tableNode.moveRow(sourceIndexPath, to: destinationIndexPath)
-        return self
-    }
-    
     public func selectionStyle(_ value: UITableViewCell.SelectionStyle) -> Self {
         tableNode.selectionStyle = value
         return self
@@ -290,6 +233,49 @@ extension List {
     public func dragInteractionEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITableView.dragInteractionEnabled),value)
         return self
+    }
+}
+
+extension List {
+    
+    public func reloadData() {
+        tableNode.reloadData()
+    }
+    
+    public func reloadData(data:[T], sectionHeaderData: T? = nil, sectionFooterData: T? = nil) {
+        tableNode.reloadData(data: [data], sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
+    }
+    
+    public func reloadData(sectionData:[[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil) {
+        tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
+    }
+    
+    public func appendSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, with animation: UITableView.RowAnimation) {
+        tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
+    }
+    
+    public func appendRows(_ rowData: [T], at section: Int = 0, with animation: UITableView.RowAnimation) {
+        tableNode.appendRows(rowData, at: section, with: animation)
+    }
+    
+    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at start: Int, with animation: UITableView.RowAnimation) {
+        tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: start, with: animation)
+    }
+    
+    public func insertRows(_ rowData: [T], atStart start: Int, inSection section: Int, with animation: UITableView.RowAnimation) {
+        tableNode.insertRows(rowData, atStart: start, inSection: section, with: animation)
+    }
+    
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        tableNode.deleteSections(sections, with: animation)
+    }
+    
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableNode.deleteRows(at: indexPaths, with: animation)
+    }
+        
+    public func moveRow(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        tableNode.moveRow(sourceIndexPath, to: destinationIndexPath)
     }
 }
 
