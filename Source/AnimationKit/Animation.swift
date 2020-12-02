@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgoAnimation
 
 public enum AnimationTimingFunc {
     case defaultValue

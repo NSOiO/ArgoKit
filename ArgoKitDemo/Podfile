@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '10.0'
 
 use_frameworks!
@@ -5,6 +7,8 @@ use_frameworks!
 target 'ArgoKitDemo' do
   pod 'ArgoKit', :path=>'../'
   pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'
+#  pod 'ArgoAnimation', :path => '../../../MLNUI/MLN'
+  
 #  pod 'ArgoUI/Kit/AnimationCPP', :git => 'https://github.com/mmdongxin/MLN', :branch => 'dev_iOS_dx_temp'
 #  pod 'ArgoUI/Kit/AnimationKit', :path => '../../MLN/ArgoUI.podspec'
 end
