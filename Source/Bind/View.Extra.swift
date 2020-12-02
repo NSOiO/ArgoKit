@@ -55,10 +55,10 @@ extension View {
         return self
     }
     
-    func alias(_ alias: Alias<Self?>) -> Self{
-        alias.wrappedValue = self
-        return self
-    }
+//    func alias(_ alias: Alias<Self?>) -> Self{
+//        alias.wrappedValue = self
+//        return self
+//    }
 }
 
 //func watch<R: View,V>(object: R, property: Property<V>, f:@escaping (V) -> R, key: String) {
