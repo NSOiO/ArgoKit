@@ -81,12 +81,10 @@ class ArgoKitPickerNode: ArgoKitNode, UIPickerViewDataSource, UIPickerViewDelega
 extension ArgoKitPickerNode {
     
     open func reloadAllComponents() {
-        self.dataSourceHelper.removeAllCache()
         self.pickerView?.reloadAllComponents()
     }
 
     open func reloadComponent(_ component: Int) {
-        self.dataSourceHelper.removeAllCache()
         self.pickerView?.reloadComponent(component)
     }
 }

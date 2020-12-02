@@ -18,11 +18,11 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
         tableNode.style = style ?? .plain
     }
     
-    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: () -> View) {
+    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
-            tableNode.dataSourceHelper.nodeList = [nodes]
+            tableNode.dataSourceHelper.dataList = [nodes]
         }
     }
 
@@ -49,16 +49,6 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
 }
 
 extension List {
-    public func reloadData() -> Self {
-        tableNode.reloadData()
-        return self
-    }
-    
-    public func reloadData(data:[T]) -> Self {
-        tableNode.dataSourceHelper.dataList = [data]
-        tableNode.reloadData()
-        return self
-    }
     
     public func selectionStyle(_ value: UITableViewCell.SelectionStyle) -> Self {
         tableNode.selectionStyle = value
@@ -199,13 +189,13 @@ extension List {
         return self
     }
     
-    public func tableHeaderView(@ArgoKitViewBuilder headerContent: () -> View) -> Self {
+    public func tableHeaderView(@ArgoKitViewBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         tableNode.tableHeaderNode = container.type.viewNode()
         return self
     }
     
-    public func tableFooterView(@ArgoKitViewBuilder footerContent: () -> View) -> Self {
+    public func tableFooterView(@ArgoKitViewBuilder footerContent: @escaping () -> View) -> Self {
         let container = footerContent()
         tableNode.tableFooterNode = container.type.viewNode()
         return self
@@ -243,6 +233,53 @@ extension List {
     public func dragInteractionEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITableView.dragInteractionEnabled),value)
         return self
+    }
+}
+
+extension List {
+    
+    public func reloadData() {
+        tableNode.reloadData()
+    }
+    
+    public func reloadData(data:[T], sectionHeaderData: T? = nil, sectionFooterData: T? = nil) {
+        tableNode.reloadData(data: [data], sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
+    }
+    
+    public func reloadData(sectionData:[[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil) {
+        tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
+    }
+    
+    public func appendSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, with animation: UITableView.RowAnimation) {
+        tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
+    }
+    
+    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
+        tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: sections, with: animation)
+    }
+    
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        tableNode.deleteSections(sections, with: animation)
+    }
+    
+    public func moveSection(_ section: Int, toSection newSection: Int) {
+        tableNode.moveSection(section, toSection: newSection)
+    }
+    
+    public func appendRows(_ rowData: [T], at section: Int = 0, with animation: UITableView.RowAnimation) {
+        tableNode.appendRows(rowData, at: section, with: animation)
+    }
+    
+    public func insertRows(_ rowData: [T], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableNode.insertRows(rowData, at: indexPaths, with: animation)
+    }
+    
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableNode.deleteRows(at: indexPaths, with: animation)
+    }
+        
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        tableNode.moveRow(at: indexPath, to: newIndexPath)
     }
 }
 
