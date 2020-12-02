@@ -59,30 +59,118 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
 
 extension ArgoKitTableNode {
     
-    open func reloadData() {
-        self.dataSourceHelper.removeAllCache()
-        self.sectionHeaderSourceHelper.removeAllCache()
-        self.sectionFooterSourceHelper.removeAllCache()
+    public func reloadData() {
         self.tableView?.reloadData()
     }
     
-    open func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
-        for section in sections {
-            self.dataSourceHelper.removeCache(at: section)
-            self.sectionHeaderSourceHelper.removeCache(at: section)
-            self.sectionFooterSourceHelper.removeCache(at: section)
+    public func reloadData(data:[[Any]], sectionHeaderData: [Any]? = nil, sectionFooterData: [Any]? = nil) {
+        self.dataSourceHelper.dataList = data
+        if sectionHeaderData != nil {
+            self.sectionHeaderSourceHelper.dataList = [sectionHeaderData!]
         }
+        if sectionFooterData != nil {
+            self.sectionFooterSourceHelper.dataList = [sectionFooterData!]
+        }
+        self.tableView?.reloadData()
+    }
+    
+    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         self.tableView?.reloadSections(sections, with: animation)
     }
 
-    open func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        for indexPath in indexPaths {
-            self.dataSourceHelper.removeCache(indexPath.row, at: indexPath.section)
-        }
+    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.tableView?.reloadRows(at: indexPaths, with: animation)
     }
     
-    open func reloadRowsHeight() {
+    public func appendSections(_ data: [[Any]], sectionHeaderData: [Any]? = nil, sectionFooterData: [Any]? = nil, with animation: UITableView.RowAnimation) {
+        
+        let start = self.dataSourceHelper.dataList?.count ?? 0
+        let end = start + data.count
+        for data in data {
+            self.dataSourceHelper.appendSection(data)
+        }
+        if sectionHeaderData != nil {
+            for data in sectionHeaderData! {
+                self.sectionHeaderSourceHelper.appendRow(rowData: data, at: 0)
+            }
+        }
+        if sectionFooterData != nil {
+            for data in sectionFooterData! {
+                self.sectionFooterSourceHelper.appendRow(rowData: data, at: 0)
+            }
+        }
+        self.tableView?.insertSections(IndexSet(start..<end), with: animation)
+    }
+    
+    public func insertSections(_ sectionData: [[Any]], sectionHeaderData: [Any]? = nil, sectionFooterData: [Any]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
+                
+        for (index, value) in sections.enumerated() {
+            self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
+            
+            if sectionHeaderData != nil {
+                self.sectionHeaderSourceHelper.insertRow(rowData: sectionHeaderData![index], row: value, at: 0)
+            }
+            if sectionFooterData != nil {
+                self.sectionFooterSourceHelper.insertRow(rowData: sectionFooterData![index], row: value, at: 0)
+            }
+        }
+
+        self.tableView?.insertSections(sections, with: animation)
+    }
+    
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        
+        for index in sections {
+            self.dataSourceHelper.deleteSection(index)
+        }
+        self.tableView?.deleteSections(sections, with: animation)
+    }
+    
+    public func moveSection(_ section: Int, toSection newSection: Int) {
+        
+        self.dataSourceHelper.moveSection(section, toSection: newSection)
+        self.tableView?.moveSection(section, toSection: newSection)
+    }
+    
+    public func appendRows(_ rowData: [Any], at section: Int = 0, with animation: UITableView.RowAnimation) {
+        
+        var start = 0
+        if section > self.dataSourceHelper.dataList?.count ?? 0 {
+            start = self.dataSourceHelper.dataList?.count ?? 0
+        } else {
+            start = self.dataSourceHelper.dataList?[section].count ?? 0
+        }
+        var indesPaths = [IndexPath]()
+        for (index, data) in rowData.enumerated() {
+            indesPaths.append(IndexPath(row: start + index, section: section))
+            self.dataSourceHelper.appendRow(rowData: data, at: section)
+        }
+        self.tableView?.insertRows(at: indesPaths, with: animation)
+    }
+    
+    public func insertRows(_ rowData: [Any], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+
+        for (index, indexPath) in indexPaths.enumerated() {
+            self.dataSourceHelper.insertRow(rowData: rowData[index], row: indexPath.row, at: indexPath.section)
+        }
+        self.tableView?.insertRows(at: indexPaths, with: animation)
+    }
+    
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        
+        for indexPath in indexPaths {
+            self.dataSourceHelper.deleteRow(indexPath.row, at: indexPath.section)
+        }
+        self.tableView?.deleteRows(at: indexPaths, with: animation)
+    }
+    
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        
+        self.dataSourceHelper.moveRow(at: indexPath, to: newIndexPath)
+        self.tableView?.moveRow(at: indexPath, to: newIndexPath)
+    }
+    
+    public func reloadRowsHeight() {
         tableView?.beginUpdates()
         tableView?.endUpdates()
     }
@@ -164,7 +252,7 @@ extension ArgoKitTableNode {
         let destinationData = self.dataSourceHelper.dataForRow(destinationIndexPath.row, at: destinationIndexPath.section) ?? NSNull()
         let sel = #selector(self.tableView(_:moveRowAt:to:))
         self.sendAction(withObj: String(_sel: sel), paramter: [sourceData, destinationData, sourceIndexPath, destinationIndexPath])
-        self.dataSourceHelper.moveRow(sourceIndexPath, to: destinationIndexPath)
+        self.dataSourceHelper.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     }
 }
 
