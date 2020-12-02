@@ -349,7 +349,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _bindProperties = [NSMutableDictionary new];
 }
 
-- (void) bindView:(UIView *)view {
+- (void)bindView:(UIView *)view {
     if (![view isKindOfClass:_viewClass]) {
         return;
     }
@@ -475,9 +475,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         _nodeObservers = [NSHashTable weakObjectsHashTable];
     }
     return _nodeObservers;
-}
-
-- (void)prepareForUse{
 }
 
 #pragma mark --- Action ---
@@ -645,6 +642,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 
 @implementation ArgoKitNode(AttributeValue)
+
+- (void)prepareForUse{
+}
+
 - (void)nodeAddViewAttribute:(ViewAttribute *)attribute{
     if (!attribute) {
         return;

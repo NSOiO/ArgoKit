@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol ArgoKitIdentifiable {
-    var reuseIdentifier: String { get set } // 复用标识，用于同样式的UI复用
+    var reuseIdentifier: String {get} // 复用标识，用于同样式的UI复用
 }
 
 extension ArgoKitIdentifiable{
