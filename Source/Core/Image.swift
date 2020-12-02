@@ -12,6 +12,25 @@ class ArgoKitImageNode: ArgoKitNode {
         let temp_size:CGSize = image?.size ?? CGSize.zero
         return temp_size
     }
+    
+    public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?){
+        if let callBack = loadImage {
+            callBack(url,placeHolder){[weak self ]result,retImage in
+                if(result){
+                    if let img = retImage {
+                        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
+                    }
+                }
+            }
+        }
+    }
+    
+    override func prepareForUse() {
+        if let imageView = self.view as? UIImageView {
+            imageView.image = nil
+        }
+    }
+    
 }
 open class Image : View {
     
@@ -90,18 +109,7 @@ extension Image {
     }
     
     public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?)->Self{
-        if let callBack = loadImage {
-            callBack(url,placeHolder){[weak self ]result,retImage in
-                if(result){
-                    if let img = retImage {
-                        if let strongSelf = self {
-                            strongSelf.addAttribute(#selector(setter:UIImageView.image),img)
-                        }
-                       
-                    }
-                }
-            }
-        }
+        pNode.image(url: url, placeHolder: placeHolder, loadImage: loadImage)
         return self
     }
     
