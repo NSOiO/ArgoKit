@@ -157,21 +157,28 @@ extension View{
     }
     public func hidden(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.isHidden),value)
+        return self;
+    }
+    
+    public func display(_ value:Bool)->Self{
+        let display_ = !value
+        addAttribute(#selector(setter:UIView.isHidden),display_)
         if let enable = self.node?.isEnabled {
-            if !enable && !value {
+            if !enable && !display_ {
                 if let node =  self.node?.root{
-                    self.node?.isEnabled = !value
+                    self.node?.isEnabled = !display_
                     ArgoKitReusedLayoutHelper.appLayout(node)
                 }
             }else{
-                self.node?.isEnabled = !value
+                self.node?.isEnabled = !display_
             }
         }else{
-            self.node?.isEnabled = !value
+            self.node?.isEnabled = !display_
         }
       
         return self;
     }
+    
     public func contentMode(_ value:UIView.ContentMode)->Self{
         addAttribute(#selector(setter:UIView.contentMode),value.rawValue)
         return self;
