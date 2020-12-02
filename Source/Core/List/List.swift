@@ -254,28 +254,32 @@ extension List {
         tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
     }
     
-    public func appendRows(_ rowData: [T], at section: Int = 0, with animation: UITableView.RowAnimation) {
-        tableNode.appendRows(rowData, at: section, with: animation)
-    }
-    
-    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at start: Int, with animation: UITableView.RowAnimation) {
-        tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: start, with: animation)
-    }
-    
-    public func insertRows(_ rowData: [T], atStart start: Int, inSection section: Int, with animation: UITableView.RowAnimation) {
-        tableNode.insertRows(rowData, atStart: start, inSection: section, with: animation)
+    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
+        tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: sections, with: animation)
     }
     
     public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         tableNode.deleteSections(sections, with: animation)
     }
     
+    public func moveSection(_ section: Int, toSection newSection: Int) {
+        tableNode.moveSection(section, toSection: newSection)
+    }
+    
+    public func appendRows(_ rowData: [T], at section: Int = 0, with animation: UITableView.RowAnimation) {
+        tableNode.appendRows(rowData, at: section, with: animation)
+    }
+    
+    public func insertRows(_ rowData: [T], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableNode.insertRows(rowData, at: indexPaths, with: animation)
+    }
+    
     public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         tableNode.deleteRows(at: indexPaths, with: animation)
     }
         
-    public func moveRow(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tableNode.moveRow(sourceIndexPath, to: destinationIndexPath)
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        tableNode.moveRow(at: indexPath, to: newIndexPath)
     }
 }
 

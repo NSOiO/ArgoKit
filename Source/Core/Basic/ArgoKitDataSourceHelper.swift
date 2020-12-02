@@ -181,16 +181,37 @@ extension ArgoKitDataSourceHelper {
         dataList?.remove(at: section)
     }
         
-    func moveRow(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-                
-        if sourceIndexPath.section >= dataList?.count ?? 0
-            || sourceIndexPath.row >= dataList?[sourceIndexPath.section].count ?? 0
-            || destinationIndexPath.section >= dataList?.count ?? 0 {
+    
+    func moveSection(_ section: Int, toSection newSection: Int) {
+        
+        if section >= dataList?.count ?? 0 {
             return
         }
         
-        let itemToMove = dataList![sourceIndexPath.section][sourceIndexPath.row]
-        dataList![sourceIndexPath.section].remove(at: sourceIndexPath.row)
-        dataList![destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+        let itemToMove = dataList![section]
+        dataList!.remove(at: section)
+        if newSection > section {
+            dataList!.insert(itemToMove, at: newSection-1)
+        } else {
+            dataList!.insert(itemToMove, at: newSection)
+        }
+    }
+    
+    func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+                
+        if indexPath.section >= dataList?.count ?? 0
+            || indexPath.row >= dataList?[indexPath.section].count ?? 0
+            || newIndexPath.section >= dataList?.count ?? 0 {
+            return
+        }
+        
+        let itemToMove = dataList![indexPath.section][indexPath.row]
+        dataList![indexPath.section].remove(at: indexPath.row)
+        if indexPath.section != newIndexPath.section
+            || newIndexPath.row < indexPath.row {
+            dataList![newIndexPath.section].insert(itemToMove, at: newIndexPath.row)
+        } else {
+            dataList![newIndexPath.section].insert(itemToMove, at: newIndexPath.row-1)
+        }
     }
 }
