@@ -3,12 +3,8 @@ PODS:
     - ArgoAnimation/AnimationCPP (= 0.1.6)
   - ArgoAnimation/AnimationCPP (0.1.6)
   - ArgoKit (1.0.1):
-    - ArgoKit/AnimationKit (= 1.0.1)
     - ArgoKit/Bind (= 1.0.1)
     - ArgoKit/Core (= 1.0.1)
-    - Yoga
-  - ArgoKit/AnimationKit (1.0.1):
-    - ArgoAnimation
     - Yoga
   - ArgoKit/Bind (1.0.1):
     - Yoga
@@ -24,8 +20,6 @@ DEPENDENCIES:
   - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - ArgoAnimation
   trunk:
     - Yoga
 
@@ -40,7 +34,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ArgoAnimation: 6459f65c5a56bb677c78a4c1826d01a2d9ae1528
-  ArgoKit: 3315b9801a9aa2145cd7d57b571d531f394ef3fd
+  ArgoKit: f329f53843842c01ed83e3e856cd762ce4ede333
   ArgoKitPreview: 83c7e00b8934a873f1247c9aa2aeccc4236c9c25
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 

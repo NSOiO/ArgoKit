@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
   spec.name = 'ArgoKit'
-  spec.version = '1.0.1'
+  spec.version = '1.0.2'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
   spec.documentation_url = 'argokit'
@@ -39,13 +39,13 @@ podspec = Pod::Spec.new do |spec|
     s.source_files = 'Source/Bind/**/*.{swift}'
   end
   
-#  spec.subspec 'AnimationKit' do |ani|
-#    ani.name = 'AnimationKit'
-#    ani.dependency 'ArgoAnimation'
-#    ani.source_files = 'Source/AnimationKit/**/*.{h,m,mm,c,cpp,swift}'
-##    ani.public_header_files = 'Source/AnimationKit/*.h', 'Source/AnimationKit/MLAnimator/*.h', 'Source/AnimationKit/MLAnimator/Animations/*.h'
-##    ani.compiler_flags = '-x objective-c++'
-#  end
+  spec.subspec 'AnimationKit' do |ani|
+    ani.name = 'AnimationKit'
+    ani.dependency 'ArgoAnimation'
+    ani.source_files = 'Source/AnimationKit/**/*.{h,m,mm,c,cpp,swift}'
+#    ani.public_header_files = 'Source/AnimationKit/*.h', 'Source/AnimationKit/MLAnimator/*.h', 'Source/AnimationKit/MLAnimator/Animations/*.h'
+#    ani.compiler_flags = '-x objective-c++'
+  end
 
 end
 
