@@ -177,8 +177,7 @@ public class Animation {
         if animation == nil {
             prepareAnimation()
         }
-        // TODO: - update
-//        animation?.update(progress: CGFloat(progress))
+        animation?.update(progress: CGFloat(progress))
         return self
     }
     

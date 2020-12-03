@@ -86,8 +86,7 @@ public class AnimationGroup {
         if animation == nil {
             prepareAnimationGroup()
         }
-        // TODO: - update
-//        animation?.update(progress: CGFloat(progress))
+        animation?.update(progress: CGFloat(progress))
         return self
     }
     

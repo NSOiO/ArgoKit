@@ -1,7 +1,7 @@
 PODS:
-  - ArgoAnimation (0.1.4):
-    - ArgoAnimation/AnimationCPP (= 0.1.4)
-  - ArgoAnimation/AnimationCPP (0.1.4)
+  - ArgoAnimation (0.1.7):
+    - ArgoAnimation/AnimationCPP (= 0.1.7)
+  - ArgoAnimation/AnimationCPP (0.1.7)
   - ArgoKit (1.0.3):
     - ArgoKit/AnimationKit (= 1.0.3)
     - ArgoKit/Bind (= 1.0.3)
@@ -36,7 +36,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ArgoAnimation: 32556b44860b0526700577102246c1e0d76dc93f
+  ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
   ArgoKit: 200ce990a84ecafc48ee6c01277df989d69faf31
   ArgoKitPreview: 83c7e00b8934a873f1247c9aa2aeccc4236c9c25
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
