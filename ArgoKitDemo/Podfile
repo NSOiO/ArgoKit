@@ -8,7 +8,7 @@ use_modular_headers!
 target 'ArgoKitDemo' do
   pod 'ArgoKit', :path=>'../'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => false
   pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => false
-  pod 'ArgoAnimation', :path => '../../../MLNUI/MLN'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => true
+  #pod 'ArgoAnimation', :path => '../../../MLNUI/MLN'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => true
   
 #  pod 'ArgoUI/Kit/AnimationCPP', :git => 'https://github.com/mmdongxin/MLN', :branch => 'dev_iOS_dx_temp'
 #  pod 'ArgoUI/Kit/AnimationKit', :path => '../../MLN/ArgoUI.podspec'
