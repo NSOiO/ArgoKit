@@ -41,6 +41,10 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                      Text("姓名")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
+                        .border(width: 1)
+                        .border(color:.red)
+                        .cornerRadius(4)
+                        .clipsToBounds(true)
                      
                     Image("icybay.jpg")
                         .margin(edge: .left, value: 4)
@@ -317,7 +321,7 @@ class customView: ArgoKit.View  {
 class TabSegmentDemo: ArgoKit.View {
     var body: View {
         TabSegment {
-            Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("AA").textAlign(.center).width(200).height(50).backgroundColor(.blue)
             Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
             Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
             Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)

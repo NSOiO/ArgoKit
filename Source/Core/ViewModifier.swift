@@ -79,7 +79,7 @@ extension ArgoKitNodeViewModifier{
 extension View{
    
     public func addAttribute(isCALayer:Bool = false, _ selector:Selector, _ patamter:Any? ...) {
-        ArgoKitNodeViewModifier._addAttribute_(self.node, selector, patamter)
+        ArgoKitNodeViewModifier._addAttribute_(isCALayer: isCALayer, self.node, selector, patamter)
     }
 }
 
@@ -192,6 +192,8 @@ extension View{
         return self;
     }
     
+
+    
     public func clipsToBounds(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.clipsToBounds),value)
         return self;
@@ -201,7 +203,13 @@ extension View{
         return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
     }
     public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
-        self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
+        if topLeft == topRight &&
+            topLeft ==  bottomLeft &&
+            topLeft ==  bottomRight{
+            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),topLeft)
+        }else{
+            self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
+        }
         return self;
     }
     
@@ -215,7 +223,13 @@ extension View{
         return self;
     }
     
-    public func borderColor(_ value:UIColor)->Self{
+    public func border(width value:CGFloat)->Self{
+        self.node?.borderWidth(value)
+        addAttribute(isCALayer:true,#selector(setter:CALayer.borderWidth),value)
+        return self;
+    }
+    
+    public func border(color value:UIColor)->Self{
         addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
         return self;
     }
@@ -271,3 +285,5 @@ extension ArgoKitNode{
         }
     }
 }
+
+
