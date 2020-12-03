@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
     spec.name = 'ArgoKitPreview'
-    spec.version = '1.0.0'
+    spec.version = '1.0.1'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
     # spec.documentation_url = 'argokit'
@@ -15,14 +15,14 @@ podspec = Pod::Spec.new do |spec|
   
     spec.authors = 'MoMo'
     spec.source = {
-      :git => 'argokit.preview',
+      :git => 'https://git.wemomo.com/module/argokit.git',
       :tag => spec.version.to_s,
     }
   
     spec.platform = :ios
     spec.ios.deployment_target = '10.0'
-    spec.ios.frameworks = 'UIKit'
-    spec.ios.frameworks = 'SwiftUI'
+    spec.ios.frameworks = 'UIKit', 'SwiftUI'
+#    spec.ios.frameworks = 'SwiftUI'
 
   #  spec.default_subspec = "Core"
     # spec.dependency 'Yoga', '~> 1.14'

@@ -1,7 +1,7 @@
 PODS:
-  - ArgoAnimation (0.1.4):
-    - ArgoAnimation/AnimationCPP (= 0.1.4)
-  - ArgoAnimation/AnimationCPP (0.1.4)
+  - ArgoAnimation (0.1.6):
+    - ArgoAnimation/AnimationCPP (= 0.1.6)
+  - ArgoAnimation/AnimationCPP (0.1.6)
   - ArgoKit (1.0.1):
     - ArgoKit/AnimationKit (= 1.0.1)
     - ArgoKit/Bind (= 1.0.1)
@@ -14,21 +14,22 @@ PODS:
     - Yoga
   - ArgoKit/Core (1.0.1):
     - Yoga
-  - ArgoKitPreview (1.0.0):
+  - ArgoKitPreview (1.0.1):
     - ArgoKit
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - ArgoAnimation (from `../../../MLNUI/MLN`)
   - ArgoKit (from `../`)
   - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - ArgoAnimation
-  trunk:
     - Yoga
 
 EXTERNAL SOURCES:
+  ArgoAnimation:
+    :path: "../../../MLNUI/MLN"
   ArgoKit:
     :path: "../"
   ArgoKitPreview:
@@ -36,11 +37,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ArgoAnimation: 32556b44860b0526700577102246c1e0d76dc93f
+  ArgoAnimation: 6459f65c5a56bb677c78a4c1826d01a2d9ae1528
   ArgoKit: 3315b9801a9aa2145cd7d57b571d531f394ef3fd
-  ArgoKitPreview: c20a902a95bd3764af259e0087d9476d8a77b425
+  ArgoKitPreview: 83c7e00b8934a873f1247c9aa2aeccc4236c9c25
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 0c7f9ed889cbfd24d528620309e6ddebd712dca8
+PODFILE CHECKSUM: ece129b968ea53a4b5b735f52a23c0473a9b6c7a
 
 COCOAPODS: 1.10.0

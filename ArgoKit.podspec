@@ -24,6 +24,8 @@ podspec = Pod::Spec.new do |spec|
   spec.ios.frameworks = 'UIKit'
   spec.dependency 'Yoga'
   spec.module_name = 'ArgoKit'
+#  spec.source_files = 'Source/ArgoKit.h'
+#  spec.module_map = 'Source/module.modulemap'
   
   spec.libraries = 'z','c++'
 
