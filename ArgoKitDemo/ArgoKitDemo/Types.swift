@@ -5,7 +5,7 @@
 //  Created by Dai on 2020-11-25.
 //
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && DEBUG
 import ArgoKit
 
 typealias UIHostingController = ArgoKit.UIHostingController
