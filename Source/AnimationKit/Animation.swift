@@ -173,6 +173,15 @@ public class Animation {
     }
     
     @discardableResult
+    public func update(progress: Float) -> Self {
+        if animation == nil {
+            prepareAnimation()
+        }
+        animation?.update(progress: CGFloat(progress))
+        return self
+    }
+    
+    @discardableResult
     public func attach(_ view: View) -> Self {
         if let actualView = view.node?.view {
             attach(actualView)

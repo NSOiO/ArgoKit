@@ -269,11 +269,76 @@ class ListDemo:ArgoKit.View{
     }
 }
 
+
+class customView: ArgoKit.View  {
+    typealias View = ArgoKit.View
+    var hidden:Bool = true
+    var alertView1:AlertView?
+     var aText:ArgoKit.Text?
+    var body: View{
+        VStack {
+           Text("hello aaa")
+           Button() {
+            self.hidden = !self.hidden
+            _ = self.aText?.hidden(self.hidden)
+               print("click1")
+           } builder: {
+               Text("buttonscxdscsdcsd").font(size:20)
+               Text("buttonscxdscsdcsd")
+                  
+           }
+           .flexDirection(.column)
+           .textColor(.purple)
+           .backgroundColor(.clear)
+           .font(size:30)
+           .font(style: .bold)
+           .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
+
+           Button(text: "12345678eeee") {
+               let s = "click + \( String(describing: self.aText?.node?.text()!))"
+               _ = self.aText?.text(s)
+               print("click2")
+           }
+
+           ArgoKit.Toggle(true) { value in
+               print("value is ",value)
+           }
+
+          Text("hello bbbxassxas ")
+          Text("hello ccc").lineLimit(0)
+               .alias(variable: &self.aText)
+            .backgroundColor(.red)
+            .hidden(self.hidden)
+      }.margin(edge: .top, value: 96)
+        .backgroundColor(.cyan)
+    }
+}
+
+class TabSegmentDemo: ArgoKit.View {
+    var body: View {
+        TabSegment {
+            Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("EE").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("FF").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("GG").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+        .select(index: 5)
+        .backgroundColor(.yellow)
+//        .animType(.color)
+//        .animFromValue(.color(.blue))
+//        .animToValue(.color(.yellow))
+    }
+}
+
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
     ListDemo()
     .grow(1)
+//    TabSegmentDemo()
    }
 }
 

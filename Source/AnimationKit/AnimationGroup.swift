@@ -81,6 +81,15 @@ public class AnimationGroup {
         return self
     }
     
+    @discardableResult
+    public func update(progress: Float) -> Self {
+        if animation == nil {
+            prepareAnimationGroup()
+        }
+        animation?.update(progress: CGFloat(progress))
+        return self
+    }
+    
     public func startSerial() {
         prepareAnimationGroup()
         guard let group = animation else {
