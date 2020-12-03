@@ -98,6 +98,7 @@ extension ArgoKitRefreshHeader {
     
     override open func scrollViewContentOffsetDidChange(_ change: [NSKeyValueChangeKey : Any]?) {
         super.scrollViewContentOffsetDidChange(change)
+       
         guard let scrollView = scrollView, var scrollViewOriginalInset = scrollViewOriginalInset else {return}
         // 在刷新的refreshing状态
         if state == .Refreshing {
@@ -119,8 +120,11 @@ extension ArgoKitRefreshHeader {
         let happenOffsetY = -scrollViewOriginalInset.top
         
         // 如果是向上滚动到看不见头部控件，直接返回
-        if offsetY > happenOffsetY {
+        if offsetY >= happenOffsetY {
             return
+        }
+        if let pullingDownBlock = pullingDownBlock {
+            pullingDownBlock(scrollView.argokit_offset)
         }
         // 普通 和 即将刷新 的临界点
         let normal2pullingOffsetY = happenOffsetY - argokit_height

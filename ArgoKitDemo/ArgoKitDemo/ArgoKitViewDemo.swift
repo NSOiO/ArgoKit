@@ -119,29 +119,6 @@ class MSUserInterractionContentView: ArgoKit.View {
     }
 }
 
-class itemView: ArgoKit.View {
-    
-   typealias View = ArgoKit.View
-   var body: ArgoKit.View {
-
-    
-       Image("chincoteague.jpg")
-           .clipsToBounds(true)
-           .backgroundColor(.clear)
-           .width(60.0)
-           .height(60.0)
-           .alignSelf(.center)
-           .margin(edge: .left, value: 10)
-           .margin(edge: .top, value: 10)
-           .margin(edge: .bottom, value: 10)
-           .circle()
-           .onTapGesture {
-           }.isUserInteractionEnabled(true)
-       
-       Text("aaaa33dd")
-   }
-}
-
 
 class TextFieldView: ArgoKit.View {
     typealias View = ArgoKit.View
@@ -184,16 +161,8 @@ class SessionRow:ArgoKit.View {
    init(item:SessionItem) {
        self.item = item
    }
-    init() {
-        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        var item = SessionItem(identifier:String(1), reuseIdentifier:"reuseIdentifier")
-        item.imagePath = images[1]
-        item.sessionName = images[1] + "+\(String(1))"
-        item.lastMessage = messages[1] + "+\(String(1))"
-        self.item = item
-    }
-    var body: View{
+    
+   var body: View{
         MSUserInterractionHeaderView().margin(edge: .top, value: 5)
         MSUserInterractionContentView()
             .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
@@ -213,7 +182,7 @@ class ListDemo:ArgoKit.View{
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         for index in 1..<20{
-            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
+            let item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
@@ -222,15 +191,10 @@ class ListDemo:ArgoKit.View{
             items.append(item)
         }
     }
+    
     var hidden:Bool = false
     
     var body: View{
-//        MSUserInterractionHeaderView().margin(edge: .top, value: 5)
-//        MSUserInterractionContentView()
-//            .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
-//            .cornerRadius(5)
-//            .backgroundColor(UIColor(250,250,250))
-        
         List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
@@ -243,20 +207,27 @@ class ListDemo:ArgoKit.View{
         }
         .refreshHeaderView {
             RefreshHeaderView(startRefreshing: {
-                headerView?.endRefreshing()
+                _ = headerView?.endRefreshing()
             })
             {
                 Text("headerh").alignSelf(.center).lineLimit(0).font(size: 20)
+            }.pullingDown{ point in
+                print("pullingDown\(String(describing: point))")
             }
+            .height(100.0)
             .backgroundColor(.red)
             .alias(variable: &headerView)
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {
-                footerView?.endRefreshing()
-            }){
+//                footerView?.resetNoMoreData()
+                print("footerhead")
+            })
+            {
                 Text("footerhead").alignSelf(.center).lineLimit(0).font(size: 20)
             }
+            .height(100.0)
+            .autoRefreshOffPage(1)
             .backgroundColor(.red)
             .alias(variable: &footerView)
             
@@ -298,65 +269,8 @@ class ListDemo:ArgoKit.View{
     }
 }
 
-class customView: ArgoKit.View  {
-    typealias View = ArgoKit.View
-    var hidden:Bool = true
-    var alertView1:AlertView?
-     var aText:ArgoKit.Text?
-    var body: View{
-        VStack {
-           Text("hello aaa")
-           Button() {
-            self.hidden = !self.hidden
-            _ = self.aText?.hidden(self.hidden)
-               print("click1")
-           } builder: {
-               Text("buttonscxdscsdcsd").font(size:20)
-               Text("buttonscxdscsdcsd")
-                  
-           }
-           .flexDirection(.column)
-           .textColor(.purple)
-           .backgroundColor(.clear)
-           .font(size:30)
-           .font(style: .bold)
-           .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
-
-           Button(text: "12345678eeee") {
-               let s = "click + \( String(describing: self.aText?.node?.text()!))"
-               _ = self.aText?.text(s)
-               print("click2")
-           }
-
-           ArgoKit.Toggle(true) { value in
-               print("value is ",value)
-           }
-
-          Text("hello bbbxassxas ")
-          Text("hello ccc").lineLimit(0)
-               .alias(variable: &self.aText)
-            .backgroundColor(.red)
-            .hidden(self.hidden)
-      }.margin(edge: .top, value: 96)
-        .backgroundColor(.cyan)
-    }
-}
-
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
-    var items = [SessionItem]()
-    init() {
-        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["11","22","33","44","55"]
-        for index in 1..<20{
-            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
-            item.imagePath = images[index%5]
-            item.sessionName = images[index%5] + "+\(String(index))"
-            item.lastMessage = messages[index%5] + "+\(String(index))"
-            item.unreadCount = String(index)
-            items.append(item)
-        }
-    }
    var body:ArgoKit.View{
     ListDemo()
     .grow(1)

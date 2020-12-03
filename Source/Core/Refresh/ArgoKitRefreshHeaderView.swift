@@ -11,19 +11,39 @@ class RefreshHeaderNode:ArgoKitNode{
 
     var refreshingBlock: (() -> ())?
     
+    var pullingDownBlock: ((_ contentOffset:CGPoint?) -> ())?
+    
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let refreshHeaderView:ArgoKitRefreshHeader = ArgoKitRefreshHeader.headerWithRefreshingBlock { [weak self] in
             if let startRefresh = self?.refreshingBlock{
                 startRefresh()
             }
         }
+        let width = self.width()
+        let height = self.height()
+        if height > 0 {
+            refreshHeaderView.height(height)
+        }
+        if width >  0{
+            refreshHeaderView.width(height)
+        }
+        // 添加下拉偏移监听
+        refreshHeaderView.startPullingDownBlock(pullingDownBlock)
+        
         return refreshHeaderView
     }
-    
-    func endRefreshing() {
-        (self.view as! ArgoKitRefreshHeader).endRefreshing()
+    func refreshHeader() -> ArgoKitRefreshHeader?{
+        if let refreshHeader = self.view as? ArgoKitRefreshHeader  {
+           return refreshHeader
+        }
+        return nil
     }
-    
+    func endRefreshing() {
+        self.refreshHeader()?.endRefreshing()
+    }
+    public func pullingDown(_ value:((_ contentOffset:CGPoint?) -> ())?){
+        self.pullingDownBlock = value
+    }
 }
 
 public class RefreshHeaderView: View {
@@ -37,8 +57,13 @@ public class RefreshHeaderView: View {
         addSubNodes(builder:builder)
     }
     
-    public func endRefreshing() {
+    public func pullingDown(_ value:((_ contentOffset:CGPoint?) -> ())?) -> Self{
+        pNode?.pullingDown(value)
+        return self
+    }
+    public func endRefreshing() ->Self {
         pNode?.endRefreshing()
+        return self
     }
     
 }

@@ -26,6 +26,9 @@ open class ArgoKitRefreshComponent: UIView {
    
     //MARK: - 刷新回调
     /// 正在刷新的回调
+    var pullingDownBlock: ((_ contentOffset:CGPoint?) -> ())?
+    
+    /// 正在刷新的回调
     var refreshingBlock: (() -> ())?
     /// 回调对象
     var refreshingTarget: Any?
@@ -156,6 +159,11 @@ extension ArgoKitRefreshComponent {
             }
         }
     }
+    
+    public func startPullingDownBlock(_ pullDownBlock:((_ contentOffset:CGPoint?) -> ())?){
+        pullingDownBlock = pullDownBlock
+    }
+    
     public func beginRefreshingWithCompletionBlock(_ completionBlock: Block) {
         beginRefreshingCompletionBlock = completionBlock
         beginRefreshing()
@@ -177,6 +185,14 @@ extension ArgoKitRefreshComponent {
         // 基本属性
         autoresizingMask = .flexibleWidth
         backgroundColor = UIColor.clear
+    }
+    
+    open func height(_ value:CGFloat){
+        self.argokit_height = value
+    }
+    
+    open func width(_ value:CGFloat){
+        self.argokit_width = value
     }
     ///摆放子控件frame
     @objc open func placeSubviews() {

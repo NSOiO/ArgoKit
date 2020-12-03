@@ -9,6 +9,7 @@ import Foundation
 class RefreshFooterNode:ArgoKitNode{
 
     var refreshingBlock: (() -> ())?
+    var offPage:CGFloat?
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let refreshFooterView:ArgoKitRefreshFooter = ArgoKitRefreshAutoFooter.footerWithRefreshingBlock {  [weak self] in
@@ -16,15 +17,34 @@ class RefreshFooterNode:ArgoKitNode{
                 startRefresh()
             }
         }
+        let width = self.width()
+        let height = self.height()
+        if height > 0 {
+            refreshFooterView.height(height)
+        }
+        if width >  0{
+            refreshFooterView.width(height)
+        }
+        refreshFooterView.triggerAutomaticallyRefreshOffPages = offPage ?? 0
         return refreshFooterView
+    }
+    func refreshFooter() -> ArgoKitRefreshFooter?{
+        if let refreshFooter = self.view as? ArgoKitRefreshFooter{
+           return refreshFooter
+        }
+        return nil
     }
     
     func endRefreshing() {
-        (self.view as! ArgoKitRefreshFooter).endRefreshing()
+        self.refreshFooter()?.endRefreshing()
     }
     
     func resetNoMoreData(){
-        (self.view as! ArgoKitRefreshFooter).resetNoMoreData()
+        self.refreshFooter()?.resetNoMoreData()
+    }
+    
+    func autoRefreshOffPage(_ value:CGFloat){
+        offPage = value
     }
     
 }
@@ -40,12 +60,19 @@ public class RefreshFooterView: View {
         addSubNodes(builder:builder)
     }
     
-    public func endRefreshing() {
+    public func endRefreshing() -> Self {
         pNode?.endRefreshing()
+        return self
     }
     
-    public func resetNoMoreData() {
-        pNode?.endRefreshing()
+    public func resetNoMoreData() -> Self {
+        pNode?.resetNoMoreData()
+        return self
+    }
+    
+    public func autoRefreshOffPage(_ value:CGFloat) -> Self {
+        pNode?.autoRefreshOffPage(value)
+        return self
     }
     
 }
