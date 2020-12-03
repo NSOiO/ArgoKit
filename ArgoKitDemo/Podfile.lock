@@ -2,19 +2,19 @@ PODS:
   - ArgoAnimation (0.1.4):
     - ArgoAnimation/AnimationCPP (= 0.1.4)
   - ArgoAnimation/AnimationCPP (0.1.4)
-  - ArgoKit (1.0.1):
-    - ArgoKit/AnimationKit (= 1.0.1)
-    - ArgoKit/Bind (= 1.0.1)
-    - ArgoKit/Core (= 1.0.1)
+  - ArgoKit (1.0.3):
+    - ArgoKit/AnimationKit (= 1.0.3)
+    - ArgoKit/Bind (= 1.0.3)
+    - ArgoKit/Core (= 1.0.3)
     - Yoga
-  - ArgoKit/AnimationKit (1.0.1):
+  - ArgoKit/AnimationKit (1.0.3):
     - ArgoAnimation
     - Yoga
-  - ArgoKit/Bind (1.0.1):
+  - ArgoKit/Bind (1.0.3):
     - Yoga
-  - ArgoKit/Core (1.0.1):
+  - ArgoKit/Core (1.0.3):
     - Yoga
-  - ArgoKitPreview (1.0.0):
+  - ArgoKitPreview (1.0.1):
     - ArgoKit
   - Yoga (1.14.0)
 
@@ -37,10 +37,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ArgoAnimation: 32556b44860b0526700577102246c1e0d76dc93f
-  ArgoKit: 3315b9801a9aa2145cd7d57b571d531f394ef3fd
-  ArgoKitPreview: c20a902a95bd3764af259e0087d9476d8a77b425
+  ArgoKit: 200ce990a84ecafc48ee6c01277df989d69faf31
+  ArgoKitPreview: 83c7e00b8934a873f1247c9aa2aeccc4236c9c25
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 0c7f9ed889cbfd24d528620309e6ddebd712dca8
+PODFILE CHECKSUM: 2a2fef6ba344639e6ebbd850208872f84995d553
 
 COCOAPODS: 1.10.0

@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
   spec.name = 'ArgoKit'
-  spec.version = '1.0.1'
+  spec.version = '1.0.3'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
   spec.documentation_url = 'argokit'
@@ -24,6 +24,10 @@ podspec = Pod::Spec.new do |spec|
   spec.ios.frameworks = 'UIKit'
   spec.dependency 'Yoga'
   spec.module_name = 'ArgoKit'
+  spec.header_dir = '.'
+
+#  spec.source_files = 'Source/ArgoKit.h'
+#  spec.module_map = 'Source/module.modulemap'
   
   spec.libraries = 'z','c++'
 
