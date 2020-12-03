@@ -13,15 +13,14 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
     
-    public func image(url:String?,loadImage:((_ name:String?,_ block: @escaping (Bool,UIImage?)->())->())?){
-        if let callBack = loadImage {
-            callBack(url){[weak self ]result,retImage in
-                if(result){
-                    if let img = retImage {
-                        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
-                    }
-                }
+    
+    public func image(url:URL?,placeholder: String?){
+        ArgoKitInstance.imageLoader()?.loadImage(url: url, placeHolder: placeholder) { image in
+            if let img = image {
+                ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
             }
+        }failure: {
+            // 图片加载失败
         }
     }
     
@@ -33,10 +32,6 @@ class ArgoKitImageNode: ArgoKitNode {
     
 }
 
-extension Image {
-    
-    public typealias Loader = (_ url:String, _ placeholder:String?, _ completion: @escaping (Bool, UIImage?) -> Void) -> Void
-}
 
 open class Image : View {
     
@@ -55,6 +50,11 @@ open class Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
+    public convenience init(url:URL?,placeholder: String?){
+        self.init(image: nil, highlightedImage: nil)
+        pNode.image(url: url, placeholder: placeholder)
+    }
+    
     public convenience init(_ name: String, bundle: Bundle) {
         let image: UIImage? =  UIImage(named: name, in: bundle, compatibleWith: nil)
         self.init(image: image, highlightedImage: nil)
@@ -69,13 +69,6 @@ open class Image : View {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
     }
     
-    public convenience init(url: String, placeholder: String?, loader: @escaping Image.Loader) {
-        var image: UIImage?
-        if placeholder != nil {
-            image = UIImage(named: placeholder!, in: nil, compatibleWith: nil)
-        }
-        self.init(image: image, highlightedImage: nil)
-    }
     
     required public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         pNode = ArgoKitImageNode(viewClass: UIImageView.self)
@@ -116,14 +109,8 @@ extension Image {
         return self.image(value ?? placeholder)
     }
     
-    public func image(name: String?, placeholder: String?) -> Self {
-        let imageName: String? = name ?? placeholder
-        let image: UIImage? = (imageName != nil) ? UIImage(named: imageName!, in: nil, compatibleWith: nil) : nil
-        return self.image(image)
-    }
-    
-    public func image(url:String?,loadImage:((_ name:String?,_ block: @escaping (Bool,UIImage?)->())->())?)->Self{
-        pNode.image(url: url, loadImage: loadImage)
+    public func image(url:URL?,placeholder: String?)->Self{
+        pNode.image(url: url, placeholder: placeholder)
         return self
     }
     

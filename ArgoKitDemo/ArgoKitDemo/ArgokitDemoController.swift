@@ -28,6 +28,7 @@ public class SessionItem:ArgoKitIdentifiable{
 }
 class ArgokitDemoController:UIViewController{
     let contentView = ArgoKitViewDemo()
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         let argoKitControll = UIHostingController(rootView: contentView)

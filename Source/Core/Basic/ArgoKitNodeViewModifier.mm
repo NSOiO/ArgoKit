@@ -127,7 +127,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         ArgoKitNode *resueNode = reuseNodes[i];
         
         resueNode.linkNode = node;
-        if (!node.view) {
+        if (!node.view && resueNode.isEnabled) {
             [node createNodeViewIfNeed:node.frame];
         }  
         if (!only) {
