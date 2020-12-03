@@ -7,45 +7,6 @@
 
 import Foundation
 
-private var kOriginBounds = "OriginBounds"
-extension UIView {
-    private var _originBounds: CGRect {
-        get {
-            guard let rect = objc_getAssociatedObject(self, &kOriginBounds) as? CGRect else { return .zero }
-            return rect
-        }
-        set {
-            objc_setAssociatedObject(self, &kOriginBounds, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    var originBounds: CGRect {
-        if _originBounds.equalTo(.zero) {
-            _originBounds = self.bounds
-        }
-        return _originBounds
-    }
-}
-
-private var kOriginFontSize = "OriginFontSize"
-extension UILabel {
-    private var _originFontSize: CGFloat? {
-        get {
-            return objc_getAssociatedObject(self, &kOriginFontSize) as? CGFloat
-        }
-        set {
-            objc_setAssociatedObject(self, &kOriginFontSize, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    var originFontSize: CGFloat {
-        if let size = _originFontSize {
-            return size
-        } else {
-            _originFontSize = self.font.pointSize
-            return self.font.pointSize
-        }
-    }
-}
-
 public class TabSegment: View {
     
     // MARK: - Private
@@ -153,6 +114,10 @@ public class TabSegment: View {
     @discardableResult
     public func select(index: Int) -> Self {
         guard _currentIndex != index else {
+            return self
+        }
+        guard index > -1 && index < _contentNodes.count else {
+            assertionFailure("The index is invalid, it should be greater than -1 and less than \(_contentNodes.count) (TabSegment subviews count is \(_contentNodes.count)). ")
             return self
         }
         _currentIndex = index
@@ -272,13 +237,14 @@ public class TabSegment: View {
         }
         
         var left = ItemSpaceValue
-        for item in _contentNodes {
+        for item in _contentNodes { // 调整每个item的frame.origin.x
             if let superview = item.view?.superview {
                 var frame = superview.akAnimationFrame
                 frame.origin.x = CGFloat(left)
                 superview.akAnimationFrame = frame
-                left += Float(frame.size.width) + ItemSpaceValue
-                item.view?.akAnimationFrame = superview.bounds
+                let xScale = superview.layer.sublayerTransform.m11
+                let scaleWidth = xScale * frame.width;
+                left += Float(scaleWidth) + ItemSpaceValue
             }
         }
     }
@@ -317,12 +283,7 @@ public class TabSegment: View {
         
         if let superview = itemView.superview {
             let transform = CGAffineTransform(scaleX: CGFloat(scale), y: CGFloat(scale))
-            superview.bounds = superview.originBounds.applying(transform)
-        }
-        if itemView is UILabel {
-            let label = itemView as! UILabel
-            let fontSize = label.originFontSize * CGFloat(scale)
-            label.font = label.font.withSize(fontSize)
+            superview.layer.sublayerTransform = CATransform3DMakeAffineTransform(transform)
         }
     }
     
@@ -505,6 +466,14 @@ public class TabSegment: View {
     }
     
     private func itemViewCenterX(_ itemIndex: Int) -> Float {
+        let itemNode = _contentNodes[itemIndex]
+        guard let itemStackView = itemNode.view?.superview else {
+            return 0.0
+        }
+        guard _animType == .scale || _animType == .scaleX else {
+            return ViewCenterX(itemStackView)
+        }
+        
         var scale: Float = DefaultScaleToValue
         switch _toValue {
         case .float(let value):
@@ -514,14 +483,8 @@ public class TabSegment: View {
         default:
             break
         }
-        
-        let itemNode = _contentNodes[itemIndex]
-        if let itemSupview = itemNode.view?.superview {
-            let itemWidth = Float(itemSupview.originBounds.width)
-            let xOffset = ItemSpaceValue + Float(itemIndex) * (ItemSpaceValue + itemWidth)
-            let scaleWidth = itemWidth * scale
-            return xOffset + scaleWidth / 2
-        }
-        return 0
+        let itemWidth = Float(itemStackView.frame.width)
+        let xOffset = ItemSpaceValue + Float(itemIndex) * (ItemSpaceValue + itemWidth)
+        return xOffset + itemWidth * scale / 2
     }
 }

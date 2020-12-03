@@ -317,15 +317,28 @@ class customView: ArgoKit.View  {
 class TabSegmentDemo: ArgoKit.View {
     var body: View {
         TabSegment {
-            Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("EE").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("FF").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("GG").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            VStack {
+                Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+                Text("0").textAlign(.center).width(100).height(30).backgroundColor(.blue).font(size: 12)
+            }
+            VStack {
+                Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+                Text("1").textAlign(.center).width(100).height(30).backgroundColor(.blue).font(size: 12)
+            }
+            VStack {
+                Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+                Text("2").textAlign(.center).width(100).height(30).backgroundColor(.blue).font(size: 12)
+            }
+            VStack {
+                Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+                Text("3").textAlign(.center).width(100).height(30).backgroundColor(.blue).font(size: 12)
+            }
+            VStack {
+                Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+                Text("4").textAlign(.center).width(100).height(30).backgroundColor(.blue).font(size: 12)
+            }
         }.margin(top: 100, right: 0, bottom: 0, left: 0)
-        .select(index: 5)
+        .select(index: 2)
         .backgroundColor(.yellow)
 //        .animType(.color)
 //        .animFromValue(.color(.blue))
