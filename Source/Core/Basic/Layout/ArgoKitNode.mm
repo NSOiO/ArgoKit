@@ -316,7 +316,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-    NSLog(@"dealloc");
+    NSLog(@"dealloc %@", self);
 }
 
 - (instancetype)init {

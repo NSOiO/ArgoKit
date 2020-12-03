@@ -342,6 +342,25 @@ class customView: ArgoKit.View  {
     }
 }
 
+class TabSegmentDemo: ArgoKit.View {
+    var body: View {
+        TabSegment {
+            Text("AA").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("EE").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("FF").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+            Text("GG").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+        .select(index: 5)
+        .backgroundColor(.yellow)
+//        .animType(.color)
+//        .animFromValue(.color(.blue))
+//        .animToValue(.color(.yellow))
+    }
+}
+
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
     var items = [SessionItem]()
@@ -360,6 +379,7 @@ class ArgoKitViewDemo:ArgoKit.View  {
    var body:ArgoKit.View{
     ListDemo()
     .grow(1)
+//    TabSegmentDemo()
    }
 }
 
