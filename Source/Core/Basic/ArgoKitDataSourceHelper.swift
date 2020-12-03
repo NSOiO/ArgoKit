@@ -8,42 +8,21 @@
 import Foundation
 
 class ArgoKitDataSourceHelper {
-      
-    lazy var nodeCache: [NSString: ArgoKitCellNode] = { () -> [NSString: ArgoKitCellNode] in
-        NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
-        return [NSString: ArgoKitCellNode]()
-    }()
     
     lazy var registedReuseIdSet = Set<String>()
-    
-    public var nodeList: [[ArgoKitNode]]?
-    
+        
     public var dataList: [[Any]]?
     public var buildNodeFunc: ((Any)->View)?
-    
-    @objc func memoryWarning(notification : Notification) {
-        self.nodeCache.removeAll()
-    }
 }
 
 extension ArgoKitDataSourceHelper {
     
     open func numberOfSection() -> Int {
         
-        if nodeList != nil {
-            return nodeList?.count ?? 1
-        }
         return dataList?.count ?? 1
     }
     
     open func numberOfRows(section: Int) -> Int {
-        
-        if nodeList != nil {
-            if section < nodeList!.count {
-                return nodeList![section].count
-            }
-            return 0
-        }
         
         if section < dataList?.count ?? 0 {
             return dataList![section].count
@@ -51,44 +30,7 @@ extension ArgoKitDataSourceHelper {
         return 0
     }
     
-    open func cacheKeyForRow(_ row: Int, at section: Int) -> String {
-        if nodeList != nil {
-            if section < nodeList!.count
-                && row < nodeList![section].count {
-                if let node = nodeList![section][row] as? ArgoKitIdentifiable {
-                    return node.identifier
-                } else {
-                    let node = nodeList![section][row]
-                    return String("\(node)".hashValue)
-                }
-            }
-            return "defualt"
-        }
-        
-        if section >= dataList?.count ?? 0
-            || row >= dataList?[section].count ?? 0 {
-            return "defualt"
-        }
-        
-        if let item = dataList![section][row] as? ArgoKitIdentifiable {
-            return item.identifier
-        }
-        
-        let item = dataList![section][row]
-        return String("\(item)".hashValue)
-    }
-    
     open func reuseIdForRow(_ row: Int, at section: Int) -> String? {
-        
-        if nodeList != nil {
-            if section < nodeList!.count
-                && row < nodeList![section].count {
-                if let node = nodeList![section][row] as? ArgoKitIdentifiable {
-                    return node.reuseIdentifier
-                }
-            }
-            return nil
-        }
         
         if section >= dataList?.count ?? 0
             || row >= dataList?[section].count ?? 0 {
@@ -108,54 +50,49 @@ extension ArgoKitDataSourceHelper {
             return nil
         }
         
+        if let node = self.dataList![section][row] as? ArgoKitCellNode {
+            return node.cellSourceData
+        }
+        
+        if self.dataList![section][row] is ArgoKitNode {
+            return nil
+        }
         return dataList![section][row]
     }
     
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
-        
-        let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        if let node = self.nodeCache[cacheKey] {
-            return node
-        }
-        
-        if nodeList != nil {
-            if section < nodeList!.count
-                && row < nodeList![section].count {
-                let node = nodeList![section][row]
-                let contentNode = ArgoKitCellNode(viewClass: UIView.self)
-                contentNode.addChildNode(node)
-                self.nodeCache[cacheKey] = contentNode
-                return contentNode
-            }
-            return nil
-        }
         
         if section >= dataList?.count ?? 0
             || row >= dataList?[section].count ?? 0 {
             return nil
         }
 
-        if let view = self.buildNodeFunc?(self.dataList![section][row]) {
+        if let node = self.dataList![section][row] as? ArgoKitCellNode {
+            return node
+        }
+        
+        if let node = self.dataList![section][row] as? ArgoKitNode {
+            let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
+            cellNode.addChildNode(node)
+            self.dataList![section][row] = cellNode
+            return cellNode
+        }
+        
+        let sourceData = self.dataList![section][row]
+        if let view = self.buildNodeFunc?(sourceData) {
             if let nodes = view.type.viewNodes() {
-                let contentNode = ArgoKitCellNode(viewClass: UIView.self)
-                contentNode.addChildNodes(nodes)
-                self.nodeCache[cacheKey] = contentNode
-                return contentNode
+                let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
+                cellNode.addChildNodes(nodes)
+                cellNode.cellSourceData = sourceData;
+                self.dataList![section][row] = cellNode
+                return cellNode
             }
         }
         return nil
     }
     
     open func nodeForRowNoCache(_ row: Int, at section: Int) -> ArgoKitNode? {
-        
-        if nodeList != nil {
-            if section < nodeList!.count
-                && row < nodeList![section].count {
-                return nodeList![section][row]
-            }
-            return nil
-        }
-        
+                
         if section >= dataList?.count ?? 0
             || row >= dataList?[section].count ?? 0 {
             return nil
@@ -184,74 +121,97 @@ extension ArgoKitDataSourceHelper {
 
 extension ArgoKitDataSourceHelper {
     
-    func removeAllCache() {
-        self.nodeCache.removeAll()
-    }
-    
-    func removeCache(at section: Int) {
-        
-        var itemSection: [Any]?
-        if nodeList != nil && section < nodeList!.count {
-            itemSection = nodeList![section]
-        } else if section < dataList?.count ?? 0 {
-            itemSection = dataList![section]
-        }
-    
-        if itemSection != nil && itemSection!.count > 0 {
-            for row in 0..<itemSection!.count {
-                let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-                self.nodeCache.removeValue(forKey: cacheKey)
-            }
-        }
-    }
-    
-    func removeCache(_ row: Int, at section: Int) {
-                
-        let cacheKey = self.cacheKeyForRow(row, at: section) as NSString
-        self.nodeCache.removeValue(forKey: cacheKey)
-    }
-    
-    func deleteRow(_ row: Int, at section: Int) {
-        
-        if nodeList != nil {
-            if section < nodeList!.count
-                && row < nodeList![section].count {
-                removeCache(row, at: section)
-                nodeList![section].remove(at: row)
-            }
+    func appendSection(_ data: [Any]) {
+        if dataList == nil {
+            dataList = [data]
             return
         }
         
+        dataList?.append(data)
+    }
+    
+    func appendRow(rowData: Any, at section: Int) {
+        
+        if dataList == nil {
+            dataList = [[rowData]]
+            return
+        }
+
+        if section >= dataList?.count ?? 0 {
+            dataList?.append([rowData])
+            return
+        }
+        
+        dataList?[section].append(rowData)
+    }
+    
+    func insertSection(data: [Any], section: Int) {
+        
+        if section >= dataList?.count ?? 0 {
+            appendSection(data)
+            return
+        }
+        
+        dataList?.insert(data, at: section)
+    }
+    
+    func insertRow(rowData: Any, row: Int, at section: Int) {
+        
+        if section >= dataList?.count ?? 0
+            || row >= dataList?[section].count ?? 0 {
+            appendRow(rowData: rowData, at: section)
+            return
+        }
+        
+        dataList?[section].insert(rowData, at: row)
+    }
+    
+    func deleteRow(_ row: Int, at section: Int) {
+                
         if section >= dataList?.count ?? 0
             || row >= dataList?[section].count ?? 0 {
             return
         }
         
-        removeCache(row, at: section)
         dataList![section].remove(at: row)
     }
     
-    func moveRow(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func deleteSection(_ section: Int) {
+
+        dataList?.remove(at: section)
+    }
         
-        if nodeList != nil {
-            if sourceIndexPath.section < nodeList!.count
-                && sourceIndexPath.row < nodeList![sourceIndexPath.section].count
-                && destinationIndexPath.section < nodeList!.count {
-                let itemToMove = nodeList![sourceIndexPath.section][sourceIndexPath.row]
-                nodeList![sourceIndexPath.section].remove(at: sourceIndexPath.row)
-                nodeList![destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
-            }
+    
+    func moveSection(_ section: Int, toSection newSection: Int) {
+        
+        if section >= dataList?.count ?? 0 {
             return
         }
         
-        if sourceIndexPath.section >= dataList?.count ?? 0
-            || sourceIndexPath.row >= dataList?[sourceIndexPath.section].count ?? 0
-            || destinationIndexPath.section >= dataList?.count ?? 0 {
+        let itemToMove = dataList![section]
+        dataList!.remove(at: section)
+        if newSection > section {
+            dataList!.insert(itemToMove, at: newSection-1)
+        } else {
+            dataList!.insert(itemToMove, at: newSection)
+        }
+    }
+    
+    func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+                
+        if indexPath.section >= dataList?.count ?? 0
+            || indexPath.row >= dataList?[indexPath.section].count ?? 0
+            || newIndexPath.section >= dataList?.count ?? 0 {
             return
         }
         
-        let itemToMove = dataList![sourceIndexPath.section][sourceIndexPath.row]
-        dataList![sourceIndexPath.section].remove(at: sourceIndexPath.row)
-        dataList![destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+        let itemToMove = dataList![indexPath.section][indexPath.row]
+        dataList![indexPath.section].remove(at: indexPath.row)
+        if indexPath.section != newIndexPath.section
+            || newIndexPath.row < indexPath.row {
+            dataList![newIndexPath.section].insert(itemToMove, at: newIndexPath.row)
+        } else {
+            dataList![newIndexPath.section].insert(itemToMove, at: newIndexPath.row-1)
+        }
     }
 }

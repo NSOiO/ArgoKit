@@ -755,7 +755,7 @@
      
 }
 
-- (void)widthWithAuto{
+- (void)widthAuto{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetWidthAuto(node);
      

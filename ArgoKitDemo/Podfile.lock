@@ -25,6 +25,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - ArgoAnimation
+  trunk:
     - Yoga
 
 EXTERNAL SOURCES:

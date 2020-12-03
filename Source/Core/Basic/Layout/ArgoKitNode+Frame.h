@@ -243,7 +243,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)borderEndWidth:(CGFloat)value;
 - (void)borderWidth:(CGFloat)value;
 
-- (void)widthWithAuto;
+- (void)widthAuto;
 - (void)widthWithPercent:(CGFloat)value NS_SWIFT_NAME(width(percent:));
 - (void)widthWithPoint:(CGFloat)value NS_SWIFT_NAME(width(point:));
 - (CGFloat)width;

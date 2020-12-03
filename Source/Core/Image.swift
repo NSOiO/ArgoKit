@@ -13,15 +13,14 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
     
-    public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?){
-        if let callBack = loadImage {
-            callBack(url,placeHolder){[weak self ]result,retImage in
-                if(result){
-                    if let img = retImage {
-                        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
-                    }
-                }
+    
+    public func image(url:URL?,placeholder: String?){
+        ArgoKitInstance.imageLoader()?.loadImage(url: url, placeHolder: placeholder) { image in
+            if let img = image {
+                ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
             }
+        }failure: {
+            // 图片加载失败
         }
     }
     
@@ -32,6 +31,8 @@ class ArgoKitImageNode: ArgoKitNode {
     }
     
 }
+
+
 open class Image : View {
     
     private var pNode : ArgoKitImageNode
@@ -49,6 +50,11 @@ open class Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
+    public convenience init(url:URL?,placeholder: String?){
+        self.init(image: nil, highlightedImage: nil)
+        pNode.image(url: url, placeholder: placeholder)
+    }
+    
     public convenience init(_ name: String, bundle: Bundle) {
         let image: UIImage? =  UIImage(named: name, in: bundle, compatibleWith: nil)
         self.init(image: image, highlightedImage: nil)
@@ -63,7 +69,8 @@ open class Image : View {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
     }
     
-    public init(image: UIImage?, highlightedImage: UIImage? = nil) {
+    
+    required public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         pNode = ArgoKitImageNode(viewClass: UIImageView.self)
         if let img = image {
             addAttribute(#selector(setter:UIImageView.image),img)
@@ -98,18 +105,12 @@ extension Image {
         return self
     }
     
-    public func image(_ value: UIImage?,placeHolder:UIImage?) -> Self {
-        return self.image(value ?? placeHolder)
+    public func image(_ value: UIImage?, placeholder: UIImage?) -> Self {
+        return self.image(value ?? placeholder)
     }
     
-    public func image(name:String?,placeHolderName:String?)->Self{
-        let imageName:String? = name ?? placeHolderName
-        let image: UIImage? = (imageName != nil) ? UIImage(named: imageName!, in: nil, compatibleWith: nil) : nil
-        return self.image(image)
-    }
-    
-    public func image(url:String?,placeHolder:String?,loadImage:((_ name:String?,_ placeHolderName:String?,_ block: @escaping (Bool,UIImage?)->())->())?)->Self{
-        pNode.image(url: url, placeHolder: placeHolder, loadImage: loadImage)
+    public func image(url:URL?,placeholder: String?)->Self{
+        pNode.image(url: url, placeholder: placeholder)
         return self
     }
     
