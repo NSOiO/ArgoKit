@@ -14,12 +14,12 @@ class ArgoKitImageNode: ArgoKitNode {
     }
     
     
-    public func image(url:URL?,placeholder: String?){
+    public func image(url: URL?, placeholder: String?) {
         ArgoKitInstance.imageLoader()?.loadImage(url: url, placeHolder: placeholder) { image in
             if let img = image {
                 ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
             }
-        }failure: {
+        } failure: {
             // 图片加载失败
         }
     }
@@ -50,7 +50,7 @@ open class Image : View {
         self.init(image: image, highlightedImage: nil)
     }
     
-    public convenience init(url:URL?,placeholder: String?){
+    public convenience init(url: URL?, placeholder: String?) {
         self.init(image: nil, highlightedImage: nil)
         pNode.image(url: url, placeholder: placeholder)
     }
@@ -109,7 +109,7 @@ extension Image {
         return self.image(value ?? placeholder)
     }
     
-    public func image(url:URL?,placeholder: String?)->Self{
+    public func image(url: URL?, placeholder: String?) -> Self {
         pNode.image(url: url, placeholder: placeholder)
         return self
     }

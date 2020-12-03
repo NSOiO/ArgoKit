@@ -31,14 +31,14 @@ extension ArgoKitDataSourceHelper {
     }
     
     open func reuseIdForRow(_ row: Int, at section: Int) -> String? {
-        
-        if section >= dataList?.count ?? 0
-            || row >= dataList?[section].count ?? 0 {
-            return nil
-        }
-        
-        if let item = dataList![section][row] as? ArgoKitIdentifiable {
-            return item.reuseIdentifier
+                
+        if let item = dataForRow(row, at: section) {
+            if let reuseItem = item as? ArgoKitIdentifiable {
+                return reuseItem.reuseIdentifier
+            }
+            if let hashItem = item as? NSObjectProtocol  {
+                return String(hashItem.hash)
+            }
         }
         return nil
     }
@@ -53,10 +53,7 @@ extension ArgoKitDataSourceHelper {
         if let node = self.dataList![section][row] as? ArgoKitCellNode {
             return node.cellSourceData
         }
-        
-        if self.dataList![section][row] is ArgoKitNode {
-            return nil
-        }
+
         return dataList![section][row]
     }
     
@@ -71,14 +68,16 @@ extension ArgoKitDataSourceHelper {
             return node
         }
         
-        if let node = self.dataList![section][row] as? ArgoKitNode {
+        let sourceData = self.dataList![section][row]
+        
+        if let node = sourceData as? ArgoKitNode {
             let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
             cellNode.addChildNode(node)
+            cellNode.cellSourceData = node
             self.dataList![section][row] = cellNode
             return cellNode
         }
         
-        let sourceData = self.dataList![section][row]
         if let view = self.buildNodeFunc?(sourceData) {
             if let nodes = view.type.viewNodes() {
                 let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)

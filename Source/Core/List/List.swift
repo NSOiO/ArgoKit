@@ -18,7 +18,7 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
         tableNode.style = style ?? .plain
     }
     
-    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) {
+    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) where T : ArgoKitNode {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
