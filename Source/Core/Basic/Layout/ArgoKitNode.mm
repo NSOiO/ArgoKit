@@ -13,7 +13,7 @@
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
 #import "ArgoKitNode+Observer.h"
-//#import "UIView+AKFrame.h"
+#import "UIView+AKFrame.h"
 
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
@@ -372,7 +372,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
     UIView *view = [self.viewClass new];
-    view.frame = frame;
+    view.akLayoutFrame = frame;
     return view;
 }
 
@@ -391,8 +391,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
                     observer.createViewBlock(wealSelf.view);
                 }
             }
-        }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
-            wealSelf.view.frame = frame;
+        }else if (!CGRectEqualToRect(frame, wealSelf.view.akLayoutFrame)) {
+            wealSelf.view.akLayoutFrame = frame;
             if (!wealSelf.view.superview) {
                 [wealSelf insertViewToParentNodeView];
             }
