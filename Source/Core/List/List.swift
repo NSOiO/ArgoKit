@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class List<T>: ScrollView where T : ArgoKitIdentifiable {
+public class List<T, HeaderData, FooterData>: ScrollView where T : ArgoKitIdentifiable, HeaderData : ArgoKitIdentifiable, FooterData : ArgoKitIdentifiable {
     
     private var tableNode: ArgoKitTableNode {
         pNode as! ArgoKitTableNode
@@ -26,15 +26,17 @@ public class List<T>: ScrollView where T : ArgoKitIdentifiable {
         }
     }
 
-    public convenience init(_ style: UITableView.Style? = .plain, data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
+    public convenience init(_ style: UITableView.Style? = .plain, data: [T]?, @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
         self.init(style: style)
-        tableNode.dataSourceHelper.dataList = [data]
+        if let rowData = data {
+            tableNode.dataSourceHelper.dataList = [rowData]
+        }
         tableNode.dataSourceHelper.buildNodeFunc = { item in
             return rowContent(item as! T)
         }
     }
     
-    public convenience init(_ style: UITableView.Style? = .plain, sectionData: [[T]], @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
+    public convenience init(_ style: UITableView.Style? = .plain, sectionData: [[T]]?, @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
         self.init(style: style)
         tableNode.dataSourceHelper.dataList = sectionData
         tableNode.dataSourceHelper.buildNodeFunc = { item in
@@ -201,18 +203,22 @@ extension List {
         return self
     }
     
-    public func sectionHeader(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
-        tableNode.sectionHeaderSourceHelper.dataList = [data]
+    public func sectionHeader(_ data: [HeaderData]?, @ArgoKitListBuilder headerContent: @escaping (HeaderData) -> View) -> Self {
+        if let headerData = data {
+            tableNode.sectionHeaderSourceHelper.dataList = [headerData]
+        }
         tableNode.sectionHeaderSourceHelper.buildNodeFunc = { item in
-            return headerContent(item as! T)
+            return headerContent(item as! HeaderData)
         }
         return self
     }
     
-    public func sectionFooter(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
-        tableNode.sectionFooterSourceHelper.dataList = [data]
+    public func sectionFooter(_ data: [FooterData]?, @ArgoKitListBuilder footerContent: @escaping (FooterData) -> View) -> Self {
+        if let footerData = data {
+            tableNode.sectionFooterSourceHelper.dataList = [footerData]
+        }
         tableNode.sectionFooterSourceHelper.buildNodeFunc = { item in
-            return footerContent(item as! T)
+            return footerContent(item as! FooterData)
         }
         return self
     }
@@ -242,19 +248,19 @@ extension List {
         tableNode.reloadData()
     }
     
-    public func reloadData(data:[T], sectionHeaderData: T? = nil, sectionFooterData: T? = nil) {
+    public func reloadData(data:[T], sectionHeaderData: HeaderData? = nil, sectionFooterData: FooterData? = nil) {
         tableNode.reloadData(data: [data], sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
     }
     
-    public func reloadData(sectionData:[[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil) {
+    public func reloadData(sectionData:[[T]], sectionHeaderData: [HeaderData]? = nil, sectionFooterData: [FooterData]? = nil) {
         tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
     }
     
-    public func appendSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, with animation: UITableView.RowAnimation) {
+    public func appendSections(_ data: [[T]], sectionHeaderData: [HeaderData]? = nil, sectionFooterData: [FooterData]? = nil, with animation: UITableView.RowAnimation) {
         tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
     }
     
-    public func insertSections(_ data: [[T]], sectionHeaderData: [T]? = nil, sectionFooterData: [T]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
+    public func insertSections(_ data: [[T]], sectionHeaderData: [HeaderData]? = nil, sectionFooterData: [FooterData]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
         tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: sections, with: animation)
     }
     
@@ -405,12 +411,12 @@ extension List {
         return self
     }
 
-    public func willDisplayHeaderView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func willDisplayHeaderView(_ action: @escaping (_ data: HeaderData, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: T = paramter![0] as! T
+                let data: HeaderData = paramter![0] as! HeaderData
                 let section: Int = paramter![1] as! Int
                 action(data, section)
             }
@@ -419,12 +425,12 @@ extension List {
         return self
     }
 
-    public func willDisplayFooterView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func willDisplayFooterView(_ action: @escaping (_ data: FooterData, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplayFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: T = paramter![0] as! T
+                let data: FooterData = paramter![0] as! FooterData
                 let section: Int = paramter![1] as! Int
                 action(data, section)
             }
@@ -447,12 +453,12 @@ extension List {
         return self
     }
 
-    public func didEndDisplayingHeaderView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func didEndDisplayingHeaderView(_ action: @escaping (_ data: HeaderData, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplayingHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: T = paramter![0] as! T
+                let data: HeaderData = paramter![0] as! HeaderData
                 let section: Int = paramter![1] as! Int
                 action(data, section)
             }
@@ -461,12 +467,12 @@ extension List {
         return self
     }
 
-    public func didEndDisplayingFooterView(_ action: @escaping (_ data: T, _ section: Int) -> Void) -> Self {
+    public func didEndDisplayingFooterView(_ action: @escaping (_ data: FooterData, _ section: Int) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplayingFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: T = paramter![0] as! T
+                let data: FooterData = paramter![0] as! FooterData
                 let section: Int = paramter![1] as! Int
                 action(data, section)
             }
