@@ -201,7 +201,7 @@ class ListDemo:ArgoKit.View{
     var hidden:Bool = false
     
     var body: View{
-        List(data:items){ item in
+        List<SessionItem,SessionItem,SessionItem>(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
         .didSelectRow {item, indexPath in

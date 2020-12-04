@@ -10,7 +10,16 @@ import Foundation
 class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
   
     var contentNode: ArgoKitCellNode?
-        
+      
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .white
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     public func linkCellNode(_ node: ArgoKitCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {

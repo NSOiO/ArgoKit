@@ -7,7 +7,7 @@
 
 import Foundation
 extension ArgoKitNodeViewModifier{
-    class func isDirty(_ selector:Selector) -> Bool {
+    class func getIsDirty(_ selector:Selector) -> Bool {
         var isDirty_ = false
         if selector == #selector(setter:UILabel.text) {
             isDirty_ = true
@@ -38,10 +38,10 @@ extension ArgoKitNodeViewModifier{
         
         return isDirty_;
     }
-    public class func addAttribute(isCALayer:Bool = false,_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
+    public class func addAttribute(isCALayer:Bool = false,isDirty:Bool = false,_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
         ArgoKitNodeViewModifier._addAttribute_(isCALayer:isCALayer,outNode, selector, patamter)
     }
-    public class func _addAttribute_(isCALayer:Bool = false,_ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+    public class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
         if let node = outNode{
             // 获取参数
             var paraList:Array<Any> = Array()
@@ -55,7 +55,10 @@ extension ArgoKitNodeViewModifier{
             }
             
             let attribute = ViewAttribute(selector:selector,paramter:paraList)
-            attribute.isDirty = isDirty(selector)
+            attribute.isDirty = getIsDirty(selector)
+            if isDirty {
+                attribute.isDirty = isDirty
+            }
             attribute.isCALayer = isCALayer
             
             self.setNodeAttribute(node, attribute)
@@ -64,7 +67,7 @@ extension ArgoKitNodeViewModifier{
         }
     }
     
-    class func  setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
+    class func setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
         if let linkNode = node?.link {
              self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
          }else{
@@ -77,8 +80,8 @@ extension ArgoKitNodeViewModifier{
 }
 
 extension View{
-   
-    public func addAttribute(isCALayer:Bool = false, _ selector:Selector, _ patamter:Any? ...) {
+    
+    public func addAttribute(isCALayer:Bool = false,isDirty:Bool = false, _ selector:Selector, _ patamter:Any? ...) {
         ArgoKitNodeViewModifier._addAttribute_(isCALayer: isCALayer, self.node, selector, patamter)
     }
 }
