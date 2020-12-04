@@ -40,28 +40,38 @@ class MSUserInterractionHeaderView: ArgoKit.View {
              
              VStack{
                  HStack{
-                     Text("姓名")
+                    HStack{
+                     Text("姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                        .border(width: 1)
-                        .border(color:.red)
-                        .circle()
-                        .clipsToBounds(true)
-                     
-                    Image("icybay.jpg")
-                        .margin(edge: .left, value: 4)
-                        .width(15.0)
-                        .height(15.0)
-                     
-                     Spacer()
+                         .shrink(1.0)
+                        
+                        Button(action: {
+                            
+                        }){
+                            Image("icybay.jpg")
+                                .margin(edge: .left, value: 4)
+                                .width(15.0)
+                                .height(15.0)
+                        }
+                        .backgroundColor(.red)
+                        .alignSelf(.center)
+                        .padding(top: 7, right: 7, bottom: 7, left: 7)
+     
+                    }.basis(1.0)
+                    
+//                     Spacer()
                      
                      Text("10.0千米")
                          .textAlign(.right)
                          .font(size: 13)
                          .textColor(UIColor(170,170,170))
-                         .margin(edge: .right, value: 15)
+                        .backgroundColor(.yellow)
+                    
                  }.margin(edge: .left, value: 4)
                  .width(100%)
+                 
+                
                  
                  Text("他在陌陌很有人气")
                      .textAlign(.left)
@@ -71,6 +81,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                      .margin(edge: .right, value: 15)
                      .margin(edge: .left, value: 4)
              }.grow(1)
+             .width(0)
          }
     }
 }
@@ -170,6 +181,9 @@ class SessionRow:ArgoKit.View {
     
    var body: View{
         MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+        .onTapGesture {[data = self.item] in
+            print(data)
+        }
         MSUserInterractionContentView()
             .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
             .cornerRadius(5)
@@ -344,9 +358,52 @@ class customView: ArgoKit.View  {
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-    ListDemo()
-    .grow(1)
+//    ListDemo()
+//    .grow(1)
 //    TabSegmentDemo()
+    
+    HStack{
+        
+       HStack{
+        
+        Text("姓名姓名姓名姓名s姓名姓名姓名姓名s姓名姓名姓名姓名s")
+            .textColor(UIColor(50,51,51))
+            .font(size: 16.0)
+            .shrink(1.0)
+        ForEach(0..<1){ item in
+            Image("icybay.jpg")
+                .margin(edge: .left, value: 4)
+                .width(15.0)
+                .height(15.0)
+               .alignSelf(.center)
+        }.flexDirection(.row)
+        .margin(edge: .left, value: 4)
+        .margin(edge: .right, value: 4)
+        .alignSelf(.center)
+       
+       }
+       .flex(1)
+//       .grow(1)
+//       .shrink(1)
+//       .basis(1)
+      
+//        Spacer().basis(1)
+        
+        Text("10.0千米")
+            .textAlign(.right)
+            .font(size: 13)
+            .textColor(UIColor(170,170,170))
+           .backgroundColor(.yellow)
+         
+            
+       
+    }
+    .margin(edge: .left, value: 4)
+    .margin(edge: .top, value: 104)
+    .width(100%)
+    .height(50)
+    .backgroundColor(.purple)
+    
    }
 }
 

@@ -89,15 +89,7 @@ class ArgoKitTextNode: ArgoKitNode {
             lable.lineBreakMode = self.lineBreakMode()
             result = lable.sizeThatFits(size)
         }
-//        if lineSpacing > 0 && linenumber != 1 && floor(result.height) <= CGFloat(ceilf(lineHeight)) + lineSpacing {
-//            let oldLineSpacing = lineSpacing;
-//            lineSpacing = 0
-//            cleanLineSpacing()
-//            lineSpacing = oldLineSpacing;
-//            result.height -= lineSpacing;
-//        }
-//        result.width = ceil(result.width)
-//        result.height = ceil(result.height)
+        
         return result
     }
 }

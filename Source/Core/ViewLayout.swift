@@ -304,7 +304,7 @@ extension View{
 }
 
 extension View{
-    fileprivate func flex(_ value:CGFloat)->Self{
+    public func flex(_ value:CGFloat)->Self{
         self.node?.flex(value);
         return self;
     }
