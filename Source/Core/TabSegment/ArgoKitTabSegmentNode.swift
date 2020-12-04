@@ -8,9 +8,7 @@
 import Foundation
 
 class ArgoKitTabSegmentNode: ArgoKitNode {
-    
-    var contentNode: ArgoKitNode?
-    
+
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let view = UIScrollView(frame: frame)
         view.showsHorizontalScrollIndicator = false

@@ -82,9 +82,20 @@ public class AnimationGroup {
     }
     
     @discardableResult
-    public func update(progress: Float) -> Self {
+    public func updateSerial(progress: Float) -> Self {
         if animation == nil {
             prepareAnimationGroup()
+            animation?.runSequentially(rawAnimations)
+        }
+        animation?.update(progress: CGFloat(progress))
+        return self
+    }
+    
+    @discardableResult
+    public func updateConcurrent(progress: Float) -> Self {
+        if animation == nil {
+            prepareAnimationGroup()
+            animation?.runTogether(rawAnimations)
         }
         animation?.update(progress: CGFloat(progress))
         return self

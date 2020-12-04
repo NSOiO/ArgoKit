@@ -323,30 +323,35 @@ class customView: ArgoKit.View  {
 }
 
 class TabSegmentDemo: ArgoKit.View {
+
     var body: View {
-        TabSegment {
-            Text("AA").textAlign(.center).width(200).height(50).backgroundColor(.blue)
-            Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("EE").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("FF").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-            Text("GG").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-        }.margin(top: 100, right: 0, bottom: 0, left: 0)
-        .select(index: 2)
+        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { data in
+            Text(data as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
+        }
+        .margin(top: 100, right: 0, bottom: 0, left: 0)
+        .select(index: 0)
         .backgroundColor(.yellow)
-//        .animType(.color)
-//        .animFromValue(.color(.blue))
-//        .animToValue(.color(.yellow))
+        .animType(.color)
+        .animFromValue(.color(.blue))
+        .animToValue(.color(.green))
+        
+        TabSegment(["AA", "BB", "CC", "DD", "EE"])  { 
+            Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
+        }
+        .margin(top: 100, right: 0, bottom: 0, left: 0)
+        .backgroundColor(.yellow)
+        .clickedCallback { (index, anim) in
+            print("====== index: \(index), ==== anim: \(anim)")
+        }
     }
 }
 
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-    ListDemo()
-    .grow(1)
-//    TabSegmentDemo()
+//    ListDemo()
+//    .grow(1)
+    TabSegmentDemo()
    }
 }
 
