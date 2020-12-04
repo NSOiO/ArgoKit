@@ -205,10 +205,12 @@ class ListDemo:ArgoKit.View{
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
         .didSelectRow {item, indexPath in
-            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
-                print(text ?? "")
-            }.cancel(title: "取消") {}
+            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert)
             .textField()
+            .destructive(title: "确认") { text in
+                print(text ?? "")
+            }
+            .cancel(title: "取消") {}
             .show()
         }
         .refreshHeaderView {
