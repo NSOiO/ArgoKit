@@ -13,7 +13,7 @@ struct TestModel {
     @Property var title: String
 }
 
-struct ContentView:View {
+class ContentView:View {
     var pNode = ArgoKitNode(viewClass: UIView.self)
     var node: ArgoKitNode?{
         pNode
@@ -21,11 +21,17 @@ struct ContentView:View {
     let items = ["查查","cscs","122e"]
     let images:Array<UIImage> = Array([UIImage(named: "turtlerock")!])
     var model: TestModel
+    @Property var title: String = "dsdsd"
     init() {
         model = TestModel(title: "hahah")
     }
     var body:View{
-        Text(model.title).textAlign(.center)
+        Text("")
+            .text(title)
+            .textAlign(.center)
+            .margin(edge: .top, value: 100).onTapGesture {
+                self.title = "dasada"
+            }
 //        Slider(value: 0.7,in:-1...1,onValueChanged: { value in
 //            print("UISlider ", value)
 //        }).width(200).height(30)
