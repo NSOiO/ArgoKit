@@ -13,7 +13,7 @@
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
 #import "ArgoKitNode+Observer.h"
-#import "UIView+AKFrame.h"
+#import <ArgoAnimation/UIView+AKFrame.h>
 
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
