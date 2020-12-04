@@ -13,6 +13,23 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     if (object == nil) {
         return;
     }
+    // 一个nsvalue类型参数
+    if (values.count == 1 && ![values.firstObject isKindOfClass:[NSValue class]]) {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+          [object performSelector:selector withObject:values.firstObject];
+        #pragma clang diagnostic pop
+        return;
+    }
+    // 两个非nsvalue类型参数
+    if (values.count == 2 && ![values.firstObject isKindOfClass:[NSValue class]] && ![values.lastObject isKindOfClass:[NSValue class]]) {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+          [object performSelector:selector withObject:values.firstObject withObject:values.lastObject];
+        #pragma clang diagnostic pop
+        return;
+    }
+    
     NSMethodSignature *methodSignate = [[object class] instanceMethodSignatureForSelector:selector];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignate];
     invocation.target = object;
@@ -28,7 +45,9 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         NSString *argumentTypeString = [NSString stringWithUTF8String:argumentType];
         if ([argumentTypeString isEqualToString:@"@"]) { // id
             [invocation setArgument:&obj atIndex:i + 2];
-        }  else if ([argumentTypeString isEqualToString:@"B"]) { // bool
+        } else if([argumentTypeString isEqualToString:@"^{CGColor=}"]){
+            [invocation setArgument:&obj atIndex:i + 2];
+        } else if ([argumentTypeString isEqualToString:@"B"]) { // bool
             bool objVaule = [obj boolValue];
             [invocation setArgument:&objVaule atIndex:i + 2];
         } else if ([argumentTypeString isEqualToString:@"f"]) { // float

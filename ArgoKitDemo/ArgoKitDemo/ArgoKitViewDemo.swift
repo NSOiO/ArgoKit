@@ -23,8 +23,10 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                 Image("icybay.jpg").width(50.0)
                 .height(50.0)
                 .margin(edge: .left, value: 15.0)
-                .circle()
+                .cornerRadius(10)
                 .backgroundColor(.red)
+                    .border(width: 1)
+                    .border(color:.cyan)
                 
                 Image("")
                     .height(12.0)
@@ -43,7 +45,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                          .font(size: 16.0)
                         .border(width: 1)
                         .border(color:.red)
-                        .cornerRadius(4)
+                        .circle()
                         .clipsToBounds(true)
                      
                     Image("icybay.jpg")
