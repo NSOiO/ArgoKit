@@ -138,7 +138,7 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 
 
 @interface ArgoKitNode(Hierarchy)
-- (void)addChildNode:(ArgoKitNode *)node;
+- (void)addChildNode:(nullable ArgoKitNode *)node;
 - (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes;
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index;
 - (void)removeFromSuperNode;

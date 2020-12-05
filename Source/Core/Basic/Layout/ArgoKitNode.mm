@@ -621,8 +621,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if(self.parentNode){
         [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
-        self.parentNode = nil;
         YGNodeRemoveChild(self.parentNode.layout.ygnode, self.layout.ygnode);
+        self.parentNode = nil;
     }
 }
 - (void)removeAllChildNodes {

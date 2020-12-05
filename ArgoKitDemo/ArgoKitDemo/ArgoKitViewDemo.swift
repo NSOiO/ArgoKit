@@ -362,14 +362,36 @@ class ArgoKitViewDemo:ArgoKit.View  {
 //    .grow(1)
 //    TabSegmentDemo()
     
+    
+    
     HStack{
-        
+
        HStack{
         
-        Text("姓名姓名姓名姓名s姓名姓名姓名姓名s姓名姓名姓名姓名s")
-            .textColor(UIColor(50,51,51))
+        Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
             .font(size: 16.0)
+            .backgroundColor(.cyan)
+            .textColor(.red)
             .shrink(1.0)
+        Button {
+            
+        } builder: {
+            Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
+                .font(size: 16.0)
+                .backgroundColor(.cyan)
+                .textColor(.red)
+                .shrink(1.0).alignSelf(.center)
+        }.textColor(.orange)
+        .shrink(1.0)
+
+        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
+            
+        }
+            .font(size: 26.0)
+            .backgroundColor(.cyan)
+            .textColor(.red)
+            .shrink(1.0)
+        
         ForEach(0..<1){ item in
             Image("icybay.jpg")
                 .margin(edge: .left, value: 4)
@@ -380,29 +402,23 @@ class ArgoKitViewDemo:ArgoKit.View  {
         .margin(edge: .left, value: 4)
         .margin(edge: .right, value: 4)
         .alignSelf(.center)
-       
        }
        .flex(1)
-//       .grow(1)
-//       .shrink(1)
-//       .basis(1)
-      
-//        Spacer().basis(1)
+        
         
         Text("10.0千米")
             .textAlign(.right)
             .font(size: 13)
             .textColor(UIColor(170,170,170))
            .backgroundColor(.yellow)
-         
             
        
     }
     .margin(edge: .left, value: 4)
     .margin(edge: .top, value: 104)
     .width(100%)
-    .height(50)
     .backgroundColor(.purple)
+
     
    }
 }
