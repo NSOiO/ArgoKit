@@ -360,6 +360,7 @@ class ArgoKitViewDemo:ArgoKit.View  {
    var body:ArgoKit.View{
 //    ListDemo()
 //    .grow(1)
+<<<<<<< HEAD
 //    TabSegmentDemo()
     
     HStack{
