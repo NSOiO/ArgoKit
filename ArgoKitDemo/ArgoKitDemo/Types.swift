@@ -44,5 +44,7 @@ typealias TextField = ArgoKit.TextField
 typealias TextView = ArgoKit.TextView
 typealias TabSegment = ArgoKit.TabSegment
 
+//typealias SessionItem = ArgoKit.SessionItem
+
 #endif
 

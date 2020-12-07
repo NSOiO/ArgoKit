@@ -179,7 +179,7 @@ class SessionRow:ArgoKit.View {
        self.item = item
    }
     
-   var body: View{
+    var body: ArgoKit.View{
         MSUserInterractionHeaderView().margin(edge: .top, value: 5)
         .onTapGesture {[data = self.item] in
             print(data)
@@ -214,7 +214,7 @@ class ListDemo:ArgoKit.View{
     
     var hidden:Bool = false
     
-    var body: View{
+    var body: ArgoKit.View{
         List<SessionItem,SessionItem,SessionItem>(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
@@ -297,7 +297,7 @@ class customView: ArgoKit.View  {
     var hidden:Bool = true
     var alertView1:AlertView?
      var aText:ArgoKit.Text?
-    var body: View{
+    var body: ArgoKit.View{
         VStack {
            Text("hello aaa")
            Button() {
@@ -337,7 +337,7 @@ class customView: ArgoKit.View  {
 }
 
 class TabSegmentDemo: ArgoKit.View {
-    var body: View {
+    var body: ArgoKit.View {
         TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
             Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
         }.margin(top: 100, right: 0, bottom: 0, left: 0)
