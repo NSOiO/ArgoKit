@@ -64,6 +64,8 @@ open class UIHostingController:UIViewController{
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
+        self.edgesForExtendedLayout = UIRectEdge.init()
+        
         rootView = HostView(self.view){
             rootView_!.grow(1)
         }

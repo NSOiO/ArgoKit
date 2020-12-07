@@ -45,6 +45,8 @@ class PreviewDemo: ArgoKit.View {
                 .lineLimit(0)
                 .alias(variable: &self.model.label)
                 .margin(edge: .bottom, value: 20)
+                .backgroundColor(.red)
+                .textAlign(.center)
             
             Button {
                 print("click")

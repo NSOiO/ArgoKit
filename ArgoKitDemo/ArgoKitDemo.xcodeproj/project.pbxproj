@@ -43,6 +43,7 @@
 		FA51A0AB255D17F9005BE240 /* LandmarkRow1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AA255D17F9005BE240 /* LandmarkRow1.swift */; };
 		FA51A0B0255D1804005BE240 /* LandmarkRow2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */; };
 		FA5709BD25765303004A0EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
+		FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */; };
 		FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE290F9256F505A0012989F /* PreviewDemo.swift */; };
 		FAE29115256F54650012989F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE29114256F54650012989F /* Types.swift */; };
 		FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */; };
@@ -117,6 +118,7 @@
 		FAE29114256F54650012989F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitViewDemo.swift; sourceTree = "<group>"; };
 		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
+		FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo1ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -293,10 +295,19 @@
 		FAE29113256F54570012989F /* Previews */ = {
 			isa = PBXGroup;
 			children = (
+				FAF06A07257E0B2700EF1EDA /* TestCases */,
 				FAE290F9256F505A0012989F /* PreviewDemo.swift */,
 				FAE29114256F54650012989F /* Types.swift */,
 			);
 			name = Previews;
+			sourceTree = "<group>";
+		};
+		FAF06A07257E0B2700EF1EDA /* TestCases */ = {
+			isa = PBXGroup;
+			children = (
+				FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */,
+			);
+			path = TestCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,6 +500,7 @@
 				FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */,
 				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
 				FAF6E61D254FB20E0028A5C7 /* Demo1ContentView.swift in Sources */,
+				FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */,
 				FA5164FE255BB99E005BE240 /* LandmarkDetail.swift in Sources */,
 				FA5164FC255BB99E005BE240 /* Data.swift in Sources */,
 			);
