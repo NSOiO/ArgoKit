@@ -26,12 +26,11 @@ public class TabSegment: View {
     private var _fromValue: AnimationValue?
     private var _toValue: AnimationValue?
     private var _isDoingAnimation = false
-    private var _previousScrollProgress: Float = 0
     private var _scaleAnimationProgress: Float = 0.0
     private var _animCache: [AnyHashable:Array<Any>] = [:]
     
-    private var _previousIndex: Int = -1
-    private var _currentIndex: Int = -1
+    private var _fromIndex: Int = -1
+    private var _toIndex: Int = 0
     private var _displayLink: CADisplayLink?
     private var _clickCallback: ((Int,Bool)->Void)?
     
@@ -101,33 +100,26 @@ public class TabSegment: View {
     
     @discardableResult
     public func select(index: Int) -> Self {
-        guard _currentIndex != index else {
+        guard _toIndex != index else {
             return self
         }
         guard index > -1 && index < _contentNodes.count else {
             assertionFailure("The index is invalid, it should be greater than -1 and less than \(_contentNodes.count) (TabSegment subviews count is \(_contentNodes.count)). ")
             return self
         }
-        _currentIndex = index
+        _toIndex = index
         return self
     }
     
     @discardableResult
     public func scroll(toIndex: Int, progress: Float) -> Self {
-        if _currentIndex < 0 {
+        if _fromIndex == toIndex {
             return self
         }
-        if _previousScrollProgress < 0 && progress < 0 {
-            return self
-        }
-        if _previousScrollProgress > 1.0 && progress > 1.0 {
-            return self
-        }
-        _previousScrollProgress = progress
-        updateContentUI(_previousIndex, toIndex, max(min(1, progress), 0), false)
-        if progress >= 1 {
-            _previousIndex = _currentIndex
-            _currentIndex = toIndex
+        updateContentUI(_fromIndex, toIndex, max(min(1, progress), 0), false)
+        if progress >= 0.999 {
+            _fromIndex = _toIndex
+            _toIndex = toIndex
         }
         return self
     }
@@ -184,33 +176,25 @@ public class TabSegment: View {
     }
     
     private func clickContentItem(_ index: Int?, _ anim: Bool) {
-        if index == _currentIndex || _isDoingAnimation {
+        if index == _toIndex || _isDoingAnimation {
             return
         }
-        if _currentIndex < 0 {
-            _currentIndex = 0 // default is 0
-        }
-        let toIndex = index ?? _currentIndex
+        let toIndex = index ?? _toIndex
         if let callback = _clickCallback {
             callback(toIndex, anim)
         }
-        _previousIndex = _currentIndex
-        _currentIndex = toIndex
-        updateContentUI(_previousIndex, toIndex, 1.0, anim)
+        _fromIndex = _toIndex
+        _toIndex = toIndex
+        updateContentUI(_fromIndex, toIndex, 1.0, anim)
     }
     
     private func updateContentUI(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
+        print("==== update from: \(fromIndex) === to: \(toIndex) == progress: \(progress)")
+        
         if _animType == .scale || _animType == .scaleX {
-            prepareContentItemViewScaleAnimation(autoAnim, progress)
+            prepareContentItemViewScaleAnimation(fromIndex, toIndex, progress, autoAnim)
         } else {
-            if fromIndex > -1 {
-                let old = _contentNodes[fromIndex]
-                doContentItemViewOtherAnimation(old.view, false, progress, autoAnim)
-            }
-            if toIndex > -1 {
-                let new = _contentNodes[toIndex]
-                doContentItemViewOtherAnimation(new.view, true, progress, autoAnim)
-            }
+            doContentItemViewOtherAnimation(fromIndex, toIndex, progress, autoAnim)
         }
         doProgressBarAnimation(fromIndex, toIndex, progress, autoAnim)
         doScrollViewContentOffsetAnimation(toIndex, progress, autoAnim)
@@ -238,12 +222,12 @@ public class TabSegment: View {
     }
     
     // MARK: - Scale Animation
-    private func prepareContentItemViewScaleAnimation(_ autoAnim: Bool, _ progress: Float) {
+    private func prepareContentItemViewScaleAnimation(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
         if autoAnim {
             removeScaleAnimationDisplayLink()
             createScaleAnimationDisplayLink()
         } else {
-            updateItemViewScaleAnimation(progress)
+            updateItemViewScaleAnimation(fromIndex, toIndex, progress)
         }
     }
 
@@ -267,17 +251,17 @@ public class TabSegment: View {
         } else {
             _scaleAnimationProgress += 0.07
             _scaleAnimationProgress = max(0.0, min(_scaleAnimationProgress, 1.0))
-            updateItemViewScaleAnimation(_scaleAnimationProgress)
+            updateItemViewScaleAnimation(_fromIndex, _toIndex, _scaleAnimationProgress)
         }
     }
     
-    private func updateItemViewScaleAnimation(_ progress: Float) {
-        if _previousIndex > -1 {
-            let old = _contentNodes[_previousIndex]
+    private func updateItemViewScaleAnimation(_ fromIndex: Int, _ toIndex: Int, _ progress: Float) {
+        if fromIndex > -1 {
+            let old = _contentNodes[fromIndex]
             doContentItemViewScaleAnimation(old.view, false, progress)
         }
-        if _currentIndex > -1 {
-            let new = _contentNodes[_currentIndex]
+        if toIndex > -1 {
+            let new = _contentNodes[toIndex]
             doContentItemViewScaleAnimation(new.view, true, progress)
         }
         
@@ -333,45 +317,52 @@ public class TabSegment: View {
     }
     
     // MARK: - Other Animation
-    private func doContentItemViewOtherAnimation(_ itemView: UIView?, _ positive: Bool, _ progress: Float, _ autoAnim: Bool) {
-        guard let view = itemView else { return }
+    private func doContentItemViewOtherAnimation(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
         guard _animType != .scale && _animType != .scaleX else {
             assertionFailure("The scale animation of TabSegment should implement by using Timer.")
             return
         }
-        guard let to = _toValue else {
+        guard let toValue = _toValue else {
             assertionFailure("You must call `animToValue` method firstly.")
             return
         }
-        
-        var cachAnim: Animation?
-        if let cache = _animCache[itemView] {
-            cachAnim = cache.first as? Animation
-        } else {
-            cachAnim = Animation(type: _animType)
-            cachAnim?.attach(view)
-            _animCache[itemView] = [cachAnim!]
+
+        let startAnimation = { [self] (index: Int, from: AnimationValue?, to: AnimationValue) in
+            if let view = _contentNodes[index].view {
+                var cachAnim: Animation?
+                if let cache = _animCache[view] {
+                    cachAnim = cache.first as? Animation
+                } else {
+                    cachAnim = Animation(type: _animType)
+                    cachAnim?.attach(view)
+                    _animCache[view] = [cachAnim!]
+                }
+                if let anim = cachAnim {
+                    resolveValuesForAnimation(anim, from, to)
+                    if autoAnim {
+                        anim.duration(AnimationDuration)
+                        anim.start()
+                    } else {
+                        anim.update(progress: progress)
+                    }
+                }
+            }
         }
-        guard let anim = cachAnim else { return }
         
-        if positive {
-            resolveValuesForAnimation(anim, _fromValue, to)
-        } else {
+        if fromIndex > -1 {
             var from = _fromValue
             if (from == nil) {
-                if let view = _contentNodes[_currentIndex].view {
+                if let view = _contentNodes[toIndex].view {
                     from = currentAnimationValueForView(view)
                 }
             }
-            guard let value = from else { return }
-            resolveValuesForAnimation(anim, to, value)
+            let newFromValue = toValue
+            guard let newToValue = from else { return }
+            startAnimation(fromIndex, newFromValue, newToValue)
         }
         
-        if autoAnim {
-            anim.duration(AnimationDuration)
-            anim.start()
-        } else {
-            anim.update(progress: progress)
+        if toIndex > -1 {
+            startAnimation(toIndex, _fromValue, toValue)
         }
     }
     

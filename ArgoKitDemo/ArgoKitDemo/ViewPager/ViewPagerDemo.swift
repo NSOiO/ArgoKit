@@ -69,11 +69,21 @@ struct ViewPage1 : ArgoKit.View {
             }
             
             item.text = "test>>>>>>>>" + String(index) + ""
-
         }
     }
     
+    let tab = TabSegment(["A", "B", "C", "D", "E"]) {
+        Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
+    }
+    
     var body: ArgoKit.View {
+        
+        tab
+            .margin(top: 100, right: 0, bottom: 0, left: 0)
+            .backgroundColor(.yellow)
+            .clickedCallback { (index, anim) in
+                
+            }
         
         ArgoKit.HStack {
             ArgoKit.ViewPage(data: items) { item in
@@ -82,11 +92,16 @@ struct ViewPage1 : ArgoKit.View {
             .grow(1)
             .height(300)
             .backgroundColor(UIColor.orange)
-//            .reuseEnable(enable: false)
+            .reuseEnable(enable: false)
             .scrollToPage(index: 2)
 //            .scrollEnable(enable: false)
             .setTabScrollingListener { (percent, from, to) in
-                NSLog("%f - %d - %d", percent, from, to)
+                let value = Float(percent) - Float(from)
+//                if Float(percent) >= Float(from) {
+//                    value = 1
+//                }
+                NSLog("percent: %f == from:%d == to:%d", value, from, to)
+                self.tab.scroll(toIndex: to, progress: Float(value))
             }
             .onChangeSelected { (item, to) in
                 NSLog(">>> %d", to)
