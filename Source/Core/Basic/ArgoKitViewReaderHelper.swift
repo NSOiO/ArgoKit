@@ -118,7 +118,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
                 }else{
                     view.layer.shadowOpacity = shadowOpacity;
                 }
-//                view.layer.shadowPath = shadowPath?.cgPath
+                view.layer.shadowPath = shadowPath?.cgPath
             }else{
                 ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowColor),shadowColor?.cgColor)
                 ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowOffset),shadowOffset)
@@ -128,7 +128,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
                 }else{
                     ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowOpacity),shadowOpacity)
                 }
-//                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowPath),shadowPath?.cgPath)
+                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowPath),shadowPath?.cgPath)
             }
         }
     }

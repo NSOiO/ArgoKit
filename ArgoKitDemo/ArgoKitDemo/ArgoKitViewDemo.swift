@@ -374,21 +374,24 @@ class ArgoKitViewDemo:ArgoKit.View  {
             .textColor(.red)
             .width(150)
             .textAlign(.center)
+//            .shadow(offset: CGSize(width: 60, height: 10), radius: 3, opacity: 0.5)
+            .shadow(shadowColor: UIColor.red, shadowOffset: CGSize(width: 60, height: 10), shadowRadius: 3, shadowOpacity: 0.5)
 //            .shrink(1.0)
-        Button {
-            
-        } builder: {
-            Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
-                .font(size: 16.0)
-                .backgroundColor(.cyan)
-                .textColor(.red)
-                .shrink(1.0).alignSelf(.center)
-        }.textColor(.orange)
-        .shrink(1.0)
-
-        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
-            
-        }
+//        Button {
+//
+//        } builder: {
+//            Text("姓名姓名姓")
+//                .font(size: 16.0)
+//                .backgroundColor(.cyan)
+//                .textColor(.red)
+//                .
+//                .shrink(1.0).alignSelf(.center)
+//        }.textColor(.orange)
+//        .shrink(1.0)
+//
+//        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
+//
+//        }
             .font(size: 26.0)
             .backgroundColor(.cyan)
             .textColor(.red)
