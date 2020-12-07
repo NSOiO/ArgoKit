@@ -85,11 +85,16 @@ extension ArgoKitViewPageNode {
         self.pageCount = pageCount
     }
     
-    public func scrollToPage(index:Int) {
-        self.currentIndex = index
+    public func scrollToPage(to: Int, isCallTab:Bool) {
+        let from = self.currentIndex
+        self.currentIndex = to
         
         if (self.view != nil) {
-            self.viewPage.scrollToItem(at: NSIndexPath(item: index, section: 0) as IndexPath, at: .centeredHorizontally, animated: false)
+            self.viewPage.scrollToItem(at: NSIndexPath(item: to, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
+            
+            if isCallTab && self.pageTabScrollingListener != nil {
+                self.calculateScrollPercent(self.viewPage, from: from, to: to)
+            }
         }
     }
     
@@ -121,24 +126,29 @@ extension ArgoKitViewPageNode {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = self.dataSourceHelper.numberOfRows(section: section)
-        if count > self.pageCount {
+        if count > 0 {
             return count
         }
         return self.pageCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var identifier = self.dataSourceHelper.reuseIdForRow(indexPath.row, at: indexPath.section) ?? kCellReuseIdentifier
-        if !self.isReuseEnable {
-            identifier = identifier + String(indexPath.row)
+        
+        let node = self.dataSourceHelper.nodeForRow(indexPath.item, at: indexPath.section)
+        
+        var identifier = self.dataSourceHelper.reuseIdForRow(indexPath.item, at: indexPath.section) ?? kCellReuseIdentifier
+        if !self.isReuseEnable && node != nil {
+            identifier = String(node!.hashValue)
         }
+        
         if !self.dataSourceHelper.registedReuseIdSet.contains(identifier) {
             viewPage.register(ArgoKitViewPageCell.self, forCellWithReuseIdentifier: identifier)
             self.dataSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let cell = viewPage.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ArgoKitViewPageCell
-        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-            cell.linkCellNode(node)
+        cell.reuseEnable = self.isReuseEnable
+        if node != nil {
+            cell.linkCellNode(node!)
         }
         return cell
     }
@@ -239,6 +249,13 @@ extension ArgoKitViewPageNode {
     private func calculateToIndex(_ scrollView: UIScrollView) -> Int {
         let originX = pageWidth() * CGFloat(self.currentIndex)
         let offsetX = scrollView.contentOffset.x
+        if offsetX <= 0 {
+            return 0
+        }
+        if (scrollView.contentSize.width - offsetX) <= pageWidth() {
+            return self.currentIndex
+        }
+        
         if originX > offsetX {
             return self.currentIndex - 1
         }else if originX < offsetX {

@@ -50,9 +50,13 @@ extension ViewPage {
         return self
     }
     
-    public func scrollToPage(index:Int) -> Self {
-        viewPageNode.scrollToPage(index: index)
+    public func scrollToPage(to: Int) -> Self {
+        viewPageNode.scrollToPage(to: to, isCallTab: false)
         return self
+    }
+    
+    public func scrollToPage(to: Int, isCallTab: Bool) {
+        viewPageNode.scrollToPage(to: to, isCallTab: isCallTab)
     }
     
     public func pageCount(pageCount:Int) -> Self {
