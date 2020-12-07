@@ -243,6 +243,67 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
 }
 
 
+class ArgoKitGradientLayerOperation:NSObject, ArgoKitViewReaderOperation {
+    weak var viewNode:ArgoKitNode?
+    private var gradientLayer:CAGradientLayer?
+    private var _needRemake:Bool = false
+    
+//    private startColort
+    var needRemake: Bool{
+        get{
+            _needRemake
+        }
+        set{
+            _needRemake = newValue
+        }
+    }
+    
+    private var _nodeObserver:ArgoKitNodeObserver = ArgoKitNodeObserver()
+    var nodeObserver: ArgoKitNodeObserver{
+        get{
+            _nodeObserver
+        }
+    }
+    required init(viewNode: ArgoKitNode) {
+        self.viewNode = viewNode
+        super.init()
+        self.nodeObserver.setCreateViewBlock {[weak self] view in
+            if let strongSelf = self{
+                strongSelf.needRemake = true
+                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+            }
+        }
+        self.viewNode?.addNode(observer:self.nodeObserver)
+    }
+    
+    func remakeIfNeed() {
+        
+    }
+    
+    func updateCornersRadius(_ multiRadius: ArgoKitCornerRadius) {
+        
+    }
+    
+    private func remark(){
+        cleanGradientLayerIfNeed()
+        self.gradientLayer = CAGradientLayer()
+        
+        
+    }
+    
+    func cleanGradientLayerIfNeed (){
+        self.needRemake = false;
+        if self.gradientLayer != nil{
+            self.gradientLayer?.removeFromSuperlayer()
+            self.gradientLayer = nil;
+        }
+    }
+    
+    
+}
+
+
+
 class ArgoKitViewReaderHelper{
     static var shared: ArgoKitViewReaderHelper = {
         let instance = ArgoKitViewReaderHelper()

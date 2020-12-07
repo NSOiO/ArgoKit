@@ -160,6 +160,19 @@ extension InnerText{
         pNode.handleLineSpacing()
         return self
     }
+    
+    public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        addAttribute(#selector(setter:UILabel.textColor),value)
+        return self;
+    }
+    
+    public func textColor(hex :Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        addAttribute(#selector(setter:UILabel.textColor),value)
+        return self;
+    }
+    
     public func textAlign(_ value:NSTextAlignment)->Self{
         addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
         pNode.handleLineSpacing()
@@ -174,6 +187,18 @@ extension InnerText{
     public func textShadowColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:UILabel.shadowColor),value)
         return self
+    }
+    
+    public func textShadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        addAttribute(#selector(setter:UILabel.shadowColor),value)
+        return self;
+    }
+    
+    public func textShadowColor(hex :Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        addAttribute(#selector(setter:UILabel.shadowColor),value)
+        return self;
     }
     
     public func breakMode(_ value:NSLineBreakMode)->Self{
@@ -335,6 +360,15 @@ extension Text{
         _ = innerText.textColor(value)
         return self
     }
+    public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        _ = innerText.textColor(red: r, green: g, blue: b,alpha: a)
+        return self;
+    }
+    public func textColor(hex :Int,alpha a:Float = 1)->Self{
+        _ = innerText.textColor(hex: hex,alpha: a)
+        return self;
+    }
+    
     public func textAlign(_ value:NSTextAlignment)->Self{
         _ = innerText.textAlign(value)
         return self
@@ -345,9 +379,19 @@ extension Text{
         return self
     }
     
+    
     public func textShadowColor(_ value:UIColor)->Self{
         _ = innerText.textShadowColor(value)
         return self
+    }
+    
+    public func textShadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        _ = innerText.textShadowColor(red: r, green: g, blue: b,alpha: a)
+        return self;
+    }
+    public func textShadowColor(hex :Int,alpha a:Float = 1)->Self{
+        _ = innerText.textShadowColor(hex: hex,alpha: a)
+        return self;
     }
     
     public func breakMode(_ value:NSLineBreakMode)->Self{

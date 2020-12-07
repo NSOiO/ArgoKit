@@ -25,11 +25,11 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                 .margin(edge: .left, value: 15.0)
                 .cornerRadius(10)
                 .backgroundColor(.red)
-                    .border(width: 1)
-                    .border(color:.cyan)
+                    .borderWidth(1)
+                    .borderColor(.cyan)
                 
                 Image("")
-                    .height(12.0)
+                .height(12.0)
                 .width(18.0)
                 .margin(top: -5, right: 0, bottom: 0, left: 33)
                 .circle()
@@ -41,10 +41,16 @@ class MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                     Text("姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓")
+                     Text("姓名")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                         .shrink(1.0)
+                        .textShadowOffset(CGSize(width: 2, height: 2))
+                        .textShadowColor(.red)
+                        .shadow(offset: CGSize(width: 2, height: 2), radius: 20, opacity: 0.5)
+                        .width(100)
+                        .padding(edge: .left, value: 5)
+                        
+//                         .shrink(1.0)
                         
                         Button(action: {
                             
@@ -181,7 +187,7 @@ class SessionRow:ArgoKit.View {
        self.item = item
    }
     
-   var body: View{
+   var body: ArgoKit.View{
         MSUserInterractionHeaderView().margin(edge: .top, value: 5)
         .onTapGesture {[data = self.item] in
             print(data)
@@ -216,8 +222,8 @@ class ListDemo:ArgoKit.View{
     
     var hidden:Bool = false
     
-    var body: View{
-        List<SessionItem,SessionItem,SessionItem>(data:items){ item in
+    var body: ArgoKit.View{
+        ArgoKit.List<SessionItem,SessionItem,SessionItem>(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
         .didSelectRow {item, indexPath in
@@ -299,7 +305,7 @@ class customView: ArgoKit.View  {
     var hidden:Bool = true
     var alertView1:AlertView?
      var aText:ArgoKit.Text?
-    var body: View{
+    var body: ArgoKit.View{
         VStack {
            Text("hello aaa")
            Button() {
@@ -337,25 +343,25 @@ class customView: ArgoKit.View  {
         .backgroundColor(.cyan)
     }
 }
-
-class TabSegmentDemo: ArgoKit.View {
-    var body: View {
-        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
-            Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
-        }.margin(top: 100, right: 0, bottom: 0, left: 0)
-        .select(index: 1)
-        .backgroundColor(.yellow)
-//        .animType(.color)
-//        .animFromValue(.color(.blue))
-//        .animToValue(.color(.yellow))
-        
-//        TabSegment(["1", "2", "3", "4", "5", "6", "7", "8"]) {
-//            Text($0 as? String).textAlign(.center).width(400).height(500).backgroundColor(.green)
+//
+//class TabSegmentDemo: ArgoKit.View {
+//    var body: ArgoKit.View {
+//        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
+//            Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
 //        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+//        .select(index: 1)
 //        .backgroundColor(.yellow)
-//        .animType(.color).animToValue(.color(.orange))
-    }
-}
+////        .animType(.color)
+////        .animFromValue(.color(.blue))
+////        .animToValue(.color(.yellow))
+//
+////        TabSegment(["1", "2", "3", "4", "5", "6", "7", "8"]) {
+////            Text($0 as? String).textAlign(.center).width(400).height(500).backgroundColor(.green)
+////        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+////        .backgroundColor(.yellow)
+////        .animType(.color).animToValue(.color(.orange))
+//    }
+//}
 
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View

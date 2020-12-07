@@ -146,6 +146,19 @@ extension View{
         addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
     }
+    
+    public func backgroundColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        addAttribute(#selector(setter:UIView.backgroundColor),value)
+        return self;
+    }
+    
+    public func backgroundColor(hex :Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        addAttribute(#selector(setter:UIView.backgroundColor),value)
+        return self;
+    }
+    
     public func alpha(_ value:CGFloat)->Self{
         addAttribute(#selector(setter:UIView.alpha),value)
         return self;
@@ -190,12 +203,23 @@ extension View{
         addAttribute(#selector(setter:UIView.tintColor),value)
         return self;
     }
+    
+    public func tintColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        addAttribute(#selector(setter:UIView.tintColor),value)
+        return self;
+    }
+    
+    public func tintColor(hex :Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        addAttribute(#selector(setter:UIView.tintColor),value)
+        return self;
+    }
+    
     public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
         addAttribute(#selector(setter:UIView.tintAdjustmentMode),value.rawValue)
         return self;
     }
-    
-
     
     public func clipsToBounds(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.clipsToBounds),value)
@@ -218,16 +242,29 @@ extension View{
         return self;
     }
     
-    public func border(width value:CGFloat)->Self{
+    public func borderWidth(_ value:CGFloat)->Self{
         self.node?.borderWidth(value)
         addAttribute(isCALayer:true,#selector(setter:CALayer.borderWidth),value)
         return self;
     }
     
-    public func border(color value:UIColor)->Self{
+    public func borderColor(_ value:UIColor)->Self{
         addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
         return self;
     }
+    
+    public func borderColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
+        return self;
+    }
+    
+    public func borderColor(hex :Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
+        return self;
+    }
+    
     public func circle()->Self{
         _ = self.clipsToBounds(true)
         self.node?.maskLayerOperation?.circle()
@@ -239,16 +276,31 @@ extension View{
         return self
     }
     
+    public func shadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        self.node?.shadowOperation?.updateShadowColor(value)
+        return self;
+    }
+    
+    public func shadowColor(hex :Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        self.node?.shadowOperation?.updateShadowColor(value)
+        return self;
+    }
+    
     public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
         self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
         return self
     }
     
-    public func shadow(shadowColor:UIColor, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner = .allCorners)->Self{
+    public func shadow(shadowColor:UIColor? = .gray, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner = .allCorners)->Self{
         self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
         return self;
     }
 }
+
+
+
 
 private struct AssociatedNodeRenderKey {
        static var shadowKey:Void?
