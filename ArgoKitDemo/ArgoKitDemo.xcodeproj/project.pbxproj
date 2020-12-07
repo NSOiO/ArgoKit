@@ -46,6 +46,7 @@
 		FAE29115256F54650012989F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE29114256F54650012989F /* Types.swift */; };
 		FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */; };
 		FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */; };
+		FAF06A09257E0C5B00EF1EDA /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */; };
 		FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */; };
 		FAF6E61D254FB20E0028A5C7 /* Demo1ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -115,6 +116,7 @@
 		FAE29114256F54650012989F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitViewDemo.swift; sourceTree = "<group>"; };
 		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
+		FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo1ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,10 +292,19 @@
 		FAE29113256F54570012989F /* Previews */ = {
 			isa = PBXGroup;
 			children = (
+				FAF06A07257E0B2700EF1EDA /* TestCases */,
 				FAE290F9256F505A0012989F /* PreviewDemo.swift */,
 				FAE29114256F54650012989F /* Types.swift */,
 			);
 			name = Previews;
+			sourceTree = "<group>";
+		};
+		FAF06A07257E0B2700EF1EDA /* TestCases */ = {
+			isa = PBXGroup;
+			children = (
+				FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */,
+			);
+			path = TestCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,6 +481,7 @@
 				FA5709BD25765303004A0EAD /* ViewController.swift in Sources */,
 				FA516501255BB99E005BE240 /* LandmarkRow.swift in Sources */,
 				FAE29115256F54650012989F /* Types.swift in Sources */,
+				FAF06A09257E0C5B00EF1EDA /* LayoutTests.swift in Sources */,
 				FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
 				FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */,
