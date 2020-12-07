@@ -10,14 +10,14 @@ class ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
 }
 
 
-#if canImport(SwiftUI) && DEBUG
+#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 import ArgoKitPreview
 import SwiftUI
 @available(iOS 13.0.0, *)
 struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoRender {
-            ___FILEBASENAMEASIDENTIFIER___().body
+            ___FILEBASENAMEASIDENTIFIER___()
         }
     }
 }
