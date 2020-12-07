@@ -252,14 +252,15 @@ extension ArgoKitViewPageNode {
         if offsetX <= 0 {
             return 0
         }
-        if (scrollView.contentSize.width - offsetX) <= pageWidth() {
+        if (scrollView.contentSize.width - offsetX) < pageWidth() {
             return self.currentIndex
         }
         
-        if originX > offsetX {
-            return self.currentIndex - 1
-        }else if originX < offsetX {
+        if offsetX > originX {
             return self.currentIndex + 1
+        }
+        if offsetX < originX {
+            return self.currentIndex - 1
         }
         return self.currentIndex
     }
