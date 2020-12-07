@@ -9,6 +9,22 @@ import Foundation
 open class ArgoKitRefreshFooter: ArgoKitRefreshComponent {
     ///忽略多少scrollView的contentInset的bottom
     public var ignoredScrollViewContentInsetBottom: CGFloat = 0
+    
+    
+    ///是否自动刷新(默认为YES)
+    public var automaticallyRefresh: Bool = true
+    
+    public var _triggerAutomaticallyRefreshOffPages: CGFloat = 0
+    
+    public var triggerAutomaticallyRefreshOffPages: CGFloat {
+        get{
+            _triggerAutomaticallyRefreshOffPages
+        }
+        set(newVlaue){
+            _triggerAutomaticallyRefreshOffPages = newVlaue
+        }
+    }
+    
     //MARK: - 创建footer方法
     public class func footerWithRefreshingBlock(_ refreshingBlock: Block) -> ArgoKitRefreshFooter {
         
@@ -42,10 +58,9 @@ extension ArgoKitRefreshFooter {
 
 open class ArgoKitRefreshAutoFooter: ArgoKitRefreshFooter {
     
-    ///是否自动刷新(默认为YES)
-    public var automaticallyRefresh: Bool = true
     ///当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新)
     public var triggerAutomaticallyRefreshPercent: CGFloat = 1.0
+    
     ///是否每一次拖拽只发一次请求
     public var onlyRefreshPerDrag: Bool = false
     /// 一个新的拖拽
@@ -149,7 +164,7 @@ extension ArgoKitRefreshAutoFooter {
                     beginRefreshing()
                 }
             } else {
-                if scrollView.argokit_offsetY >= scrollView.argokit_contentH + scrollView.argokit_insetBottom - scrollView.argokit_height {
+                if scrollView.argokit_offsetY >= scrollView.argokit_contentH + scrollView.argokit_insetBottom - scrollView.argokit_height * (_triggerAutomaticallyRefreshOffPages + 1) {
                     beginRefreshing()
                 }
             }

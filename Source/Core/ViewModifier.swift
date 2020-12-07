@@ -7,7 +7,7 @@
 
 import Foundation
 extension ArgoKitNodeViewModifier{
-    class func isDirty(_ selector:Selector) -> Bool {
+    class func getIsDirty(_ selector:Selector) -> Bool {
         var isDirty_ = false
         if selector == #selector(setter:UILabel.text) {
             isDirty_ = true
@@ -38,10 +38,10 @@ extension ArgoKitNodeViewModifier{
         
         return isDirty_;
     }
-    public class func addAttribute(isCALayer:Bool = false,_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
+    public class func addAttribute(isCALayer:Bool = false,isDirty:Bool = false,_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
         ArgoKitNodeViewModifier._addAttribute_(isCALayer:isCALayer,outNode, selector, patamter)
     }
-    public class func _addAttribute_(isCALayer:Bool = false,_ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+    public class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
         if let node = outNode{
             // 获取参数
             var paraList:Array<Any> = Array()
@@ -55,7 +55,10 @@ extension ArgoKitNodeViewModifier{
             }
             
             let attribute = ViewAttribute(selector:selector,paramter:paraList)
-            attribute.isDirty = isDirty(selector)
+            attribute.isDirty = getIsDirty(selector)
+            if isDirty {
+                attribute.isDirty = isDirty
+            }
             attribute.isCALayer = isCALayer
             
             self.setNodeAttribute(node, attribute)
@@ -64,7 +67,7 @@ extension ArgoKitNodeViewModifier{
         }
     }
     
-    class func  setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
+    class func setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
         if let linkNode = node?.link {
              self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
          }else{
@@ -77,9 +80,9 @@ extension ArgoKitNodeViewModifier{
 }
 
 extension View{
-   
-    public func addAttribute(isCALayer:Bool = false, _ selector:Selector, _ patamter:Any? ...) {
-        ArgoKitNodeViewModifier._addAttribute_(self.node, selector, patamter)
+    
+    public func addAttribute(isCALayer:Bool = false,isDirty:Bool = false, _ selector:Selector, _ patamter:Any? ...) {
+        ArgoKitNodeViewModifier._addAttribute_(isCALayer: isCALayer, self.node, selector, patamter)
     }
 }
 
@@ -192,6 +195,8 @@ extension View{
         return self;
     }
     
+
+    
     public func clipsToBounds(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.clipsToBounds),value)
         return self;
@@ -200,26 +205,31 @@ extension View{
     public func cornerRadius(_ value:CGFloat)->Self{
         return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
     }
-    public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
-        self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
-        return self;
-    }
     
-    public func cornerRadius(_ value:CGFloat, corners:UIRectCorner = .allCorners)->Self{
-        if corners.contains(.allCorners) {
+    public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
+        if topLeft == topRight &&
+            topLeft ==  bottomLeft &&
+            topLeft ==  bottomRight{
             _ = self.clipsToBounds(true)
-            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),value)
+            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),topLeft)
         }else{
-            self.node?.maskLayerOperation?.updateCornersRadius( radius: value,corners: corners)
+            self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
         }
         return self;
     }
     
-    public func borderColor(_ value:UIColor)->Self{
+    public func border(width value:CGFloat)->Self{
+        self.node?.borderWidth(value)
+        addAttribute(isCALayer:true,#selector(setter:CALayer.borderWidth),value)
+        return self;
+    }
+    
+    public func border(color value:UIColor)->Self{
         addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
         return self;
     }
     public func circle()->Self{
+        _ = self.clipsToBounds(true)
         self.node?.maskLayerOperation?.circle()
         return self;
     }
@@ -271,3 +281,5 @@ extension ArgoKitNode{
         }
     }
 }
+
+

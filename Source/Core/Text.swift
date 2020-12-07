@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class ArgoKitTextNode: ArgoKitNode {
+class ArgoKitInnerTextNode: ArgoKitNode {
     var lineSpacing:CGFloat = 0
     
     func lineSpacing(_ value:CGFloat){
@@ -89,24 +89,16 @@ class ArgoKitTextNode: ArgoKitNode {
             lable.lineBreakMode = self.lineBreakMode()
             result = lable.sizeThatFits(size)
         }
-//        if lineSpacing > 0 && linenumber != 1 && floor(result.height) <= CGFloat(ceilf(lineHeight)) + lineSpacing {
-//            let oldLineSpacing = lineSpacing;
-//            lineSpacing = 0
-//            cleanLineSpacing()
-//            lineSpacing = oldLineSpacing;
-//            result.height -= lineSpacing;
-//        }
-//        result.width = ceil(result.width)
-//        result.height = ceil(result.height)
+        
         return result
     }
 }
-open class Text:View {
+class InnerText:View {
     private var fontSize:CGFloat
     private var fontStyle:AKFontStyle
     private var font:UIFont
     private var fontName:String?
-    private let pNode:ArgoKitTextNode
+    private let pNode:ArgoKitInnerTextNode
     public var node: ArgoKitNode?{
         pNode
     }
@@ -115,8 +107,7 @@ open class Text:View {
         fontStyle = .default
         fontSize = UIFont.systemFontSize
         font = UIFont.systemFont(ofSize:fontSize)
-        pNode = ArgoKitTextNode(viewClass:UILabel.self)
-        pNode.flexShrink(1.0)
+        pNode = ArgoKitInnerTextNode(viewClass:UILabel.self)
     }
     public convenience init(_ text:String?) {
         self.init()
@@ -124,7 +115,7 @@ open class Text:View {
     }
 }
 
-extension Text{
+extension InnerText{
     public func text(_ value:String?)->Self{
         addAttribute(#selector(setter:UILabel.text),value)
         pNode.handleLineSpacing()
@@ -269,6 +260,166 @@ extension Text{
     @available(iOS 6.0, *)
     public func preferredMaxLayoutWidth(in value: CGFloat)->Self{
         addAttribute(#selector(setter:UILabel.preferredMaxLayoutWidth),value)
+        return self
+    }
+    
+}
+
+class ArgoKitTextNode: ArgoKitNode {
+    public var innerTextNode:ArgoKitInnerTextNode?
+}
+
+open class Text:View {
+    private let pNode:ArgoKitTextNode
+    private let innerText:InnerText
+    public var node: ArgoKitNode?{
+        pNode
+    }
+
+    public init() {
+        pNode = ArgoKitTextNode(viewClass:UIView.self)
+        pNode.alignItemsCenter()
+        pNode.row()
+        innerText = InnerText()
+      
+        if let node = innerText.node as? ArgoKitInnerTextNode{
+            pNode.innerTextNode = node
+            pNode.addChildNode(node)
+        }
+    }
+    public convenience init(_ text:String?) {
+        self.init()
+        _ = innerText.text(text)
+    }
+}
+
+extension Text{
+    public func text(_ value:String?)->Self{
+        _ = innerText.text(value)
+        return self
+    }
+    public func font(_ value:UIFont!)->Self{
+        _ = innerText.font(value)
+        return self
+    }
+    
+    public func font(name: String? = nil, style:AKFontStyle = .default,size:CGFloat = UIFont.systemFontSize)->Self{
+        _ = innerText.font(name: name, style: style, size: size)
+        return self
+    }
+    
+    public func font(name value:String?)->Self{
+        _ = innerText.font(name: value)
+        return self
+    }
+    public func font(size value:CGFloat)->Self{
+        _ = innerText.font(size: value)
+        return self
+    }
+    public func font(style value:AKFontStyle)->Self{
+        _ = innerText.font(style: value)
+        return self
+    }
+    
+    public func textColor(_ value:UIColor!)->Self{
+        _ = innerText.textColor(value)
+        return self
+    }
+    public func textAlign(_ value:NSTextAlignment)->Self{
+        _ = innerText.textAlign(value)
+        return self
+    }
+    public func breakMode(_ value:NSLineBreakMode)->Self{
+        _ = innerText.breakMode(value)
+        return self
+    }
+    
+    public func attributedText(_ value:NSAttributedString?)->Self{
+        _ = innerText.attributedText(value)
+        return self
+    }
+    
+    public func highlightedTextColor(_ value:UIColor?)->Self{
+        _ = innerText.highlightedTextColor(value)
+        return self
+    }
+    
+    public func isHighlighted(_ value:Bool)->Self{
+        _ = innerText.isHighlighted(value)
+        return self
+    }
+    
+    
+    public func userInteractionEnabled(_ value:Bool)->Self{
+        _ = innerText.userInteractionEnabled(value)
+        return self
+    }
+    public func isEnabled(_ value:Bool)->Self{
+        _ = innerText.isEnabled(value)
+        return self
+    }
+    
+    public func lineLimit(_ value:Int)->Self{
+        _ = innerText.lineLimit(value)
+        return self
+    }
+    public func lineSpacing(_ value:CGFloat)->Self{
+        _ = innerText.lineSpacing(value)
+        return self
+    }
+
+    public func adjustsFontSizeToFitWidth(_ value:Bool)->Self{
+        _ = innerText.adjustsFontSizeToFitWidth(value)
+        return self
+    }
+    
+    // default is UIBaselineAdjustmentAlignBaselines
+    public func baselineAdjustment(_ value:UIBaselineAdjustment)->Self{
+        _ = innerText.baselineAdjustment(value)
+        return self
+    }
+
+
+    @available(iOS 6.0, *)
+    public func minimumScaleFactor(_ value:CGFloat)->Self{
+        _ = innerText.minimumScaleFactor(value)
+        return self
+    }
+
+    
+    // Tightens inter-character spacing in attempt to fit lines wider than the available space if the line break mode is one of the truncation modes before starting to truncate.
+    // The maximum amount of tightening performed is determined by the system based on contexts such as font, line width, etc.
+    @available(iOS 9.0, *)
+    public func allowsDefaultTighteningForTruncation(_ value:Bool)->Self{
+        _ = innerText.allowsDefaultTighteningForTruncation(value)
+        return self
+    }
+
+    
+    // Specifies the line break strategies that may be used for laying out the text in this// label.
+    // If this property is not set, the default value is NSLineBreakStrategyStandard.
+    // If the label contains an attributed text with paragraph style(s) that specify a set of line break strategies, the set of strategies in the paragraph style(s) will be used instead of the set of strategies defined by this property.
+    public func lineBreakStrategy(_ value:NSParagraphStyle.LineBreakStrategy)->Self{
+        _ = innerText.lineBreakStrategy(value)
+        return self
+    }
+
+    // override points. can adjust rect before calling super.
+    // label has default content mode of UIViewContentModeRedraw
+    public func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect{
+        return innerText.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines);
+    }
+
+    public func drawText(in rect: CGRect)->Self{
+        _ = innerText.drawText(in: rect);
+        return self
+    }
+
+    // Support for constraint-based layout (auto layout)
+    // If nonzero, this is used when determining -intrinsicContentSize for multiline labels
+    @available(iOS 6.0, *)
+    public func preferredMaxLayoutWidth(in value: CGFloat)->Self{
+        _ = innerText.preferredMaxLayoutWidth(in: value);
         return self
     }
     

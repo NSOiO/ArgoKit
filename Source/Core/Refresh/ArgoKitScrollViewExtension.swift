@@ -139,6 +139,15 @@ public extension UIScrollView {
         }
     }
     
+    var argokit_offset: CGPoint {
+        set(newOffset) {
+            self.contentOffset = newOffset
+        }
+        get {
+            return self.contentOffset
+        }
+    }
+    
     var argokit_offsetX: CGFloat {
         set(newOffsetX) {
             var offset = self.contentOffset

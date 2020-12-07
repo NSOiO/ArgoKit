@@ -14,7 +14,7 @@ open class Button:View{
     private var fontName:String?
     
     private let pNode:ArgoKitNode
-    private var label:Text?
+    private var label:InnerText?
     public var node: ArgoKitNode?{
         pNode
     }
@@ -31,7 +31,19 @@ open class Button:View{
     
     public convenience init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){
         self.init(text: nil, action: action)
-        addSubNodes(builder: builder)
+        let container = builder()
+        if let nodes = container.type.viewNodes() {
+            for node in nodes {
+                if node is ArgoKitTextNode {
+                    let innerTextNode:ArgoKitInnerTextNode? = (node as? ArgoKitTextNode)?.innerTextNode
+                    innerTextNode?.removeFromSuperNode()
+                    self.node!.addChildNode(innerTextNode)
+                }else{
+                    self.node!.addChildNode(node)
+                }
+                
+            }
+        }
     }
     
     public convenience init(text:String?,action :@escaping ()->Void){
@@ -41,7 +53,7 @@ open class Button:View{
         }, for: UIControl.Event.touchUpInside)
         
         if let t = text {
-            label = Text(t).alignSelf(.center).width(100%).textAlign(.center)
+            label = InnerText(t).alignSelf(.center).width(100%).textAlign(.center)
             if let node = label?.node {
                 pNode.addChildNode(node)
             }
@@ -53,10 +65,12 @@ open class Button:View{
 
 extension Button{
     public func textColor(_ color: UIColor?)->Self{
+//        _ = label?.textColor(color)
         setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
     }
     public func font(_ value:UIFont!)->Self{
+//        _ = label?.font(value)
         setValue(pNode, #selector(setter: UILabel.font), value)
         return self
     }
@@ -94,16 +108,16 @@ extension Button{
         return self
     }
     
-    func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
+    func setValue(_ node:ArgoKitNode?,_ selector:Selector,_ value:Any?) -> Void {
         if let nodes = pNode.childs{
-            for node in nodes {
-                if node is ArgoKitTextNode {
-                    if let _ =  (node as! ArgoKitTextNode).value(with: selector){
+            for subNode in nodes {
+                if node is ArgoKitInnerTextNode {
+                    if let _ =  (subNode as! ArgoKitInnerTextNode).value(with: selector){
                     }else{
-                        ArgoKitNodeViewModifier.addAttribute(node as? ArgoKitTextNode, selector, value)
+                        ArgoKitNodeViewModifier.addAttribute(subNode as? ArgoKitInnerTextNode, selector, value)
                     }
                 }else{
-                    setValue(node as! ArgoKitNode, selector, value)
+                    setValue(subNode as? ArgoKitNode, selector, value)
                 }
             }
         }

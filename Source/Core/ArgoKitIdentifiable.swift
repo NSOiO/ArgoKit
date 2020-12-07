@@ -11,9 +11,16 @@ public protocol ArgoKitIdentifiable {
     var reuseIdentifier: String {get} // 复用标识，用于同样式的UI复用
 }
 
-extension ArgoKitIdentifiable{
+extension ArgoKitIdentifiable {
     
     var reuseIdentifier: String {
         "ArgoKitDefaultReuseIdentifier"
+    }
+}
+
+extension ArgoKitNode: ArgoKitIdentifiable {
+    
+    public var reuseIdentifier: String {
+        return String(self.hash)
     }
 }

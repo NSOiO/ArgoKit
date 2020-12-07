@@ -89,15 +89,6 @@ extension AlertView{
 }
 
 extension View{
-//   public func alert(isPresented:inout Bool,_ content:()->AlertView) -> Self{
-//        let alertView = content()
-//        if let node = alertView.node as? ArgokitAlertViewNode{
-//            isPresented = node.isPresented
-//            self.node!.addChildNode(node)
-//        }
-//        return self
-//    }
-    
     public func alert(_ content:()->AlertView) -> Self{
         let alertView = content()
         if let node = alertView.node {

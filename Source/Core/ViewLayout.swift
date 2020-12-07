@@ -304,7 +304,7 @@ extension View{
 }
 
 extension View{
-    fileprivate func flex(_ value:CGFloat)->Self{
+    public func flex(_ value:CGFloat)->Self{
         self.node?.flex(value);
         return self;
     }
@@ -704,13 +704,13 @@ extension View{
 }
 
 extension View{
-    public func  borderWidth(top:CGFloat,right:CGFloat,bottom:CGFloat,left:CGFloat)->Self{
+    private func  borderWidth(top:CGFloat,right:CGFloat,bottom:CGFloat,left:CGFloat)->Self{
         return self.borderWidth(edge: .top, value: top)
             .borderWidth(edge: .right, value: right)
             .borderWidth(edge: .bottom, value: bottom)
             .borderWidth(edge: .left, value: left)
     }
-    public func  borderWidth(edge:ArgoEdge,value:CGFloat)->Self{
+    private func  borderWidth(edge:ArgoEdge,value:CGFloat)->Self{
         switch edge {
         case .left:
             self.node?.borderLeftWidth(value)

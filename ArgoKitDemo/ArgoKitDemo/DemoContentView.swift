@@ -61,7 +61,7 @@ class DemoContentView: View {
     }
     
     var body:View{
-        List(data:items) { item in
+        List<ArgoKitItem,ArgoKitItem,ArgoKitItem>(data:items) { item in
             if item.index % 2 == 0{
                 row(item: item).padding(edge: .left, value: 10).backgroundColor(.orange)
             }else{

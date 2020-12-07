@@ -13,6 +13,11 @@
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
 #import "ArgoKitNode+Observer.h"
+#if __has_include(<ArgoAnimation/UIView+AKFrame.h>)
+#import <ArgoAnimation/UIView+AKFrame.h>
+#else
+#import "UIView+AKFrame.h"
+#endif
 
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
@@ -316,7 +321,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-    NSLog(@"dealloc");
+    NSLog(@"dealloc %@", self);
 }
 
 - (instancetype)init {
@@ -371,7 +376,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
     UIView *view = [self.viewClass new];
-    view.frame = frame;
+    view.akLayoutFrame = frame;
     return view;
 }
 
@@ -390,8 +395,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
                     observer.createViewBlock(wealSelf.view);
                 }
             }
-        }else if (!CGRectEqualToRect(frame, wealSelf.view.frame)) {
-            wealSelf.view.frame = frame;
+        }else if (!CGRectEqualToRect(frame, wealSelf.view.akLayoutFrame)) {
+            wealSelf.view.akLayoutFrame = frame;
             if (!wealSelf.view.superview) {
                 [wealSelf insertViewToParentNodeView];
             }
@@ -616,8 +621,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if(self.parentNode){
         [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
-        self.parentNode = nil;
         YGNodeRemoveChild(self.parentNode.layout.ygnode, self.layout.ygnode);
+        self.parentNode = nil;
     }
 }
 - (void)removeAllChildNodes {

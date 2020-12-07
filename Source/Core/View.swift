@@ -39,7 +39,7 @@ public enum ArgoKitNodeType {
     }
 }
 
-public protocol View {
+public protocol  View {
     // 初始视图层次
     var type: ArgoKitNodeType{get}
     // 布局节点对象

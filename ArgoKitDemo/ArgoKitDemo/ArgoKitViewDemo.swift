@@ -23,8 +23,10 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                 Image("icybay.jpg").width(50.0)
                 .height(50.0)
                 .margin(edge: .left, value: 15.0)
-                .circle()
+                .cornerRadius(10)
                 .backgroundColor(.red)
+                    .border(width: 1)
+                    .border(color:.cyan)
                 
                 Image("")
                     .height(12.0)
@@ -38,24 +40,38 @@ class MSUserInterractionHeaderView: ArgoKit.View {
              
              VStack{
                  HStack{
-                     Text("姓名")
+                    HStack{
+                     Text("姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                     
-                    Image("icybay.jpg")
-                        .margin(edge: .left, value: 4)
-                        .width(15.0)
-                        .height(15.0)
-                     
-                     Spacer()
+                         .shrink(1.0)
+                        
+                        Button(action: {
+                            
+                        }){
+                            Image("icybay.jpg")
+                                .margin(edge: .left, value: 4)
+                                .width(15.0)
+                                .height(15.0)
+                        }
+                        .backgroundColor(.red)
+                        .alignSelf(.center)
+                        .padding(top: 7, right: 7, bottom: 7, left: 7)
+     
+                    }.basis(1.0)
+                    
+//                     Spacer()
                      
                      Text("10.0千米")
                          .textAlign(.right)
                          .font(size: 13)
                          .textColor(UIColor(170,170,170))
-                         .margin(edge: .right, value: 15)
+                        .backgroundColor(.yellow)
+                    
                  }.margin(edge: .left, value: 4)
                  .width(100%)
+                 
+                
                  
                  Text("他在陌陌很有人气")
                      .textAlign(.left)
@@ -65,6 +81,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                      .margin(edge: .right, value: 15)
                      .margin(edge: .left, value: 4)
              }.grow(1)
+             .width(0)
          }
     }
 }
@@ -119,29 +136,6 @@ class MSUserInterractionContentView: ArgoKit.View {
     }
 }
 
-class itemView: ArgoKit.View {
-    
-   typealias View = ArgoKit.View
-   var body: ArgoKit.View {
-
-    
-       Image("chincoteague.jpg")
-           .clipsToBounds(true)
-           .backgroundColor(.clear)
-           .width(60.0)
-           .height(60.0)
-           .alignSelf(.center)
-           .margin(edge: .left, value: 10)
-           .margin(edge: .top, value: 10)
-           .margin(edge: .bottom, value: 10)
-           .circle()
-           .onTapGesture {
-           }.isUserInteractionEnabled(true)
-       
-       Text("aaaa33dd")
-   }
-}
-
 
 class TextFieldView: ArgoKit.View {
     typealias View = ArgoKit.View
@@ -184,17 +178,12 @@ class SessionRow:ArgoKit.View {
    init(item:SessionItem) {
        self.item = item
    }
-    init() {
-        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["chincoteague","chincoteagueadasdadchincoteagueadasdadcfeehincoteagueadasdadchincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad","chincoteagueadasdadchincoteagueadasdadchincoteagueadasdad.qdaswdwsad"]
-        var item = SessionItem(identifier:String(1), reuseIdentifier:"reuseIdentifier")
-        item.imagePath = images[1]
-        item.sessionName = images[1] + "+\(String(1))"
-        item.lastMessage = messages[1] + "+\(String(1))"
-        self.item = item
-    }
-    var body: View{
+    
+   var body: View{
         MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+        .onTapGesture {[data = self.item] in
+            print(data)
+        }
         MSUserInterractionContentView()
             .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
             .cornerRadius(5)
@@ -213,7 +202,7 @@ class ListDemo:ArgoKit.View{
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         for index in 1..<20{
-            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
+            let item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
@@ -222,41 +211,45 @@ class ListDemo:ArgoKit.View{
             items.append(item)
         }
     }
+    
     var hidden:Bool = false
     
     var body: View{
-//        MSUserInterractionHeaderView().margin(edge: .top, value: 5)
-//        MSUserInterractionContentView()
-//            .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
-//            .cornerRadius(5)
-//            .backgroundColor(UIColor(250,250,250))
-        
-        List(data:items){ item in
+        List<SessionItem,SessionItem,SessionItem>(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
         .didSelectRow {item, indexPath in
-            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert).default(title: "确认") { text in
-                print(text ?? "")
-            }.cancel(title: "取消") {}
+            AlertView(title: item!.imagePath, message: item!.lastMessage, preferredStyle: UIAlertController.Style.alert)
             .textField()
+            .destructive(title: "确认") { text in
+                print(text ?? "")
+            }
+            .cancel(title: "取消") {}
             .show()
         }
         .refreshHeaderView {
             RefreshHeaderView(startRefreshing: {
-                headerView?.endRefreshing()
+                _ = headerView?.endRefreshing()
             })
             {
                 Text("headerh").alignSelf(.center).lineLimit(0).font(size: 20)
+            }.pullingDown{ point in
+                print("pullingDown\(String(describing: point))")
             }
+            .height(100.0)
             .backgroundColor(.red)
             .alias(variable: &headerView)
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {
-                footerView?.endRefreshing()
-            }){
+//                footerView?.resetNoMoreData()
+                print("footerhead")
+            })
+            {
                 Text("footerhead").alignSelf(.center).lineLimit(0).font(size: 20)
             }
+            .height(100.0)
+            .autoRefreshOffPage(1)
             .backgroundColor(.red)
             .alias(variable: &footerView)
             
@@ -297,6 +290,7 @@ class ListDemo:ArgoKit.View{
         return str
     }
 }
+
 
 class customView: ArgoKit.View  {
     typealias View = ArgoKit.View
@@ -342,24 +336,90 @@ class customView: ArgoKit.View  {
     }
 }
 
+//class TabSegmentDemo: ArgoKit.View {
+//    var body: View {
+//        TabSegment {
+//            Text("AA").textAlign(.center).width(200).height(50).backgroundColor(.blue)
+//            Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+//            Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+//            Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+//            Text("EE").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+//            Text("FF").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+//            Text("GG").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+//        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+//        .select(index: 2)
+//        .backgroundColor(.yellow)
+////        .animType(.color)
+////        .animFromValue(.color(.blue))
+////        .animToValue(.color(.yellow))
+//    }
+//}
+
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
-    var items = [SessionItem]()
-    init() {
-        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
-        let messages = ["11","22","33","44","55"]
-        for index in 1..<20{
-            var item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
-            item.imagePath = images[index%5]
-            item.sessionName = images[index%5] + "+\(String(index))"
-            item.lastMessage = messages[index%5] + "+\(String(index))"
-            item.unreadCount = String(index)
-            items.append(item)
-        }
-    }
    var body:ArgoKit.View{
-    ListDemo()
-    .grow(1)
+//    ListDemo()
+//    .grow(1)
+//    TabSegmentDemo()
+    
+    
+    
+    HStack{
+
+       HStack{
+        
+        Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
+            .font(size: 16.0)
+            .backgroundColor(.cyan)
+            .textColor(.red)
+            .shrink(1.0)
+        Button {
+            
+        } builder: {
+            Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
+                .font(size: 16.0)
+                .backgroundColor(.cyan)
+                .textColor(.red)
+                .shrink(1.0).alignSelf(.center)
+        }.textColor(.orange)
+        .shrink(1.0)
+
+        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
+            
+        }
+            .font(size: 26.0)
+            .backgroundColor(.cyan)
+            .textColor(.red)
+            .shrink(1.0)
+        
+        ForEach(0..<1){ item in
+            Image("icybay.jpg")
+                .margin(edge: .left, value: 4)
+                .width(15.0)
+                .height(15.0)
+               .alignSelf(.center)
+        }.flexDirection(.row)
+        .margin(edge: .left, value: 4)
+        .margin(edge: .right, value: 4)
+        .alignSelf(.center)
+       }
+       .flex(1)
+        
+        
+        Text("10.0千米")
+            .textAlign(.right)
+            .font(size: 13)
+            .textColor(UIColor(170,170,170))
+           .backgroundColor(.yellow)
+            
+       
+    }
+    .margin(edge: .left, value: 4)
+    .margin(edge: .top, value: 104)
+    .width(100%)
+    .backgroundColor(.purple)
+
+    
    }
 }
 

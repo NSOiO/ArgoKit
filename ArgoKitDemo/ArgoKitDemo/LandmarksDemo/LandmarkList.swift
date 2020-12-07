@@ -9,7 +9,7 @@ import ArgoKit
 
 class LandmarkList: View {
     var body: View {
-        List(data:landmarkData) { landmark in
+        List<Landmark,Landmark,Landmark>(data:landmarkData) { landmark in
             switch landmark.reuseIdentifier {
             case "LandmarkRow1":
                 LandmarkRow1(landmark: landmark)

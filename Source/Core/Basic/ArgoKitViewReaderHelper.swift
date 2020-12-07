@@ -216,7 +216,8 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
                 return
             }
             if pcircle == true{
-                self.multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: CGFloat.minimum(frame.size.width, frame.size.height)/2.0)
+                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.cornerRadius),CGFloat.minimum(frame.size.width, frame.size.height)/2.0)
+                return;
             }
             let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)
             var maskLayer:CAShapeLayer? = nil

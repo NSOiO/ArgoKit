@@ -7,5 +7,5 @@
 
 import Foundation
 public protocol ArgoKitImageLoader {
-    func loadImage(url:URL?,placeHolder:String?,successed:((_ image:UIImage?)->())?,failure:(()->())?) -> Void;
+    func loadImage(url: URL?, placeHolder: String?, successed: ((UIImage?)->())?, failure: (()->())?)
 }
