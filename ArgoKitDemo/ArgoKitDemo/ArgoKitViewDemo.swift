@@ -368,11 +368,13 @@ class ArgoKitViewDemo:ArgoKit.View  {
 
        HStack{
         
-        Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
+        Text("姓")
             .font(size: 16.0)
             .backgroundColor(.cyan)
             .textColor(.red)
-            .shrink(1.0)
+            .width(150)
+            .textAlign(.center)
+//            .shrink(1.0)
         Button {
             
         } builder: {

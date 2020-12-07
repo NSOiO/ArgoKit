@@ -280,8 +280,7 @@ open class Text:View {
         pNode = ArgoKitTextNode(viewClass:UIView.self)
         pNode.alignItemsCenter()
         pNode.row()
-        innerText = InnerText()
-      
+        innerText = InnerText().grow(1.0)
         if let node = innerText.node as? ArgoKitInnerTextNode{
             pNode.innerTextNode = node
             pNode.addChildNode(node)
