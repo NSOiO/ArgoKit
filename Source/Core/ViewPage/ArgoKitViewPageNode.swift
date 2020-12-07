@@ -14,6 +14,12 @@ public typealias ViewPageTabScrollingListener = (_ percent:CGFloat, _ fromIndex:
 
 // MARK: Init
 
+private struct ArgoKitViewPageScrollInfo {
+    var isScroll = false
+    var from = 0
+    var to = 0
+}
+
 class ArgoKitViewPageNode: ArgoKitScrollViewNode, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     public var viewPage:UICollectionView {
@@ -43,6 +49,7 @@ class ArgoKitViewPageNode: ArgoKitScrollViewNode, UICollectionViewDelegateFlowLa
     private var pageChangedFunc:ViewPageChangedCloser?
     private var pageTabScrollingListener:ViewPageTabScrollingListener?
     
+    private var pageScrollInfo: ArgoKitViewPageScrollInfo?
     
 }
 
@@ -90,11 +97,8 @@ extension ArgoKitViewPageNode {
         self.currentIndex = to
         
         if (self.view != nil) {
+            self.pageScrollInfo = ArgoKitViewPageScrollInfo(isScroll: true, from: from, to: to)
             self.viewPage.scrollToItem(at: NSIndexPath(item: to, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
-            
-            if isCallTab && self.pageTabScrollingListener != nil {
-                self.calculateScrollPercent(self.viewPage, from: from, to: to)
-            }
         }
     }
     
@@ -199,9 +203,15 @@ extension ArgoKitViewPageNode {
         scrollViewScrollEnd(scrollView)
     }
     
+    override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        super.scrollViewDidEndScrollingAnimation(scrollView)
+        autoScrollEnd(scrollView)
+    }
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         scrollViewScrollPercent(scrollView)
+        autoScrollPercent(scrollView)
     }
     
     func scrollViewScrollPercent(_ scrollView: UIScrollView) {
@@ -278,5 +288,17 @@ extension ArgoKitViewPageNode {
     
     private func pageWidth() -> CGFloat {
         return self.viewPage.frame.width
+    }
+    
+    private func autoScrollPercent(_ scrollView: UIScrollView) {
+        guard let info = self.pageScrollInfo else { return }
+        guard let listener = self.pageTabScrollingListener else { return }
+        let percent = (scrollView.contentOffset.x - CGFloat(info.from) * pageWidth()) / (CGFloat(info.to - info.from) * pageWidth())
+        listener(abs(percent), info.from, info.to)
+    }
+    
+    private func autoScrollEnd(_ scrollView: UIScrollView) {
+        autoScrollPercent(scrollView)
+        self.pageScrollInfo = nil
     }
 }
