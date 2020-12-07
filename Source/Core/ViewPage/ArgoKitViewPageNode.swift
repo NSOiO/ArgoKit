@@ -190,23 +190,35 @@ extension ArgoKitViewPageNode {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
         scrollViewScrollPercent(scrollView)
     }
     
     func scrollViewScrollPercent(_ scrollView: UIScrollView) {
         guard self.isScrolling else { return }
-        guard let listener = self.pageTabScrollingListener else { return }
+        guard self.pageTabScrollingListener != nil else { return }
         
-        let percentX = scrollView.contentOffset.x / scrollView.frame.width
-        let toIndex:Int = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        let offsetX = scrollView.contentOffset.x
+        if offsetX < 0
+            || (scrollView.contentSize.width - offsetX) < pageWidth() {
+            return
+        }
         
-        listener(percentX, self.currentIndex, toIndex)
+        let originX = pageWidth() * CGFloat(self.currentIndex)
+        if abs(originX - offsetX) > pageWidth() {
+            scrollView.isScrollEnabled = false
+            scrollView.isScrollEnabled = true
+            return
+        }
+        
+        let toIndex:Int = calculateToIndex(scrollView)
+        calculateScrollPercent(scrollView, from: self.currentIndex, to: toIndex)
     }
     
     func scrollViewScrollEnd(_ scrollView: UIScrollView) {
         guard !self.isScrolling else { return }
         
-        let toIndex:Int = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        let toIndex:Int = calculateToIndex(scrollView)
         let fromIndex = self.currentIndex
         self.currentIndex = toIndex
         
@@ -219,9 +231,34 @@ extension ArgoKitViewPageNode {
             changedFunc(item, toIndex)
         }
         
-        if let listener = self.pageTabScrollingListener {
-            let percentX = scrollView.contentOffset.x / scrollView.frame.width
-            listener(percentX, fromIndex, toIndex)
+        if self.pageTabScrollingListener != nil {
+            calculateScrollPercent(scrollView, from: fromIndex, to: toIndex)
         }
+    }
+    
+    private func calculateToIndex(_ scrollView: UIScrollView) -> Int {
+        let originX = pageWidth() * CGFloat(self.currentIndex)
+        let offsetX = scrollView.contentOffset.x
+        if originX > offsetX {
+            return self.currentIndex - 1
+        }else if originX < offsetX {
+            return self.currentIndex + 1
+        }
+        return self.currentIndex
+    }
+    
+    private func calculateScrollPercent(_ scrollView: UIScrollView, from:Int, to: Int) {
+        let offsetX = scrollView.contentOffset.x
+        var percentX = offsetX / pageWidth()
+        if (to > from) {
+            percentX -= CGFloat(from)
+        }else {
+            percentX = abs(CGFloat(from) - percentX)
+        }
+        self.pageTabScrollingListener!(percentX, from, to)
+    }
+    
+    private func pageWidth() -> CGFloat {
+        return self.viewPage.frame.width
     }
 }
