@@ -165,6 +165,17 @@ extension InnerText{
         pNode.handleLineSpacing()
         return self
     }
+    
+    public func textShadowOffset(_ value:CGSize)->Self{
+        addAttribute(#selector(setter:UILabel.shadowOffset),value)
+        return self
+    }
+    
+    public func textShadowColor(_ value:UIColor)->Self{
+        addAttribute(#selector(setter:UILabel.shadowColor),value)
+        return self
+    }
+    
     public func breakMode(_ value:NSLineBreakMode)->Self{
         addAttribute(#selector(setter:UILabel.lineBreakMode),value.rawValue)
         
@@ -328,6 +339,17 @@ extension Text{
         _ = innerText.textAlign(value)
         return self
     }
+    
+    public func textShadowOffset(_ value:CGSize)->Self{
+        _ = innerText.textShadowOffset(value)
+        return self
+    }
+    
+    public func textShadowColor(_ value:UIColor)->Self{
+        _ = innerText.textShadowColor(value)
+        return self
+    }
+    
     public func breakMode(_ value:NSLineBreakMode)->Self{
         _ = innerText.breakMode(value)
         return self

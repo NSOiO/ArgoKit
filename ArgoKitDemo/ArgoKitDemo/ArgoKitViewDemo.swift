@@ -58,7 +58,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                         .alignSelf(.center)
                         .padding(top: 7, right: 7, bottom: 7, left: 7)
      
-                    }.basis(1.0)
+                    }.flex(1.0)
                     
 //                     Spacer()
                      
@@ -97,12 +97,14 @@ class MSUserInterractionContentView: ArgoKit.View {
              .height(46.0)
              .cornerRadius(4)
             
-            Text("姓名sasd姓名sasd姓名sasd姓名")
+            Text("姓名sasd姓名sasd")
                 .lineLimit(2)
                 .textColor(UIColor(50,51,51))
                 .font(size: 16.0)
                 .margin(edge: .left, value: 5)
                 .alignSelf(.center)
+                .textShadowColor(UIColor.red)
+                .textShadowOffset(CGSize(width: 0, height: 2))
             
          }.margin(edge: .left, value: 10)
          .margin(edge: .top, value: 10)
@@ -358,72 +360,80 @@ class TabSegmentDemo: ArgoKit.View {
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-//    ListDemo()
-//    .grow(1)
+    
+    MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+    
+    MSUserInterractionContentView()
+        .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
+        .cornerRadius(5)
+        .backgroundColor(UIColor(250,250,250))
+    
+    ListDemo()
+    .grow(1)
 //    TabSegmentDemo()
     
     
     
-    HStack{
-
-       HStack{
-        
-        Text("姓")
-            .font(size: 16.0)
-            .backgroundColor(.cyan)
-            .textColor(.red)
-            .width(150)
-            .textAlign(.center)
-//            .shadow(offset: CGSize(width: 60, height: 10), radius: 3, opacity: 0.5)
-            .shadow(shadowColor: UIColor.red, shadowOffset: CGSize(width: 60, height: 10), shadowRadius: 3, shadowOpacity: 0.5)
+//    HStack{
+//
+//       HStack{
+//
+//        Text("姓")
+//            .font(size: 16.0)
+//            .backgroundColor(.cyan)
+//            .textColor(.red)
+//            .width(150)
+//            .textAlign(.center)
+////            .shadow(offset: CGSize(width: 60, height: 10), radius: 3, opacity: 0.5)
+//            .shadow(shadowColor: UIColor.red, shadowOffset: CGSize(width: 60, height: 10), shadowRadius: 3, shadowOpacity: 0.5)
+////            .shrink(1.0)
+////        Button {
+////
+////        } builder: {
+////            Text("姓名姓名姓")
+////                .font(size: 16.0)
+////                .backgroundColor(.cyan)
+////                .textColor(.red)
+////                .
+////                .shrink(1.0).alignSelf(.center)
+////        }.textColor(.orange)
+////        .shrink(1.0)
+////
+////        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
+////
+////        }
+//            .font(size: 26.0)
+//            .backgroundColor(.cyan)
+//            .textColor(.red)
 //            .shrink(1.0)
-//        Button {
 //
-//        } builder: {
-//            Text("姓名姓名姓")
-//                .font(size: 16.0)
-//                .backgroundColor(.cyan)
-//                .textColor(.red)
-//                .
-//                .shrink(1.0).alignSelf(.center)
-//        }.textColor(.orange)
-//        .shrink(1.0)
+//        ForEach(0..<1){ item in
+//            Image("icybay.jpg")
+//                .margin(edge: .left, value: 4)
+//                .width(15.0)
+//                .height(15.0)
+//               .alignSelf(.center)
+//        }.flexDirection(.row)
+//        .margin(edge: .left, value: 4)
+//        .margin(edge: .right, value: 4)
+//        .alignSelf(.center)
+//       }
+//       .flex(1)
 //
-//        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
 //
-//        }
-            .font(size: 26.0)
-            .backgroundColor(.cyan)
-            .textColor(.red)
-            .shrink(1.0)
-        
-        ForEach(0..<1){ item in
-            Image("icybay.jpg")
-                .margin(edge: .left, value: 4)
-                .width(15.0)
-                .height(15.0)
-               .alignSelf(.center)
-        }.flexDirection(.row)
-        .margin(edge: .left, value: 4)
-        .margin(edge: .right, value: 4)
-        .alignSelf(.center)
-       }
-       .flex(1)
-        
-        
-        Text("10.0千米")
-            .textAlign(.right)
-            .font(size: 13)
-            .textColor(UIColor(170,170,170))
-           .backgroundColor(.yellow)
-            
-       
-    }
-    .margin(edge: .left, value: 4)
-    .margin(edge: .top, value: 104)
-    .width(100%)
-    .backgroundColor(.purple)
-    
+//        Text("10.0千米")
+//            .textAlign(.right)
+//            .font(size: 13)
+//            .textColor(UIColor(170,170,170))
+//           .backgroundColor(.yellow)
+//
+//
+//    }
+//    .margin(edge: .left, value: 4)
+//    .margin(edge: .top, value: 104)
+//    .width(100%)
+//    .backgroundColor(.purple)
+//
    }
 }
 
