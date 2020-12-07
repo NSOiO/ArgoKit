@@ -46,8 +46,13 @@ struct ViewPageCell: ArgoKit.View {
         item = it
     }
     var body: ArgoKit.View {
-        ArgoKit.Text(item.text)
-            .font(size: 20)
+        ArgoKit.HStack {
+            ArgoKit.Text(item.text)
+                .font(size: 20)
+        }
+        .height(100)
+        .margin(edge: ArgoEdge.top, value: 50)
+        .backgroundColor(item.bgColor ?? UIColor.red)
     }
 }
 
@@ -68,31 +73,36 @@ struct ViewPage1 : ArgoKit.View {
         }
     }
     
-    var body: View {
-        ArgoKit.ViewPage(data: items) { item in
-            ViewPageCell(it: item)
+    var body: ArgoKit.View {
+        
+        ArgoKit.HStack {
+            ArgoKit.ViewPage(data: items) { item in
+                ViewPageCell(it: item)
+            }
+            .grow(1)
+            .height(300)
+            .backgroundColor(UIColor.orange)
+//            .reuseEnable(enable: false)
+            .scrollToPage(index: 2)
+//            .scrollEnable(enable: false)
+            .setTabScrollingListener { (percent, from, to) in
+                NSLog("%f - %d - %d", percent, from, to)
+            }
+            .onChangeSelected { (item, to) in
+                NSLog(">>> %d", to)
+            }
         }
-        .grow(1)
-        .height(300)
-//        .reuseEnable(enable: false)
-        .scrollToPage(index: 2)
-//        .scrollEnable(enable: false)
-        .setTabScrollingListener { (percent, from, to) in
-            NSLog("%f - %d - %d", percent, from, to)
-        }
-        .onChangeSelected { (item, to) in
-            NSLog(">>> %d", to)
-        }
-
+        .backgroundColor(UIColor.red)
+        .margin(top: 100, right: 0, bottom: 0, left: 0)
     }
 
 }
 
-//struct ViewPagerDemo_Previews: PreviewProvider {
-//    static var previews: some SwiftUI.View {
-//        ArgoRender {
-////            ViewPagerDemo().body
-//            ViewPage1().body
-//        }
-//    }
-//}
+struct ViewPagerDemo_Previews: PreviewProvider {
+    static var previews: some SwiftUI.View {
+        ArgoRender {
+//            ViewPagerDemo().body
+            ViewPage1().body
+        }
+    }
+}
