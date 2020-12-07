@@ -19,6 +19,23 @@ struct ArgoKitCornerRadius{
     var bottomRight:CGFloat = 0
 }
 
+public struct ArgoKitGradientType : OptionSet {
+    public var rawValue: UInt
+    
+    public init(rawValue: UInt){
+        self.rawValue = rawValue
+    }
+    public static var Non: ArgoKitGradientType = ArgoKitGradientType(rawValue: 0)
+
+    public static var LeftToRight: ArgoKitGradientType = ArgoKitGradientType(rawValue: 1<<0)
+
+    public static var RightToLeft: ArgoKitGradientType = ArgoKitGradientType(rawValue: 1<<1)
+
+    public static var TopToBottom: ArgoKitGradientType = ArgoKitGradientType(rawValue: 1<<2)
+
+    public static var BottomToTop: ArgoKitGradientType = ArgoKitGradientType(rawValue: 1<<3)
+}
+
 class ArgoKitCornerManagerTool {
     
     class func multiRadius(multiRadius:ArgoKitCornerRadius,corner:UIRectCorner,cornerRadius:CGFloat)->ArgoKitCornerRadius{
