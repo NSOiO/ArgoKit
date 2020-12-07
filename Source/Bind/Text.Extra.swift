@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 extension Text {
     public convenience
     init(_ textProperty: Property<String>?) {
@@ -25,10 +25,17 @@ extension Text {
     }
     
     public func text(_ property: Property<String>?)->Self{
-        return self.watch(property: property, function: self.text, key: #function)
+        return self.watch(property: property, function: { (text: String) -> Self in
+            self.text(text)
+        }, key: #function)
+//        return self.watch(property: property, function: self.text, key: #function)
     }
     
     public func text(_ property: Property<String?>?) -> Self {
-        return self.watch(property: property, function: self.text, key: #function)
+//        return self.watch(property: property, function: self.text, key: #function)
+        return self.watch(property: property, function: { (text: String?) -> Self in
+            self.text(text)
+        }, key: #function)
     }
 }
+*/

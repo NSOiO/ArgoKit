@@ -7,9 +7,12 @@ A view that clips an image to a circle and adds a stroke and shadow.
 
 import ArgoKit
 
-struct CircleImage: View {
+class CircleImage: View {
+    
     var image: Image
-
+    init(image: Image) {
+        self.image = image
+    }
     var body: View {
         image.cornerRadius(image.imageSize().width * 0.5)
 //        image

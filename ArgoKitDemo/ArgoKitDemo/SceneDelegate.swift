@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let contentView = PreviewDemo()
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
-            let vc = ArgokitDemoController()//UIHostingController(rootView: contentView)
+//            let vc = ArgokitDemoController()//
+            let vc = UIHostingController(rootView: contentView)
             vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
             let nav = UINavigationController(rootViewController: vc)
             let window = UIWindow(windowScene: windowScene)

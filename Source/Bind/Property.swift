@@ -42,6 +42,9 @@ public class Property<Value> : DynamicProperty {
     /// The current state value.
     public var wrappedValue: Value {
         get {
+            if let sub = Dep.getSub() {
+                Dep.pushCancellable(self.watch(sub))
+            }
             return _value
         }
         set {
@@ -68,6 +71,16 @@ public class Property<Value> : DynamicProperty {
     
     public func watch(_ f: @escaping (Value) -> Void) -> Cancellable {
         let id = self.subscribe(f)
+        let cancel = ClosureCancelable { [weak self] in
+            self?.removesubscriber(id)
+        }
+        return cancel
+    }
+    
+    public func watch(_ f:@escaping () -> Void) -> Cancellable {
+        let id = self.subscribe { _ in
+            f()
+        }
         let cancel = ClosureCancelable { [weak self] in
             self?.removesubscriber(id)
         }

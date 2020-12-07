@@ -7,26 +7,29 @@ A single row to be displayed in a list of landmarks.
 
 import ArgoKit
 
-struct LandmarkRow: View {
+class LandmarkRow: View {
     
     var landmark: Landmark
-
+    init(landmark: Landmark) {
+        self.landmark = landmark
+    }
+    
     var body: View {
         Text("我是样式0").size(width: 100%, height: 44).alignContent(.center)
         HStack {
-            landmark.image
+            self.landmark.image
                 .resizable()
                 .size(width: 50, height: 50).cornerRadius(10).clipsToBounds(true)
             Spacer()
             HStack{
-                Text(landmark.name).alignSelf(.center)
+                Text(self.landmark.name).alignSelf(.center)
             }.backgroundColor(.yellow)
             Spacer()
-            Text(landmark.name)
+            Text(self.landmark.name)
            
         }
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("👌").margin(top: 30, right: 40, bottom: 20, left: 10)
             Text("👌")
             Text("👌")
@@ -34,7 +37,7 @@ struct LandmarkRow: View {
             Text("👌")
         }
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("👌")
             Text("👌")
             Text("👌")
@@ -42,7 +45,7 @@ struct LandmarkRow: View {
             Text("👌")
         }
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("👌")
             Text("👌")
             Text("👌")
@@ -50,7 +53,7 @@ struct LandmarkRow: View {
             Text("👌")
         }
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("👌")
             Text("👌")
             Text("👌")
@@ -58,7 +61,7 @@ struct LandmarkRow: View {
             Text("👌")
         }
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("👌")
             Text("👌")
             Text("👌")

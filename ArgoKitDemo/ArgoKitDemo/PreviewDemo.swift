@@ -9,9 +9,20 @@ import ArgoKit
 
 class PreviewModel {
     var label:Text?
+    @Property var title: String = "is title"
+    @Property var name: String = "is name"
+    static var count: Int = 1
+    
+    func getTitle() -> String {
+        Self.count += 2
+        if Self.count > 10 {
+            return self.name
+        }
+        return self.title + " \(Self.count)"
+    }
 }
 
-struct MyView: ArgoKit.View {
+class MyView: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: View {
         VStack {
@@ -20,7 +31,7 @@ struct MyView: ArgoKit.View {
     }
 }
 
-struct PreviewDemo: ArgoKit.View {
+class PreviewDemo: ArgoKit.View {
     var model = PreviewModel()
     
     typealias View = ArgoKit.View
@@ -30,16 +41,26 @@ struct PreviewDemo: ArgoKit.View {
                 .margin(edge: .bottom, value: 20)
                 .backgroundColor(.blue)
             
-            Text("aabbbbbbbbfldjaflajsflajsflkjasfl;ads")
+            Text().text(self.self.model.getTitle())
                 .lineLimit(0)
-                .alias(variable: &model.label)
+                .alias(variable: &self.model.label)
                 .margin(edge: .bottom, value: 20)
+            
             Button {
                 print("click")
-                if let t = self.model.label?.node?.text() {
-                    _ = self.model.label?.text(t + "click ")
+                
+                let count = Swift.type(of: self.model).count
+                if count > 10 {
+                    self.model.name = "name \(count)"
+                } else {
+                    self.self.model.title = self.self.model.title
                 }
-//                self.model.text?.text("\(self.model.text?.text)" + "click  ")
+                
+//                if let t = self.self.model.label?.node?.text() {
+//                    _ = self.self.model.label?.text(t + "click ")
+//                }
+//                self.self.model.title = self.self.model.label?.node?.text() ?? "init"
+                
             } builder: { () -> View in
                 Text("Click")
                 Image(".iamge")
@@ -70,6 +91,7 @@ struct PreviewDemo_Previews: PreviewProvider {
         ArgoRender {
             PreviewDemo()
         }
+//        SwiftUI.Text("aaaaa")
     }
 }
 #endif

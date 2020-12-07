@@ -7,31 +7,34 @@
 
 import ArgoKit
 
-struct LandmarkRow2: View {
+class LandmarkRow2: View {
     
     var landmark: Landmark
-
+    init(landmark: Landmark) {
+        self.landmark = landmark
+    }
+    
     var body: View {
         Text("我是样式2").size(width: 100%, height: 44).alignContent(.center)
         HStack {
-            landmark.image
+            self.landmark.image
                 .resizable()
                 .size(width: 50, height: 50)
             Spacer()
-            Text(landmark.name)
+            Text(self.landmark.name)
         }
         HStack {
-            landmark.image
+            self.landmark.image
                 .resizable()
                 .size(width: 50, height: 50)
-            Text(landmark.name)
+            Text(self.landmark.name)
         }
-        landmark.image
+        self.landmark.image
             .resizable()
             .size(width: 50, height: 50)
         HStack {
             
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("🐯")
             Text("🐯")
             Text("🐯")
@@ -39,29 +42,29 @@ struct LandmarkRow2: View {
             Text("🐯")
         }
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("🐯")
             Text("🐯")
             Text("🐯")
             Text("🐯")
             Text("🐯")
         }
-        landmark.image
+        self.landmark.image
             .resizable()
             .size(width: 50, height: 50)
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("🐯")
             Text("🐯")
             Text("🐯")
             Text("🐯")
             Text("🐯")
         }
-        landmark.image
+        self.landmark.image
             .resizable()
             .size(width: 50, height: 50)
         HStack {
-            Text(landmark.name)
+            Text(self.landmark.name)
             Text("🐯")
             Text("🐯")
             Text("🐯")
