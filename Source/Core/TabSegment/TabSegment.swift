@@ -27,15 +27,13 @@ public class TabSegment: View {
     private var _toValue: AnimationValue?
     private var _isDoingAnimation = false
     private var _previousScrollProgress: Float = 0
+    private var _scaleAnimationProgress: Float = 0.0
     private var _animCache: [AnyHashable:Array<Any>] = [:]
     
     private var _previousIndex: Int = -1
     private var _currentIndex: Int = -1
     private var _displayLink: CADisplayLink?
     private var _clickCallback: ((Int,Bool)->Void)?
-    
-    private var _scaleAnimationProgress: Float = 0.0
-    private var _previousContentOffsetX: Float = 0.0
     
     private let containerNodeObserver = ArgoKitNodeObserver()
     private let itemStackNodeObserver = ArgoKitNodeObserver()
@@ -436,11 +434,6 @@ public class TabSegment: View {
         } else {
             cachAnim = Animation(type: .contentOffset)
             cachAnim?.attach(self)
-            cachAnim?.finishCallback { (_, _) in
-                if let scrollView = self._scrollView {
-                    self._previousContentOffsetX = Float(scrollView.contentOffset.x)
-                }
-            }
             _animCache[_scrollView] = [cachAnim!]
         }
         guard let anim = cachAnim else { return }
@@ -457,15 +450,12 @@ public class TabSegment: View {
         } else {
             offset = centerX - width / 2
         }
-        anim.from(_previousContentOffsetX, 0).to(offset, 0)
+        anim.to(offset, 0)
         if autoAnim {
             anim.duration(AnimationDuration)
             anim.start()
         } else {
             anim.update(progress: progress)
-            if progress >= 1 {
-                _previousContentOffsetX = Float(_scrollView?.contentOffset.x ?? 0.0)
-            }
         }
     }
     

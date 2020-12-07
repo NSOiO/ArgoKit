@@ -336,24 +336,24 @@ class customView: ArgoKit.View  {
     }
 }
 
-//class TabSegmentDemo: ArgoKit.View {
-//    var body: View {
-//        TabSegment {
-//            Text("AA").textAlign(.center).width(200).height(50).backgroundColor(.blue)
-//            Text("BB").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-//            Text("CC").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-//            Text("DD").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-//            Text("EE").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-//            Text("FF").textAlign(.center).width(100).height(50).backgroundColor(.blue)
-//            Text("GG").textAlign(.center).width(100).height(50).backgroundColor(.blue)
+class TabSegmentDemo: ArgoKit.View {
+    var body: View {
+        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
+            Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
+        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+        .select(index: 1)
+        .backgroundColor(.yellow)
+//        .animType(.color)
+//        .animFromValue(.color(.blue))
+//        .animToValue(.color(.yellow))
+        
+//        TabSegment(["1", "2", "3", "4", "5", "6", "7", "8"]) {
+//            Text($0 as? String).textAlign(.center).width(400).height(500).backgroundColor(.green)
 //        }.margin(top: 100, right: 0, bottom: 0, left: 0)
-//        .select(index: 2)
 //        .backgroundColor(.yellow)
-////        .animType(.color)
-////        .animFromValue(.color(.blue))
-////        .animToValue(.color(.yellow))
-//    }
-//}
+//        .animType(.color).animToValue(.color(.orange))
+    }
+}
 
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
@@ -418,7 +418,7 @@ class ArgoKitViewDemo:ArgoKit.View  {
     .margin(edge: .top, value: 104)
     .width(100%)
     .backgroundColor(.purple)
-
+ */
     
    }
 }

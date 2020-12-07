@@ -18,7 +18,7 @@ public class ScrollView: View {
         pNode
     }
     
-    init() {
+    public init() {
         createNode()
     }
     
