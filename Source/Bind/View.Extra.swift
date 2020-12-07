@@ -75,10 +75,10 @@ extension View {
     
     @discardableResult
     public func bindCallback(_ callback: @escaping () -> Void, forKey key: String) -> Self {
-        Dep.setSub { [weak self] in
-            self?.removeCancellables(forKey: key)
-            self?.bindCallback(callback, forKey: key)
-        }
+//        Dep.setSub { [weak self] in
+//            self?.removeCancellables(forKey: key)
+//            self?.bindCallback(callback, forKey: key)
+//        }
         callback()
         Dep.removeSub()
         let cancels = Dep.popAllCancellables()
