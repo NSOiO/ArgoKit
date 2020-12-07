@@ -225,7 +225,7 @@ extension ArgoKitViewPageNode {
         if let changedFunc = self.pageChangedFunc {
             let count = self.dataSourceHelper.numberOfRows(section: 0)
             var item:Any? = nil
-            if count > toIndex {
+            if count > toIndex && toIndex >= 0 {
                 item = self.dataSourceHelper.dataList?[0][toIndex]
             }
             changedFunc(item, toIndex)
