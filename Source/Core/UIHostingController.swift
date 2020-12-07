@@ -67,7 +67,7 @@ open class UIHostingController:UIViewController{
         self.edgesForExtendedLayout = UIRectEdge.init()
         
         rootView = HostView(self.view){
-            rootView_!.width(100%).height(100%)
+            rootView_!.grow(1)
         }
     }
     

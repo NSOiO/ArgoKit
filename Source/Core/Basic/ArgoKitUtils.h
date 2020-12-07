@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ArgoKitUtils : NSObject
 + (void)runMainThreadAsyncBlock:(dispatch_block_t)block;
 + (void)runMainThreadSyncBlock:(dispatch_block_t)block;
++ (UIColor*)colorWithHex:(long)hexColor;
++ (UIColor *)colorWithHex:(long)hexColor alpha:(float)opacity;
 @end
 
 NS_ASSUME_NONNULL_END

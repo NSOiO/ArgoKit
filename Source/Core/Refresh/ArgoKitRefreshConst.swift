@@ -37,5 +37,5 @@ public struct ArgoKitRefreshAutoFoot {
 }
 
 
-public let JRefreshLabelFont = UIFont.boldSystemFont(ofSize: 14)
-public let JRefreshLabelTextColor = UIColor(red: 90.0 / 255.0, green: 90.0 / 255.0, blue: 90.0 / 255.0, alpha: 1.0)
+public let ArgoKitRefreshLabelFont = UIFont.boldSystemFont(ofSize: 14)
+public let ArgoKitRefreshLabelTextColor = UIColor(red: 90.0 / 255.0, green: 90.0 / 255.0, blue: 90.0 / 255.0, alpha: 1.0)

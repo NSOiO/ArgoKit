@@ -25,11 +25,11 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                 .margin(edge: .left, value: 15.0)
                 .cornerRadius(10)
                 .backgroundColor(.red)
-                    .border(width: 1)
-                    .border(color:.cyan)
+                    .borderWidth(1)
+                    .borderColor(.cyan)
                 
                 Image("")
-                    .height(12.0)
+                .height(12.0)
                 .width(18.0)
                 .margin(top: -5, right: 0, bottom: 0, left: 33)
                 .circle()
@@ -41,10 +41,16 @@ class MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                     Text("姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓姓名姓")
+                     Text("姓名")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                         .shrink(1.0)
+                        .textShadowOffset(CGSize(width: 2, height: 2))
+                        .textShadowColor(.red)
+                        .shadow(offset: CGSize(width: 2, height: 2), radius: 20, opacity: 0.5)
+                        .width(100)
+                        .padding(edge: .left, value: 5)
+                        
+//                         .shrink(1.0)
                         
                         Button(action: {
                             
@@ -58,7 +64,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                         .alignSelf(.center)
                         .padding(top: 7, right: 7, bottom: 7, left: 7)
      
-                    }.basis(1.0)
+                    }.flex(1.0)
                     
 //                     Spacer()
                      
@@ -97,12 +103,14 @@ class MSUserInterractionContentView: ArgoKit.View {
              .height(46.0)
              .cornerRadius(4)
             
-            Text("姓名sasd姓名sasd姓名sasd姓名")
+            Text("姓名sasd姓名sasd")
                 .lineLimit(2)
                 .textColor(UIColor(50,51,51))
                 .font(size: 16.0)
                 .margin(edge: .left, value: 5)
                 .alignSelf(.center)
+                .textShadowColor(UIColor.red)
+                .textShadowOffset(CGSize(width: 0, height: 2))
             
          }.margin(edge: .left, value: 10)
          .margin(edge: .top, value: 10)
@@ -179,7 +187,7 @@ class SessionRow:ArgoKit.View {
        self.item = item
    }
     
-    var body: ArgoKit.View{
+   var body: ArgoKit.View{
         MSUserInterractionHeaderView().margin(edge: .top, value: 5)
         .onTapGesture {[data = self.item] in
             print(data)
@@ -215,7 +223,7 @@ class ListDemo:ArgoKit.View{
     var hidden:Bool = false
     
     var body: ArgoKit.View{
-        List<SessionItem,SessionItem,SessionItem>(data:items){ item in
+        ArgoKit.List<SessionItem,SessionItem,SessionItem>(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
         .didSelectRow {item, indexPath in
@@ -335,92 +343,103 @@ class customView: ArgoKit.View  {
         .backgroundColor(.cyan)
     }
 }
-
-class TabSegmentDemo: ArgoKit.View {
-    var body: ArgoKit.View {
-        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
-            Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
-        }.margin(top: 100, right: 0, bottom: 0, left: 0)
-        .select(index: 1)
-        .backgroundColor(.yellow)
-//        .animType(.color)
-//        .animFromValue(.color(.blue))
-//        .animToValue(.color(.yellow))
-        
-//        TabSegment(["1", "2", "3", "4", "5", "6", "7", "8"]) {
-//            Text($0 as? String).textAlign(.center).width(400).height(500).backgroundColor(.green)
+//
+//class TabSegmentDemo: ArgoKit.View {
+//    var body: ArgoKit.View {
+//        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
+//            Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
 //        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+//        .select(index: 1)
 //        .backgroundColor(.yellow)
-//        .animType(.color).animToValue(.color(.orange))
-    }
-}
+////        .animType(.color)
+////        .animFromValue(.color(.blue))
+////        .animToValue(.color(.yellow))
+//
+////        TabSegment(["1", "2", "3", "4", "5", "6", "7", "8"]) {
+////            Text($0 as? String).textAlign(.center).width(400).height(500).backgroundColor(.green)
+////        }.margin(top: 100, right: 0, bottom: 0, left: 0)
+////        .backgroundColor(.yellow)
+////        .animType(.color).animToValue(.color(.orange))
+//    }
+//}
 
 class ArgoKitViewDemo:ArgoKit.View  {
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-//    ListDemo()
-//    .grow(1)
+    
+    MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+    
+    MSUserInterractionContentView()
+        .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
+        .cornerRadius(5)
+        .backgroundColor(UIColor(250,250,250))
+    
+    ListDemo()
+    .grow(1)
 //    TabSegmentDemo()
     
     
     
-    HStack{
-
-       HStack{
-        
-        Text("姓")
-            .font(size: 16.0)
-            .backgroundColor(.cyan)
-            .textColor(.red)
-            .width(150)
-            .textAlign(.center)
+//    HStack{
+//
+//       HStack{
+//
+//        Text("姓")
+//            .font(size: 16.0)
+//            .backgroundColor(.cyan)
+//            .textColor(.red)
+//            .width(150)
+//            .textAlign(.center)
+////            .shadow(offset: CGSize(width: 60, height: 10), radius: 3, opacity: 0.5)
+//            .shadow(shadowColor: UIColor.red, shadowOffset: CGSize(width: 60, height: 10), shadowRadius: 3, shadowOpacity: 0.5)
+////            .shrink(1.0)
+////        Button {
+////
+////        } builder: {
+////            Text("姓名姓名姓")
+////                .font(size: 16.0)
+////                .backgroundColor(.cyan)
+////                .textColor(.red)
+////                .
+////                .shrink(1.0).alignSelf(.center)
+////        }.textColor(.orange)
+////        .shrink(1.0)
+////
+////        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
+////
+////        }
+//            .font(size: 26.0)
+//            .backgroundColor(.cyan)
+//            .textColor(.red)
 //            .shrink(1.0)
-        Button {
-            
-        } builder: {
-            Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
-                .font(size: 16.0)
-                .backgroundColor(.cyan)
-                .textColor(.red)
-                .shrink(1.0).alignSelf(.center)
-        }.textColor(.orange)
-        .shrink(1.0)
-
-        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
-            
-        }
-            .font(size: 26.0)
-            .backgroundColor(.cyan)
-            .textColor(.red)
-            .shrink(1.0)
-        
-        ForEach(0..<1){ item in
-            Image("icybay.jpg")
-                .margin(edge: .left, value: 4)
-                .width(15.0)
-                .height(15.0)
-               .alignSelf(.center)
-        }.flexDirection(.row)
-        .margin(edge: .left, value: 4)
-        .margin(edge: .right, value: 4)
-        .alignSelf(.center)
-       }
-       .flex(1)
-        
-        
-        Text("10.0千米")
-            .textAlign(.right)
-            .font(size: 13)
-            .textColor(UIColor(170,170,170))
-           .backgroundColor(.yellow)
-            
-       
-    }
-    .margin(edge: .left, value: 4)
-    .margin(edge: .top, value: 104)
-    .width(100%)
-    .backgroundColor(.purple)
-    
+//
+//        ForEach(0..<1){ item in
+//            Image("icybay.jpg")
+//                .margin(edge: .left, value: 4)
+//                .width(15.0)
+//                .height(15.0)
+//               .alignSelf(.center)
+//        }.flexDirection(.row)
+//        .margin(edge: .left, value: 4)
+//        .margin(edge: .right, value: 4)
+//        .alignSelf(.center)
+//       }
+//       .flex(1)
+//
+//
+//        Text("10.0千米")
+//            .textAlign(.right)
+//            .font(size: 13)
+//            .textColor(UIColor(170,170,170))
+//           .backgroundColor(.yellow)
+//
+//
+//    }
+//    .margin(edge: .left, value: 4)
+//    .margin(edge: .top, value: 104)
+//    .width(100%)
+//    .backgroundColor(.purple)
+//
    }
 }
 

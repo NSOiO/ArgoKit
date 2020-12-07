@@ -15,6 +15,13 @@ class ArgoKitImageNode: ArgoKitNode {
     
     
     public func image(url: URL?, placeholder: String?) {
+        if url == nil {
+            guard let image = placeholder != nil ? UIImage(named: placeholder!) : nil else {
+                return
+            }
+            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+            return
+        }
         ArgoKitInstance.imageLoader()?.loadImage(url: url, placeHolder: placeholder) { image in
             if let img = image {
                 ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
