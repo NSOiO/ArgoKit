@@ -4,7 +4,7 @@ import ArgoKit
 
 class ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
     typealias View = ArgoKit.View
-    var body: View {
+    var body: ArgoKit.View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
