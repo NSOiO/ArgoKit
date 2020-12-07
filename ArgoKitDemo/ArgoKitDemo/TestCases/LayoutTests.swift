@@ -9,46 +9,46 @@ import ArgoKit
 
 class LayoutTests: ArgoKit.View {
     typealias View = ArgoKit.View
-    var body: View {
+    var body: ArgoKit.View {
         VStack {
             Text("text 1")
                 .backgroundColor(.blue)
                 .textAlign(.center)
-                .border(color: .red)
-                .border(width: 2)
+                .borderColor(.red)
+                .borderWidth(2)
                 .cornerRadius(12)
                 .margin(edge: .all, value: 20)
                 .shadow(shadowColor: .red, shadowOffset: .init(width: 10, height: 10), shadowRadius: 5, shadowOpacity: 1)
-            
+
             Text("text 1.1")
                 .backgroundColor(.blue)
                 .textAlign(.center)
                 .padding(edge: .left, value: 200)
                 .margin(edge: .top, value: 10)
                 .margin(edge: .bottom, value: 10)
-                
+
             Text("text 1.1")
                 .backgroundColor(.blue)
                 .textAlign(.justified)
                 .padding(edge: .left, value: 200)
-                
+
             Image("turtlerock")
                 .width(100)
                 .aspect(ratio: 1)
                 .cornerRadius(50)
-                .border(width: 4)
-                .border(color: .white)
+                .borderWidth(4)
+                .borderColor(.white)
                 .margin(edge: .all, value: 40)
-            
+
             Image("turtlerock")
                 .width(100)
                 .aspect(ratio: 1)
                 .margin(edge: .left, value: 40)
                 .shadow(shadowColor: .red, shadowOffset: CGSize.init(width: 10, height: 10), shadowRadius: 5, shadowOpacity: 1)
                 .margin(edge: .bottom, value: 40)
-            
+
             Spacer().height(10).backgroundColor(.lightText)
-            
+
             Text("text 2")
                 .backgroundColor(.red)
                 .alignSelf(.start)
