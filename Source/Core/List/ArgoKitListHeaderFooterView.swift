@@ -13,7 +13,7 @@ class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
       
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .white
+        backgroundView = UIView()
     }
     
     required init?(coder: NSCoder) {
