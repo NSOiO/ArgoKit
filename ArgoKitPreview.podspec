@@ -27,6 +27,8 @@ podspec = Pod::Spec.new do |spec|
   #  spec.default_subspec = "Core"
     # spec.dependency 'Yoga', '~> 1.14'
     spec.dependency 'ArgoKit'
+    spec.dependency 'ArgoKitComponent'
+    
     spec.module_name = 'ArgoKitPreview'
     spec.source_files = "Source/Preview/**/*.{h,m,mm,swift}"
     # spec.libraries = 'z','c++'
