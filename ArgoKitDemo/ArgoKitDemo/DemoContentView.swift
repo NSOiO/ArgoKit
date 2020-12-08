@@ -70,7 +70,7 @@ class DemoContentView: View {
            
         }.width(100%).height(100%).backgroundColor(.white)
         .didSelectRow { item, indexPath in
-            item?.textCom?.text("haha11"+item!.text)
+            item.textCom?.text("haha11"+item.text)
         }
     }
 }

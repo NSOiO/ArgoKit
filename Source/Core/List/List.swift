@@ -295,12 +295,12 @@ extension List {
         return self
     }
     
-    public func canEditRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func canEditRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canEditRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -309,12 +309,12 @@ extension List {
         return self
     }
     
-    public func canMoveRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func canMoveRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canMoveRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -328,13 +328,13 @@ extension List {
         return self
     }
     
-    public func commitEditingRow(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func commitEditingRow(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:commit:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
                 let editingStyle: UITableViewCell.EditingStyle = paramter![0] as! UITableViewCell.EditingStyle
-                let data: Data? = paramter![1] as? Data
+                let data: Data = paramter![1] as! Data
                 let indexPath: IndexPath = paramter![2] as! IndexPath
                 action(editingStyle, data, indexPath)
             }
@@ -343,13 +343,13 @@ extension List {
         return self
     }
     
-    public func moveRow(_ action: @escaping (_ sourceData: Data?, _ destinationData: Data?, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
+    public func moveRow(_ action: @escaping (_ sourceData: Data, _ destinationData: Data, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:moveRowAt:to:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 4 {
-                let sourceData: Data? = paramter![0] as? Data
-                let destinationData: Data? = paramter![1] as? Data
+                let sourceData: Data = paramter![0] as! Data
+                let destinationData: Data = paramter![1] as! Data
                 let sourceIndexPath: IndexPath = paramter![2] as! IndexPath
                 let destinationIndexPath: IndexPath = paramter![3] as! IndexPath
                 action(sourceData, destinationData, sourceIndexPath, destinationIndexPath)
@@ -391,12 +391,12 @@ extension List {
 
 extension List {
     
-    public func willDisplayRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func willDisplayRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDisplay:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 action(data, indexPath)
             }
@@ -433,12 +433,12 @@ extension List {
         return self
     }
 
-    public func didEndDisplayingRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didEndDisplayingRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didEndDisplaying:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 action(data, indexPath)
             }
@@ -475,12 +475,12 @@ extension List {
         return self
     }
     
-    public func shouldHighlightRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldHighlightRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldHighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -489,12 +489,12 @@ extension List {
         return self
     }
 
-    public func didHighlightRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didHighlightRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didHighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 action(data, indexPath)
             }
@@ -503,12 +503,12 @@ extension List {
         return self
     }
 
-    public func didUnhighlightRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didUnhighlightRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didUnhighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 action(data, indexPath)
             }
@@ -517,12 +517,12 @@ extension List {
         return self
     }
 
-    public func willSelectRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+    public func willSelectRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> IndexPath?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -531,12 +531,12 @@ extension List {
         return self
     }
 
-    public func willDeselectRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+    public func willDeselectRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> IndexPath?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -545,7 +545,7 @@ extension List {
         return self
     }
 
-    public func didSelectRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didSelectRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -553,21 +553,18 @@ extension List {
                 let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 action(data, indexPath)
-            } else if paramter?.count ?? 0 >= 1 {
-                let indexPath: IndexPath = paramter![0] as! IndexPath
-                action(nil, indexPath)
             }
             return nil
         })
         return self
     }
 
-    public func didDeselectRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didDeselectRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -576,12 +573,12 @@ extension List {
         return self
     }
     
-    public func editingStyle(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> UITableViewCell.EditingStyle) -> Self {
+    public func editingStyle(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> UITableViewCell.EditingStyle) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:editingStyleForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -590,12 +587,12 @@ extension List {
         return self
     }
 
-    public func titleForDeleteConfirmationButton(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> String?) -> Self {
+    public func titleForDeleteConfirmationButton(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> String?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -605,12 +602,12 @@ extension List {
     }
     
     @available(iOS, introduced: 8.0, deprecated: 13.0)
-    public func editActions(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> [ListRowAction]?) -> Self {
+    public func editActions(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> [ListRowAction]?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:editActionsForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -620,12 +617,12 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func leadingSwipeActions(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
+    public func leadingSwipeActions(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -635,12 +632,12 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func trailingSwipeActions(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
+    public func trailingSwipeActions(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -649,12 +646,12 @@ extension List {
         return self
     }
 
-    public func shouldIndentWhileEditingRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldIndentWhileEditingRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldIndentWhileEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -663,12 +660,12 @@ extension List {
         return self
     }
 
-    public func willBeginEditingRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func willBeginEditingRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:willBeginEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -682,7 +679,7 @@ extension List {
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             } else {
@@ -693,13 +690,13 @@ extension List {
         return self
     }
 
-    public func targetIndexPathForMove(_ action: @escaping (_ sourceData: Data?, _ proposedDestinationData: Data?, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath) -> Self {
+    public func targetIndexPathForMove(_ action: @escaping (_ sourceData: Data, _ proposedDestinationData: Data, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 4 {
-                let sourceData: Data? = paramter![0] as? Data
-                let destinationData: Data? = paramter![1] as? Data
+                let sourceData: Data = paramter![0] as! Data
+                let destinationData: Data = paramter![1] as! Data
                 let sourceIndexPath: IndexPath = paramter![2] as! IndexPath
                 let proposedDestinationIndexPath: IndexPath = paramter![3] as! IndexPath
                 return action(sourceData, destinationData, sourceIndexPath, proposedDestinationIndexPath)
@@ -709,12 +706,12 @@ extension List {
         return self
     }
 
-    public func indentationLevel(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Int) -> Self {
+    public func indentationLevel(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Int) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:indentationLevelForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -724,12 +721,12 @@ extension List {
     }
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
-    public func shouldShowMenu(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldShowMenu(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldShowMenuForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -739,13 +736,13 @@ extension List {
     }
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
-    public func canPerformAction(_ action: @escaping (_ action: Selector, _ data: Data?, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
+    public func canPerformAction(_ action: @escaping (_ action: Selector, _ data: Data, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canPerformAction:forRowAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
                 let act: Selector = paramter![0] as! Selector
-                let data: Data? = paramter![1] as? Data
+                let data: Data = paramter![1] as! Data
                 let indexPath: IndexPath = paramter![2] as! IndexPath
                 var sender: Any? = nil
                 if paramter?.count ?? 0 >= 4 {
@@ -759,13 +756,13 @@ extension List {
     }
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
-    public func performAction(_ action: @escaping (_ action: Selector, _ data: Data?, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
+    public func performAction(_ action: @escaping (_ action: Selector, _ data: Data, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:performAction:forRowAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
                 let act: Selector = paramter![0] as! Selector
-                let data: Data? = paramter![1] as? Data
+                let data: Data = paramter![1] as! Data
                 let indexPath: IndexPath = paramter![2] as! IndexPath
                 var sender: Any? = nil
                 if paramter?.count ?? 0 >= 4 {
@@ -778,12 +775,12 @@ extension List {
         return self
     }
 
-    public func canFocusRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func canFocusRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canFocusRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -829,12 +826,12 @@ extension List {
     }
 
     @available(iOS 11.0, *)
-    public func shouldSpringLoadRow(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool) -> Self {
+    public func shouldSpringLoadRow(_ action: @escaping (_ data: Data, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldSpringLoadRowAt:with:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 let context: UISpringLoadedInteractionContext = paramter![2] as! UISpringLoadedInteractionContext
                 return action(data, indexPath, context)
@@ -845,12 +842,12 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func shouldBeginMultipleSelectionInteraction(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldBeginMultipleSelectionInteraction(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:shouldBeginMultipleSelectionInteractionAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -860,12 +857,12 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func didBeginMultipleSelectionInteraction(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath) -> Void) -> Self {
+    public func didBeginMultipleSelectionInteraction(_ action: @escaping (_ data: Data, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:didBeginMultipleSelectionInteractionAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 return action(data, indexPath)
             }
@@ -886,12 +883,12 @@ extension List {
     }
 
     @available(iOS 13.0, *)
-    public func contextMenuConfiguration(_ action: @escaping (_ data: Data?, _ indexPath: IndexPath, _ point: CGPoint) -> UIContextMenuConfiguration?) -> Self {
+    public func contextMenuConfiguration(_ action: @escaping (_ data: Data, _ indexPath: IndexPath, _ point: CGPoint) -> UIContextMenuConfiguration?) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:contextMenuConfigurationForRowAt:point:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 {
-                let data: Data? = paramter![0] as? Data
+                let data: Data = paramter![0] as! Data
                 let indexPath: IndexPath = paramter![1] as! IndexPath
                 let point: CGPoint = paramter![2] as! CGPoint
                 return action(data, indexPath, point)
