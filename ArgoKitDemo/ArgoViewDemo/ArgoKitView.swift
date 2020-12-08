@@ -11,7 +11,6 @@ import ArgoKit
 class ArgoKitViewModel {
     var imageUrl: URL? = nil
     var title: String = ""
-    init() {}
 }
 
 // view
@@ -24,7 +23,10 @@ class ArgoKitView: ArgoKit.View {
             Image(url: self.model.imageUrl, placeholder: "turtlerock")
                 .width(100)
                 .height(100)
+            
             Text(self.model.title)
+                .onTapGesture {
+                }
         }
     }
 }
@@ -34,7 +36,6 @@ class ArgoKitView: ArgoKit.View {
 import ArgoKitPreview
 import ArgoKitComponent
 import SwiftUI
-@available(iOS 13.0.0, *)
 // mock view model
 class ArgoKitViewModel_Previews: ArgoKitViewModel {
     override init() {
@@ -43,6 +44,8 @@ class ArgoKitViewModel_Previews: ArgoKitViewModel {
         self.title = "Hello World!.."
     }
 }
+
+@available(iOS 13.0.0, *)
 struct ArgoKitView_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
