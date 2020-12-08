@@ -17,7 +17,14 @@ class ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
 //        Text("Hello, World!")
-       
+//        List { () -> View in
+//            Header(model: HeaderModel_Previews())
+//            Header(model: HeaderModel_Previews())
+//            ArgoKitView()
+//        }
+        return VStack {
+            Header(model: HeaderModel_Previews())
+        }
     }
 }
 

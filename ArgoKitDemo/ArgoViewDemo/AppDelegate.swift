@@ -9,18 +9,13 @@ import UIKit
 import ArgoKitComponent
 import ArgoKit
 
-class ArgoPreviewConfig {
-    static func configImageLoader() {
-        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
-
-    }
-}
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+
         // Override point for customization after application launch.
         let vc = ViewController()
 //        let content = MSHeaderView(data: MSHeaderViewModel_Previews())

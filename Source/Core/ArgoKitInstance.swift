@@ -18,7 +18,7 @@ public class ArgoKitInstance {
         ArgoKitInstance.shared.pimageLoader = imageLoader
     }
     
-    class func imageLoader()->ArgoKitImageLoader?{
+    public class func imageLoader()->ArgoKitImageLoader?{
        return ArgoKitInstance.shared.pimageLoader
     }
     

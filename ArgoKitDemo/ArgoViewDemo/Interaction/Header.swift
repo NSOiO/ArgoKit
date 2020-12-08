@@ -31,6 +31,8 @@ class Header: ArgoKit.View {
     
     var body: ArgoKit.View {
         let data = self.model
+        let loader = ArgoKitInstance.imageLoader()
+
          return HStack{
             VStack {
                 Image(url: data.avatarURL,placeholder: "icon_default_circle")
@@ -52,6 +54,7 @@ class Header: ArgoKit.View {
                 .display(data.displayOnline)
                 .alignSelf(.end)
             }
+            .backgroundColor((loader != nil) ? .red : .blue)
         
              VStack{
                  HStack{
