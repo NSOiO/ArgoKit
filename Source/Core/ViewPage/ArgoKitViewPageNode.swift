@@ -226,6 +226,13 @@ extension ArgoKitViewPageNode {
         
         let originX = pageWidth() * CGFloat(self.currentIndex)
         if abs(originX - offsetX) > pageWidth() {
+            var offset = CGPoint(x: 0, y: scrollView.contentOffset.y)
+            if offsetX > originX {
+                offset.x = pageWidth() * CGFloat(self.currentIndex + 1)
+            }else {
+                offset.x = pageWidth() * CGFloat(self.currentIndex - 1)
+            }
+            scrollView.contentOffset = offset
             scrollView.isScrollEnabled = false
             scrollView.isScrollEnabled = true
             return
