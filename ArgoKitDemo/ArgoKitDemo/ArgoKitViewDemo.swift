@@ -41,16 +41,10 @@ class MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                     Text("姓名")
+                     Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                        .textShadowOffset(CGSize(width: 2, height: 2))
-                        .textShadowColor(.red)
-                        .shadow(offset: CGSize(width: 2, height: 2), radius: 20, opacity: 0.5)
-                        .width(100)
-                        .padding(edge: .left, value: 5)
-                        
-//                         .shrink(1.0)
+                         .shrink(1.0)
                         
                         Button(action: {
                             
@@ -73,6 +67,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
                          .font(size: 13)
                          .textColor(UIColor(170,170,170))
                         .backgroundColor(.yellow)
+                        .margin(edge: .right, value: 10)
                     
                  }.margin(edge: .left, value: 4)
                  .width(100%)
@@ -223,7 +218,7 @@ class ListDemo:ArgoKit.View{
     var hidden:Bool = false
     
     var body: ArgoKit.View{
-        ArgoKit.List<SessionItem,SessionItem,SessionItem>(data:items){ item in
+        ArgoKit.List(data:items){ item in
             SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
         }
         .didSelectRow {item, indexPath in

@@ -10,9 +10,12 @@ import ArgoKit
 struct ArgoKitView1: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).backgroundColor(.red).textAlign(.left)
-//            .width(400)
-            .padding(edge: .left, value: 200)
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//            .backgroundColor(.red)
+            .textAlign(.center)
+            .width(400)
+            .padding(edge: .left, value: 50)
+            .gradientColor(startColor: .red, endColor: .yellow, direction: .RightToLeft)
     }
 }
 

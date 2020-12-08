@@ -297,41 +297,14 @@ extension View{
         self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
         return self;
     }
-}
-
-
-
-
-private struct AssociatedNodeRenderKey {
-       static var shadowKey:Void?
-       static var maskLayerKey:Void?
-}
-extension ArgoKitNode{
-    var shadowOperation: ArgoKitViewShadowOperation? {
-           get {
-               if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.shadowKey) as? ArgoKitViewShadowOperation {
-                   return rs
-               }else{
-                    let rs = ArgoKitViewShadowOperation(viewNode: self)
-                    objc_setAssociatedObject(self, &AssociatedNodeRenderKey.shadowKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                    ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
-                    return rs
-               }
-           }
-       }
     
-    var maskLayerOperation: ArgoKitViewLayerOperation? {
-        get {
-            if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey) as? ArgoKitViewLayerOperation {
-                return rs
-            }else{
-                 let rs = ArgoKitViewLayerOperation(viewNode: self)
-                objc_setAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
-                 return rs
-            }
-        }
+    public func gradientColor(startColor: UIColor?,endColor:UIColor?,direction:ArgoKitGradientType?) -> Self {
+        self.node?.gradientLayerOperation?.updateGradientLayer(startColor: startColor, endColor: endColor, direction: direction)
+        return self
+    }
+    
+    func cleanGradientLayer() -> Self {
+        self.node?.gradientLayerOperation?.cleanGradientLayerIfNeed()
+        return self
     }
 }
-
-

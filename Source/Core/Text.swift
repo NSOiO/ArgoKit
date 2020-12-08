@@ -315,6 +315,7 @@ open class Text:View {
     public init() {
         pNode = ArgoKitTextNode(viewClass:UIView.self)
         pNode.alignItemsCenter()
+        pNode.alignSelfFlexStart()
         pNode.row()
         innerText = InnerText().grow(1.0)
         if let node = innerText.node as? ArgoKitInnerTextNode{
