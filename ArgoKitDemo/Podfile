@@ -15,8 +15,14 @@ target 'ArgoKitDemo' do
 # :modular_headers => true
 end
 
+target 'ArgoViewDemo' do
+  pod 'ArgoKit', :path=>'../'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => false
+  pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'  #, :use_frameworks! => true, :linkage =>
+  pod 'ArgoKitComponent', :path =>'../'
+end
 
-dynamic_frameworks = ['ArgoKit','ArgoKitPreview', 'Yoga'] # <- swift libraries names
+
+dynamic_frameworks = ['ArgoKit','ArgoKitPreview', 'ArgoKitComponent', 'Yoga'] # <- swift libraries names
 
 # Make all the other frameworks into static frameworks by overriding the static_framework? function to return true
 pre_install do |installer|

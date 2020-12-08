@@ -327,6 +327,10 @@ open class Text:View {
         self.init()
         _ = innerText.text(text)
     }
+    
+    deinit {
+        print("\(self) deinit")
+    }
 }
 
 extension Text{

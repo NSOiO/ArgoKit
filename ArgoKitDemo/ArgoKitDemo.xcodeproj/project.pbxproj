@@ -15,10 +15,12 @@
 		326335E5254133D40094676D /* ArgoKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335E4254133D40094676D /* ArgoKitDemoTests.swift */; };
 		326335F0254133D40094676D /* ArgoKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335EF254133D40094676D /* ArgoKitDemoUITests.swift */; };
 		3263370B25419A3C0094676D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3263370A25419A3C0094676D /* ContentView.swift */; };
+		9978B2A091E9B284786696F7 /* libPods-ArgoViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACAAB0265D00E1D3A24D3DC1 /* libPods-ArgoViewDemo.a */; };
 		A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423580E257900920052E0B0 /* ViewPagerDemo.swift */; };
 		A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E668257B8770003D3591 /* ViewPageTest.swift */; };
 		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
 		FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163037257E3C4A000BA507 /* ArgoKitView1.swift */; };
+		FA3C6594257F555B0077C923 /* ArgoKitView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C6593257F555B0077C923 /* ArgoKitView3.swift */; };
 		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
 		FA5164EE255BB99D005BE240 /* turtlerock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D8255BB99D005BE240 /* turtlerock.jpg */; };
 		FA5164EF255BB99D005BE240 /* silversalmoncreek.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */; };
@@ -43,6 +45,13 @@
 		FA51A0AB255D17F9005BE240 /* LandmarkRow1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AA255D17F9005BE240 /* LandmarkRow1.swift */; };
 		FA51A0B0255D1804005BE240 /* LandmarkRow2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */; };
 		FA5709BD25765303004A0EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
+		FA723142257E641400C6492B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA723141257E641400C6492B /* AppDelegate.swift */; };
+		FA723144257E641400C6492B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA723143257E641400C6492B /* SceneDelegate.swift */; };
+		FA723146257E641400C6492B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA723145257E641400C6492B /* ViewController.swift */; };
+		FA723149257E641400C6492B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA723147257E641400C6492B /* Main.storyboard */; };
+		FA72314E257E641700C6492B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA72314C257E641700C6492B /* LaunchScreen.storyboard */; };
+		FA723157257E643400C6492B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
+		FA72315D257E644000C6492B /* ArgoKitView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72315C257E644000C6492B /* ArgoKitView2.swift */; };
 		FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */; };
 		FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE290F9256F505A0012989F /* PreviewDemo.swift */; };
 		FAE29115256F54650012989F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE29114256F54650012989F /* Types.swift */; };
@@ -69,6 +78,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA72311C257E633800C6492B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		326335CA254133D20094676D /* ArgoKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgoKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		326335CD254133D20094676D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,12 +107,18 @@
 		326335F1254133D40094676D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3263370A25419A3C0094676D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3947581CFD2CA964820946BE /* libPods-ArgoKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgoKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85FC2EEDD8F8A7C2EC8BC7B8 /* Pods-ArgoViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.debug.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A423580E257900920052E0B0 /* ViewPagerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerDemo.swift; sourceTree = "<group>"; };
 		A4F5E668257B8770003D3591 /* ViewPageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPageTest.swift; sourceTree = "<group>"; };
 		A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
+		ACAAB0265D00E1D3A24D3DC1 /* libPods-ArgoViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgoViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.debug.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.debug.xcconfig"; sourceTree = "<group>"; };
+		C93FDC9396227466369EFEA7 /* libPods-ArgoPreview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgoPreview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA163037257E3C4A000BA507 /* ArgoKitView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView1.swift; sourceTree = "<group>"; };
+		FA3C6593257F555B0077C923 /* ArgoKitView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView3.swift; sourceTree = "<group>"; };
 		FA4D581F254ABD1C002E2532 /* DemoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContentView.swift; sourceTree = "<group>"; };
 		FA5164D8255BB99D005BE240 /* turtlerock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtlerock.jpg; sourceTree = "<group>"; };
 		FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = silversalmoncreek.jpg; sourceTree = "<group>"; };
@@ -114,6 +142,14 @@
 		FA5164ED255BB99D005BE240 /* LandmarkRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
 		FA51A0AA255D17F9005BE240 /* LandmarkRow1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow1.swift; sourceTree = "<group>"; };
 		FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow2.swift; sourceTree = "<group>"; };
+		FA72313F257E641400C6492B /* ArgoViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgoViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA723141257E641400C6492B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA723143257E641400C6492B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FA723145257E641400C6492B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FA723148257E641400C6492B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA72314D257E641700C6492B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA72314F257E641700C6492B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA72315C257E644000C6492B /* ArgoKitView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView2.swift; sourceTree = "<group>"; };
 		FAE290F9256F505A0012989F /* PreviewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDemo.swift; sourceTree = "<group>"; };
 		FAE29114256F54650012989F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitViewDemo.swift; sourceTree = "<group>"; };
@@ -121,6 +157,7 @@
 		FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo1ContentView.swift; sourceTree = "<group>"; };
+		FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.release.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +183,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA72313C257E641400C6492B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9978B2A091E9B284786696F7 /* libPods-ArgoViewDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -155,6 +200,7 @@
 				326335CC254133D20094676D /* ArgoKitDemo */,
 				326335E3254133D40094676D /* ArgoKitDemoTests */,
 				326335EE254133D40094676D /* ArgoKitDemoUITests */,
+				FA723140257E641400C6492B /* ArgoViewDemo */,
 				326335CB254133D20094676D /* Products */,
 				F4111651BAEBC0F7E7C25E97 /* Pods */,
 				8266FB072263C28BD6505C25 /* Frameworks */,
@@ -167,6 +213,7 @@
 				326335CA254133D20094676D /* ArgoKitDemo.app */,
 				326335E0254133D40094676D /* ArgoKitDemoTests.xctest */,
 				326335EB254133D40094676D /* ArgoKitDemoUITests.xctest */,
+				FA72313F257E641400C6492B /* ArgoViewDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,6 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				3947581CFD2CA964820946BE /* libPods-ArgoKitDemo.a */,
+				C93FDC9396227466369EFEA7 /* libPods-ArgoPreview.a */,
+				ACAAB0265D00E1D3A24D3DC1 /* libPods-ArgoViewDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -235,6 +284,10 @@
 			children = (
 				A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */,
 				89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */,
+				AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */,
+				FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */,
+				85FC2EEDD8F8A7C2EC8BC7B8 /* Pods-ArgoViewDemo.debug.xcconfig */,
+				CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -292,6 +345,21 @@
 			path = "Supporting Views";
 			sourceTree = "<group>";
 		};
+		FA723140257E641400C6492B /* ArgoViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				FA723141257E641400C6492B /* AppDelegate.swift */,
+				FA723143257E641400C6492B /* SceneDelegate.swift */,
+				FA723145257E641400C6492B /* ViewController.swift */,
+				FA723147257E641400C6492B /* Main.storyboard */,
+				FA72314C257E641700C6492B /* LaunchScreen.storyboard */,
+				FA72314F257E641700C6492B /* Info.plist */,
+				FA72315C257E644000C6492B /* ArgoKitView2.swift */,
+				FA3C6593257F555B0077C923 /* ArgoKitView3.swift */,
+			);
+			path = ArgoViewDemo;
+			sourceTree = "<group>";
+		};
 		FAE29113256F54570012989F /* Previews */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +389,7 @@
 				326335C6254133D20094676D /* Sources */,
 				326335C7254133D20094676D /* Frameworks */,
 				326335C8254133D20094676D /* Resources */,
+				FA72311C257E633800C6492B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,6 +436,24 @@
 			productReference = 326335EB254133D40094676D /* ArgoKitDemoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		FA72313E257E641400C6492B /* ArgoViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA723150257E641700C6492B /* Build configuration list for PBXNativeTarget "ArgoViewDemo" */;
+			buildPhases = (
+				E7F31ACBD4F6E1A95E4C3103 /* [CP] Check Pods Manifest.lock */,
+				FA72313B257E641400C6492B /* Sources */,
+				FA72313C257E641400C6492B /* Frameworks */,
+				FA72313D257E641400C6492B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArgoViewDemo;
+			productName = ArgoViewDemo;
+			productReference = FA72313F257E641400C6492B /* ArgoViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -387,6 +474,9 @@
 						CreatedOnToolsVersion = 12.0.1;
 						TestTargetID = 326335C9254133D20094676D;
 					};
+					FA72313E257E641400C6492B = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 				};
 			};
 			buildConfigurationList = 326335C5254133D20094676D /* Build configuration list for PBXProject "ArgoKitDemo" */;
@@ -405,6 +495,7 @@
 				326335DF254133D40094676D /* ArgoKitDemoTests */,
 				326335C9254133D20094676D /* ArgoKitDemo */,
 				326335EA254133D40094676D /* ArgoKitDemoUITests */,
+				FA72313E257E641400C6492B /* ArgoViewDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -447,6 +538,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA72313D257E641400C6492B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA72314E257E641700C6492B /* LaunchScreen.storyboard in Resources */,
+				FA723157257E643400C6492B /* Assets.xcassets in Resources */,
+				FA723149257E641400C6492B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -466,6 +567,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-ArgoKitDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7F31ACBD4F6E1A95E4C3103 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ArgoViewDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -522,6 +645,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA72313B257E641400C6492B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA723146257E641400C6492B /* ViewController.swift in Sources */,
+				FA3C6594257F555B0077C923 /* ArgoKitView3.swift in Sources */,
+				FA723142257E641400C6492B /* AppDelegate.swift in Sources */,
+				FA723144257E641400C6492B /* SceneDelegate.swift in Sources */,
+				FA72315D257E644000C6492B /* ArgoKitView2.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -550,6 +685,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				326335D9254133D30094676D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FA723147257E641400C6492B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA723148257E641400C6492B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FA72314C257E641700C6492B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA72314D257E641700C6492B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -678,6 +829,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -712,6 +864,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -838,6 +991,48 @@
 			};
 			name = Release;
 		};
+		FA723151257E641700C6492B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85FC2EEDD8F8A7C2EC8BC7B8 /* Pods-ArgoViewDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E5SS7YSZ2F;
+				INFOPLIST_FILE = ArgoViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemomo.ArgoViewDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA723152257E641700C6492B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E5SS7YSZ2F;
+				INFOPLIST_FILE = ArgoViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemomo.ArgoViewDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -873,6 +1068,15 @@
 			buildConfigurations = (
 				326335FB254133D40094676D /* Debug */,
 				326335FC254133D40094676D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA723150257E641700C6492B /* Build configuration list for PBXNativeTarget "ArgoViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA723151257E641700C6492B /* Debug */,
+				FA723152257E641700C6492B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
