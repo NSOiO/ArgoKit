@@ -12,14 +12,14 @@ struct ArgoKitView1: ArgoKit.View {
     var body: View {
         Image("scx")
             .backgroundColor(.red)
-            .width(200)
+            .width(300)
             .height(200)
             .margin(edge: .left, value: 50)
             .margin(edge: .top, value: 50)
             .circle()
 //            .cornerRadius(100)
-//            .borderWidth(5)
-//            .borderColor(.blue)
+            .borderWidth(5)
+            .borderColor(.blue)
  
     }
 }

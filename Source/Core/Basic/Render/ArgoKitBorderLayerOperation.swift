@@ -37,6 +37,12 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
         self.needRemake = true
     }
     
+    private var pcircle:Bool = false
+    func circle() {
+        pcircle = true
+        self.needRemake = true
+    }
+    
     private var _nodeObserver:ArgoKitNodeObserver = ArgoKitNodeObserver()
     var nodeObserver: ArgoKitNodeObserver{
         get{
@@ -93,6 +99,9 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
             let bounds = view.bounds
             let maxBorderWidth = CGFloat.minimum(bounds.size.width, bounds.size.height)
             let borderWidth = (self.borderWidth < maxBorderWidth) ? self.borderWidth:maxBorderWidth
+            if pcircle {
+                self.multiRadius = ArgoKitCornerRadius(topLeft: maxBorderWidth/2.0, topRight: maxBorderWidth/2.0, bottomLeft: maxBorderWidth/2.0, bottomRight: maxBorderWidth/2.0)
+            }
             borderLayer.path = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius, lineWidth: borderWidth).cgPath
             borderLayer.frame = bounds
             borderLayer.lineWidth = borderWidth
