@@ -7,15 +7,24 @@
 
 import ArgoKit
 
-var image_name = "tt"
-
 class ArgoKitView2: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: View {
-        Image(image_name)
-            .width(100)
-            .height(100)
-            .backgroundColor(.red)
+        return VStack {
+            Image("turtlerock")
+                .width(100)
+                .height(100)
+                .backgroundColor(.red)
+            
+            Image(url: URL(string: "https://img.momocdn.com/album/95/62/9562CD67-C76A-1437-29D7-58AB7F421B4820181023_S.jpg"), placeholder: "turtlerock")
+                .width(100)
+                .height(100)
+            
+            Image("turtlerock")
+                .width(100)
+                .height(100)
+                .backgroundColor(.red)
+        }
     }
 }
 
@@ -24,10 +33,14 @@ class ArgoKitView2: ArgoKit.View {
 
 import ArgoKitPreview
 import SwiftUI
+import ArgoKitComponent
+
 @available(iOS 13.0.0, *)
 struct ArgoKitView2_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoRender {
+        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+
+        return ArgoRender {
             ArgoKitView2()
         }
     }

@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import ArgoKitComponent
+import ArgoKit
+
+class ArgoPreviewConfig {
+    static func configImageLoader() {
+        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+
+    }
+}
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        image_name = "turtlerock"
+        
         return true
     }
 
