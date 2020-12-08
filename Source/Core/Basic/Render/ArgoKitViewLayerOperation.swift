@@ -101,6 +101,7 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
             }
         }
     }
+    
     deinit {
         if let view = self.viewNode?.view{
             view.removeObserver(self, forKeyPath: "frame")
