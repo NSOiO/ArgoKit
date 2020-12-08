@@ -15,6 +15,16 @@ target 'ArgoKitDemo' do
 # :modular_headers => true
 end
 
+target 'ArgoPreview' do
+  pod 'ArgoKit', :path=>'../'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => false
+  pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'  #, :use_frameworks! => true, :linkage =>
+end
+
+target 'ArgoViewDemo' do
+  pod 'ArgoKit', :path=>'../'  #, :use_frameworks! => true, :linkage => :static,:modular_headers => false
+  pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'  #, :use_frameworks! => true, :linkage =>
+end
+
 
 dynamic_frameworks = ['ArgoKit','ArgoKitPreview', 'Yoga'] # <- swift libraries names
 
