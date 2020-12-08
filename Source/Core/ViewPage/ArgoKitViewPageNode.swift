@@ -9,8 +9,8 @@ import Foundation
 
 fileprivate let kCellReuseIdentifier = "ArgoKitViewPageCell"
 
-public typealias ViewPageChangedCloser = (_ item:Any?, _ index:Int) -> Void
-public typealias ViewPageTabScrollingListener = (_ percent:CGFloat, _ fromIndex:Int, _ toIndex:Int) -> Void
+public typealias ViewPageChangedCloser = (_ item:Any?, _ to:Int, _ from:Int) -> Void
+public typealias ViewPageTabScrollingListener = (_ percent:CGFloat, _ fromIndex:Int, _ toIndex:Int, _ isScrolling:Bool) -> Void
 
 // MARK: Init
 
@@ -211,7 +211,7 @@ extension ArgoKitViewPageNode {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         scrollViewScrollPercent(scrollView)
-        autoScrollPercent(scrollView)
+        autoScrollPercent(scrollView, true)
     }
     
     func scrollViewScrollPercent(_ scrollView: UIScrollView) {
@@ -232,7 +232,7 @@ extension ArgoKitViewPageNode {
         }
         
         let toIndex:Int = calculateToIndex(scrollView)
-        calculateScrollPercent(scrollView, from: self.currentIndex, to: toIndex)
+        calculateScrollPercent(scrollView, from: self.currentIndex, to: toIndex, isScroll: true)
     }
     
     func scrollViewScrollEnd(_ scrollView: UIScrollView) {
@@ -248,11 +248,11 @@ extension ArgoKitViewPageNode {
             if count > toIndex && toIndex >= 0 {
                 item = self.dataSourceHelper.dataList?[0][toIndex]
             }
-            changedFunc(item, toIndex)
+            changedFunc(item, toIndex, fromIndex)
         }
         
         if self.pageTabScrollingListener != nil {
-            calculateScrollPercent(scrollView, from: fromIndex, to: toIndex)
+            calculateScrollPercent(scrollView, from: fromIndex, to: toIndex, isScroll: false)
         }
     }
     
@@ -275,7 +275,7 @@ extension ArgoKitViewPageNode {
         return self.currentIndex
     }
     
-    private func calculateScrollPercent(_ scrollView: UIScrollView, from:Int, to: Int) {
+    private func calculateScrollPercent(_ scrollView: UIScrollView, from:Int, to: Int, isScroll:Bool) {
         let offsetX = scrollView.contentOffset.x
         var percentX = offsetX / pageWidth()
         if (to > from) {
@@ -283,22 +283,22 @@ extension ArgoKitViewPageNode {
         }else {
             percentX = abs(CGFloat(from) - percentX)
         }
-        self.pageTabScrollingListener!(percentX, from, to)
+        self.pageTabScrollingListener!(percentX, from, to, isScroll)
     }
     
     private func pageWidth() -> CGFloat {
         return self.viewPage.frame.width
     }
     
-    private func autoScrollPercent(_ scrollView: UIScrollView) {
+    private func autoScrollPercent(_ scrollView: UIScrollView,_ isScroll: Bool) {
         guard let info = self.pageScrollInfo else { return }
         guard let listener = self.pageTabScrollingListener else { return }
         let percent = (scrollView.contentOffset.x - CGFloat(info.from) * pageWidth()) / (CGFloat(info.to - info.from) * pageWidth())
-        listener(abs(percent), info.from, info.to)
+        listener(abs(percent), info.from, info.to, isScroll)
     }
     
     private func autoScrollEnd(_ scrollView: UIScrollView) {
-        autoScrollPercent(scrollView)
+        autoScrollPercent(scrollView, false)
         self.pageScrollInfo = nil
     }
 }
