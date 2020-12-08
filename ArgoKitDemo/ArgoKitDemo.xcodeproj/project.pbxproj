@@ -21,6 +21,7 @@
 		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
 		FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163037257E3C4A000BA507 /* ArgoKitView1.swift */; };
 		FA3C6594257F555B0077C923 /* ArgoKitView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C6593257F555B0077C923 /* ArgoKitView3.swift */; };
+		FA3C7AB4257F62190077C923 /* ArgoKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C7AB3257F62190077C923 /* ArgoKitView.swift */; };
 		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
 		FA5164EE255BB99D005BE240 /* turtlerock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D8255BB99D005BE240 /* turtlerock.jpg */; };
 		FA5164EF255BB99D005BE240 /* silversalmoncreek.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */; };
@@ -119,6 +120,7 @@
 		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA163037257E3C4A000BA507 /* ArgoKitView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView1.swift; sourceTree = "<group>"; };
 		FA3C6593257F555B0077C923 /* ArgoKitView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView3.swift; sourceTree = "<group>"; };
+		FA3C7AB3257F62190077C923 /* ArgoKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView.swift; sourceTree = "<group>"; };
 		FA4D581F254ABD1C002E2532 /* DemoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContentView.swift; sourceTree = "<group>"; };
 		FA5164D8255BB99D005BE240 /* turtlerock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtlerock.jpg; sourceTree = "<group>"; };
 		FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = silversalmoncreek.jpg; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				FA72314F257E641700C6492B /* Info.plist */,
 				FA72315C257E644000C6492B /* ArgoKitView2.swift */,
 				FA3C6593257F555B0077C923 /* ArgoKitView3.swift */,
+				FA3C7AB3257F62190077C923 /* ArgoKitView.swift */,
 			);
 			path = ArgoViewDemo;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 			files = (
 				FA723146257E641400C6492B /* ViewController.swift in Sources */,
 				FA3C6594257F555B0077C923 /* ArgoKitView3.swift in Sources */,
+				FA3C7AB4257F62190077C923 /* ArgoKitView.swift in Sources */,
 				FA723142257E641400C6492B /* AppDelegate.swift in Sources */,
 				FA723144257E641400C6492B /* SceneDelegate.swift in Sources */,
 				FA72315D257E644000C6492B /* ArgoKitView2.swift in Sources */,

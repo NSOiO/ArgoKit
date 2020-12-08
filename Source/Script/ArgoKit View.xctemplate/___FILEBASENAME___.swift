@@ -21,6 +21,10 @@ import ArgoKitPreview
 import ArgoKitComponent
 import SwiftUI
 @available(iOS 13.0.0, *)
+// mock view model
+class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
+
+}
 struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
