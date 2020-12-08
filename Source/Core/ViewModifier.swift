@@ -231,29 +231,19 @@ extension View{
     }
     
     public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
-        if topLeft == topRight &&
-            topLeft ==  bottomLeft &&
-            topLeft ==  bottomRight{
-            _ = self.clipsToBounds(true)
-            addAttribute(isCALayer: true,#selector(setter:CALayer.cornerRadius),topLeft)
-        }else{
-            self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
-        }
         let multiRadius = ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
+        self.node?.maskLayerOperation?.updateCornersRadius(multiRadius)
+        
         self.node?.borderLayerOperation?.updateCornersRadius(multiRadius)
         return self;
     }
     
     public func borderWidth(_ value:CGFloat)->Self{
-//        addAttribute(isCALayer:true,#selector(setter:CALayer.borderWidth),value)
-        
         self.node?.borderLayerOperation?.borderWidth = value
         return self;
     }
     
     public func borderColor(_ value:UIColor)->Self{
-//        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
-        
         self.node?.borderLayerOperation?.borderColor = value
         return self;
     }
@@ -311,8 +301,20 @@ extension View{
         return self
     }
     
-    func cleanGradientLayer() -> Self {
+    public func cleanGradientLayer() -> Self {
         self.node?.gradientLayerOperation?.cleanGradientLayerIfNeed()
+        return self
+    }
+}
+
+extension View{
+    public func addBlurEffect(style:UIBlurEffect.Style,alpha:CGFloat? = nil,color:UIColor? = nil) -> Self{
+        self.node?.blurEffectOperation?.addBlurEffect(style: style,alpha: alpha,color: color)
+        return self
+    }
+    
+    public func removeBlurEffect() -> Self{
+        self.node?.blurEffectOperation?.removeBlurEffect()
         return self
     }
 }

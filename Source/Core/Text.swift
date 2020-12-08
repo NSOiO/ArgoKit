@@ -329,7 +329,7 @@ open class Text:View {
     }
     
     deinit {
-        print("\(self) deinit")
+//        print("\(self) deinit")
     }
 }
 

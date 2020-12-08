@@ -69,33 +69,6 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
     func remakeIfNeed() {
         self.needRemake = false
         remake()
-//        if let node = self.viewNode {
-//            var frame:CGRect = node.frame
-//            if let view = node.view{
-//                frame = view.frame
-//            }
-//            if frame.equalTo(CGRect.zero) {
-//                return
-//            }
-//            if pcircle == true{
-//                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.cornerRadius),CGFloat.minimum(frame.size.width, frame.size.height)/2.0)
-//                return;
-//            }
-//            let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)
-//            var maskLayer:CAShapeLayer? = nil
-//            if let mask =  node.view?.layer.mask {
-//                maskLayer = mask as? CAShapeLayer
-//            }else{
-//                maskLayer = CAShapeLayer()
-//            }
-//            maskLayer?.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
-//            maskLayer?.path = maskPath.cgPath
-//            if let view = node.view {
-//                view.layer.mask = maskLayer
-//            }else{
-//                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.mask),maskLayer)
-//            }
-//        }
     }
     
     func remake() {

@@ -23,6 +23,7 @@ private struct AssociatedNodeRenderKey {
        static var maskLayerKey:Void?
        static var gradientLayerKey:Void?
        static var borderLayerKey:Void?
+       static var blurEffectKey:Void?
 }
 extension ArgoKitNode{
     var shadowOperation: ArgoKitViewShadowOperation? {
@@ -71,6 +72,19 @@ extension ArgoKitNode{
             }else{
                  let rs = ArgoKitBorderLayerOperation(viewNode: self)
                  objc_setAssociatedObject(self, &AssociatedNodeRenderKey.borderLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
+                 return rs
+            }
+        }
+    }
+    
+    var blurEffectOperation: ArgoKitBlurEffectOperation? {
+        get {
+            if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.blurEffectKey) as? ArgoKitBlurEffectOperation {
+                return rs
+            }else{
+                 let rs = ArgoKitBlurEffectOperation(viewNode: self)
+                 objc_setAssociatedObject(self, &AssociatedNodeRenderKey.blurEffectKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                  ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
             }
