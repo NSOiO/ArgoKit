@@ -125,4 +125,61 @@ class ArgoKitCornerManagerTool {
     }
     
     
+    class func bezierPath(frame:CGRect,multiRadius:ArgoKitCornerRadius,lineWidth:CGFloat) -> UIBezierPath {
+        let path:UIBezierPath = UIBezierPath()
+        path.lineWidth = lineWidth
+        
+        let width:CGFloat = frame.size.width
+        let height:CGFloat = frame.size.height
+        let minRadius = CGFloat.minimum(width * 0.5, height * 0.5)
+        
+        var radius:CGFloat = multiRadius.topLeft
+        radius = CGFloat.maximum(CGFloat.minimum(minRadius, radius), 0)
+        
+        path.move(to: CGPoint(x: lineWidth/2.0, y: height/2.0))
+        
+        if radius > 0 {
+            path.addLine(to: CGPoint(x:lineWidth/2.0, y: radius))
+            path.addArc(withCenter: CGPoint(x:radius, y:radius), radius: radius - lineWidth/2.0, startAngle: -CGFloat.pi, endAngle: -(CGFloat.pi/2), clockwise: true)
+        }else{
+            path.addLine(to: CGPoint(x: lineWidth/2.0, y: lineWidth/2.0))
+        }
+        path.addLine(to: CGPoint(x:width/2.0, y:lineWidth/2.0))
+        
+        
+        
+        radius = multiRadius.topRight
+        radius = CGFloat.maximum(CGFloat.minimum(minRadius, radius), 0)
+        if radius > 0 {
+            path.addLine(to: CGPoint(x: width - radius, y: lineWidth/2.0))
+            path.addArc(withCenter: CGPoint(x:width - radius, y:radius), radius: radius - lineWidth/2.0, startAngle: -(CGFloat.pi/2), endAngle: 0, clockwise: true)
+        }else{
+            path.addLine(to: CGPoint(x:width - lineWidth/2.0, y: lineWidth/2.0))
+        }
+        path.addLine(to: CGPoint(x:width - lineWidth/2.0, y:height/2.0))
+        
+        
+        radius = multiRadius.bottomRight
+        radius = CGFloat.maximum(CGFloat.minimum(minRadius, radius), 0)
+        if radius > 0 {
+            path.addLine(to: CGPoint(x: width - lineWidth/2.0, y: height - radius))
+            path.addArc(withCenter: CGPoint(x:width - radius, y:height - radius), radius: radius - lineWidth/2.0, startAngle: 0, endAngle: CGFloat.pi/2, clockwise: true)
+        }else{
+            path.addLine(to: CGPoint(x:width - lineWidth/2.0, y: height - lineWidth/2.0))
+        }
+        path.addLine(to: CGPoint(x:width/2.0 - lineWidth/2.0, y:height - lineWidth/2.0))
+        
+        radius = multiRadius.bottomLeft
+        radius = CGFloat.maximum(CGFloat.minimum(minRadius, radius), 0)
+        if radius > 0 {
+            path.addLine(to: CGPoint(x: radius, y: height - lineWidth/2.0))
+            path.addArc(withCenter: CGPoint(x:radius, y:height - radius), radius: radius - lineWidth/2.0, startAngle:CGFloat.pi/2, endAngle: CGFloat.pi, clockwise: true)
+        }else{
+            path.addLine(to: CGPoint(x:lineWidth/2.0, y: height - lineWidth/2.0))
+        }
+        path.addLine(to: CGPoint(x:lineWidth/2.0, y:height/2.0))
+        
+       return path
+    }
+    
 }

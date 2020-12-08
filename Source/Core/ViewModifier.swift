@@ -239,19 +239,26 @@ extension View{
         }else{
             self.node?.maskLayerOperation?.updateCornersRadius(ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight))
         }
+        let multiRadius = ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
+        self.node?.borderLayerOperation?.updateCornersRadius(multiRadius)
         return self;
     }
     
     public func borderWidth(_ value:CGFloat)->Self{
-        self.node?.borderWidth(value)
-        addAttribute(isCALayer:true,#selector(setter:CALayer.borderWidth),value)
+//        addAttribute(isCALayer:true,#selector(setter:CALayer.borderWidth),value)
+        
+        self.node?.borderLayerOperation?.borderWidth = value
         return self;
     }
     
     public func borderColor(_ value:UIColor)->Self{
-        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
+//        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
+        
+        self.node?.borderLayerOperation?.borderColor = value
         return self;
     }
+    
+    
     
     public func borderColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)

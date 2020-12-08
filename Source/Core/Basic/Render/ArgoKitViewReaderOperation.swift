@@ -11,6 +11,7 @@ protocol ArgoKitViewReaderOperation:AnyObject{
     var nodeObserver:ArgoKitNodeObserver{get}
     init(viewNode:ArgoKitNode)
     func remakeIfNeed() -> Void
+    
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void
 }
 extension ArgoKitViewReaderOperation{
@@ -21,6 +22,7 @@ private struct AssociatedNodeRenderKey {
        static var shadowKey:Void?
        static var maskLayerKey:Void?
        static var gradientLayerKey:Void?
+       static var borderLayerKey:Void?
 }
 extension ArgoKitNode{
     var shadowOperation: ArgoKitViewShadowOperation? {
@@ -36,12 +38,12 @@ extension ArgoKitNode{
            }
        }
     
-    var maskLayerOperation: ArgoKitViewLayerOperation? {
+    var maskLayerOperation: ArgoKitMaskLayerOperation? {
         get {
-            if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey) as? ArgoKitViewLayerOperation {
+            if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey) as? ArgoKitMaskLayerOperation {
                 return rs
             }else{
-                 let rs = ArgoKitViewLayerOperation(viewNode: self)
+                 let rs = ArgoKitMaskLayerOperation(viewNode: self)
                 objc_setAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
@@ -57,6 +59,19 @@ extension ArgoKitNode{
                  let rs = ArgoKitGradientLayerOperation(viewNode: self)
                 objc_setAssociatedObject(self, &AssociatedNodeRenderKey.gradientLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
+                 return rs
+            }
+        }
+    }
+    
+    var borderLayerOperation: ArgoKitBorderLayerOperation? {
+        get {
+            if let rs = objc_getAssociatedObject(self, &AssociatedNodeRenderKey.borderLayerKey) as? ArgoKitBorderLayerOperation {
+                return rs
+            }else{
+                 let rs = ArgoKitBorderLayerOperation(viewNode: self)
+                 objc_setAssociatedObject(self, &AssociatedNodeRenderKey.borderLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
             }
         }
