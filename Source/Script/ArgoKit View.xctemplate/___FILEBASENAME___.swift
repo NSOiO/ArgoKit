@@ -2,6 +2,12 @@
 
 import ArgoKit
 
+// view model
+class ___FILEBASENAMEASIDENTIFIER___Model {
+
+}
+
+// view
 class ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
