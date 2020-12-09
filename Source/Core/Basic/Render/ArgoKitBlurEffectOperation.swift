@@ -19,7 +19,6 @@ class ArgoKitBlurEffectOperation: NSObject,ArgoKitViewReaderOperation {
         }
     }
     
-    
     public var style:UIBlurEffect.Style = UIBlurEffect.Style.extraLight
     
     private var blurEffect:Bool = false
