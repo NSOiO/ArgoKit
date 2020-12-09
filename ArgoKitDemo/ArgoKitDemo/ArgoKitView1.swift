@@ -9,7 +9,7 @@ import ArgoKit
 
 
 struct ArgoKitView2: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
     typealias View = ArgoKit.View
     var body: View {
         Text("scxasxaxsa")

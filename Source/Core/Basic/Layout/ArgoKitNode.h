@@ -141,8 +141,6 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index;
 - (void)removeFromSuperNode;
 - (void)removeAllChildNodes;
-
-- (ArgoKitNode *)ViewNode;
 @end
 
 
