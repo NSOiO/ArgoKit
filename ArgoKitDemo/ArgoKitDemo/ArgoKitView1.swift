@@ -37,7 +37,7 @@ struct ArgoKitView2: ArgoKit.View {
 
 struct ArgoKitView1: ArgoKit.View {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
     var body: View {
 //          ArgoKitView2().margin(edge: .left, value: 100)
         Image("icybay.jpg")
