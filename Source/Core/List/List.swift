@@ -96,16 +96,6 @@ extension List {
         return self
     }
     
-    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) -> Self {
-        tableNode.reloadSections(sections, with: animation)
-        return self
-    }
-
-    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self {
-        tableNode.reloadRows(at: indexPaths, with: animation)
-        return self
-    }
-    
     public func setEditing(_ editing: Bool, animated: Bool) -> Self {
         addAttribute(#selector(UITableView.setEditing(_:animated:)), editing, animated)
         return self
@@ -237,17 +227,17 @@ extension List {
 }
 
 extension List {
-    
-    public func reloadData() {
-        tableNode.reloadData()
+        
+    public func reloadData(_ data: [Data]? = nil, sectionHeaderData: ArgoKitIdentifiable? = nil, sectionFooterData: ArgoKitIdentifiable? = nil) {
+        tableNode.reloadData(data: data != nil ? [data!] : nil, sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
     }
     
-    public func reloadData(data:[Data], sectionHeaderData: ArgoKitIdentifiable? = nil, sectionFooterData: ArgoKitIdentifiable? = nil) {
-        tableNode.reloadData(data: [data], sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
-    }
-    
-    public func reloadData(sectionData:[[Data]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
+    public func reloadData(_ sectionData: [[Data]]? = nil, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
         tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
+    }
+    
+    public func reloadSections(_ sectionData: [[Data]]? = nil, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
+        tableNode.reloadSections(sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, sections: sections, with: animation)
     }
     
     public func appendSections(_ data: [[Data]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, with animation: UITableView.RowAnimation) {
@@ -264,6 +254,10 @@ extension List {
     
     public func moveSection(_ section: Int, toSection newSection: Int) {
         tableNode.moveSection(section, toSection: newSection)
+    }
+    
+    public func reloadRows(_ rowData: [Data]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableNode.reloadRows(rowData, at: indexPaths, with: animation)
     }
     
     public func appendRows(_ rowData: [Data], at section: Int = 0, with animation: UITableView.RowAnimation) {
