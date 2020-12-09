@@ -167,7 +167,7 @@ extension InnerText{
         return self;
     }
     
-    public func textColor(hex :Int,alpha a:Float = 1)->Self{
+    public func textColor(hex:Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
         addAttribute(#selector(setter:UILabel.textColor),value)
         return self;

@@ -8,8 +8,8 @@
 import Foundation
 
 public class TextField : View {
-    private var fontSize:CGFloat
-    private var fontStyle:AKFontStyle
+    private var fontSize:CGFloat = UIFont.systemFontSize
+    private var fontStyle:AKFontStyle = .default
     private var font:UIFont
     private var fontName:String?
     private var pNode : ArgoKitTextFieldNode
@@ -21,12 +21,10 @@ public class TextField : View {
         self.init(nil)
     }
     public init(_ text: String?, placeholder: String? = nil) {
-        fontStyle = .default
-        fontSize = UIFont.systemFontSize
         font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
         pNode.placeholder = placeholder
-        pNode.row()
+        pNode.alignSelfFlexStart()
         addAttribute(#selector(setter:UITextField.text),text)
         addAttribute(#selector(setter:UITextField.placeholder),placeholder)
     }
@@ -90,8 +88,8 @@ extension TextField {
         return self
     }
     
-    public func textAlignment(_ value: NSTextAlignment) -> Self {
-        addAttribute(#selector(setter:UITextField.textAlignment),value)
+    public func textAlign(_ value: NSTextAlignment) -> Self {
+        addAttribute(#selector(setter:UITextField.textAlignment),value.rawValue)
         return self
     }
     
@@ -156,8 +154,6 @@ extension TextField {
             let width = node.width()
             addAttribute(#selector(setter:ArgoKitTextField.leftPadding),width)
             pNode.addChildNode(node)
-           
-
         }
         return self
     }
@@ -314,4 +310,61 @@ extension TextField {
         })
         return self
     }
+}
+
+
+
+extension TextField{
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return padding(edge: .top, value: top)
+            .padding(edge: .left, value: left)
+            .padding(edge: .bottom, value: bottom)
+            .padding(edge: .right, value:right)
+    }
+    
+    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
+        switch edge {
+        case .left:
+            switch value {
+            case .point(let value):
+                addAttribute(#selector(setter:ArgoKitTextField.leftPadding),value)
+                break
+            default:
+                break
+            }
+            break
+        case .top:
+            switch value {
+            case .point(let value):
+                addAttribute(#selector(setter:ArgoKitTextField.topPadding),value)
+                break
+            default:
+                break
+            }
+            break
+        case .right:
+            switch value {
+            case .point(let value):
+                addAttribute(#selector(setter:ArgoKitTextField.rightPadding),value)
+                break
+            default:
+                break
+            }
+            break
+        case .bottom:
+            switch value {
+            case .point(let value):
+                addAttribute(#selector(setter:ArgoKitTextField.bottomPadding),value)
+                break
+            default:
+                break
+            }
+            break
+       
+        default:
+            break
+        }
+        return self;
+    }
+    
 }

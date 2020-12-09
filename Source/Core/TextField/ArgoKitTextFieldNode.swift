@@ -9,16 +9,19 @@ import Foundation
 class ArgoKitTextField: UITextField {
     @objc var leftPadding:CGFloat = 1
     @objc var rightPadding:CGFloat = 1
+    @objc var topPadding:CGFloat = 0
+    @objc var bottomPadding:CGFloat = 0
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        let inset = CGRect(x: bounds.origin.x+leftPadding, y: bounds.origin.y, width: bounds.size.width-leftPadding-rightPadding, height: bounds.size.height)
+        let inset = CGRect(x: bounds.origin.x+leftPadding, y: bounds.origin.y + topPadding, width: bounds.size.width-leftPadding-rightPadding, height: bounds.size.height - topPadding - bottomPadding)
         return inset
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        let inset = CGRect(x: bounds.origin.x+leftPadding, y: bounds.origin.y, width: bounds.size.width-leftPadding-rightPadding, height: bounds.size.height)
+        let inset = CGRect(x: bounds.origin.x+leftPadding, y: bounds.origin.y + topPadding , width: bounds.size.width-leftPadding-rightPadding, height: bounds.size.height - topPadding - bottomPadding)
         return inset
     }
+    
 }
 class ArgoKitTextFieldNode: ArgoKitNode, UITextFieldDelegate {
     var placeholder:String?

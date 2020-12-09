@@ -10,37 +10,30 @@ import ArgoKit
 struct ArgoKitView1: ArgoKit.View {
     typealias View = ArgoKit.View
     var body: View {
-//        Text("scxasxaxsa")
-//            .backgroundColor(.red)
-//            .width(500)
-//            .height(500)
-//            .margin(edge: .top, value: 150)
-////            .cornerRadius(topLeft: 0, topRight: 0, bottomLeft: 30, bottomRight: 140)
-////            .borderWidth(2)
-////            .borderColor(.blue)
-////            .gradientColor(startColor: UIColor.red, endColor: UIColor.yellow, direction: ArgoKitGradientType.TopToBottom)
-//            .addBlurEffect(style: .dark,alpha: 0.5,color:nil)
-            
-//
-        HStack{
-
-
-            Text("scxdcsdcs")
-                .backgroundColor(.clear)
-                .width(500)
-                .height(500)
-                .margin(edge: .left, value: 50)
-                .backgroundColor(.yellow)
-
-            BlurEffectView(style: UIBlurEffect.Style.light){
-
-            }.width(200)
-            .height(200)
-            .positionType(.absolute)
-            .position(top: 0, right: 0, bottom: 0, left: 0)
-//            .alpha(0.8)
-        }.width(400).height(400).margin(edge: .top, value: 100)
+        Text("scxasxaxsa")
+            .backgroundColor(.red)
+            .margin(edge: .top, value: 150)
+            .cornerRadius(topLeft: 0, topRight: 0, bottomLeft: 30, bottomRight: 140)
+            .borderWidth(2)
+            .borderColor(.blue)
+            .gradientColor(startColor: UIColor.red, endColor: UIColor.yellow, direction: ArgoKitGradientType.TopToBottom)
         
+        TextView(text:"da")
+            .alignSelf(.start)
+//            .width(100).height(40)
+            .backgroundColor(.yellow)
+            .cornerRadius(3)
+            .margin(edge: .left, value: 50)
+//            .textAlign(.center)
+        
+        TextField("haha",placeholder: "").width(100).backgroundColor(.red).height(20)
+            .padding(edge: .left, value: 10)
+            .padding(edge: .bottom, value: 5)
+        
+        
+    
+        
+            
  
     }
 }
