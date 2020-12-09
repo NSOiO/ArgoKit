@@ -8,6 +8,7 @@
 import ArgoKit
 
 class LayoutTests: ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
         VStack {

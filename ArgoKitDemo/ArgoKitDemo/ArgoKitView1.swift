@@ -7,7 +7,9 @@
 
 import ArgoKit
 
-struct ArgoKitView1: ArgoKit.View {
+
+struct ArgoKitView2: ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     typealias View = ArgoKit.View
     var body: View {
         Text("scxasxaxsa")
@@ -29,12 +31,25 @@ struct ArgoKitView1: ArgoKit.View {
         TextField("haha",placeholder: "").width(100).backgroundColor(.red).height(20)
             .padding(edge: .left, value: 10)
             .padding(edge: .bottom, value: 5)
-        
-        
-    
-        
+
+    }
+}
+
+struct ArgoKitView1: ArgoKit.View {
+    typealias View = ArgoKit.View
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+    var body: View {
+//          ArgoKitView2().margin(edge: .left, value: 100)
+        Image("icybay.jpg")
+            .margin(edge: .top, value: 100)
+            .margin(edge: .left, value: 50)
             
- 
+            .padding(edge: .left, value: 150)
+            
+            .width(100)
+            .height(100)
+        
+
     }
 }
 

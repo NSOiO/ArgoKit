@@ -7,7 +7,8 @@ A view showing a list of landmarks.
 
 import ArgoKit
 
-class LandmarkList: View {
+struct LandmarkList: View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var body: View {
         List(data:landmarkData) { landmark in
             switch landmark.reuseIdentifier {

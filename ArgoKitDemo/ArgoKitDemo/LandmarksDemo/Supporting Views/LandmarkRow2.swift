@@ -7,8 +7,8 @@
 
 import ArgoKit
 
-class LandmarkRow2: View {
-    
+struct LandmarkRow2: View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var landmark: Landmark
     init(landmark: Landmark) {
         self.landmark = landmark
