@@ -14,8 +14,9 @@ class ArgoKitView3: ArgoKit.View {
             Image(url: URL(string: "https://img.momocdn.com/album/95/62/9562CD67-C76A-1437-29D7-58AB7F421B4820181023_S.jpg"), placeholder: "turtlerock")
                 .width(100)
                 .height(100)
+            Text("Hello, World!")
+
         }
-        Text("Hello, World!")
     }
 }
 

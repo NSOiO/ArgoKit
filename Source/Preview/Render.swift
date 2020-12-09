@@ -26,7 +26,7 @@ public struct ArgoRender: UIViewRepresentable {
         
         let view = controller.view!
 //      view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
+//        view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
         return view
     }
     
