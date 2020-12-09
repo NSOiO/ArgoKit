@@ -643,6 +643,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     return node;
 }
+
+- (ArgoKitNode *)ViewNode{
+    return  [[ArgoKitNode alloc] initWithViewClass:UIView.class];
+}
 @end
 
 

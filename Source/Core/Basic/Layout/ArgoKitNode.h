@@ -121,8 +121,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (CGSize)applyLayout:(CGSize)size
     NS_SWIFT_NAME(applyLayout(size:));
 
-
-
 /**
   Returns the size of the view based on provided constraints. Pass NaN for an unconstrained dimension.
  */
@@ -143,6 +141,8 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index;
 - (void)removeFromSuperNode;
 - (void)removeAllChildNodes;
+
+- (ArgoKitNode *)ViewNode;
 @end
 
 
