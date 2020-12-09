@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class TextField : View {
+public struct TextField : View {
     private var fontSize:CGFloat = UIFont.systemFontSize
     private var fontStyle:AKFontStyle = .default
     private var font:UIFont
@@ -17,7 +17,7 @@ public class TextField : View {
         pNode
     }
     
-    public convenience init() {
+    public init() {
         self.init(nil)
     }
     public init(_ text: String?, placeholder: String? = nil) {
@@ -57,12 +57,12 @@ extension TextField {
         let f = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
-    public func fontName(_ value:String?)->Self{
+    public mutating func fontName(_ value:String?)->Self{
         fontName = value
         let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
-    public func fontSize(_ value:CGFloat)->Self{
+    public mutating func fontSize(_ value:CGFloat)->Self{
         fontSize = value
         let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         return font(f)

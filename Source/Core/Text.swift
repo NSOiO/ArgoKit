@@ -93,7 +93,8 @@ class ArgoKitInnerTextNode: ArgoKitNode {
         return result
     }
 }
-class InnerText:View {
+
+struct InnerText:View {
     private var fontSize:CGFloat
     private var fontStyle:AKFontStyle
     private var font:UIFont
@@ -109,7 +110,7 @@ class InnerText:View {
         font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitInnerTextNode(viewClass:UILabel.self)
     }
-    public convenience init(_ text:String?) {
+    public init(_ text:String?) {
         self.init()
         addAttribute(#selector(setter:UILabel.text),text)
     }
@@ -134,14 +135,14 @@ extension InnerText{
         return self
     }
     
-    public func font(name value:String?)->Self{
+    public mutating func font(name value:String?)->Self{
         fontName = value
         let font = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
         pNode.handleLineSpacing()
         return self
     }
-    public func font(size value:CGFloat)->Self{
+    public mutating func font(size value:CGFloat)->Self{
         fontSize = value
         let font = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         addAttribute(#selector(setter:UILabel.font),font)
@@ -305,7 +306,7 @@ class ArgoKitTextNode: ArgoKitNode {
     public var innerTextNode:ArgoKitInnerTextNode?
 }
 
-open class Text:View {
+public struct Text:View {
     private let pNode:ArgoKitTextNode
     private let innerText:InnerText
     public var node: ArgoKitNode?{
@@ -323,13 +324,9 @@ open class Text:View {
             pNode.addChildNode(node)
         }
     }
-    public convenience init(_ text:String?) {
+    public init(_ text:String?) {
         self.init()
         _ = innerText.text(text)
-    }
-    
-    deinit {
-//        print("\(self) deinit")
     }
 }
 

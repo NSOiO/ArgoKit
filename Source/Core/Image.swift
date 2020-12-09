@@ -40,7 +40,7 @@ class ArgoKitImageNode: ArgoKitNode {
 }
 
 
-open class Image : View {
+public struct Image : View {
     
     private var pNode : ArgoKitImageNode
     
@@ -48,36 +48,36 @@ open class Image : View {
         pNode
     }
     
-    public convenience init() {
+    public init() {
         self.init(image: nil, highlightedImage: nil)
     }
     
-    public convenience init(_ name: String) {
+    public init(_ name: String) {
         let image: UIImage? =  UIImage(named: name, in: nil, compatibleWith: nil)
         self.init(image: image, highlightedImage: nil)
     }
     
-    public convenience init(url: URL?, placeholder: String?) {
+    public init(url: URL?, placeholder: String?) {
         self.init(image: nil, highlightedImage: nil)
         pNode.image(url: url, placeholder: placeholder)
     }
     
-    public convenience init(_ name: String, bundle: Bundle) {
+    public init(_ name: String, bundle: Bundle) {
         let image: UIImage? =  UIImage(named: name, in: bundle, compatibleWith: nil)
         self.init(image: image, highlightedImage: nil)
     }
     
     @available(iOS 13.0, *)
-    public convenience init(systemName: String) {
+    public init(systemName: String) {
         self.init(image: UIImage(systemName: systemName), highlightedImage: nil)
     }
     
-    public convenience init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
     }
     
     
-    required public init(image: UIImage?, highlightedImage: UIImage? = nil) {
+    public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         pNode = ArgoKitImageNode(viewClass: UIImageView.self)
         if let img = image {
             addAttribute(#selector(setter:UIImageView.image),img)

@@ -7,20 +7,20 @@
 
 import Foundation
 
-open class ProgressView : View {
+public struct ProgressView : View {
     
     private var pNode : ArgoKitNode
     public var node: ArgoKitNode? {
         pNode
     }
     
-    public convenience init(_ progress: Float?) {
+    public init(_ progress: Float?) {
         self.init(progressViewStyle: .default)
         addAttribute(#selector(setter:UIProgressView.progress),progress ?? 0.0)
     }
     
     @available(iOS 9.0, *)
-    public convenience init(_ observedProgress: Progress) {
+    public init(_ observedProgress: Progress) {
         self.init(progressViewStyle: .default)
         addAttribute(#selector(setter:UIProgressView.observedProgress),observedProgress)
     }

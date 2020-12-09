@@ -6,7 +6,7 @@
 //
 
 import Foundation
-open class SegmenteControl:View{
+public struct SegmenteControl:View{
     private let pSegment:UISegmentedControl
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
