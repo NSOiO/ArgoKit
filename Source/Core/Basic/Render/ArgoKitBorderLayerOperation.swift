@@ -85,7 +85,8 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
             if layer.sublayers?.last != borderLayer {
                 layer.insertSublayer(borderLayer, at: 0)
             }
-        }else{
+        }
+        else{
             self.needRemake = true
         }
     }
