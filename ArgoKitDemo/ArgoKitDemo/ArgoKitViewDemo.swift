@@ -212,7 +212,7 @@ class ListDemo:ArgoKit.View{
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 1..<20{
+        for index in 1..<1000{
             let item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -305,9 +305,9 @@ class ArgoKitViewDemo:ArgoKit.View  {
    var node: ArgoKitNode? = ArgoKitNode()
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-    Text("dasdas")
-//    ListDemo()
-//    .grow(1)
+//    Text("dasdas")
+    ListDemo()
+    .grow(1)
 
    }
 }

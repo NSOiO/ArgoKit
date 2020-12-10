@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct Button:View{
+open class Button:View{
     
     private var fontSize:CGFloat
     private var fontStyle:AKFontStyle
@@ -14,7 +14,7 @@ public struct Button:View{
     private var fontName:String?
     
     private let pNode:ArgoKitNode
-    private var label:InnerText?
+    private var label:Text?
     public var node: ArgoKitNode?{
         pNode
     }
@@ -29,31 +29,19 @@ public struct Button:View{
         pNode.alignItemsFlexStart()
     }
     
-    public init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){
+    public convenience init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){
         self.init(text: nil, action: action)
-        let container = builder()
-        if let nodes = container.type.viewNodes() {
-            for node in nodes {
-                if node is ArgoKitTextNode {
-                    let innerTextNode:ArgoKitInnerTextNode? = (node as? ArgoKitTextNode)?.innerTextNode
-                    innerTextNode?.removeFromSuperNode()
-                    self.node!.addChildNode(innerTextNode)
-                }else{
-                    self.node!.addChildNode(node)
-                }
-                
-            }
-        }
+        addSubNodes(builder: builder)
     }
     
-    public init(text:String?,action :@escaping ()->Void){
+    public convenience init(text:String?,action :@escaping ()->Void){
         self.init()
         pNode.addAction({ (obj, paramter) -> Any? in
             action();
         }, for: UIControl.Event.touchUpInside)
         
         if let t = text {
-            label = InnerText(t).alignSelf(.center).width(100%).textAlign(.center)
+            label = Text(t).alignSelf(.center).width(100%).textAlign(.center)
             if let node = label?.node {
                 pNode.addChildNode(node)
             }
@@ -77,12 +65,12 @@ extension Button{
         let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
         return font(f)
     }
-    public mutating func font(name value:String?)->Self{
+    public func font(name value:String?)->Self{
         fontName = value
         let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
-    public mutating func font(size value:CGFloat)->Self{
+    public func font(size value:CGFloat)->Self{
         fontSize = value
         let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         return font(f)
@@ -106,16 +94,16 @@ extension Button{
         return self
     }
     
-    func setValue(_ node:ArgoKitNode?,_ selector:Selector,_ value:Any?) -> Void {
+    func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
         if let nodes = pNode.childs{
-            for subNode in nodes {
-                if node is ArgoKitInnerTextNode {
-                    if let _ =  (subNode as! ArgoKitInnerTextNode).value(with: selector){
+            for node in nodes {
+                if node is ArgoKitTextNode {
+                    if let _ =  (node as! ArgoKitTextNode).value(with: selector){
                     }else{
-                        ArgoKitNodeViewModifier.addAttribute(subNode as? ArgoKitInnerTextNode, selector, value)
+                        ArgoKitNodeViewModifier.addAttribute(node as? ArgoKitTextNode, selector, value)
                     }
                 }else{
-                    setValue(subNode as? ArgoKitNode, selector, value)
+                    setValue(node as! ArgoKitNode, selector, value)
                 }
             }
         }
