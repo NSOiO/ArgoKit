@@ -2,7 +2,7 @@
 
 import ArgoKit
 
-// view model
+// view model.
 class ___FILEBASENAMEASIDENTIFIER___Model {
 
 }
@@ -27,7 +27,7 @@ import ArgoKitPreview
 import ArgoKitComponent
 import SwiftUI
 
-// mock view model
+// mock data.
 class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
 
 }

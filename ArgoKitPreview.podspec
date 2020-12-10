@@ -16,7 +16,7 @@ podspec = Pod::Spec.new do |spec|
     spec.authors = 'MoMo'
     spec.source = {
       :git => 'https://git.wemomo.com/module/argokit.git',
-      :tag => spec.version.to_s,
+      :tag => spec.name + '/' + spec.version.to_s,
     }
   
     spec.platform = :ios
@@ -28,8 +28,13 @@ podspec = Pod::Spec.new do |spec|
     
     spec.module_name = 'ArgoKitPreview'
     spec.source_files = "Source/Preview/**/*.{h,m,mm,swift}"
-    spec.resources = ['Source/Script/**/*']
-  
+#    spec.resources = ['Source/Script/**/*']
+    spec.resources = ['Source/Script/*']
+    spec.prepare_command = <<-CMD
+                pwd
+                chmod +x  ./Source//Script/config.sh
+                ./Source//Script/config.sh
+    CMD
   end
   
   # See https://github.com/facebook/yoga/pull/366
