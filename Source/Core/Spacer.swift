@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class Spacer: View {
+public struct Spacer: View {
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
         pNode
@@ -18,3 +18,13 @@ public class Spacer: View {
     }
 }
 
+extension Spacer{
+    @available(*, deprecated, message: "Spacer does not support padding!")
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return self
+    }
+    @available(*, deprecated, message: "Spacer does not support padding!")
+    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
+        return self
+    }
+}

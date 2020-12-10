@@ -120,3 +120,14 @@ public class ProgressViewStyleConfiguration {
         self.node = node
     }
 }
+
+extension ProgressView{
+    @available(*, deprecated, message: "ProgressView does not support padding!")
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return self
+    }
+    @available(*, deprecated, message: "ProgressView does not support padding!")
+    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
+        return self
+    }
+}
