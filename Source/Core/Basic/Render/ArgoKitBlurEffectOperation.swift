@@ -59,7 +59,6 @@ class ArgoKitBlurEffectOperation: NSObject,ArgoKitViewReaderOperation {
     }
     
     func remakeIfNeed() {
-        return
         if self.blurEffect {
             if let view = self.viewNode?.view {
                 if self.effectView == nil{
