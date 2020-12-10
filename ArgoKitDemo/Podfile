@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '10.0'
 
-#use_frameworks!:linkage => :static
+use_frameworks!:linkage => :static
 use_modular_headers!
 
 target 'ArgoKitDemo' do
@@ -21,20 +21,20 @@ target 'ArgoViewDemo' do
   pod 'ArgoKitComponent', :path =>'../'
 end
 
-
-dynamic_frameworks = ['ArgoKit','ArgoKitPreview', 'ArgoKitComponent', 'Yoga'] # <- swift libraries names
-
-# Make all the other frameworks into static frameworks by overriding the static_framework? function to return true
-pre_install do |installer|
-  installer.pod_targets.each do |target|
-    if dynamic_frameworks.include?(target.name)
-      puts "Overriding the static_framework? method for #{target.name}"
-      def target.static_framework?;
-        true
-      end
-      def target.build_type;
-        Pod::BuildType.static_framework
-      end
-    end
-  end
-end
+#
+#dynamic_frameworks = ['ArgoKit','ArgoKitPreview', 'ArgoKitComponent', 'Yoga'] # <- swift libraries names
+#
+## Make all the other frameworks into static frameworks by overriding the static_framework? function to return true
+#pre_install do |installer|
+#  installer.pod_targets.each do |target|
+#    if dynamic_frameworks.include?(target.name)
+#      puts "Overriding the static_framework? method for #{target.name}"
+#      def target.static_framework?;
+#        true
+#      end
+#      def target.build_type;
+#        Pod::BuildType.static_framework
+#      end
+#    end
+#  end
+#end
