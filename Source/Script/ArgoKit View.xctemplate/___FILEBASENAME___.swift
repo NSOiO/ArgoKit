@@ -2,7 +2,7 @@
 
 import ArgoKit
 
-// view model
+// view model2
 class ___FILEBASENAMEASIDENTIFIER___Model {
 
 }
