@@ -10,7 +10,7 @@ class ___FILEBASENAMEASIDENTIFIER___Model {
 // view
 struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode()
     private var model: ___FILEBASENAMEASIDENTIFIER___Model
     init(model: ___FILEBASENAMEASIDENTIFIER___Model) {
         self.model = model

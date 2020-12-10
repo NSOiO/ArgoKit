@@ -7,7 +7,9 @@
 
 import Foundation
 public struct ArgoKitNodeBuilder {
-    public static var defaultViewNode:ArgoKitNode = ArgoKitNode(viewClass: UIView.self)
+    public static func defaultViewNode() -> ArgoKitNode{
+        return ArgoKitNode(viewClass: UIView.self)
+    }
 }
 public enum ArgoKitNodeType {
     case empty
