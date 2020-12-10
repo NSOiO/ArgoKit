@@ -42,7 +42,9 @@ class ArgoKitImageNode: ArgoKitNode {
 
 public struct Image : View {
     
-    private var pNode : ArgoKitImageNode
+    private var pNode : ArgoKitNode
+    
+    private var pImageNode : ArgoKitImageNode
     
     public var node: ArgoKitNode? {
         pNode
@@ -59,7 +61,7 @@ public struct Image : View {
     
     public init(url: URL?, placeholder: String?) {
         self.init(image: nil, highlightedImage: nil)
-        pNode.image(url: url, placeholder: placeholder)
+        pImageNode.image(url: url, placeholder: placeholder)
     }
     
     public init(_ name: String, bundle: Bundle) {
@@ -78,12 +80,20 @@ public struct Image : View {
     
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil) {
-        pNode = ArgoKitImageNode(viewClass: UIImageView.self)
+        pNode = ArgoKitNode(viewClass: UIView.self)
+        pNode.alignItemsCenter()
+        pNode.alignSelfFlexStart()
+        
+        pImageNode = ArgoKitImageNode(viewClass: UIImageView.self)
+        pImageNode.flexGrow(1.0)
+        
+        pNode.addChildNode(pImageNode)
+
         if let img = image {
-            addAttribute(#selector(setter:UIImageView.image),img)
+            ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.image), img)
         }
         if let hightImg = highlightedImage{
-            addAttribute(#selector(setter:UIImageView.highlightedImage),hightImg)
+            ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.highlightedImage), hightImg)
         }
     }
 }
@@ -108,7 +118,7 @@ extension Image {
 extension Image {
     
     public func image(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UIImageView.image),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.image), value)
         return self
     }
     
@@ -117,63 +127,63 @@ extension Image {
     }
     
     public func image(url: URL?, placeholder: String?) -> Self {
-        pNode.image(url: url, placeholder: placeholder)
+        pImageNode.image(url: url, placeholder: placeholder)
         return self
     }
     
     public func highlightedImage(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UIImageView.image),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.highlightedImage), value)
         return self
     }
     
     @available(iOS 13.0, *)
     public func preferredSymbolConfiguration(_ value: UIImage.SymbolConfiguration?) -> Self {
-        addAttribute(#selector(setter:UIImageView.preferredSymbolConfiguration),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.preferredSymbolConfiguration), value)
         return self
     }
     
     public func isUserInteractionEnabled(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIImageView.isUserInteractionEnabled),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.isUserInteractionEnabled), value)
         return self
     }
     
     public func isHighlighted(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIImageView.isHighlighted),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.isHighlighted), value)
         return self
     }
     
     public func animationImages(_ value: [UIImage]?) -> Self {
-        addAttribute(#selector(setter:UIImageView.animationImages),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.animationImages), value)
         return self
     }
     
     public func highlightedAnimationImages(_ value: [UIImage]?) -> Self {
-        addAttribute(#selector(setter:UIImageView.highlightedAnimationImages),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.highlightedAnimationImages), value)
         return self
     }
     
     public func animationDuration(_ value: TimeInterval) -> Self {
-        addAttribute(#selector(setter:UIImageView.animationDuration),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.animationDuration), value)
         return self
     }
     
     public func animationRepeatCount(_ value: Int) -> Self {
-        addAttribute(#selector(setter:UIImageView.animationRepeatCount),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.animationRepeatCount), value)
         return self
     }
     
     public func tintColor(_ value: UIColor!) -> Self {
-        addAttribute(#selector(setter:UIImageView.tintColor),value)
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(setter:UIImageView.tintColor), value)
         return self
     }
     
     public func startAnimating() -> Self {
-        addAttribute(#selector(UIImageView.startAnimating))
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(UIImageView.startAnimating))
         return self
     }
     
     public func stopAnimating() -> Self {
-        addAttribute(#selector(UIImageView.stopAnimating))
+        ArgoKitNodeViewModifier.addAttribute(pImageNode, #selector(UIImageView.stopAnimating))
         return self
     }
 }

@@ -65,12 +65,10 @@ public struct Button:View{
 
 extension Button{
     public func textColor(_ color: UIColor?)->Self{
-//        _ = label?.textColor(color)
         setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
     }
     public func font(_ value:UIFont!)->Self{
-//        _ = label?.font(value)
         setValue(pNode, #selector(setter: UILabel.font), value)
         return self
     }

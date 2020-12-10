@@ -1,28 +1,30 @@
 //
-//  ArgoKitView10.swift
+//  ArgoKitView20.swift
 //  ArgoKitDemo
 //
-//  Created by Bruce on 2020/12/9.
+//  Created by Bruce on 2020/12/10.
 //
 
 import ArgoKit
 
 // view model
-class ArgoKitView10Model {
+class ArgoKitView20Model {
+    
 
 }
 
 // view
-struct ArgoKitView10: ArgoKit.View {
+struct ArgoKitView20: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
-    private var model: ArgoKitView10Model
-    init(model: ArgoKitView10Model) {
+    private var model: ArgoKitView20Model
+    init(model: ArgoKitView20Model) {
         self.model = model
     }
     
     var body: ArgoKit.View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, Worldcdscdscd!").margin(edge: .top, value: 100)
+        
     }
 }
 
@@ -33,16 +35,16 @@ import ArgoKitComponent
 import SwiftUI
 
 // mock view model
-class ArgoKitView10Model_Previews:  ArgoKitView10Model {
+class ArgoKitView20Model_Previews:  ArgoKitView20Model {
 
 }
 
 @available(iOS 13.0.0, *)
-struct ArgoKitView10_Previews: PreviewProvider {
+struct ArgoKitView20_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
         return ArgoRender {
-            ArgoKitView10(model: ArgoKitView10Model_Previews())
+            ArgoKitView20(model: ArgoKitView20Model_Previews())
         }
     }
 }

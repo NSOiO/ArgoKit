@@ -9,7 +9,7 @@ import ArgoKit
 
 
 struct ArgoKitView2: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     var body: View {
         Text("scxasxaxsa")
@@ -22,11 +22,11 @@ struct ArgoKitView2: ArgoKit.View {
         
         TextView(text:"da")
             .alignSelf(.start)
-//            .width(100).height(40)
+            .width(100).height(40)
             .backgroundColor(.yellow)
             .cornerRadius(3)
             .margin(edge: .left, value: 50)
-//            .textAlign(.center)
+            .textAlign(.center)
         
         TextField("haha",placeholder: "").width(100).backgroundColor(.red).height(20)
             .padding(edge: .left, value: 10)
@@ -37,19 +37,19 @@ struct ArgoKitView2: ArgoKit.View {
 
 struct ArgoKitView1: ArgoKit.View {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     var body: View {
-//          ArgoKitView2().margin(edge: .left, value: 100)
         Image("icybay.jpg")
             .margin(edge: .top, value: 100)
             .margin(edge: .left, value: 50)
-            
-            .padding(edge: .left, value: 150)
-            
+            .backgroundColor(.white)
+            .padding(top: 0, right: 0, bottom: 0, left: 0)
             .width(100)
             .height(100)
-        
-
+//            .borderWidth(1)
+//            .borderColor(.red)
+//            .cornerRadius(topLeft: 4, topRight: 6, bottomLeft: 19, bottomRight: 11)
+            .gradientColor(startColor: UIColor.red, endColor: UIColor.yellow, direction: ArgoKitGradientType.BottomToTop)
     }
 }
 
