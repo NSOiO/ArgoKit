@@ -14,7 +14,7 @@ extension UIColor{
     }
 }
 struct MSUserInterractionHeaderView: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
          HStack{
@@ -90,7 +90,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
 
 
 class MSUserInterractionContentView: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
          HStack{
@@ -143,7 +143,7 @@ class MSUserInterractionContentView: ArgoKit.View {
 
 
 class TextFieldView: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
    var body: ArgoKit.View {
     TextField(nil,placeholder: "请输入文本")
@@ -178,7 +178,7 @@ class TextFieldView: ArgoKit.View {
    }
 }
 class SessionRow:ArgoKit.View {
-   var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+   var node: ArgoKitNode? = ArgoKitNode()
    typealias View = ArgoKit.View
    var item:SessionItem
    var hidden:Bool = true
@@ -206,7 +206,7 @@ class SessionRow:ArgoKit.View {
 var headerView:RefreshHeaderView?
 var footerView:RefreshFooterView?
 class ListDemo:ArgoKit.View{
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     var items = [SessionItem]()
     init() {
@@ -302,7 +302,7 @@ class ListDemo:ArgoKit.View{
 }
 
 class ArgoKitViewDemo:ArgoKit.View  {
-   var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+   var node: ArgoKitNode? = ArgoKitNode()
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
     Text("dasdas")

@@ -15,7 +15,7 @@ class ArgoKitView20Model {
 
 // view
 struct ArgoKitView20: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     private var model: ArgoKitView20Model
     init(model: ArgoKitView20Model) {

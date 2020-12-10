@@ -6,11 +6,6 @@
 //
 
 import Foundation
-public struct ArgoKitNodeBuilder {
-    public static func defaultViewNode() -> ArgoKitNode{
-        return ArgoKitNode(viewClass: UIView.self)
-    }
-}
 public enum ArgoKitNodeType {
     case empty
     case multiple([ArgoKitNode])

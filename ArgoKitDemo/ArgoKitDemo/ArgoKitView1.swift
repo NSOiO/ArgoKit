@@ -9,7 +9,7 @@ import ArgoKit
 
 
 struct ArgoKitView2: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     var body: View {
         Text("scxasxaxsa")
@@ -37,7 +37,7 @@ struct ArgoKitView2: ArgoKit.View {
 
 struct ArgoKitView1: ArgoKit.View {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
+    var node: ArgoKitNode? = ArgoKitNode()
     var body: View {
         Image("icybay.jpg")
             .margin(edge: .top, value: 100)
