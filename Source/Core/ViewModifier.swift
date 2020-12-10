@@ -289,8 +289,8 @@ extension View{
         return self
     }
     
-    public func shadow(shadowColor:UIColor? = .gray, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner = .allCorners)->Self{
-        self.node?.shadowOperation?.updateCornersRadius(shadowColor: shadowColor, shadowOffset: shadowOffset, shadowRadius: shadowRadius, shadowOpacity: shadowOpacity, corners: corners)
+    public func shadow(color:UIColor? = .gray, offset:CGSize,radius:CGFloat,opacity:Float,corners:UIRectCorner = .allCorners)->Self{
+        self.node?.shadowOperation?.updateCornersRadius(shadowColor: color, shadowOffset: offset, shadowRadius: radius, shadowOpacity: opacity, corners: corners)
         return self;
     }
     

@@ -19,28 +19,27 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
         }
     }
     
-    
     var borderWidth:CGFloat = 0{
         didSet{
-            self.needRemake = true
+            needRemake = true
         }
     }
     var borderColor:UIColor = UIColor.black{
         didSet{
-            self.needRemake = true
+            needRemake = true
         }
-    }
-    
-    private var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0);
-    func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
-        self.multiRadius = multiRadius
-        self.needRemake = true
     }
     
     private var pcircle:Bool = false
     func circle() {
         pcircle = true
-        self.needRemake = true
+        needRemake = true
+    }
+    
+    private var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0);
+    func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
+        self.multiRadius = multiRadius
+        needRemake = true
     }
     
     private var _nodeObserver:ArgoKitNodeObserver = ArgoKitNodeObserver()
@@ -54,14 +53,20 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
                 strongSelf.needRemake = true
-                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+                view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
+        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
+        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
+        if newrect.equalTo(oldrect) {
+            return
+        }
         if let view = object as? UIView {
             remakeIfNeed(view: view)
         }
@@ -69,6 +74,9 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     func remakeIfNeed() {
         self.cleanBorderLayerIfNeed()
+        if self.borderWidth == 0 {
+            return
+        }
         remark()
     }
     
@@ -93,6 +101,7 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     
     private func remark(){
+       
         let borderLayer = CAShapeLayer()
         borderLayer.strokeColor = self.borderColor.cgColor
         borderLayer.fillColor = nil

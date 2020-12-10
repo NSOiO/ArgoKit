@@ -40,15 +40,21 @@ class ArgoKitGradientLayerOperation:NSObject, ArgoKitViewReaderOperation {
         self.viewNode = viewNode
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
-            if let strongSelf = self{
-                strongSelf.needRemake = true
-                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+            if let `self` = self{
+                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
+                self.needRemake = true
+                view.addObserver(self, forKeyPath: "frame", options:  [.new,.old], context: nil)
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
+        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
+        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
+        if newrect.equalTo(oldrect) {
+            return
+        }
         remakeIfNeed()
     }
     

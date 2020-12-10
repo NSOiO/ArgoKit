@@ -33,7 +33,6 @@ extension ArgoKitNode{
                }else{
                     let rs = ArgoKitViewShadowOperation(viewNode: self)
                     objc_setAssociatedObject(self, &AssociatedNodeRenderKey.shadowKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                    ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                     return rs
                }
            }
@@ -46,7 +45,6 @@ extension ArgoKitNode{
             }else{
                  let rs = ArgoKitMaskLayerOperation(viewNode: self)
                 objc_setAssociatedObject(self, &AssociatedNodeRenderKey.maskLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
             }
         }
@@ -59,7 +57,6 @@ extension ArgoKitNode{
             }else{
                  let rs = ArgoKitGradientLayerOperation(viewNode: self)
                 objc_setAssociatedObject(self, &AssociatedNodeRenderKey.gradientLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
             }
         }
@@ -72,7 +69,6 @@ extension ArgoKitNode{
             }else{
                  let rs = ArgoKitBorderLayerOperation(viewNode: self)
                  objc_setAssociatedObject(self, &AssociatedNodeRenderKey.borderLayerKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
             }
         }
@@ -85,7 +81,6 @@ extension ArgoKitNode{
             }else{
                  let rs = ArgoKitBlurEffectOperation(viewNode: self)
                  objc_setAssociatedObject(self, &AssociatedNodeRenderKey.blurEffectKey,rs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:rs)
                  return rs
             }
         }

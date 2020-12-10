@@ -24,11 +24,7 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
     }
     var radius:CGFloat = 0
     var corners:UIRectCorner = .allCorners
-    var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0){
-        didSet{
-            self.needRemake = true
-        }
-    }
+    var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0)
     var shadowPath:UIBezierPath? = nil
     private var pcircle:Bool? = false
     weak var viewNode:ArgoKitNode?
@@ -39,30 +35,31 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
         
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:strongSelf)
                 strongSelf.needRemake = true
-                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+                view.addObserver(strongSelf, forKeyPath: "frame", options: [.new,.old], context: nil)
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        let rect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
-        if let mask = self.viewNode?.view?.layer.mask {
-            if !(mask.frame.equalTo(rect)) {
-                self.needRemake = true
-            }
+        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
+        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
+        if (newrect.equalTo(oldrect)) {
+            return
+        }
+        if let _ = (object as? UIView)?.layer.mask {
+            self.needRemake = true
         }
     }
     
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
         self.multiRadius = multiRadius
-        self.needRemake = true
     }
     
     func circle() {
         pcircle = true
-        self.needRemake = true
     }
     
     
@@ -92,6 +89,7 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
             maskLayer?.frame = bounds
             maskLayer?.path = maskPath.cgPath
             view.layer.mask = maskLayer
+           
         }
     }
     

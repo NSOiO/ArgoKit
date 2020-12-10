@@ -24,7 +24,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         }
     }
    
-    var shadowColor:UIColor?
+    var shadowColor:UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.215)
     var shadowOffset:CGSize
     var shadowRadius:CGFloat
     var shadowOpacity:Float
@@ -35,7 +35,6 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     
     required init(viewNode:ArgoKitNode){
         self.multiRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0)
-        self.shadowColor = nil
         self.shadowOffset = CGSize(width: 0, height: 0)
         self.shadowRadius = 0
         self.shadowOpacity = 0
@@ -43,41 +42,49 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                ArgoKitViewReaderHelper.shared.addRenderOperation(operation:strongSelf)
                 strongSelf.needRemake = true
-                view.addObserver(strongSelf, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+                view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        if let shadowRadius = self.viewNode?.view?.layer.shadowRadius {
+        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
+        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
+        if newrect.equalTo(oldrect) {
+            return
+        }
+        if let shadowRadius = (object as? UIView)?.layer.shadowRadius {
             if shadowRadius > 0 {
                 self.needRemake = true
             }
         }
     }
     
+    
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
         self.multiRadius = multiRadius
+        
         self.needRemake = true
     }
     
-    
     func updateCornersRadius(shadowColor:UIColor?, shadowOffset:CGSize,shadowRadius:CGFloat,shadowOpacity:Float,corners:UIRectCorner)->Void{
-        self.shadowColor = shadowColor
+        self.shadowColor = shadowColor ?? UIColor(red: 0, green: 0, blue: 0, alpha: 0.215)
         self.shadowOffset = shadowOffset
         self.shadowRadius = shadowRadius
         self.shadowOpacity = shadowOpacity
         self.corners = corners
         let multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: shadowRadius)
         self.multiRadius = multiRadius
+        
         self.needRemake = true
     }
     
-    
     func updateShadowColor(_ value: UIColor?) -> Void {
-        self.shadowColor = value
+        self.shadowColor = value ?? UIColor(red: 0, green: 0, blue: 0, alpha: 0.215)
+
         self.needRemake = true
     }
     
@@ -85,6 +92,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         self.shadowOffset = offset
         self.shadowRadius = radius
         self.shadowOpacity = opacity
+        
         self.needRemake = true
     }
     
@@ -97,7 +105,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
             }
             shadowPath = ArgoKitCornerManagerTool.bezierPath(frame:frame, multiRadius: self.multiRadius)
             if let view = node.view {
-                view.layer.shadowColor = shadowColor?.cgColor
+                view.layer.shadowColor = shadowColor.cgColor
                 view.layer.shadowOffset = shadowOffset
                 view.layer.shadowRadius = shadowRadius
                 if shadowRadius <= 0 {
@@ -107,7 +115,7 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
                 }
                 view.layer.shadowPath = shadowPath?.cgPath
             }else{
-                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowColor),shadowColor?.cgColor)
+                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowColor),shadowColor.cgColor)
                 ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowOffset),shadowOffset)
                 ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.shadowRadius),shadowRadius)
                 if shadowRadius <= 0 {
