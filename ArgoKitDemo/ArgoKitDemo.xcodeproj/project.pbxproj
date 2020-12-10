@@ -52,7 +52,6 @@
 		FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */; };
 		FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */; };
 		FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */; };
-		FAF6E61D254FB20E0028A5C7 /* Demo1ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,7 +142,6 @@
 		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
 		FAF06A08257E0C5B00EF1EDA /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo1ContentView.swift; sourceTree = "<group>"; };
 		FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.release.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.release.xcconfig"; sourceTree = "<group>"; };
 		FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -208,7 +206,6 @@
 				FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */,
 				FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */,
 				FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */,
-				FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */,
 				FA163037257E3C4A000BA507 /* ArgoKitView1.swift */,
 				FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */,
 				FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */,
@@ -555,7 +552,6 @@
 				FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */,
 				FA0B5E772581CB9800D483EC /* ArgoKitView13.swift in Sources */,
 				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
-				FAF6E61D254FB20E0028A5C7 /* Demo1ContentView.swift in Sources */,
 				FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */,
 				FA5164FE255BB99E005BE240 /* LandmarkDetail.swift in Sources */,
 				FA5164FC255BB99E005BE240 /* Data.swift in Sources */,

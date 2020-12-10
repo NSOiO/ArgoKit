@@ -40,43 +40,44 @@ public struct ProgressView : View {
 }
 
 extension ProgressView {
-    
+    @discardableResult
     public func progressViewStyle(_ value: UIProgressView.Style) -> Self {
         addAttribute(#selector(setter:UIProgressView.progressViewStyle),value.rawValue)
         return self
     }
-    
+    @discardableResult
     public func progress(_ value: Float) -> Self {
         addAttribute(#selector(setter:UIProgressView.progress),value)
         return self
     }
-    
+    @discardableResult
     public func progressTintColor(_ value: UIColor?) -> Self {
         addAttribute(#selector(setter:UIProgressView.progressTintColor),value)
         return self
     }
-    
+    @discardableResult
     public func trackTintColor(_ value: UIColor?) -> Self {
         addAttribute(#selector(setter:UIProgressView.trackTintColor),value)
         return self
     }
-    
+    @discardableResult
     public func progressImage(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIProgressView.progressImage),value)
         return self
     }
-    
+    @discardableResult
     public func trackImage(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIProgressView.trackImage),value)
         return self
     }
-    
+    @discardableResult
     public func setProgress(_ value: Float, animated: Bool) -> Self {
         addAttribute(#selector(UIProgressView.setProgress),value,animated)
         return self
     }
     
     @available(iOS 9.0, *)
+    @discardableResult
     public func observedProgress(_ value: Progress?) -> Self {
         addAttribute(#selector(setter:UIProgressView.observedProgress),value)
         return self

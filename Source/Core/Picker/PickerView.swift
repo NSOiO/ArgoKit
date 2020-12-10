@@ -48,21 +48,25 @@ public class PickerView<T>: View {
 
 extension PickerView {
     
+    @discardableResult
     public func reloadAllComponents() -> Self {
         pNode.reloadAllComponents()
         return self
     }
     
+    @discardableResult
     public func reloadComponent(_ value: Int) -> Self {
         pNode.reloadComponent(value)
         return self
     }
     
+    @discardableResult
     public func selectRow(_ row: Int, inComponent component: Int, animated: Bool) -> Self {
         pickerView.selectRow(row, inComponent: component, animated: animated)
         return self
     }
     
+    @discardableResult
     public func didSelectRow(_ action: @escaping (_ data: T, _ row: Int, _ component: Int) -> Void) -> Self {
         self.pNode.observeAction(pickerView) { target, paramter in
             if paramter?.count ?? 0 >= 3 {

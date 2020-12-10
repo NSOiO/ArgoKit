@@ -19,7 +19,7 @@ class LayoutTests: ArgoKit.View {
                 .borderWidth(2)
                 .cornerRadius(12)
                 .margin(edge: .all, value: 20)
-                .shadow(shadowColor: .red, shadowOffset: .init(width: 10, height: 10), shadowRadius: 5, shadowOpacity: 1)
+
 
             Text("text 1.1")
                 .backgroundColor(.blue)

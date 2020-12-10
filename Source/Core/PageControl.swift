@@ -32,18 +32,22 @@ public struct PageControl:View{
 
 extension PageControl{
     /// default is 0
+    @discardableResult
     public func numberOfPages(_ value:Int)->Self{
         addAttribute(#selector(setter:UIPageControl.numberOfPages),value)
         return self
     }
     
     /// default is 0. Value is pinned to 0..numberOfPages-1
+    
+    @discardableResult
     public func currentPage(_ value:Int)->Self{
         addAttribute(#selector(setter:UIPageControl.currentPage),value)
         return self
     }
     
     /// hides the indicator if there is only one page, default is NO
+    @discardableResult
     public func hidesForSinglePage(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIPageControl.hidesForSinglePage),value)
         return self
@@ -51,6 +55,7 @@ extension PageControl{
     
     /// The tint color for non-selected indicators. Default is nil.
     @available(iOS 6.0, *)
+    @discardableResult
     public func pageIndicatorTintColor(_ value:UIColor?)->Self{
         addAttribute(#selector(setter:UIPageControl.pageIndicatorTintColor),value)
         return self
@@ -58,6 +63,7 @@ extension PageControl{
 
     /// The tint color for the currently-selected indicators. Default is nil.
     @available(iOS 6.0, *)
+    @discardableResult
     public func currentPageIndicatorTintColor(_ value:UIColor?)->Self{
         addAttribute(#selector(setter:UIPageControl.currentPageIndicatorTintColor),value)
         return self
@@ -65,6 +71,7 @@ extension PageControl{
 
     /// The preferred background style. Default is UIPageControlBackgroundStyleAutomatic on iOS, and UIPageControlBackgroundStyleProminent on tvOS.
     @available(iOS 14.0, *)
+    @discardableResult
     public func backgroundStyle(_ value:UIPageControl.BackgroundStyle)->Self{
         addAttribute(#selector(setter:UIPageControl.backgroundStyle),value)
         return self
@@ -72,6 +79,7 @@ extension PageControl{
     
     /// The current interaction state for when the current page changes. Default is UIPageControlInteractionStateNone
     @available(iOS 14.0, *)
+    @discardableResult
     public func interactionState()->UIPageControl.InteractionState{
         if let view = self.node?.view as? UIPageControl{
             return view.interactionState
@@ -80,6 +88,7 @@ extension PageControl{
     }
     /// Returns YES if the continuous interaction is enabled, NO otherwise. Default is YES.
     @available(iOS 14.0, *)
+    @discardableResult
     public func allowsContinuousInteraction(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIPageControl.allowsContinuousInteraction),value)
         return self
@@ -87,6 +96,7 @@ extension PageControl{
 
     /// The preferred image for indicators. Symbol images are recommended. Default is nil.
     @available(iOS 14.0, *)
+    @discardableResult
     public func preferredIndicatorImage(_ value:UIImage?)->Self{
         addAttribute(#selector(setter:UIPageControl.preferredIndicatorImage),value)
         return self
@@ -110,6 +120,7 @@ extension PageControl{
      * @param page      Must be in the range of 0..numberOfPages
      */
     @available(iOS 14.0, *)
+    @discardableResult
     public func setIndicatorImage(_ image: UIImage?, forPage page: Int)->Self{
         addAttribute(#selector(UIPageControl.setIndicatorImage),image,page)
         return self
@@ -132,6 +143,7 @@ extension PageControl{
 
     /// update page display to match the currentPage. ignored if defersCurrentPageDisplay is NO. setting the page value directly will update immediately
     @available(iOS, introduced: 2.0, deprecated: 14.0, message: "updateCurrentPageDisplay no longer does anything reasonable with the new interaction mode.")
+    @discardableResult
     public func updateCurrentPageDisplay()-> Self{
         addAttribute(#selector(UIPageControl.updateCurrentPageDisplay))
         return self

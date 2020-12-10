@@ -69,6 +69,7 @@ extension View{
 }
 
 extension View{
+    @discardableResult
     public func alias<T>(variable ptr:inout T?) -> Self where T: View{
         ptr = self as? T
         return self
@@ -89,6 +90,7 @@ extension View{
 
 // UIGestureRecognizer
 extension View{
+    @discardableResult
     public func gesture(gesture:Gesture)->Self{
         gesture.gesture.isEnabled = true
         addAttribute(#selector(setter: UIView.isUserInteractionEnabled),true)
@@ -101,6 +103,7 @@ extension View{
         }
         return self
     }
+    @discardableResult
     public func removeGesture(gesture:Gesture)->Self{
         self.node?.view?.removeGestureRecognizer(gesture.gesture)
         return self
@@ -108,12 +111,14 @@ extension View{
 }
 
 extension View{
+    @discardableResult
     public func onTapGesture(numberOfTaps: Int = 1, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
         let gesture = TapGesture(numberOfTaps: numberOfTaps, numberOfTouches: numberOfTouches) { gesture in
             action()
         }
         return self.gesture(gesture:gesture)
     }
+    @discardableResult
     public func onLongPressGesture(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
         let gesture = LongPressGesture(numberOfTaps:numberOfTaps,numberOfTouches:numberOfTouches,minimumPressDuration:minimumPressDuration,allowableMovement:allowableMovement) { gesture in
             action()
@@ -123,7 +128,7 @@ extension View{
 }
 
 extension View {
-    
+    @discardableResult
     public func endEditing(_ force: Bool) -> Self {
         self.node?.view?.endEditing(force)
         return self
@@ -131,7 +136,7 @@ extension View {
 }
 
 extension View {
-    
+    @discardableResult
     public func addAnimation(_ animation: Animation) -> Self {
         if let view = self.node?.view {
             animation.attach(view)

@@ -42,98 +42,119 @@ public class TextView : ScrollView {
 }
 
 extension TextView {
-    
+    @discardableResult
     public func text(_ value: String?) -> Self {
         addAttribute(#selector(setter:UITextView.text),value)
         return self
     }
     
+    @discardableResult
     public func font(_ value: UIFont?) -> Self {
         addAttribute(#selector(setter:UITextView.font),value)
         return self
     }
     
+    @discardableResult
     public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
         let f = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
+    
+    @discardableResult
     public func fontName(_ value:String?)->Self{
         fontName = value
         let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
+    
+    @discardableResult
     public func fontSize(_ value:CGFloat)->Self{
         fontSize = value
         let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         return font(f)
     }
+    
+    @discardableResult
     public func fontStyle(_ value:AKFontStyle)->Self{
         let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
         return font(f)
     }
     
+    @discardableResult
     public func textColor(_ value: UIColor?) -> Self {
         addAttribute(#selector(setter:UITextView.textColor),value)
         return self
     }
     
+    @discardableResult
     public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
         addAttribute(#selector(setter:UITextView.textColor),value)
         return self;
     }
     
+    @discardableResult
     public func textColor(hex:Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
         addAttribute(#selector(setter:UITextView.textColor),value)
         return self;
     }
     
+    @discardableResult
     public func textAlign(_ value: NSTextAlignment) -> Self {
         addAttribute(#selector(setter:UITextView.textAlignment),value.rawValue)
         return self
     }
     
+    @discardableResult
     public func selectedRange(_ value: NSRange) -> Self {
         addAttribute(#selector(setter:UITextView.selectedRange),value)
         return self
     }
     
+    @discardableResult
     public func isEditable(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextView.isEditable),value)
         return self
     }
     
+    @discardableResult
     public func isSelectable(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextView.isSelectable),value)
         return self
     }
     
+    @discardableResult
     public func dataDetectorTypes(detectorType value: ()->UIDataDetectorTypes) -> Self {
         addAttribute(#selector(setter:UITextView.dataDetectorTypes),value())
         return self
     }
     
+    @discardableResult
     public func allowsEditingTextAttributes(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextView.allowsEditingTextAttributes),value)
         return self
     }
     
+    @discardableResult
     public func attributedText(_ value: NSAttributedString!) -> Self {
         addAttribute(#selector(setter:UITextView.attributedText),value)
         return self
     }
     
+    @discardableResult
     public func typingAttributes(_ value: [NSAttributedString.Key : Any]) -> Self {
         addAttribute(#selector(setter:UITextView.typingAttributes),value)
         return self
     }
     
+    @discardableResult
     public func scrollRangeToVisible(_ value: NSRange) -> Self {
         addAttribute(#selector(UITextView.scrollRangeToVisible),value)
         return self
     }
     
+    @discardableResult
     public func inputView(_ content:()->View) -> Self {
         let inView = content()
         if let node = inView.node {
@@ -146,6 +167,7 @@ extension TextView {
         return self
     }
     
+    @discardableResult
     public func inputAccessoryView(_ content:()->View) -> Self {
         let inAcView = content()
         if let node = inAcView.node {
@@ -158,22 +180,26 @@ extension TextView {
         return self
     }
     
+    @discardableResult
     public func clearsOnInsertion(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextView.clearsOnInsertion),value)
         return self
     }
     
+    @discardableResult
     public func textContainerInset(_ value: UIEdgeInsets) -> Self {
         addAttribute(#selector(setter:UITextView.textContainerInset),value)
         return self
     }
     
+    @discardableResult
     public func linkTextAttributes(_ value: [NSAttributedString.Key : Any]!) -> Self {
         addAttribute(#selector(setter:UITextView.linkTextAttributes),value)
         return self
     }
     
     @available(iOS 13.0, *)
+    @discardableResult
     public func usesStandardTextScaling(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextView.usesStandardTextScaling),value)
         return self
@@ -182,6 +208,7 @@ extension TextView {
 
 extension TextView {
     
+    @discardableResult
     public func shouldBeginEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewShouldBeginEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -195,6 +222,7 @@ extension TextView {
         return self
     }
 
+    @discardableResult
     public func shouldEndEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewShouldEndEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -208,6 +236,7 @@ extension TextView {
         return self
     }
 
+    @discardableResult
     public func didBeginEditing(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidBeginEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -221,6 +250,7 @@ extension TextView {
         return self
     }
 
+    @discardableResult
     public func didEndEditing(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidEndEditing(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -234,6 +264,7 @@ extension TextView {
         return self
     }
 
+    @discardableResult
     public func shouldChangeText(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementText: String) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textView(_:shouldChangeTextIn:replacementText:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -249,6 +280,7 @@ extension TextView {
         return self
     }
 
+    @discardableResult
     public func didChangeText(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidChange(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -261,7 +293,8 @@ extension TextView {
         })
         return self
     }
-
+    
+    @discardableResult
     public func didChangeSelection(_ action: @escaping (_ text: String?, _ selectedRange: NSRange) -> Void) -> Self {
         let sel = #selector(ArgoKitTextViewNode.textViewDidChangeSelection(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -276,6 +309,7 @@ extension TextView {
     }
 
     @available(iOS 10.0, *)
+    @discardableResult
     public func shouldInteractWithURL(_ action: @escaping (_ text: String?, _ URL: URL, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
         let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, URL, NSRange, UITextItemInteraction) -> Bool)
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
@@ -293,6 +327,7 @@ extension TextView {
     }
 
     @available(iOS 10.0, *)
+    @discardableResult
     public func shouldInteractWithTextAttachment(_ action: @escaping (_ text: String?, _ textAttachment: NSTextAttachment, _ characterRange: NSRange, _ interaction: UITextItemInteraction) -> Bool) -> Self {
         let sel = #selector(textViewNode.textView(_:shouldInteractWith:in:interaction:) as (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool);
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in

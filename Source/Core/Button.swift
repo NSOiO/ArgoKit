@@ -52,39 +52,51 @@ open class Button:View{
 
 
 extension Button{
+    @discardableResult
     public func textColor(_ color: UIColor?)->Self{
         setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
     }
+    
+    @discardableResult
     public func font(_ value:UIFont!)->Self{
         setValue(pNode, #selector(setter: UILabel.font), value)
         return self
     }
     
+    @discardableResult
     public func font(name: String? = nil, style:AKFontStyle = .default,size:CGFloat = UIFont.systemFontSize)->Self{
         let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
         return font(f)
     }
+    
+    @discardableResult
     public func font(name value:String?)->Self{
         fontName = value
         let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
+    
+    @discardableResult
     public func font(size value:CGFloat)->Self{
         fontSize = value
         let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         return font(f)
     }
+    
+    @discardableResult
     public func font(style value:AKFontStyle)->Self{
         let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
         return font(f)
     }
     
+    @discardableResult
     public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
         return self
     }
     
+    @discardableResult
     public func backgroundImage(path: String?, for state: UIControl.State)->Self{
         if let p =  path{
             if let image =  UIImage(named:p){
@@ -93,6 +105,7 @@ extension Button{
         }
         return self
     }
+    
     
     func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
         if let nodes = pNode.childs{

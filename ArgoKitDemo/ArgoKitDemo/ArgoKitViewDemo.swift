@@ -240,7 +240,7 @@ class ListDemo:ArgoKit.View{
         }
         .refreshHeaderView {
             RefreshHeaderView(startRefreshing: {
-                _ = headerView?.endRefreshing()
+                headerView?.endRefreshing()
             })
             {
                 Text("headerh").alignSelf(.center).lineLimit(0).font(size: 20)

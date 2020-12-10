@@ -44,6 +44,8 @@ public enum ArgoDirection{
     case RTL
 }
 extension View {
+    
+    @discardableResult
     fileprivate func direction(_ value:ArgoDirection)->Self{
         switch value{
         case .Inherit:
@@ -69,6 +71,8 @@ public enum ArgoFlexDirection{
     case rowReverse
 }
 extension View {
+    
+    @discardableResult
     public func flexDirection(_ value:ArgoFlexDirection)->Self{
         switch value{
         case .column:
@@ -100,6 +104,8 @@ public enum ArgoJustify{
     case evenly
 }
 extension View{
+    
+    @discardableResult
     public func justifyContent(_ value:ArgoJustify)->Self{
         switch value{
         case .start:
@@ -140,6 +146,8 @@ public enum ArgoAlign{
  Align content defines the distribution of lines along the cross-axis. This only has effect when items are wrapped to multiple lines using flex wrap.
  */
 extension View{
+    
+    @discardableResult
     public func alignContent(_ value:ArgoAlign)->Self{
         switch value{
         case .auto:
@@ -174,6 +182,8 @@ extension View{
  Align items describes how to align children along the cross axis of their container. Align items is very similar to justify content but instead of applying to the main axis, align items applies to the cross axis.
  */
 extension View{
+    
+    @discardableResult
     public func alignItems(_ value:ArgoAlign)->Self{
         switch value{
         case .auto:
@@ -209,6 +219,8 @@ extension View{
  Align self has the same options and effect as align items but instead of affecting the children within a container, you can apply this property to a single child to change its alignment within its parent. align self overrides any option set by the parent with align items.
  */
 extension View{
+    
+    @discardableResult
     public func alignSelf(_ value:ArgoAlign)->Self{
         switch value{
         case .auto:
@@ -244,6 +256,8 @@ public enum ArgoPositionType{
     case absolute
 }
 extension View{
+    
+    @discardableResult
     public func positionType(_ value:ArgoPositionType)->Self{
         switch value {
         case .relative:
@@ -264,6 +278,8 @@ public enum ArgoWrapType{
 }
 
 extension View{
+    
+    @discardableResult
     public func wrap(_ value:ArgoWrapType)->Self{
         switch value {
         case .noWrap:
@@ -281,6 +297,8 @@ extension View{
 }
 
 extension View{
+    
+    @discardableResult
     fileprivate func overflowVisible()->Self{
         self.node?.overflowVisible();
         return self;
@@ -304,20 +322,26 @@ extension View{
 }
 
 extension View{
+    
+    @discardableResult
     public func flex(_ value:CGFloat)->Self{
         self.node?.flex(value);
         return self;
     }
+    
+    @discardableResult
     public func grow(_ value:CGFloat)->Self{
         self.node?.flexGrow(value);
         return self;
     }
     
+    @discardableResult
     public func shrink(_ value:CGFloat)->Self{
         self.node?.flexShrink(value);
         return self;
     }
     
+    @discardableResult
     public func basis(_ value:ArgoValue)->Self{
         switch value {
         case .auto:
@@ -349,12 +373,16 @@ public enum ArgoEdge{
 }
 
 extension View{
+    
+    @discardableResult
     public func position(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return position(edge: .top, value: top)
             .position(edge: .left, value: left)
             .position(edge: .bottom, value: bottom)
             .position(edge: .right, value:right)
     }
+    
+    @discardableResult
     public func position(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:
@@ -456,12 +484,16 @@ extension View{
 }
 
 extension View{
+    
+    @discardableResult
     public func margin(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return margin(edge: .top, value: top)
             .margin(edge: .left, value: left)
             .margin(edge: .bottom, value: bottom)
             .margin(edge: .right, value:right)
-    } 
+    }
+    
+    @discardableResult
     public func margin(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:
@@ -580,13 +612,14 @@ extension View{
 
 
 extension View{
+    @discardableResult
     public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return padding(edge: .top, value: top)
             .padding(edge: .left, value: left)
             .padding(edge: .bottom, value: bottom)
             .padding(edge: .right, value:right)
     }
-    
+    @discardableResult
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {
         case .left:
@@ -704,12 +737,14 @@ extension View{
 }
 
 extension View{
+    @discardableResult
     private func  borderWidth(top:CGFloat,right:CGFloat,bottom:CGFloat,left:CGFloat)->Self{
         return self.borderWidth(edge: .top, value: top)
             .borderWidth(edge: .right, value: right)
             .borderWidth(edge: .bottom, value: bottom)
             .borderWidth(edge: .left, value: left)
     }
+    @discardableResult
     private func  borderWidth(edge:ArgoEdge,value:CGFloat)->Self{
         switch edge {
         case .left:
@@ -741,11 +776,11 @@ extension View{
 }
 
 extension View{
-    
+    @discardableResult
     public func size(width: ArgoValue, height: ArgoValue) -> Self {
         return self.width(width).height(height)
     }
-    
+    @discardableResult
     public func width(_ value:ArgoValue)->Self{
         switch value {
         case .point(let value):
@@ -762,6 +797,7 @@ extension View{
         }
         return self
     }
+    @discardableResult
     public func height(_ value:ArgoValue)->Self{
         switch value {
         case .point(let value):
@@ -778,7 +814,7 @@ extension View{
         }
         return self
     }
-    
+    @discardableResult
     public func minWidth(_ value:ArgoValue)->Self{
         switch value {
         case .point(let value):
@@ -792,7 +828,7 @@ extension View{
         }
         return self
     }
-
+    @discardableResult
     public func minHeight(_ value:ArgoValue)->Self{
         switch value {
         case .point(let value):
@@ -806,7 +842,7 @@ extension View{
         }
         return self
     }
-
+    @discardableResult
     public func maxWidth(_ value:ArgoValue)->Self{
         switch value {
         case .point(let value):
@@ -820,7 +856,7 @@ extension View{
         }
         return self
     }
-    
+    @discardableResult
     public func maxHeight(_ value:ArgoValue)->Self{
         switch value {
         case .point(let value):
@@ -859,7 +895,7 @@ extension View{
     }
 }
 extension View {
-    
+    @discardableResult
     public func aspect(ratio: CGFloat) -> Self {
         self.node?.aspect(ratio:ratio)
         return self

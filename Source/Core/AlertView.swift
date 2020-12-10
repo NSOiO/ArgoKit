@@ -28,6 +28,8 @@ public class AlertView: View {
     }
 }
 extension AlertView{
+    
+    @discardableResult
     public func `default`(title:String?,handler:((String?)->Void)?)->Self{
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.default) {[weak self] action in
             if let block = handler{
@@ -37,6 +39,8 @@ extension AlertView{
         alerView.addAction(alertAction)
         return self
     }
+    
+    @discardableResult
     public func cancel(title:String?,handler:(()->Void)?)->Self{
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.cancel) { action in
             if let block = handler{
@@ -47,6 +51,8 @@ extension AlertView{
         
         return self
     }
+    
+    @discardableResult
     public func destructive(title:String?,handler:((String?)->Void)?)->Self{
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.destructive) { [weak self] action in
             if let block = handler{
@@ -78,10 +84,14 @@ open var preferredAction: UIAlertAction?
 open func addTextField(configurationHandler: ((UITextField) -> Void)? = nil)
  */
 extension AlertView{
+    
+    @discardableResult
     public func titile(_ value: String?)->Self{
         alerView.title = value
         return self
     }
+    
+    @discardableResult
     public func message(_ value: String?)->Self{
         alerView.message = value
         return self
@@ -89,6 +99,7 @@ extension AlertView{
 }
 
 extension View{
+    @discardableResult
     public func alert(_ content:()->AlertView) -> Self{
         let alertView = content()
         if let node = alertView.node {

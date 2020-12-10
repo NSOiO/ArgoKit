@@ -60,16 +60,19 @@ public class RefreshFooterView: View {
         addSubNodes(builder:builder)
     }
     
+    @discardableResult
     public func endRefreshing() -> Self {
         pNode?.endRefreshing()
         return self
     }
     
+    @discardableResult
     public func resetNoMoreData() -> Self {
         pNode?.resetNoMoreData()
         return self
     }
     
+    @discardableResult
     public func autoRefreshOffPage(_ value:CGFloat) -> Self {
         pNode?.autoRefreshOffPage(value)
         return self

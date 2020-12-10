@@ -88,15 +88,19 @@ extension View{
 
 // modifier
 extension View {
+    
+    @discardableResult
     public func isUserInteractionEnabled(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
         return self
     }
-
+    
+    @discardableResult
     public func tag(_ value:Int)->Self{
         addAttribute(#selector(setter:UIView.tag),value)
         return self
     }
+    
     public func tag()->Int?{
         return self.node?.view?.tag
     }
@@ -116,17 +120,20 @@ extension View {
 
     /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
     @available(iOS 14.0, *)
+    @discardableResult
     public func focusGroupIdentifier(_ value:String?)->Self{
         addAttribute(#selector(setter:UIView.focusGroupIdentifier),value)
         return self
     }
     
     @available(iOS 14.0, *)
+    @discardableResult
     public func focusGroupIdentifier()-> String? {
         return self.node?.view?.focusGroupIdentifier
     }
 
     @available(iOS 9.0, *)
+    @discardableResult
     public func semanticContentAttribute(_ value:UISemanticContentAttribute)->Self{
         addAttribute(#selector(setter:UIView.semanticContentAttribute),value)
         return self
@@ -141,41 +148,52 @@ extension View {
 }
 
 extension View{
-   
+    
+    @discardableResult
     public func backgroundColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
     }
     
+    @discardableResult
     public func backgroundColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
         addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
     }
     
+    @discardableResult
     public func backgroundColor(hex :Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
         addAttribute(#selector(setter:UIView.backgroundColor),value)
         return self;
     }
     
+    @discardableResult
     public func alpha(_ value:CGFloat)->Self{
         addAttribute(#selector(setter:UIView.alpha),value)
         return self;
     }
+    
+    @discardableResult
     public func opaque(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.isOpaque),value)
         return self;
     }
+    
+    @discardableResult
     public func clearsContextBeforeDrawing(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
         return self;
     }
+    
+    @discardableResult
     public func hidden(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.isHidden),value)
         return self;
     }
     
+    @discardableResult
     public func display(_ value:Bool)->Self{
         let display_ = !value
         addAttribute(#selector(setter:UIView.isHidden),display_)
@@ -195,41 +213,50 @@ extension View{
         return self;
     }
     
+    @discardableResult
     public func contentMode(_ value:UIView.ContentMode)->Self{
         addAttribute(#selector(setter:UIView.contentMode),value.rawValue)
         return self;
     }
+    
+    @discardableResult
     public func tintColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:UIView.tintColor),value)
         return self;
     }
     
+    @discardableResult
     public func tintColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
         addAttribute(#selector(setter:UIView.tintColor),value)
         return self;
     }
     
+    @discardableResult
     public func tintColor(hex :Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
         addAttribute(#selector(setter:UIView.tintColor),value)
         return self;
     }
     
+    @discardableResult
     public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
         addAttribute(#selector(setter:UIView.tintAdjustmentMode),value.rawValue)
         return self;
     }
     
+    @discardableResult
     public func clipsToBounds(_ value:Bool)->Self{
         addAttribute(#selector(setter:UIView.clipsToBounds),value)
         return self;
     }
     
+    @discardableResult
     public func cornerRadius(_ value:CGFloat)->Self{
         return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
     }
     
+    @discardableResult
     public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
         let multiRadius = ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
         self.node?.maskLayerOperation?.updateCornersRadius(multiRadius)
@@ -238,28 +265,33 @@ extension View{
         return self;
     }
     
+    @discardableResult
     public func borderWidth(_ value:CGFloat)->Self{
         self.node?.borderLayerOperation?.borderWidth = value
         return self;
     }
     
+    @discardableResult
     public func borderColor(_ value:UIColor)->Self{
         self.node?.borderLayerOperation?.borderColor = value
         return self;
     }
     
+    @discardableResult
     public func borderColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
         addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
         return self;
     }
     
+    @discardableResult
     public func borderColor(hex :Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
         addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
         return self;
     }
     
+    @discardableResult
     public func circle()->Self{
         _ = self.clipsToBounds(true)
         self.node?.maskLayerOperation?.circle()
@@ -267,38 +299,45 @@ extension View{
         return self;
     }
     
+    @discardableResult
     public func shadowColor(_ value: UIColor?) -> Self {
         self.node?.shadowOperation?.updateShadowColor(value)
         return self
     }
     
+    @discardableResult
     public func shadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
         self.node?.shadowOperation?.updateShadowColor(value)
         return self;
     }
     
+    @discardableResult
     public func shadowColor(hex :Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
         self.node?.shadowOperation?.updateShadowColor(value)
         return self;
     }
     
+    @discardableResult
     public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
         self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
         return self
     }
     
+    @discardableResult
     public func shadow(color:UIColor? = .gray, offset:CGSize,radius:CGFloat,opacity:Float,corners:UIRectCorner = .allCorners)->Self{
         self.node?.shadowOperation?.updateCornersRadius(shadowColor: color, shadowOffset: offset, shadowRadius: radius, shadowOpacity: opacity, corners: corners)
         return self;
     }
     
+    @discardableResult
     public func gradientColor(startColor: UIColor?,endColor:UIColor?,direction:ArgoKitGradientType?) -> Self {
         self.node?.gradientLayerOperation?.updateGradientLayer(startColor: startColor, endColor: endColor, direction: direction)
         return self
     }
     
+    @discardableResult
     public func cleanGradientLayer() -> Self {
         self.node?.gradientLayerOperation?.cleanGradientLayerIfNeed()
         return self
@@ -306,11 +345,14 @@ extension View{
 }
 
 extension View{
+    
+    @discardableResult
     public func addBlurEffect(style:UIBlurEffect.Style,alpha:CGFloat? = nil,color:UIColor? = nil) -> Self{
         self.node?.blurEffectOperation?.addBlurEffect(style: style,alpha: alpha,color: color)
         return self
     }
     
+    @discardableResult
     public func removeBlurEffect() -> Self{
         self.node?.blurEffectOperation?.removeBlurEffect()
         return self

@@ -57,10 +57,13 @@ public class RefreshHeaderView: View {
         addSubNodes(builder:builder)
     }
     
+    @discardableResult
     public func pullingDown(_ value:((_ contentOffset:CGPoint?) -> ())?) -> Self{
         pNode?.pullingDown(value)
         return self
     }
+    
+    @discardableResult
     public func endRefreshing() ->Self {
         pNode?.endRefreshing()
         return self
