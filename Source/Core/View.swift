@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+public struct ArgoKitNodeBuilder {
+    public static var defaultViewNode:ArgoKitNode = ArgoKitNode(viewClass: UIView.self)
+}
 public enum ArgoKitNodeType {
     case empty
     case multiple([ArgoKitNode])
@@ -39,7 +41,7 @@ public enum ArgoKitNodeType {
     }
 }
 
-public protocol  View {
+public protocol View {
     // 初始视图层次
     var type: ArgoKitNodeType{get}
     // 布局节点对象
@@ -49,10 +51,8 @@ public protocol  View {
     
 }
 
-private struct AssociatedNodeKey {
-       static var nodeKey:Void?
-}
 public extension View{
+    
     @ArgoKitViewBuilder var body: View {
         ViewEmpty()
     }
@@ -63,16 +63,11 @@ public extension View{
             return .empty
         }
     }
-    
-    var node:ArgoKitNode?{
-        get{
-            var obj = objc_getAssociatedObject(self, &AssociatedNodeKey.nodeKey) as? ArgoKitNode
-            if (obj == nil) {
-                obj = ArgoKitNode(viewClass: UIView.self)
-                objc_setAssociatedObject(self, &AssociatedNodeKey.nodeKey, obj, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-            return obj
-        }
+}
+
+extension View{
+    public static func ViewNode()->ArgoKitNode{
+        return ArgoKitNode(viewClass: UIView.self)
     }
 }
 
@@ -140,10 +135,10 @@ extension View {
 
 extension View {
     
-//    public func addAnimation(_ animation: Animation) -> Self {
-//        if let view = self.node?.view {
-//            animation.attach(view)
-//        }
-//        return self
-//    }
+    public func addAnimation(_ animation: Animation) -> Self {
+        if let view = self.node?.view {
+            animation.attach(view)
+        }
+        return self
+    }
 }

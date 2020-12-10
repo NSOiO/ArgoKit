@@ -120,34 +120,51 @@ extension ArgoKitDataSourceHelper {
 
 extension ArgoKitDataSourceHelper {
     
-    func appendSection(_ data: [Any]) {
-        if dataList == nil {
-            dataList = [data]
+    func reloadSection(data: [Any], section: Int) {
+        if section >= dataList?.count ?? 0 {
             return
         }
         
-        dataList?.append(data)
+        dataList?[section] = data
     }
     
-    func appendRow(rowData: Any, at section: Int) {
+    func reloadRow(rowData: Any, row: Int, at section: Int) {
+        if section >= dataList?.count ?? 0
+            || row >= dataList?[section].count ?? 0 {
+            return
+        }
+        
+        dataList?[section][row] = rowData
+    }
+    
+    func appendSections(_ data: [[Any]]) {
+        if dataList == nil {
+            dataList = data
+            return
+        }
+
+        dataList?.append(contentsOf: data)
+    }
+    
+    func appendRows(rowData: [Any], at section: Int) {
         
         if dataList == nil {
-            dataList = [[rowData]]
+            dataList = [rowData]
             return
         }
 
         if section >= dataList?.count ?? 0 {
-            dataList?.append([rowData])
+            dataList?.append(contentsOf: [rowData])
             return
         }
         
-        dataList?[section].append(rowData)
+        dataList?[section].append(contentsOf: rowData)
     }
     
     func insertSection(data: [Any], section: Int) {
         
         if section >= dataList?.count ?? 0 {
-            appendSection(data)
+            appendSections([data])
             return
         }
         
@@ -158,7 +175,7 @@ extension ArgoKitDataSourceHelper {
         
         if section >= dataList?.count ?? 0
             || row >= dataList?[section].count ?? 0 {
-            appendRow(rowData: rowData, at: section)
+            appendRows(rowData: [rowData], at: section)
             return
         }
         

@@ -27,6 +27,7 @@ class ArgoKitItem:ArgoKitIdentifiable {
     var textCom:Text?
 }
 class row: View{
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var item: ArgoKitItem
     init(item:ArgoKitItem) {
         self.item = item
@@ -43,6 +44,7 @@ class row: View{
     
 }
 class DemoContentView: View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var items:[ArgoKitItem]
     public init(){
         items = [ArgoKitItem]()

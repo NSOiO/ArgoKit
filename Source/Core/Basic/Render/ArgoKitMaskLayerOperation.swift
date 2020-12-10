@@ -1,12 +1,12 @@
 //
-//  ArgoKitViewLayerOperation.swift
+//  ArgoKitMaskLayerOperation.swift
 //  ArgoKit
 //
 //  Created by Bruce on 2020/12/8.
 //
 
 import Foundation
-class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
+class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
     private var _needRemake:Bool = false
     var needRemake: Bool{
         get{
@@ -22,17 +22,18 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
             _nodeObserver
         }
     }
-    var radius:CGFloat
-    var corners:UIRectCorner
-    var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0)
+    var radius:CGFloat = 0
+    var corners:UIRectCorner = .allCorners
+    var multiRadius:ArgoKitCornerRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0){
+        didSet{
+            self.needRemake = true
+        }
+    }
     var shadowPath:UIBezierPath? = nil
     private var pcircle:Bool? = false
     weak var viewNode:ArgoKitNode?
     
     required init(viewNode:ArgoKitNode){
-        self.multiRadius = ArgoKitCornerRadius(topLeft: 0, topRight: 0, bottomLeft: 0, bottomRight: 0)
-        self.radius = 0
-        self.corners = .allCorners
         self.viewNode = viewNode
         super.init()
         
@@ -58,47 +59,39 @@ class ArgoKitViewLayerOperation:NSObject, ArgoKitViewReaderOperation {
         self.multiRadius = multiRadius
         self.needRemake = true
     }
+    
     func circle() {
         pcircle = true
         self.needRemake = true
     }
     
-    func updateCornersRadius(radius:CGFloat,corners:UIRectCorner)->Void{
-        self.corners = corners
-        self.radius = radius
-        let multiRadius = ArgoKitCornerManagerTool.multiRadius(multiRadius: self.multiRadius, corner: corners, cornerRadius: radius)
-        self.multiRadius = multiRadius
-        self.needRemake = true
-    }
     
     func remakeIfNeed() {
         self.needRemake = false
-        if let node = self.viewNode {
-            var frame:CGRect = node.frame
-            if let view = node.view{
-                frame = view.frame
-            }
-            if frame.equalTo(CGRect.zero) {
+        remake()
+    }
+    
+    func remake() {
+        self.needRemake = false
+        if let view = self.viewNode?.view {
+            let bounds:CGRect = view.bounds
+            if bounds.equalTo(CGRect.zero) {
                 return
             }
             if pcircle == true{
-                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.cornerRadius),CGFloat.minimum(frame.size.width, frame.size.height)/2.0)
-                return;
+                let cornerRadius = CGFloat.minimum(bounds.size.width, bounds.size.height)/2.0
+                self.multiRadius = ArgoKitCornerRadius(topLeft: cornerRadius, topRight: cornerRadius, bottomLeft: cornerRadius, bottomRight: cornerRadius)
             }
-            let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)
+            let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius)
             var maskLayer:CAShapeLayer? = nil
-            if let mask =  node.view?.layer.mask {
+            if let mask = view.layer.mask {
                 maskLayer = mask as? CAShapeLayer
             }else{
                 maskLayer = CAShapeLayer()
             }
-            maskLayer?.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+            maskLayer?.frame = bounds
             maskLayer?.path = maskPath.cgPath
-            if let view = node.view {
-                view.layer.mask = maskLayer
-            }else{
-                ArgoKitNodeViewModifier.addAttribute(isCALayer: true,node,#selector(setter:CALayer.mask),maskLayer)
-            }
+            view.layer.mask = maskLayer
         }
     }
     

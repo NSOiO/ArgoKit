@@ -41,6 +41,7 @@ public class ViewPageCellItem:ArgoKitIdentifiable{
 }
 
 struct ViewPageCell: ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var item:ViewPageCellItem
     init(it: ViewPageCellItem) {
         item = it
@@ -57,6 +58,7 @@ struct ViewPageCell: ArgoKit.View {
 }
 
 struct ViewPage1 : ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var items = [ViewPageCellItem]()
     init() {
         for index in 1...5{

@@ -8,29 +8,36 @@
 import Foundation
 
 public class TextView : ScrollView {
-       
+    private var fontSize:CGFloat = UIFont.systemFontSize
+    private var fontStyle:AKFontStyle = .default
+    private var font:UIFont
+    private var fontName:String?
     private var textViewNode: ArgoKitTextViewNode {
         pNode as! ArgoKitTextViewNode
     }
     
     override convenience init() {
-        self.init(nil)
+        self.init(text:nil)
     }
     
-    public init(_ text: String?) {
+    public init(text: String?) {
+        font = UIFont.systemFont(ofSize:fontSize)
         super.init()
         if text != nil {
             addAttribute(#selector(setter:UITextView.text),text)
         }
     }
     
-    public init(textContainer: NSTextContainer?) {
+    
+    public init(textContainer:()->NSTextContainer?) {
+        font = UIFont.systemFont(ofSize:fontSize)
         super.init()
-        textViewNode.textContainer = textContainer
+        textViewNode.textContainer = textContainer()
     }
     
     override func createNode() {
         pNode = ArgoKitTextViewNode(viewClass: UITextView.self)
+        pNode?.alignSelfFlexStart()
     }
 }
 
@@ -46,13 +53,44 @@ extension TextView {
         return self
     }
     
+    public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
+        let f = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
+        return font(f)
+    }
+    public func fontName(_ value:String?)->Self{
+        fontName = value
+        let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
+        return font(f)
+    }
+    public func fontSize(_ value:CGFloat)->Self{
+        fontSize = value
+        let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
+        return font(f)
+    }
+    public func fontStyle(_ value:AKFontStyle)->Self{
+        let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
+        return font(f)
+    }
+    
     public func textColor(_ value: UIColor?) -> Self {
         addAttribute(#selector(setter:UITextView.textColor),value)
         return self
     }
     
-    public func textAlignment(_ value: NSTextAlignment) -> Self {
-        addAttribute(#selector(setter:UITextView.textAlignment),value)
+    public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        addAttribute(#selector(setter:UITextView.textColor),value)
+        return self;
+    }
+    
+    public func textColor(hex:Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        addAttribute(#selector(setter:UITextView.textColor),value)
+        return self;
+    }
+    
+    public func textAlign(_ value: NSTextAlignment) -> Self {
+        addAttribute(#selector(setter:UITextView.textAlignment),value.rawValue)
         return self
     }
     
@@ -71,8 +109,8 @@ extension TextView {
         return self
     }
     
-    public func dataDetectorTypes(_ value: UIDataDetectorTypes) -> Self {
-        addAttribute(#selector(setter:UITextView.dataDetectorTypes),value)
+    public func dataDetectorTypes(detectorType value: ()->UIDataDetectorTypes) -> Self {
+        addAttribute(#selector(setter:UITextView.dataDetectorTypes),value())
         return self
     }
     

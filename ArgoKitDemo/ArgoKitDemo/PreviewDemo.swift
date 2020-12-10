@@ -23,6 +23,7 @@ class PreviewModel {
 }
 
 class MyView: ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     typealias View = ArgoKit.View
     var body: View {
         VStack {
@@ -32,6 +33,7 @@ class MyView: ArgoKit.View {
 }
 
 class PreviewDemo: ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var model = PreviewModel()
     
     typealias View = ArgoKit.View

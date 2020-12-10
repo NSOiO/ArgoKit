@@ -8,7 +8,7 @@ A single row to be displayed in a list of landmarks.
 import ArgoKit
 
 class LandmarkRow: View {
-    
+    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var landmark: Landmark
     init(landmark: Landmark) {
         self.landmark = landmark

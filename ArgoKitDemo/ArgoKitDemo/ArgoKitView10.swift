@@ -1,18 +1,23 @@
-//___FILEHEADER___
+//
+//  ArgoKitView10.swift
+//  ArgoKitDemo
+//
+//  Created by Bruce on 2020/12/9.
+//
 
 import ArgoKit
 
 // view model
-class ___FILEBASENAMEASIDENTIFIER___Model {
+class ArgoKitView10Model {
 
 }
 
 // view
-struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
-    typealias View = ArgoKit.View
+struct ArgoKitView10: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
-    private var model: ___FILEBASENAMEASIDENTIFIER___Model
-    init(model: ___FILEBASENAMEASIDENTIFIER___Model) {
+    typealias View = ArgoKit.View
+    private var model: ArgoKitView10Model
+    init(model: ArgoKitView10Model) {
         self.model = model
     }
     
@@ -28,16 +33,16 @@ import ArgoKitComponent
 import SwiftUI
 
 // mock view model
-class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
+class ArgoKitView10Model_Previews:  ArgoKitView10Model {
 
 }
 
 @available(iOS 13.0.0, *)
-struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
+struct ArgoKitView10_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
         return ArgoRender {
-            ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
+            ArgoKitView10(model: ArgoKitView10Model_Previews())
         }
     }
 }

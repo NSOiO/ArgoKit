@@ -6,7 +6,7 @@
 //
 
 import Foundation
-open class Button:View{
+public struct Button:View{
     
     private var fontSize:CGFloat
     private var fontStyle:AKFontStyle
@@ -29,7 +29,7 @@ open class Button:View{
         pNode.alignItemsFlexStart()
     }
     
-    public convenience init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){
+    public init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){
         self.init(text: nil, action: action)
         let container = builder()
         if let nodes = container.type.viewNodes() {
@@ -46,7 +46,7 @@ open class Button:View{
         }
     }
     
-    public convenience init(text:String?,action :@escaping ()->Void){
+    public init(text:String?,action :@escaping ()->Void){
         self.init()
         pNode.addAction({ (obj, paramter) -> Any? in
             action();
@@ -79,12 +79,12 @@ extension Button{
         let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
         return font(f)
     }
-    public func font(name value:String?)->Self{
+    public mutating func font(name value:String?)->Self{
         fontName = value
         let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
         return font(f)
     }
-    public func font(size value:CGFloat)->Self{
+    public mutating func font(size value:CGFloat)->Self{
         fontSize = value
         let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
         return font(f)
