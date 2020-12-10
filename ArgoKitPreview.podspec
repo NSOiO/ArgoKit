@@ -22,22 +22,13 @@ podspec = Pod::Spec.new do |spec|
     spec.platform = :ios
     spec.ios.deployment_target = '10.0'
     spec.ios.frameworks = 'UIKit', 'SwiftUI'
-#    spec.ios.frameworks = 'SwiftUI'
 
-  #  spec.default_subspec = "Core"
-    # spec.dependency 'Yoga', '~> 1.14'
     spec.dependency 'ArgoKit'
     spec.dependency 'ArgoKitComponent'
     
     spec.module_name = 'ArgoKitPreview'
     spec.source_files = "Source/Preview/**/*.{h,m,mm,swift}"
-    # spec.libraries = 'z','c++'
-
-    # spec.subspec "Core" do |ss|
-    #   ss.source_files = 'Source/Core/**/*.{h,m,mm}','Source/Core/**/*.{swift}'
-    #   ss.private_header_files = 'ArgoKit/Source/*.h'
-    # end
-
+    spec.resources = ['Source/Script/**/*']
   
   end
   
