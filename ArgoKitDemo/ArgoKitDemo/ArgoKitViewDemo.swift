@@ -13,8 +13,8 @@ extension UIColor{
      
     }
 }
-class MSUserInterractionHeaderView: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+struct MSUserInterractionHeaderView: ArgoKit.View {
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
          HStack{
@@ -39,10 +39,11 @@ class MSUserInterractionHeaderView: ArgoKit.View {
             }
 
              
+            
              VStack{
                  HStack{
                     HStack{
-                     Text("姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名")
+                     Text("姓名姓名姓名姓名姓")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
                          .shrink(1.0)
@@ -61,7 +62,6 @@ class MSUserInterractionHeaderView: ArgoKit.View {
      
                     }.flex(1.0)
                     
-//                     Spacer()
                      
                      Text("10.0千米")
                          .textAlign(.right)
@@ -90,7 +90,7 @@ class MSUserInterractionHeaderView: ArgoKit.View {
 
 
 class MSUserInterractionContentView: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
     typealias View = ArgoKit.View
     var body: ArgoKit.View {
          HStack{
@@ -143,7 +143,7 @@ class MSUserInterractionContentView: ArgoKit.View {
 
 
 class TextFieldView: ArgoKit.View {
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
     typealias View = ArgoKit.View
    var body: ArgoKit.View {
     TextField(nil,placeholder: "请输入文本")
@@ -166,7 +166,7 @@ class TextFieldView: ArgoKit.View {
      .rightView(UITextField.ViewMode.always) {
          Button{
          }builder: {
-             Image("chincoteague.jpg")
+            Image("chincoteague.jpg")
             Image()
             Image("chincoteague.jpg", bundle: Bundle.main)
          }
@@ -178,7 +178,7 @@ class TextFieldView: ArgoKit.View {
    }
 }
 class SessionRow:ArgoKit.View {
-   var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+   var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
    typealias View = ArgoKit.View
    var item:SessionItem
    var hidden:Bool = true
@@ -187,10 +187,13 @@ class SessionRow:ArgoKit.View {
    }
     
    var body: ArgoKit.View{
-        MSUserInterractionHeaderView().margin(edge: .top, value: 5)
+        MSUserInterractionHeaderView()
+            
+            .margin(edge: .top, value: 5)
         .onTapGesture {[data = self.item] in
             print(data)
         }
+    
         MSUserInterractionContentView()
             .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
             .cornerRadius(5)
@@ -203,7 +206,7 @@ class SessionRow:ArgoKit.View {
 var headerView:RefreshHeaderView?
 var footerView:RefreshFooterView?
 class ListDemo:ArgoKit.View{
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+    var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
     typealias View = ArgoKit.View
     var items = [SessionItem]()
     init() {
@@ -250,7 +253,6 @@ class ListDemo:ArgoKit.View{
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {
-//                footerView?.resetNoMoreData()
                 print("footerhead")
             })
             {
@@ -299,149 +301,14 @@ class ListDemo:ArgoKit.View{
     }
 }
 
-
-class customView: ArgoKit.View  {
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
-    typealias View = ArgoKit.View
-    var hidden:Bool = true
-    var alertView1:AlertView?
-     var aText:ArgoKit.Text?
-    var body: ArgoKit.View{
-        VStack {
-           Text("hello aaa")
-           Button() {
-            self.hidden = !self.hidden
-            _ = self.aText?.hidden(self.hidden)
-               print("click1")
-           } builder: {
-               Text("buttonscxdscsdcsd").font(size:20)
-               Text("buttonscxdscsdcsd")
-                  
-           }
-           .flexDirection(.column)
-           .textColor(.purple)
-           .backgroundColor(.clear)
-           .font(size:30)
-           .font(style: .bold)
-           .shadow(shadowColor: .yellow, shadowOffset: CGSize(width: 1, height: 1), shadowRadius: 3.0, shadowOpacity: 13.0)
-
-           Button(text: "12345678eeee") {
-               let s = "click + \( String(describing: self.aText?.node?.text()!))"
-               _ = self.aText?.text(s)
-               print("click2")
-           }
-
-           ArgoKit.Toggle(true) { value in
-               print("value is ",value)
-           }
-
-          Text("hello bbbxassxas ")
-          Text("hello ccc").lineLimit(0)
-               .alias(variable: &self.aText)
-            .backgroundColor(.red)
-            .hidden(self.hidden)
-      }.margin(edge: .top, value: 96)
-        .backgroundColor(.cyan)
-    }
-}
-//
-//class TabSegmentDemo: ArgoKit.View {
-//    var body: ArgoKit.View {
-//        TabSegment(["AA", "BB", "CC", "DD", "EE"]) { text in
-//            Text(text as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
-//        }.margin(top: 100, right: 0, bottom: 0, left: 0)
-//        .select(index: 1)
-//        .backgroundColor(.yellow)
-////        .animType(.color)
-////        .animFromValue(.color(.blue))
-////        .animToValue(.color(.yellow))
-//
-////        TabSegment(["1", "2", "3", "4", "5", "6", "7", "8"]) {
-////            Text($0 as? String).textAlign(.center).width(400).height(500).backgroundColor(.green)
-////        }.margin(top: 100, right: 0, bottom: 0, left: 0)
-////        .backgroundColor(.yellow)
-////        .animType(.color).animToValue(.color(.orange))
-//    }
-//}
-
 class ArgoKitViewDemo:ArgoKit.View  {
-   var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
+   var node: ArgoKitNode? = ArgoKitNodeBuilder.defaultViewNode
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-    
-    MSUserInterractionHeaderView().margin(edge: .top, value: 5)
-    
-    MSUserInterractionContentView()
-        .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
-        .cornerRadius(5)
-        .backgroundColor(UIColor(250,250,250))
-    
-    ListDemo()
-    .grow(1)
-//    TabSegmentDemo()
-    
-    
-    
-//    HStack{
-//
-//       HStack{
-//
-//        Text("姓")
-//            .font(size: 16.0)
-//            .backgroundColor(.cyan)
-//            .textColor(.red)
-//            .width(150)
-//            .textAlign(.center)
-////            .shadow(offset: CGSize(width: 60, height: 10), radius: 3, opacity: 0.5)
-//            .shadow(shadowColor: UIColor.red, shadowOffset: CGSize(width: 60, height: 10), shadowRadius: 3, shadowOpacity: 0.5)
-////            .shrink(1.0)
-////        Button {
-////
-////        } builder: {
-////            Text("姓名姓名姓")
-////                .font(size: 16.0)
-////                .backgroundColor(.cyan)
-////                .textColor(.red)
-////                .
-////                .shrink(1.0).alignSelf(.center)
-////        }.textColor(.orange)
-////        .shrink(1.0)
-////
-////        Button(text: "姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名姓名"){
-////
-////        }
-//            .font(size: 26.0)
-//            .backgroundColor(.cyan)
-//            .textColor(.red)
-//            .shrink(1.0)
-//
-//        ForEach(0..<1){ item in
-//            Image("icybay.jpg")
-//                .margin(edge: .left, value: 4)
-//                .width(15.0)
-//                .height(15.0)
-//               .alignSelf(.center)
-//        }.flexDirection(.row)
-//        .margin(edge: .left, value: 4)
-//        .margin(edge: .right, value: 4)
-//        .alignSelf(.center)
-//       }
-//       .flex(1)
-//
-//
-//        Text("10.0千米")
-//            .textAlign(.right)
-//            .font(size: 13)
-//            .textColor(UIColor(170,170,170))
-//           .backgroundColor(.yellow)
-//
-//
-//    }
-//    .margin(edge: .left, value: 4)
-//    .margin(edge: .top, value: 104)
-//    .width(100%)
-//    .backgroundColor(.purple)
-//
+    Text("dasdas")
+//    ListDemo()
+//    .grow(1)
+
    }
 }
 
@@ -453,7 +320,8 @@ import SwiftUI
 struct ArgoKitViewDemo_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoRender {
-            ArgoKitViewDemo().body
+            MSUserInterractionHeaderView()
+                .margin(edge: .top, value: 100)
         }
     }
 }

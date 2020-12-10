@@ -20,6 +20,8 @@
 		A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E668257B8770003D3591 /* ViewPageTest.swift */; };
 		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
 		FA0B216D2580DBC700D483EC /* ArgoKitView10.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */; };
+		FA0B5E772581CB9800D483EC /* ArgoKitView13.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */; };
+		FA0B881C2581DA7B00D483EC /* ArgoKitView20.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */; };
 		FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163037257E3C4A000BA507 /* ArgoKitView1.swift */; };
 		FA3C6594257F555B0077C923 /* ArgoKitView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C6593257F555B0077C923 /* ArgoKitView3.swift */; };
 		FA3C7AB4257F62190077C923 /* ArgoKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C7AB3257F62190077C923 /* ArgoKitView.swift */; };
@@ -124,6 +126,8 @@
 		C93FDC9396227466369EFEA7 /* libPods-ArgoPreview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgoPreview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView10.swift; sourceTree = "<group>"; };
+		FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView13.swift; sourceTree = "<group>"; };
+		FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView20.swift; sourceTree = "<group>"; };
 		FA163037257E3C4A000BA507 /* ArgoKitView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView1.swift; sourceTree = "<group>"; };
 		FA3C6593257F555B0077C923 /* ArgoKitView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView3.swift; sourceTree = "<group>"; };
 		FA3C7AB3257F62190077C923 /* ArgoKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView.swift; sourceTree = "<group>"; };
@@ -238,7 +242,9 @@
 				FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */,
 				326335CD254133D20094676D /* AppDelegate.swift */,
 				3263370A25419A3C0094676D /* ContentView.swift */,
+				FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */,
 				FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */,
+				FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */,
 				FAF6E61C254FB20E0028A5C7 /* Demo1ContentView.swift */,
 				FA163037257E3C4A000BA507 /* ArgoKitView1.swift */,
 				FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */,
@@ -634,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0B881C2581DA7B00D483EC /* ArgoKitView20.swift in Sources */,
 				FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */,
 				A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */,
 				FA5709BD25765303004A0EAD /* ViewController.swift in Sources */,
@@ -654,6 +661,7 @@
 				FA0B216D2580DBC700D483EC /* ArgoKitView10.swift in Sources */,
 				A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */,
 				FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */,
+				FA0B5E772581CB9800D483EC /* ArgoKitView13.swift in Sources */,
 				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
 				FAF6E61D254FB20E0028A5C7 /* Demo1ContentView.swift in Sources */,
 				FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */,

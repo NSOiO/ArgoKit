@@ -248,8 +248,6 @@ extension View{
         return self;
     }
     
-    
-    
     public func borderColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
         addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
