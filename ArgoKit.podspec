@@ -16,7 +16,7 @@ podspec = Pod::Spec.new do |spec|
   spec.authors = 'MoMo'
   spec.source = {
     :git => 'argokit',
-    :tag => spec.version.to_s,
+    :tag => spec.name + '/' + spec.version.to_s,
   }
 
   spec.platform = :ios
