@@ -29,8 +29,7 @@ struct ArgoKitButtonTest: ArgoKit.View {
             // 点击事件
             model.btn?.backgroundColor(.yellow)
         }
-        .font(size: 30)
-        .font(style: .bold)
+        .font(style: AKFontStyle.default, size: 19)
         // 指定宽高
         .width(300)
         .height(100)
@@ -60,13 +59,15 @@ struct ArgoKitButtonTest: ArgoKit.View {
                 .font(size: 16)
             
         }
-        .font(size: 20)
+        .font(style: AKFontStyle.default, size: 20)
         .width(300)
         .height(100)
         .backgroundColor(.green)
         
         .margin(edge: .top, value: 20)
         .alignSelf(.start)
+        
+        .gradientColor(startColor: .red, endColor: .yellow, direction: ArgoKitGradientType.TopToBottom)
         
         
         // 设置按钮文字图片混排
@@ -76,7 +77,6 @@ struct ArgoKitButtonTest: ArgoKit.View {
             
             Text("按钮文字")
                 .backgroundColor(.cyan)
-//                .font(style: .bold)
             
             Image("chilkoottrail.jpg")
                 .shrink(1)
@@ -85,8 +85,8 @@ struct ArgoKitButtonTest: ArgoKit.View {
             
         }.width(200)
         .backgroundColor(.purple)
-        .font(size: 20)
-        .font(style: .bolditalic)
+        .font(style: AKFontStyle.bold, size: 20)
+        
         .padding(edge: .left, value: 20)
         .padding(edge: .right, value: 30)
         .margin(edge: .top, value: 20)
@@ -100,9 +100,8 @@ struct ArgoKitButtonTest: ArgoKit.View {
         }.width(200)
         .height(100)
         .textColor(.red)
-        .font(style: .bolditalic)
+        .font(style: AKFontStyle.bolditalic, size: 25)
         .backgroundImage(path: "chilkoottrail.jpg", for: UIControl.State.normal)
-        .font(size: 20)
         .padding(edge: .left, value: 20)
         .padding(edge: .right, value: 30)
         .margin(edge: .top, value: 20)

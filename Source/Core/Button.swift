@@ -6,22 +6,16 @@
 //
 
 import Foundation
-class ArgoKitButtonNode: ArgoKitNode {
-     var fontSize:CGFloat = 17.0
-     var fontStyle:AKFontStyle = .default
-     var fontName:String?
-}
 public struct Button:View{
     
-    
-    private let pNode:ArgoKitButtonNode
+    private let pNode:ArgoKitArttibuteNode
     private var label:Text?
     public var node: ArgoKitNode?{
         pNode
     }
     
     private init(){
-        pNode = ArgoKitButtonNode(viewClass: UIButton.self)
+        pNode = ArgoKitArttibuteNode(viewClass: UIButton.self)
         pNode.row()
         pNode.alignSelfFlexStart()
     }
@@ -51,12 +45,6 @@ public struct Button:View{
 extension Button{
     
     @discardableResult
-    public func text(_ value: String?)->Self{
-        setValue(pNode, #selector(setter: UILabel.text), value)
-        return self
-    }
-    
-    @discardableResult
     public func textColor(_ color: UIColor?)->Self{
         setValue(pNode, #selector(setter: UILabel.textColor), color)
         return self
@@ -81,29 +69,8 @@ extension Button{
     }
     
     @discardableResult
-    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
+    public func font(name: String? = nil, style:AKFontStyle,size:CGFloat)->Self{
         let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
-        return font(f)
-    }
-    
-    @discardableResult
-    public  func font(name value:String?)->Self{
-        pNode.fontName = value
-        let f = UIFont.font(fontName: value, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
-        return font(f)
-    }
-    
-    @discardableResult
-    public func font(size value:CGFloat)->Self{
-        pNode.fontSize = value
-        let f = UIFont.font(fontName: pNode.fontName, fontStyle: pNode.fontStyle, fontSize: value)
-        return font(f)
-    }
-    
-    @discardableResult
-    public func font(style value:AKFontStyle)->Self{
-        pNode.fontStyle = value
-        let f = UIFont.font(fontName: pNode.fontName, fontStyle: value, fontSize: pNode.fontSize)
         return font(f)
     }
     

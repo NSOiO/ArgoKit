@@ -6,10 +6,7 @@
 //
 
 import Foundation
-class ArgoKitTextNode: ArgoKitNode {
-    var fontSize:CGFloat = 17.0
-    var fontStyle:AKFontStyle = .default
-    var fontName:String?
+class ArgoKitTextNode: ArgoKitArttibuteNode {
     
     var lineSpacing:CGFloat = 0
     
@@ -106,6 +103,7 @@ public struct Text:View {
 
     public init() {
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
+        pNode.alignSelfFlexStart()
     }
     public init(_ text:String?) {
         self.init()
