@@ -78,7 +78,7 @@ extension Button{
     }
     
     @discardableResult
-    public func backgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
+    public func backgroundImage(image: UIImage?, for state: UIControl.State)->Self{
         addAttribute(#selector(UIButton.setBackgroundImage(_:for:)),image,state.rawValue)
         return self
     }
@@ -92,6 +92,7 @@ extension Button{
         }
         return self
     }
+    
     
     
     func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {

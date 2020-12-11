@@ -64,20 +64,20 @@ struct ArgoKitListTest: ArgoKit.View {
     
     var body: ArgoKit.View {
         ArgoKitCellTest(model: ArgoKitListCellModel())
-        List{
-            Text("dsds11")
-            Text("dsds22")
-            Text("dsds333")
-        }
-        .backgroundColor(.red)
-////
-//        List(data:models){ data in
-//            Text(data.sessionName)
-//                .height(50)
+//        List{
+//            Text("dsds11")
+//            Text("dsds22")
+//            Text("dsds333")
 //        }
-//        .width(100%)
-//        .height(400)
 //        .backgroundColor(.red)
+////
+        List(data:models){ data in
+            Text(data.sessionName)
+                .height(50)
+        }
+        .width(100%)
+        .height(400)
+        .backgroundColor(.red)
     }
 }
 

@@ -29,18 +29,10 @@ public class List<Data>: ScrollView where Data : ArgoKitIdentifiable {
     public convenience init(_ style: UITableView.Style? = .plain, data: [Data], @ArgoKitListBuilder rowContent: @escaping (Data) -> View) {
         self.init(style: style)
         
-        for innerData in data {
-             let container = rowContent(innerData)
-             if let nodes = container.type.viewNodes() {
-                 tableNode.dataSourceHelper.dataList?.append(contentsOf:[nodes])
-             }
-                   
+        tableNode.dataSourceHelper.dataList = [data]
+        tableNode.dataSourceHelper.buildNodeFunc = { item in
+            return rowContent(item as! Data)
         }
-        
-//        tableNode.dataSourceHelper.dataList = [data]
-//        tableNode.dataSourceHelper.buildNodeFunc = { item in
-//            return rowContent(item as! Data)
-//        }
     }
     
     public convenience init(_ style: UITableView.Style? = .plain, sectionData: [[Data]], @ArgoKitListBuilder rowContent: @escaping (Data) -> View) {
