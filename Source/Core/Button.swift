@@ -26,7 +26,7 @@ open class Button:View{
         
         pNode = ArgoKitNode(viewClass: UIButton.self)
         pNode.row()
-        pNode.alignItemsFlexStart()
+        pNode.alignSelfFlexStart()
     }
     
     public convenience init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){
@@ -41,7 +41,7 @@ open class Button:View{
         }, for: UIControl.Event.touchUpInside)
         
         if let t = text {
-            label = Text(t).alignSelf(.center).width(100%).textAlign(.center)
+            label = Text(t).alignSelf(.center).textAlign(.center).grow(1)
             if let node = label?.node {
                 pNode.addChildNode(node)
             }
