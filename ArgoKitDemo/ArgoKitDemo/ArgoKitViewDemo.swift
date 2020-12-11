@@ -249,7 +249,7 @@ class ListDemo:ArgoKit.View{
             }
             .height(100.0)
             .backgroundColor(.red)
-            .alias(variable: &headerView)
+//            .alias(variable: &headerView)
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {
@@ -261,7 +261,7 @@ class ListDemo:ArgoKit.View{
             .height(100.0)
             .autoRefreshOffPage(1)
             .backgroundColor(.red)
-            .alias(variable: &footerView)
+//            .alias(variable: &footerView)
             
         }
         

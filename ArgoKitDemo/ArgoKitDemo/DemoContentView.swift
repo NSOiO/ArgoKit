@@ -36,9 +36,11 @@ class row: View{
         HStack{ [self] in
             Image().image(UIImage(named: "turtlerock")).width(100).height(100).backgroundColor(.orange)
             Spacer()
-            Text(item.text).backgroundColor(.purple).lineLimit(0).alignSelf(ArgoAlign.center).width(10).alias(variable: &self.item.textCom)
+            Text(item.text).backgroundColor(.purple).lineLimit(0).alignSelf(ArgoAlign.center).width(10)
+//                .alias(variable: &self.item.textCom)
             Spacer()
-            Text(item.text).backgroundColor(.purple).lineLimit(0).alignSelf(ArgoAlign.center).width(10).alias(variable: &self.item.textCom)
+            Text(item.text).backgroundColor(.purple).lineLimit(0).alignSelf(ArgoAlign.center).width(10)
+//                .alias(variable: &self.item.textCom)
         }.width(100%)
     }
     
