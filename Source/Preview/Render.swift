@@ -12,7 +12,7 @@ import ArgoKit
 var host: UIHostingController?
 
 @available(iOS 13.0, *)
-public struct ArgoRender: UIViewRepresentable {
+public struct ArgoRender2: UIViewRepresentable {
     let builder:() -> View
     
     public init (@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) {

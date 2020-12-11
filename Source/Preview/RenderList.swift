@@ -13,13 +13,10 @@ import ArgoKit
 
 //var host: UIHostingController?
 var hostView: HostView?
-//var current_preview_list: UITableView?
-//var current_preview_list_coordinator: (UITableViewDataSource & UITableViewDelegate)?
-
 var current_tables = [UITableView: (UITableViewDataSource & UITableViewDelegate)]()
 
 @available(iOS 13.0, *)
-public struct ArgoRenderList: UIViewRepresentable {
+public struct ArgoRender: UIViewRepresentable {
     let builder:() -> View
     var content: View
     var view: UIView
@@ -35,7 +32,7 @@ public struct ArgoRenderList: UIViewRepresentable {
     
     static func createView(_ content: View) -> UIView {
         let ss = UIScreen.main.bounds.size
-        var view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: ss.width, height: ss.height))
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: ss.width, height: ss.height))
         
         let host = ArgoKit.HostView(view) {
             content.grow(1)
@@ -43,7 +40,7 @@ public struct ArgoRenderList: UIViewRepresentable {
         let size = view.frame.size
         host.height(.init(size.height)).width(.init(size.width  ))
         hostView = host
-        host.applyLayout()
+        _ = host.applyLayout()
         return view
     }
     
@@ -60,12 +57,6 @@ public struct ArgoRenderList: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIView, context: Context) {
-//        if let table = current_preview_list {
-//            table.dataSource = context.coordinator
-//            table.delegate = context.coordinator
-//            current_preview_list = nil
-//            current_preview_list_coordinator = nil
-//        }
         for(table, coor) in current_tables {
             table.dataSource = coor
             table.delegate = coor

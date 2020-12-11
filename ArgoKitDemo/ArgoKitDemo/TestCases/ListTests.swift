@@ -35,8 +35,8 @@ struct LandRow: View {
     }
 }
 
-class ListCellModel: ArgoKitIdentifiable {
-    var reuseIdentifier = "idd"
+class ListCellModel:  ArgoKitNode {
+//    var reuseIdentifier = "idd"
     var name = "name.."
 }
 
@@ -50,17 +50,27 @@ class ListTests: ArgoKit.View {
         self.model = model
     }
     
+    var cellDatas = [ListCellModel]()
+    
     var body: ArgoKit.View {
         
 //        let data = [landmarkDatopa[0]]
-        
-        VStack {
+        cellDatas.append(ListCellModel())
+    
+        return VStack {
             Text("aa")
             
-//            List(data: [ListCellModel()]) { landmark in
-//                Text(landmark.name)
-//            }
-//            .backgroundColor(.red)
+            List(data: self.cellDatas) {landmark in
+                Text(landmark.name)
+
+                Text("t1")
+                    .height(100)
+                    .backgroundColor(.lightText)
+                    .margin(edge: .bottom, value:10)
+                Text("t222")
+                    .backgroundColor(.lightText)
+            }
+            .backgroundColor(.red)
             
             List {
                 Text("t1")
@@ -108,7 +118,7 @@ struct ListTests_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
         ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
-        return ArgoRenderList {
+        return ArgoRender {
             ListTests(model: ListTestsModel_Previews())
         }
     }
