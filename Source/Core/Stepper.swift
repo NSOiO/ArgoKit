@@ -6,6 +6,11 @@
 //
 
 import Foundation
+class ArgoKitStepperNode: ArgoKitNode {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: 94, height: 32)
+    }
+}
 public struct Stepper:View{
     private let pNode:ArgoKitNode
     public var node: ArgoKitNode?{
@@ -80,7 +85,7 @@ extension Stepper{
     @available(iOS 6.0, *)
     @discardableResult
     public func setBackgroundImage(_ image: UIImage?, for state: UIControl.State)->Self{
-        addAttribute(#selector(UIStepper.setBackgroundImage(_:for:)),value,state.rawValue)
+        addAttribute(#selector(UIStepper.setBackgroundImage(_:for:)),image,state.rawValue)
         return self
     }
 
@@ -96,7 +101,7 @@ extension Stepper{
     @available(iOS 6.0, *)
     @discardableResult
     public func setIncrementImage(_ image: UIImage?, for state: UIControl.State)->Self{
-        addAttribute(#selector(UIStepper.setIncrementImage(_:for:)),value,state.rawValue)
+        addAttribute(#selector(UIStepper.setIncrementImage(_:for:)),image,state.rawValue)
         return self
     }
     
@@ -104,7 +109,7 @@ extension Stepper{
     @available(iOS 6.0, *)
     @discardableResult
     public func setDecrementImage(_ image: UIImage?, for state: UIControl.State)->Self{
-        addAttribute(#selector(UIStepper.setDecrementImage(_:for:)),value,state.rawValue)
+        addAttribute(#selector(UIStepper.setDecrementImage(_:for:)),image,state.rawValue)
         return self
     }
 

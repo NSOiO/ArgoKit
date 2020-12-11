@@ -50,12 +50,28 @@ extension Slider{
         addAttribute(#selector(setter:UISlider.minimumValueImage),value)
         return self
     }
+    
+    @discardableResult
+    public func minimumValueImage(_ value: String?)->Self{
+        let image = UIImage(named:value ?? "")
+        addAttribute(#selector(setter:UISlider.minimumValueImage),image)
+        return self
+    }
+    
     // default is nil. image that appears to right of control (e.g. speaker max)
     @discardableResult
     public func maximumValueImage(_ value: UIImage?)->Self{
         addAttribute(#selector(setter:UISlider.maximumValueImage),value)
         return self
     }
+    
+    @discardableResult
+    public func maximumValueImage(_ value: String?)->Self{
+        let image = UIImage(named:value ?? "")
+        addAttribute(#selector(setter:UISlider.maximumValueImage),image)
+        return self
+    }
+    
     // if set, value change events are generated any time the value changes due to dragging. default = YES
     @discardableResult
     public func isContinuous(_ value: Bool)->Self{
