@@ -8,20 +8,15 @@
 import Foundation
 
 public struct TextField : View {
-    private var fontSize:CGFloat = UIFont.systemFontSize
-    private var fontStyle:AKFontStyle = .default
-    private var font:UIFont
-    private var fontName:String?
     private var pNode : ArgoKitTextFieldNode
     public var node: ArgoKitNode? {
         pNode
     }
     
     public init() {
-        self.init(nil)
+        self.init(text:nil)
     }
-    public init(_ text: String?, placeholder: String? = nil) {
-        font = UIFont.systemFont(ofSize:fontSize)
+    public init(text: String? = nil, placeholder: String? = nil) {
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
         pNode.placeholder = placeholder
         pNode.alignSelfFlexStart()
@@ -57,29 +52,33 @@ extension TextField {
     }
     
     @discardableResult
-    public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
-        let f = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
-        return font(f)
+    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
+        pNode.fontName = name
+        pNode.fontStyle = style
+        pNode.fontSize = size
+        let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
+        return self.font(font)
     }
     
     @discardableResult
-    public mutating func fontName(_ value:String?)->Self{
-        fontName = value
-        let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
-        return font(f)
+    public func font(name value:String?)->Self{
+        pNode.fontName = value
+        let font = UIFont.font(fontName: value, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
+        return self.font(font)
     }
     
     @discardableResult
-    public mutating func fontSize(_ value:CGFloat)->Self{
-        fontSize = value
-        let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
-        return font(f)
+    public  func font(size value:CGFloat)->Self{
+        pNode.fontSize = value
+        let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: value)
+        return self.font(font)
     }
     
     @discardableResult
-    public func fontStyle(_ value:AKFontStyle)->Self{
-        let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
-        return font(f)
+    public func font(style value:AKFontStyle)->Self{
+        pNode.fontStyle = value
+        let font = UIFont.font(fontName: pNode.fontName, fontStyle: value, fontSize: pNode.fontSize)
+        return self.font(font)
     }
     
     @discardableResult
@@ -175,10 +174,29 @@ extension TextField {
     }
     
     @discardableResult
-    public func leftView(_ viewMode: UITextField.ViewMode,_ content:()->View) -> Self {
+    public func leftView(_ content:()->View) -> Self {
         let lfView = content()
         if let node = lfView.alignSelf(.start).node {
-            let width = node.width()
+            
+            let maxHeight = pNode.height()
+            let maxWidth = pNode.width()
+            let maxValue = CGFloat.minimum(maxHeight, maxWidth)
+            
+            var width = node.width()
+            var height = node.height()
+            
+            if width == 0 {
+                width = maxValue
+            }
+            
+            if height == 0 {
+                height = maxValue
+            }
+
+            
+            node.width(point: height)
+            node.height(point: height)
+            
             addAttribute(#selector(setter:ArgoKitTextField.leftPadding),width)
             pNode.addChildNode(node)
         }
@@ -186,10 +204,30 @@ extension TextField {
     }
     
     @discardableResult
-    public func rightView(_ viewMode: UITextField.ViewMode,_ content:()->View) -> Self {
+    public func rightView(_ content:()->View) -> Self {
         let rtView = content()
         if let node = rtView.alignSelf(.end).node {
-            let width = node.width()
+            
+           
+            let maxHeight = pNode.height()
+            let maxWidth = pNode.width()
+            let maxValue = CGFloat.minimum(maxHeight, maxWidth)
+            
+            var width = node.width()
+            var height = node.height()
+            
+            if width == 0 {
+                width = maxValue
+            }
+            
+            if height == 0 {
+                height = maxValue
+            }
+
+            
+            node.width(point: height)
+            node.height(point: height)
+        
             node.positionAbsolute()
             node.left(point: (pNode.width()-width))
             addAttribute(#selector(setter:ArgoKitTextField.rightPadding),width)

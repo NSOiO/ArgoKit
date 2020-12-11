@@ -45,7 +45,7 @@ class PreviewDemo: ArgoKit.View {
             
             Text().text(self.self.model.getTitle())
                 .lineLimit(0)
-                .alias(variable: &self.model.label)
+//                .alias(variable: &self.model.label)
                 .margin(edge: .bottom, value: 20)
                 .backgroundColor(.red)
                 .textAlign(.center)

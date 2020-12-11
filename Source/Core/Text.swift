@@ -6,7 +6,8 @@
 //
 
 import Foundation
-class ArgoKitTextNode: ArgoKitNode {
+class ArgoKitTextNode: ArgoKitArttibuteNode {
+    
     var lineSpacing:CGFloat = 0
     
     func lineSpacing(_ value:CGFloat){
@@ -95,20 +96,14 @@ class ArgoKitTextNode: ArgoKitNode {
 }
 
 public struct Text:View {
-    private var fontSize:CGFloat
-    private var fontStyle:AKFontStyle
-    private var font:UIFont
-    private var fontName:String?
     private let pNode:ArgoKitTextNode
     public var node: ArgoKitNode?{
         pNode
     }
 
     public init() {
-        fontStyle = .default
-        fontSize = UIFont.systemFontSize
-        font = UIFont.systemFont(ofSize:fontSize)
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
+        pNode.alignSelfFlexStart()
     }
     public init(_ text:String?) {
         self.init()
@@ -132,7 +127,10 @@ extension Text{
     }
     
     @discardableResult
-    public func font(name: String? = nil, style:AKFontStyle = .default,size:CGFloat = UIFont.systemFontSize)->Self{
+    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
+        pNode.fontName = name
+        pNode.fontSize = size
+        pNode.fontStyle = style
         let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
         addAttribute(#selector(setter:UILabel.font),font)
         pNode.handleLineSpacing()
@@ -140,18 +138,18 @@ extension Text{
     }
     
     @discardableResult
-    public mutating func font(name value:String?)->Self{
-        fontName = value
-        let font = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
+    public func font(name value:String?)->Self{
+        pNode.fontName = value
+        let font = UIFont.font(fontName: value, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
         pNode.handleLineSpacing()
         return self
     }
     
     @discardableResult
-    public mutating func font(size value:CGFloat)->Self{
-        fontSize = value
-        let font = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
+    public  func font(size value:CGFloat)->Self{
+        pNode.fontSize = value
+        let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: value)
         addAttribute(#selector(setter:UILabel.font),font)
         pNode.handleLineSpacing()
         return self
@@ -159,7 +157,8 @@ extension Text{
     
     @discardableResult
     public func font(style value:AKFontStyle)->Self{
-        let font = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
+        pNode.fontStyle = value
+        let font = UIFont.font(fontName: pNode.fontName, fontStyle: value, fontSize: pNode.fontSize)
         addAttribute(#selector(setter:UILabel.font),font)
         pNode.handleLineSpacing()
         return self

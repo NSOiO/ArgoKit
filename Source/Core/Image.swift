@@ -31,6 +31,7 @@ class ArgoKitImageNode: ArgoKitNode {
         }
     }
     
+    
     override func prepareForUse() {
         if let imageView = self.view as? UIImageView {
             imageView.image = nil
@@ -59,6 +60,15 @@ public struct Image : View {
     
     public init(url: URL?, placeholder: String?) {
         self.init(image: nil, highlightedImage: nil)
+        pNode.image(url: url, placeholder: placeholder)
+    }
+    
+    public init(urlString: String?, placeholder: String?) {
+        self.init(image: nil, highlightedImage: nil)
+        var url:URL? = nil
+        if let urlString = urlString {
+            url = URL(string: urlString)
+        }
         pNode.image(url: url, placeholder: placeholder)
     }
     
@@ -120,6 +130,17 @@ extension Image {
         pNode.image(url: url, placeholder: placeholder)
         return self
     }
+    
+    @discardableResult
+    public func image(urlString: String?, placeholder: String?) -> Self {
+        var url:URL? = nil
+        if let urlString = urlString {
+            url = URL(string: urlString)
+        }
+        pNode.image(url: url, placeholder: placeholder)
+        return self
+    }
+    
     @discardableResult
     public func highlightedImage(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.image),value)

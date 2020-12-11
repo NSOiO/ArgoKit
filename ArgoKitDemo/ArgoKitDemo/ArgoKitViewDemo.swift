@@ -146,7 +146,7 @@ class TextFieldView: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
    var body: ArgoKit.View {
-    TextField(nil,placeholder: "请输入文本")
+    TextField(placeholder: "请输入文本")
      .width(200)
      .height(30)
      .alignSelf(.center)
@@ -155,7 +155,7 @@ class TextFieldView: ArgoKit.View {
      .didChangeSelection { content in
      }
      .backgroundColor(.gray)
-     .leftView(UITextField.ViewMode.always) {
+     .leftView{
          Button(text:""){
          }
          .width(30)
@@ -163,7 +163,7 @@ class TextFieldView: ArgoKit.View {
          .backgroundColor(.red)
          .contentMode(.center)
      }
-     .rightView(UITextField.ViewMode.always) {
+     .rightView{
          Button{
          }builder: {
             Image("chincoteague.jpg")
@@ -249,7 +249,7 @@ class ListDemo:ArgoKit.View{
             }
             .height(100.0)
             .backgroundColor(.red)
-            .alias(variable: &headerView)
+//            .alias(variable: &headerView)
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {
@@ -261,7 +261,7 @@ class ListDemo:ArgoKit.View{
             .height(100.0)
             .autoRefreshOffPage(1)
             .backgroundColor(.red)
-            .alias(variable: &footerView)
+//            .alias(variable: &footerView)
             
         }
         

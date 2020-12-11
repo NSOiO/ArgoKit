@@ -37,7 +37,6 @@ public class TextView : ScrollView {
     
     override func createNode() {
         pNode = ArgoKitTextViewNode(viewClass: UITextView.self)
-        pNode?.alignSelfFlexStart()
     }
 }
 
@@ -55,29 +54,33 @@ extension TextView {
     }
     
     @discardableResult
-    public func font(fontName: String? = nil, fontStyle:AKFontStyle = .default,fontSize:CGFloat = UIFont.systemFontSize)->Self{
-        let f = UIFont.font(fontName: fontName, fontStyle: fontStyle, fontSize: fontSize)
-        return font(f)
+    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
+        textViewNode.fontName = name
+        textViewNode.fontStyle = style
+        textViewNode.fontSize = size
+        let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
+        return self.font(font)
     }
     
     @discardableResult
-    public func fontName(_ value:String?)->Self{
-        fontName = value
-        let f = UIFont.font(fontName: value, fontStyle: fontStyle, fontSize: fontSize)
-        return font(f)
+    public func font(name value:String?)->Self{
+        textViewNode.fontName = value
+        let font = UIFont.font(fontName: value, fontStyle: textViewNode.fontStyle, fontSize: textViewNode.fontSize)
+        return self.font(font)
     }
     
     @discardableResult
-    public func fontSize(_ value:CGFloat)->Self{
-        fontSize = value
-        let f = UIFont.font(fontName: nil, fontStyle: fontStyle, fontSize: value)
-        return font(f)
+    public  func font(size value:CGFloat)->Self{
+        textViewNode.fontSize = value
+        let font = UIFont.font(fontName: textViewNode.fontName, fontStyle:  textViewNode.fontStyle, fontSize: value)
+        return self.font(font)
     }
     
     @discardableResult
-    public func fontStyle(_ value:AKFontStyle)->Self{
-        let f = UIFont.font(fontName: nil, fontStyle: value, fontSize: fontSize)
-        return font(f)
+    public func font(style value:AKFontStyle)->Self{
+        textViewNode.fontStyle = value
+        let font = UIFont.font(fontName: textViewNode.fontName, fontStyle: value, fontSize: textViewNode.fontSize)
+        return self.font(font)
     }
     
     @discardableResult
