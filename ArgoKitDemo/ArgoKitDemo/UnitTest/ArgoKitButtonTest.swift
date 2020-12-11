@@ -25,10 +25,22 @@ struct ArgoKitButtonTest: ArgoKit.View {
         Button {
             
         } builder: {
+            
             Text("Hello, World!")
                 .backgroundColor(.cyan)
             
+            Image("chilkoottrail.jpg")
+                .width(30)
+                .height(30)
+            
+            
+            
         }.width(300)
+        
+        .backgroundColor(.yellow)
+        .font(size: 30)
+        .padding(edge: .left, value: 20)
+        
         
         Button(text: "Hello, World!") {
             

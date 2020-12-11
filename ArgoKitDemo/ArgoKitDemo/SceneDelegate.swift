@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let contentView = LandmarkList()
 //        let contentView = ArgoKitViewDemo()
 //        let contentView = PreviewDemo()
-        let contentView = ArgoKitView1()
+        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
 //            let vc = ArgokitDemoController()//

@@ -120,15 +120,15 @@ extension Button{
     
     
     func setValue(_ node:ArgoKitNode,_ selector:Selector,_ value:Any?) -> Void {
-        if let nodes = pNode.childs{
-            for node in nodes {
-                if node is ArgoKitTextNode {
-                    if let _ =  (node as! ArgoKitTextNode).value(with: selector){
+        if let nodes = node.childs{
+            for subNode in nodes {
+                if subNode is ArgoKitTextNode {
+                    if let _ =  (subNode as! ArgoKitTextNode).value(with: selector){
                     }else{
-                        ArgoKitNodeViewModifier.addAttribute(node as? ArgoKitTextNode, selector, value)
+                        ArgoKitNodeViewModifier.addAttribute(subNode as? ArgoKitTextNode, selector, value)
                     }
                 }else{
-                    setValue(node as! ArgoKitNode, selector, value)
+                    setValue(subNode as! ArgoKitNode, selector, value)
                 }
             }
         }
