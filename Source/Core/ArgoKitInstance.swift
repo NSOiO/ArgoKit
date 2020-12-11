@@ -8,6 +8,8 @@
 import Foundation
 public class ArgoKitInstance {
     private var pimageLoader:ArgoKitImageLoader?
+    private var plistPreviewService: ArgoKitListPreviewService?
+    
     static var shared: ArgoKitInstance = {
         let instance = ArgoKitInstance()
         return instance
@@ -22,4 +24,11 @@ public class ArgoKitInstance {
        return ArgoKitInstance.shared.pimageLoader
     }
     
+    public class func registerPreviewService(previewService: ArgoKitListPreviewService) {
+        ArgoKitInstance.shared.plistPreviewService = previewService
+    }
+    
+    public class func listPreviewService()->ArgoKitListPreviewService?{
+       return ArgoKitInstance.shared.plistPreviewService
+    }
 }

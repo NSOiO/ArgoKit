@@ -7,15 +7,15 @@
 
 import Foundation
 
-private class HostView:View {
-    var body: View{
+public class HostView:View {
+    public var body: View{
         self
     }
     private var pNode:ArgoKitNode
-    var node: ArgoKitNode?{
+    public var node: ArgoKitNode?{
         pNode
     }
-    var type: ArgoKitNodeType{
+    public var type: ArgoKitNodeType{
         .single(pNode)
     }
     
@@ -27,7 +27,7 @@ private class HostView:View {
         pNode.flexGrow(1.0)
     }
     
-    init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
+    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
         pView = view
         pNode = ArgoKitNode(view:view);
         pNode.width(point: view.frame.size.width)
