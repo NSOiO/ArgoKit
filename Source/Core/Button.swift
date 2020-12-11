@@ -59,6 +59,18 @@ extension Button{
     }
     
     @discardableResult
+    public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
+        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
+        return self.textColor(value)
+    }
+    
+    @discardableResult
+    public func textColor(hex:Int,alpha a:Float = 1)->Self{
+        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
+        return self.textColor(value)
+    }
+    
+    @discardableResult
     public func font(_ value:UIFont!)->Self{
         setValue(pNode, #selector(setter: UILabel.font), value)
         return self

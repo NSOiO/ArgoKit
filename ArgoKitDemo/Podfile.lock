@@ -50,9 +50,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
-  ArgoKit: 200ce990a84ecafc48ee6c01277df989d69faf31
-  ArgoKitComponent: 1464ea1fc0bf1f97c97bacc33e62dbbd86d000f9
-  ArgoKitPreview: 84a505e598f85612c291e4a0893f533b0135096a
+  ArgoKit: 38b1f127b882f0f7b7a3281cc66736a6383c4037
+  ArgoKitComponent: 942fe82849075296b12f9752630f4f73788a90b2
+  ArgoKitPreview: 158ceb0e558f824f3220f20086345aebbed201c9
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
