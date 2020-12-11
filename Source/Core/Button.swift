@@ -70,6 +70,9 @@ extension Button{
     
     @discardableResult
     public func font(name: String? = nil, style:AKFontStyle,size:CGFloat)->Self{
+        pNode.fontName = name
+        pNode.fontSize = size
+        pNode.fontStyle = style
         let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
         return font(f)
     }

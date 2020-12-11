@@ -45,14 +45,14 @@ struct ArgoKitTextFieldTest: ArgoKit.View {
             })
             .rightView{
                 Button(text: "left") {
-                    
+                    print("left")
                 }
                 .backgroundColor(.cyan)
                 
             }
             .leftView{ () -> View in
                 Button(text: "right") {
-                    
+                    print("right")
                 }
                 .backgroundColor(.cyan)
             }

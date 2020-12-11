@@ -128,6 +128,9 @@ extension Text{
     
     @discardableResult
     public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
+        pNode.fontName = name
+        pNode.fontSize = size
+        pNode.fontStyle = style
         let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
         addAttribute(#selector(setter:UILabel.font),font)
         pNode.handleLineSpacing()

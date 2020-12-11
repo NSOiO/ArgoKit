@@ -53,6 +53,9 @@ extension TextField {
     
     @discardableResult
     public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
+        pNode.fontName = name
+        pNode.fontStyle = style
+        pNode.fontSize = size
         let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
         return self.font(font)
     }
