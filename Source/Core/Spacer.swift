@@ -13,8 +13,8 @@ public struct Spacer: View {
     }
     public init() {
         pNode = ArgoKitNode(viewClass: UIView.self)
-        pNode.flexGrow(1.0)
-        
+//        pNode.flexGrow(1.0)
+        pNode.flex(1)
     }
 }
 
