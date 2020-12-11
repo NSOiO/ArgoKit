@@ -25,6 +25,7 @@
 		FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */; };
 		FA0BEF3A2583476100D483EC /* ArgoKitImageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */; };
 		FA0BEF3E25834AB200D483EC /* ArgoKitImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */; };
+		FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */; };
 		FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163037257E3C4A000BA507 /* ArgoKitView1.swift */; };
 		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
 		FA5164EE255BB99D005BE240 /* turtlerock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D8255BB99D005BE240 /* turtlerock.jpg */; };
@@ -120,6 +121,7 @@
 		FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitTextTest.swift; sourceTree = "<group>"; };
 		FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitImageTest.swift; sourceTree = "<group>"; };
 		FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitImageLoader.swift; sourceTree = "<group>"; };
+		FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitTextFieldTest.swift; sourceTree = "<group>"; };
 		FA163037257E3C4A000BA507 /* ArgoKitView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView1.swift; sourceTree = "<group>"; };
 		FA4D581F254ABD1C002E2532 /* DemoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContentView.swift; sourceTree = "<group>"; };
 		FA5164D8255BB99D005BE240 /* turtlerock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtlerock.jpg; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */,
 				FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */,
 				FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */,
+				FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */,
 			);
 			path = UnitTest;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */,
 				FA5164FD255BB99E005BE240 /* Landmark.swift in Sources */,
 				FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */,
+				FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */,
 				FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */,
 				FA0B216D2580DBC700D483EC /* ArgoKitView10.swift in Sources */,
 				A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */,

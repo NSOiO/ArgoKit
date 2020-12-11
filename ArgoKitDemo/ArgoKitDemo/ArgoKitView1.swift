@@ -28,7 +28,7 @@ struct ArgoKitView2: ArgoKit.View {
             .margin(edge: .left, value: 50)
             .textAlign(.center)
         
-        TextField("haha",placeholder: "").width(100).backgroundColor(.red).height(20)
+        TextField(text:"haha",placeholder: "").width(100).backgroundColor(.red).height(20)
             .padding(edge: .left, value: 10)
             .padding(edge: .bottom, value: 5)
 

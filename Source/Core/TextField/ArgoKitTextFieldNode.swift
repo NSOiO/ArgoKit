@@ -23,7 +23,7 @@ class ArgoKitTextField: UITextField {
     }
     
 }
-class ArgoKitTextFieldNode: ArgoKitNode, UITextFieldDelegate {
+class ArgoKitTextFieldNode: ArgoKitArttibuteNode, UITextFieldDelegate {
     var placeholder:String?
     var placeholderColor:UIColor?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
