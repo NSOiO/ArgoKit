@@ -19,7 +19,6 @@ public struct TextField : View {
     public init(text: String? = nil, placeholder: String? = nil) {
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
         pNode.placeholder = placeholder
-        pNode.alignSelfFlexStart()
         addAttribute(#selector(setter:UITextField.text),text)
         addAttribute(#selector(setter:UITextField.placeholder),placeholder)
     }

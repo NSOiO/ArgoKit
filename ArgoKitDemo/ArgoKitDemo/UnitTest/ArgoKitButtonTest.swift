@@ -89,10 +89,11 @@ struct ArgoKitButtonTest: ArgoKit.View {
         
         .padding(edge: .left, value: 20)
         .padding(edge: .right, value: 30)
+        
         .margin(edge: .top, value: 20)
-        .alignSelf(.end)
-        
-        
+        .alignSelf(.center)
+    
+
         
         
         Button(text:"设置背景图片") {
@@ -102,10 +103,9 @@ struct ArgoKitButtonTest: ArgoKit.View {
         .textColor(.red)
         .font(style: AKFontStyle.bolditalic, size: 25)
         .backgroundImage(path: "chilkoottrail.jpg", for: UIControl.State.normal)
-        .padding(edge: .left, value: 20)
-        .padding(edge: .right, value: 30)
         .margin(edge: .top, value: 20)
         .alignSelf(.center)
+        
         
         
         

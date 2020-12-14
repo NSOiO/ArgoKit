@@ -17,7 +17,7 @@ public struct Button:View{
     private init(){
         pNode = ArgoKitArttibuteNode(viewClass: UIButton.self)
         pNode.row()
-        pNode.alignSelfFlexStart()
+        pNode.alignItemsCenter()
     }
     
     public init(action :@escaping ()->Void,@ArgoKitViewBuilder builder:@escaping ()->View){

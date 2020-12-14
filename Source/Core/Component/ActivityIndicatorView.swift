@@ -27,7 +27,6 @@ public struct ActivityIndicatorView : View {
     public init(style: UIActivityIndicatorView.Style) {
         pNode = ArgoKitIndicatorViewNode(viewClass: UIActivityIndicatorView.self)
         pNode.style = style
-        pNode.alignSelfFlexStart()
     }
 }
 

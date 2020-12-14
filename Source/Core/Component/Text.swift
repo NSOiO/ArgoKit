@@ -103,7 +103,6 @@ public struct Text:View {
 
     public init() {
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
-        pNode.alignSelfFlexStart()
     }
     public init(_ text:String?) {
         self.init()
