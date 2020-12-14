@@ -10,10 +10,6 @@ import Foundation
 public class ScrollView: View {
     var pNode : ArgoKitScrollViewNode?
     
-    public var type: ArgoKitNodeType {
-        .single(pNode!)
-    }
-    
     public var node: ArgoKitNode? {
         pNode
     }

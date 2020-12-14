@@ -44,7 +44,7 @@ final class ImageStore {
     func image(name: String) -> Image {
         let index = _guaranteeImage(name: name)
         
-        return Image(images.values[index], scale: CGFloat(ImageStore.scale))
+        return Image(cgImage:images.values[index], scale: CGFloat(ImageStore.scale))
         
     }
 

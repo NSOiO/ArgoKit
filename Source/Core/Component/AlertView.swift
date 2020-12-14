@@ -63,6 +63,7 @@ extension AlertView{
         return self
     }
     
+    @discardableResult
     public func textField()->Self{
         alerView.addTextField { [weak self] textFiled in
             self?.pTextField = textFiled

@@ -73,8 +73,6 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
         ActivityIndicatorView(style: .large)
             .hidesWhenStopped(false)
             .color(.purple)
-//            .width(50)
-//            .height(50)
             .backgroundColor(.red)
             .margin(edge: .top, value: 30)
             .startAnimating()
@@ -88,16 +86,13 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
             .margin(edge: .top, value: 30)
             .startAnimating()
         
+        Spacer().backgroundColor(.yellow)
         
         ProgressView(0.5)
             .width(100)
             .height(100)
             .backgroundColor(.brown)
             .margin(edge: .top, value: 30)
-        
-        
-        
-        
     }
 }
 
@@ -117,7 +112,8 @@ struct ArgoKitOtherViewTest_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
         return ArgoRender {
-            ArgoKitOtherViewTest(model: ArgoKitOtherViewTestModel_Previews())
+            ArgoKitOtherViewTest(model: ArgoKitOtherViewTestModel_Previews()).height(100%)
+            
         }
     }
 }
