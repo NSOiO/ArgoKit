@@ -25,7 +25,7 @@ struct AspectTests: ArgoKit.View {
     var body: ArgoKit.View {
         HStack {
             Image(url: model.url, placeholder: model.placeHolder)
-                .width(60)
+                .height(60)
                 .aspect(ratio: 1)
                 .margin(edge: .all, value: 10)
                 .grow(1)

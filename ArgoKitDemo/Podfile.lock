@@ -20,7 +20,7 @@ PODS:
   - ArgoKitComponent/ImageLoader (1.0.2):
     - ArgoKit
     - SDWebImage
-  - ArgoKitPreview (1.0.2):
+  - ArgoKitPreview (1.0.3):
     - ArgoKit
     - ArgoKitComponent
   - SDWebImage (5.10.0):
@@ -52,10 +52,10 @@ SPEC CHECKSUMS:
   ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
   ArgoKit: a3bd73382e0f77b0ad11b6d4262d62e04199eb29
   ArgoKitComponent: bb417eeaec9fff18c36531cc60a4fc4dfe435650
-  ArgoKitPreview: e17b060a20043deb6dbb4e97c5a4faf038e2b052
+  ArgoKitPreview: c25c3d2e926e667c1b45a3339c9b4245a50278e3
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 1c5c843eb46c49323ba33433ef6f6c3b9289e0d4
+PODFILE CHECKSUM: b64caf94093e9a5c20164bc28b26dcca99e82722
 
 COCOAPODS: 1.10.0

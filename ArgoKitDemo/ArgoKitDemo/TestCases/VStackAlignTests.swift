@@ -32,7 +32,7 @@ struct VStackAlignTests: ArgoKit.View {
                 .backgroundColor(.blue)
         }
         .backgroundColor(.red)
-        .alignItems(.end)
+        .alignItems(.start)
     }
 }
 
