@@ -434,12 +434,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _frame = frame;
     _size = frame.size;
     
-    NSArray *nodeObservers = [self.nodeObservers copy];
-    for (ArgoKitNodeObserver *observer in nodeObservers) {
-        if (observer.frameChangeBlock) {
-            observer.frameChangeBlock(frame);
-        }
-    }
+    [self sendFrameChanged:frame];
 }
 
 - (NSMutableArray<ArgoKitNode *> *)childs{

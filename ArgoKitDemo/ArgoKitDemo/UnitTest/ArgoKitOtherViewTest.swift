@@ -23,7 +23,7 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        
+        ScrollView {
         Slider(value: 1.9, in: 1...1000) { value in
             print("\(value)")
         }
@@ -86,13 +86,17 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
             .margin(edge: .top, value: 30)
             .startAnimating()
         
-        Spacer().backgroundColor(.yellow)
+//        Spacer().backgroundColor(.yellow)
         
         ProgressView(0.5)
             .width(100)
             .height(100)
             .backgroundColor(.brown)
-            .margin(edge: .top, value: 30)
+            .margin(edge: .top, value: 300)
+        }.width(100%)
+        .height(100%)
+//        .contentHeight(800)
+        .backgroundColor(.red)
     }
 }
 

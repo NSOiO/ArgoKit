@@ -14,7 +14,7 @@ public class ViewPage<T> : ScrollView where T : ArgoKitIdentifiable {
         pNode as! ArgoKitViewPageNode
     }
 
-    private override init() {
+    internal required init() {
         super.init()
     }
     

@@ -14,8 +14,13 @@ public class ScrollView: View {
         pNode
     }
     
-    public init() {
+    required public init() {
         createNode()
+    }
+    
+    public convenience init(@ArgoKitViewBuilder builder:@escaping () -> View) {
+        self.init()
+        addSubNodes(builder: builder)
     }
     
     func createNode() {
@@ -33,7 +38,19 @@ extension ScrollView {
 
     @discardableResult
     public func contentSize(_ value: CGSize) -> Self {
-        addAttribute(#selector(setter:UIScrollView.contentSize),value)
+        pNode?.contentSize(value)
+        return self
+    }
+    
+    @discardableResult
+    public func contentWidth(_ value: CGFloat) -> Self {
+        pNode?.contentWidth(value)
+        return self
+    }
+    
+    @discardableResult
+    public func contentHeight(_ value: CGFloat) -> Self {
+        pNode?.contentHeight(value)
         return self
     }
 

@@ -21,7 +21,7 @@
 @end
 
 @interface ArgoKitNode()
-@property(nonatomic,strong)NSMutableArray<ArgoKitNodeObserver *> *nodeObservers;
+@property(nonatomic,strong) NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
 @end
 @implementation ArgoKitNode(Observer)
 - (void)addNodeObserver:(ArgoKitNodeObserver *)observer{
@@ -37,4 +37,14 @@
 - (void)removeAllNodeObservers{
     [self.nodeObservers removeAllObjects];
 }
+
+- (void)sendFrameChanged:(CGRect)frame {
+    NSHashTable *nodeObservers = [self.nodeObservers copy];
+    for (ArgoKitNodeObserver *observer in nodeObservers) {
+        if (observer.frameChangeBlock) {
+            observer.frameChangeBlock(frame);
+        }
+    }
+}
+
 @end

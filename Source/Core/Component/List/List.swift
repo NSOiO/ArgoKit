@@ -18,6 +18,10 @@ public class List<Data>: ScrollView where Data : ArgoKitIdentifiable {
         tableNode.style = style ?? .plain
     }
     
+    required public convenience init() {
+        self.init(style: .plain)
+    }
+    
     public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) where Data : ArgoKitNode {
         self.init(style: style)
         let container = content()

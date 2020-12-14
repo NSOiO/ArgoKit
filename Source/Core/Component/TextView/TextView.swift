@@ -16,7 +16,7 @@ public class TextView : ScrollView {
         pNode as! ArgoKitTextViewNode
     }
     
-    override convenience init() {
+    required convenience init() {
         self.init(text:nil)
     }
     
