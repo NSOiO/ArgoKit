@@ -15,14 +15,28 @@ target 'ArgoKitDemo' do
 # :modular_headers => true
 end
 
+#post_integrate do |installer|
+#  ap_target = 'ArgoKitPreview'
+#  installer.generated_pod_targets.each do |target|
+#    if target.name == ap_target
+#      pod_dir = target.sandbox.pod_dir(target.name)
+#      file_path = "#{pod_dir}/Source/Script/argokit_preview_config.rb"
+#      require file_path
+#      integrate_argokit_preview installer
+#    end
+#  end
+#end
+
 post_integrate do |installer|
-  ap_target = 'ArgoKitPreview'
-  installer.generated_pod_targets.each do |target|
-    if target.name == ap_target
-      pod_dir = target.sandbox.pod_dir(target.name)
-      file_path = "#{pod_dir}/Source/Script/argokit_preview_config.rb"
-      require file_path
-      integrate_argokit_preview installer
+    ap_target = 'ArgoKitPreview'
+    main_target = 'ArgoKitDemo'
+    
+    installer.generated_pod_targets.each do |target|
+      if target.name == ap_target
+        pod_dir = target.sandbox.pod_dir(target.name)
+        file_path = "#{pod_dir}/Source/Script/argokit_preview_config.rb"
+        require file_path
+        integrate_argokit_preview installer, main_target
+      end
     end
-  end
 end
