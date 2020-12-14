@@ -21,8 +21,9 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-
+**/.DS_Store
 ## IDE
 .idea/
-ArgoKitDemo/Pods/
+# ArgoKitDemo/Pods/
 ArgoKitDemo/Pods
+ArgoVersionDemo/

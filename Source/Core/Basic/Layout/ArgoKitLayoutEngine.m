@@ -1,0 +1,73 @@
+//
+//  ArgoKitLayoutEngine.m
+//  ArgoKit
+//
+//  Created by Bruce on 2020/11/27.
+//
+
+#import "ArgoKitLayoutEngine.h"
+#import "ArgoKitNode.h"
+@interface ArgoKitLayoutEngine(){
+    CFRunLoopObserverRef _observer;
+}
+@property(nonatomic,strong)NSHashTable<ArgoKitNode *> *layoutNodesPool;
+@end
+@implementation ArgoKitLayoutEngine
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+-(void)dealloc{
+    [self stopRunloop];
+}
+
+#pragma mark --- private methods ---
+- (NSHashTable<ArgoKitNode *> *)layoutNodesPool{
+    if (!_layoutNodesPool) {
+        _layoutNodesPool = [NSHashTable weakObjectsHashTable];
+    }
+    return _layoutNodesPool;
+}
+- (void)startRunloop:(CFOptionFlags)activities repeats:(Boolean) repeats order:(CFIndex)order block:(void(^)(ArgoKitNode *node))block{
+    // 监听主线程runloop操作
+    CFRunLoopRef runloop = CFRunLoopGetMain();
+    __weak typeof(self)weakSelf = self;
+    _observer = CFRunLoopObserverCreateWithHandler(CFAllocatorGetDefault(), activities, repeats, order, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
+        [weakSelf layout:block];
+    });
+    CFRunLoopAddObserver(runloop, _observer, kCFRunLoopCommonModes);
+}
+- (void)stopRunloop{
+    if (_observer) {
+        if (CFRunLoopContainsObserver(CFRunLoopGetMain(), _observer, kCFRunLoopCommonModes)) {
+            CFRunLoopRemoveObserver(CFRunLoopGetMain(), _observer, kCFRunLoopCommonModes);
+        }
+        CFRelease(_observer);
+        _observer = nil;
+    }
+}
+
+- (void)addLayoutNode:(nullable ArgoKitNode *)node{
+    if (node.isRootNode && ![self.layoutNodesPool containsObject:node]) {
+        [self.layoutNodesPool addObject:node];
+    }
+}
+
+- (void)removeLayoutNode:(nullable ArgoKitNode *)node{
+    if (node.isRootNode && [self.layoutNodesPool containsObject:node]) {
+        [self.layoutNodesPool removeObject:node];
+    }
+}
+- (void)layout:(void(^)(ArgoKitNode *node))block{
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    for(ArgoKitNode *node in nodes){
+        if (block) {
+            block(node);
+        }
+    }
+}
+@end

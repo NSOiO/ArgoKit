@@ -1,26 +1,61 @@
 PODS:
-  - ArgoKit (1.0.0):
-    - ArgoKit/Core (= 1.0.0)
-    - Yoga (~> 1.14)
-  - ArgoKit/Core (1.0.0):
-    - Yoga (~> 1.14)
+  - ArgoAnimation (0.1.7):
+    - ArgoAnimation/AnimationCPP (= 0.1.7)
+  - ArgoAnimation/AnimationCPP (0.1.7)
+  - ArgoKit (1.0.3):
+    - ArgoKit/AnimationKit (= 1.0.3)
+    - ArgoKit/Bind (= 1.0.3)
+    - ArgoKit/Core (= 1.0.3)
+    - Yoga
+  - ArgoKit/AnimationKit (1.0.3):
+    - ArgoAnimation
+    - Yoga
+  - ArgoKit/Bind (1.0.3):
+    - Yoga
+  - ArgoKit/Core (1.0.3):
+    - Yoga
+  - ArgoKitComponent (1.0.1):
+    - ArgoKit
+    - ArgoKitComponent/ImageLoader (= 1.0.1)
+  - ArgoKitComponent/ImageLoader (1.0.1):
+    - ArgoKit
+    - SDWebImage
+  - ArgoKitPreview (1.0.1):
+    - ArgoKit
+    - ArgoKitComponent
+  - SDWebImage (5.10.0):
+    - SDWebImage/Core (= 5.10.0)
+  - SDWebImage/Core (5.10.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - ArgoKit (from `../`)
+  - ArgoKitComponent (from `../`)
+  - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
+    - ArgoAnimation
+    - SDWebImage
     - Yoga
 
 EXTERNAL SOURCES:
   ArgoKit:
     :path: "../"
+  ArgoKitComponent:
+    :path: "../"
+  ArgoKitPreview:
+    :link_style: weak
+    :path: "../"
 
 SPEC CHECKSUMS:
-  ArgoKit: bd0c3ddfd5260201ac573a64d71145fe5781af50
+  ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
+  ArgoKit: 38b1f127b882f0f7b7a3281cc66736a6383c4037
+  ArgoKitComponent: 942fe82849075296b12f9752630f4f73788a90b2
+  ArgoKitPreview: 158ceb0e558f824f3220f20086345aebbed201c9
+  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 17b7c67fcfe99f63cba75c8bf862e473fb2df9f6
+PODFILE CHECKSUM: 1c5c843eb46c49323ba33433ef6f6c3b9289e0d4
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

@@ -7,25 +7,46 @@
 
 import UIKit
 import ArgoKit
+import SwiftUI
+import ArgoKitComponent
+import ArgoKitPreview
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+        ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 //        guard let _ = (scene as? UIWindowScene) else { return }
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+//        let contentView = LandmarkList()
+//        let contentView = ArgoKitViewDemo()
+//        let contentView = PreviewDemo()
+        ArgoKitInstance.registerImageLoader(imageLoader: ImageLoader())
+//        let contentView = ArgoKitOtherViewTest(model:ArgoKitOtherViewTestModel())
+//        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
+//        let contentView = ListTests(model: ListTestsModel())
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
+//            let vc = ArgokitDemoController()//
+//            let vc = UIHostingController(rootView: contentView)
+//            vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+            
+            let vc = SwiftUI.UIHostingController.init(rootView: ArgoKitImageTest_Previews.previews)
+            
+            let nav = UINavigationController(rootViewController: vc)
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = nav
             self.window = window
             window.makeKeyAndVisible()
+           
         }
     }
 

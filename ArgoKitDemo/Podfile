@@ -1,8 +1,17 @@
-platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
 
-use_frameworks!
+platform :ios, '10.0'
+
+use_frameworks!:linkage => :static
+use_modular_headers!
 
 target 'ArgoKitDemo' do
-#  pod 'YogaKit', '~> 1.5'
   pod 'ArgoKit', :path=>'../'
+  pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'
+  pod 'ArgoKitComponent', :path =>'../'
+
+#  pod 'ArgoUI/Kit/AnimationCPP', :git => 'https://github.com/mmdongxin/MLN', :branch => 'dev_iOS_dx_temp'
+#  pod 'ArgoUI/Kit/AnimationKit', :path => '../../MLN/ArgoUI.podspec'
+# :modular_headers => true
 end
+

@@ -7,16 +7,61 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EE1B2BE5D73068D15C3698C /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50AAA0B63A9952FB82B1C5B /* Pods_ArgoKitDemo.framework */; };
+		2C5DCAF651D66932037CC787 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24ED9E6602CA87B2603229F0 /* Pods_ArgoKitDemo.framework */; };
 		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
-		326335D0254133D20094676D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CF254133D20094676D /* SceneDelegate.swift */; };
-		326335D2254133D20094676D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
 		326335D5254133D20094676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D3254133D20094676D /* Main.storyboard */; };
 		326335D7254133D30094676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
 		326335DA254133D30094676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D8254133D30094676D /* LaunchScreen.storyboard */; };
 		326335E5254133D40094676D /* ArgoKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335E4254133D40094676D /* ArgoKitDemoTests.swift */; };
 		326335F0254133D40094676D /* ArgoKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335EF254133D40094676D /* ArgoKitDemoUITests.swift */; };
 		3263370B25419A3C0094676D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3263370A25419A3C0094676D /* ContentView.swift */; };
+		A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423580E257900920052E0B0 /* ViewPagerDemo.swift */; };
+		A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E668257B8770003D3591 /* ViewPageTest.swift */; };
+		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
+		FA0B216D2580DBC700D483EC /* ArgoKitView10.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */; };
+		FA0B5E772581CB9800D483EC /* ArgoKitView13.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */; };
+		FA0B881C2581DA7B00D483EC /* ArgoKitView20.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */; };
+		FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */; };
+		FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */; };
+		FA0BEF3A2583476100D483EC /* ArgoKitImageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */; };
+		FA0BEF3E25834AB200D483EC /* ArgoKitImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */; };
+		FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */; };
+		FA0BFE012583615500D483EC /* ArgoKitTextViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFE002583615500D483EC /* ArgoKitTextViewTest.swift */; };
+		FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFE0425836B5300D483EC /* ArgoKitListTest.swift */; };
+		FA0BFE1B258376D600D483EC /* ArgoKitOtherViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */; };
+		FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163037257E3C4A000BA507 /* ArgoKitView1.swift */; };
+		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
+		FA5164EE255BB99D005BE240 /* turtlerock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D8255BB99D005BE240 /* turtlerock.jpg */; };
+		FA5164EF255BB99D005BE240 /* silversalmoncreek.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */; };
+		FA5164F0255BB99D005BE240 /* icybay.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164DA255BB99D005BE240 /* icybay.jpg */; };
+		FA5164F1255BB99D005BE240 /* lakemcdonald.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164DB255BB99D005BE240 /* lakemcdonald.jpg */; };
+		FA5164F2255BB99D005BE240 /* hiddenlake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164DC255BB99D005BE240 /* hiddenlake.jpg */; };
+		FA5164F3255BB99D005BE240 /* twinlake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164DD255BB99D005BE240 /* twinlake.jpg */; };
+		FA5164F4255BB99D005BE240 /* umbagog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164DE255BB99D005BE240 /* umbagog.jpg */; };
+		FA5164F5255BB99D005BE240 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = FA5164DF255BB99D005BE240 /* landmarkData.json */; };
+		FA5164F6255BB99E005BE240 /* chincoteague.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164E0255BB99D005BE240 /* chincoteague.jpg */; };
+		FA5164F7255BB99E005BE240 /* yukon_charleyrivers.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164E1255BB99D005BE240 /* yukon_charleyrivers.jpg */; };
+		FA5164F8255BB99E005BE240 /* stmarylake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164E2255BB99D005BE240 /* stmarylake.jpg */; };
+		FA5164F9255BB99E005BE240 /* chilkoottrail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164E3255BB99D005BE240 /* chilkoottrail.jpg */; };
+		FA5164FA255BB99E005BE240 /* rainbowlake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164E4255BB99D005BE240 /* rainbowlake.jpg */; };
+		FA5164FB255BB99E005BE240 /* LandmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164E5255BB99D005BE240 /* LandmarkList.swift */; };
+		FA5164FC255BB99E005BE240 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164E7255BB99D005BE240 /* Data.swift */; };
+		FA5164FD255BB99E005BE240 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164E8255BB99D005BE240 /* Landmark.swift */; };
+		FA5164FE255BB99E005BE240 /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164E9255BB99D005BE240 /* LandmarkDetail.swift */; };
+		FA5164FF255BB99E005BE240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164EB255BB99D005BE240 /* MapView.swift */; };
+		FA516500255BB99E005BE240 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164EC255BB99D005BE240 /* CircleImage.swift */; };
+		FA516501255BB99E005BE240 /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5164ED255BB99D005BE240 /* LandmarkRow.swift */; };
+		FA51A0AB255D17F9005BE240 /* LandmarkRow1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AA255D17F9005BE240 /* LandmarkRow1.swift */; };
+		FA51A0B0255D1804005BE240 /* LandmarkRow2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */; };
+		FA5709BD25765303004A0EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
+		FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE290F9256F505A0012989F /* PreviewDemo.swift */; };
+		FAE29115256F54650012989F /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE29114256F54650012989F /* Types.swift */; };
+		FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */; };
+		FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */; };
+		FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */; };
+		FAF72F2C25831BCD003273F2 /* HVStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF72F2B25831BCD003273F2 /* HVStackTests.swift */; };
+		FAF72F3225832548003273F2 /* SpacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF72F3125832548003273F2 /* SpacerTests.swift */; };
+		FAF72F36258326F1003273F2 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF72F35258326F1003273F2 /* ListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +81,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA72311C257E633800C6492B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		24ED9E6602CA87B2603229F0 /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		326335CA254133D20094676D /* ArgoKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgoKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		326335CD254133D20094676D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		326335CF254133D20094676D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		326335D1254133D20094676D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		326335D4254133D20094676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		326335D6254133D30094676D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,9 +110,60 @@
 		326335EF254133D40094676D /* ArgoKitDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitDemoUITests.swift; sourceTree = "<group>"; };
 		326335F1254133D40094676D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3263370A25419A3C0094676D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		52395E0D439704ADC9F68E29 /* Pods-ArgoKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.release.xcconfig"; sourceTree = "<group>"; };
-		AE4549680995E8F7F9E1E43C /* Pods-ArgoKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		E50AAA0B63A9952FB82B1C5B /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85FC2EEDD8F8A7C2EC8BC7B8 /* Pods-ArgoViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.debug.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.release.xcconfig"; sourceTree = "<group>"; };
+		A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		A423580E257900920052E0B0 /* ViewPagerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerDemo.swift; sourceTree = "<group>"; };
+		A4F5E668257B8770003D3591 /* ViewPageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPageTest.swift; sourceTree = "<group>"; };
+		A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
+		AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.debug.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.debug.xcconfig"; sourceTree = "<group>"; };
+		C93FDC9396227466369EFEA7 /* libPods-ArgoPreview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgoPreview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView10.swift; sourceTree = "<group>"; };
+		FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView13.swift; sourceTree = "<group>"; };
+		FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView20.swift; sourceTree = "<group>"; };
+		FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitButtonTest.swift; sourceTree = "<group>"; };
+		FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitTextTest.swift; sourceTree = "<group>"; };
+		FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitImageTest.swift; sourceTree = "<group>"; };
+		FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitImageLoader.swift; sourceTree = "<group>"; };
+		FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitTextFieldTest.swift; sourceTree = "<group>"; };
+		FA0BFE002583615500D483EC /* ArgoKitTextViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitTextViewTest.swift; sourceTree = "<group>"; };
+		FA0BFE0425836B5300D483EC /* ArgoKitListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitListTest.swift; sourceTree = "<group>"; };
+		FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitOtherViewTest.swift; sourceTree = "<group>"; };
+		FA163037257E3C4A000BA507 /* ArgoKitView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView1.swift; sourceTree = "<group>"; };
+		FA4D581F254ABD1C002E2532 /* DemoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContentView.swift; sourceTree = "<group>"; };
+		FA5164D8255BB99D005BE240 /* turtlerock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtlerock.jpg; sourceTree = "<group>"; };
+		FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = silversalmoncreek.jpg; sourceTree = "<group>"; };
+		FA5164DA255BB99D005BE240 /* icybay.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icybay.jpg; sourceTree = "<group>"; };
+		FA5164DB255BB99D005BE240 /* lakemcdonald.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lakemcdonald.jpg; sourceTree = "<group>"; };
+		FA5164DC255BB99D005BE240 /* hiddenlake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hiddenlake.jpg; sourceTree = "<group>"; };
+		FA5164DD255BB99D005BE240 /* twinlake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twinlake.jpg; sourceTree = "<group>"; };
+		FA5164DE255BB99D005BE240 /* umbagog.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = umbagog.jpg; sourceTree = "<group>"; };
+		FA5164DF255BB99D005BE240 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
+		FA5164E0255BB99D005BE240 /* chincoteague.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chincoteague.jpg; sourceTree = "<group>"; };
+		FA5164E1255BB99D005BE240 /* yukon_charleyrivers.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yukon_charleyrivers.jpg; sourceTree = "<group>"; };
+		FA5164E2255BB99D005BE240 /* stmarylake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stmarylake.jpg; sourceTree = "<group>"; };
+		FA5164E3255BB99D005BE240 /* chilkoottrail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chilkoottrail.jpg; sourceTree = "<group>"; };
+		FA5164E4255BB99D005BE240 /* rainbowlake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rainbowlake.jpg; sourceTree = "<group>"; };
+		FA5164E5255BB99D005BE240 /* LandmarkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkList.swift; sourceTree = "<group>"; };
+		FA5164E7255BB99D005BE240 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FA5164E8255BB99D005BE240 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
+		FA5164E9255BB99D005BE240 /* LandmarkDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkDetail.swift; sourceTree = "<group>"; };
+		FA5164EB255BB99D005BE240 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FA5164EC255BB99D005BE240 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		FA5164ED255BB99D005BE240 /* LandmarkRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
+		FA51A0AA255D17F9005BE240 /* LandmarkRow1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow1.swift; sourceTree = "<group>"; };
+		FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow2.swift; sourceTree = "<group>"; };
+		FAE290F9256F505A0012989F /* PreviewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDemo.swift; sourceTree = "<group>"; };
+		FAE29114256F54650012989F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitViewDemo.swift; sourceTree = "<group>"; };
+		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
+		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FAF72F2B25831BCD003273F2 /* HVStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HVStackTests.swift; sourceTree = "<group>"; };
+		FAF72F3125832548003273F2 /* SpacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTests.swift; sourceTree = "<group>"; };
+		FAF72F35258326F1003273F2 /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
+		FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.release.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.release.xcconfig"; sourceTree = "<group>"; };
+		FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EE1B2BE5D73068D15C3698C /* Pods_ArgoKitDemo.framework in Frameworks */,
+				2C5DCAF651D66932037CC787 /* Pods_ArgoKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +200,7 @@
 				326335EE254133D40094676D /* ArgoKitDemoUITests */,
 				326335CB254133D20094676D /* Products */,
 				F4111651BAEBC0F7E7C25E97 /* Pods */,
-				9190EACB2913D507EDC80DB6 /* Frameworks */,
+				8266FB072263C28BD6505C25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,14 +217,25 @@
 		326335CC254133D20094676D /* ArgoKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FA0BEF0F258312CD00D483EC /* UnitTest */,
+				A423580D257900760052E0B0 /* ViewPager */,
+				FAE29113256F54570012989F /* Previews */,
+				FA5164D6255BB99D005BE240 /* LandmarksDemo */,
+				FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */,
 				326335CD254133D20094676D /* AppDelegate.swift */,
-				326335CF254133D20094676D /* SceneDelegate.swift */,
 				3263370A25419A3C0094676D /* ContentView.swift */,
+				FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */,
+				FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */,
+				FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */,
+				FA163037257E3C4A000BA507 /* ArgoKitView1.swift */,
+				FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */,
+				FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */,
 				326335D1254133D20094676D /* ViewController.swift */,
 				326335D3254133D20094676D /* Main.storyboard */,
 				326335D6254133D30094676D /* Assets.xcassets */,
 				326335D8254133D30094676D /* LaunchScreen.storyboard */,
 				326335DB254133D30094676D /* Info.plist */,
+				FA4D581F254ABD1C002E2532 /* DemoContentView.swift */,
 			);
 			path = ArgoKitDemo;
 			sourceTree = "<group>";
@@ -138,21 +258,125 @@
 			path = ArgoKitDemoUITests;
 			sourceTree = "<group>";
 		};
-		9190EACB2913D507EDC80DB6 /* Frameworks */ = {
+		8266FB072263C28BD6505C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E50AAA0B63A9952FB82B1C5B /* Pods_ArgoKitDemo.framework */,
+				C93FDC9396227466369EFEA7 /* libPods-ArgoPreview.a */,
+				24ED9E6602CA87B2603229F0 /* Pods_ArgoKitDemo.framework */,
+				FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A423580D257900760052E0B0 /* ViewPager */ = {
+			isa = PBXGroup;
+			children = (
+				A423580E257900920052E0B0 /* ViewPagerDemo.swift */,
+				A4F5E668257B8770003D3591 /* ViewPageTest.swift */,
+				A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */,
+			);
+			path = ViewPager;
 			sourceTree = "<group>";
 		};
 		F4111651BAEBC0F7E7C25E97 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AE4549680995E8F7F9E1E43C /* Pods-ArgoKitDemo.debug.xcconfig */,
-				52395E0D439704ADC9F68E29 /* Pods-ArgoKitDemo.release.xcconfig */,
+				A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */,
+				89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */,
+				AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */,
+				FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */,
+				85FC2EEDD8F8A7C2EC8BC7B8 /* Pods-ArgoViewDemo.debug.xcconfig */,
+				CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA0BEF0F258312CD00D483EC /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */,
+				FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */,
+				FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */,
+				FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */,
+				FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */,
+				FA0BFE002583615500D483EC /* ArgoKitTextViewTest.swift */,
+				FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */,
+				FA0BFE0425836B5300D483EC /* ArgoKitListTest.swift */,
+			);
+			path = UnitTest;
+			sourceTree = "<group>";
+		};
+		FA5164D6255BB99D005BE240 /* LandmarksDemo */ = {
+			isa = PBXGroup;
+			children = (
+				FA5164E9255BB99D005BE240 /* LandmarkDetail.swift */,
+				FA5164E5255BB99D005BE240 /* LandmarkList.swift */,
+				FA5164E6255BB99D005BE240 /* Models */,
+				FA5164D7255BB99D005BE240 /* Resources */,
+				FA5164EA255BB99D005BE240 /* Supporting Views */,
+			);
+			path = LandmarksDemo;
+			sourceTree = "<group>";
+		};
+		FA5164D7255BB99D005BE240 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA5164E3255BB99D005BE240 /* chilkoottrail.jpg */,
+				FA5164E0255BB99D005BE240 /* chincoteague.jpg */,
+				FA5164DC255BB99D005BE240 /* hiddenlake.jpg */,
+				FA5164DA255BB99D005BE240 /* icybay.jpg */,
+				FA5164DB255BB99D005BE240 /* lakemcdonald.jpg */,
+				FA5164E4255BB99D005BE240 /* rainbowlake.jpg */,
+				FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */,
+				FA5164E2255BB99D005BE240 /* stmarylake.jpg */,
+				FA5164D8255BB99D005BE240 /* turtlerock.jpg */,
+				FA5164DD255BB99D005BE240 /* twinlake.jpg */,
+				FA5164DE255BB99D005BE240 /* umbagog.jpg */,
+				FA5164E1255BB99D005BE240 /* yukon_charleyrivers.jpg */,
+				FA5164DF255BB99D005BE240 /* landmarkData.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FA5164E6255BB99D005BE240 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA5164E7255BB99D005BE240 /* Data.swift */,
+				FA5164E8255BB99D005BE240 /* Landmark.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA5164EA255BB99D005BE240 /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA5164EC255BB99D005BE240 /* CircleImage.swift */,
+				FA5164ED255BB99D005BE240 /* LandmarkRow.swift */,
+				FA5164EB255BB99D005BE240 /* MapView.swift */,
+				FA51A0AA255D17F9005BE240 /* LandmarkRow1.swift */,
+				FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */,
+			);
+			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
+		FAE29113256F54570012989F /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				FAF06A07257E0B2700EF1EDA /* TestCases */,
+				FAE290F9256F505A0012989F /* PreviewDemo.swift */,
+				FAE29114256F54650012989F /* Types.swift */,
+			);
+			name = Previews;
+			sourceTree = "<group>";
+		};
+		FAF06A07257E0B2700EF1EDA /* TestCases */ = {
+			isa = PBXGroup;
+			children = (
+				FAF72F2B25831BCD003273F2 /* HVStackTests.swift */,
+				FAF72F3125832548003273F2 /* SpacerTests.swift */,
+				FAF72F35258326F1003273F2 /* ListTests.swift */,
+			);
+			path = TestCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,11 +386,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 326335F4254133D40094676D /* Build configuration list for PBXNativeTarget "ArgoKitDemo" */;
 			buildPhases = (
-				BD2E10AE6998383ABD814E3A /* [CP] Check Pods Manifest.lock */,
+				D72DD5057E1A6D051356CD99 /* [CP] Check Pods Manifest.lock */,
 				326335C6254133D20094676D /* Sources */,
 				326335C7254133D20094676D /* Frameworks */,
 				326335C8254133D20094676D /* Resources */,
-				1941DCD91BA0068EB683846A /* [CP] Embed Pods Frameworks */,
+				FA72311C257E633800C6492B /* Embed Frameworks */,
+				DB9169ADF08A9F46AA539FA6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,8 +473,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				326335C9254133D20094676D /* ArgoKitDemo */,
 				326335DF254133D40094676D /* ArgoKitDemoTests */,
+				326335C9254133D20094676D /* ArgoKitDemo */,
 				326335EA254133D40094676D /* ArgoKitDemoUITests */,
 			);
 		};
@@ -260,9 +485,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5164F1255BB99D005BE240 /* lakemcdonald.jpg in Resources */,
+				FA5164EF255BB99D005BE240 /* silversalmoncreek.jpg in Resources */,
+				FA5164F5255BB99D005BE240 /* landmarkData.json in Resources */,
+				FA5164EE255BB99D005BE240 /* turtlerock.jpg in Resources */,
 				326335DA254133D30094676D /* LaunchScreen.storyboard in Resources */,
+				FA5164F4255BB99D005BE240 /* umbagog.jpg in Resources */,
+				FA5164F8255BB99E005BE240 /* stmarylake.jpg in Resources */,
+				FA5164F6255BB99E005BE240 /* chincoteague.jpg in Resources */,
 				326335D7254133D30094676D /* Assets.xcassets in Resources */,
+				FA5164F0255BB99D005BE240 /* icybay.jpg in Resources */,
+				FA5164F3255BB99D005BE240 /* twinlake.jpg in Resources */,
+				FA5164F2255BB99D005BE240 /* hiddenlake.jpg in Resources */,
 				326335D5254133D20094676D /* Main.storyboard in Resources */,
+				FA5164FA255BB99E005BE240 /* rainbowlake.jpg in Resources */,
+				FA5164F9255BB99E005BE240 /* chilkoottrail.jpg in Resources */,
+				FA5164F7255BB99E005BE240 /* yukon_charleyrivers.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,24 +521,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1941DCD91BA0068EB683846A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BD2E10AE6998383ABD814E3A /* [CP] Check Pods Manifest.lock */ = {
+		D72DD5057E1A6D051356CD99 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -322,6 +543,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DB9169ADF08A9F46AA539FA6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -329,10 +567,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				326335D2254133D20094676D /* ViewController.swift in Sources */,
+				FA0B881C2581DA7B00D483EC /* ArgoKitView20.swift in Sources */,
+				FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */,
+				A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */,
+				FA5709BD25765303004A0EAD /* ViewController.swift in Sources */,
+				FA516501255BB99E005BE240 /* LandmarkRow.swift in Sources */,
+				FA0BFE012583615500D483EC /* ArgoKitTextViewTest.swift in Sources */,
+				FAE29115256F54650012989F /* Types.swift in Sources */,
+				FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */,
+				FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
+				FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */,
+				FA51A0AB255D17F9005BE240 /* LandmarkRow1.swift in Sources */,
+				FA5164FF255BB99E005BE240 /* MapView.swift in Sources */,
+				FAF72F3225832548003273F2 /* SpacerTests.swift in Sources */,
+				FA5164FB255BB99E005BE240 /* LandmarkList.swift in Sources */,
+				FA51A0B0255D1804005BE240 /* LandmarkRow2.swift in Sources */,
+				FAF72F2C25831BCD003273F2 /* HVStackTests.swift in Sources */,
+				FA0BEF3E25834AB200D483EC /* ArgoKitImageLoader.swift in Sources */,
+				FA0BEF3A2583476100D483EC /* ArgoKitImageTest.swift in Sources */,
+				FA516500255BB99E005BE240 /* CircleImage.swift in Sources */,
 				3263370B25419A3C0094676D /* ContentView.swift in Sources */,
-				326335D0254133D20094676D /* SceneDelegate.swift in Sources */,
+				FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */,
+				FA5164FD255BB99E005BE240 /* Landmark.swift in Sources */,
+				FA0BFE1B258376D600D483EC /* ArgoKitOtherViewTest.swift in Sources */,
+				FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */,
+				FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */,
+				FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */,
+				FA0B216D2580DBC700D483EC /* ArgoKitView10.swift in Sources */,
+				FAF72F36258326F1003273F2 /* ListTests.swift in Sources */,
+				A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */,
+				FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */,
+				FA0B5E772581CB9800D483EC /* ArgoKitView13.swift in Sources */,
+				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
+				FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */,
+				FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */,
+				FA5164FE255BB99E005BE240 /* LandmarkDetail.swift in Sources */,
+				FA5164FC255BB99E005BE240 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +709,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -493,9 +764,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -505,19 +777,34 @@
 		};
 		326335F5254133D40094676D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE4549680995E8F7F9E1E43C /* Pods-ArgoKitDemo.debug.xcconfig */;
+			baseConfigurationReference = A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3WCAH9767T;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 4BXE593ED8;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruce-zhang.www.ArgoKitDemo";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-framework",
+					"\"ArgoKit\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"yoga\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemomo.cosmos.hwphotonim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Photonimdemo;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -525,19 +812,38 @@
 		};
 		326335F6254133D40094676D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 52395E0D439704ADC9F68E29 /* Pods-ArgoKitDemo.release.xcconfig */;
+			baseConfigurationReference = 89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3WCAH9767T;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 36WT396TPZ;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruce-zhang.www.ArgoKitDemo";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-framework",
+					"\"ArgoKit\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"yoga\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruce-zhang.www.ArgoKitDemo2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Xcode iOS Wildcard";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -548,8 +854,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3WCAH9767T;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ArgoKitDemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,6 +867,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruce-zhang.www.ArgoKitDemoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArgoKitDemo.app/ArgoKitDemo";
@@ -570,8 +880,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3WCAH9767T;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ArgoKitDemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -581,6 +893,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruce-zhang.www.ArgoKitDemoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArgoKitDemo.app/ArgoKitDemo";
