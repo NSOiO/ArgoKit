@@ -31,6 +31,9 @@
 		FA0BFE1B258376D600D483EC /* ArgoKitOtherViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */; };
 		FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163037257E3C4A000BA507 /* ArgoKitView1.swift */; };
 		FA397C5E2587057D002D400F /* ListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA397C5D2587057D002D400F /* ListCellTests.swift */; };
+		FA397C6D2587118C002D400F /* ForEachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA397C6C2587118C002D400F /* ForEachTests.swift */; };
+		FA397C91258756DD002D400F /* AspectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA397C90258756DD002D400F /* AspectTests.swift */; };
+		FA397C95258758E2002D400F /* VStackAlignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA397C94258758E2002D400F /* VStackAlignTests.swift */; };
 		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
 		FA5164EE255BB99D005BE240 /* turtlerock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D8255BB99D005BE240 /* turtlerock.jpg */; };
 		FA5164EF255BB99D005BE240 /* silversalmoncreek.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */; };
@@ -133,6 +136,9 @@
 		FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitOtherViewTest.swift; sourceTree = "<group>"; };
 		FA163037257E3C4A000BA507 /* ArgoKitView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView1.swift; sourceTree = "<group>"; };
 		FA397C5D2587057D002D400F /* ListCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellTests.swift; sourceTree = "<group>"; };
+		FA397C6C2587118C002D400F /* ForEachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachTests.swift; sourceTree = "<group>"; };
+		FA397C90258756DD002D400F /* AspectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectTests.swift; sourceTree = "<group>"; };
+		FA397C94258758E2002D400F /* VStackAlignTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStackAlignTests.swift; sourceTree = "<group>"; };
 		FA4D581F254ABD1C002E2532 /* DemoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContentView.swift; sourceTree = "<group>"; };
 		FA5164D8255BB99D005BE240 /* turtlerock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtlerock.jpg; sourceTree = "<group>"; };
 		FA5164D9255BB99D005BE240 /* silversalmoncreek.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = silversalmoncreek.jpg; sourceTree = "<group>"; };
@@ -378,6 +384,9 @@
 				FAF72F3125832548003273F2 /* SpacerTests.swift */,
 				FAF72F35258326F1003273F2 /* ListTests.swift */,
 				FA397C5D2587057D002D400F /* ListCellTests.swift */,
+				FA397C6C2587118C002D400F /* ForEachTests.swift */,
+				FA397C90258756DD002D400F /* AspectTests.swift */,
+				FA397C94258758E2002D400F /* VStackAlignTests.swift */,
 			);
 			path = TestCases;
 			sourceTree = "<group>";
@@ -594,17 +603,19 @@
 				3263370B25419A3C0094676D /* ContentView.swift in Sources */,
 				FA163038257E3C4A000BA507 /* ArgoKitView1.swift in Sources */,
 				FA5164FD255BB99E005BE240 /* Landmark.swift in Sources */,
+				FA397C6D2587118C002D400F /* ForEachTests.swift in Sources */,
 				FA0BFE1B258376D600D483EC /* ArgoKitOtherViewTest.swift in Sources */,
 				FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */,
 				FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */,
 				FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */,
+				FA397C91258756DD002D400F /* AspectTests.swift in Sources */,
 				FA0B216D2580DBC700D483EC /* ArgoKitView10.swift in Sources */,
 				FAF72F36258326F1003273F2 /* ListTests.swift in Sources */,
 				A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */,
 				FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */,
 				FA0B5E772581CB9800D483EC /* ArgoKitView13.swift in Sources */,
+				FA397C95258758E2002D400F /* VStackAlignTests.swift in Sources */,
 				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
-				FADA3A57257E428000368DB3 /* LayoutTests.swift in Sources */,
 				FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */,
 				FA5164FE255BB99E005BE240 /* LandmarkDetail.swift in Sources */,
 				FA5164FC255BB99E005BE240 /* Data.swift in Sources */,

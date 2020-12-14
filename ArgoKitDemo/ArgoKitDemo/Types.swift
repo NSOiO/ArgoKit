@@ -5,8 +5,9 @@
 //  Created by Dai on 2020-11-25.
 //
 
-#if canImport(SwiftUI) && DEBUG
+#if canImport(SwiftUI) && canImport(ArgoKit) && DEBUG
 import ArgoKit
+import SwiftUI
 
 typealias UIHostingController = ArgoKit.UIHostingController
 typealias View = ArgoKit.View
@@ -45,6 +46,19 @@ typealias TextView = ArgoKit.TextView
 typealias TabSegment = ArgoKit.TabSegment
 
 //typealias SessionItem = ArgoKit.SessionItem
+
+
+extension String {
+    public static var iPhoneSE: String { "iPhone SE" }
+    public static var iPhoneXEMax: String { "iPhone XE Max" }
+    public static var iPhone11ProMax: String { "iPhone 11 Pro Max" }
+}
+
+extension PreviewDevice {
+    public static var iPhoneSE: PreviewDevice { .init(rawValue: .iPhoneSE) }
+    public static var iPhoneXEMax: PreviewDevice { .init(rawValue: .iPhoneXEMax) }
+    public static var iPhone11ProMax: PreviewDevice { .init(rawValue: .iPhone11ProMax) }
+}
 
 #endif
 

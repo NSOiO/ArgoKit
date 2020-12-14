@@ -27,6 +27,10 @@ struct SpacerTests: ArgoKit.View {
             Spacer()
                 .backgroundColor(.red)
             
+            Spacer()
+                .backgroundColor(.blue)
+                .height(10)
+            
             Text("Text 2")
             Text("Text 3")
             Text("Text 4")

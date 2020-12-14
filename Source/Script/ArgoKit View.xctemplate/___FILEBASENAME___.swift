@@ -35,10 +35,15 @@ class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER
 }
 
 @available(iOS 13.0.0, *)
+fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
+    ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    return ArgoRender(builder: builder)
+}
+
+@available(iOS 13.0.0, *)
 struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
-        return ArgoRender {
+        ArgoKitRender {
             ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
         }
     }
