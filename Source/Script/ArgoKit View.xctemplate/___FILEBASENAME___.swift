@@ -29,7 +29,9 @@ import SwiftUI
 
 // mock data.
 class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
-
+    override init() {
+        super.init()
+    }
 }
 
 @available(iOS 13.0.0, *)
