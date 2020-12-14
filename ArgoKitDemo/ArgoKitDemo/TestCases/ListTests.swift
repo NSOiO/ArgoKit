@@ -42,7 +42,7 @@ class ListCellModel:  ArgoKitNode {
 
 
 // view
-class ListTests: ArgoKit.View {
+struct ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ListTestsModel
@@ -50,17 +50,17 @@ class ListTests: ArgoKit.View {
         self.model = model
     }
     
-    var cellDatas = [ListCellModel]()
+//    var cellDatas = [ListCellModel]()
     
     var body: ArgoKit.View {
         
 //        let data = [landmarkDatopa[0]]
-        cellDatas.append(ListCellModel())
+//        cellDatas.append(ListCellModel())
     
         return VStack {
             Text("aa")
             
-            List(data: self.cellDatas) {landmark in
+            List(data: [ListCellModel()]) {landmark in
                 Text(landmark.name)
 
                 Text("t1")
@@ -87,18 +87,18 @@ class ListTests: ArgoKit.View {
         .height(100%)
         .backgroundColor(.lightGray)
         
-//        ArgoKit.List(data:landmarkData) { landmark in
-////            switch landmark.reuseIdentifier {
-////            case "LandmarkRow1":
-////                LandmarkRow1(landmark: landmark)
-////            case "LandmarkRow2":
-////                LandmarkRow2(landmark: landmark)
-////            default:
-////                LandmarkRow(landmark: landmark)
-////            }
-//            LandmarkRow2(landmark: landmark)
-//        }
-//        .size(width: 100%, height: 100%)
+        ArgoKit.List(data:landmarkData) { landmark in
+//            switch landmark.reuseIdentifier {
+//            case "LandmarkRow1":
+//                LandmarkRow1(landmark: landmark)
+//            case "LandmarkRow2":
+//                LandmarkRow2(landmark: landmark)
+//            default:
+//                LandmarkRow(landmark: landmark)
+//            }
+            LandmarkRow2(landmark: landmark)
+        }
+        .size(width: 100%, height: 100%)
     }
 }
 
