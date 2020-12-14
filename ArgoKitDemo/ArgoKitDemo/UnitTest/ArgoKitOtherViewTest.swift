@@ -31,7 +31,7 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
         .thumbTintColor(.red)
         .minimumTrackTintColor(.yellow)
         .maximumTrackTintColor(.green)
-        
+
         //步近器
         Stepper(value: 1, in: 0...10, step: 3) { value in
             print("\(value)")
@@ -39,13 +39,13 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
         .margin(edge: .top, value: 50)
         .backgroundColor(.yellow)
         .setIncrementImage(UIImage(named: "lakemcdonald.lpg"), for: UIControl.State.normal)
-        
+
         // switch
         Toggle(false){ result in
             print("\(result)")
         }.margin(edge: .top, value: 50)
-        
-        
+
+
         // pageControl
         PageControl(currentPage: 0, numberOfPages: 10){selecedIndex in
             print("\(selecedIndex)")
@@ -55,10 +55,10 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
         .width(300)
         .height(50)
         .margin(edge: .top, value: 30)
-        
-        
+
+
         SegmenteControl (onSegmentedChange:{ index in
-            
+
         }){
             Text("1")
             Text("2")
@@ -70,6 +70,30 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
         .height(50)
         .margin(edge: .top, value: 30)
 
+        ActivityIndicatorView(style: .large)
+            .hidesWhenStopped(false)
+            .color(.purple)
+//            .width(50)
+//            .height(50)
+            .backgroundColor(.red)
+            .margin(edge: .top, value: 30)
+            .startAnimating()
+        
+        ActivityIndicatorView(style: .large)
+            .hidesWhenStopped(false)
+            .color(.purple)
+            .width(100)
+            .height(100)
+            .backgroundColor(.red)
+            .margin(edge: .top, value: 30)
+            .startAnimating()
+        
+        
+        ProgressView(0.5)
+            .width(100)
+            .height(100)
+            .backgroundColor(.brown)
+            .margin(edge: .top, value: 30)
         
         
         
