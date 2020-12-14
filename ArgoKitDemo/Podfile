@@ -29,6 +29,7 @@ end
 
 post_integrate do |installer|
     ap_target = 'ArgoKitPreview'
+    main_project = 'ArgoKitDemo'
     main_target = 'ArgoKitDemo'
     
     installer.generated_pod_targets.each do |target|
@@ -36,7 +37,7 @@ post_integrate do |installer|
         pod_dir = target.sandbox.pod_dir(target.name)
         file_path = "#{pod_dir}/Source/Script/argokit_preview_config.rb"
         require file_path
-        integrate_argokit_preview installer, main_target
+        integrate_argokit_preview installer, main_project, main_target
       end
     end
 end

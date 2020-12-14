@@ -26,7 +26,7 @@ class String
     def reverse_color;  "\e[7m#{self}\e[27m" end
 end
 
-def integrate_argokit_preview(installer, main_target)
+def integrate_argokit_preview(installer, main_project ,main_target)
     argokit_prefix = "[ArgoKitPreview]"
     puts "#{argokit_prefix} Start Integrating ArgoKitPreview"
     
@@ -50,7 +50,7 @@ def integrate_argokit_preview(installer, main_target)
         return
     end
 
-    project_path = Dir.pwd + "/#{main_target}.xcodeproj"
+    project_path = Dir.pwd + "/#{main_project}.xcodeproj"
     # puts project_path
 
     project = Xcodeproj::Project.open(project_path)
@@ -90,17 +90,18 @@ end
 
 
 #Usage:
-# 需要将main_target替换成真实的target
+# 需要将main_project和main_target替换成真实数据ß
 #post_integrate do |installer|
 #    ap_target = 'ArgoKitPreview'
-#    main_target = 'XXXXXXX'
+#    main_project = 'xxxxxx'
+#    main_target = 'xxxxxxx'
 #
 #    installer.generated_pod_targets.each do |target|
 #      if target.name == ap_target
 #        pod_dir = target.sandbox.pod_dir(target.name)
 #        file_path = "#{pod_dir}/Source/Script/argokit_preview_config.rb"
 #        require file_path
-#        integrate_argokit_preview installer, main_target
+#        integrate_argokit_preview installer, main_project, main_target
 #      end
 #    end
 #end
