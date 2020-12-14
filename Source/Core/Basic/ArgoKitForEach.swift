@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ForEach:View{
+public struct ForEach:View{
     private var innerNode:ArgoKitNode
     public var node: ArgoKitNode?{
         innerNode

@@ -23,6 +23,7 @@ typedef void(^ArgoKitNodeFrameChangeBlock)(CGRect);
 - (void)removeNodeObserver:(ArgoKitNodeObserver *)observer NS_SWIFT_NAME(removeNode(observer:));
 - (void)removeAllNodeObservers NS_SWIFT_NAME(removeAllNodeObservers());
 
+- (void)sendFrameChanged:(CGRect)frame NS_SWIFT_NAME(sendFrameChanged(frame:));
 
 @end
 

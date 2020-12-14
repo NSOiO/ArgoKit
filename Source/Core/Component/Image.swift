@@ -82,7 +82,7 @@ public struct Image : View {
         self.init(image: UIImage(systemName: systemName), highlightedImage: nil)
     }
     
-    public init(_ cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
+    public init(cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation = .up) {
         self.init(image: UIImage(cgImage: cgImage, scale: scale, orientation: orientation), highlightedImage: nil)
     }
     
@@ -206,7 +206,6 @@ extension Image {
         return pNode.image()?.size ?? .zero
     }
 }
-
 
 extension Image{
     @available(*, deprecated, message: "Image does not support padding!")
