@@ -35,11 +35,6 @@ struct LandRow: View {
     }
 }
 
-class ListCellModel:  ArgoKitNode {
-//    var reuseIdentifier = "idd"
-    var name = "name.."
-}
-
 
 // view
 struct ListTests: ArgoKit.View {
@@ -60,7 +55,8 @@ struct ListTests: ArgoKit.View {
         return VStack {
             Text("aa")
             
-            List(data: [ListCellModel()]) {landmark in
+            ArgoKit.List(data: [ListCellModel()]) {landmark in
+                
                 Text(landmark.name)
 
                 Text("t1")
@@ -84,21 +80,21 @@ struct ListTests: ArgoKit.View {
             .backgroundColor(.lightText)
             
         }
-        .height(100%)
+        .height(50%)
         .backgroundColor(.lightGray)
         
-        ArgoKit.List(data:landmarkData) { landmark in
-//            switch landmark.reuseIdentifier {
-//            case "LandmarkRow1":
-//                LandmarkRow1(landmark: landmark)
-//            case "LandmarkRow2":
-//                LandmarkRow2(landmark: landmark)
-//            default:
-//                LandmarkRow(landmark: landmark)
-//            }
-            LandmarkRow2(landmark: landmark)
-        }
-        .size(width: 100%, height: 100%)
+//        ArgoKit.List(data:landmarkData) { landmark in
+////            switch landmark.reuseIdentifier {
+////            case "LandmarkRow1":
+////                LandmarkRow1(landmark: landmark)
+////            case "LandmarkRow2":
+////                LandmarkRow2(landmark: landmark)
+////            default:
+////                LandmarkRow(landmark: landmark)
+////            }
+//            LandmarkRow2(landmark: landmark)
+//        }
+//        .size(width: 100%, height: 100%)
     }
 }
 
