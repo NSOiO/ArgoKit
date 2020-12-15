@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 public class UIHostingView:UIView{
     var rootNode:ArgoKitNode?
     public override func layoutSubviews() {
@@ -20,9 +21,10 @@ public class UIHostingView:UIView{
         super.layoutSubviews()
     }
 }
-public class HostView:View {
+
+public struct HostView:View {
     public var body: View{
-        self
+        ViewEmpty()
     }
     private var pNode:ArgoKitNode
     public var node: ArgoKitNode?{
