@@ -63,12 +63,12 @@ struct ArgoKitListTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        List{
-            Text("dsds11dcs")
-            Text("dsds22")
-            Text("dsds333")
-        }
-        .backgroundColor(.red)
+//        List{
+//            Text("dsds11dcs")
+//            Text("dsds22")
+//            Text("dsds333")
+//        }
+//        .backgroundColor(.red)
         
         List(data:models){ data in
             Text(data.sessionName)

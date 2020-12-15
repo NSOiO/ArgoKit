@@ -264,32 +264,6 @@ class ListDemo:ArgoKit.View{
 //            .alias(variable: &footerView)
             
         }
-        
-//        .canEditRow({ item, indexPath -> Bool in
-//            return true
-//        })
-//        .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-//            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-//                print("trailing 菜鸡")
-//                complation(true)
-//            }),
-//             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-//                 print("trailing  互啄")
-//                 complation(true)
-//             }),
-//            ].swipeActionsConfiguration()
-//        }
-//        .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-//            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-//                print("leading 菜鸡")
-//                complation(true)
-//            }),
-//             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-//                 print("leading 互啄")
-//                 complation(true)
-//             }),
-//            ].swipeActionsConfiguration()
-//        }
     }
     
     func getTimeLabel()->String{

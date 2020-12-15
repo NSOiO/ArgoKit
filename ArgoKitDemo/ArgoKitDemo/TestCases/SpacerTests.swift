@@ -26,10 +26,17 @@ struct SpacerTests: ArgoKit.View {
             Text("Text 1")
             Spacer()
                 .backgroundColor(.red)
+//                .grow(0)
+                .height(100)
+            
             
             Spacer()
                 .backgroundColor(.blue)
+//                .grow(0)
                 .height(10)
+                .shrink(1)
+            
+            
             
             Text("Text 2")
             Text("Text 3")
@@ -37,7 +44,7 @@ struct SpacerTests: ArgoKit.View {
             Text("Text 5")
         }
         .backgroundColor(.lightGray)
-        .height(80%)
+        .height(100%)
 //        .justifyContent(.between)
         
     }

@@ -27,30 +27,25 @@ public class SessionItem:ArgoKitIdentifiable{
 
 }
 class ArgokitDemoController:UIViewController{
-    let contentView = ArgoKitViewDemo()
-    
     open override func viewDidLoad() {
         super.viewDidLoad()
-        let argoKitControll = UIHostingController(rootView: contentView)
-        argoKitControll.view.frame = self.view.bounds
-        argoKitControll.didMove(toParent: self)
-        self.addChild(argoKitControll)
-        self.view.addSubview(argoKitControll.view)
-    }
-    open override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated);
-    }
-    
-    open override func viewDidLayoutSubviews() {
-    }
-    
-    open override func viewLayoutMarginsDidChange() {
         
+        let hostView:UIHostingView = UIHostingView()
+        hostView.frame = CGRect(x: 0, y: 100, width: self.view.bounds.size.width, height: self.view.bounds.size.height - 200)
+        hostView.backgroundColor = .red
+        self.view.addSubview(hostView)
+        
+        HStack(hostView){
+            ArgoKitOtherViewTest(model: ArgoKitOtherViewTestModel())
+           
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 5) {
+            hostView.frame = CGRect(x: 0, y: 200, width: self.view.bounds.size.width, height: self.view.bounds.size.height - 400)
+        }
     }
-
     deinit {
         print("deinit")
     }
 
-    
 }

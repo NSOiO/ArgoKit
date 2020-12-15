@@ -52,10 +52,6 @@ class ArgoKitScrollViewNode: ArgoKitArttibuteNode, UIScrollViewDelegate {
         }
         self.addNode(observer: nodeObserver)
     }
-        
-    override func setValue(_ selector:Selector,_ value:Any?) -> Void {
-        contentNode.setValue(selector, value)
-    }
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let scrollView = UIScrollView(frame: frame)

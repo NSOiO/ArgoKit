@@ -72,33 +72,33 @@ struct ListTests: ArgoKit.View {
             }
             .backgroundColor(.red)
             
-            List {
-                Text("t1")
-                    .height(100)
-                    .backgroundColor(.lightText)
-                    .margin(edge: .bottom, value:10)
-                Text("t2")
-                    .backgroundColor(.lightText)
-
-            }
-            .backgroundColor(.lightText)
+//            List {
+//                Text("t1")
+//                    .height(100)
+//                    .backgroundColor(.lightText)
+//                    .margin(edge: .bottom, value:10)
+//                Text("t2")
+//                    .backgroundColor(.lightText)
+//
+//            }
+//            .backgroundColor(.lightText)
             
         }
         .height(100%)
         .backgroundColor(.lightGray)
         
-        ArgoKit.List(data:landmarkData) { landmark in
-//            switch landmark.reuseIdentifier {
-//            case "LandmarkRow1":
-//                LandmarkRow1(landmark: landmark)
-//            case "LandmarkRow2":
-//                LandmarkRow2(landmark: landmark)
-//            default:
-//                LandmarkRow(landmark: landmark)
-//            }
-            LandmarkRow2(landmark: landmark)
-        }
-        .size(width: 100%, height: 100%)
+//        ArgoKit.List(data:landmarkData) { landmark in
+////            switch landmark.reuseIdentifier {
+////            case "LandmarkRow1":
+////                LandmarkRow1(landmark: landmark)
+////            case "LandmarkRow2":
+////                LandmarkRow2(landmark: landmark)
+////            default:
+////                LandmarkRow(landmark: landmark)
+////            }
+//            LandmarkRow2(landmark: landmark)
+//        }
+//        .size(width: 100%, height: 100%)
     }
 }
 
