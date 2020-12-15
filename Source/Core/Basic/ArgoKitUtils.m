@@ -6,6 +6,7 @@
 //
 
 #import "ArgoKitUtils.h"
+#import <CoreText/CoreText.h>
 #include <pthread/pthread.h>
 @implementation ArgoKitUtils
 + (void)runMainThreadAsyncBlock:(dispatch_block_t)block{
@@ -76,5 +77,39 @@
     [[NSScanner scannerWithString:bString] scanHexInt:&b];
 
     return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
+}
+
++ (CGSize)sizeThatFits:(CGSize)size
+         numberOfLines:(NSInteger)numberOfLines
+      attributedString:(nullable NSAttributedString *)attributedString{
+    if (attributedString == nil) {
+        return CGSizeZero;
+    }
+    CFAttributedStringRef attributedStringRef = (__bridge CFAttributedStringRef)attributedString;
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attributedStringRef);
+    CFRange range = CFRangeMake(0, 0);
+    if (numberOfLines > 0 && framesetter) {
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+        CFArrayRef lines = CTFrameGetLines(frame);
+        
+        if (nil != lines && CFArrayGetCount(lines) > 0) {
+            NSInteger lastVisibleLineIndex = MIN(numberOfLines, CFArrayGetCount(lines)) - 1;
+            CTLineRef lastVisibleLine = (CTLineRef)CFArrayGetValueAtIndex(lines, lastVisibleLineIndex);
+            
+            CFRange rangeToLayout = CTLineGetStringRange(lastVisibleLine);
+            range = CFRangeMake(0, rangeToLayout.location + rangeToLayout.length);
+        }
+        CFRelease(frame);
+        CFRelease(path);
+    }
+    
+    CFRange fitCFRange = CFRangeMake(0, 0);
+    CGSize newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, NULL, size, &fitCFRange);
+    if (framesetter) {
+        CFRelease(framesetter);
+    }
+    return newSize;
 }
 @end

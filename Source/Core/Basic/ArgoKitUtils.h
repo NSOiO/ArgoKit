@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)runMainThreadSyncBlock:(dispatch_block_t)block;
 + (UIColor*)colorWithHex:(long)hexColor;
 + (UIColor *)colorWithHex:(long)hexColor alpha:(float)opacity;
++ (CGSize)sizeThatFits:(CGSize)size
+         numberOfLines:(NSInteger)numberOfLines
+      attributedString:(nullable NSAttributedString *)attributedString;
 @end
 
 NS_ASSUME_NONNULL_END

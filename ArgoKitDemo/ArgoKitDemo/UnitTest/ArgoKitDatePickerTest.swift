@@ -29,11 +29,14 @@ struct ArgoKitDatePickerTest: ArgoKit.View {
         .width(300)
         .height(100)
         
-        
+        Text("11111")
         PickerView(["1","2","3","4","5"]){item in
             Text(item)
         }.width(100)
         .height(200)
+        .backgroundColor(.yellow)
+        
+        
     }
 }
 

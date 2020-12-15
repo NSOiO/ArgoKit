@@ -31,6 +31,8 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
             .thumbTintColor(.red)
             .minimumTrackTintColor(.yellow)
             .maximumTrackTintColor(.green)
+            .width(100)
+            .width(80%)
 
             //步近器
             Stepper(value: 1, in: 0...10, step: 3) { value in
