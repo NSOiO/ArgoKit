@@ -13,7 +13,7 @@ target 'ArgoKitDemo' do
 #  pod 'ArgoUI/Kit/AnimationCPP', :git => 'https://github.com/mmdongxin/MLN', :branch => 'dev_iOS_dx_temp'
 #  pod 'ArgoUI/Kit/AnimationKit', :path => '../../MLN/ArgoUI.podspec'
 # :modular_headers => true
-  pod 'ArgoKitPreviewPodDemo/Core', :path => '../ArgoKitPreviewPodDemo'
+#  pod 'ArgoKitPreviewPodDemo/Core', :path => '../ArgoKitPreviewPodDemo'
 end
 
 #post_integrate do |installer|
