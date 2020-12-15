@@ -63,21 +63,17 @@ struct ArgoKitListTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        ArgoKitCellTest(model: ArgoKitListCellModel())
-//        List{
-//            Text("dsds11")
-//            Text("dsds22")
-//            Text("dsds333")
-//        }
-//        .backgroundColor(.red)
-////
+        List{
+            Text("dsds11dcs")
+            Text("dsds22")
+            Text("dsds333")
+        }
+        .backgroundColor(.red)
+        
         List(data:models){ data in
             Text(data.sessionName)
-                .height(50)
-        }
-        .width(100%)
-        .height(400)
-        .backgroundColor(.red)
+                .backgroundColor(.blue)
+        }.grow(1.0)
     }
 }
 
@@ -96,8 +92,9 @@ class ArgoKitListTestModel_Previews:  ArgoKitListTestModel {
 struct ArgoKitListTest_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+        ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
         return ArgoRender {
-            ArgoKitListTest(model: ArgoKitListTestModel_Previews())
+            ArgoKitListTest(model: ArgoKitListTestModel_Previews()).grow(1)
         }
     }
 }

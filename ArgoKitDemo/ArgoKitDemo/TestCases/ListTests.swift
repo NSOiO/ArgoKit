@@ -35,9 +35,9 @@ struct LandRow: View {
     }
 }
 
-class ListCellModel:  ArgoKitNode {
-//    var reuseIdentifier = "idd"
-    var name = "name.."
+class ListCellModel:  ArgoKitIdentifiable {
+    var reuseIdentifier = "idd"
+    var name = "name..ss"
 }
 
 
