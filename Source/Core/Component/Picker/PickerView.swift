@@ -49,14 +49,14 @@ public struct PickerView<T>: View {
 extension PickerView {
     
     @discardableResult
-    public func reloadAllComponents() -> Self {
-        pNode.reloadAllComponents()
+    public func reloadAllComponents(_ data: [[T]]?) -> Self {
+        pNode.reloadAllComponents(data)
         return self
     }
     
     @discardableResult
-    public func reloadComponent(_ value: Int) -> Self {
-        pNode.reloadComponent(value)
+    public func reloadComponent(_ data: [Any]?, inComponent component: Int) -> Self {
+        pNode.reloadComponent(data, inComponent:component)
         return self
     }
     

@@ -92,12 +92,7 @@ extension ArgoKitDataSourceHelper {
     
     open func nodeForRowNoCache(_ row: Int, at section: Int) -> ArgoKitNode? {
                 
-        if section >= dataList?.count ?? 0
-            || row >= dataList?[section].count ?? 0 {
-            return nil
-        }
-        
-        if let view = self.buildNodeFunc?(self.dataList![section][row]) {
+        if let data = dataForRow(row, at: section), let view = self.buildNodeFunc?(data) {
             if let nodes = view.type.viewNodes() {
                 let contentNode = ArgoKitCellNode(viewClass: UIView.self)
                 contentNode.addChildNodes(nodes)

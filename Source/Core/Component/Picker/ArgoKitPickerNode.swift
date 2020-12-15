@@ -34,7 +34,9 @@ class ArgoKitPickerRowView: UIView {
     
     public func linkCellNode(_ node: ArgoKitNode) {
         if node.size.width == 0 || node.size.height == 0 {
-            node.calculateLayout(size: CGSize(width: node.width(), height: node.height()))
+            let width = node.width() > 0 ? node.width() : CGFloat.nan
+            let heigth = node.height() > 0 ? node.height() : CGFloat.nan
+            node.calculateLayout(size: CGSize(width: width, height: heigth))
         }
         if self.contentView?.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) {
@@ -80,11 +82,17 @@ class ArgoKitPickerNode: ArgoKitNode, UIPickerViewDataSource, UIPickerViewDelega
 
 extension ArgoKitPickerNode {
     
-    open func reloadAllComponents() {
+    open func reloadAllComponents(_ data: [[Any]]?) {
+        if let pData = data {
+            self.dataSourceHelper.dataList = pData
+        }
         self.pickerView?.reloadAllComponents()
     }
 
-    open func reloadComponent(_ component: Int) {
+    open func reloadComponent(_ data: [Any]?, inComponent component: Int) {
+        if let pData = data {
+            self.dataSourceHelper.reloadSection(data: pData, section: component)
+        }
         self.pickerView?.reloadComponent(component)
     }
 }
