@@ -1,6 +1,6 @@
 //
-//  TextDemo2.swift
-//  ArgoKitPreviewPodDemo
+//  ArgoKitViewDemo1.swift
+//  ArgoKitBusinessPod
 //
 //  Created by Dai on 2020-12-15.
 //
@@ -8,16 +8,16 @@
 import ArgoKit
 
 // view model.
-class TextDemo2Model {
+class ArgoKitViewDemo1Model {
 
 }
 
 // view
-struct TextDemo2: ArgoKit.View {
+struct ArgoKitViewDemo1: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
-    private var model: TextDemo2Model
-    init(model: TextDemo2Model) {
+    private var model: ArgoKitViewDemo1Model
+    init(model: ArgoKitViewDemo1Model) {
         self.model = model
     }
     
@@ -27,13 +27,13 @@ struct TextDemo2: ArgoKit.View {
 }
 
 
-//#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
+#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 import ArgoKitPreview
 import ArgoKitComponent
 import SwiftUI
 
 // mock data.
-class TextDemo2Model_Previews:  TextDemo2Model {
+class ArgoKitViewDemo1Model_Previews:  ArgoKitViewDemo1Model {
     override init() {
         super.init()
     }
@@ -46,11 +46,11 @@ fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKi
 }
 
 @available(iOS 13.0.0, *)
-struct TextDemo2_Previews: PreviewProvider {
+struct ArgoKitViewDemo1_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitRender {
-            TextDemo2(model: TextDemo2Model_Previews())
+            ArgoKitViewDemo1(model: ArgoKitViewDemo1Model_Previews())
         }
     }
 }
-//#endif
+#endif

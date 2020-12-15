@@ -4,13 +4,13 @@
 # LICENSE file in the root directory of this source tree.
 
 podspec = Pod::Spec.new do |spec|
-    spec.name = 'ArgoKitPreviewPodDemo'
+    spec.name = 'ArgoKitBusinessPod'
     spec.version = '1.0.0'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
     # spec.documentation_url = 'argokit'
   
-    spec.summary = 'ArgoKitPreviewPodDemo'
+    spec.summary = 'ArgoKitBusinessPod'
     # spec.description = 'argokit'
   
     spec.authors = 'MoMo'
@@ -21,21 +21,11 @@ podspec = Pod::Spec.new do |spec|
   
     spec.platform = :ios
     spec.ios.deployment_target = '10.0'
-    spec.ios.frameworks = 'UIKit', 'SwiftUI'
+    spec.ios.frameworks = 'UIKit'
 
-    # spec.dependency 'ArgoKit'
-    spec.dependency 'ArgoKitPreview'
-    # spec.dependency 'ArgoKitComponent'
-    
-    spec.module_name = 'ArgoKitPreviewPodDemo'
+    spec.dependency 'ArgoKit'    
+    spec.module_name = 'ArgoKitBusinessPod'
     spec.source_files = "Core/**/*.{h,m,mm,swift}"
-    
-    # spec.subspec "Core" do |ss|
-    #   ss.source_files = 'Core/**/*.{h,m,mm,swift}'
-    #   # ss.private_header_files = 'ArgoKit/Source/*.h'
-    #   # ss.dependency 'SDWebImage'
-    # end
-
   end
   
   # See https://github.com/facebook/yoga/pull/366
