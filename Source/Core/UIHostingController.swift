@@ -47,23 +47,20 @@ public struct HostView:View {
 
 public class UIHostingView:UIView{
     private var rootView:HostView?
-    private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
-        if !oldFrame.equalTo(self.frame) {
-            oldFrame = self.frame
-            if let node = rootView?.node {
-                let width:CGFloat = oldFrame.size.width as CGFloat
-                let height:CGFloat = oldFrame.size.height as CGFloat
-                node.width(point: width)
-                node.height(point: height)
-                node.frame = frame
-                node.resetOrigin = false
-                node.applyLayout()
-            }
+        let frame = self.frame
+        if let node = rootView?.node {
+            let width:CGFloat = frame.size.width as CGFloat
+            let height:CGFloat = frame.size.height as CGFloat
+            node.width(point: width)
+            node.height(point: height)
+            node.frame = frame
+            node.resetOrigin = false
+            node.applyLayout()
         }
-        
         super.layoutSubviews()
     }
+    
     
     public init(content:View,frame:CGRect = CGRect.zero){
         super.init(frame: CGRect.zero)
