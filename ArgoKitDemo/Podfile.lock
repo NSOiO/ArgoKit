@@ -34,7 +34,7 @@ DEPENDENCIES:
   - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - ArgoAnimation
     - SDWebImage
     - Yoga
@@ -45,17 +45,16 @@ EXTERNAL SOURCES:
   ArgoKitComponent:
     :path: "../"
   ArgoKitPreview:
-    :link_style: weak
     :path: "../"
 
 SPEC CHECKSUMS:
   ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
   ArgoKit: a3bd73382e0f77b0ad11b6d4262d62e04199eb29
   ArgoKitComponent: bb417eeaec9fff18c36531cc60a4fc4dfe435650
-  ArgoKitPreview: 82b6e6a9497f96a1e084fc34d1a74874237e45d1
+  ArgoKitPreview: 92bd307e15979a4576f4fce7191dbabaff1cdeb0
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 6c81ec72c00170b39f4fa1faf6a7516befad2386
+PODFILE CHECKSUM: 006d0b72a0a8513b54300669d909b462a62c4c41
 
 COCOAPODS: 1.10.0

@@ -141,19 +141,20 @@ class MSUserInterractionContentView: ArgoKit.View {
     }
 }
 
-
 class TextFieldView: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
    var body: ArgoKit.View {
+    
     TextField(placeholder: "请输入文本")
      .width(200)
      .height(30)
      .alignSelf(.center)
      .margin(top: 0, right: 2, bottom: 0, left: 2)
      .placeholderColor(.orange)
-     .didChangeSelection { content in
-     }
+     .didBeginEditing({ content in
+            
+     })
      .backgroundColor(.gray)
      .leftView{
          Button(text:""){

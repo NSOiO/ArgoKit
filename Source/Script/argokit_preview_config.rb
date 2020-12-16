@@ -26,15 +26,15 @@ class String
     def reverse_color;  "\e[7m#{self}\e[27m" end
 end
 
-def integrate_argokit_preview(installer, main_project ,main_target)
+def integrate_argokit_preview(installer, main_project ,main_target, remove_if_exist = true, ap_target = "ArgoKitPreview")
     argokit_prefix = "[ArgoKitPreview]"
     puts "#{argokit_prefix} Start Integrating ArgoKitPreview"
     
-    ap_target = 'ArgoKitPreview'
     ap_files = ["/Source/Preview/ArgoKitPreviewTypes.swift"]
     ap_group = 'ArgoKitPreviewFiles'
+    
     #  ap_group = 'ArgoKitPreview'
-
+        
     file_paths = Array.new
     installer.generated_pod_targets.each do |target|
     if target.name == ap_target
@@ -65,9 +65,14 @@ def integrate_argokit_preview(installer, main_project ,main_target)
 
         group.children.each do |child|
             if child.name == file_name
-            file_exist = true
-            puts "#{argokit_prefix} file #{file_name} exist, no longer need to add.".green
-            break
+                if remove_if_exist
+                    child.remove_from_project()
+                    puts "#{argokit_prefix} file #{file_name} exist, remove from project.".green
+                else
+                    file_exist = true
+                    puts "#{argokit_prefix} file #{file_name} exist, no longer need to add.".green
+                end
+                break
             end
         end
 
@@ -90,14 +95,13 @@ end
 
 
 #Usage:
-# 需要将main_project和main_target替换成真实数据ß
+# 需要将main_project和main_target替换成真实数据
 #post_integrate do |installer|
-#    ap_target = 'ArgoKitPreview'
-#    main_project = 'xxxxxx'
-#    main_target = 'xxxxxxx'
+#    main_project = '*******'
+#    main_target = "*******"
 #
 #    installer.generated_pod_targets.each do |target|
-#      if target.name == ap_target
+#      if target.name == "ArgoKitPreview"
 #        pod_dir = target.sandbox.pod_dir(target.name)
 #        file_path = "#{pod_dir}/Source/Script/argokit_preview_config.rb"
 #        require file_path

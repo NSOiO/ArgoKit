@@ -7,11 +7,6 @@
 
 import ArgoKit
 
-// view model.
-class ListTestsModel {
-
-}
-
 struct LandRow: View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var landmark: Landmark
@@ -35,14 +30,14 @@ struct LandRow: View {
     }
 }
 
-class ListCellModel:  ArgoKitIdentifiable {
+class ListTestsModel:  ArgoKitIdentifiable {
     var reuseIdentifier = "idd"
     var name = "name..ss"
 }
 
 
 // view
-struct ListTests: ArgoKit.View {
+class ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ListTestsModel
@@ -60,7 +55,8 @@ struct ListTests: ArgoKit.View {
         return VStack {
             Text("aa")
             
-            List(data: [ListCellModel()]) {landmark in
+            ArgoKit.List(data: [ListTestsModel()]) {landmark in
+                
                 Text(landmark.name)
 
                 Text("t1")
@@ -84,7 +80,7 @@ struct ListTests: ArgoKit.View {
 //            .backgroundColor(.lightText)
             
         }
-        .height(100%)
+        .height(50%)
         .backgroundColor(.lightGray)
         
 //        ArgoKit.List(data:landmarkData) { landmark in

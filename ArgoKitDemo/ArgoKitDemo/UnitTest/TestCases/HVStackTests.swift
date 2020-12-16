@@ -54,7 +54,7 @@ struct HVStackTests: ArgoKit.View {
                     .backgroundColor(.blue)
                 Text("VStack 2")
                     .width(200)
-                    .backgroundColor(.link)
+                    .backgroundColor(.orange)
             }
             .backgroundColor(.red)
             .alignItems(.end)

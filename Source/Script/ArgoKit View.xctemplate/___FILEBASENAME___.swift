@@ -37,6 +37,7 @@ class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER
 @available(iOS 13.0.0, *)
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
     return ArgoRender(builder: builder)
 }
 
