@@ -39,8 +39,8 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = UITableView(frame: frame, style: style)
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         if #available(iOS 10.0, *) {
             tableView.prefetchDataSource = self
         }
