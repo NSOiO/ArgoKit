@@ -26,19 +26,23 @@ struct ArgoKitTextTest: ArgoKit.View {
             .font(size: 25)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 100)
+//            .alignSelf(.start)
         
         Text("单行文本粗体")
             .font(size: 25)
             .font(style: .bold)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
+            .alignSelf(.start)
         
-        Text("单行文本斜体单行文本斜体单行文本斜体单行文本斜体单行文本斜体")
-            .font(size: 25)
+        Text("单行文本斜体单行文本斜体单行文本斜体111111111")
+            .font(size: 20)
             .font(style: .default)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
-            .shrink(0)
+            .alignSelf(.start)
+//            .width(300)
+//            .height(30)
         
         
         Text("单行文本粗体斜体")
