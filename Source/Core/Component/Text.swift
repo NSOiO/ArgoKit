@@ -109,9 +109,9 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
             lable.numberOfLines = self.numberOfLines()
             lable.lineBreakMode = self.lineBreakMode()
             result = lable.sizeThatFits(size)
-            result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
+//            result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         }
-        
+//        let result1 = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         return result
     }
 }

@@ -110,6 +110,8 @@
     if (framesetter) {
         CFRelease(framesetter);
     }
-    return newSize;
+    CGFloat width = ceilf(newSize.width);
+    CGFloat height = ceilf(newSize.height);
+    return CGSizeMake(width, height);
 }
 @end

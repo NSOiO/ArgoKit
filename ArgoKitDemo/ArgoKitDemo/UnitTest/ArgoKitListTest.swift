@@ -72,8 +72,10 @@ struct ArgoKitListTest: ArgoKit.View {
         
         List(data:models){ data in
             Text(data.sessionName)
-                .backgroundColor(.blue)
         }.grow(1.0)
+        .didSelectRow { (mode, index) in
+            print("\(mode)")
+        }
     }
 }
 
