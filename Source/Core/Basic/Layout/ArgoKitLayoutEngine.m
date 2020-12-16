@@ -70,4 +70,14 @@
         }
     }
 }
+
+- (void)forLayoutNode:(nullable Class)anyClass{
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    for(ArgoKitNode *node in nodes){
+        if ([node isKindOfClass:anyClass]) {
+            [node applyLayout];
+        }
+       
+    }
+}
 @end

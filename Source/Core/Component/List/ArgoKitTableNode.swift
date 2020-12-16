@@ -11,6 +11,17 @@ fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
 fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
+public class ArgoKitTableView:UITableView{
+    private var oldFrame = CGRect.zero
+    public override func layoutSubviews() {
+        if !self.frame.equalTo(oldFrame) {
+            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self)
+            oldFrame = self.frame
+        }
+        super.layoutSubviews()
+    }
+}
+
 class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
@@ -38,7 +49,7 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
     public var titlesForSection: [String]?
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        let tableView = UITableView(frame: frame, style: style)
+        let tableView = ArgoKitTableView(frame: frame, style: style)
         tableView.delegate = self
         tableView.dataSource = self
         if #available(iOS 10.0, *) {

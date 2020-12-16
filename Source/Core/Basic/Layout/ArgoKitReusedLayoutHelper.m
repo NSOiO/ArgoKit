@@ -44,6 +44,10 @@ static ArgoKitReusedLayoutHelper* _instance;
 + (void)appLayout:(ArgoKitNode *)node{
     [[ArgoKitReusedLayoutHelper sharedInstance] _layout:node];
 }
+
++ (void)forLayoutNode:(nullable Class)anyClass{
+    [[ArgoKitReusedLayoutHelper sharedInstance].layoutEngine forLayoutNode:anyClass];
+}
 #pragma mark --- private methods ---
 - (void)startLayoutEngine {
     __weak typeof(self)wealSelf = self;

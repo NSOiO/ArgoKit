@@ -24,15 +24,6 @@ public class VStack:View {
     }
     
     //TODO:是否考虑支持兼容/混合布局
-    @discardableResult
-    public init(_ view:UIHostingView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = ArgoKitNode(view:view);
-        pNode.column()
-        view.rootNode = pNode
-        addSubNodes(builder:builder)
-    }
-    
-    //TODO:是否考虑支持兼容/混合布局
     private init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = ArgoKitNode(view:view);
         pNode.column();

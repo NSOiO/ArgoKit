@@ -43,7 +43,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                     Text("姓名姓名姓名姓名姓")
+                     Text("姓名姓名姓名姓名姓姓名姓名姓名姓名姓姓名姓名姓名姓名姓姓名姓名姓名姓名姓")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
                          .shrink(1.0)

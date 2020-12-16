@@ -61,8 +61,8 @@ struct ForEachTests: ArgoKit.View {
     //                .padding()
     //            }
                 
-               // List数据范型，ForEach,Scrollview，Group
-                
+                //: List数据范型，ForEach,Scrollview，Group
+                //: 自动换行,业务端自定义组件模板
             
             }
             .grow(1)

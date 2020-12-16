@@ -7,21 +7,6 @@
 
 import Foundation
 
-public class UIHostingView:UIView{
-    var rootNode:ArgoKitNode?
-    public override func layoutSubviews() {
-        let frame = self.frame
-        let width:CGFloat = frame.size.width as CGFloat
-        let height:CGFloat = frame.size.height as CGFloat
-        rootNode?.width(point: width)
-        rootNode?.height(point: height)
-        rootNode?.frame = frame
-        rootNode?.resetOrigin = false
-        rootNode?.applyLayout()
-        super.layoutSubviews()
-    }
-}
-
 public struct HostView:View {
     public var body: View{
         ViewEmpty()
@@ -58,32 +43,59 @@ public struct HostView:View {
     }
 }
 
+
+
+public class UIHostingView:UIView{
+    private var rootView:HostView?
+    public override func layoutSubviews() {
+        let frame = self.frame
+        let width:CGFloat = frame.size.width as CGFloat
+        let height:CGFloat = frame.size.height as CGFloat
+        rootView?.node?.width(point: width)
+        rootView?.node?.height(point: height)
+        rootView?.node?.frame = frame
+        rootView?.node?.resetOrigin = false
+        rootView?.node?.applyLayout()
+        super.layoutSubviews()
+    }
+    
+    public init(content:View){
+        super.init(frame: CGRect.zero)
+        rootView = HostView(self){
+            content.grow(1.0)
+        }
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 open class UIHostingController:UIViewController{
     var frame:CGRect = CGRect.zero
-    private var rootView_:View!
+    private var hostView:UIHostingView
     public init(rootView: View){
+        hostView = UIHostingView(content:rootView)
         super.init(nibName: nil, bundle: nil)
-        rootView_ = rootView
+        
     }
 
     public init?(coder aDecoder: NSCoder, rootView: View){
+        hostView = UIHostingView(content:rootView)
         super.init(coder: aDecoder)
-        rootView_ = rootView
     }
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var rootView:HostView?
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
         self.edgesForExtendedLayout = UIRectEdge.init()
-        
-        rootView = HostView(self.view){
-            rootView_!.grow(1)
-        }
+        self.view.addSubview(hostView)
+        hostView.frame = self.view.bounds
+       
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
@@ -94,9 +106,7 @@ open class UIHostingController:UIViewController{
         let frame = self.view.frame
         if !frame.equalTo(self.frame) {
             self.frame = frame
-            let width:CGFloat = frame.size.width as CGFloat
-            let height:CGFloat = frame.size.height as CGFloat
-            _ = rootView?.width(ArgoValue(width)).height(ArgoValue(height)).applyLayout()
+            hostView.frame = self.view.bounds
         }
         super.viewDidLayoutSubviews()
     }
