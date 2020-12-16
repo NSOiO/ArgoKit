@@ -68,4 +68,11 @@ public struct ArgoKitPreviewDevice: Identifiable {
     public static var iPhone12Mini: ArgoKitPreviewDevice { .init(name: .iPhone12Mini, device: .iPhone12Mini) }
 
 }
+
+@available(iOS 13.0, *)
+extension SwiftUI.ForEach where Data == [ArgoKitPreviewDevice], ID == String, Content: SwiftUI.View {
+    public init(_ data: [ArgoKitPreviewDevice], @ViewBuilder content: @escaping (ArgoKitPreviewDevice) -> Content) {
+        self.init(data, id:\.id, content: content)
+    }
+}
 #endif

@@ -44,8 +44,13 @@ fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKi
 @available(iOS 13.0.0, *)
 struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoKitRender {
-            ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
+        // 数组中可以添加其他设备进行多设备预览
+        SwiftUI.ForEach([.iPhone11]) { item in
+            ArgoKitRender {
+                ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
+            }
+            .previewDevice(item.device)
+            .previewDisplayName(item.name)
         }
     }
 }
