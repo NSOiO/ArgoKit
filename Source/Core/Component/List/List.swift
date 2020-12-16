@@ -39,20 +39,7 @@ public class List<D>: ScrollView  {
         }
     }
     
-<<<<<<< HEAD
-    public convenience init(_ style: UITableView.Style? = .plain, data_s: [D], @ArgoKitListBuilder rowContent: @escaping (Any) -> View) {
-        self.init(style: style)
-        
-        tableNode.dataSourceHelper.dataList = [data_s]
-        tableNode.dataSourceHelper.buildNodeFunc = { item in
-            return rowContent(item as! D)
-        }
-    }
-    
-    public convenience init(_ style: UITableView.Style? = .plain, sectionData: [[D]], @ArgoKitListBuilder rowContent: @escaping (D) -> View) {
-=======
     public convenience init(_ style: UITableView.Style? = .plain, sectionData: [[D]], @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
->>>>>>> origin/dev
         self.init(style: style)
         tableNode.dataSourceHelper.dataList = sectionData
         tableNode.dataSourceHelper.buildNodeFunc = { item in

@@ -7,11 +7,6 @@
 
 import ArgoKit
 
-// view model.
-class ListTestsModel {
-
-}
-
 struct LandRow: View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     var landmark: Landmark
@@ -35,7 +30,7 @@ struct LandRow: View {
     }
 }
 
-class ListCellModel:  ArgoKitIdentifiable {
+class ListTestsModel:  ArgoKitIdentifiable {
     var reuseIdentifier = "idd"
     var name = "name..ss"
 }
