@@ -96,6 +96,27 @@ public struct ForEach<T>:View{
 
 
 // MARK ===== 废弃方法 ====
+
+// layout
+extension ForEach{
+    @available(*, deprecated, message: "Image does not support the method!")
+    public func parentNode()->ArgoKitNode?{
+        return nil
+       
+    }
+    @available(*, deprecated, message: "Image does not support the method!")
+    public func applyLayout()->CGSize{
+        return CGSize.zero
+    }
+    @available(*, deprecated, message: "Image does not support the method!")
+    public func applyLayout(size:CGSize){
+      
+    }
+    @available(*, deprecated, message: "Image does not support the method!")
+    public func calculateLayout(size:CGSize){
+    }
+    
+}
 extension ForEach {
     @available(*, deprecated, message: "Image does not support the method!")
     fileprivate func direction(_ value:ArgoDirection)->Self{

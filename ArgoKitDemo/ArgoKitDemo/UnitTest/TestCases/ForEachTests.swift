@@ -44,10 +44,11 @@ struct ForEachTests: ArgoKit.View {
                         Text(String(item)).margin(edge: .top, value: 3)
                     }
                 }
-                .height(100%)
+                .height(800)
                 .width(300)
                 .margin(edge: .left, value: 60)
                 .backgroundColor(.red)
+                .alignSelf(.start)
                 
 
                 
@@ -63,8 +64,8 @@ struct ForEachTests: ArgoKit.View {
                // List数据范型，ForEach,Scrollview，Group
                 
             
-            }.width(100%)
-            .height(800)
+            }
+            .grow(1)
 //        }.width(100%)
 //        .height(800)
       
