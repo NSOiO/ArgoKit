@@ -608,7 +608,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
         YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
     }
-   
 }
 
 

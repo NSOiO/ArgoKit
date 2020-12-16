@@ -90,7 +90,7 @@
     CFRange range = CFRangeMake(0, 0);
     if (numberOfLines > 0 && framesetter) {
         if (numberOfLines == 1) {
-            size.width = NAN;
+            size.width = CGFLOAT_MAX;
         }
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));

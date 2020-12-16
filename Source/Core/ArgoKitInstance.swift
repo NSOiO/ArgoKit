@@ -7,6 +7,7 @@
 
 import Foundation
 public class ArgoKitInstance {
+    
     private var pimageLoader:ArgoKitImageLoader?
     private var plistPreviewService: ArgoKitListPreviewService?
     
