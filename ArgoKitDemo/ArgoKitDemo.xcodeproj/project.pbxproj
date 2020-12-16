@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0B64C3EA4DD965F755E26D16 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2A6C83604D98391FFDD563F3 /* ArgoKitPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96777A968C28EBF9C4B0E8F /* ArgoKitPreviewTypes.swift */; };
 		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
 		326335D5254133D20094676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D3254133D20094676D /* Main.storyboard */; };
@@ -16,16 +16,16 @@
 		326335E5254133D40094676D /* ArgoKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335E4254133D40094676D /* ArgoKitDemoTests.swift */; };
 		326335F0254133D40094676D /* ArgoKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335EF254133D40094676D /* ArgoKitDemoUITests.swift */; };
 		3263370B25419A3C0094676D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3263370A25419A3C0094676D /* ContentView.swift */; };
-		5C9C0E6111CFB46305184E8C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		87438CB30AC4943CFA1F29DD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		94BBB2E5119EF1369DBC440A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		A2CCF5BBAAA7B2344209E8F8 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		5C9C0E6111CFB46305184E8C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		87438CB30AC4943CFA1F29DD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		94BBB2E5119EF1369DBC440A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A2CCF5BBAAA7B2344209E8F8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423580E257900920052E0B0 /* ViewPagerDemo.swift */; };
 		A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E668257B8770003D3591 /* ViewPageTest.swift */; };
 		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
 		B24576515409429925EC2BC6 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */; };
-		B6082F26B2D874C94D2B40A0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		CC277FB02338E844863A2EE9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		B6082F26B2D874C94D2B40A0 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CC277FB02338E844863A2EE9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FA04056C2588BB47006E997F /* ArgoKitDatePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04056B2588BB47006E997F /* ArgoKitDatePickerTest.swift */; };
 		FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */; };
 		FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */; };
@@ -68,7 +68,6 @@
 		FAE72A5E2589E8D10066B2CB /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A572589E8D10066B2CB /* ListTests.swift */; };
 		FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */; };
 		FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */; };
-		FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -568,7 +567,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */,
 				A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */,
 				FA5709BD25765303004A0EAD /* ViewController.swift in Sources */,
 				FA516501255BB99E005BE240 /* LandmarkRow.swift in Sources */,
@@ -601,15 +599,15 @@
 				FA5164FE255BB99E005BE240 /* LandmarkDetail.swift in Sources */,
 				FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */,
 				FA5164FC255BB99E005BE240 /* Data.swift in Sources */,
-				CC277FB02338E844863A2EE9 /* BuildFile in Sources */,
-				5C9C0E6111CFB46305184E8C /* BuildFile in Sources */,
-				A2CCF5BBAAA7B2344209E8F8 /* BuildFile in Sources */,
-				87438CB30AC4943CFA1F29DD /* BuildFile in Sources */,
-				B6082F26B2D874C94D2B40A0 /* BuildFile in Sources */,
-				94BBB2E5119EF1369DBC440A /* BuildFile in Sources */,
+				CC277FB02338E844863A2EE9 /* (null) in Sources */,
+				5C9C0E6111CFB46305184E8C /* (null) in Sources */,
+				A2CCF5BBAAA7B2344209E8F8 /* (null) in Sources */,
+				87438CB30AC4943CFA1F29DD /* (null) in Sources */,
+				B6082F26B2D874C94D2B40A0 /* (null) in Sources */,
+				94BBB2E5119EF1369DBC440A /* (null) in Sources */,
 				FAE72A582589E8D10066B2CB /* AspectTests.swift in Sources */,
 				FAE72A5E2589E8D10066B2CB /* ListTests.swift in Sources */,
-				0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */,
+				0B64C3EA4DD965F755E26D16 /* (null) in Sources */,
 				2A6C83604D98391FFDD563F3 /* ArgoKitPreviewTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,7 +792,7 @@
 				DEVELOPMENT_TEAM = 4BXE593ED8;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -833,7 +831,7 @@
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -115,6 +115,7 @@ struct ViewPage1 : ArgoKit.View {
 
 }
 
+@available(iOS 13.0.0, *)
 struct ViewPagerDemo_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoRender {

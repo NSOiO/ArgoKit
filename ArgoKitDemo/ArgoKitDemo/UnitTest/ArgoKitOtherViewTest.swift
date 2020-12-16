@@ -72,14 +72,14 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
             .height(50)
             .margin(edge: .top, value: 30)
 
-            ActivityIndicatorView(style: .large)
+            ActivityIndicatorView(style: .whiteLarge)
                 .hidesWhenStopped(false)
                 .color(.purple)
                 .backgroundColor(.red)
                 .margin(edge: .top, value: 30)
                 .startAnimating()
             
-            ActivityIndicatorView(style: .large)
+            ActivityIndicatorView(style: .whiteLarge)
                 .hidesWhenStopped(false)
                 .color(.purple)
                 .width(100)
