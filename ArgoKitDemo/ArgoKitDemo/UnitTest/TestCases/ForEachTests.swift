@@ -22,7 +22,7 @@ struct ForEachTests: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        ScrollView{
+//        ScrollView{
             HStack {
                 VStack{
                     ForEach(model.titles) { item in
@@ -43,9 +43,12 @@ struct ForEachTests: ArgoKit.View {
                     ForEach(100..<200) { item in
                         Text(String(item)).margin(edge: .top, value: 3)
                     }
-                }.height(100%)
+                }
+                .height(100%)
                 .width(300)
                 .margin(edge: .left, value: 60)
+                .backgroundColor(.red)
+                
 
                 
                 // Group
@@ -60,9 +63,10 @@ struct ForEachTests: ArgoKit.View {
                // List数据范型，ForEach,Scrollview，Group
                 
             
-            }
-        }.width(100%)
-        .height(800)
+            }.width(100%)
+            .height(800)
+//        }.width(100%)
+//        .height(800)
       
     }
 }
