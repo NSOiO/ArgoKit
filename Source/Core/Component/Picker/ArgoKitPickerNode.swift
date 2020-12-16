@@ -7,6 +7,12 @@
 
 import Foundation
 
+func calculateLayoutSize(_ node: ArgoKitNode) -> CGSize {
+    let width = node.width() > 0 ? node.width() : CGFloat.nan
+    let heigth = node.height() > 0 ? node.height() : CGFloat.nan
+    return CGSize(width: width, height: heigth)
+}
+
 class ArgoKitPickerRowView: UIView {
     
     var contentNode: ArgoKitNode?
@@ -15,14 +21,12 @@ class ArgoKitPickerRowView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView = UIView(frame: self.bounds)
-        contentView?.backgroundColor = .red
         addSubview(contentView!)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         contentView = UIView(frame: self.bounds)
-        contentView?.backgroundColor = .red
         addSubview(contentView!)
     }
     
@@ -34,9 +38,8 @@ class ArgoKitPickerRowView: UIView {
     
     public func linkCellNode(_ node: ArgoKitNode) {
         if node.size.width == 0 || node.size.height == 0 {
-            let width = node.width() > 0 ? node.width() : CGFloat.nan
-            let heigth = node.height() > 0 ? node.height() : CGFloat.nan
-            node.calculateLayout(size: CGSize(width: width, height: heigth))
+            let size = calculateLayoutSize(node)
+            node.calculateLayout(size: size)
         }
         if self.contentView?.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) {
@@ -110,7 +113,8 @@ extension ArgoKitPickerNode {
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         if let node = self.dataSourceHelper.nodeForRow(0, at: component) {
             if node.size.width == 0 || node.size.height == 0 {
-                node.calculateLayout(size: CGSize(width: CGFloat.nan, height: CGFloat.nan))
+                let size = calculateLayoutSize(node)
+                node.calculateLayout(size: size)
             }
             return node.size.width
         }
@@ -120,7 +124,8 @@ extension ArgoKitPickerNode {
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         if let node = self.dataSourceHelper.nodeForRow(0, at: component) {
             if node.size.width == 0 || node.size.height == 0 {
-                node.calculateLayout(size: CGSize(width: CGFloat.nan, height: CGFloat.nan))
+                let size = calculateLayoutSize(node)
+                node.calculateLayout(size: size)
             }
             return node.size.height
         }
