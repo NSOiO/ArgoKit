@@ -7,7 +7,7 @@
 
 import Foundation
 struct TextCalculation {
-    static var calculationLable:UILabel = UILabel()
+    static let calculationLable:UILabel = UILabel()
 }
 class ArgoKitTextNode: ArgoKitArttibuteNode {
     
