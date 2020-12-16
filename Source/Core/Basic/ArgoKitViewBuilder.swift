@@ -79,7 +79,7 @@ public struct ArgoNodeContainer: View {
     }
 }
 
-public class ViewEmpty: View {
+class ViewEmpty: View {
     public var body: View{
         ViewEmpty()
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PickerView<T>: View {
+public struct PickerView<T>: View {
     
     private var pickerView : UIPickerView
     private var pNode : ArgoKitPickerNode
@@ -29,7 +29,7 @@ public class PickerView<T>: View {
         pNode = ArgoKitPickerNode(view: pickerView)
     }
     
-    public convenience init(_ data: [T], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
+    public init(_ data: [T], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
         self.init()
         self.pNode.dataSourceHelper.dataList = [data]
         self.pNode.dataSourceHelper.buildNodeFunc = { item in
@@ -37,7 +37,7 @@ public class PickerView<T>: View {
         }
     }
     
-    public convenience init(_ data: [[T]], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
+    public init(_ data: [[T]], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
         self.init()
         self.pNode.dataSourceHelper.dataList = data
         self.pNode.dataSourceHelper.buildNodeFunc = { item in
@@ -49,14 +49,14 @@ public class PickerView<T>: View {
 extension PickerView {
     
     @discardableResult
-    public func reloadAllComponents() -> Self {
-        pNode.reloadAllComponents()
+    public func reloadAllComponents(_ data: [[T]]?) -> Self {
+        pNode.reloadAllComponents(data)
         return self
     }
     
     @discardableResult
-    public func reloadComponent(_ value: Int) -> Self {
-        pNode.reloadComponent(value)
+    public func reloadComponent(_ data: [Any]?, inComponent component: Int) -> Self {
+        pNode.reloadComponent(data, inComponent:component)
         return self
     }
     

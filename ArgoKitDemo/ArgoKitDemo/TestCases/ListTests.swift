@@ -35,6 +35,11 @@ struct LandRow: View {
     }
 }
 
+class ListCellModel:  ArgoKitIdentifiable {
+    var reuseIdentifier = "idd"
+    var name = "name..ss"
+}
+
 
 // view
 struct ListTests: ArgoKit.View {
@@ -68,16 +73,16 @@ struct ListTests: ArgoKit.View {
             }
             .backgroundColor(.red)
             
-            List {
-                Text("t1")
-                    .height(100)
-                    .backgroundColor(.lightText)
-                    .margin(edge: .bottom, value:10)
-                Text("t2")
-                    .backgroundColor(.lightText)
-
-            }
-            .backgroundColor(.lightText)
+//            List {
+//                Text("t1")
+//                    .height(100)
+//                    .backgroundColor(.lightText)
+//                    .margin(edge: .bottom, value:10)
+//                Text("t2")
+//                    .backgroundColor(.lightText)
+//
+//            }
+//            .backgroundColor(.lightText)
             
         }
         .height(50%)

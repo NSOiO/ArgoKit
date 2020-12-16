@@ -7,9 +7,24 @@
 
 import Foundation
 
-public class HostView:View {
+public class UIHostingView:UIView{
+    var rootNode:ArgoKitNode?
+    public override func layoutSubviews() {
+        let frame = self.frame
+        let width:CGFloat = frame.size.width as CGFloat
+        let height:CGFloat = frame.size.height as CGFloat
+        rootNode?.width(point: width)
+        rootNode?.height(point: height)
+        rootNode?.frame = frame
+        rootNode?.resetOrigin = false
+        rootNode?.applyLayout()
+        super.layoutSubviews()
+    }
+}
+
+public struct HostView:View {
     public var body: View{
-        self
+        ViewEmpty()
     }
     private var pNode:ArgoKitNode
     public var node: ArgoKitNode?{

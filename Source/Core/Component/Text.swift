@@ -14,7 +14,23 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
         self.lineSpacing = value
         self.handleLineSpacing()
     }
-    
+    func attributesForSize()->NSAttributedString?{
+        let lableText:String = self.text() ?? ""
+        if lableText.count == 0 {
+            return self.attributedText()
+        }
+        
+        let range = NSRange(location: 0, length: lableText.count)
+        let attributedString = NSMutableAttributedString(string: lableText)
+        if let font:UIFont = self.font(){
+            attributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
+        }
+        if let textColor:UIColor = self.textColor() {
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: textColor, range: range)
+        }
+        return attributedText(attri: attributedString)
+
+    }
     func handleLineSpacing() {
         if self.lineSpacing == 0 {
             return
@@ -35,7 +51,8 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
         attributedText(attri: attributedString)
     }
     
-    func attributedText(attri:NSAttributedString?) {
+    @discardableResult
+    func attributedText(attri:NSAttributedString?) ->NSAttributedString?{
         if let attriText = attri {
             let attributedString = NSMutableAttributedString(attributedString: attriText)
             let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
@@ -49,8 +66,11 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
             attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attriText.length))
             
             ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedString)
+            return attributedString
         }
+        return nil
     }
+
     
     
     func cleanLineSpacing() {
@@ -89,8 +109,9 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
             lable.numberOfLines = self.numberOfLines()
             lable.lineBreakMode = self.lineBreakMode()
             result = lable.sizeThatFits(size)
+//            result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         }
-        
+//        let result1 = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         return result
     }
 }

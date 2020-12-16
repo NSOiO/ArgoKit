@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: Init
-public class ViewPage<T> : ScrollView where T : ArgoKitIdentifiable {
+public class ViewPage<T> : ScrollView {
     
     private var viewPageNode : ArgoKitViewPageNode {
         pNode as! ArgoKitViewPageNode
@@ -26,7 +26,7 @@ public class ViewPage<T> : ScrollView where T : ArgoKitIdentifiable {
         }
     }
     
-    public convenience init(data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) {
+    public convenience init(data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable{
         self.init()
         viewPageNode.dataSourceHelper.dataList = [data]
         viewPageNode.dataSourceHelper.buildNodeFunc = { item in

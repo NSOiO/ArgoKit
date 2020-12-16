@@ -35,9 +35,11 @@ struct ArgoKitTextTest: ArgoKit.View {
         
         Text("单行文本斜体单行文本斜体单行文本斜体单行文本斜体单行文本斜体")
             .font(size: 25)
-            .font(style: .italic)
+            .font(style: .default)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
+            .shrink(0)
+        
         
         Text("单行文本粗体斜体")
             .font(size: 25)

@@ -39,8 +39,8 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = UITableView(frame: frame, style: style)
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         if #available(iOS 10.0, *) {
             tableView.prefetchDataSource = self
         }
@@ -62,7 +62,7 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
 
 extension ArgoKitTableNode {
         
-    public func reloadData(data: [[Any]]?, sectionHeaderData: [Any]? = nil, sectionFooterData: [Any]? = nil) {
+    public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
         
         if data != nil {
             self.dataSourceHelper.dataList = data
@@ -76,7 +76,7 @@ extension ArgoKitTableNode {
         self.tableView?.reloadData()
     }
         
-    public func reloadSections(_ sectionData: [[Any]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
+    public func reloadSections(_ sectionData: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
         
         if sectionHeaderData != nil
             || sectionHeaderData != nil
@@ -97,7 +97,7 @@ extension ArgoKitTableNode {
         self.tableView?.reloadSections(sections, with: animation)
     }
 
-    public func appendSections(_ data: [[Any]], sectionHeaderData: [Any]? = nil, sectionFooterData: [Any]? = nil, with animation: UITableView.RowAnimation) {
+    public func appendSections(_ data: [[ArgoKitIdentifiable]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, with animation: UITableView.RowAnimation) {
         
         let start = self.dataSourceHelper.dataList?.count ?? 0
         let end = start + data.count
@@ -111,7 +111,7 @@ extension ArgoKitTableNode {
         self.tableView?.insertSections(IndexSet(start..<end), with: animation)
     }
     
-    public func insertSections(_ sectionData: [[Any]], sectionHeaderData: [Any]? = nil, sectionFooterData: [Any]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
+    public func insertSections(_ sectionData: [[ArgoKitIdentifiable]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
                 
         for (index, value) in sections.enumerated() {
             self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
@@ -141,7 +141,7 @@ extension ArgoKitTableNode {
         self.tableView?.moveSection(section, toSection: newSection)
     }
     
-    public func reloadRows(_ rowData: [Any]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+    public func reloadRows(_ rowData: [ArgoKitIdentifiable]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         
         if let datas = rowData {
             for (index, indexPath) in indexPaths.enumerated() {
@@ -151,7 +151,7 @@ extension ArgoKitTableNode {
         self.tableView?.reloadRows(at: indexPaths, with: animation)
     }
     
-    public func appendRows(_ rowData: [Any], at section: Int = 0, with animation: UITableView.RowAnimation) {
+    public func appendRows(_ rowData: [ArgoKitIdentifiable], at section: Int = 0, with animation: UITableView.RowAnimation) {
         
         var start = 0
         if section > self.dataSourceHelper.dataList?.count ?? 0 {
@@ -167,7 +167,7 @@ extension ArgoKitTableNode {
         self.tableView?.insertRows(at: indesPaths, with: animation)
     }
     
-    public func insertRows(_ rowData: [Any], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+    public func insertRows(_ rowData: [ArgoKitIdentifiable], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
 
         for (index, indexPath) in indexPaths.enumerated() {
             self.dataSourceHelper.insertRow(rowData: rowData[index], row: indexPath.row, at: indexPath.section)

@@ -12,7 +12,7 @@ class ArgoKitArttibuteNode: ArgoKitNode {
     var fontName:String?
     
     
-    
+    /*
     func setValue(_ selector:Selector,_ value:Any?) -> Void{
         setValue(self, selector, value)
     }
@@ -30,5 +30,6 @@ class ArgoKitArttibuteNode: ArgoKitNode {
                 }
             }
         }
-    }
+    } */
+
 }

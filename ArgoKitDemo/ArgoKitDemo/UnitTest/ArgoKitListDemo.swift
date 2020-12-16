@@ -213,7 +213,7 @@ class ListDemo:ArgoKit.View{
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         for index in 1..<1000{
-            let item = SessionItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
+            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
@@ -227,7 +227,7 @@ class ListDemo:ArgoKit.View{
     
     var body: ArgoKit.View{
         ArgoKit.List(data:items){ item in
-            SessionRow(item: item).width(100%).height(100%).backgroundColor(.clear)
+            SessionRow(item: item)
         }
         .didSelectRow {item, indexPath in
             AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
@@ -243,7 +243,7 @@ class ListDemo:ArgoKit.View{
                 headerView?.endRefreshing()
             })
             {
-                Text("headerh").alignSelf(.center).lineLimit(0).font(size: 20)
+                Text("refreshheader").alignSelf(.center).lineLimit(0).font(size: 20)
             }.pullingDown{ point in
                 print("pullingDown\(String(describing: point))")
             }
@@ -256,7 +256,7 @@ class ListDemo:ArgoKit.View{
                 print("footerhead")
             })
             {
-                Text("footerhead").alignSelf(.center).lineLimit(0).font(size: 20)
+                Text("refreshfooter").alignSelf(.center).lineLimit(0).font(size: 20)
             }
             .height(100.0)
             .autoRefreshOffPage(1)
@@ -264,32 +264,6 @@ class ListDemo:ArgoKit.View{
 //            .alias(variable: &footerView)
             
         }
-        
-//        .canEditRow({ item, indexPath -> Bool in
-//            return true
-//        })
-//        .trailingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-//            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-//                print("trailing 菜鸡")
-//                complation(true)
-//            }),
-//             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-//                 print("trailing  互啄")
-//                 complation(true)
-//             }),
-//            ].swipeActionsConfiguration()
-//        }
-//        .leadingSwipeActions { (item, indexPath) -> ListSwipeActionsConfiguration? in
-//            [ListContextualAction(style: .normal, title: "菜鸡", handler: { (action, view, complation) in
-//                print("leading 菜鸡")
-//                complation(true)
-//            }),
-//             ListContextualAction(style: .destructive, title: "互啄", handler: { (action, view, complation) in
-//                 print("leading 互啄")
-//                 complation(true)
-//             }),
-//            ].swipeActionsConfiguration()
-//        }
     }
     
     func getTimeLabel()->String{
@@ -305,25 +279,27 @@ class ArgoKitViewDemo:ArgoKit.View  {
    var node: ArgoKitNode? = ArgoKitNode()
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-//    Text("dasdas")
     ListDemo()
     .grow(1)
-
+        .backgroundColor(.red)
    }
 }
 
 
 #if canImport(SwiftUI) && DEBUG
 import ArgoKitPreview
+import ArgoKitComponent
 import SwiftUI
 @available(iOS 13.0.0, *)
 struct ArgoKitViewDemo_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoRender {
-            MSUserInterractionHeaderView()
-                .margin(edge: .top, value: 100)
+        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+        ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+        return ArgoRender {
+            ArgoKitViewDemo().grow(1)
         }
     }
 }
 #endif
+
 
