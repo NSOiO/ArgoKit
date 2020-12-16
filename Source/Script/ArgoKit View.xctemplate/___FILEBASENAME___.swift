@@ -17,16 +17,12 @@ struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, ArgoKit!")
     }
 }
 
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
-import ArgoKitPreview
-import ArgoKitComponent
-import SwiftUI
-
 // mock data.
 class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
     override init() {
@@ -34,6 +30,9 @@ class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER
     }
 }
 
+import ArgoKitPreview
+import ArgoKitComponent
+import SwiftUI
 @available(iOS 13.0.0, *)
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
