@@ -37,7 +37,7 @@ class ListTestsModel:  ArgoKitIdentifiable {
 
 
 // view
-struct ListTests: ArgoKit.View {
+class ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ListTestsModel
@@ -55,7 +55,7 @@ struct ListTests: ArgoKit.View {
         return VStack {
             Text("aa")
             
-            ArgoKit.List(data: [ListCellModel()]) {landmark in
+            ArgoKit.List(data: [ListTestsModel()]) {landmark in
                 
                 Text(landmark.name)
 

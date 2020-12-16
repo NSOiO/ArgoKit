@@ -21,7 +21,8 @@ podspec = Pod::Spec.new do |spec|
   
     spec.platform = :ios
     spec.ios.deployment_target = '10.0'
-    spec.ios.frameworks = 'UIKit', 'SwiftUI'
+    spec.ios.frameworks = 'UIKit'
+    spec.ios.weak_frameworks = 'SwiftUI'
 
     spec.dependency 'ArgoKit'
     spec.dependency 'ArgoKitComponent'
