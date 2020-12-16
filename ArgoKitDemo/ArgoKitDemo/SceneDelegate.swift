@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            let vc = UIHostingController(rootView: contentView)
 //            vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
             
-            let vc = SwiftUI.UIHostingController.init(rootView: ArgoKitTextTest_Previews.previews)
+            let vc = SwiftUI.UIHostingController.init(rootView: ArgoKitViewDemo_Previews.previews)
             
             let nav = UINavigationController(rootViewController: vc)
 //            let nav = ArgokitDemoController()

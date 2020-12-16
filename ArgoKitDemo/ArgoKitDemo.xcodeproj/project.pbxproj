@@ -61,7 +61,7 @@
 		FA51A0B0255D1804005BE240 /* LandmarkRow2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */; };
 		FA5709BD25765303004A0EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
 		FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE290F9256F505A0012989F /* PreviewDemo.swift */; };
-		FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */; };
+		FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */; };
 		FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */; };
 		FAF6E618254FB10A0028A5C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */; };
 		FAF72F2C25831BCD003273F2 /* HVStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF72F2B25831BCD003273F2 /* HVStackTests.swift */; };
@@ -167,7 +167,7 @@
 		FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow2.swift; sourceTree = "<group>"; };
 		FAE290F9256F505A0012989F /* PreviewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDemo.swift; sourceTree = "<group>"; };
 		FAE29114256F54650012989F /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
-		FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitViewDemo.swift; sourceTree = "<group>"; };
+		FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitListDemo.swift; sourceTree = "<group>"; };
 		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
 		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FAF72F2B25831BCD003273F2 /* HVStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HVStackTests.swift; sourceTree = "<group>"; };
@@ -237,7 +237,6 @@
 				326335CD254133D20094676D /* AppDelegate.swift */,
 				3263370A25419A3C0094676D /* ContentView.swift */,
 				FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */,
-				FAEB0B60256F53530037B68F /* ArgoKitViewDemo.swift */,
 				FA0B881B2581DA7B00D483EC /* ArgoKitView20.swift */,
 				FA163037257E3C4A000BA507 /* ArgoKitView1.swift */,
 				FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */,
@@ -322,6 +321,7 @@
 				FA0BFE002583615500D483EC /* ArgoKitTextViewTest.swift */,
 				FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */,
 				FA0BFE0425836B5300D483EC /* ArgoKitListTest.swift */,
+				FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */,
 				FA04056B2588BB47006E997F /* ArgoKitDatePickerTest.swift */,
 			);
 			path = UnitTest;
@@ -602,7 +602,7 @@
 				FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */,
 				FAE290FA256F505A0012989F /* PreviewDemo.swift in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
-				FAEB0B61256F53530037B68F /* ArgoKitViewDemo.swift in Sources */,
+				FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */,
 				FA51A0AB255D17F9005BE240 /* LandmarkRow1.swift in Sources */,
 				FA5164FF255BB99E005BE240 /* MapView.swift in Sources */,
 				FAF72F3225832548003273F2 /* SpacerTests.swift in Sources */,

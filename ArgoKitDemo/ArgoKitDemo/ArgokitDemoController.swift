@@ -9,8 +9,11 @@ import Foundation
 import UIKit
 import ArgoKit
 public class SessionItem:ArgoKitIdentifiable{
-    public var identifier: String
-    public var reuseIdentifier: String
+    private var reuser:String!
+    public var reuseIdentifier: String{
+        reuser
+    }
+    
     var imagePath:String?
     var sessionName:String?
     var lastMessage:String?
@@ -20,9 +23,8 @@ public class SessionItem:ArgoKitIdentifiable{
     var textCom:Text?
     var hidden:Bool = false
 
-    init(identifier:String,reuseIdentifier:String) {
-        self.identifier = identifier
-        self.reuseIdentifier = reuseIdentifier
+    init(reuseIdentifier:String) {
+        self.reuser = reuseIdentifier
     }
 
 }
