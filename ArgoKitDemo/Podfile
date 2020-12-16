@@ -15,7 +15,7 @@ end
 post_integrate do |installer|
     main_project = 'ArgoKitDemo'
     main_target = "ArgoKitDemo"
-        
+    
     installer.generated_pod_targets.each do |target|
       if target.name == "ArgoKitPreview"
         pod_dir = target.sandbox.pod_dir(target.name)
@@ -24,4 +24,11 @@ post_integrate do |installer|
         integrate_argokit_preview installer, main_project, main_target
       end
     end
+    
+#    installer.aggregate_targets.each do | t |
+#      puts '====='
+#      puts t
+#      puts  t.user_project
+#      puts '====='
+#    end
 end

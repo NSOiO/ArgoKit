@@ -37,12 +37,12 @@ def integrate_argokit_preview(installer, main_project ,main_target, remove_if_ex
         
     file_paths = Array.new
     installer.generated_pod_targets.each do |target|
-    if target.name == ap_target
-        pod_dir = target.sandbox.pod_dir(target.name)
-        ap_files.each do |file|
-        file_paths <<  "#{pod_dir}/Source/Preview/ArgoKitPreviewTypes.swift"
+        if target.name == ap_target
+            pod_dir = target.sandbox.pod_dir(target.name)
+            ap_files.each do |file|
+                file_paths <<  "#{pod_dir}/Source/Preview/ArgoKitPreviewTypes.swift"
+            end
         end
-    end
     end
 
     if file_paths.length <= 0
@@ -55,43 +55,42 @@ def integrate_argokit_preview(installer, main_project ,main_target, remove_if_ex
 
     project = Xcodeproj::Project.open(project_path)
     project.targets.each do |target|
-    if target.name == main_target
-        # puts target.name
+        if target.name == main_target
+            # puts target.name
+            group = project.main_group.find_subpath(File.join(ap_group), true)
+            file_paths.each do |file_path|
+                file_name = File.basename(file_path)
+                file_exist = false
 
-        group = project.main_group.find_subpath(File.join(ap_group), true)
-        file_paths.each do |file_path|
-        file_name = File.basename(file_path)
-        file_exist = false
-
-        group.children.each do |child|
-            if child.name == file_name
-                if remove_if_exist
-                    child.remove_from_project()
-                    puts "#{argokit_prefix} file #{file_name} exist, remove from project.".green
-                else
-                    file_exist = true
-                    puts "#{argokit_prefix} file #{file_name} exist, no longer need to add.".green
+                group.children.each do |child|
+                    if child.name == file_name
+                        if remove_if_exist
+                            child.remove_from_project()
+                            puts "#{argokit_prefix} file #{file_name} exist, remove from project.".green
+                        else
+                            file_exist = true
+                            puts "#{argokit_prefix} file #{file_name} exist, no longer need to add.".green
+                        end
+                        break
+                    end
                 end
-                break
-            end
-        end
 
-        if !file_exist
-            file_ref = group.new_reference(file_path, :absolute)
-            ret = target.add_file_references([file_ref])
-            if ret
-            puts "#{argokit_prefix} succ to add  #{file_name} to #{ap_group}".green
-            else
-            puts "#{argokit_prefix} failed to add  #{file_name}".red
-            end
-        end# !file_exist
-
-        end
-    end
-    end
+                if !file_exist
+                    file_ref = group.new_reference(file_path, :absolute)
+                    ret = target.add_file_references([file_ref])
+                    if ret
+                        puts "#{argokit_prefix} succ to add  #{file_name} to #{ap_group}".green
+                    else
+                        puts "#{argokit_prefix} failed to add  #{file_name}".red
+                    end
+                end# !file_exist
+            end# file_paths.each
+        end# if target.name
+    end# project.targets.each
+    
     project.save
     puts "#{argokit_prefix} End Integrating ArgoKitPreview"
-end 
+end
 
 
 #Usage:
