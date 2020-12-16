@@ -45,7 +45,6 @@ EXTERNAL SOURCES:
   ArgoKitComponent:
     :path: "../"
   ArgoKitPreview:
-    :link_style: weak
     :path: "../"
 
 SPEC CHECKSUMS:
@@ -56,6 +55,6 @@ SPEC CHECKSUMS:
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 01469c0703192c3fd3e7f0b40701d95a8eca5812
+PODFILE CHECKSUM: 006d0b72a0a8513b54300669d909b462a62c4c41
 
 COCOAPODS: 1.10.0
