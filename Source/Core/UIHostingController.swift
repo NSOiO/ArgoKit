@@ -47,15 +47,21 @@ public struct HostView:View {
 
 public class UIHostingView:UIView{
     private var rootView:HostView?
+    private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
-        let frame = self.frame
-        let width:CGFloat = frame.size.width as CGFloat
-        let height:CGFloat = frame.size.height as CGFloat
-        rootView?.node?.width(point: width)
-        rootView?.node?.height(point: height)
-        rootView?.node?.frame = frame
-        rootView?.node?.resetOrigin = false
-        rootView?.node?.applyLayout()
+        if !oldFrame.equalTo(self.frame) {
+            oldFrame = self.frame
+            if let node = rootView?.node {
+                let width:CGFloat = oldFrame.size.width as CGFloat
+                let height:CGFloat = oldFrame.size.height as CGFloat
+                node.width(point: width)
+                node.height(point: height)
+                node.frame = frame
+                node.resetOrigin = false
+                node.applyLayout()
+            }
+        }
+        
         super.layoutSubviews()
     }
     
@@ -95,7 +101,6 @@ open class UIHostingController:UIViewController{
         self.edgesForExtendedLayout = UIRectEdge.init()
         self.view.addSubview(hostView)
         hostView.frame = self.view.bounds
-       
     }
     
     open override func viewDidDisappear(_ animated: Bool) {

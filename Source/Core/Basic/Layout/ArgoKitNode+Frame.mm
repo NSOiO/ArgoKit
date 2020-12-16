@@ -288,7 +288,6 @@
         default:
             break;
     }
-    
      
 }
 - (void)positionWithPercent:(CGFloat)value edge:(YGEdge)edge{
