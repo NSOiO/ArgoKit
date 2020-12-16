@@ -65,7 +65,7 @@ public class UIHostingView:UIView{
         super.layoutSubviews()
     }
     
-    public init(content:View){
+    public init(content:View,frame:CGRect = CGRect.zero){
         super.init(frame: CGRect.zero)
         rootView = HostView(self){
             content.grow(1.0)
