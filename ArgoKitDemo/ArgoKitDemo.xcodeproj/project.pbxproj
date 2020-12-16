@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C99A8558E17FA743C9B2050 /* Pods_ArgoPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8518C4FCC503BE664F7BCC /* Pods_ArgoPreview.framework */; };
 		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
 		326335D5254133D20094676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D3254133D20094676D /* Main.storyboard */; };
 		326335D7254133D30094676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
@@ -108,7 +107,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0F8518C4FCC503BE664F7BCC /* Pods_ArgoPreview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoPreview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA797B26CCB5ABC066A5405 /* ArgoKitPreviewTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewTypes.swift; path = /Users/momo/Development/data/UI/argokit/Source/Preview/ArgoKitPreviewTypes.swift; sourceTree = "<absolute>"; };
 		326335CA254133D20094676D /* ArgoKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgoKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		326335CD254133D20094676D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 		A4F5E668257B8770003D3591 /* ViewPageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPageTest.swift; sourceTree = "<group>"; };
 		A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
 		A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.debug.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.debug.xcconfig"; sourceTree = "<group>"; };
 		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA0B216C2580DBC700D483EC /* ArgoKitView10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView10.swift; sourceTree = "<group>"; };
 		FA0B5E762581CB9800D483EC /* ArgoKitView13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitView13.swift; sourceTree = "<group>"; };
@@ -189,7 +186,6 @@
 		FAF72F2B25831BCD003273F2 /* HVStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HVStackTests.swift; sourceTree = "<group>"; };
 		FAF72F3125832548003273F2 /* SpacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTests.swift; sourceTree = "<group>"; };
 		FAF72F35258326F1003273F2 /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
-		FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoPreview.release.xcconfig"; path = "Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview.release.xcconfig"; sourceTree = "<group>"; };
 		FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -220,7 +216,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C99A8558E17FA743C9B2050 /* Pods_ArgoPreview.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +295,6 @@
 			isa = PBXGroup;
 			children = (
 				FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */,
-				0F8518C4FCC503BE664F7BCC /* Pods_ArgoPreview.framework */,
 				A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */,
 			);
 			name = Frameworks;
@@ -329,8 +323,6 @@
 			children = (
 				A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */,
 				89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */,
-				AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */,
-				FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */,
 				85FC2EEDD8F8A7C2EC8BC7B8 /* Pods-ArgoViewDemo.debug.xcconfig */,
 				CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */,
 			);
@@ -507,11 +499,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA39AE562588601F002D400F /* Build configuration list for PBXNativeTarget "ArgoPreview" */;
 			buildPhases = (
-				841C9D7C819977390F11987C /* [CP] Check Pods Manifest.lock */,
 				FA39AE3F2588601D002D400F /* Sources */,
 				FA39AE402588601D002D400F /* Frameworks */,
 				FA39AE412588601D002D400F /* Resources */,
-				5FEB9F207B2255B3CBF1A605 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -619,45 +609,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5FEB9F207B2255B3CBF1A605 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArgoPreview/Pods-ArgoPreview-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		841C9D7C819977390F11987C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ArgoPreview-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D72DD5057E1A6D051356CD99 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1111,7 +1062,6 @@
 		};
 		FA39AE542588601F002D400F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFFDC0723297552C15F95EFA /* Pods-ArgoPreview.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1132,7 +1082,6 @@
 		};
 		FA39AE552588601F002D400F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC193D1C07F21F0A9AEED0BC /* Pods-ArgoPreview.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

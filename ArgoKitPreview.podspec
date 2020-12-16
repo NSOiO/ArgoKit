@@ -31,9 +31,15 @@ podspec = Pod::Spec.new do |spec|
 #    spec.resources = ['Source/Script/**/*']
     spec.resources = ['Source/Script/*']
     spec.prepare_command = <<-CMD
-                pwd
-                chmod +x  ./Source//Script/config.sh
-                ./Source//Script/config.sh
+        path=./Source//Script/config.sh
+        if [ -f "$path" ]; then
+          sh $path
+        else
+          echo "$path not exist"
+        fi
+        pwd
+        printenv
+        echo "======end======="
     CMD
   end
   
