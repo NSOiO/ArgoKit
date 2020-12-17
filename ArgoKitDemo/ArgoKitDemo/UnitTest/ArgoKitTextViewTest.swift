@@ -22,7 +22,13 @@ struct ArgoKitTextViewTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
+        
+        let getstur = PanPressGesture(minimumNumberOfTouches: 1, maximumNumberOfTouches: 1) { pangesture in
+            print("\(pangesture)")
+        }
+        
         Text("Hello, World!")
+        
         TextView(text: "Hello, World!")
             .height(100)
             .font(size: 20)
@@ -41,6 +47,11 @@ struct ArgoKitTextViewTest: ArgoKit.View {
             }
             .didChangeText { text in
                 print("\(String(describing: text))")
+            }.gesture(gesture: getstur)
+            .onTapGesture {
+                
+            }.onLongPressGesture(numberOfTaps: 1, numberOfTouches: 3) {
+                
             }
         
     }
