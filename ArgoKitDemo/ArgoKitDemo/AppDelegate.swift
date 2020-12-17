@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let contentView = ArgoKitTextViewTest(model: ArgoKitTextViewTestModel())
+        let contentView = ListDemo()
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
         let nav = UINavigationController(rootViewController: vc)
