@@ -339,19 +339,7 @@ extension List {
 }
 
 extension List {
-    
-    @discardableResult
-    public func titlesForHeaderInSection(_ value: [String]?) -> Self {
-        tableNode.titlesForHeaderInSection = value;
-        return self
-    }
-    
-    @discardableResult
-    public func titlesForFooterInSection(_ value: [String]?) -> Self {
-        tableNode.titlesForFooterInSection = value;
-        return self
-    }
-    
+        
     @discardableResult
     public func canEditRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(ArgoKitTableNode.tableView(_:canEditRowAt:))

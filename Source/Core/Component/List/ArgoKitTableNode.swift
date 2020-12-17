@@ -43,9 +43,6 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
     
     public var tableHeaderNode: ArgoKitNode?
     public var tableFooterNode: ArgoKitNode?
-    
-    public var titlesForHeaderInSection: [String]?
-    public var titlesForFooterInSection: [String]?
     public var sectionIndexTitles: [String]?
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
@@ -231,26 +228,6 @@ extension ArgoKitTableNode {
             cell.linkCellNode(node)
         }
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section < titlesForHeaderInSection?.count ?? 0,
-           let title = titlesForHeaderInSection?[section],
-           title.count > 0 {
-            return title
-        }
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        
-        if section < titlesForFooterInSection?.count ?? 0,
-           let title = titlesForFooterInSection?[section],
-           title.count > 0 {
-            return title
-        }
-        return nil
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
