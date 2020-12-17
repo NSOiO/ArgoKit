@@ -12,6 +12,7 @@
 #end
 
 require "xcodeproj"
+require "pathname"
 
 class APGConstant
     @@argokit_prefix = "[ArgoKitPreview]"
@@ -95,7 +96,12 @@ def add_preview_files(project, agg_pods, file_paths, should_check_file_exist)
         end# should_check_file_exist
         
         if !file_exist
-            file_ref = group.new_reference(file_path, :absolute)
+            rp = Pathname.new(file_path).relative_path_from(Pathname.new(group.real_path))
+            if rp
+                file_ref = group.new_reference(rp, :group)
+            else
+                file_ref = group.new_reference(file_path, :absolute)
+            end
             user_targets.each do |target|
               ret = target.add_file_references([file_ref])
               if ret
