@@ -264,66 +264,90 @@ extension List {
 }
 
 extension List {
-        
-    public func reloadData(_ data: [D]? = nil, sectionHeaderData: ArgoKitIdentifiable? = nil, sectionFooterData: ArgoKitIdentifiable? = nil) where D : ArgoKitIdentifiable{
+    
+    @discardableResult
+    public func reloadData(_ data: [D]? = nil, sectionHeaderData: ArgoKitIdentifiable? = nil, sectionFooterData: ArgoKitIdentifiable? = nil) -> Self where D : ArgoKitIdentifiable{
         tableNode.reloadData(data: data != nil ? [data!] : nil, sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
+        return self
     }
     
-    public func reloadData(_ sectionData: [[D]]? = nil, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func reloadData(_ sectionData: [[D]]? = nil, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) -> Self where D : ArgoKitIdentifiable{
         tableNode.reloadData(data: sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData)
+        return self
     }
     
-    public func reloadSections(_ sectionData: [[D]]? = nil, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func reloadSections(_ sectionData: [[D]]? = nil, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) -> Self where D : ArgoKitIdentifiable{
         tableNode.reloadSections(sectionData, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, sections: sections, with: animation)
+        return self
     }
     
-    public func appendSections(_ data: [[D]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, with animation: UITableView.RowAnimation) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func appendSections(_ data: [[D]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, with animation: UITableView.RowAnimation) -> Self where D : ArgoKitIdentifiable{
         tableNode.appendSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, with: animation)
+        return self
     }
     
-    public func insertSections(_ data: [[D]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func insertSections(_ data: [[D]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) -> Self where D : ArgoKitIdentifiable{
         tableNode.insertSections(data, sectionHeaderData: sectionHeaderData, sectionFooterData: sectionFooterData, at: sections, with: animation)
+        return self
     }
     
-    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+    @discardableResult
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) -> Self {
         tableNode.deleteSections(sections, with: animation)
+        return self
     }
     
-    public func moveSection(_ section: Int, toSection newSection: Int) {
+    @discardableResult
+    public func moveSection(_ section: Int, toSection newSection: Int) -> Self {
         tableNode.moveSection(section, toSection: newSection)
+        return self
     }
     
-    public func reloadRows(_ rowData: [D]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func reloadRows(_ rowData: [D]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self where D : ArgoKitIdentifiable{
         tableNode.reloadRows(rowData, at: indexPaths, with: animation)
+        return self
     }
     
-    public func appendRows(_ rowData: [D], at section: Int = 0, with animation: UITableView.RowAnimation) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func appendRows(_ rowData: [D], at section: Int = 0, with animation: UITableView.RowAnimation) -> Self where D : ArgoKitIdentifiable{
         tableNode.appendRows(rowData, at: section, with: animation)
+        return self
     }
     
-    public func insertRows(_ rowData: [D], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) where D : ArgoKitIdentifiable{
+    @discardableResult
+    public func insertRows(_ rowData: [D], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self where D : ArgoKitIdentifiable{
         tableNode.insertRows(rowData, at: indexPaths, with: animation)
+        return self
     }
     
-    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+    @discardableResult
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) -> Self {
         tableNode.deleteRows(at: indexPaths, with: animation)
+        return self
     }
-        
-    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+      
+    @discardableResult
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) -> Self {
         tableNode.moveRow(at: indexPath, to: newIndexPath)
+        return self
     }
 }
 
 extension List {
     
     @discardableResult
-    public func titlesForHeaderInSection(_ value: [Int:String]?) -> Self {
+    public func titlesForHeaderInSection(_ value: [String]?) -> Self {
         tableNode.titlesForHeaderInSection = value;
         return self
     }
     
     @discardableResult
-    public func titlesForFooterInSection(_ value: [Int:String]?) -> Self {
+    public func titlesForFooterInSection(_ value: [String]?) -> Self {
         tableNode.titlesForFooterInSection = value;
         return self
     }
@@ -359,8 +383,8 @@ extension List {
     }
     
     @discardableResult
-    public func titlesForSection(_ value: [String]?) -> Self {
-        tableNode.titlesForSection = value;
+    public func sectionIndexTitles(_ value: [String]?) -> Self {
+        tableNode.sectionIndexTitles = value;
         return self
     }
     
