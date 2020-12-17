@@ -10,11 +10,24 @@ target 'ArgoKitDemo' do
   pod 'ArgoKitComponent', :path =>'../'
 end
 
+target 'ArgoTest' do
+  pod 'ArgoKit', :path=>'../'
+  pod 'ArgoKitPreview', :path=>'../' #, :link_style => 'weak'
+  pod 'ArgoKitComponent', :path =>'../'
+end
+
+class TTT
+  @@data = "is data"
+  def self.data
+    @@data
+  end
+end
 
 # from argokit_preview_config.rb
 post_integrate do |installer|
     installer.generated_pod_targets.each do |target|
       if target.name == "ArgoKitPreview"
+        puts "handle target ..."
         pod_dir = target.sandbox.pod_dir(target.name)
         require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
         config_preview_files installer

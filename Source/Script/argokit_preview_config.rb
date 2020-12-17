@@ -13,69 +13,114 @@
 
 require "xcodeproj"
 
-def config_preview_files(installer, remove_if_exist = false, ap_target_name = "ArgoKitPreview")
-  ap_files = ["/Source/Preview/ArgoKitPreviewTypes.swift"]
-  file_paths = Array.new
-  
-  installer.aggregate_targets.each do | target |
-    ap_pod = target.pod_targets.select {|item| item.name == ap_target_name }.first
-    if ap_pod
-      ap_pod_dir = ap_pod.sandbox.pod_dir(ap_pod.name)
-      ap_files.each do | file |
-        file_paths << "#{ap_pod_dir}#{file}"
-      end
-      add_preview_files target, ap_pod, file_paths, remove_if_exist
+class APGConstant
+    @@argokit_prefix = "[ArgoKitPreview]"
+    @@ap_group = 'ArgoKitPreviewFiles'
+    @@ap_files = ["/Source/Preview/ArgoKitPreviewTypes.swift"]
+    
+    def self.argokit_prefix
+        @@argokit_prefix
     end
-  end
+    
+    def self.ap_group
+        @@ap_group
+    end
+    
+    def self.ap_files
+        @@ap_files
+    end
 end
 
-def add_preview_files(agg_pod, ap_pod, file_paths, remove_if_exist)
-  ap_group = 'ArgoKitPreviewFiles'
-  argokit_prefix = "[ArgoKitPreview]"
-  project = agg_pod.user_project
+def config_preview_files(installer, remove_if_exist = false, ap_target_name = "ArgoKitPreview")
+    #    should_check_file_exist = !remove_if_exist
+    file_paths = Array.new
+    project_map = Hash.new # [project, aggpods]
+    ap_pod_dir = nil
+    should_check_file_exist = !remove_if_exist
+
+    installer.aggregate_targets.each do | target |
+        ap_pod = target.pod_targets.select {|item| item.name == ap_target_name }.first
+        project = target.user_project
+        if ap_pod && project
+            ap_pod_dir = ap_pod.sandbox.pod_dir(ap_pod.name)
+            ts = project_map[project]
+            if ts == nil
+                ts = Array.new
+            end
+            ts << target
+            project_map[project] = ts
+        end
+    end
+    
+    APGConstant.ap_files.each do | file |
+        file_paths << "#{ap_pod_dir}#{file}"
+    end
+    
+    project_map.each do |project, aggs|
+        if remove_if_exist
+            remove_files_from_project project, file_paths
+        end
+        add_preview_files project, aggs, file_paths, should_check_file_exist
+    end
+end
+
+def add_preview_files(project, agg_pods, file_paths, should_check_file_exist)
+    argokit_prefix = APGConstant.argokit_prefix
   
-  user_targets = Array.new
-  agg_pod.user_target_uuids.each do |uuid|
-    t = project.objects_by_uuid[uuid]
-    t ? user_targets << t : nil
-  end
-  
-  if user_targets.length == 0
-    puts "#{argokit_prefix} Can't find user targets".red
-    return
-  end
-  
-  group = project.main_group.find_subpath(File.join(ap_group), true)
-  
-  file_paths.each do |file_path|
-      file_name = File.basename(file_path)
-      file_exist = false
-      group.children.each do |child|
-          if child.name == file_name
-              if remove_if_exist
-                  child.remove_from_project()
-                  puts "#{argokit_prefix} file #{file_name} exist, remove from project.".green
-              else
+    user_targets = Array.new
+    agg_pods.each do |agg_pod|
+        agg_pod.user_target_uuids.each do |uuid|
+            t = project.objects_by_uuid[uuid]
+            t ? user_targets << t : nil
+        end
+    end
+    
+    if user_targets.length == 0
+      puts "#{argokit_prefix} Can't find user targets".red
+      return
+    end
+    
+    group = project.main_group.find_subpath(File.join(APGConstant.ap_group), true)
+      
+    file_paths.each do |file_path|
+        file_name = File.basename(file_path)
+        file_exist = false
+        if should_check_file_exist
+            group.children.each do |child|
+                if child.name == file_name
                   file_exist = true
                   puts "#{argokit_prefix} file #{file_name} exist, no longer need to add.".green
+                end
+            end# group.children
+        end# should_check_file_exist
+        
+        if !file_exist
+            file_ref = group.new_reference(file_path, :absolute)
+            user_targets.each do |target|
+              ret = target.add_file_references([file_ref])
+              if ret
+                  puts "#{argokit_prefix} succ to add  #{file_name} to target #{target.name}".green
+              else
+                  puts "#{argokit_prefix} failed to add  #{file_name} to target #{target.name}".red
               end
-          end
-      end# group.children
-      
-      if !file_exist
-          file_ref = group.new_reference(file_path, :absolute)
-          user_targets.each do |target|
-            ret = target.add_file_references([file_ref])
-            if ret
-                puts "#{argokit_prefix} succ to add  #{file_name} to target #{target.name}".green
-            else
-                puts "#{argokit_prefix} failed to add  #{file_name} to target #{target.name}".red
             end
-          end
-      end# !file_exist
+        end# !file_exist
+    end
+    project.save
   end
-end
 
+def remove_files_from_project(project, file_paths)
+    argokit_prefix = APGConstant.argokit_prefix
+    
+    group = project.main_group.find_subpath(File.join(APGConstant.ap_group), false)
+    group.children.each do |child|
+        if file_paths.select {|path| File.basename(path) == child.name }
+            child.remove_from_project()
+            #project.root_object.name
+            puts "#{argokit_prefix} file #{child.name} exist, remove from #{File.basename(project.path)}".green
+        end
+    end
+end
 
 class String
     def black;          "\e[30m#{self}\e[0m" end
