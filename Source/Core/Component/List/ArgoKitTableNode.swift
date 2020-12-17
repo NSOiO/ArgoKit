@@ -20,9 +20,6 @@ public class ArgoKitTableView:UITableView{
         }
         super.layoutSubviews()
     }
-    public override func reloadData() {
-        super.reloadData()
-    }
 }
 
 class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
