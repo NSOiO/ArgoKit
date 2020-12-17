@@ -186,7 +186,6 @@
 		FAE72A572589E8D10066B2CB /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitListDemo.swift; sourceTree = "<group>"; };
 		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
-		FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FBD5030552A19052F6BC0181 /* Pods-ArgoTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoTest.release.xcconfig"; path = "Target Support Files/Pods-ArgoTest/Pods-ArgoTest.release.xcconfig"; sourceTree = "<group>"; };
 		FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -247,7 +246,6 @@
 				FA0BEF0F258312CD00D483EC /* UnitTest */,
 				A423580D257900760052E0B0 /* ViewPager */,
 				FA5164D6255BB99D005BE240 /* LandmarksDemo */,
-				FAF6E617254FB10A0028A5C7 /* SceneDelegate.swift */,
 				326335CD254133D20094676D /* AppDelegate.swift */,
 				3263370A25419A3C0094676D /* ContentView.swift */,
 				FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */,

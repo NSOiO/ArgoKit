@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let contentView = LandmarkList()
 //        let contentView = ArgoKitViewDemo()
 //        let contentView = PreviewDemo()
-        ArgoKitInstance.registerImageLoader(imageLoader: ImageLoader())
 //        let contentView = ArgoKitOtherViewTest(model:ArgoKitOtherViewTestModel())
 //        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
 //        let contentView = ListTests(model: ListTestsModel())
