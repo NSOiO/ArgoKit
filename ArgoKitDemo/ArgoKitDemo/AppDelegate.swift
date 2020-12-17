@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-            vc.view.frame = CGRect(x: 100, y: 100, width: 300, height: 300)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+//            vc.view.frame = CGRect(x: 100, y: 100, width: 300, height: 300)
+//        }
         return true
     }
 
