@@ -46,7 +46,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 
 /* 节点持有的视图 */
-@property (nonatomic, strong, readonly, nullable) UIView *view;
+@property (nonatomic, weak, readonly, nullable) UIView *view;
 /* 节点持有的视图 */
 @property (nonatomic, assign, readonly)Class viewClass;
 
