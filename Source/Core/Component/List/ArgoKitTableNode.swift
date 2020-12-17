@@ -14,8 +14,14 @@ fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 public class ArgoKitTableView:UITableView{
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
-        ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self)
+        if !oldFrame.equalTo(self.frame) {
+            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
+            oldFrame = self.frame
+        }
         super.layoutSubviews()
+    }
+    public override func reloadData() {
+        super.reloadData()
     }
 }
 

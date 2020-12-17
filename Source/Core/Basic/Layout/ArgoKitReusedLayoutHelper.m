@@ -45,8 +45,8 @@ static ArgoKitReusedLayoutHelper* _instance;
     [[ArgoKitReusedLayoutHelper sharedInstance] _layout:node];
 }
 
-+ (void)forLayoutNode:(nullable Class)anyClass{
-    [[ArgoKitReusedLayoutHelper sharedInstance].layoutEngine forLayoutNode:anyClass];
++ (void)forLayoutNode:(nullable Class)anyClass frame:(CGRect)frame{
+    [[ArgoKitReusedLayoutHelper sharedInstance].layoutEngine forLayoutNode:anyClass frame:frame];
 }
 #pragma mark --- private methods ---
 - (void)startLayoutEngine {

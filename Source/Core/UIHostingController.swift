@@ -47,16 +47,19 @@ public struct HostView:View {
 
 public class UIHostingView:UIView{
     private var rootView:HostView?
+    private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
-        let frame = self.frame
-        if let node = rootView?.node {
-            let width:CGFloat = frame.size.width as CGFloat
-            let height:CGFloat = frame.size.height as CGFloat
-            node.width(point: width)
-            node.height(point: height)
-            node.frame = frame
-            node.resetOrigin = false
-            node.applyLayout()
+        if !oldFrame.equalTo(self.frame) {
+            oldFrame = self.frame
+            if let node = rootView?.node {
+                let width:CGFloat = oldFrame.size.width as CGFloat
+                let height:CGFloat = oldFrame.size.height as CGFloat
+                node.width(point: width)
+                node.height(point: height)
+                node.frame = frame
+                node.resetOrigin = false
+                node.applyLayout()
+            }
         }
         super.layoutSubviews()
     }
@@ -105,11 +108,12 @@ open class UIHostingController:UIViewController{
     }
     
     open override func viewDidLayoutSubviews() {
-        let frame = self.view.frame
-        if !frame.equalTo(self.frame) {
-            self.frame = frame
-            hostView.frame = self.view.bounds
-        }
+//        let frame = self.view.frame
+//        if !frame.equalTo(self.frame) {
+//            self.frame = frame
+//            hostView.frame = self.view.bounds
+//        }
+        hostView.frame = self.view.bounds
         super.viewDidLayoutSubviews()
     }
     

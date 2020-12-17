@@ -71,13 +71,12 @@
     }
 }
 
-- (void)forLayoutNode:(nullable Class)anyClass{
+- (void)forLayoutNode:(nullable Class)anyClass frame:(CGRect)frame{
     NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
     for(ArgoKitNode *node in nodes){
         if ([node isKindOfClass:anyClass]) {
-            [node applyLayout];
+            [node applyLayout:CGSizeMake(frame.size.width,NAN)];
         }
-       
     }
 }
 @end
