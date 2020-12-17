@@ -89,6 +89,9 @@
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attributedStringRef);
     CFRange range = CFRangeMake(0, 0);
     if (numberOfLines > 0 && framesetter) {
+        if (numberOfLines == 1) {
+            size.width = CGFLOAT_MAX;
+        }
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
@@ -110,8 +113,8 @@
     if (framesetter) {
         CFRelease(framesetter);
     }
-    CGFloat width = ceilf(newSize.width);
-    CGFloat height = ceilf(newSize.height);
+    CGFloat width = ceil(newSize.width);
+    CGFloat height = ceil(newSize.height);
     return CGSizeMake(width, height);
 }
 @end

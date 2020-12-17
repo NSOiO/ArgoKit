@@ -6,6 +6,9 @@
 //
 
 import Foundation
+struct TextCalculation {
+    static let calculationLable:UILabel = UILabel()
+}
 class ArgoKitTextNode: ArgoKitArttibuteNode {
     
     var lineSpacing:CGFloat = 0
@@ -90,7 +93,7 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
         if let view = self.view {
             result = view.sizeThatFits(size)
         }else{
-            let lable:UILabel = UILabel()
+            let lable:UILabel = TextCalculation.calculationLable
             if let text =  self.text(){
                 if text.count > 0 {
                     lable.text = text
@@ -105,13 +108,15 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
             if let font = self.font() {
                 lable.font = font
             }
-            
             lable.numberOfLines = self.numberOfLines()
             lable.lineBreakMode = self.lineBreakMode()
             result = lable.sizeThatFits(size)
-//            result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
+            let width = ceil(result.width);
+            let height = ceil(result.height);
+            result = CGSize(width: width, height: height)
         }
-//        let result1 = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
+        
+//        let result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         return result
     }
 }

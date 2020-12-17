@@ -31,7 +31,7 @@ struct ArgoKitOtherViewTest: ArgoKit.View {
             .thumbTintColor(.red)
             .minimumTrackTintColor(.yellow)
             .maximumTrackTintColor(.green)
-            .width(100)
+            .height(100)
             .width(80%)
 
             //步近器

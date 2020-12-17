@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ArgoKitLayoutHelper : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (void)addLayoutNode:(nullable ArgoKitNode *)node;
+
++ (void)forLayoutNode:(nullable Class)anyClass frame:(CGRect)frame;
 @end
 
 NS_ASSUME_NONNULL_END

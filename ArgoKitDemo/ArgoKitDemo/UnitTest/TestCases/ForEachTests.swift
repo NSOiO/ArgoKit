@@ -22,27 +22,53 @@ struct ForEachTests: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        HStack {
+//        ScrollView{
+            HStack {
+                VStack{
+                    ForEach(model.titles) { item in
+                        Text(item).margin(edge: .top, value: 23)
+                    }
+                }
+                
+                VStack{
+                    ForEach(0..<100) { item in
+                        Text(String(item)).margin(edge: .top, value: 3)
+                    }
+                }.margin(edge: .left, value: 50)
+                
+                
+                Text("ttttt")
+                
+                List{
+                    ForEach(100..<200) { item in
+                        Text(String(item)).margin(edge: .top, value: 3)
+                    }
+                }
+                .height(800)
+                .width(300)
+                .margin(edge: .left, value: 60)
+                .backgroundColor(.red)
+                .alignSelf(.start)
+                
+
+                
+                // Group
+                
+    //            HStack {
+    //                ForEach() {
+    //                    Image().margin()
+    //                }
+    //                .padding()
+    //            }
+                
+                //: List数据范型，ForEach,Scrollview，Group
+                //: 自动换行,业务端自定义组件模板
             
-            ForEach(model.titles) { item in
-                Text(item)
             }
-            .flexDirection(.row)
-            
-            // Group
-            
-//            HStack {
-//                ForEach() {
-//                    Image().margin()
-//                }
-//                .padding()
-//            }
-            
-           // List数据范型，ForEach,Scrollview，Group
-            
-            
-            Text("ttttt")
-        }
+            .grow(1)
+//        }.width(100%)
+//        .height(800)
+      
     }
 }
 

@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let contentView = LandmarkList()
+        let contentView = ArgoKitTextViewTest(model: ArgoKitTextViewTestModel())
+//        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
         let nav = UINavigationController(rootViewController: vc)
         
@@ -25,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8) {
+//            vc.view.frame = CGRect(x: 100, y: 100, width: 300, height: 300)
+//        }
         return true
     }
 

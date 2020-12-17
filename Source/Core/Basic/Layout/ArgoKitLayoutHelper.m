@@ -38,6 +38,10 @@ static ArgoKitLayoutHelper* _instance;
 + (void)addLayoutNode:(ArgoKitNode *)node{
     [[ArgoKitLayoutHelper sharedInstance] addLayoutNode:node];
 }
+
++ (void)forLayoutNode:(nullable Class)anyClass frame:(CGRect)frame{
+    [[ArgoKitLayoutHelper sharedInstance].layoutEngine forLayoutNode:anyClass frame:(CGRect)frame];
+}
 #pragma mark --- private methods ---
 - (void)startLayoutEngine {
     __weak typeof(self)wealSelf = self;
