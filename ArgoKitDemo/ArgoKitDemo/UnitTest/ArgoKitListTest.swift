@@ -63,15 +63,20 @@ struct ArgoKitListTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-//        List{
-//            Text("dsds11dcs")
-//            Text("dsds22")
-//            Text("dsds333")
-//        }
-//        .backgroundColor(.red)
         
         List(data:models){ data in
+            
             Text(data.sessionName)
+                .lineLimit(2)
+                .width(150)
+                .alias(variable: &data.textCom)
+            
+            
+            Image("icybay.jpg")
+                .aspect(ratio: 1)
+                .onTapGesture {
+                    data.textCom?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
+                }
         }.grow(1.0)
         .didSelectRow { (mode, index) in
             print("\(mode)")

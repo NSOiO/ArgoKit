@@ -114,7 +114,7 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
             let width = ceil(result.width);
             let height = ceil(result.height);
             result = CGSize(width: width, height: height)
-        }
+          }
         
 //        let result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         return result

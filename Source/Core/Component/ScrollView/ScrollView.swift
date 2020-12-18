@@ -129,6 +129,13 @@ extension ScrollView {
         addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
         return self
     }
+    
+    @discardableResult
+    public func showsScrollIndicator(_ value: Bool) -> Self {
+        addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
+        addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
+        return self
+    }
 
     @discardableResult
     public func indicatorStyle(_ value: UIScrollView.IndicatorStyle) -> Self {

@@ -6,7 +6,9 @@
 //
 
 import Foundation
-fileprivate let kGridCellReuseIdentifier = "KArgoKitGridCell"
+fileprivate let kGridCellReuseIdentifier = "kGridCellReuseIdentifier"
+fileprivate let kGridHeaderReuseIdentifier = "kGridHeaderReuseIdentifier"
+fileprivate let kGridFooterReuseIdentifier = "kGridFooterReuseIdentifier"
 class ArgoKitGridView: UICollectionView {
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
@@ -25,9 +27,10 @@ class ArgoKitGridNode: ArgoKitScrollViewNode,
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
+    
     lazy var dataSourceHelper = ArgoKitGridDataSourceHelper()
-    lazy var sectionHeaderSourceHelper = ArgoKitGridDataSourceHelper()
-    lazy var sectionFooterSourceHelper = ArgoKitGridDataSourceHelper()
+    lazy var headerSourceHelper = ArgoKitGridDataSourceHelper()
+    lazy var footerSourceHelper = ArgoKitGridDataSourceHelper()
     
     private var pGridView:ArgoKitGridView?
     var flowLayout:ArgoKitGridFlowLayout = ArgoKitGridFlowLayout()
@@ -38,7 +41,6 @@ class ArgoKitGridNode: ArgoKitScrollViewNode,
         pGridView = gridView
         gridView.delegate = self
         gridView.dataSource = self
-        gridView.alwaysBounceVertical = true
         if #available(iOS 11.0, *) {
             gridView.contentInsetAdjustmentBehavior = .never
         }
@@ -57,10 +59,10 @@ extension ArgoKitGridNode {
             self.dataSourceHelper.dataList = data
         }
         if sectionHeaderData != nil {
-            self.sectionHeaderSourceHelper.dataList = [sectionHeaderData!]
+            self.headerSourceHelper.dataList = [sectionHeaderData!]
         }
         if sectionFooterData != nil {
-            self.sectionFooterSourceHelper.dataList = [sectionFooterData!]
+            self.footerSourceHelper.dataList = [sectionFooterData!]
         }
         self.pGridView?.reloadData()
     }
@@ -76,10 +78,10 @@ extension ArgoKitGridNode {
                     self.dataSourceHelper.reloadSection(data: sectionData![index], section: value)
                 }
                 if sectionHeaderData != nil {
-                    self.sectionHeaderSourceHelper.reloadRow(rowData: sectionHeaderData![index], row: value, at: 0)
+                    self.headerSourceHelper.reloadRow(rowData: sectionHeaderData![index], row: value, at: 0)
                 }
                 if sectionFooterData != nil {
-                    self.sectionFooterSourceHelper.reloadRow(rowData: sectionFooterData![index], row: value, at: 0)
+                    self.footerSourceHelper.reloadRow(rowData: sectionFooterData![index], row: value, at: 0)
                 }
             }
         }
@@ -92,10 +94,10 @@ extension ArgoKitGridNode {
         let end = start + data.count
         self.dataSourceHelper.appendSections(data)
         if sectionHeaderData != nil {
-            self.sectionHeaderSourceHelper.appendRows(rowData: sectionHeaderData!, at: 0)
+            self.headerSourceHelper.appendRows(rowData: sectionHeaderData!, at: 0)
         }
         if sectionFooterData != nil {
-            self.sectionFooterSourceHelper.appendRows(rowData: sectionFooterData!, at: 0)
+            self.footerSourceHelper.appendRows(rowData: sectionFooterData!, at: 0)
         }
         self.pGridView?.insertSections(IndexSet(start..<end))
     }
@@ -106,10 +108,10 @@ extension ArgoKitGridNode {
             self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
             
             if sectionHeaderData != nil {
-                self.sectionHeaderSourceHelper.insertRow(rowData: sectionHeaderData![index], row: value, at: 0)
+                self.headerSourceHelper.insertRow(rowData: sectionHeaderData![index], row: value, at: 0)
             }
             if sectionFooterData != nil {
-                self.sectionFooterSourceHelper.insertRow(rowData: sectionFooterData![index], row: value, at: 0)
+                self.footerSourceHelper.insertRow(rowData: sectionFooterData![index], row: value, at: 0)
             }
         }
         self.pGridView?.insertSections(sections)
@@ -178,9 +180,15 @@ extension ArgoKitGridNode {
         self.pGridView?.moveItem(at: indexPath, to: newIndexPath)
     }
     
-//    public func reloadRowsHeight() {
-//        self.pGridView?.reloadItems(at: <#T##[IndexPath]#>)
-//    }
+    public func reloadRowsHeight(indexPath:IndexPath) {
+        print("indexPath=\(indexPath)")
+        self.pGridView?.performBatchUpdates({[weak self] in
+            self?.pGridView?.reloadItems(at: [indexPath])
+        }, completion: { result in
+            
+        })
+       
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -205,13 +213,62 @@ extension ArgoKitGridNode{
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        if collectionViewLayout is ArgoKitGridFlowLayout {
+            let layout = collectionViewLayout as! ArgoKitGridFlowLayout
+            var height = layout.itemHeight
+            let calculateHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: layout.width)
+            if height == 0{
+                height = calculateHeight
+            }
+            return CGSize(width:layout.width, height: height)
+        }
+        return flowLayout.itemSize
+    }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
-//        return UICollectionReusableView()
-//    }
-//
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
+        print("indexPath:\(indexPath)")
+        var dataSourceHelper:ArgoKitGridDataSourceHelper? = nil
+        var reuseIdentifier:String = kGridHeaderReuseIdentifier
+        if kind ==  UICollectionView.elementKindSectionHeader{
+            dataSourceHelper = self.headerSourceHelper
+            reuseIdentifier = kGridHeaderReuseIdentifier
+        }else if kind ==  UICollectionView.elementKindSectionFooter{
+            dataSourceHelper = self.footerSourceHelper
+            reuseIdentifier = kGridFooterReuseIdentifier
+        }
+        if let dataSourceHelper = dataSourceHelper {
+            let identifier = dataSourceHelper.reuseIdForRow(indexPath.section, at: 0) ?? reuseIdentifier
+            if !dataSourceHelper.registedReuseIdSet.contains(identifier) {
+                pGridView?.register(ArgoKitGridCell.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
+                dataSourceHelper.registedReuseIdSet.insert(identifier)
+            }
+            let reusableView = pGridView?.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath) as! ArgoKitGridCell
+            if let node = dataSourceHelper.nodeForRow(indexPath.section, at: 0) {
+                reusableView.linkCellNode(node)
+            }
+            return reusableView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
+        let width = collectionView.frame.size.width
+        let height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        return CGSize(width:width, height: height)
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
+        let width = collectionView.frame.size.width
+        let height = self.footerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        return CGSize(width:width, height: height)
+    }
+    
+
 //    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool{
-//        return false
+//        return true
 //    }
 //
 //    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
@@ -242,7 +299,6 @@ extension ArgoKitGridNode{
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-//        pGridView?.deselectItem(at: indexPath, animated: true)
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
@@ -250,30 +306,50 @@ extension ArgoKitGridNode{
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
 
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath){
-//        
-//    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath){
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return
+        }
+        let sel = #selector(self.collectionView(_:didDeselectItemAt:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
+    }
 }
 
 // MARK: UICollectionViewDelegate Highlight
 extension ArgoKitGridNode{
-//    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool{
-//        return false
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath){
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath){
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool{
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath){
+        let sel = #selector(self.collectionView(_:didHighlightItemAt:))
+        if  let color = self.sendAction(withObj: String(_sel: sel), paramter: nil) as? UIColor {
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.contentView.backgroundColor = color
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath){
+        let sel = #selector(self.collectionView(_:didUnhighlightItemAt:))
+        if  let color = self.sendAction(withObj: String(_sel: sel), paramter: nil) as? UIColor {
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.contentView.backgroundColor = color
+        }
+    }
 }
 
 // MARK: UICollectionViewDelegate Display
 extension ArgoKitGridNode{
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            node.indexpath = indexPath
+            node.observeFrameChanged {[weak self] (_, _) in
+                self?.reloadRowsHeight(indexPath: node.indexpath)
+            }
+        }
+        
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
@@ -283,10 +359,18 @@ extension ArgoKitGridNode{
 
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
-        
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            node.removeObservingFrameChanged()
+        }
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return
+        }
+        let sel = #selector(self.collectionView(_:didEndDisplaying:forItemAt:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
 
     
+    // MARK: HEADER OR FOOTER
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
         
@@ -300,14 +384,7 @@ extension ArgoKitGridNode{
 
 // MARK: UICollectionViewDelegateFlowLayout
 extension ArgoKitGridNode{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        if collectionViewLayout is ArgoKitGridFlowLayout {
-            let layout = collectionViewLayout as! ArgoKitGridFlowLayout
-            let height = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: layout.width)
-            return CGSize(width:layout.width, height: 150)
-        }
-        return flowLayout.itemSize
-    }
+
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
 //
@@ -323,13 +400,7 @@ extension ArgoKitGridNode{
 //    }
 //
 //
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
-//
-//    }
+
 }
 
 
@@ -340,8 +411,8 @@ extension ArgoKitGridNode{
 
 //MARK: 设置配置参数
 extension ArgoKitGridNode{
-    public func maxItemHeight(_ value:CGFloat){
-        flowLayout.height = value
+    public func itemHeight(_ value:CGFloat){
+        flowLayout.itemHeight = value
     }
     
     public func columnCount(_ value:Int){

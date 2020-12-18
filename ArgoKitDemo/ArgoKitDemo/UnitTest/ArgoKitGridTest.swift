@@ -9,7 +9,48 @@ import ArgoKit
 
 // view model.
 class ArgoKitGridTestModel {
+    let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+    let messages = ["11","22","33","44","55"]
+    var dataSource = [[ArgoKitGridCellTestModel]]()
+    var headerSource = [ArgoKitGridHeaderTestModel]()
+    init() {
+        for session in 0..<10 {
+            let idetifier = "gridcell_\(session)"
+            let headerModel = ArgoKitGridHeaderTestModel()
+            headerModel.headerName = idetifier
+            headerSource.append(headerModel)
+            
+            var subDataSource = [ArgoKitGridCellTestModel]()
+            for index in 0..<10000 {
+                let item = ArgoKitGridCellTestModel()
+                item.headerName = "\(index)"
+                item.imagePath = images[index%5]
+                subDataSource.append(item)
+            }
+            dataSource.append(subDataSource)
+        }
+    }
 
+}
+
+class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
+    var _reuseIdentifier: String = "ArgoKitGridCellTestModel"
+    var reuseIdentifier: String{
+        _reuseIdentifier
+    }
+    var headerName = "title"
+    var imagePath = "icybay.jpg"
+    
+    var text:Text?
+   
+}
+
+class ArgoKitGridHeaderTestModel:ArgoKitIdentifiable {
+    var _reuseIdentifier: String = "ArgoKitGridHeaderTestModel"
+    var reuseIdentifier: String{
+        _reuseIdentifier
+    }
+    var headerName = "title"
 }
 
 // view
@@ -22,361 +63,50 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Grid{
-            HStack{
-                Text("Hello, World!")
-            }.backgroundColor(.red)
+        Grid(data:model.dataSource.first ?? [ArgoKitGridCellTestModel()]){ data in
+            Text(data.headerName)
+                .lineLimit(0)
+                .alias(variable: &data.text)
+            
+            Image(data.imagePath)
+                .aspect(ratio: 1)
+                .onTapGesture {
+                    data.text?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
+                }
            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .grow(1)
-            
-            Text("Hello, World!Hello, World!Hello, World!Hello").lineLimit(0)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .grow(1)
-            
-
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .grow(1)
-            
-            Text("Hello, World!Hello, World!Hello, World!Hello, World!Hello!").lineLimit(0)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .grow(1)
-            
-            Text("Hello, World!Hello, World!Hello, World!Hello,").lineLimit(0)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-            Text("Hello, World!")
-                .backgroundColor(.yellow)
-                .height(100%).width(100%)
-                .grow(1)
-            
-            
-            
-            Text("Hello, World!").backgroundColor(.purple)
-            
-            Text("Hello, World!").backgroundColor(.orange)
-        }.grow(1)
+        }
+        .grow(1)
         .columnCount(3)
         .columnSpacing(20)
-//        .lineSpacing(10)
+        .lineSpacing(10)
+//        .itemHeight(150)
         .sectionInset(UIEdgeInsets(top: 0, left:15, bottom: 0, right: 15))
-        .didSelectItem { (data, indexpath) in
+//        .cellWillAppear{ (data, indexpath) in
+//            print("\(data)")
+//
+//        }
+//        .cellDidDisappear({ (data, indexpath) in
+//            print("\(data)")
+//        })
+        .cellSelected({ (data, indexpath) in
             print("\(data)")
-
+        })
+        .cellDeselected({ (data, indexpath) in
+            print("\(data)")
+        })
+        .willBeginDragging {
         }
-        .maxItemHeight(200)
+        .scrollDirection(UICollectionView.ScrollDirection.vertical)
+        .showsVerticalScrollIndicator(true)
+        .showsHorizontalScrollIndicator(true)
+        .sectionHeader(model.headerSource) { data -> View in
+            Text(data.headerName).backgroundColor(.purple)
+                .height(100)
+        }
+//        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
+//            Text(data.headerName).backgroundColor(.yellow)
+//                .height(100)
+//        }
     }
 }
 
@@ -404,7 +134,7 @@ fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKi
 struct ArgoKitGridTest_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitRender {
-            ArgoKitGridTest(model: ArgoKitGridTestModel_Previews())
+            ArgoKitGridTest(model: ArgoKitGridTestModel_Previews()).grow(1)
         }
     }
 }

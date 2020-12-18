@@ -12,7 +12,7 @@ class ArgoKitGridCellNode: ArgoKitNode {
     var cellSourceData: Any?
     
     var frameObserber: NSKeyValueObservation?
-    
+    var indexpath:IndexPath = IndexPath(row: 0, section: 0)
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitGridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
         removeObservingFrameChanged()
         frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
