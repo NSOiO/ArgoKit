@@ -42,7 +42,7 @@ extension UIView {
         }
     }
         
-    @objc public func startAnimation(serial: Bool = false) {
+    @objc public func argokit_startAnimation(serial: Bool = false) {
         if let animationGroup = self.argokit_animationGroup {
             if serial {
                 animationGroup.startSerial()
@@ -54,7 +54,7 @@ extension UIView {
         self.argokit_animation?.start()
     }
     
-    @objc public func pauseAnimation() {
+    @objc public func argokit_pauseAnimation() {
         if let animationGroup = self.argokit_animationGroup {
             animationGroup.pause()
             return
@@ -62,7 +62,7 @@ extension UIView {
         self.argokit_animation?.pause()
     }
     
-    @objc public func resumeAnimation() {
+    @objc public func argokit_resumeAnimation() {
         if let animationGroup = self.argokit_animationGroup {
             animationGroup.resume()
             return
@@ -70,7 +70,7 @@ extension UIView {
         self.argokit_animation?.resume()
     }
     
-    @objc public func stopAnimation() {
+    @objc public func argokit_stopAnimation() {
         if let animationGroup = self.argokit_animationGroup {
             animationGroup.stop()
             return
@@ -109,25 +109,25 @@ extension View {
     
     @discardableResult
     public func startAnimation(serial: Bool = false) -> Self {
-        addAttribute(#selector(UIView.startAnimation), serial)
+        addAttribute(#selector(UIView.argokit_startAnimation), serial)
         return self
     }
     
     @discardableResult
     public func pauseAnimation() -> Self {
-        addAttribute(#selector(UIView.pauseAnimation))
+        addAttribute(#selector(UIView.argokit_pauseAnimation))
         return self
     }
     
     @discardableResult
     public func resumeAnimation() -> Self {
-        addAttribute(#selector(UIView.resumeAnimation))
+        addAttribute(#selector(UIView.argokit_resumeAnimation))
         return self
     }
     
     @discardableResult
     public func stopAnimation() -> Self {
-        addAttribute(#selector(UIView.stopAnimation))
+        addAttribute(#selector(UIView.argokit_stopAnimation))
         return self
     }
 }
