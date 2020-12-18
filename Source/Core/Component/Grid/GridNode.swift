@@ -13,13 +13,13 @@ class ArgoKitGridView: UICollectionView {
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
-            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitGridCellNode.self,frame: self.bounds)
+            ArgoKitReusedLayoutHelper.forLayoutNode(GridCellNode.self,frame: self.bounds)
             oldFrame = self.frame
         }
         super.layoutSubviews()
     }
 }
-class ArgoKitGridNode: ArgoKitScrollViewNode,
+class GridNode: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,
                        UICollectionViewDelegateFlowLayout{
@@ -28,12 +28,17 @@ class ArgoKitGridNode: ArgoKitScrollViewNode,
         return CGSize.zero
     }
     
-    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper()
-    lazy var headerSourceHelper = ArgoKitGridDataSourceHelper()
-    lazy var footerSourceHelper = ArgoKitGridDataSourceHelper()
+    
+    lazy var dataSourceHelper = GridDataSourceHelper()
+    lazy var headerSourceHelper = GridDataSourceHelper()
+    lazy var footerSourceHelper = GridDataSourceHelper()
+    
+    fileprivate var longPressGesture: UILongPressGestureRecognizer!
+    fileprivate var moveItem = false
     
     private var pGridView:ArgoKitGridView?
-    var flowLayout:ArgoKitGridFlowLayout = ArgoKitGridFlowLayout()
+    
+    var flowLayout:GridFlowLayout = GridFlowLayout()
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout:flowLayout)
         gridView.backgroundColor = .white
@@ -47,11 +52,37 @@ class ArgoKitGridNode: ArgoKitScrollViewNode,
         if #available(iOS 10.0, *) {
             gridView.isPrefetchingEnabled = false
         }
+        
+        if moveItem {
+            longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(GridNode.handleLongGesture(_:)))
+            gridView.addGestureRecognizer(longPressGesture)
+            
+        }
+        
         return gridView
+    }
+
+    
+    @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
+        
+        switch(gesture.state) {
+            
+        case UIGestureRecognizerState.began:
+            guard let selectedIndexPath = pGridView?.indexPathForItem(at: gesture.location(in: self.pGridView)) else {
+                break
+            }
+            pGridView?.beginInteractiveMovementForItem(at: selectedIndexPath)
+        case UIGestureRecognizerState.changed:
+            pGridView?.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+        case UIGestureRecognizerState.ended:
+            pGridView?.endInteractiveMovement()
+        default:
+            pGridView?.cancelInteractiveMovement()
+        }
     }
 }
 
-extension ArgoKitGridNode {
+extension GridNode {
         
     public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
         
@@ -181,18 +212,12 @@ extension ArgoKitGridNode {
     }
     
     public func reloadRowsHeight(indexPath:IndexPath) {
-        print("indexPath=\(indexPath)")
-        self.pGridView?.performBatchUpdates({[weak self] in
-            self?.pGridView?.reloadItems(at: [indexPath])
-        }, completion: { result in
-            
-        })
-       
+        self.pGridView?.performBatchUpdates(nil, completion: nil)
     }
 }
 
 // MARK: UICollectionViewDataSource
-extension ArgoKitGridNode{
+extension GridNode{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.dataSourceHelper.numberOfSection()
     }
@@ -203,10 +228,10 @@ extension ArgoKitGridNode{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = self.dataSourceHelper.reuseIdForRow(indexPath.row, at: indexPath.section) ?? kGridCellReuseIdentifier
         if !self.dataSourceHelper.registedReuseIdSet.contains(identifier) {
-            pGridView?.register(ArgoKitGridCell.self, forCellWithReuseIdentifier: identifier)
+            pGridView?.register(GridCell.self, forCellWithReuseIdentifier: identifier)
             self.dataSourceHelper.registedReuseIdSet.insert(identifier)
         }
-        let cell = pGridView?.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ArgoKitGridCell
+        let cell = pGridView?.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! GridCell
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.linkCellNode(node)
         }
@@ -214,8 +239,8 @@ extension ArgoKitGridNode{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        if collectionViewLayout is ArgoKitGridFlowLayout {
-            let layout = collectionViewLayout as! ArgoKitGridFlowLayout
+        if collectionViewLayout is GridFlowLayout {
+            let layout = collectionViewLayout as! GridFlowLayout
             var height = layout.itemHeight
             let calculateHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: layout.width)
             if height == 0{
@@ -228,8 +253,7 @@ extension ArgoKitGridNode{
     
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
-        print("indexPath:\(indexPath)")
-        var dataSourceHelper:ArgoKitGridDataSourceHelper? = nil
+        var dataSourceHelper:GridDataSourceHelper? = nil
         var reuseIdentifier:String = kGridHeaderReuseIdentifier
         if kind ==  UICollectionView.elementKindSectionHeader{
             dataSourceHelper = self.headerSourceHelper
@@ -241,10 +265,10 @@ extension ArgoKitGridNode{
         if let dataSourceHelper = dataSourceHelper {
             let identifier = dataSourceHelper.reuseIdForRow(indexPath.section, at: 0) ?? reuseIdentifier
             if !dataSourceHelper.registedReuseIdSet.contains(identifier) {
-                pGridView?.register(ArgoKitGridCell.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
+                pGridView?.register(GridCell.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
                 dataSourceHelper.registedReuseIdSet.insert(identifier)
             }
-            let reusableView = pGridView?.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath) as! ArgoKitGridCell
+            let reusableView = pGridView?.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath) as! GridCell
             if let node = dataSourceHelper.nodeForRow(indexPath.section, at: 0) {
                 reusableView.linkCellNode(node)
             }
@@ -267,26 +291,46 @@ extension ArgoKitGridNode{
     }
     
 
-//    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool{
-//        return true
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
-//        
-//    }
-//
-//
-//    func indexTitles(for collectionView: UICollectionView) -> [String]?{
-//        return []
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath{
-//        return IndexPath(index: 0)
-//    }
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool{
+        return moveItem
+    }
+
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
+        var items = self.dataSourceHelper.dataList?[sourceIndexPath.section]
+        let temp = items?.remove(at: sourceIndexPath.item)
+        items?.insert(temp as Any, at: destinationIndexPath.item)
+        if let items = items{
+            self.dataSourceHelper.dataList?[sourceIndexPath.section] = items
+        }
+        
+        if let sourceItem = items?[sourceIndexPath.item] as? GridCellNode,let desItem = items?[destinationIndexPath.item] as? GridCellNode{
+            if !sourceItem.frame.equalTo(desItem.frame) {
+                sourceItem.calculateLayout(size: sourceItem.frame.size)
+                sourceItem.applyLayoutAferCalculation(withView: false)
+                desItem.calculateLayout(size: desItem.frame.size)
+                desItem.applyLayoutAferCalculation(withView: false)
+            }
+        }
+       
+    }
+
+    func indexTitles(for collectionView: UICollectionView) -> [String]?{
+        let sel = #selector(self.indexTitles(for:))
+        if let titles = self.sendAction(withObj: String(_sel: sel), paramter: nil) as? [String]{
+            return titles
+        }
+        return ["A","b","C","D","E"]
+    }
+
+    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath{
+        print(title)
+        print(index)
+        return IndexPath(index: 0)
+    }
 }
 
 // MARK: UICollectionViewDelegate Select
-extension ArgoKitGridNode{
+extension GridNode{
     
 //    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool{
 //        return false
@@ -316,7 +360,7 @@ extension ArgoKitGridNode{
 }
 
 // MARK: UICollectionViewDelegate Highlight
-extension ArgoKitGridNode{
+extension GridNode{
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool{
         return true
     }
@@ -340,7 +384,7 @@ extension ArgoKitGridNode{
 }
 
 // MARK: UICollectionViewDelegate Display
-extension ArgoKitGridNode{
+extension GridNode{
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -383,7 +427,7 @@ extension ArgoKitGridNode{
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
-extension ArgoKitGridNode{
+extension GridNode{
 
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
@@ -410,7 +454,12 @@ extension ArgoKitGridNode{
 
 
 //MARK: 设置配置参数
-extension ArgoKitGridNode{
+extension GridNode{
+    
+    public func enableMoveItem(_ value:Bool){
+        self.moveItem = value
+    }
+    
     public func itemHeight(_ value:CGFloat){
         flowLayout.itemHeight = value
     }

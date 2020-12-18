@@ -164,16 +164,15 @@ class ListCellTestsModel_Previews:  ListCellTestsModel {
 @available(iOS 13.0.0, *)
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
     return ArgoRender(builder: builder)
 }
 
 @available(iOS 13.0.0, *)
 struct ListCellTests_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        SwiftUI.ForEach([
-            ArgoKitPreviewDevice.iPhone8, ArgoKitPreviewDevice.iPhone11
-        ]) { item in
-            
+        // 数组中可以添加其他设备进行多设备预览
+        SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
                 ListCellTests(model: ListCellTestsModel_Previews())
                     .padding(edge: .all, value: 10)

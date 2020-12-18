@@ -8,16 +8,16 @@
 import Foundation
 
 public class Grid<D>: ScrollView  {
-    var gridNode:ArgoKitGridNode?
+    var gridNode:GridNode?
     override func createNode() {
-        gridNode = ArgoKitGridNode(viewClass: ArgoKitGridView.self)
+        gridNode = GridNode(viewClass: ArgoKitGridView.self)
         pNode = gridNode
     }
     public required init() {
         super.init()
     }
     
-    public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
+    public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
         self.init()
         let container = content()
         if let nodes = container.type.viewNodes() {
@@ -43,12 +43,32 @@ public class Grid<D>: ScrollView  {
     }
 }
 
+
 extension Grid{
+    
+    @discardableResult
+    public func sectionHeader(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+        let container = headerContent()
+        if let nodes = container.type.viewNodes() {
+            gridNode?.headerSourceHelper.dataList = [nodes]
+        }
+        return self
+    }
+    
     @discardableResult
     public func sectionHeader<T: ArgoKitIdentifiable>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
         gridNode?.headerSourceHelper.dataList = [data]
         gridNode?.headerSourceHelper.buildNodeFunc = { item in
             return headerContent(item as! T)
+        }
+        return self
+    }
+    
+    @discardableResult
+    public func sectionFooter(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+        let container = headerContent()
+        if let nodes = container.type.viewNodes() {
+            gridNode?.footerSourceHelper.dataList = [nodes]
         }
         return self
     }

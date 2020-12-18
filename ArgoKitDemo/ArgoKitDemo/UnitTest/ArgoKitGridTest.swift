@@ -21,7 +21,7 @@ class ArgoKitGridTestModel {
             headerSource.append(headerModel)
             
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for index in 0..<10000 {
+            for index in 0..<1400{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = "\(index)"
                 item.imagePath = images[index%5]
@@ -67,46 +67,48 @@ struct ArgoKitGridTest: ArgoKit.View {
             Text(data.headerName)
                 .lineLimit(0)
                 .alias(variable: &data.text)
+                .textAlign(.center)
             
             Image(data.imagePath)
                 .aspect(ratio: 1)
+                .circle()
                 .onTapGesture {
                     data.text?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
                 }
            
         }
         .grow(1)
+//        .height(500)
         .columnCount(3)
-        .columnSpacing(20)
+        .columnSpacing(10)
         .lineSpacing(10)
 //        .itemHeight(150)
-        .sectionInset(UIEdgeInsets(top: 0, left:15, bottom: 0, right: 15))
-//        .cellWillAppear{ (data, indexpath) in
-//            print("\(data)")
-//
-//        }
-//        .cellDidDisappear({ (data, indexpath) in
-//            print("\(data)")
-//        })
+        .sectionInset(UIEdgeInsets(top: 10, left:10, bottom: 10, right: 10))
+        .showsScrollIndicator(true)
+        .cellWillAppear{ (data, indexpath) in
+
+        }
+        .cellDidDisappear({ (data, indexpath) in
+        })
         .cellSelected({ (data, indexpath) in
-            print("\(data)")
         })
         .cellDeselected({ (data, indexpath) in
-            print("\(data)")
         })
         .willBeginDragging {
         }
-        .scrollDirection(UICollectionView.ScrollDirection.vertical)
-        .showsVerticalScrollIndicator(true)
-        .showsHorizontalScrollIndicator(true)
         .sectionHeader(model.headerSource) { data -> View in
-            Text(data.headerName).backgroundColor(.purple)
-                .height(100)
+            Text(data.headerName)
+                .textAlign(.center)
+                .backgroundColor(.purple)
+                .height(40)
         }
-//        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
-//            Text(data.headerName).backgroundColor(.yellow)
-//                .height(100)
-//        }
+        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
+            Text(data.headerName)
+                .textAlign(.center)
+                .backgroundColor(.yellow)
+                .height(40)
+        }
+        .enableMoveItem(true)
     }
 }
 

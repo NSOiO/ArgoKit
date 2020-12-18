@@ -1,5 +1,5 @@
 //
-//  ArgoKitGridCell.swift
+//  GridCell.swift
 //  ArgoKit
 //
 //  Created by Bruce on 2020/12/17.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-class ArgoKitGridCellNode: ArgoKitNode {
+class GridCellNode: ArgoKitNode {
     
     var cellSourceData: Any?
     
     var frameObserber: NSKeyValueObservation?
     var indexpath:IndexPath = IndexPath(row: 0, section: 0)
-    public func observeFrameChanged(changeHandler: @escaping (ArgoKitGridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
+    public func observeFrameChanged(changeHandler: @escaping (GridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
         removeObservingFrameChanged()
         frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
     }
@@ -26,9 +26,9 @@ class ArgoKitGridCellNode: ArgoKitNode {
     }
 }
 
-class ArgoKitGridCell: UICollectionViewCell {
+class GridCell: UICollectionViewCell {
   
-    var contentNode: ArgoKitGridCellNode?
+    var contentNode: GridCellNode?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -45,7 +45,7 @@ class ArgoKitGridCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
-    public func linkCellNode(_ node: ArgoKitGridCellNode) {
+    public func linkCellNode(_ node: GridCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculation(withView:false)

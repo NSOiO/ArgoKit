@@ -10,11 +10,11 @@ class GridReusableViewNode: ArgoKitNode {
     
 }
 class GridReusableView: UICollectionReusableView {
-    var contentNode: ArgoKitGridCellNode?
+    var contentNode: GridCellNode?
     override func prepareForReuse() {
         
     }
-    public func linkCellNode(_ node: ArgoKitGridCellNode) {
+    public func linkCellNode(_ node: GridCellNode) {
         if self.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculation(withView:false)

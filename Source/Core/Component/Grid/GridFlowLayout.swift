@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class ArgoKitGridFlowLayout: UICollectionViewFlowLayout {
+class GridFlowLayout: UICollectionViewFlowLayout {
     var columCount:Int = 1
     var width:CGFloat = 0
     var itemHeight:CGFloat = 0

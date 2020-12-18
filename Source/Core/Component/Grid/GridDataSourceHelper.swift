@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArgoKitGridDataSourceHelper {
+class GridDataSourceHelper {
     
     lazy var registedReuseIdSet = Set<String>()
         
@@ -15,7 +15,7 @@ class ArgoKitGridDataSourceHelper {
     public var buildNodeFunc: ((Any)->View)?
 }
 
-extension ArgoKitGridDataSourceHelper {
+extension GridDataSourceHelper {
     
     open func numberOfSection() -> Int {
         
@@ -50,28 +50,28 @@ extension ArgoKitGridDataSourceHelper {
             return nil
         }
         
-        if let node = self.dataList![section][row] as? ArgoKitGridCellNode {
+        if let node = self.dataList![section][row] as? GridCellNode {
             return node.cellSourceData
         }
 
         return dataList![section][row]
     }
     
-    open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitGridCellNode? {
+    open func nodeForRow(_ row: Int, at section: Int) -> GridCellNode? {
         
         if section >= dataList?.count ?? 0
             || row >= dataList?[section].count ?? 0 {
             return nil
         }
 
-        if let node = self.dataList![section][row] as? ArgoKitGridCellNode {
+        if let node = self.dataList![section][row] as? GridCellNode {
             return node
         }
         
         let sourceData = self.dataList![section][row]
         
         if let node = sourceData as? ArgoKitNode {
-            let cellNode: ArgoKitGridCellNode = ArgoKitGridCellNode(viewClass: UIView.self)
+            let cellNode: GridCellNode = GridCellNode(viewClass: UIView.self)
             cellNode.addChildNode(node)
             cellNode.cellSourceData = node
             self.dataList![section][row] = cellNode
@@ -80,7 +80,7 @@ extension ArgoKitGridDataSourceHelper {
         
         if let view = self.buildNodeFunc?(sourceData) {
             if let nodes = view.type.viewNodes() {
-                let cellNode: ArgoKitGridCellNode = ArgoKitGridCellNode(viewClass: UIView.self)
+                let cellNode: GridCellNode = GridCellNode(viewClass: UIView.self)
                 cellNode.addChildNodes(nodes)
                 cellNode.cellSourceData = sourceData;
                 self.dataList![section][row] = cellNode
@@ -94,7 +94,7 @@ extension ArgoKitGridDataSourceHelper {
                 
         if let data = dataForRow(row, at: section), let view = self.buildNodeFunc?(data) {
             if let nodes = view.type.viewNodes() {
-                let contentNode = ArgoKitGridCellNode(viewClass: UIView.self)
+                let contentNode = GridCellNode(viewClass: UIView.self)
                 contentNode.addChildNodes(nodes)
                 return contentNode
             }
@@ -113,7 +113,7 @@ extension ArgoKitGridDataSourceHelper {
     }
 }
 
-extension ArgoKitGridDataSourceHelper {
+extension GridDataSourceHelper {
     
     func reloadSection(data: [Any], section: Int) {
         if section >= dataList?.count ?? 0 {

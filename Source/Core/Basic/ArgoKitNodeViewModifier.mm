@@ -161,14 +161,10 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
             }
         }
         
-        if ([node.view isKindOfClass:[UILabel class]]) {
-            NSLog(@"resueNode.frame == %@ == %@",@(resueNode.frame.size.width),@(resueNode.frame.size.height));
-        }
         if (!CGRectEqualToRect(node.view.frame, resueNode.frame)) {
             node.view.frame = resueNode.frame;
         }
-        
-       
+    
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
             [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs resetFrame:only];
         }

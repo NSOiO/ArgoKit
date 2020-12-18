@@ -17,16 +17,12 @@ struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, ArgoKit!")
     }
 }
 
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
-import ArgoKitPreview
-import ArgoKitComponent
-import SwiftUI
-
 // mock data.
 class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
     override init() {
@@ -34,6 +30,9 @@ class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER
     }
 }
 
+import ArgoKitPreview
+import ArgoKitComponent
+import SwiftUI
 @available(iOS 13.0.0, *)
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
@@ -44,8 +43,13 @@ fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKi
 @available(iOS 13.0.0, *)
 struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoKitRender {
-            ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
+        // 数组中可以添加其他设备进行多设备预览
+        SwiftUI.ForEach([.iPhone11]) { item in
+            ArgoKitRender {
+                ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
+            }
+            .previewDevice(item.device)
+            .previewDisplayName(item.name)
         }
     }
 }
