@@ -8,7 +8,7 @@
 import Foundation
 import ArgoAnimation
 
-public class AnimationGroup {
+public class AnimationGroup: NSObject {
     
     private var delay: Float?
     private var repeatCount: Int?
@@ -28,8 +28,6 @@ public class AnimationGroup {
     private var rawAnimations = [MLAAnimation]()
     
     // MARK: - Public
-    public init() { }
-    
     @discardableResult
     public func delay(_ delay: Float) -> Self {
         self.delay = delay

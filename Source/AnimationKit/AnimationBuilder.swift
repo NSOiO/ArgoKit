@@ -55,6 +55,7 @@ public enum AnimationElement {
 }
 
 extension Animation {
+    
     public static func build(_ elements: [AnimationElement]) -> Animation {
         var type: AnimationType?
         var view: UIView?
@@ -94,10 +95,10 @@ extension Animation {
         
         guard let t = type else {
             assertionFailure("You should specify the `.type` case of AnimationElement enumeration.")
-            return Animation(type: .alpha)
+            return Self(type: .alpha)
         }
         
-        let anim = Animation(type: t)
+        let anim = Self(type: t)
         if let v = view {
             anim.attach(v)
         }

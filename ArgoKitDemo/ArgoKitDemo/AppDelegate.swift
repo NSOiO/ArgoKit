@@ -17,9 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
 //        let contentView = ArgoKitTextViewTest(model: ArgoKitTextViewTestModel())
-        let contentView = LandmarkList()
+        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
+//        let vc = ViewController()
         let nav = UINavigationController(rootViewController: vc)
         
         let window = UIWindow.init(frame: UIScreen.main.bounds)
