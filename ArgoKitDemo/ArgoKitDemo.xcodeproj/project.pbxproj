@@ -40,8 +40,8 @@
 		B24576515409429925EC2BC6 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */; };
 		B6082F26B2D874C94D2B40A0 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CC277FB02338E844863A2EE9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF006DF4B435F4C3237140C7 /* ArgoKitPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857F2A91F8397D0371A4392 /* ArgoKitPreviewTypes.swift */; };
 		CF183E8A768603E46E9A567C /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF8FD96F5C6CC274F9FD3BB0 /* ArgoKitPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5C95F65A63270847B4C83D /* ArgoKitPreviewTypes.swift */; };
 		D95F3DFCC7C8477EFA874E26 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		DB3EFA2603509E23049FC61D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FA04056C2588BB47006E997F /* ArgoKitDatePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04056B2588BB47006E997F /* ArgoKitDatePickerTest.swift */; };
@@ -141,10 +141,9 @@
 		A4F5E668257B8770003D3591 /* ViewPageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPageTest.swift; sourceTree = "<group>"; };
 		A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
 		A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC5C95F65A63270847B4C83D /* ArgoKitPreviewTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewTypes.swift; path = /Users/momo/Development/data/UI/argokit/Source/Preview/ArgoKitPreviewTypes.swift; sourceTree = "<absolute>"; };
 		C368D52D56FE7ECADE543F28 /* Pods_ArgoTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
-		D0FC0DB8B4D6564575C40658 /* ArgoKitPreviewTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewTypes.swift; path = /Users/momo/Development/data/UI/argokit/Source/Preview/ArgoKitPreviewTypes.swift; sourceTree = "<absolute>"; };
+		E857F2A91F8397D0371A4392 /* ArgoKitPreviewTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewTypes.swift; path = ../Source/Preview/ArgoKitPreviewTypes.swift; sourceTree = "<group>"; };
 		FA04056B2588BB47006E997F /* ArgoKitDatePickerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitDatePickerTest.swift; sourceTree = "<group>"; };
 		FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitButtonTest.swift; sourceTree = "<group>"; };
 		FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitTextTest.swift; sourceTree = "<group>"; };
@@ -225,7 +224,6 @@
 				326335CB254133D20094676D /* Products */,
 				F4111651BAEBC0F7E7C25E97 /* Pods */,
 				8266FB072263C28BD6505C25 /* Frameworks */,
-				FAC41BC9258B2F8F0006AE78 /* Recovered References */,
 				62FE0835838FF2C5F47C3127 /* ArgoKitPreviewFiles */,
 			);
 			sourceTree = "<group>";
@@ -280,7 +278,7 @@
 		62FE0835838FF2C5F47C3127 /* ArgoKitPreviewFiles */ = {
 			isa = PBXGroup;
 			children = (
-				BC5C95F65A63270847B4C83D /* ArgoKitPreviewTypes.swift */,
+				E857F2A91F8397D0371A4392 /* ArgoKitPreviewTypes.swift */,
 			);
 			name = ArgoKitPreviewFiles;
 			sourceTree = "<group>";
@@ -387,14 +385,6 @@
 				FA51A0AF255D1804005BE240 /* LandmarkRow2.swift */,
 			);
 			path = "Supporting Views";
-			sourceTree = "<group>";
-		};
-		FAC41BC9258B2F8F0006AE78 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				D0FC0DB8B4D6564575C40658 /* ArgoKitPreviewTypes.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		FAE72A502589E8D00066B2CB /* TestCases */ = {
@@ -658,7 +648,7 @@
 				DB3EFA2603509E23049FC61D /* (null) in Sources */,
 				1C17BF04B7426CA0BDEBEDE6 /* (null) in Sources */,
 				460B278FFEB6B669AF0B5D12 /* (null) in Sources */,
-				CF8FD96F5C6CC274F9FD3BB0 /* ArgoKitPreviewTypes.swift in Sources */,
+				CF006DF4B435F4C3237140C7 /* ArgoKitPreviewTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
