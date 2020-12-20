@@ -13,7 +13,7 @@ class ArgoKitGridView: UICollectionView {
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
-            ArgoKitReusedLayoutHelper.forLayoutNode(GridCellNode.self,frame: self.bounds)
+            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
             oldFrame = self.frame
         }
         super.layoutSubviews()
@@ -29,9 +29,9 @@ class GridNode: ArgoKitScrollViewNode,
     }
     
     
-    lazy var dataSourceHelper = GridDataSourceHelper()
-    lazy var headerSourceHelper = GridDataSourceHelper()
-    lazy var footerSourceHelper = GridDataSourceHelper()
+    lazy var dataSourceHelper = ArgoKitDataSourceHelper()
+    lazy var headerSourceHelper = ArgoKitDataSourceHelper()
+    lazy var footerSourceHelper = ArgoKitDataSourceHelper()
     
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
     fileprivate var moveItem = false
@@ -211,7 +211,7 @@ extension GridNode {
         self.pGridView?.moveItem(at: indexPath, to: newIndexPath)
     }
     
-    public func reloadRowsHeight(indexPath:IndexPath) {
+    public func reloadRowsHeight() {
         self.pGridView?.performBatchUpdates(nil, completion: nil)
     }
 }
@@ -253,7 +253,7 @@ extension GridNode{
     
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
-        var dataSourceHelper:GridDataSourceHelper? = nil
+        var dataSourceHelper:ArgoKitDataSourceHelper? = nil
         var reuseIdentifier:String = kGridHeaderReuseIdentifier
         if kind ==  UICollectionView.elementKindSectionHeader{
             dataSourceHelper = self.headerSourceHelper
@@ -279,14 +279,26 @@ extension GridNode{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
-        let height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        var height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        if collectionViewLayout is GridFlowLayout {
+            let layout = collectionViewLayout as! GridFlowLayout
+            if layout.headerHeiht > 0 {
+                height = layout.headerHeiht
+            }
+        }
         return CGSize(width:width, height: height)
     }
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
-        let height = self.footerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        var height = self.footerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        if collectionViewLayout is GridFlowLayout {
+            let layout = collectionViewLayout as! GridFlowLayout
+            if layout.headerHeiht > 0 {
+                height = layout.headerHeiht
+            }
+        }
         return CGSize(width:width, height: height)
     }
     
@@ -303,7 +315,7 @@ extension GridNode{
             self.dataSourceHelper.dataList?[sourceIndexPath.section] = items
         }
         
-        if let sourceItem = items?[sourceIndexPath.item] as? GridCellNode,let desItem = items?[destinationIndexPath.item] as? GridCellNode{
+        if let sourceItem = items?[sourceIndexPath.item] as? ArgoKitCellNode,let desItem = items?[destinationIndexPath.item] as? ArgoKitCellNode{
             if !sourceItem.frame.equalTo(desItem.frame) {
                 sourceItem.calculateLayout(size: sourceItem.frame.size)
                 sourceItem.applyLayoutAferCalculation(withView: false)
@@ -319,12 +331,14 @@ extension GridNode{
         if let titles = self.sendAction(withObj: String(_sel: sel), paramter: nil) as? [String]{
             return titles
         }
-        return ["A","b","C","D","E"]
+        return nil
     }
 
     func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath{
-        print(title)
-        print(index)
+        let sel = #selector(self.collectionView(_:indexPathForIndexTitle:at:))
+        if let indexPath = self.sendAction(withObj: String(_sel: sel), paramter: [title,index]) as? IndexPath{
+            return indexPath
+        }
         return IndexPath(index: 0)
     }
 }
@@ -341,7 +355,6 @@ extension GridNode{
 //        return false
 //    }
 
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
@@ -366,8 +379,11 @@ extension GridNode{
     }
 
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath){
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return
+        }
         let sel = #selector(self.collectionView(_:didHighlightItemAt:))
-        if  let color = self.sendAction(withObj: String(_sel: sel), paramter: nil) as? UIColor {
+        if let color = self.sendAction(withObj: String(_sel: sel), paramter: [data,indexPath]) as? UIColor {
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.contentView.backgroundColor = color
         }
@@ -375,8 +391,11 @@ extension GridNode{
     }
 
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath){
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return
+        }
         let sel = #selector(self.collectionView(_:didUnhighlightItemAt:))
-        if  let color = self.sendAction(withObj: String(_sel: sel), paramter: nil) as? UIColor {
+        if  let color = self.sendAction(withObj: String(_sel: sel), paramter: [data,indexPath]) as? UIColor {
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.contentView.backgroundColor = color
         }
@@ -388,12 +407,10 @@ extension GridNode{
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-            node.indexpath = indexPath
             node.observeFrameChanged {[weak self] (_, _) in
-                self?.reloadRowsHeight(indexPath: node.indexpath)
+                self?.reloadRowsHeight()
             }
         }
-        
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
@@ -417,13 +434,73 @@ extension GridNode{
     // MARK: HEADER OR FOOTER
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
-        
+        var dataSourceHelper:ArgoKitDataSourceHelper? = nil
+        if elementKind ==  UICollectionView.elementKindSectionHeader{
+            dataSourceHelper = self.headerSourceHelper
+        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
+            dataSourceHelper = self.footerSourceHelper
+        }
+        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
+            node.observeFrameChanged {[weak self] (_, _) in
+                self?.reloadRowsHeight()
+            }
+        }
     }
     
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath){
+        var dataSourceHelper:ArgoKitDataSourceHelper? = nil
+        if elementKind ==  UICollectionView.elementKindSectionHeader{
+            dataSourceHelper = self.headerSourceHelper
+        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
+            dataSourceHelper = self.footerSourceHelper
+        }
+        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
+            node.removeObservingFrameChanged()
+        }
         
     }
+}
+
+// MARK: UICollectionViewDelegate Menu
+extension GridNode{
+    func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return false
+        }
+        let sel = #selector(self.collectionView(_:shouldShowMenuForItemAt:))
+        return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? Bool ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return false
+        }
+        let sel = #selector(self.collectionView(_:canPerformAction:forItemAt:withSender:))
+        if let s_sender = sender {
+            return self.sendAction(withObj: String(_sel: sel), paramter: [action, data, indexPath, s_sender]) as? Bool ?? false
+        }
+        return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? Bool ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return
+        }
+        let sel = #selector(self.collectionView(_:performAction:forItemAt:withSender:))
+        if let s_sender = sender {
+            self.sendAction(withObj: String(_sel: sel), paramter: [action, data, indexPath, s_sender])
+        } else {
+            self.sendAction(withObj: String(_sel: sel), paramter: [action, data, indexPath])
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    func collectionView(_ collectionView: UICollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+        
+    }
+    
 }
 
 // MARK: UICollectionViewDelegateFlowLayout

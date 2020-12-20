@@ -7,28 +7,28 @@
 
 import Foundation
 
-class GridCellNode: ArgoKitNode {
-    
-    var cellSourceData: Any?
-    
-    var frameObserber: NSKeyValueObservation?
-    var indexpath:IndexPath = IndexPath(row: 0, section: 0)
-    public func observeFrameChanged(changeHandler: @escaping (GridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
-        removeObservingFrameChanged()
-        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
-    }
-    
-    public func removeObservingFrameChanged() {
-        if frameObserber != nil {
-            frameObserber?.invalidate()
-            frameObserber = nil
-        }
-    }
-}
+//class GridCellNode: ArgoKitNode {
+//    
+//    var cellSourceData: Any?
+//    
+//    var frameObserber: NSKeyValueObservation?
+//    var indexpath:IndexPath = IndexPath(row: 0, section: 0)
+//    public func observeFrameChanged(changeHandler: @escaping (GridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
+//        removeObservingFrameChanged()
+//        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
+//    }
+//    
+//    public func removeObservingFrameChanged() {
+//        if frameObserber != nil {
+//            frameObserber?.invalidate()
+//            frameObserber = nil
+//        }
+//    }
+//}
 
 class GridCell: UICollectionViewCell {
   
-    var contentNode: GridCellNode?
+    var contentNode: ArgoKitCellNode?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -45,7 +45,7 @@ class GridCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
-    public func linkCellNode(_ node: GridCellNode) {
+    public func linkCellNode(_ node: ArgoKitCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculation(withView:false)

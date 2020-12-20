@@ -15,13 +15,13 @@ class ArgoKitGridTestModel {
     var headerSource = [ArgoKitGridHeaderTestModel]()
     init() {
         for session in 0..<10 {
-            let idetifier = "gridcell_\(session)"
+            let idetifier = "gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_\(session)"
             let headerModel = ArgoKitGridHeaderTestModel()
             headerModel.headerName = idetifier
             headerSource.append(headerModel)
             
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for index in 0..<1400{
+            for index in 0..<5{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = "\(index)"
                 item.imagePath = images[index%5]
@@ -100,7 +100,8 @@ struct ArgoKitGridTest: ArgoKit.View {
             Text(data.headerName)
                 .textAlign(.center)
                 .backgroundColor(.purple)
-                .height(40)
+                .lineLimit(0)
+            
         }
         .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
             Text(data.headerName)

@@ -7,25 +7,6 @@
 
 import Foundation
 
-class ArgoKitCellNode: ArgoKitNode {
-    
-    var cellSourceData: Any?
-    
-    var frameObserber: NSKeyValueObservation?
-    
-    public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
-        removeObservingFrameChanged()
-        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
-    }
-    
-    public func removeObservingFrameChanged() {
-        if frameObserber != nil {
-            frameObserber?.invalidate()
-            frameObserber = nil
-        }
-    }
-}
-
 class ArgoKitListCell: UITableViewCell {
   
     var contentNode: ArgoKitCellNode?

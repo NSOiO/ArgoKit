@@ -138,3 +138,86 @@ extension Grid{
         return self
     }
 }
+
+
+extension Grid{
+    @available(iOS, introduced: 5.0, deprecated: 13.0)
+    @discardableResult
+    public func shouldShowMenu(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:shouldShowMenuForItemAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2 {
+                let data: D = paramter![0] as! D
+                let indexPath: IndexPath = paramter![1] as! IndexPath
+                return action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS, introduced: 5.0, deprecated: 13.0)
+    @discardableResult
+    public func canPerformAction(_ action: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:canPerformAction:forItemAt:withSender:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 3 {
+                let act: Selector = paramter![0] as! Selector
+                let data: D = paramter![1] as! D
+                let indexPath: IndexPath = paramter![2] as! IndexPath
+                var sender: Any? = nil
+                if paramter?.count ?? 0 >= 4 {
+                    sender = paramter![2]
+                }
+                return action(act, data, indexPath, sender)
+            }
+            return nil
+        })
+        return self
+    }
+
+    @available(iOS, introduced: 5.0, deprecated: 13.0)
+    @discardableResult
+    public func performAction(_ action: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:performAction:forItemAt:withSender:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 3 {
+                let act: Selector = paramter![0] as! Selector
+                let data: D = paramter![1] as! D
+                let indexPath: IndexPath = paramter![2] as! IndexPath
+                var sender: Any? = nil
+                if paramter?.count ?? 0 >= 4 {
+                    sender = paramter![3]
+                }
+                action(act, data, indexPath, sender)
+            }
+            return nil
+        })
+        return self
+    }
+}
+
+extension Grid{
+    func indexTitles(_ action: @escaping () -> [String]?) -> Self{
+        let sel = #selector(gridNode?.indexTitles(for:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            return action()
+        })
+        return self
+    }
+    
+    func indexPathForIndexTitle(_ action: @escaping (_ title: String, _ index: Int) -> IndexPath) -> Self{
+        let sel = #selector(gridNode?.collectionView(_:indexPathForIndexTitle:at:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2 {
+                let title: String = paramter![0] as! String
+                let index: Int = paramter![1] as!Int
+                return action(title, index)
+            }
+            return nil
+        })
+        return self
+    }
+}
