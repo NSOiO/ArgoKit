@@ -33,7 +33,7 @@ class ArgoKitDataSourceHelper {
     lazy var registedReuseIdSet = Set<String>()
         
     public var dataList: [[Any]]?
-    public var buildNodeFunc: ((Any)->View)?
+    public var buildNodeFunc: ((Any)->View?)?
 }
 
 extension ArgoKitDataSourceHelper {

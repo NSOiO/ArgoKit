@@ -9,7 +9,19 @@ import Foundation
 //MARK: Reload
 extension Grid {
     public func reloadData(_ data: [D]? = nil, sectionHeaderData: ArgoKitIdentifiable? = nil, sectionFooterData: ArgoKitIdentifiable? = nil)  ->Self where D : ArgoKitIdentifiable{
-        gridNode?.reloadData(data: data != nil ? [data!] : nil, sectionHeaderData: (sectionHeaderData != nil) ? [sectionHeaderData!] : nil, sectionFooterData: (sectionFooterData != nil) ? [sectionFooterData!] : nil)
+        var rdata:[[D]]? = nil
+        var rsectionHeaderData:[ArgoKitIdentifiable]? = nil
+        var rsectionFooterData:[ArgoKitIdentifiable]? = nil
+        if let date = data{
+            rdata? = [date]
+        }
+        if let sectionHeaderData = sectionHeaderData {
+            rsectionHeaderData = [sectionHeaderData]
+        }
+        if let sectionFooterData = sectionFooterData{
+            rsectionFooterData = [sectionFooterData]
+        }
+        gridNode?.reloadData(data:rdata, sectionHeaderData: rsectionHeaderData, sectionFooterData: rsectionFooterData)
         return self
     }
     

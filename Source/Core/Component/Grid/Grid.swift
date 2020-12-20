@@ -30,15 +30,21 @@ public class Grid<D>: ScrollView  {
         
         gridNode?.dataSourceHelper.dataList = [data]
         gridNode?.dataSourceHelper.buildNodeFunc = { item in
-            return rowContent(item as! D)
+            if let item = item as? D{
+                return rowContent(item)
+            }
+            return nil
         }
     }
     
     public convenience init(sectionData: [[D]], @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
         self.init()
         gridNode?.dataSourceHelper.dataList = sectionData
-        gridNode!.dataSourceHelper.buildNodeFunc = { item in
-            return rowContent(item as! D)
+        gridNode?.dataSourceHelper.buildNodeFunc = { item in
+            if let item = item as? D{
+                return rowContent(item)
+            }
+            return nil
         }
     }
 }
@@ -59,7 +65,10 @@ extension Grid{
     public func sectionHeader<T: ArgoKitIdentifiable>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
         gridNode?.headerSourceHelper.dataList = [data]
         gridNode?.headerSourceHelper.buildNodeFunc = { item in
-            return headerContent(item as! T)
+            if let item = item as? T{
+                return headerContent(item)
+            }
+            return nil
         }
         return self
     }
@@ -75,9 +84,12 @@ extension Grid{
     
     @discardableResult
     public func sectionFooter<T: ArgoKitIdentifiable>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
-        gridNode!.footerSourceHelper.dataList = [data]
-        gridNode!.footerSourceHelper.buildNodeFunc = { item in
-            return footerContent(item as! T)
+        gridNode?.footerSourceHelper.dataList = [data]
+        gridNode?.footerSourceHelper.buildNodeFunc = { item in
+            if let item = item as? T {
+                return footerContent(item)
+            }
+           return nil
         }
         return self
     }

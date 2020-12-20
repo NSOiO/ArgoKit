@@ -86,34 +86,47 @@ extension GridNode {
         
     public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
         
-        if data != nil {
+        if let data = data {
             self.dataSourceHelper.dataList = data
         }
-        if sectionHeaderData != nil {
-            self.headerSourceHelper.dataList = [sectionHeaderData!]
+        
+        if let sectionHeaderData = sectionHeaderData {
+            self.headerSourceHelper.dataList = [sectionHeaderData]
         }
-        if sectionFooterData != nil {
-            self.footerSourceHelper.dataList = [sectionFooterData!]
+        if let sectionFooterData =  sectionFooterData{
+            self.footerSourceHelper.dataList = [sectionFooterData]
         }
         self.pGridView?.reloadData()
     }
         
     public func reloadSections(_ sectionData: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
-        
-        if sectionHeaderData != nil
+        /*
+        if sectionData != nil
             || sectionHeaderData != nil
             || sectionFooterData != nil{
             
             for (index, value) in sections.enumerated() {
-                if sectionHeaderData != nil {
-                    self.dataSourceHelper.reloadSection(data: sectionData![index], section: value)
+                if let sectionData = sectionData {
+                    self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
                 }
-                if sectionHeaderData != nil {
-                    self.headerSourceHelper.reloadRow(rowData: sectionHeaderData![index], row: value, at: 0)
+                if let sectionHeaderData = sectionHeaderData {
+                    self.headerSourceHelper.reloadRow(rowData: sectionHeaderData[index], row: value, at: 0)
                 }
-                if sectionFooterData != nil {
-                    self.footerSourceHelper.reloadRow(rowData: sectionFooterData![index], row: value, at: 0)
+                if let sectionFooterData = sectionFooterData {
+                    self.footerSourceHelper.reloadRow(rowData: sectionFooterData[index], row: value, at: 0)
                 }
+            }
+        }
+*/
+        for (index, value) in sections.enumerated() {
+            if let sectionData = sectionData {
+                self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
+            }
+            if let sectionHeaderData = sectionHeaderData {
+                self.headerSourceHelper.reloadRow(rowData: sectionHeaderData[index], row: value, at: 0)
+            }
+            if let sectionFooterData = sectionFooterData {
+                self.footerSourceHelper.reloadRow(rowData: sectionFooterData[index], row: value, at: 0)
             }
         }
         self.pGridView?.reloadSections(sections)
@@ -124,11 +137,11 @@ extension GridNode {
         let start = self.dataSourceHelper.dataList?.count ?? 0
         let end = start + data.count
         self.dataSourceHelper.appendSections(data)
-        if sectionHeaderData != nil {
-            self.headerSourceHelper.appendRows(rowData: sectionHeaderData!, at: 0)
+        if let sectionHeaderData = sectionHeaderData {
+            self.headerSourceHelper.appendRows(rowData: sectionHeaderData, at: 0)
         }
-        if sectionFooterData != nil {
-            self.footerSourceHelper.appendRows(rowData: sectionFooterData!, at: 0)
+        if let sectionFooterData = sectionFooterData {
+            self.footerSourceHelper.appendRows(rowData: sectionFooterData, at: 0)
         }
         self.pGridView?.insertSections(IndexSet(start..<end))
     }
@@ -138,11 +151,11 @@ extension GridNode {
         for (index, value) in sections.enumerated() {
             self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
             
-            if sectionHeaderData != nil {
-                self.headerSourceHelper.insertRow(rowData: sectionHeaderData![index], row: value, at: 0)
+            if let sectionHeaderData = sectionHeaderData {
+                self.headerSourceHelper.insertRow(rowData: sectionHeaderData[index], row: value, at: 0)
             }
-            if sectionFooterData != nil {
-                self.footerSourceHelper.insertRow(rowData: sectionFooterData![index], row: value, at: 0)
+            if let sectionFooterData = sectionFooterData {
+                self.footerSourceHelper.insertRow(rowData: sectionFooterData[index], row: value, at: 0)
             }
         }
         self.pGridView?.insertSections(sections)
@@ -279,8 +292,7 @@ extension GridNode{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
         var height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
-        if collectionViewLayout is GridFlowLayout {
-            let layout = collectionViewLayout as! GridFlowLayout
+        if let layout = collectionViewLayout as? GridFlowLayout{
             if layout.headerHeiht > 0 {
                 height = layout.headerHeiht
             }
@@ -312,15 +324,6 @@ extension GridNode{
         items?.insert(temp as Any, at: destinationIndexPath.item)
         if let items = items{
             self.dataSourceHelper.dataList?[sourceIndexPath.section] = items
-        }
-        
-        if let sourceItem = items?[sourceIndexPath.item] as? ArgoKitCellNode,let desItem = items?[destinationIndexPath.item] as? ArgoKitCellNode{
-            if !sourceItem.frame.equalTo(desItem.frame) {
-                sourceItem.calculateLayout(size: sourceItem.frame.size)
-                sourceItem.applyLayoutAferCalculation(withView: false)
-                desItem.calculateLayout(size: desItem.frame.size)
-                desItem.applyLayoutAferCalculation(withView: false)
-            }
         }
     }
 

@@ -148,7 +148,7 @@ extension Grid{
         node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2,
                let data = paramter?.first as? D ,
-               let indexPath = paramter![1] as? IndexPath{
+               let indexPath = paramter?[1] as? IndexPath{
                 return function(data, indexPath)
             }
             return nil
