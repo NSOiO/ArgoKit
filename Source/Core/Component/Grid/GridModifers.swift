@@ -71,10 +71,10 @@ extension Grid{
     @discardableResult
     public func cellSelected(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) ->Self {
         let sel = #selector(GridNode.collectionView(_:didSelectItemAt:))
-        gridNode?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            if paramter?.count ?? 0 >= 2 {
-                let data: D = paramter![0] as! D
-                let indexPath: IndexPath = paramter![1] as! IndexPath
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D ,
+               let indexPath: IndexPath = paramter?.last as? IndexPath{
                 function(data, indexPath)
             }
             return nil
@@ -85,10 +85,10 @@ extension Grid{
     @discardableResult
     public func cellDeselected(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) ->Self {
         let sel = #selector(GridNode.collectionView(_:didDeselectItemAt:))
-        gridNode?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            if paramter?.count ?? 0 >= 2 {
-                let data: D = paramter![0] as! D
-                let indexPath: IndexPath = paramter![1] as! IndexPath
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D ,
+               let indexPath: IndexPath = paramter?.last as? IndexPath{
                 function(data, indexPath)
             }
             return nil
@@ -98,10 +98,10 @@ extension Grid{
     
     public func cellWillAppear(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
         let sel = #selector(GridNode.collectionView(_:willDisplay:forItemAt:))
-        gridNode?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            if paramter?.count ?? 0 >= 2 {
-                let data: D = paramter![0] as! D
-                let indexPath: IndexPath = paramter![1] as! IndexPath
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath {
                 function(data, indexPath)
             }
             return nil
@@ -111,11 +111,11 @@ extension Grid{
     
     public func cellDidDisappear(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
         let sel = #selector(GridNode.collectionView(_:didEndDisplaying:forItemAt:))
-        gridNode?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 {
-                let data: D = paramter![0] as! D
-                let indexPath: IndexPath = paramter![1] as! IndexPath
-                function(data, indexPath)
+                if let data = paramter?.first as? D,let indexPath = paramter?.last as? IndexPath {
+                    function(data, indexPath)
+                }
             }
             return nil
         })
@@ -124,7 +124,7 @@ extension Grid{
     
     public func cellDidHighlight(_ function:@escaping () -> UIColor) -> Self{
         let sel = #selector(GridNode.collectionView(_:didHighlightItemAt:))
-        gridNode?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return function()
         })
         return self
@@ -132,7 +132,7 @@ extension Grid{
     
     public func cellDidUnhighlight(_ function:@escaping () -> UIColor) -> Self{
         let sel = #selector(GridNode.collectionView(_:didUnhighlightItemAt:))
-        gridNode?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return function()
         })
         return self
@@ -143,13 +143,13 @@ extension Grid{
 extension Grid{
     @available(iOS, introduced: 5.0, deprecated: 13.0)
     @discardableResult
-    public func shouldShowMenu(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func shouldShowMenu(_ function: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(gridNode?.collectionView(_:shouldShowMenuForItemAt:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            if paramter?.count ?? 0 >= 2 {
-                let data: D = paramter![0] as! D
-                let indexPath: IndexPath = paramter![1] as! IndexPath
-                return action(data, indexPath)
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D ,
+               let indexPath = paramter![1] as? IndexPath{
+                return function(data, indexPath)
             }
             return nil
         })
@@ -158,19 +158,18 @@ extension Grid{
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
     @discardableResult
-    public func canPerformAction(_ action: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
+    public func canPerformAction(_ function: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
         let sel = #selector(gridNode?.collectionView(_:canPerformAction:forItemAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            
-            if paramter?.count ?? 0 >= 3 {
-                let act: Selector = paramter![0] as! Selector
-                let data: D = paramter![1] as! D
-                let indexPath: IndexPath = paramter![2] as! IndexPath
+            if paramter?.count ?? 0 >= 3,
+               let act = paramter?.first as? Selector,
+               let data = paramter?[1] as? D,
+               let indexPath: IndexPath = paramter?[2] as? IndexPath{
                 var sender: Any? = nil
-                if paramter?.count ?? 0 >= 4 {
-                    sender = paramter![2]
+                if paramter?.count ?? 0 >= 4,let sender_ =  paramter?[3]{
+                    sender = sender_
                 }
-                return action(act, data, indexPath, sender)
+                return function(act, data, indexPath, sender)
             }
             return nil
         })
@@ -179,19 +178,18 @@ extension Grid{
 
     @available(iOS, introduced: 5.0, deprecated: 13.0)
     @discardableResult
-    public func performAction(_ action: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
+    public func performAction(_ function: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
         let sel = #selector(gridNode?.collectionView(_:performAction:forItemAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            
-            if paramter?.count ?? 0 >= 3 {
-                let act: Selector = paramter![0] as! Selector
-                let data: D = paramter![1] as! D
-                let indexPath: IndexPath = paramter![2] as! IndexPath
+            if paramter?.count ?? 0 >= 3 ,
+               let act = paramter?.first as? Selector,
+               let data = paramter?[1] as? D,
+               let indexPath: IndexPath = paramter?[2] as? IndexPath{
                 var sender: Any? = nil
-                if paramter?.count ?? 0 >= 4 {
-                    sender = paramter![3]
+                if paramter?.count ?? 0 >= 4,let sender_ =  paramter?[3]{
+                    sender = sender_
                 }
-                action(act, data, indexPath, sender)
+                return function(act, data, indexPath, sender)
             }
             return nil
         })
@@ -211,9 +209,9 @@ extension Grid{
     func indexPathForIndexTitle(_ action: @escaping (_ title: String, _ index: Int) -> IndexPath) -> Self{
         let sel = #selector(gridNode?.collectionView(_:indexPathForIndexTitle:at:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            if paramter?.count ?? 0 >= 2 {
-                let title: String = paramter![0] as! String
-                let index: Int = paramter![1] as!Int
+            if paramter?.count ?? 0 >= 2,
+               let title = paramter?.first as? String,
+               let index = paramter?.last as?Int{
                 return action(title, index)
             }
             return nil

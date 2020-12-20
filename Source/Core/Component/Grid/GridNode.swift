@@ -185,7 +185,6 @@ extension GridNode {
         for index in (0..<rowData.count) {
             indexPaths.append(IndexPath(row: start + index, section: section))
         }
-        
         self.pGridView?.insertItems(at: indexPaths)
     }
     
@@ -323,7 +322,6 @@ extension GridNode{
                 desItem.applyLayoutAferCalculation(withView: false)
             }
         }
-       
     }
 
     func indexTitles(for collectionView: UICollectionView) -> [String]?{
