@@ -12,6 +12,17 @@ extension Grid{
         gridNode?.enableMoveItem(value)
         return self
     }
+    @discardableResult
+    public func scrollToItem(indexPath: IndexPath,scrollposition:UICollectionView.ScrollPosition,animated:Bool)->Self {
+        addAttribute(#selector(ArgoKitGridView.scrollToItem(at:at:animated:)),indexPath,scrollposition.rawValue,animated)
+        return self
+    }
+    
+    @discardableResult
+    public func scrollToItem(rect: CGRect,animated:Bool)->Self {
+        addAttribute(#selector(ArgoKitGridView.scrollRectToVisible(_:animated:)),rect,animated)
+        return self
+    }
     
     @discardableResult
     public func allowsSelection(_ value:Bool) -> Self {

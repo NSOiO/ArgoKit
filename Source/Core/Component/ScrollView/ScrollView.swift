@@ -113,7 +113,7 @@ extension ScrollView {
     }
 
     @discardableResult
-    public func isScrollEnabled(_ value: Bool) -> Self {
+    public func scrollEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.isScrollEnabled),value)
         return self
     }

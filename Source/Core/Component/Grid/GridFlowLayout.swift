@@ -31,34 +31,34 @@ class GridFlowLayout: UICollectionViewFlowLayout {
 //MARK: item layout设置配置参数
 extension Grid{
     @discardableResult
-    public func itemHeight(_ value:CGFloat = 0) -> Self{
+    public func itemHeight(_ value:CGFloat) -> Self{
         gridNode?.itemHeight(value)
         return self
     }
     
     @discardableResult
-    public func columnCount(_ value:Int = 1) -> Self{
+    public func columnCount(_ value:Int) -> Self{
         gridNode?.columnCount(value)
         return self
     }
 
-    public func columnSpacing(_ value:CGFloat = 0) -> Self{
+    public func columnSpacing(_ value:CGFloat) -> Self{
         gridNode?.columnSpacing(value)
         return self
         
     }
     
-    public func lineSpacing(_ value:CGFloat = 0) -> Self{
+    public func lineSpacing(_ value:CGFloat) -> Self{
         gridNode?.lineSpacing(value)
         return self
     }
     
-    public func estimatedItemSize(_ value:CGSize = CGSize.zero) -> Self{
+    public func estimatedItemSize(_ value:CGSize) -> Self{
         gridNode?.estimatedItemSize(value)
         return self
     }
     
-    public func scrollDirection(_ value:UICollectionView.ScrollDirection = .vertical)->Self{
+    public func scrollDirection(_ value:UICollectionView.ScrollDirection)->Self{
         gridNode?.scrollDirection(value)
         return self
     }
@@ -73,23 +73,23 @@ extension Grid{
         return self
     }
 
-    public func sectionInset(_ value:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )) -> Self {
+    public func sectionInset(_ value:UIEdgeInsets ) -> Self {
         gridNode?.sectionInset(value)
         return self
     }
     
     @available(iOS 11.0, *)
-    public func sectionInsetReference(_ value:UICollectionViewFlowLayout.SectionInsetReference = .fromContentInset) -> Self {
+    public func sectionInsetReference(_ value:UICollectionViewFlowLayout.SectionInsetReference) -> Self {
         gridNode?.sectionInsetReference(value)
         return self
     }
     
-    public func sectionHeadersPinToVisibleBounds(_ value:Bool = false) -> Self {
+    public func sectionHeadersPinToVisibleBounds(_ value:Bool) -> Self {
         gridNode?.sectionHeadersPinToVisibleBounds(value)
         return self
     }
     
-    public func sectionFootersPinToVisibleBounds(_ value:Bool = false) -> Self {
+    public func sectionFootersPinToVisibleBounds(_ value:Bool) -> Self {
         gridNode?.sectionFootersPinToVisibleBounds(value)
         return self
     }

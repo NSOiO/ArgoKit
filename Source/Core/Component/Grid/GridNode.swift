@@ -60,6 +60,7 @@ class GridNode: ArgoKitScrollViewNode,
         if #available(iOS 10.0, *) {
             gridView.isPrefetchingEnabled = false
         }
+       
         
         if moveItem {
             longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(GridNode.handleLongGesture(_:)))
@@ -74,18 +75,18 @@ class GridNode: ArgoKitScrollViewNode,
     @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         
         switch(gesture.state) {
-            
-        case UIGestureRecognizerState.began:
-            guard let selectedIndexPath = pGridView?.indexPathForItem(at: gesture.location(in: self.pGridView)) else {
-                break
-            }
-            pGridView?.beginInteractiveMovementForItem(at: selectedIndexPath)
-        case UIGestureRecognizerState.changed:
-            pGridView?.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
-        case UIGestureRecognizerState.ended:
-            pGridView?.endInteractiveMovement()
-        default:
-            pGridView?.cancelInteractiveMovement()
+        
+            case UIGestureRecognizerState.began:
+                guard let selectedIndexPath = pGridView?.indexPathForItem(at: gesture.location(in: self.pGridView)) else    {
+                    break
+                }
+                pGridView?.beginInteractiveMovementForItem(at: selectedIndexPath)
+            case UIGestureRecognizerState.changed:
+                pGridView?.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+            case UIGestureRecognizerState.ended:
+                pGridView?.endInteractiveMovement()
+            default:
+                pGridView?.cancelInteractiveMovement()
         }
     }
 }
@@ -108,24 +109,6 @@ extension GridNode {
     }
         
     public func reloadSections(_ sectionData: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
-        /*
-        if sectionData != nil
-            || sectionHeaderData != nil
-            || sectionFooterData != nil{
-            
-            for (index, value) in sections.enumerated() {
-                if let sectionData = sectionData {
-                    self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
-                }
-                if let sectionHeaderData = sectionHeaderData {
-                    self.headerSourceHelper.reloadRow(rowData: sectionHeaderData[index], row: value, at: 0)
-                }
-                if let sectionFooterData = sectionFooterData {
-                    self.footerSourceHelper.reloadRow(rowData: sectionFooterData[index], row: value, at: 0)
-                }
-            }
-        }
-*/
         for (index, value) in sections.enumerated() {
             if let sectionData = sectionData {
                 self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
@@ -229,6 +212,13 @@ extension GridNode {
         
         self.dataSourceHelper.moveRow(at: indexPath, to: newIndexPath)
         self.pGridView?.moveItem(at: indexPath, to: newIndexPath)
+    }
+    
+    
+    
+    
+    public func scrollToItem(indexPath: IndexPath,scrollposition:UICollectionView.ScrollPosition,animated:Bool) {
+        pGridView?.scrollToItem(at: indexPath, at: scrollposition, animated: animated)
     }
     
     public func reloadRowsHeight() {
@@ -355,14 +345,17 @@ extension GridNode{
 // MARK: UICollectionViewDelegate Select
 extension GridNode{
     
-//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool{
-//        return false
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool // called when the user taps on an already-selected item in multi-select mode
-//    {
-//        return false
-//    }
+    /*
+     // 使用默认实现
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool{
+        return false
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool // called when the user taps on an already-selected item in multi-select mode
+    {
+        return false
+    }
+ */
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {

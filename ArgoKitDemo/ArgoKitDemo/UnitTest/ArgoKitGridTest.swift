@@ -78,11 +78,9 @@ struct ArgoKitGridTest: ArgoKit.View {
            
         }
         .grow(1)
-//        .height(500)
         .columnCount(3)
         .columnSpacing(10)
         .lineSpacing(10)
-//        .itemHeight(150)
         .sectionInset(UIEdgeInsets(top: 10, left:10, bottom: 10, right: 10))
         .showsScrollIndicator(true)
         .cellWillAppear{ (data, indexpath) in
@@ -95,6 +93,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         .cellDeselected({ (data, indexpath) in
         })
         .willBeginDragging {
+            
         }
         .sectionHeader(model.headerSource) { data -> View in
             Text(data.headerName)
@@ -133,8 +132,30 @@ struct ArgoKitGridTest: ArgoKit.View {
             }
             .backgroundColor(.red)
             .height(100)
-//            .width(300)
         }
+        .refreshHeaderView { () -> RefreshHeaderView in
+            RefreshHeaderView {
+                
+            } _: { () -> View in
+                Text("RefreshHeaderView").alignSelf(.center)
+            }
+            .height(100)
+            .backgroundColor(.red)
+        }
+        .refreshFooterView { () -> RefreshFooterView in
+            RefreshFooterView {
+                
+            } _: { () -> View in
+                Text("RefreshFooterViewRefreshFooterView").backgroundColor(.red)
+                Text("RefreshFooterView").backgroundColor(.purple)
+            }
+            .width(100%)
+            .backgroundColor(.orange)
+            .alignContent(.center)
+        }
+        .scrollEnabled(true)
+        .scrollDirection(UICollectionView.ScrollDirection.horizontal)
+        .showsScrollIndicator(true)
 
     }
 }
