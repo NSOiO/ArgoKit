@@ -9,72 +9,33 @@ import Foundation
 
 private struct ArgoKitNodeAnimationKey {
     static var animationKey: Void?
-    static var animationGroupKey: Void?
 }
 
 extension UIView {
     
-    @objc public var argokit_animation: Animation? {
+    @objc public var argokit_animation: AnimationBasic? {
         set {
-            if let animationGroup = self.argokit_animationGroup {
-                animationGroup.stop()
-                self.argokit_animationGroup = nil
-            }
             newValue?.attach(self)
             objc_setAssociatedObject(self, &ArgoKitNodeAnimationKey.animationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return  objc_getAssociatedObject(self, &ArgoKitNodeAnimationKey.animationKey) as? Animation
+            return  objc_getAssociatedObject(self, &ArgoKitNodeAnimationKey.animationKey) as? AnimationBasic
         }
     }
     
-    @objc public var argokit_animationGroup: AnimationGroup? {
-        set {
-            if let animation = self.argokit_animation {
-                animation.stop()
-                self.argokit_animation = nil
-            }
-            newValue?.attach(self)
-            objc_setAssociatedObject(self, &ArgoKitNodeAnimationKey.animationGroupKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-        get {
-            return  objc_getAssociatedObject(self, &ArgoKitNodeAnimationKey.animationGroupKey) as? AnimationGroup
-        }
-    }
-        
     @objc public func argokit_startAnimation(serial: Bool = false) {
-        if let animationGroup = self.argokit_animationGroup {
-            if serial {
-                animationGroup.startSerial()
-            } else {
-                animationGroup.startConcurrent()
-            }
-            return
-        }
-        self.argokit_animation?.start()
+        self.argokit_animation?.start(serial: serial)
     }
     
     @objc public func argokit_pauseAnimation() {
-        if let animationGroup = self.argokit_animationGroup {
-            animationGroup.pause()
-            return
-        }
         self.argokit_animation?.pause()
     }
     
     @objc public func argokit_resumeAnimation() {
-        if let animationGroup = self.argokit_animationGroup {
-            animationGroup.resume()
-            return
-        }
         self.argokit_animation?.resume()
     }
     
     @objc public func argokit_stopAnimation() {
-        if let animationGroup = self.argokit_animationGroup {
-            animationGroup.stop()
-            return
-        }
         self.argokit_animation?.stop()
     }
 }
@@ -82,28 +43,15 @@ extension UIView {
 extension View {
     
     @discardableResult
-    public func addAnimation(animation: Animation) -> Self {
+    public func addAnimation(animation: AnimationBasic) -> Self {
         addAttribute(#selector(setter: UIView.argokit_animation), animation)
         return self
     }
     
     @discardableResult
-    public func addAnimation(_ builder: () -> Animation) -> Self {
+    public func addAnimation(@ArgoKitAnimationBuilder _ builder: () -> AnimationBasic) -> Self {
         let animation = builder()
         addAttribute(#selector(setter: UIView.argokit_animation), animation)
-        return self
-    }
-    
-    @discardableResult
-    public func addAnimationGroup(group: AnimationGroup) -> Self {
-        addAttribute(#selector(setter: UIView.argokit_animationGroup), group)
-        return self
-    }
-    
-    @discardableResult
-    public func addAnimationGroup(@ArgoKitAnimationGroupBuilder _ builder: () -> AnimationGroup) -> Self {
-        let animation = builder()
-        addAttribute(#selector(setter: UIView.argokit_animationGroup), animation)
         return self
     }
     

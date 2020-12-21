@@ -17,13 +17,13 @@ class RefreshFooterNode:ArgoKitNode{
                 startRefresh()
             }
         }
-        let width = self.width()
-        let height = self.height()
+        let width = frame.size.width
+        let height = frame.size.height
         if height > 0 {
             refreshFooterView.height(height)
         }
         if width >  0{
-            refreshFooterView.width(height)
+            refreshFooterView.width(width)
         }
         refreshFooterView.triggerAutomaticallyRefreshOffPages = offPage ?? 0
         return refreshFooterView

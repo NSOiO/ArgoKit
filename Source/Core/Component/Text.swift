@@ -106,7 +106,6 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
                 lable.attributedText = attribut
             }
         }
-
         if let font = self.font() {
             lable.font = font
         }

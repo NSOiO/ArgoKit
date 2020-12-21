@@ -62,6 +62,7 @@ extension ArgoKitNodeViewModifier{
             attribute.isCALayer = isCALayer
             
             self.setNodeAttribute(node, attribute)
+            
             node.nodeAddView(attribute:attribute)
             
         }

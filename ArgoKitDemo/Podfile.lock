@@ -2,25 +2,25 @@ PODS:
   - ArgoAnimation (0.1.7):
     - ArgoAnimation/AnimationCPP (= 0.1.7)
   - ArgoAnimation/AnimationCPP (0.1.7)
-  - ArgoKit (1.0.4):
-    - ArgoKit/AnimationKit (= 1.0.4)
-    - ArgoKit/Bind (= 1.0.4)
-    - ArgoKit/Core (= 1.0.4)
+  - ArgoKit (1.0.5):
+    - ArgoKit/AnimationKit (= 1.0.5)
+    - ArgoKit/Bind (= 1.0.5)
+    - ArgoKit/Core (= 1.0.5)
     - Yoga
-  - ArgoKit/AnimationKit (1.0.4):
+  - ArgoKit/AnimationKit (1.0.5):
     - ArgoAnimation
     - Yoga
-  - ArgoKit/Bind (1.0.4):
+  - ArgoKit/Bind (1.0.5):
     - Yoga
-  - ArgoKit/Core (1.0.4):
+  - ArgoKit/Core (1.0.5):
     - Yoga
-  - ArgoKitComponent (1.0.2):
+  - ArgoKitComponent (1.0.3):
     - ArgoKit
-    - ArgoKitComponent/ImageLoader (= 1.0.2)
-  - ArgoKitComponent/ImageLoader (1.0.2):
+    - ArgoKitComponent/ImageLoader (= 1.0.3)
+  - ArgoKitComponent/ImageLoader (1.0.3):
     - ArgoKit
     - SDWebImage
-  - ArgoKitPreview (1.0.5.beta):
+  - ArgoKitPreview (1.0.5):
     - ArgoKit
     - ArgoKitComponent
   - SDWebImage (5.10.0):
@@ -49,9 +49,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
-  ArgoKit: a3bd73382e0f77b0ad11b6d4262d62e04199eb29
-  ArgoKitComponent: 49e852dca9a1801e9bd9e78aeb6a48a1bbaf23b4
-  ArgoKitPreview: 11fcee38ff0049197b92919251d6b80ce1cb4bbd
+  ArgoKit: f7ebcb08aeebcd87b0e648842ed23d16d12d3bd1
+  ArgoKitComponent: f13792da4531fe0fa7007c35b8c6c8c569d6fb3c
+  ArgoKitPreview: 51bb277f592fb5508bce4a9a12fd2f6fa8b94d5b
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 

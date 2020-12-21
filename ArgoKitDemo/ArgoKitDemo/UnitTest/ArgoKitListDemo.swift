@@ -244,12 +244,15 @@ class ListDemo:ArgoKit.View{
                 headerView?.endRefreshing()
             })
             {
-                Text("refreshheader").alignSelf(.center).lineLimit(0).font(size: 20)
+                Text("refreshheader")
+                    .alignSelf(.center)
+                    .lineLimit(0).font(size: 20)
+                  
             }.pullingDown{ point in
                 print("pullingDown\(String(describing: point))")
             }
             .height(100.0)
-            .backgroundColor(.red)
+//            .backgroundColor(.red)
 //            .alias(variable: &headerView)
         }
         .refreshFooterView{
@@ -262,7 +265,6 @@ class ListDemo:ArgoKit.View{
             .height(100.0)
             .autoRefreshOffPage(1)
             .backgroundColor(.red)
-//            .alias(variable: &footerView)
             
         }
     }

@@ -72,34 +72,29 @@ extension ArgoKitTableNode {
         
     public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
         
-        if data != nil {
+        if let data = data{
             self.dataSourceHelper.dataList = data
         }
-        if sectionHeaderData != nil {
-            self.sectionHeaderSourceHelper.dataList = [sectionHeaderData!]
+        if let sectionHeaderData = sectionHeaderData {
+            self.sectionHeaderSourceHelper.dataList = [sectionHeaderData]
         }
-        if sectionFooterData != nil {
-            self.sectionFooterSourceHelper.dataList = [sectionFooterData!]
+        if let sectionFooterData = sectionFooterData {
+            self.sectionFooterSourceHelper.dataList = [sectionFooterData]
         }
         self.tableView?.reloadData()
     }
         
     public func reloadSections(_ sectionData: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
-        
-        if sectionHeaderData != nil
-            || sectionHeaderData != nil
-            || sectionFooterData != nil{
-            
-            for (index, value) in sections.enumerated() {
-                if sectionHeaderData != nil {
-                    self.dataSourceHelper.reloadSection(data: sectionData![index], section: value)
-                }
-                if sectionHeaderData != nil {
-                    self.sectionHeaderSourceHelper.reloadRow(rowData: sectionHeaderData![index], row: value, at: 0)
-                }
-                if sectionFooterData != nil {
-                    self.sectionFooterSourceHelper.reloadRow(rowData: sectionFooterData![index], row: value, at: 0)
-                }
+    
+        for (index, value) in sections.enumerated() {
+            if let sectionData = sectionData {
+                self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
+            }
+            if let sectionHeaderData = sectionHeaderData {
+                self.sectionHeaderSourceHelper.reloadRow(rowData: sectionHeaderData[index], row: value, at: 0)
+            }
+            if let sectionFooterData = sectionFooterData {
+                self.sectionFooterSourceHelper.reloadRow(rowData: sectionFooterData[index], row: value, at: 0)
             }
         }
         self.tableView?.reloadSections(sections, with: animation)
@@ -110,11 +105,11 @@ extension ArgoKitTableNode {
         let start = self.dataSourceHelper.dataList?.count ?? 0
         let end = start + data.count
         self.dataSourceHelper.appendSections(data)
-        if sectionHeaderData != nil {
-            self.sectionHeaderSourceHelper.appendRows(rowData: sectionHeaderData!, at: 0)
+        if let sectionHeaderData = sectionHeaderData {
+            self.sectionHeaderSourceHelper.appendRows(rowData: sectionHeaderData, at: 0)
         }
-        if sectionFooterData != nil {
-            self.sectionFooterSourceHelper.appendRows(rowData: sectionFooterData!, at: 0)
+        if let sectionFooterData = sectionFooterData {
+            self.sectionFooterSourceHelper.appendRows(rowData: sectionFooterData, at: 0)
         }
         self.tableView?.insertSections(IndexSet(start..<end), with: animation)
     }
@@ -124,11 +119,11 @@ extension ArgoKitTableNode {
         for (index, value) in sections.enumerated() {
             self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
             
-            if sectionHeaderData != nil {
-                self.sectionHeaderSourceHelper.insertRow(rowData: sectionHeaderData![index], row: value, at: 0)
+            if let sectionHeaderData = sectionHeaderData {
+                self.sectionHeaderSourceHelper.insertRow(rowData: sectionHeaderData[index], row: value, at: 0)
             }
-            if sectionFooterData != nil {
-                self.sectionFooterSourceHelper.insertRow(rowData: sectionFooterData![index], row: value, at: 0)
+            if let sectionFooterData = sectionFooterData {
+                self.sectionFooterSourceHelper.insertRow(rowData: sectionFooterData[index], row: value, at: 0)
             }
         }
 

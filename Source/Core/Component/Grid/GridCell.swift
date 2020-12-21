@@ -1,26 +1,43 @@
 //
-//  ArgoKitListCell.swift
+//  GridCell.swift
 //  ArgoKit
 //
-//  Created by MOMO on 2020/10/28.
+//  Created by Bruce on 2020/12/17.
 //
 
 import Foundation
 
-class ArgoKitListCell: UITableViewCell {
+//class GridCellNode: ArgoKitNode {
+//    
+//    var cellSourceData: Any?
+//    
+//    var frameObserber: NSKeyValueObservation?
+//    var indexpath:IndexPath = IndexPath(row: 0, section: 0)
+//    public func observeFrameChanged(changeHandler: @escaping (GridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
+//        removeObservingFrameChanged()
+//        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
+//    }
+//    
+//    public func removeObservingFrameChanged() {
+//        if frameObserber != nil {
+//            frameObserber?.invalidate()
+//            frameObserber = nil
+//        }
+//    }
+//}
+
+class GridCell: UICollectionViewCell {
   
     var contentNode: ArgoKitCellNode?
-    var tempNode: ArgoKitCellNode?
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
-    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.contentView.backgroundColor = .green
+    }
     
-    // 清空视图属性
     override func prepareForReuse() {
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
     }
@@ -41,6 +58,5 @@ class ArgoKitListCell: UITableViewCell {
         }
         ArgoKitReusedLayoutHelper.addLayoutNode(node)
     }
-    
-    
+      
 }

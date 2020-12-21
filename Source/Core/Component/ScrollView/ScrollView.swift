@@ -113,7 +113,7 @@ extension ScrollView {
     }
 
     @discardableResult
-    public func isScrollEnabled(_ value: Bool) -> Self {
+    public func scrollEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.isScrollEnabled),value)
         return self
     }
@@ -126,6 +126,13 @@ extension ScrollView {
 
     @discardableResult
     public func showsHorizontalScrollIndicator(_ value: Bool) -> Self {
+        addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
+        return self
+    }
+    
+    @discardableResult
+    public func showsScrollIndicator(_ value: Bool) -> Self {
+        addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
         addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
         return self
     }

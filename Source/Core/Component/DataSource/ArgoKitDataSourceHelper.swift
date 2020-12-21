@@ -6,13 +6,34 @@
 //
 
 import Foundation
+class ArgoKitCellNode: ArgoKitNode {
+    
+    var cellSourceData: Any?
+    
+    var frameObserber: NSKeyValueObservation?
+    
+    public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
+        removeObservingFrameChanged()
+        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
+    }
+    
+    public func removeObservingFrameChanged() {
+        if frameObserber != nil {
+            frameObserber?.invalidate()
+            frameObserber = nil
+        }
+    }
+    
+    
+}
+
 
 class ArgoKitDataSourceHelper {
     
     lazy var registedReuseIdSet = Set<String>()
         
     public var dataList: [[Any]]?
-    public var buildNodeFunc: ((Any)->View)?
+    public var buildNodeFunc: ((Any)->View?)?
 }
 
 extension ArgoKitDataSourceHelper {
