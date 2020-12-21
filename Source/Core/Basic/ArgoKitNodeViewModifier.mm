@@ -119,7 +119,9 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         return;
     }
     UIView *view = node.view;
+    
     for (ViewAttribute *attribute in attributes) {
+       
         if(attribute.isCALayer){
             if(view &&  [view.layer respondsToSelector:attribute.selector]){
                 performSelector(view.layer,attribute.selector,attribute.paramter);
@@ -151,7 +153,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         }  
         if (!only) {
             // 处理UIView属性点击事件
-            [self _nodeViewAttributeWithNode:node attributes:resueNode.viewAttributes.allValues markDirty:NO];
+            [self _nodeViewAttributeWithNode:node attributes:[resueNode nodeAllAttributeValue] markDirty:NO];
             // 处理UIControl点击事件
             if (node.nodeActions.count && [node.view isKindOfClass:[UIControl class]] && [node.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
                 NSArray<NodeAction *> *copyActions = [resueNode.nodeActions mutableCopy];
