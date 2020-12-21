@@ -53,11 +53,11 @@ class ArgoKitTableNode: ArgoKitScrollViewNode, UITableViewDelegate, UITableViewD
             tableView.prefetchDataSource = self
         }
         if tableHeaderNode != nil {
-            tableHeaderNode?.applyLayout()
+            tableHeaderNode?.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
             tableView.tableHeaderView = tableHeaderNode?.view
         }
         if tableFooterNode != nil {
-            tableFooterNode?.applyLayout()
+            tableFooterNode?.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
             tableView.tableFooterView = tableFooterNode?.view
         }
         tableView.separatorStyle = .none;
