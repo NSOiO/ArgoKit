@@ -94,14 +94,3 @@ extension Grid{
         return self
     }
 }
-
-
-extension Grid{
-    public func parseParamter(function:@escaping (_ data: D, _ indexPath: IndexPath)->Void,paramter:[Any]?){
-        if paramter?.count ?? 0 >= 2 {
-            if let data = paramter?.first as? D,let indexPath = paramter?.last as? IndexPath {
-                function(data, indexPath)
-            }
-        }
-    }
-}

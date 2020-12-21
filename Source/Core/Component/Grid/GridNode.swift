@@ -19,6 +19,8 @@ class ArgoKitGridView: UICollectionView {
         super.layoutSubviews()
     }
 }
+
+
 class GridNode: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,
@@ -33,8 +35,13 @@ class GridNode: ArgoKitScrollViewNode,
     lazy var headerSourceHelper = ArgoKitDataSourceHelper()
     lazy var footerSourceHelper = ArgoKitDataSourceHelper()
     
+    // 支持移动重排
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
     fileprivate var moveItem = false
+    
+    // 支持preview context menu
+//    @available(iOS 13.0, *)
+//    private var menuActions:[UIAction]?
     
     private var pGridView:ArgoKitGridView?
     
@@ -474,7 +481,6 @@ extension GridNode{
     }
     
     func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return false
         }
@@ -497,10 +503,97 @@ extension GridNode{
         }
     }
     
+
+    /**
+     * @abstract Called when the interaction begins.
+     *
+     * @param collectionView  This UICollectionView.
+     * @param indexPath       IndexPath of the item for which a configuration is being requested.
+     * @param point           Location in the collection view's coordinate space
+     *
+     * @return A UIContextMenuConfiguration describing the menu to be presented. Return nil to prevent the interaction from beginning.
+     *         Returning an empty configuration causes the interaction to begin then fail with a cancellation effect. You might use this
+     *         to indicate to users that it's possible for a menu to be presented from this element, but that there are no actions to
+     *         present at this particular time.
+     */
     @available(iOS 13.0, *)
-    func collectionView(_ collectionView: UICollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?{
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return nil
+        }
+        let sel = #selector(self.collectionView(_:contextMenuConfigurationForItemAt:point:))
+        if let children = self.sendAction(withObj: String(_sel: sel), paramter: [data,indexPath, point])  as? [UIMenuElement]{
+            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+                UIMenu(title: "Actions", children:children)
+            }
+        }
+        return nil
+    }
+
+    
+    /**
+     * @abstract Called when the interaction begins. Return a UITargetedPreview describing the desired highlight preview.
+     *
+     * @param collectionView  This UICollectionView.
+     * @param configuration   The configuration of the menu about to be displayed by this interaction.
+     */
+//    @available(iOS 13.0, *)
+//    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview{
+//        return UITargetedPreview(view: UIView())
+//    }
+
+    
+    /**
+     * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
+     * The interaction will animate the presented menu to the target. Use this to customize the dismissal animation.
+     *
+     * @param collectionView  This UICollectionView.
+     * @param configuration   The configuration of the menu displayed by this interaction.
+     */
+    @available(iOS 13.0, *)
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?{
+        return nil
+    }
+
+    
+    /**
+     * @abstract Called when the interaction is about to "commit" in response to the user tapping the preview.
+     *
+     * @param collectionView  This UICollectionView.
+     * @param configuration   Configuration of the currently displayed menu.
+     * @param animator        Commit animator. Add animations to this object to run them alongside the commit transition.
+     */
+    @available(iOS 13.0, *)
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating){
         
     }
+
+    
+    /**
+     * @abstract Called when the collection view is about to display a menu.
+     *
+     * @param collectionView  This UICollectionView.
+     * @param configuration   The configuration of the menu about to be displayed.
+     * @param animator        Appearance animator. Add animations to run them alongside the appearance transition.
+     */
+    @available(iOS 13.2, *)
+    func collectionView(_ collectionView: UICollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?){
+        
+    }
+
+    
+    /**
+     * @abstract Called when the collection view's context menu interaction is about to end.
+     *
+     * @param collectionView  This UICollectionView.
+     * @param configuration   Ending configuration.
+     * @param animator        Disappearance animator. Add animations to run them alongside the disappearance transition.
+     */
+    @available(iOS 13.2, *)
+    func collectionView(_ collectionView: UICollectionView, willEndContextMenuInteraction configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?){
+        
+    }
+
     
 }
 

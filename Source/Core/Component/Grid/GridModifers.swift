@@ -198,21 +198,38 @@ extension Grid{
 }
 
 extension Grid{
-    func indexTitles(_ action: @escaping () -> [String]?) -> Self{
+    @discardableResult
+    public func indexTitles(_ action: @escaping () -> [String]?) -> Self{
         let sel = #selector(gridNode?.indexTitles(for:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return action()
         })
         return self
     }
-    
-    func indexPathForIndexTitle(_ action: @escaping (_ title: String, _ index: Int) -> IndexPath) -> Self{
+    @discardableResult
+    public func indexPathForIndexTitle(_ action: @escaping (_ title: String, _ index: Int) -> IndexPath) -> Self{
         let sel = #selector(gridNode?.collectionView(_:indexPathForIndexTitle:at:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2,
                let title = paramter?.first as? String,
                let index = paramter?.last as?Int{
                 return action(title, index)
+            }
+            return nil
+        })
+        return self
+    }
+}
+
+
+extension Grid{
+    @available(iOS 13.0, *)
+    public func contextMenuConfiguration(title:String,menuActions:()->[UIAction])->Self{
+        let sel = #selector(gridNode?.collectionView(_:contextMenuConfigurationForItemAt:point:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let title = paramter?.first as? String,
+               let index = paramter?.last as?Int{
             }
             return nil
         })
