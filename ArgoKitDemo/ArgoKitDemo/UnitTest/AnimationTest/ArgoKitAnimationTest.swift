@@ -30,7 +30,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "透明度") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .alpha)
+                        Animation(type: .alpha)
                             .duration(3.0)
                             .from(0.0)
                             .to(1.0)
@@ -41,7 +41,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "背景颜色") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .color)
+                        Animation(type: .color)
                             .duration(3.0)
                             .from(UIColor.clear)
                             .to(UIColor.red)
@@ -52,7 +52,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "文字颜色") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .textColor)
+                        Animation(type: .textColor)
                             .duration(3.0)
                             .from(UIColor.black)
                             .to(UIColor.blue)
@@ -65,7 +65,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "位移") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .position)
+                        Animation(type: .position)
                             .duration(3.0)
                             .from(15,0)
                             .to(200, 200)
@@ -77,7 +77,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "旋转") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .rotation)
+                        Animation(type: .rotation)
                             .duration(3.0)
                             .from(0)
                             .to(360)
@@ -89,7 +89,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "缩放") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .scale)
+                        Animation(type: .scale)
                             .duration(3.0)
                             .from(1, 1)
                             .to(1.5, 1.5)
@@ -101,7 +101,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "内容偏移") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .contentOffset)
+                        Animation(type: .contentOffset)
                             .duration(3.0)
                             .from(0, 0)
                             .to(120, 120)
@@ -113,17 +113,17 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "组合") {
                 self.text?
                     .addAnimation {
-                        ArgoKit.Animation(type: .position)
+                        Animation(type: .position)
                             .duration(3.0)
                             .from(0,0)
                             .to(200, 200)
                         
-                        ArgoKit.Animation(type: .rotation)
+                        Animation(type: .rotation)
                             .duration(3.0)
                             .from(0)
                             .to(360)
                         
-                        ArgoKit.Animation(type: .scale)
+                        Animation(type: .scale)
                             .duration(3.0)
                             .from(1, 1)
                             .to(1.5, 1.5)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0093EA9F2590A4520051238B /* ArgoKitAnimationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */; };
 		00A906B3259048DC0052550C /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906AF259048DC0052550C /* Landmark.swift */; };
 		00A906B4259048DC0052550C /* HikeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906B0259048DC0052550C /* HikeData.swift */; };
 		00A906B5259048DC0052550C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906B1259048DC0052550C /* UserData.swift */; };
@@ -80,7 +81,6 @@
 		FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA624339258B4B1400D9C780 /* ArgoKitGridTest.swift */; };
 		FA9B4958258B7C02006DB896 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FA9B495C258C4CD1006DB896 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		FAB3CE7925909DEB00EEE851 /* ArgoKitAnimationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */; };
 		FAC41C46258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		FAC41C47258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		FAC41C48258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -665,7 +665,6 @@
 				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
 				FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */,
 				FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */,
-				00A906B2259048DC0052550C /* Data.swift in Sources */,
 				FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */,
 				CC277FB02338E844863A2EE9 /* (null) in Sources */,
 				5C9C0E6111CFB46305184E8C /* (null) in Sources */,
@@ -674,6 +673,7 @@
 				B6082F26B2D874C94D2B40A0 /* (null) in Sources */,
 				94BBB2E5119EF1369DBC440A /* (null) in Sources */,
 				FAE72A582589E8D10066B2CB /* AspectTests.swift in Sources */,
+				0093EA9F2590A4520051238B /* ArgoKitAnimationTest.swift in Sources */,
 				00A906B3259048DC0052550C /* Landmark.swift in Sources */,
 				00A906DB259048EE0052550C /* LandmarkRow.swift in Sources */,
 				FAE72A5E2589E8D10066B2CB /* ListTests.swift in Sources */,

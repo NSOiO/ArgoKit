@@ -44,4 +44,5 @@ typealias ScrollView = ArgoKit.ScrollView
 typealias TextField = ArgoKit.TextField
 typealias TextView = ArgoKit.TextView
 
+typealias Animation = ArgoKit.Animation
 #endif
