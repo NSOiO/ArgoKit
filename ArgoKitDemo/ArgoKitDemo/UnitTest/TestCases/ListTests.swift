@@ -54,33 +54,28 @@ class ListTests: ArgoKit.View {
     
         return VStack {
             Text("aa")
-            
             ArgoKit.List(data: [ListTestsModel()]) {landmark in
-                
-                Text(landmark.name)
-
-                Text("t1")
-                    .height(100)
-                    .backgroundColor(.lightText)
-                    .margin(edge: .bottom, value:10)
-                Text("t222")
-                    .backgroundColor(.lightText)
+                VStack {
+                    Text(landmark.name)
+                    Text("t1")
+                        .height(100)
+                        .backgroundColor(.lightText)
+                        .margin(edge: .bottom, value:10)
+                    Text("t222")
+                        .backgroundColor(.lightText)
+                }
+                .borderWidth(5)
+                .borderColor(.cyan)
+                .padding(edge: .horizontal, value: 5)
             }
-            .backgroundColor(.red)
-            
-//            List {
-//                Text("t1")
-//                    .height(100)
-//                    .backgroundColor(.lightText)
-//                    .margin(edge: .bottom, value:10)
-//                Text("t2")
-//                    .backgroundColor(.lightText)
-//
-//            }
-//            .backgroundColor(.lightText)
-            
+            .tableHeaderView {
+                Text("This is tableHeader")
+            }
+            .tableFooterView {
+                Text("This is tableFooter")
+            }
         }
-        .height(50%)
+        .height(100%)
         .backgroundColor(.lightGray)
         
 //        ArgoKit.List(data:landmarkData) { landmark in

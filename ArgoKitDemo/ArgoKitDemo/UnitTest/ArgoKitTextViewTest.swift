@@ -23,7 +23,7 @@ struct ArgoKitTextViewTest: ArgoKit.View {
     
     var body: ArgoKit.View {
         
-        let getstur = PanPressGesture(minimumNumberOfTouches: 1, maximumNumberOfTouches: 1) { pangesture in
+        let getstur = PanGesture(minimumNumberOfTouches: 1, maximumNumberOfTouches: 1) { pangesture in
             print("\(pangesture)")
         }
         

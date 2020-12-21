@@ -86,17 +86,17 @@ struct ListCellTests: ArgoKit.View {
                 .font(size: 14)
                 .margin(edge: .bottom, value: 5)
             
-            // Image
-            ForEach(model.photoURLs) { item in
-                Image(url: item, placeholder: model.placeHolder)
-                    .height(100)
-                    .aspect(ratio: 1)
-                    .margin(edge: .right, value: 10)
-                    .margin(edge: .bottom, value: 10)
-                    .cornerRadius(5)
-                    .grow(1)
+            HStack {
+                ForEach(model.photoURLs) { item in
+                    Image(url: item, placeholder: model.placeHolder)
+                        .height(100)
+                        .aspect(ratio: 1)
+                        .margin(edge: .right, value: 10)
+                        .margin(edge: .bottom, value: 10)
+                        .cornerRadius(5)
+                        .grow(1)
+                }
             }
-            .flexDirection(.row)
             .wrap(.wrap)
             .justifyContent(.between)
             .margin(edge: .bottom, value: 5)

@@ -35,7 +35,6 @@ struct AspectTests: ArgoKit.View {
                 .aspect(ratio: 1)
                 .margin(edge: .all, value: 10)
                 .grow(1)
-                
         }
         .wrap(.wrap) //wrap的时候，第一个Image的aspect没有生效？
         

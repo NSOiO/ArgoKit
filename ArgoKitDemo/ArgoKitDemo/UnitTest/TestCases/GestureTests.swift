@@ -9,7 +9,7 @@ import ArgoKit
 
 // view model.
 class GestureTestsModel {
-
+    @Alias var myText: Text? = nil
 }
 
 // view
@@ -22,7 +22,36 @@ struct GestureTests: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Text("Hello, ArgoKit!")
+//        let pan = PanGesture(minimumNumberOfTouches: 1, maximumNumberOfTouches: 2) { pan in
+//            print("pan")
+//        }
+//        
+//        let tap = TapGesture(numberOfTaps: 1, numberOfTouches: 1) { tap in
+//            print("tap")
+//        }
+        
+        VStack {
+            Text("Hello, ArgoKit!")
+                .onTapGesture {
+                    self.model.myText?.text("on tap")
+                    print("on tap Texst")
+                }
+                .onLongPressGesture {
+                    self.model.myText?.text("on long press")
+                }
+                .alias(variable: model.$myText)
+                .borderWidth(1)
+                .borderColor(.blue)
+//                .gesture(gesture: pan)
+//                .gesture(gesture: tap)
+            
+            Text("Text 2")
+        }
+        .onTapGesture {
+            print("on tap HStack")
+        }
+        .backgroundColor(.orange)
+        
     }
 }
 
@@ -52,6 +81,7 @@ struct GestureTests_Previews: PreviewProvider {
         SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
                 GestureTests(model: GestureTestsModel_Previews())
+                    .alignItems(.start)
             }
             .previewDevice(item.device)
             .previewDisplayName(item.name)

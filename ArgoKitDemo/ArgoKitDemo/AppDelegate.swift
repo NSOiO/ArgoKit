@@ -22,14 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //SwiftUI
 //        if #available(iOS 13.0.0, *) {
-//            let content = LandmarkList_Previews.previews
+////            let content = LandmarkList_Previews.previews
 ////            let content = ToggleRow_Previews.previews
+//            let content = GestureTests_Previews.previews
 //            let vc = SwiftUI.UIHostingController(rootView: content)
 //            nav = UINavigationController(rootViewController: vc)
 //        }
         
 //        let contentView = ArgoKitTextViewTest(model: ArgoKitTextViewTestModel())
-        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
+//        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
+        let contentView = GestureTests(model: GestureTestsModel())
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
 //        let vc = ViewController()

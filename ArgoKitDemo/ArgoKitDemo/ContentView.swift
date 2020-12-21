@@ -13,7 +13,7 @@ struct TestModel {
     @Property var title: String
 }
 
-class ContentView:View {
+struct ContentView:View {
     var pNode = ArgoKitNode(viewClass: UIView.self)
     var node: ArgoKitNode?{
         pNode

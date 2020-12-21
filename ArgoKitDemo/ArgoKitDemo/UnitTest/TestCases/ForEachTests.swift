@@ -40,6 +40,7 @@ struct ForEachTests: ArgoKit.View {
                 Text("ttttt")
                 
                 List{
+                    Text("Header Cell")
                     ForEach(100..<200) { item in
                         Text(String(item)).margin(edge: .top, value: 3)
                     }

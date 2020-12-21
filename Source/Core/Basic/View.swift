@@ -119,7 +119,7 @@ extension View{
 
 extension View{
     @discardableResult
-    public func onTapGesture(numberOfTaps: Int = 0, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
+    public func onTapGesture(numberOfTaps: Int = 1, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
         let gesture = TapGesture(numberOfTaps: numberOfTaps, numberOfTouches: numberOfTouches) { gesture in
             action()
         }
