@@ -7,6 +7,7 @@
 
 import UIKit
 import ArgoKit
+import SwiftUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+    
+        
+        var nav: UINavigationController?
+        
+        //SwiftUI
+//        if #available(iOS 13.0.0, *) {
+//            let content = LandmarkList_Previews.previews
+////            let content = ToggleRow_Previews.previews
+//            let vc = SwiftUI.UIHostingController(rootView: content)
+//            nav = UINavigationController(rootViewController: vc)
+//        }
         
 //        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
 
@@ -24,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
 //        let vc = ViewController()
-        let nav = UINavigationController(rootViewController: vc)
+        nav = UINavigationController(rootViewController: vc)
         
         let window = UIWindow.init(frame: UIScreen.main.bounds)
         window.rootViewController = nav

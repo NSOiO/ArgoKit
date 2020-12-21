@@ -13,11 +13,13 @@
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitNode+Frame.h"
 #import "ArgoKitNode+Observer.h"
+#import "ArgoKitDictionary.h"
 #if __has_include(<ArgoAnimation/UIView+AKFrame.h>)
 #import <ArgoAnimation/UIView+AKFrame.h>
 #else
 #import "UIView+AKFrame.h"
 #endif
+
 
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
@@ -46,7 +48,7 @@
 @class ArgoKitLayout;
 @interface ArgoKitNode()
 
-@property(nonatomic,strong,nullable)UIView *view;
+@property(nonatomic,weak,nullable)UIView *view;
 // 布局layout
 @property (nonatomic, strong) ArgoKitLayout *layout;
 // 子node
@@ -55,6 +57,9 @@
 
 @property (nonatomic,assign)BOOL isUIView;
 @property (nonatomic, assign) BOOL isReused;
+
+//存储View属性
+@property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 //action 相关
 @property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 @property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
@@ -406,7 +411,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (void)commitAttributes {
     if (_viewAttributes.count) {
-        [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:self.viewAttributes.allValues markDirty:NO];
+        [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:[self nodeAllAttributeValue] markDirty:NO];
     }
     if (_nodeActions.count && [self.view isKindOfClass:[UIControl class]] && [self.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
         NSArray<NodeAction *> *copyActions = [self.nodeActions mutableCopy];
@@ -658,16 +663,18 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     ViewAttribute *oldattribute = self.viewAttributes[selector_name];
     if (![selector_name hasPrefix:@"set"]) {//不是set方法则排除在外
         selector_name = [NSString stringWithFormat:@"%@:%@",selector_name,@([attribute.paramter.firstObject hash])];
-        [self.viewAttributes setObject:attribute forKey:selector_name];
+        [self.viewAttributes argokit_setObject:attribute forKey:selector_name];
     }else{
         if (oldattribute) {
             oldattribute.paramter = attribute.paramter;
         }else{
-            [self.viewAttributes setObject:attribute forKey:selector_name];
+            [self.viewAttributes argokit_setObject:attribute forKey:selector_name];
         }
     }
 }
-
+- (nullable NSArray *)nodeAllAttributeValue{
+    return [self.viewAttributes argokit_allValues];
+}
 - (nullable NSString *)text{
     return [self valueWithSelector:@selector(setText:)];
 }

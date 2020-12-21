@@ -12,6 +12,7 @@ typealias UIHostingController = ArgoKit.UIHostingController
 typealias View = ArgoKit.View
 typealias VStack = ArgoKit.VStack
 typealias HStack = ArgoKit.HStack
+typealias EmptyView = ArgoKit.EmptyView
 
 typealias AlertView = ArgoKit.AlertView
 typealias ForEach = ArgoKit.ForEach

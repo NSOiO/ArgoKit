@@ -101,7 +101,7 @@ struct ArgoKitListTest_Previews: PreviewProvider {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
         ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
         return ArgoRender {
-            ArgoKitListTest(model: ArgoKitListTestModel_Previews()).grow(1)
+            ArgoKitListTest(model: ArgoKitListTestModel_Previews())
         }
     }
 }

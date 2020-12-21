@@ -17,19 +17,18 @@ var current_tables = [UITableView: (UITableViewDataSource & UITableViewDelegate)
 
 @available(iOS 13.0, *)
 public struct ArgoRender: UIViewRepresentable {
-    let builder:() -> View
-    var content: View
     var view: UIView
+//    let innerVStack: VStack
 //    var previewService: listPreviewService
     
     public init (@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) {
-        self.builder = builder
-        self.content = builder()
-        self.view = Self.createView(self.content)
+//        self.innerVStack = VStack(builder)
+        self.view = Self.createView(builder())
 //        self.previewService = listPreviewService()
 //        ArgoKitInstance.registerPreviewService(previewService: self.previewService)
     }
     
+    /*
     static func createView(_ content: View) -> UIView {
         let ss = UIScreen.main.bounds.size
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: ss.width, height: ss.height))
@@ -43,6 +42,14 @@ public struct ArgoRender: UIViewRepresentable {
         _ = host.applyLayout()
         return view
     }
+    */
+    
+    static func createView(_ content: View) -> UIView {
+        let ss = UIScreen.main.bounds.size
+        let view = UIHostingView(content: content, frame: .init(origin: .zero, size: ss))
+//        view.backgroundColor = .lightGray
+        return view
+    }
     
     public func makeUIView(context: Context) -> UIView {
         for(table, coor) in current_tables {
@@ -53,7 +60,7 @@ public struct ArgoRender: UIViewRepresentable {
     }
     
     public func makeCoordinator() -> (UITableViewDataSource & UITableViewDelegate)? {
-        preview_coor()
+        preview_coordinator()
     }
     
     public func updateUIView(_ uiView: UIView, context: Context) {
@@ -65,7 +72,7 @@ public struct ArgoRender: UIViewRepresentable {
     }
 }
 
-class preview_coor: NSObject, UITableViewDataSource & UITableViewDelegate {
+class preview_coordinator: NSObject, UITableViewDataSource & UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let coor = current_tables[tableView] {
             let c = coor.tableView(tableView, numberOfRowsInSection: section)

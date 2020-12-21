@@ -74,6 +74,12 @@ extension View{
         ptr = self as? T
         return self
     }
+    
+    @discardableResult
+    public func alias(variable: Alias<Self>) -> Self {
+        variable.wrappedValue = self
+        return self 
+    }
 }
 
 extension View{

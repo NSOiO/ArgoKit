@@ -42,8 +42,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 @property (nonatomic, strong) NSMutableDictionary *bindProperties;
 
-//存储View属性
-@property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
+
 
 /* 节点持有的视图 */
 @property (nonatomic, weak, readonly, nullable) UIView *view;
@@ -151,7 +150,7 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 
 - (void)prepareForUse;
 - (void)nodeAddViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(nodeAddView(attribute:));
-
+- (nullable NSArray *)nodeAllAttributeValue;
 // 获取对应属性值
 - (nullable NSString *)text;
 - (nullable NSAttributedString *)attributedText;

@@ -10,14 +10,18 @@ target 'ArgoKitDemo' do
   pod 'ArgoKitComponent', :path =>'../'
 end
 
-
 # from argokit_preview_config.rb
 post_integrate do |installer|
     installer.generated_pod_targets.each do |target|
       if target.name == "ArgoKitPreview"
         pod_dir = target.sandbox.pod_dir(target.name)
+        #执行prepare_command中的脚本。因为ArgoKitPreview通过:path引入，脚本不会自动执行。如果通过版本号引入，不需要这一句.
+        #参考：https://guides.cocoapods.org/syntax/podspec.html#prepare_command
+        `cd #{pod_dir}/Source/Script/ && sh ./config.sh`
+        
         require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
         config_preview_files installer
       end
     end
 end
+
