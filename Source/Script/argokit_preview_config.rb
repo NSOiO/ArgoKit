@@ -90,7 +90,8 @@ def add_preview_files(project, agg_pods, file_paths, should_check_file_exist)
             group.children.each do |child|
                 if child.name == file_name
                   file_exist = true
-                  puts "#{argokit_prefix} file #{file_name} exist, no longer need to add.".green
+                  puts "#{argokit_prefix} file #{file_name} exist, only add to target.".green
+                  add_file_reference_to_targets(child, user_targets)
                 end
             end# group.children
         end# should_check_file_exist
@@ -102,18 +103,31 @@ def add_preview_files(project, agg_pods, file_paths, should_check_file_exist)
             else
                 file_ref = group.new_reference(file_path, :absolute)
             end
-            user_targets.each do |target|
-              ret = target.add_file_references([file_ref])
-              if ret
-                  puts "#{argokit_prefix} succ to add  #{file_name} to target #{target.name}".green
-              else
-                  puts "#{argokit_prefix} failed to add  #{file_name} to target #{target.name}".red
-              end
-            end
+            add_file_reference_to_targets(file_ref, user_targets)
+#            user_targets.each do |target|
+#              ret = target.add_file_references([file_ref])
+#              if ret.length > 0
+#                  puts "#{argokit_prefix} succ to add  #{file_name} to target #{target.name}".green
+#              else
+#                  puts "#{argokit_prefix} failed to add  #{file_name} to target #{target.name}".red
+#              end
+#            end
         end# !file_exist
     end
     project.save
-  end
+end
+
+def add_file_reference_to_targets(file_ref, targets)
+    argokit_prefix = APGConstant.argokit_prefix
+    targets.each do |target|
+      ret = target.add_file_references([file_ref])
+      if ret.length > 0
+          puts "#{argokit_prefix} succ to add  #{file_ref.name} to target #{target.name}".green
+      else
+          puts "#{argokit_prefix} failed to add  #{file_ref.name} to target #{target.name}".red
+      end
+    end
+end
 
 def remove_files_from_project(project, file_paths)
     argokit_prefix = APGConstant.argokit_prefix

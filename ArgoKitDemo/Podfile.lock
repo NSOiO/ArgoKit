@@ -51,10 +51,10 @@ SPEC CHECKSUMS:
   ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
   ArgoKit: a3bd73382e0f77b0ad11b6d4262d62e04199eb29
   ArgoKitComponent: 49e852dca9a1801e9bd9e78aeb6a48a1bbaf23b4
-  ArgoKitPreview: 92bd307e15979a4576f4fce7191dbabaff1cdeb0
+  ArgoKitPreview: 11fcee38ff0049197b92919251d6b80ce1cb4bbd
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 640864e9eb0aa3f3532b408ea2d6e1ff8a82f6df
+PODFILE CHECKSUM: a01b97cff3acf3a4d0e6c5e5a6258b3c18d9af6b
 
 COCOAPODS: 1.10.0
