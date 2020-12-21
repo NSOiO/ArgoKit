@@ -224,14 +224,26 @@ extension Grid{
 
 extension Grid{
     @available(iOS 13.0, *)
-    public func contextMenuConfiguration(title:String,menuActions:()->[UIAction])->Self{
+    public func contextMenuConfiguration(title:String,
+                                         menuActions: @escaping (_ data: D, _ indexPath: IndexPath)->[UIAction]?)->Self{
+        gridNode?.actionTitle = title
         let sel = #selector(gridNode?.collectionView(_:contextMenuConfigurationForItemAt:point:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2,
-               let title = paramter?.first as? String,
-               let index = paramter?.last as?Int{
+               let data = paramter?.first as? D ,
+               let indexPath = paramter?[1] as? IndexPath{
+               return menuActions(data, indexPath)
             }
             return nil
+        })
+        return self
+    }
+    
+    @available(iOS 13.0, *)
+    public func previewForContextMenu(_ content: @escaping ()->View)->Self{
+        let sel = #selector(gridNode?.collectionView(_:previewForDismissingContextMenuWithConfiguration:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            return content()
         })
         return self
     }

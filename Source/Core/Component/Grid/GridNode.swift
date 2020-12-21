@@ -42,6 +42,7 @@ class GridNode: ArgoKitScrollViewNode,
     // 支持preview context menu
 //    @available(iOS 13.0, *)
 //    private var menuActions:[UIAction]?
+    var actionTitle:String?
     
     private var pGridView:ArgoKitGridView?
     
@@ -504,27 +505,19 @@ extension GridNode{
     }
     
 
-    /**
-     * @abstract Called when the interaction begins.
-     *
-     * @param collectionView  This UICollectionView.
-     * @param indexPath       IndexPath of the item for which a configuration is being requested.
-     * @param point           Location in the collection view's coordinate space
-     *
-     * @return A UIContextMenuConfiguration describing the menu to be presented. Return nil to prevent the interaction from beginning.
-     *         Returning an empty configuration causes the interaction to begin then fail with a cancellation effect. You might use this
-     *         to indicate to users that it's possible for a menu to be presented from this element, but that there are no actions to
-     *         present at this particular time.
-     */
     @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?{
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return nil
         }
         let sel = #selector(self.collectionView(_:contextMenuConfigurationForItemAt:point:))
-        if let children = self.sendAction(withObj: String(_sel: sel), paramter: [data,indexPath, point])  as? [UIMenuElement]{
-            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-                UIMenu(title: "Actions", children:children)
+        if let children = self.sendAction(withObj: String(_sel: sel), paramter: [data,indexPath, point])  as? [UIAction]{
+            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) {[weak self] _ in
+                var actionTitle = "Actions"
+                if let title = self?.actionTitle{
+                    actionTitle = title
+                }
+               return UIMenu(title: actionTitle, children:children)
             }
         }
         return nil
@@ -539,7 +532,16 @@ extension GridNode{
      */
 //    @available(iOS 13.0, *)
 //    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview{
-//        return UITargetedPreview(view: UIView())
+//        let sel = #selector(self.collectionView(_:previewForHighlightingContextMenuWithConfiguration:))
+//        if let view = self.sendAction(withObj: String(_sel: sel), paramter:nil)  as? UIView{
+//            if let containerView = self.view {
+//                let previewTarget = UIPreviewTarget(container: containerView, center: containerView.center)
+//                let previewParams = UIPreviewParameters()
+//                previewParams.backgroundColor = .clear
+//                return UITargetedPreview(view: view, parameters: previewParams, target: previewTarget)
+//            }
+//        }
+//        return nil
 //    }
 
     
@@ -552,6 +554,19 @@ extension GridNode{
      */
     @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?{
+        let sel = #selector(self.collectionView(_:previewForDismissingContextMenuWithConfiguration:))
+        if let view = self.sendAction(withObj: String(_sel: sel), paramter:nil)  as? View{
+        
+            if let containerView = self.view {
+                view.applyLayout(size:CGSize(width: containerView.frame.size.width,height: CGFloat.nan))
+                if let showView = view.node?.view {
+                    let previewTarget = UIPreviewTarget(container: containerView, center: containerView.center)
+                    let previewParams = UIPreviewParameters()
+                    previewParams.backgroundColor = .clear
+                    return UITargetedPreview(view: showView, parameters: previewParams, target: previewTarget)
+                }
+            }
+        }
         return nil
     }
 
@@ -565,6 +580,7 @@ extension GridNode{
      */
     @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating){
+        print("haha")
         
     }
 

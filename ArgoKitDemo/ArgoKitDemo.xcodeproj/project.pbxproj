@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		1C17BF04B7426CA0BDEBEDE6 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		1E71DAE2E4D765322FC62CC4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		25ECB5946E5ABD13C37C736D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		2A6C83604D98391FFDD563F3 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		319378B5BA185E8F3C8A39FD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0B64C3EA4DD965F755E26D16 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1C17BF04B7426CA0BDEBEDE6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1E71DAE2E4D765322FC62CC4 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		25ECB5946E5ABD13C37C736D /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2A6C83604D98391FFDD563F3 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		319378B5BA185E8F3C8A39FD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
 		326335D5254133D20094676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D3254133D20094676D /* Main.storyboard */; };
 		326335D7254133D30094676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
@@ -20,24 +20,23 @@
 		326335E5254133D40094676D /* ArgoKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335E4254133D40094676D /* ArgoKitDemoTests.swift */; };
 		326335F0254133D40094676D /* ArgoKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335EF254133D40094676D /* ArgoKitDemoUITests.swift */; };
 		3263370B25419A3C0094676D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3263370A25419A3C0094676D /* ContentView.swift */; };
-		460B278FFEB6B669AF0B5D12 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		4CF2204CE9F6AD5526B48F09 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		4DEE37605C50297C5AC63EB5 /* ArgoKitPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46FC141F77BD0B7330B65BB /* ArgoKitPreviewTypes.swift */; };
-		5C9C0E6111CFB46305184E8C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		7A69FB72F090435913742F7C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		811B7EC1CCF266AA964665A5 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8218ECFC112AAB889ECF246C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8555DB1D79939EE4C04F1E7D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		87438CB30AC4943CFA1F29DD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8E68FF02C2F62B5E000E9326 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		94BBB2E5119EF1369DBC440A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		A2CCF5BBAAA7B2344209E8F8 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		460B278FFEB6B669AF0B5D12 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4CF2204CE9F6AD5526B48F09 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		5C9C0E6111CFB46305184E8C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7A69FB72F090435913742F7C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		811B7EC1CCF266AA964665A5 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8218ECFC112AAB889ECF246C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8555DB1D79939EE4C04F1E7D /* (null) in Sources */ = {isa = PBXBuildFile; };
+		87438CB30AC4943CFA1F29DD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8E68FF02C2F62B5E000E9326 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		94BBB2E5119EF1369DBC440A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A2CCF5BBAAA7B2344209E8F8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423580E257900920052E0B0 /* ViewPagerDemo.swift */; };
 		A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E668257B8770003D3591 /* ViewPageTest.swift */; };
 		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
-		A94EAEEF5212D6033C4BC936 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		AD5D1FFFF39878DB9AB2D5C7 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		B16B24E4F76CDACCA358A1B0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		A94EAEEF5212D6033C4BC936 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		AD5D1FFFF39878DB9AB2D5C7 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B16B24E4F76CDACCA358A1B0 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B24576515409429925EC2BC6 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */; };
 		B6082F26B2D874C94D2B40A0 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CC277FB02338E844863A2EE9 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -771,7 +770,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -826,7 +825,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -849,7 +848,7 @@
 				DEVELOPMENT_TEAM = 4BXE593ED8;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -888,7 +887,7 @@
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

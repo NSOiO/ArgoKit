@@ -109,7 +109,33 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .backgroundColor(.yellow)
                 .height(40)
         }
-        .enableMoveItem(true)
+//        .enableMoveItem(true)
+        
+        // ios13及以上
+        .contextMenuConfiguration(title: "title") { (data, indexPath) -> [UIAction]? in
+            // 第一个
+            let favorite = UIAction(title: "Favorite", image: UIImage(systemName: "heart.fill")) { action in
+                print("favorite")
+            }
+            
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up.fill")) { action in
+                print("share")
+            }
+            
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), attributes: [.destructive]) { action in
+                print("delete")
+            }
+            return [favorite,share,delete]
+        }
+        .previewForContextMenu { () -> View in
+            HStack{
+                Text("previewForContextMenu")
+            }
+            .backgroundColor(.red)
+            .height(100)
+//            .width(300)
+        }
+
     }
 }
 

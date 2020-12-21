@@ -6,6 +6,3 @@
 //
 
 import Foundation
-struct ContextMenuAction {
-    
-}
