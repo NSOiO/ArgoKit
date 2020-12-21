@@ -28,13 +28,12 @@
 		00A906DA259048EE0052550C /* LandmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906D7259048EE0052550C /* LandmarkList.swift */; };
 		00A906DB259048EE0052550C /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906D8259048EE0052550C /* LandmarkRow.swift */; };
 		00A906DC259048EE0052550C /* ToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906D9259048EE0052550C /* ToggleRow.swift */; };
-		00A90731259073520052550C /* GestureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A90730259073510052550C /* GestureTests.swift */; };
-		0B64C3EA4DD965F755E26D16 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		1C17BF04B7426CA0BDEBEDE6 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		1E71DAE2E4D765322FC62CC4 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		25ECB5946E5ABD13C37C736D /* (null) in Sources */ = {isa = PBXBuildFile; };
-		2A6C83604D98391FFDD563F3 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		319378B5BA185E8F3C8A39FD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		1C17BF04B7426CA0BDEBEDE6 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		1E71DAE2E4D765322FC62CC4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		25ECB5946E5ABD13C37C736D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		2A6C83604D98391FFDD563F3 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		319378B5BA185E8F3C8A39FD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
 		326335D5254133D20094676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 326335D3254133D20094676D /* Main.storyboard */; };
 		326335D7254133D30094676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
@@ -42,29 +41,29 @@
 		326335E5254133D40094676D /* ArgoKitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335E4254133D40094676D /* ArgoKitDemoTests.swift */; };
 		326335F0254133D40094676D /* ArgoKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335EF254133D40094676D /* ArgoKitDemoUITests.swift */; };
 		3263370B25419A3C0094676D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3263370A25419A3C0094676D /* ContentView.swift */; };
-		460B278FFEB6B669AF0B5D12 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4CF2204CE9F6AD5526B48F09 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		5C9C0E6111CFB46305184E8C /* (null) in Sources */ = {isa = PBXBuildFile; };
-		7A69FB72F090435913742F7C /* (null) in Sources */ = {isa = PBXBuildFile; };
-		811B7EC1CCF266AA964665A5 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8218ECFC112AAB889ECF246C /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8555DB1D79939EE4C04F1E7D /* (null) in Sources */ = {isa = PBXBuildFile; };
-		87438CB30AC4943CFA1F29DD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8E68FF02C2F62B5E000E9326 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		94BBB2E5119EF1369DBC440A /* (null) in Sources */ = {isa = PBXBuildFile; };
-		A2CCF5BBAAA7B2344209E8F8 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		460B278FFEB6B669AF0B5D12 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		4CF2204CE9F6AD5526B48F09 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		5C9C0E6111CFB46305184E8C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		7A69FB72F090435913742F7C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		811B7EC1CCF266AA964665A5 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8218ECFC112AAB889ECF246C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8555DB1D79939EE4C04F1E7D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		87438CB30AC4943CFA1F29DD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8E68FF02C2F62B5E000E9326 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		94BBB2E5119EF1369DBC440A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		A2CCF5BBAAA7B2344209E8F8 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423580E257900920052E0B0 /* ViewPagerDemo.swift */; };
 		A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E668257B8770003D3591 /* ViewPageTest.swift */; };
 		A4F5E66E257BAD05003D3591 /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */; };
-		A94EAEEF5212D6033C4BC936 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		AD5D1FFFF39878DB9AB2D5C7 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		B16B24E4F76CDACCA358A1B0 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A94EAEEF5212D6033C4BC936 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		AD5D1FFFF39878DB9AB2D5C7 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		B16B24E4F76CDACCA358A1B0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		B24576515409429925EC2BC6 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */; };
-		B6082F26B2D874C94D2B40A0 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CC277FB02338E844863A2EE9 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF183E8A768603E46E9A567C /* (null) in Sources */ = {isa = PBXBuildFile; };
-		D95F3DFCC7C8477EFA874E26 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		DB3EFA2603509E23049FC61D /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B6082F26B2D874C94D2B40A0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CC277FB02338E844863A2EE9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CF183E8A768603E46E9A567C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		D95F3DFCC7C8477EFA874E26 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		DB3EFA2603509E23049FC61D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		EB8F2A6EA62A586FC100F9EB /* ArgoKitPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857F2A91F8397D0371A4392 /* ArgoKitPreviewTypes.swift */; };
 		FA04056C2588BB47006E997F /* ArgoKitDatePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04056B2588BB47006E997F /* ArgoKitDatePickerTest.swift */; };
 		FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */; };
@@ -79,23 +78,24 @@
 		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
 		FA5709BD25765303004A0EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
 		FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA624339258B4B1400D9C780 /* ArgoKitGridTest.swift */; };
-		FA9B4958258B7C02006DB896 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		FA9B495C258C4CD1006DB896 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		FAC41C46258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C47258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C48258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C49258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4A258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4B258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4C258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4D258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4E258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4F258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C50258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C51258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C52258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C53258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C61258B37920006AE78 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		FA9B4958258B7C02006DB896 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		FA9B495C258C4CD1006DB896 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		FAB3CE7925909DEB00EEE851 /* ArgoKitAnimationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */; };
+		FAC41C46258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C47258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C48258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C49258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4A258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4B258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4C258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4D258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4E258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4F258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C50258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C51258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C52258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C53258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C61258B37920006AE78 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FAE72A582589E8D10066B2CB /* AspectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A512589E8D00066B2CB /* AspectTests.swift */; };
 		FAE72A592589E8D10066B2CB /* ListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A522589E8D10066B2CB /* ListCellTests.swift */; };
 		FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A532589E8D10066B2CB /* VStackAlignTests.swift */; };
@@ -538,7 +538,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAC41C4E258B36490006AE78 /* (null) in Resources */,
+				FAC41C4E258B36490006AE78 /* BuildFile in Resources */,
 				00A906C7259048E70052550C /* icybay.jpg in Resources */,
 				00A906CE259048E70052550C /* umbagog.jpg in Resources */,
 				326335DA254133D30094676D /* LaunchScreen.storyboard in Resources */,
@@ -547,28 +547,28 @@
 				00A906D2259048E70052550C /* lakemcdonald.jpg in Resources */,
 				00A906C6259048E70052550C /* silversalmoncreek.jpg in Resources */,
 				00A906CA259048E70052550C /* hikeData.json in Resources */,
-				FAC41C4A258B36490006AE78 /* (null) in Resources */,
+				FAC41C4A258B36490006AE78 /* BuildFile in Resources */,
 				00A906D0259048E70052550C /* chilkoottrail.jpg in Resources */,
-				FAC41C4F258B36490006AE78 /* (null) in Resources */,
-				FAC41C4B258B36490006AE78 /* (null) in Resources */,
+				FAC41C4F258B36490006AE78 /* BuildFile in Resources */,
+				FAC41C4B258B36490006AE78 /* BuildFile in Resources */,
 				00A906CF259048E70052550C /* turtlerock.jpg in Resources */,
-				FAC41C51258B36490006AE78 /* (null) in Resources */,
+				FAC41C51258B36490006AE78 /* BuildFile in Resources */,
 				326335D5254133D20094676D /* Main.storyboard in Resources */,
-				FAC41C48258B36490006AE78 /* (null) in Resources */,
+				FAC41C48258B36490006AE78 /* BuildFile in Resources */,
 				00A906CB259048E70052550C /* landmarkData.json in Resources */,
-				FAC41C52258B36490006AE78 /* (null) in Resources */,
+				FAC41C52258B36490006AE78 /* BuildFile in Resources */,
 				00A906D3259048E70052550C /* stmarylake.jpg in Resources */,
-				FAC41C46258B36490006AE78 /* (null) in Resources */,
+				FAC41C46258B36490006AE78 /* BuildFile in Resources */,
 				00A906CD259048E70052550C /* rainbowlake.jpg in Resources */,
-				FAC41C49258B36490006AE78 /* (null) in Resources */,
-				FAC41C50258B36490006AE78 /* (null) in Resources */,
+				FAC41C49258B36490006AE78 /* BuildFile in Resources */,
+				FAC41C50258B36490006AE78 /* BuildFile in Resources */,
 				00A906CC259048E70052550C /* twinlake.jpg in Resources */,
 				00A906C8259048E70052550C /* charleyrivers.jpg in Resources */,
-				FAC41C4C258B36490006AE78 /* (null) in Resources */,
-				FAC41C47258B36490006AE78 /* (null) in Resources */,
-				FAC41C4D258B36490006AE78 /* (null) in Resources */,
+				FAC41C4C258B36490006AE78 /* BuildFile in Resources */,
+				FAC41C47258B36490006AE78 /* BuildFile in Resources */,
+				FAC41C4D258B36490006AE78 /* BuildFile in Resources */,
 				00A906D1259048E70052550C /* hiddenlake.jpg in Resources */,
-				FAC41C53258B36490006AE78 /* (null) in Resources */,
+				FAC41C53258B36490006AE78 /* BuildFile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,16 +636,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */,
-				FA9B495C258C4CD1006DB896 /* (null) in Sources */,
+				FA9B495C258C4CD1006DB896 /* BuildFile in Sources */,
 				00A906DC259048EE0052550C /* ToggleRow.swift in Sources */,
 				FA5709BD25765303004A0EAD /* ViewController.swift in Sources */,
 				FAE72A5C2589E8D10066B2CB /* HVStackTests.swift in Sources */,
 				FA0BFE012583615500D483EC /* ArgoKitTextViewTest.swift in Sources */,
 				FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */,
 				FA0D56F2259073DC0014E341 /* Data.swift in Sources */,
-				FAC41C61258B37920006AE78 /* (null) in Sources */,
+				FAC41C61258B37920006AE78 /* BuildFile in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
-				FA9B4958258B7C02006DB896 /* (null) in Sources */,
+				FA9B4958258B7C02006DB896 /* BuildFile in Sources */,
 				00A906DA259048EE0052550C /* LandmarkList.swift in Sources */,
 				FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */,
 				FAE72A5D2589E8D10066B2CB /* SpacerTests.swift in Sources */,
@@ -666,37 +666,38 @@
 				FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */,
 				FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */,
 				FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */,
-				CC277FB02338E844863A2EE9 /* (null) in Sources */,
-				5C9C0E6111CFB46305184E8C /* (null) in Sources */,
-				A2CCF5BBAAA7B2344209E8F8 /* (null) in Sources */,
-				87438CB30AC4943CFA1F29DD /* (null) in Sources */,
-				B6082F26B2D874C94D2B40A0 /* (null) in Sources */,
-				94BBB2E5119EF1369DBC440A /* (null) in Sources */,
+				CC277FB02338E844863A2EE9 /* BuildFile in Sources */,
+				5C9C0E6111CFB46305184E8C /* BuildFile in Sources */,
+				A2CCF5BBAAA7B2344209E8F8 /* BuildFile in Sources */,
+				87438CB30AC4943CFA1F29DD /* BuildFile in Sources */,
+				B6082F26B2D874C94D2B40A0 /* BuildFile in Sources */,
+				94BBB2E5119EF1369DBC440A /* BuildFile in Sources */,
 				FAE72A582589E8D10066B2CB /* AspectTests.swift in Sources */,
 				0093EA9F2590A4520051238B /* ArgoKitAnimationTest.swift in Sources */,
 				00A906B3259048DC0052550C /* Landmark.swift in Sources */,
 				00A906DB259048EE0052550C /* LandmarkRow.swift in Sources */,
 				FAE72A5E2589E8D10066B2CB /* ListTests.swift in Sources */,
-				0B64C3EA4DD965F755E26D16 /* (null) in Sources */,
-				2A6C83604D98391FFDD563F3 /* (null) in Sources */,
-				25ECB5946E5ABD13C37C736D /* (null) in Sources */,
+				0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */,
+				2A6C83604D98391FFDD563F3 /* BuildFile in Sources */,
+				25ECB5946E5ABD13C37C736D /* BuildFile in Sources */,
 				00A906B4259048DC0052550C /* HikeData.swift in Sources */,
-				7A69FB72F090435913742F7C /* (null) in Sources */,
-				A94EAEEF5212D6033C4BC936 /* (null) in Sources */,
-				8555DB1D79939EE4C04F1E7D /* (null) in Sources */,
-				AD5D1FFFF39878DB9AB2D5C7 /* (null) in Sources */,
-				811B7EC1CCF266AA964665A5 /* (null) in Sources */,
-				8E68FF02C2F62B5E000E9326 /* (null) in Sources */,
-				1E71DAE2E4D765322FC62CC4 /* (null) in Sources */,
-				319378B5BA185E8F3C8A39FD /* (null) in Sources */,
-				8218ECFC112AAB889ECF246C /* (null) in Sources */,
-				B16B24E4F76CDACCA358A1B0 /* (null) in Sources */,
-				CF183E8A768603E46E9A567C /* (null) in Sources */,
-				4CF2204CE9F6AD5526B48F09 /* (null) in Sources */,
-				D95F3DFCC7C8477EFA874E26 /* (null) in Sources */,
-				DB3EFA2603509E23049FC61D /* (null) in Sources */,
-				1C17BF04B7426CA0BDEBEDE6 /* (null) in Sources */,
-				460B278FFEB6B669AF0B5D12 /* (null) in Sources */,
+				7A69FB72F090435913742F7C /* BuildFile in Sources */,
+				A94EAEEF5212D6033C4BC936 /* BuildFile in Sources */,
+				8555DB1D79939EE4C04F1E7D /* BuildFile in Sources */,
+				AD5D1FFFF39878DB9AB2D5C7 /* BuildFile in Sources */,
+				811B7EC1CCF266AA964665A5 /* BuildFile in Sources */,
+				8E68FF02C2F62B5E000E9326 /* BuildFile in Sources */,
+				1E71DAE2E4D765322FC62CC4 /* BuildFile in Sources */,
+				319378B5BA185E8F3C8A39FD /* BuildFile in Sources */,
+				8218ECFC112AAB889ECF246C /* BuildFile in Sources */,
+				B16B24E4F76CDACCA358A1B0 /* BuildFile in Sources */,
+				CF183E8A768603E46E9A567C /* BuildFile in Sources */,
+				4CF2204CE9F6AD5526B48F09 /* BuildFile in Sources */,
+				D95F3DFCC7C8477EFA874E26 /* BuildFile in Sources */,
+				FAB3CE7925909DEB00EEE851 /* ArgoKitAnimationTest.swift in Sources */,
+				DB3EFA2603509E23049FC61D /* BuildFile in Sources */,
+				1C17BF04B7426CA0BDEBEDE6 /* BuildFile in Sources */,
+				460B278FFEB6B669AF0B5D12 /* BuildFile in Sources */,
 				EB8F2A6EA62A586FC100F9EB /* ArgoKitPreviewTypes.swift in Sources */,
 				00A90731259073520052550C /* GestureTests.swift in Sources */,
 			);

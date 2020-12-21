@@ -12,6 +12,13 @@ class GridFlowLayout: UICollectionViewFlowLayout {
     var itemHeight:CGFloat = 0
     var headerHeiht:CGFloat = 0
     var footerHeiht:CGFloat = 0
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     var frame:CGRect! = CGRect.zero{
         didSet{
             let width_ = frame.size.width
@@ -73,7 +80,8 @@ extension Grid{
         return self
     }
 
-    public func sectionInset(_ value:UIEdgeInsets ) -> Self {
+    public func layoutInset(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
+        let value = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         gridNode?.sectionInset(value)
         return self
     }

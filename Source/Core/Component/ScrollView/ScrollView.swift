@@ -28,7 +28,7 @@ public class ScrollView: View {
     }
 }
 
-extension ScrollView {
+extension ScrollView{
     
     @discardableResult
     public func contentOffset(_ value: CGPoint) -> Self {
