@@ -25,7 +25,7 @@ class RefreshHeaderNode:ArgoKitNode{
             refreshHeaderView.height(height)
         }
         if width >  0{
-            refreshHeaderView.width(height)
+            refreshHeaderView.width(width)
         }
         // 添加下拉偏移监听
         refreshHeaderView.startPullingDownBlock(pullingDownBlock)

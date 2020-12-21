@@ -197,8 +197,8 @@ extension ScrollView{
     @discardableResult
     public func refreshHeaderView(_ headerView:()->RefreshHeaderView)->Self{
         let view_ = headerView()
-        if let node = view_.type.viewNode(){
-            self.node?.addChildNode(node)
+        if let node = view_.type.viewNode(),let superNode = self.node{
+            superNode.addChildNode(node)
         }
         return self
     }
@@ -206,8 +206,8 @@ extension ScrollView{
     @discardableResult
     public func refreshFooterView(_ footerView:()->RefreshFooterView)->Self{
         let view_ = footerView()
-        if let node = view_.type.viewNode(){
-            self.node?.addChildNode(node)
+        if let node = view_.type.viewNode(),let superNode = self.node{
+            superNode.addChildNode(node)
         }
         return self
     }

@@ -20,7 +20,7 @@ extension Grid{
     
     @discardableResult
     public func scrollToItem(rect: CGRect,animated:Bool)->Self {
-        addAttribute(#selector(ArgoKitGridView.scrollRectToVisible(_:animated:)),rect,animated)
+        addAttribute(#selector(ArgoKitGridView.scrollRectToVisible(_:animated:)),rect,animated  )
         return self
     }
     

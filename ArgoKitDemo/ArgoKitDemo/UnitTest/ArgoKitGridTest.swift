@@ -77,7 +77,8 @@ struct ArgoKitGridTest: ArgoKit.View {
                 }
            
         }
-        .grow(1)
+        .width(300)
+        .height(100%)
         .columnCount(3)
         .columnSpacing(10)
         .lineSpacing(10)
@@ -108,54 +109,58 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .backgroundColor(.yellow)
                 .height(40)
         }
-//        .enableMoveItem(true)
+        .enableMoveItem(true)
         
-        // ios13及以上
-        .contextMenuConfiguration(title: "title") { (data, indexPath) -> [UIAction]? in
-            // 第一个
-            let favorite = UIAction(title: "Favorite", image: UIImage(systemName: "heart.fill")) { action in
-                print("favorite")
-            }
-            
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up.fill")) { action in
-                print("share")
-            }
-            
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), attributes: [.destructive]) { action in
-                print("delete")
-            }
-            return [favorite,share,delete]
-        }
-        .previewForContextMenu { () -> View in
-            HStack{
-                Text("previewForContextMenu")
-            }
-            .backgroundColor(.red)
-            .height(100)
-        }
+//        // ios13及以上
+//        .contextMenuConfiguration(title: "title") { (data, indexPath) -> [UIAction]? in
+//            // 第一个
+//            let favorite = UIAction(title: "Favorite", image: UIImage(systemName: "heart.fill")) { action in
+//                print("favorite")
+//            }
+//
+//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up.fill")) { action in
+//                print("share")
+//            }
+//
+//            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), attributes: [.destructive]) { action in
+//                print("delete")
+//            }
+//            return [favorite,share,delete]
+//        }
+//        .previewForContextMenu { () -> View in
+//            HStack{
+//                Text("previewForContextMenu")
+//            }
+//            .backgroundColor(.red)
+//            .height(100)
+//        }
         .refreshHeaderView { () -> RefreshHeaderView in
             RefreshHeaderView {
                 
             } _: { () -> View in
-                Text("RefreshHeaderView").alignSelf(.center)
+                Text("aaaaaa").alignSelf(.center)
             }
-            .height(100)
             .backgroundColor(.red)
         }
         .refreshFooterView { () -> RefreshFooterView in
             RefreshFooterView {
                 
             } _: { () -> View in
-                Text("RefreshFooterViewRefreshFooterView").backgroundColor(.red)
-                Text("RefreshFooterView").backgroundColor(.purple)
+                Text("111111").backgroundColor(.red)
+                Text("22222222").backgroundColor(.purple)
+                
+                Image("chilkoottrail.jpg")
+                    .width(50)
+                    .aspect(ratio: 1)
+                    .circle()
             }
-            .width(100%)
             .backgroundColor(.orange)
-            .alignContent(.center)
+            .alignItems(.center)
         }
-        .scrollEnabled(true)
-        .scrollDirection(UICollectionView.ScrollDirection.horizontal)
-        .showsScrollIndicator(true)
+//        .contentWidth(300)
+//        .scrollEnabled(true)
+//        .scrollDirection(UICollectionView.ScrollDirection.vertical)
+//        .showsScrollIndicator(true)
 
     }
 }

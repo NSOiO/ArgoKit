@@ -15,13 +15,11 @@ class ArgoKitTextTestModel {
 // view
 struct ArgoKitTextTest: ArgoKit.View {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = nil
+    var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitTextTestModel
     init(model: ArgoKitTextTestModel) {
         self.model = model
     }
-    
-    
     
     var body: ArgoKit.View {
         HStack{
@@ -31,53 +29,52 @@ struct ArgoKitTextTest: ArgoKit.View {
                 .margin(edge: .top, value: 100)
                 .height(100)
         }
-  
-//            .alignSelf(.start)
-//
-//        Text("单行文本粗体")
-//            .font(size: 25)
-//            .font(style: .bold)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.start)
-//
-//        Text("单行文本斜体单行文本斜体单行文本斜体111111111")
-//            .font(size: 20)
-//            .font(style: .default)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.start)
-////            .width(300)
-////            .height(30)
-//
-//
-//        Text("单行文本粗体斜体")
-//            .font(size: 25)
-//            .font(style: .bolditalic)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//
-//        Text("多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-//            .font(size: 25)
-//            .lineLimit(0)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//
-//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-//            .font(size: 25)
-//            .lineLimit(0)
-//            .lineSpacing(10)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//
-//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-//            .font(size: 25)
-//            .textColor(.white)
-//            .lineLimit(0)
-//            .lineSpacing(10)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.center)
+            .alignSelf(.center)
+
+        Text("单行文本粗体")
+            .font(size: 25)
+            .font(style: .bold)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.stretch)
+
+        Text("单行文本斜体单行文本斜体单行文本斜体111111111")
+            .font(size: 20)
+            .font(style: .default)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.start)
+
+
+
+        Text("单行文本粗体斜体")
+            .font(size: 25)
+            .font(style: .bolditalic)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .textAlign(.center)
+
+        Text("多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+            .font(size: 25)
+            .lineLimit(0)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+
+        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+            .font(size: 25)
+            .lineLimit(0)
+            .lineSpacing(10)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+
+        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+            .font(size: 25)
+            .textColor(.white)
+            .lineLimit(0)
+            .lineSpacing(10)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.center)
         
     }
 }

@@ -39,9 +39,6 @@ class GridNode: ArgoKitScrollViewNode,
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
     fileprivate var moveItem = false
     
-    // 支持preview context menu
-//    @available(iOS 13.0, *)
-//    private var menuActions:[UIAction]?
     var actionTitle:String?
     
     private var pGridView:ArgoKitGridView?
@@ -60,14 +57,13 @@ class GridNode: ArgoKitScrollViewNode,
         if #available(iOS 10.0, *) {
             gridView.isPrefetchingEnabled = false
         }
-       
+        gridView.alwaysBounceVertical = true
         
         if moveItem {
             longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(GridNode.handleLongGesture(_:)))
             gridView.addGestureRecognizer(longPressGesture)
             
         }
-        
         return gridView
     }
 
@@ -253,6 +249,7 @@ extension GridNode{
             let layout = collectionViewLayout as! GridFlowLayout
             var height = layout.itemHeight
             let calculateHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: layout.width)
+            print("calculateHeight:\(calculateHeight)==indexPath.item:\(indexPath.item)")
             if height == 0{
                 height = calculateHeight
             }
@@ -323,6 +320,7 @@ extension GridNode{
         if let items = items{
             self.dataSourceHelper.dataList?[sourceIndexPath.section] = items
         }
+
     }
 
     func indexTitles(for collectionView: UICollectionView) -> [String]?{

@@ -77,6 +77,7 @@ class ArgoKitScrollViewNode: ArgoKitArttibuteNode, UIScrollViewDelegate {
 extension ArgoKitScrollViewNode {
     
     public func contentSize(_ value: CGSize) {
+     
         contentSize = value
         contentNode.width(point: value.width)
         contentNode.height(point: value.height)
@@ -96,31 +97,58 @@ extension ArgoKitScrollViewNode {
 extension ArgoKitScrollViewNode {
     
     override func addChildNode(_ node: ArgoKitNode?) {
-        contentNode.addChildNode(node)
+        if self.isMember(of: ArgoKitScrollViewNode.self) {
+            contentNode.addChildNode(node)
+        }else{
+            super.addChildNode(node)
+        }
+       
     }
-    
+
     override func insertChildNode(_ node: ArgoKitNode, at index: Int) {
-        contentNode.insertChildNode(node, at: index)
+        if self.isMember(of: ArgoKitScrollViewNode.self) {
+            contentNode.insertChildNode(node, at: index)
+        }else{
+            super.insertChildNode(node, at: index)
+        }
+        
     }
-    
+
     override func applyLayout() -> CGSize {
-        contentNode.applyLayout(size: contentSize)
-        return super.applyLayout()
+        if self.isMember(of: ArgoKitScrollViewNode.self) {
+            contentNode.applyLayout(size: contentSize)
+            return super.applyLayout()
+        }else{
+            return super.applyLayout()
+        }
     }
-    
+
     override func applyLayout(size: CGSize) -> CGSize {
-        contentNode.applyLayout(size: contentSize)
-        return super.applyLayout(size: size)
+        if self.isMember(of: ArgoKitScrollViewNode.self) {
+            contentNode.applyLayout(size: contentSize)
+            return super.applyLayout(size: size)
+        }else{
+            return super.applyLayout(size: size)
+        }
     }
-    
+
     override func calculateLayout(size: CGSize) -> CGSize {
-        contentNode.calculateLayout(size: contentSize)
-        return super.calculateLayout(size: size)
+        if self.isMember(of: ArgoKitScrollViewNode.self) {
+            contentNode.calculateLayout(size: contentSize)
+            return super.calculateLayout(size: size)
+        }else{
+            return super.calculateLayout(size: size)
+        }
     }
-    
+
     override func applyLayoutAferCalculation(withView: Bool) {
-        contentNode.applyLayoutAferCalculation(withView: withView)
-        super.applyLayoutAferCalculation(withView: withView)
+        if self.isMember(of: ArgoKitScrollViewNode.self) {
+            contentNode.applyLayoutAferCalculation(withView: withView)
+            super.applyLayoutAferCalculation(withView: withView)
+        }else{
+            super.applyLayoutAferCalculation(withView: withView)
+        }
+
     }
 }
 
