@@ -9,9 +9,10 @@ import Foundation
 
 @propertyWrapper
 public class Alias<Value> : DynamicProperty {
-    private var _value: Value
+    private var _value: Value? = nil
     
-    public init(wrappedValue value: Value) {
+    public init() {}
+    public init(wrappedValue value: Value?) {
         self._value = value
     }
     
@@ -19,7 +20,7 @@ public class Alias<Value> : DynamicProperty {
         return self
     }
 
-    public var wrappedValue: Value {
+    public var wrappedValue: Value? {
         get {
             return _value
         }

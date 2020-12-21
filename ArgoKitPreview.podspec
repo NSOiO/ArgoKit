@@ -38,9 +38,6 @@ podspec = Pod::Spec.new do |spec|
         else
           echo "$path not exist"
         fi
-        pwd
-        printenv
-        echo "======end======="
     CMD
   end
   
