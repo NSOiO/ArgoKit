@@ -141,13 +141,3 @@ extension View {
     }
 }
 
-extension View {
-    @discardableResult
-    public func addAnimation(_ animation: Animation) -> Self {
-        if let view = self.node?.view {
-            animation.attach(view)
-        }
-        return self
-    }
-}
-

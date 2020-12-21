@@ -25,14 +25,7 @@ public enum AnimationType {
     case contentOffset
 }
 
-extension UIView {
-    
-    public func addAnimation(_ animation: Animation) {
-        animation.attach(self)
-    }
-}
-
-public class Animation {
+public class Animation : NSObject {
 
     // MARK: - Private
     private var duration: Float?
@@ -53,7 +46,7 @@ public class Animation {
     private var repeatCallback: MLAAnimationRepeatBlock?
     private var finishCallback: MLAAnimationFinishBlock?
 
-    public init(type: AnimationType) {
+    required public init(type: AnimationType) {
         self.type = type
     }
     

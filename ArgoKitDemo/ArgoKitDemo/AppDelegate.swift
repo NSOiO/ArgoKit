@@ -29,11 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
 //        let contentView = ArgoKitTextViewTest(model: ArgoKitTextViewTestModel())
-        let contentView = LandmarkList(model: UserData())
+        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
-        nav = UINavigationController(rootViewController: vc)
-
+//        let vc = ViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        
         let window = UIWindow.init(frame: UIScreen.main.bounds)
         window.rootViewController = nav
         self.window = window

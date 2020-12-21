@@ -90,32 +90,32 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var result:CGSize = size
-        if let view = self.view {
-            result = view.sizeThatFits(size)
-        }else{
-            let lable:UILabel = TextCalculation.calculationLable
-            if let text =  self.text(){
-                if text.count > 0 {
-                    lable.text = text
-                }
+//        if let view = self.view {
+//            result = view.sizeThatFits(size)
+//        }else{
+//
+//        }
+        let lable:UILabel = TextCalculation.calculationLable
+        if let text =  self.text(){
+            if text.count > 0 {
+                lable.text = text
             }
-            if let attribut =  self.attributedText(){
-                if attribut.length > 0 {
-                    lable.attributedText = attribut
-                }
-            }
-
-            if let font = self.font() {
-                lable.font = font
-            }
-            lable.numberOfLines = self.numberOfLines()
-            lable.lineBreakMode = self.lineBreakMode()
-            result = lable.sizeThatFits(size)
-            let width = ceil(result.width);
-            let height = ceil(result.height);
-            result = CGSize(width: width, height: height)
         }
-        
+        if let attribut =  self.attributedText(){
+            if attribut.length > 0 {
+                lable.attributedText = attribut
+            }
+        }
+
+        if let font = self.font() {
+            lable.font = font
+        }
+        lable.numberOfLines = self.numberOfLines()
+        lable.lineBreakMode = self.lineBreakMode()
+        result = lable.sizeThatFits(size)
+        let width = ceil(result.width);
+        let height = ceil(result.height);
+        result = CGSize(width: width, height: height)
 //        let result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         return result
     }
