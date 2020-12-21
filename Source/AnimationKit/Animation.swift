@@ -8,6 +8,35 @@
 import Foundation
 import ArgoAnimation
 
+public class AnimationBasic: NSObject {
+    
+    @discardableResult
+    func attach(_ view: View) -> Self {
+        return self
+    }
+    
+    @discardableResult
+    func attach(_ view: UIView) -> Self {
+        return self
+    }
+    
+    func start(serial: Bool) {
+        
+    }
+    
+    func pause() {
+        
+    }
+    
+    func resume() {
+        
+    }
+    
+    func stop() {
+        
+    }
+}
+
 public enum AnimationTimingFunc {
     case defaultValue
     case linear
@@ -25,7 +54,7 @@ public enum AnimationType {
     case contentOffset
 }
 
-public class Animation : NSObject {
+public class Animation : AnimationBasic {
 
     // MARK: - Private
     private var duration: Float?
@@ -175,7 +204,7 @@ public class Animation : NSObject {
     }
     
     @discardableResult
-    public func attach(_ view: View) -> Self {
+    public override func attach(_ view: View) -> Self {
         if let actualView = view.node?.view {
             attach(actualView)
         }
@@ -183,7 +212,7 @@ public class Animation : NSObject {
     }
     
     @discardableResult
-    public func attach(_ view: UIView) -> Self {
+    public override func attach(_ view: UIView) -> Self {
         guard target == nil else {
             return self
         }
@@ -191,58 +220,63 @@ public class Animation : NSObject {
         return self
     }
     
-    public func start() {
+    public override func start(serial: Bool = false) {
         prepareAnimation()
         animation?.start()
     }
     
-    public func pause() {
+    public override func pause() {
         animPaused = true
         animation?.pause()
     }
     
-    public func resume() {
+    public override func resume() {
         animPaused = false
         animation?.resume()
     }
     
-    public func stop() {
+    public override func stop() {
         animation?.finish()
     }
 
-    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) {
+    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) -> Self {
         startCallback = callback
         if let anim = animation {
             anim.startBlock = callback
         }
+        return self
     }
     
-    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) {
+    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) -> Self {
         pauseCallback = callback
         if let anim = animation {
             anim.pauseBlock = callback
         }
+        return self
     }
     
-    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) {
+    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) -> Self {
         resumeCallback = callback
         if let anim = animation {
             anim.resumeBlock = callback
         }
+        return self
     }
     
-    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) {
+    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) -> Self {
         repeatCallback = callback
         if let anim = animation {
             anim.repeatBlock = callback
         }
+        return self
     }
     
-    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) {
+    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) -> Self {
         finishCallback = callback
         if let anim = animation {
             anim.finishBlock = callback
         }
+        return self
     }
     
     // MARK: - Private
