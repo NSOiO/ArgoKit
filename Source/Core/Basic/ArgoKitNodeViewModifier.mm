@@ -120,6 +120,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     }
     UIView *view = node.view;
     for (ViewAttribute *attribute in attributes) {
+       
         if(attribute.isCALayer){
             if(view &&  [view.layer respondsToSelector:attribute.selector]){
                 performSelector(view.layer,attribute.selector,attribute.paramter);
