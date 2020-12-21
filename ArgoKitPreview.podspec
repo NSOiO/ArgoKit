@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
     spec.name = 'ArgoKitPreview'
-    spec.version = '1.0.5.beta'
+    spec.version = '1.0.5'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
     # spec.documentation_url = 'argokit'
