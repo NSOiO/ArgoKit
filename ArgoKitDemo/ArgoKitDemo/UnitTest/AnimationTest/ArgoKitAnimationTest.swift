@@ -13,9 +13,9 @@ class ArgoKitMoveAnimationTestModel {
 }
 
 // view
-class ArgoKitMoveAnimationTest: ArgoKit.View {
+struct ArgoKitMoveAnimationTest: ArgoKit.View {
     typealias View = ArgoKit.View
-    var text: Text?
+    @Alias var text: Text?
     
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitMoveAnimationTestModel
@@ -135,7 +135,7 @@ class ArgoKitMoveAnimationTest: ArgoKit.View {
         
         HStack {
             Text("Hello, ArgoKit!")
-                .alias(variable: &self.text)
+                .alias(variable: $text)
                 .margin(edge: .left, value: 15)
             Spacer()
         }.margin(edge: .top, value: 15)
