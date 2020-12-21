@@ -699,7 +699,6 @@
 				1C17BF04B7426CA0BDEBEDE6 /* BuildFile in Sources */,
 				460B278FFEB6B669AF0B5D12 /* BuildFile in Sources */,
 				EB8F2A6EA62A586FC100F9EB /* ArgoKitPreviewTypes.swift in Sources */,
-				00A90731259073520052550C /* GestureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
