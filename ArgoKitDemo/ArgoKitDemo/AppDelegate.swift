@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            nav = UINavigationController(rootViewController: vc)
 //        }
         
-        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+        let contentView = ArgoKitAnimationBlockTest(model: ArgoKitAnimationBlockTestModel())
 
 //        let contentView = ArgoKitTextViewTest(model: ArgoKitTextViewTestModel())
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
