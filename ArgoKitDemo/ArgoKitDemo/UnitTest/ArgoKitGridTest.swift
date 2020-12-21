@@ -15,13 +15,13 @@ class ArgoKitGridTestModel {
     var headerSource = [ArgoKitGridHeaderTestModel]()
     init() {
         for session in 0..<10 {
-            let idetifier = "gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_gridcell_\(session)"
+            let idetifier = "session:\(session)"
             let headerModel = ArgoKitGridHeaderTestModel()
             headerModel.headerName = idetifier
             headerSource.append(headerModel)
             
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for index in 0..<5{
+            for index in 0..<20{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = "\(index)"
                 item.imagePath = images[index%5]
@@ -63,7 +63,7 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Grid(data:model.dataSource.first ?? [ArgoKitGridCellTestModel()]){ data in
+        Grid(sectionData:model.dataSource){ data in
             Text(data.headerName)
                 .lineLimit(0)
                 .alias(variable: &data.text)
@@ -77,12 +77,11 @@ struct ArgoKitGridTest: ArgoKit.View {
                 }
            
         }
-        .width(300)
-        .height(100%)
+        .grow(1.0)
         .columnCount(3)
         .columnSpacing(10)
         .lineSpacing(10)
-        .sectionInset(UIEdgeInsets(top: 10, left:10, bottom: 10, right: 10))
+        .layoutInset(top: 10, left:10, bottom: 10, right: 10)
         .showsScrollIndicator(true)
         .cellWillAppear{ (data, indexpath) in
 
@@ -99,7 +98,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         .sectionHeader(model.headerSource) { data -> View in
             Text(data.headerName)
                 .textAlign(.center)
-                .backgroundColor(.purple)
+                .backgroundColor(.gray)
                 .lineLimit(0)
             
         }
@@ -138,7 +137,7 @@ struct ArgoKitGridTest: ArgoKit.View {
             RefreshHeaderView {
                 
             } _: { () -> View in
-                Text("aaaaaa").alignSelf(.center)
+                Text("refresh_header").alignSelf(.center)
             }
             .backgroundColor(.red)
         }
@@ -146,9 +145,7 @@ struct ArgoKitGridTest: ArgoKit.View {
             RefreshFooterView {
                 
             } _: { () -> View in
-                Text("111111").backgroundColor(.red)
-                Text("22222222").backgroundColor(.purple)
-                
+                Text("refresh_footer").backgroundColor(.red)
                 Image("chilkoottrail.jpg")
                     .width(50)
                     .aspect(ratio: 1)

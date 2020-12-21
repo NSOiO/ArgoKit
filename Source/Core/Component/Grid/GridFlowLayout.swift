@@ -73,7 +73,8 @@ extension Grid{
         return self
     }
 
-    public func sectionInset(_ value:UIEdgeInsets ) -> Self {
+    public func layoutInset(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
+        let value = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         gridNode?.sectionInset(value)
         return self
     }
