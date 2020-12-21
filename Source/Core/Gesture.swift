@@ -50,7 +50,7 @@ public struct LongPressGesture:Gesture {
     }
 }
 
-public struct PanPressGesture:Gesture {
+public struct PanGesture:Gesture {
     private var pAction:(UIGestureRecognizer)->Void
     public var action: (UIGestureRecognizer) -> Void{
         pAction

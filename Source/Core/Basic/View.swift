@@ -70,6 +70,7 @@ extension View{
 
 extension View{
     @discardableResult
+    @available(*, deprecated, message: "alias(variable ptr:inout) had been deprecated")
     public func alias<T>(variable ptr:inout T?) -> Self where T: View{
         ptr = self as? T
         return self
@@ -118,14 +119,14 @@ extension View{
 
 extension View{
     @discardableResult
-    public func onTapGesture(numberOfTaps: Int = 1, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
+    public func onTapGesture(numberOfTaps: Int = 0, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
         let gesture = TapGesture(numberOfTaps: numberOfTaps, numberOfTouches: numberOfTouches) { gesture in
             action()
         }
         return self.gesture(gesture:gesture)
     }
     @discardableResult
-    public func onLongPressGesture(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
+    public func onLongPressGesture(numberOfTaps:Int = 0, numberOfTouches:Int = 1,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
         let gesture = LongPressGesture(numberOfTaps:numberOfTaps,numberOfTouches:numberOfTouches,minimumPressDuration:minimumPressDuration,allowableMovement:allowableMovement) { gesture in
             action()
         }

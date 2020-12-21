@@ -24,7 +24,7 @@ typealias TapGesture = ArgoKit.TapGesture
 typealias SwipeGesture = ArgoKit.SwipeGesture
 typealias PinchGesture = ArgoKit.PinchGesture
 typealias RotationGesture = ArgoKit.RotationGesture
-typealias PanPressGesture = ArgoKit.PanPressGesture
+typealias PanGesture = ArgoKit.PanGesture
 typealias LongPressGesture = ArgoKit.LongPressGesture
 typealias ScreenEdgePanGesture = ArgoKit.ScreenEdgePanGesture
 
