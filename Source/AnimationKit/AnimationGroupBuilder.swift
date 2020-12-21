@@ -40,8 +40,11 @@ extension AnimationGroup {
 }
 
 @_functionBuilder
-public struct ArgoKitAnimationGroupBuilder {
-    public static func buildBlock(_ items:Animation...) -> AnimationGroup {
+public struct ArgoKitAnimationBuilder {
+    public static func buildBlock(_ items:Animation...) -> AnimationBasic {
+        if items.count == 1 {
+            return items.first!
+        }
         let group = AnimationGroup()
         group.animations(items)
         return group

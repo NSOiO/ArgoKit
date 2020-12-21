@@ -8,7 +8,7 @@
 import Foundation
 import ArgoAnimation
 
-public class AnimationGroup: NSObject {
+public class AnimationGroup: AnimationBasic {
     
     private var delay: Float?
     private var repeatCount: Int?
@@ -53,7 +53,7 @@ public class AnimationGroup: NSObject {
     }
     
     @discardableResult
-    public func attach(_ view: View) -> Self {
+    public override func attach(_ view: View) -> Self {
         if let actualView = view.node?.view {
             attach(actualView)
         }
@@ -61,7 +61,7 @@ public class AnimationGroup: NSObject {
     }
     
     @discardableResult
-    public func attach(_ view: UIView) -> Self {
+    public override func attach(_ view: UIView) -> Self {
         guard target == nil else {
             assertionFailure("You cann't attach an animaionGroup to multiple views.")
             return self
@@ -99,6 +99,14 @@ public class AnimationGroup: NSObject {
         return self
     }
     
+    public override func start(serial: Bool) {
+        if serial {
+            startSerial()
+        } else {
+            startConcurrent()
+        }
+    }
+    
     public func startSerial() {
         prepareAnimationGroup()
         guard let group = animation else {
@@ -119,53 +127,58 @@ public class AnimationGroup: NSObject {
         group.start()
     }
     
-    public func pause() {
+    public override func pause() {
         animPaused = true
         animation?.pause()
     }
     
-    public func resume() {
+    public override func resume() {
         animPaused = false
         animation?.resume()
     }
     
-    public func stop() {
+    public override func stop() {
         animation?.finish()
     }
 
-    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) {
+    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) -> Self {
         startCallback = callback
         if let anim = animation {
             anim.startBlock = callback
         }
+        return self
     }
     
-    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) {
+    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) -> Self {
         pauseCallback = callback
         if let anim = animation {
             anim.pauseBlock = callback
         }
+        return self
     }
     
-    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) {
+    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) -> Self {
         resumeCallback = callback
         if let anim = animation {
             anim.resumeBlock = callback
         }
+        return self
     }
     
-    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) {
+    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) -> Self {
         repeatCallback = callback
         if let anim = animation {
             anim.repeatBlock = callback
         }
+        return self
     }
     
-    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) {
+    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) -> Self {
         finishCallback = callback
         if let anim = animation {
             anim.finishBlock = callback
         }
+        return self
     }
     
     // MARK: - Private
