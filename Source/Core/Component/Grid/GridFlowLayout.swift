@@ -6,24 +6,17 @@
 //
 
 import Foundation
-class GridFlowLayout: UICollectionViewFlowLayout {
-    var columCount:Int = 1
+public class GridFlowLayout:UICollectionViewFlowLayout{
+    var columnCount:Int = 1
     var width:CGFloat = 0
     var itemHeight:CGFloat = 0
-    var headerHeiht:CGFloat = 0
-    var footerHeiht:CGFloat = 0
-    override init() {
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var headerHeight:CGFloat = 0
+    var footerHeight:CGFloat = 0
     var frame:CGRect! = CGRect.zero{
         didSet{
             let width_ = frame.size.width
-            let columSpace = minimumInteritemSpacing * CGFloat((columCount - 1))
-            width = (width_ - columSpace - sectionInset.left - sectionInset.right) / CGFloat(columCount)
+            let columSpace = minimumInteritemSpacing * CGFloat((columnCount - 1))
+            width = (width_ - columSpace - sectionInset.left - sectionInset.right) / CGFloat(columnCount)
             width = floor(width)
             if itemHeight == 0 {
                 itemSize = CGSize(width: width, height: itemHeight)
@@ -33,7 +26,6 @@ class GridFlowLayout: UICollectionViewFlowLayout {
         }
     }
 }
-
 
 //MARK: item layout设置配置参数
 extension Grid{
@@ -46,6 +38,7 @@ extension Grid{
     @discardableResult
     public func columnCount(_ value:Int) -> Self{
         gridNode?.columnCount(value)
+        
         return self
     }
 

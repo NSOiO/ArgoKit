@@ -24,7 +24,8 @@ class ArgoKitGridView: UICollectionView {
 class GridNode: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,
-                       UICollectionViewDelegateFlowLayout{
+                       UICollectionViewDelegateFlowLayout,
+                       GridDelegateWaterfallLayout{
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
@@ -40,31 +41,43 @@ class GridNode: ArgoKitScrollViewNode,
     fileprivate var moveItem = false
     
     var actionTitle:String?
+    var supportWaterfall:Bool = true
     
     private var pGridView:ArgoKitGridView?
     
     var flowLayout:GridFlowLayout = GridFlowLayout()
+    var waterfallLayout:GridWaterfallLayout = GridWaterfallLayout()
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        let gridView = ArgoKitGridView(frame: frame, collectionViewLayout:flowLayout)
-        gridView.backgroundColor = .white
-        flowLayout.frame = frame
+        var gridView:ArgoKitGridView?
+        if supportWaterfall{
+            gridView = ArgoKitGridView(frame: frame, collectionViewLayout: waterfallLayout)
+            waterfallLayout.frame = frame
+        }else{
+            gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
+            flowLayout.frame = frame
+        }
+        gridView?.frame = frame
+        gridView?.backgroundColor = .white
+       
         pGridView = gridView
-        gridView.delegate = self
-        gridView.dataSource = self
+       
+        
+        gridView?.delegate = self
+        gridView?.dataSource = self
         if #available(iOS 11.0, *) {
-            gridView.contentInsetAdjustmentBehavior = .never
+            gridView?.contentInsetAdjustmentBehavior = .never
         }
         if #available(iOS 10.0, *) {
-            gridView.isPrefetchingEnabled = false
+            gridView?.isPrefetchingEnabled = false
         }
-        gridView.alwaysBounceVertical = true
+        gridView?.alwaysBounceVertical = true
         
         if moveItem {
             longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(GridNode.handleLongGesture(_:)))
-            gridView.addGestureRecognizer(longPressGesture)
+            gridView?.addGestureRecognizer(longPressGesture)
             
         }
-        return gridView
+        return gridView!
     }
 
     
@@ -87,6 +100,7 @@ class GridNode: ArgoKitScrollViewNode,
     }
 }
 
+// MARK: reload data
 extension GridNode {
         
     public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
@@ -245,8 +259,7 @@ extension GridNode{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        if collectionViewLayout is GridFlowLayout {
-            let layout = collectionViewLayout as! GridFlowLayout
+        if let layout = collectionViewLayout as? GridFlowLayout {
             var height = layout.itemHeight
             let calculateHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: layout.width)
             print("calculateHeight:\(calculateHeight)==indexPath.item:\(indexPath.item)")
@@ -255,7 +268,7 @@ extension GridNode{
             }
             return CGSize(width:layout.width, height: height)
         }
-        return flowLayout.itemSize
+        return CGSize.zero//flowLayout.itemSize
     }
     
     
@@ -288,8 +301,8 @@ extension GridNode{
         let width = collectionView.frame.size.width
         var height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
         if let layout = collectionViewLayout as? GridFlowLayout{
-            if layout.headerHeiht > 0 {
-                height = layout.headerHeiht
+            if layout.headerHeight > 0 {
+                height = layout.headerHeight
             }
         }
         return CGSize(width:width, height: height)
@@ -301,8 +314,8 @@ extension GridNode{
         var height = self.footerSourceHelper.rowHeight(section, at:0, maxWidth:width)
         if collectionViewLayout is GridFlowLayout {
             let layout = collectionViewLayout as! GridFlowLayout
-            if layout.headerHeiht > 0 {
-                height = layout.headerHeiht
+            if layout.footerHeight > 0 {
+                height = layout.footerHeight
             }
         }
         return CGSize(width:width, height: height)
@@ -643,15 +656,18 @@ extension GridNode{
     }
     
     public func columnCount(_ value:Int){
-        flowLayout.columCount = value
+        flowLayout.columnCount = value
+        waterfallLayout.columnCount = value
     }
 
     public func columnSpacing(_ value:CGFloat){
         flowLayout.minimumInteritemSpacing = value
+        waterfallLayout.minimumInteritemSpacing = value
     }
     
     public func lineSpacing(_ value:CGFloat){
         flowLayout.minimumLineSpacing = value
+        waterfallLayout.minimumLineSpacing = value
     }
     
     public func estimatedItemSize(_ value:CGSize = CGSize.zero){
@@ -672,6 +688,7 @@ extension GridNode{
 
     public func sectionInset(_ value:UIEdgeInsets){
         flowLayout.sectionInset = value
+        waterfallLayout.sectionInset = value
     }
     
     @available(iOS 11.0, *)
