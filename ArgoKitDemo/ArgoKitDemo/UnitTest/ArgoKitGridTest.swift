@@ -95,20 +95,21 @@ struct ArgoKitGridTest: ArgoKit.View {
         .willBeginDragging {
             
         }
-        .sectionHeader(model.headerSource) { data -> View in
+        .sectionHeader(data:model.headerSource) { data -> View in
             Text(data.headerName)
                 .textAlign(.center)
                 .backgroundColor(.gray)
                 .lineLimit(0)
             
         }
-        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
-            Text(data.headerName)
-                .textAlign(.center)
-                .backgroundColor(.yellow)
-                .height(40)
-        }
-        .enableMoveItem(true)
+        .sectionHeadersPinToVisibleBounds(true)
+//        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
+//            Text(data.headerName)
+//                .textAlign(.center)
+//                .backgroundColor(.yellow)
+//                .height(40)
+//        }
+//        .enableMoveItem(true)
         
 //        // ios13及以上
 //        .contextMenuConfiguration(title: "title") { (data, indexPath) -> [UIAction]? in

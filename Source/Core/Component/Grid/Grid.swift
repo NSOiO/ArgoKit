@@ -53,7 +53,7 @@ public class Grid<D>: ScrollView  {
 extension Grid{
     
     @discardableResult
-    public func sectionHeader(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+    public func sectionHeader(pinToVisibleBounds:Bool = false,@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         if let nodes = container.type.viewNodes() {
             gridNode?.headerSourceHelper.dataList = [nodes]
@@ -62,7 +62,7 @@ extension Grid{
     }
     
     @discardableResult
-    public func sectionHeader<T: ArgoKitIdentifiable>(_ data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
+    public func sectionHeader<T: ArgoKitIdentifiable>(pinToVisibleBounds:Bool = false,data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
         gridNode?.headerSourceHelper.dataList = [data]
         gridNode?.headerSourceHelper.buildNodeFunc = { item in
             if let item = item as? T{
@@ -74,7 +74,7 @@ extension Grid{
     }
     
     @discardableResult
-    public func sectionFooter(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+    public func sectionFooter(pinToVisibleBounds:Bool = false,@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         if let nodes = container.type.viewNodes() {
             gridNode?.footerSourceHelper.dataList = [nodes]
@@ -83,7 +83,7 @@ extension Grid{
     }
     
     @discardableResult
-    public func sectionFooter<T: ArgoKitIdentifiable>(_ data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
+    public func sectionFooter<T: ArgoKitIdentifiable>(pinToVisibleBounds:Bool = false,data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
         gridNode?.footerSourceHelper.dataList = [data]
         gridNode?.footerSourceHelper.buildNodeFunc = { item in
             if let item = item as? T {
