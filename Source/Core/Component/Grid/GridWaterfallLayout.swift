@@ -122,6 +122,7 @@ public class GridWaterfallLayout: GridFlowLayout {
         }
     }
     
+    private var ignorPrepare:Bool = false
 
     private var columnHeights: [[CGFloat]] = []
     private var sectionItemAttributes: [[UICollectionViewLayoutAttributes]] = []
@@ -134,12 +135,14 @@ public class GridWaterfallLayout: GridFlowLayout {
 
     override public func prepare() {
         super.prepare()
-
+        if ignorPrepare {
+            ignorPrepare = false
+            return
+        }
         let numberOfSections = collectionView!.numberOfSections
         if numberOfSections == 0 {
             return
         }
-
         headersAttributes = [:]
         footersAttributes = [:]
         unionRects = []
@@ -155,11 +158,14 @@ public class GridWaterfallLayout: GridFlowLayout {
         var attributes = UICollectionViewLayoutAttributes()
 
         for section in 0 ..< numberOfSections {
-            // MARK: 1. Get section-specific metrics (minimumLineSpacing, sectionInset)
+            // 获取行间距
             let lineSpacing = delegate?.collectionView(collectionView!, layout: self, minimumLineSpacingForSectionAt: section)
                 ?? self.minimumLineSpacing
+            // 获取Insets值
             let sectionInsets = delegate?.collectionView(collectionView!, layout: self, insetForSectionAt: section) ?? self.sectionInset
+            // 获取section中item的数量
             let columnCount = columnHeights[section].count
+            // 计算每个item的宽度
             let itemWidth = self.itemWidth(inSection: section)
 
             // MARK: 2. Section header
@@ -334,8 +340,12 @@ public class GridWaterfallLayout: GridFlowLayout {
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         if self.sectionHeadersPinToVisibleBounds {
             invalidateLayout()
+            ignorPrepare = true
+            return false
         }
-        return newBounds.width != collectionView?.bounds.width
+        let result = newBounds.width != collectionView?.bounds.width
+        print("shouldInvalidateLayout:\(result)")
+        return result
     }
 
     /// Find the shortest column.
