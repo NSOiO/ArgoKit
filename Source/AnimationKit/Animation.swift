@@ -10,6 +10,8 @@ import ArgoAnimation
 
 public class AnimationBasic: NSObject {
     
+    var resetOnStop: Bool = false
+    
     @discardableResult
     func attach(_ view: View) -> Self {
         return self
@@ -17,6 +19,17 @@ public class AnimationBasic: NSObject {
     
     @discardableResult
     func attach(_ view: UIView) -> Self {
+        return self
+    }
+    
+    @discardableResult
+    func update(serial: Bool = false, progress: Float) -> Self {
+        return self
+    }
+    
+    @discardableResult
+    public func resetOnStop(_ reset: Bool) -> Self {
+        resetOnStop = reset
         return self
     }
     
@@ -195,7 +208,7 @@ public class Animation : AnimationBasic {
     }
     
     @discardableResult
-    public func update(progress: Float) -> Self {
+    public override func update(serial: Bool = false, progress: Float) -> Self {
         if animation == nil {
             prepareAnimation()
         }
@@ -350,6 +363,7 @@ public class Animation : AnimationBasic {
         let anim = animation!
         anim.fromValue = from
         anim.toValue = to
+        anim.resetOnFinish = resetOnStop
         
         if let d = delay {
             anim.beginTime = NSNumber(value: d)

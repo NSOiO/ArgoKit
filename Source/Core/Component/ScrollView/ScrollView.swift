@@ -24,11 +24,13 @@ public class ScrollView: View {
     }
     
     func createNode() {
-        pNode = ArgoKitScrollViewNode(viewClass: UIScrollView.self)
+        let node = ArgoKitScrollViewNode(viewClass: UIScrollView.self)
+        node.createContentNode()
+        pNode = node
     }
 }
 
-extension ScrollView{
+extension ScrollView {
     
     @discardableResult
     public func contentOffset(_ value: CGPoint) -> Self {
