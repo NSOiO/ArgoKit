@@ -106,6 +106,7 @@
 		FAE72A5E2589E8D10066B2CB /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A572589E8D10066B2CB /* ListTests.swift */; };
 		FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */; };
 		FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */; };
+		FAEBC97225919C2D00196254 /* ArgoKitAnimationProgressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEBC97125919C2D00196254 /* ArgoKitAnimationProgressTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +209,7 @@
 		FAE72A572589E8D10066B2CB /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		FAEB0B60256F53530037B68F /* ArgoKitListDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitListDemo.swift; sourceTree = "<group>"; };
 		FAEB0B76256FB3330037B68F /* ArgokitDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgokitDemoController.swift; sourceTree = "<group>"; };
+		FAEBC97125919C2D00196254 /* ArgoKitAnimationProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationProgressTest.swift; sourceTree = "<group>"; };
 		FBD5030552A19052F6BC0181 /* Pods-ArgoTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoTest.release.xcconfig"; path = "Target Support Files/Pods-ArgoTest/Pods-ArgoTest.release.xcconfig"; sourceTree = "<group>"; };
 		FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -416,6 +418,7 @@
 			children = (
 				FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */,
 				FAB3CE892590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift */,
+				FAEBC97125919C2D00196254 /* ArgoKitAnimationProgressTest.swift */,
 			);
 			path = AnimationTest;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				FAE72A5C2589E8D10066B2CB /* HVStackTests.swift in Sources */,
 				FA0BFE012583615500D483EC /* ArgoKitTextViewTest.swift in Sources */,
 				FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */,
+				FAEBC97225919C2D00196254 /* ArgoKitAnimationProgressTest.swift in Sources */,
 				FA0D56F2259073DC0014E341 /* Data.swift in Sources */,
 				FAC41C61258B37920006AE78 /* (null) in Sources */,
 				326335CE254133D20094676D /* AppDelegate.swift in Sources */,

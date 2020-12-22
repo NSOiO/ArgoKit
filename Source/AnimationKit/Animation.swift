@@ -20,6 +20,11 @@ public class AnimationBasic: NSObject {
         return self
     }
     
+    @discardableResult
+    func update(serial: Bool = false, progress: Float) -> Self {
+        return self
+    }
+    
     func start(serial: Bool) {
         
     }
@@ -195,7 +200,7 @@ public class Animation : AnimationBasic {
     }
     
     @discardableResult
-    public func update(progress: Float) -> Self {
+    public override func update(serial: Bool = false, progress: Float) -> Self {
         if animation == nil {
             prepareAnimation()
         }

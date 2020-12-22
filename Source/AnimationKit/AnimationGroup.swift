@@ -80,6 +80,16 @@ public class AnimationGroup: AnimationBasic {
     }
     
     @discardableResult
+    override func update(serial: Bool = false, progress: Float) -> Self {
+        if serial {
+            updateSerial(progress: progress)
+        } else {
+            updateConcurrent(progress: progress)
+        }
+        return self
+    }
+    
+    @discardableResult
     public func updateSerial(progress: Float) -> Self {
         if animation == nil {
             prepareAnimationGroup()
