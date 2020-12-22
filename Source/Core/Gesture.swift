@@ -23,7 +23,7 @@ public struct TapGesture:Gesture {
     public var gesture: UIGestureRecognizer{
         pTapGesture
     }
-    public init(numberOfTaps:Int,numberOfTouches: Int,onTapGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
+    public init(numberOfTaps:Int = 1,numberOfTouches: Int = 1,onTapGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
         pAction = onTapGesture
         pTapGesture = UITapGestureRecognizer()
         pTapGesture.numberOfTapsRequired = numberOfTaps

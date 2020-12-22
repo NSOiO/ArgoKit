@@ -29,3 +29,17 @@ public class Alias<Value> : DynamicProperty {
         }
     }
 }
+
+/* TODO: Aliasable contains Self
+public protocol Aliasable {
+    func alias(variable: Alias<Self>) -> Self;
+}
+
+public extension Aliasable {
+    @discardableResult
+    func alias(variable: Alias<Self>) -> Self {
+        variable.wrappedValue = self
+        return self
+    }
+}
+*/
