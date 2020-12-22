@@ -80,7 +80,7 @@ public class AnimationGroup: AnimationBasic {
     }
     
     @discardableResult
-    override func update(serial: Bool = false, progress: Float) -> Self {
+    public override func update(serial: Bool = false, progress: Float) -> Self {
         if serial {
             updateSerial(progress: progress)
         } else {

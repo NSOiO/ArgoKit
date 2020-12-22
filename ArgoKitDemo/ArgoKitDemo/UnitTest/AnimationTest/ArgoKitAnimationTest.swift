@@ -69,9 +69,9 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
                             .duration(3.0)
                             .from(15,0)
                             .to(200, 200)
+                            .resetOnStop(true)
                     }
                     .startAnimation()
-                    .resetAnimationOnStop()
                 
             }
             .margin(edge: .left, value: 15)

@@ -10,7 +10,7 @@ import ArgoAnimation
 
 public class AnimationBasic: NSObject {
     
-    public var resetOnStop: Bool = false
+    var resetOnStop: Bool = false
     
     @discardableResult
     func attach(_ view: View) -> Self {
@@ -24,6 +24,12 @@ public class AnimationBasic: NSObject {
     
     @discardableResult
     func update(serial: Bool = false, progress: Float) -> Self {
+        return self
+    }
+    
+    @discardableResult
+    public func resetOnStop(_ reset: Bool) -> Self {
+        resetOnStop = reset
         return self
     }
     
