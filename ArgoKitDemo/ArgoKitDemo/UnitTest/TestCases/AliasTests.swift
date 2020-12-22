@@ -9,7 +9,8 @@ import ArgoKit
 
 // view model.
 class AliasTestsModel {
-
+    @Alias var titleText: Text? = nil    
+    var count: Int = 0
 }
 
 // view
@@ -22,7 +23,17 @@ struct AliasTests: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
+
         Text("Hello, ArgoKit!")
+            .alias(variable: model.$titleText)
+            .borderWidth(1)
+            .borderColor(.blue)
+            .onTapGesture {
+                model.count += 1
+                model.titleText?.text("click \(model.count)")
+            }
+        
+            
     }
 }
 

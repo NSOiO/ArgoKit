@@ -16,6 +16,7 @@ class ArgoKitMoveAnimationTestModel {
 struct ArgoKitMoveAnimationTest: ArgoKit.View {
     typealias View = ArgoKit.View
     @Alias var text: Text?
+    @Alias var alphaAnimation: Animation? = nil
     
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitMoveAnimationTestModel
@@ -30,10 +31,7 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
             Button(text: "透明度") {
                 self.text?
                     .addAnimation {
-                        Animation(type: .alpha)
-                            .duration(3.0)
-                            .from(0.0)
-                            .to(1.0)
+
                     }
                     .startAnimation()
             }.margin(edge: .left, value: 15)
@@ -137,6 +135,13 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
             Text("Hello, ArgoKit!")
                 .alias(variable: $text)
                 .margin(edge: .left, value: 15)
+                .addAnimation {
+                    Animation(type: .alpha)
+                        .duration(3.0)
+                        .from(0.0)
+                        .to(1.0)
+                        
+                }
             Spacer()
         }.margin(edge: .top, value: 15)
     }
