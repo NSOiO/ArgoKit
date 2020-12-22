@@ -7,25 +7,6 @@
 
 import Foundation
 
-//class GridCellNode: ArgoKitNode {
-//    
-//    var cellSourceData: Any?
-//    
-//    var frameObserber: NSKeyValueObservation?
-//    var indexpath:IndexPath = IndexPath(row: 0, section: 0)
-//    public func observeFrameChanged(changeHandler: @escaping (GridCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
-//        removeObservingFrameChanged()
-//        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
-//    }
-//    
-//    public func removeObservingFrameChanged() {
-//        if frameObserber != nil {
-//            frameObserber?.invalidate()
-//            frameObserber = nil
-//        }
-//    }
-//}
-
 class GridCell: UICollectionViewCell {
   
     var contentNode: ArgoKitCellNode?

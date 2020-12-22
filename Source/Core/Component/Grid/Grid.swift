@@ -17,17 +17,18 @@ public class Grid<D>: ScrollView  {
         super.init()
     }
     
-    public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
+    public convenience init(waterfall:Bool = false,@ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
         self.init()
+        gridNode?.waterfall(waterfall)
         let container = content()
         if let nodes = container.type.viewNodes() {
             gridNode?.dataSourceHelper.dataList = [nodes]
         }
     }
 
-    public convenience init(data: [D], @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
+    public convenience init(waterfall:Bool = false,data: [D], @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
         self.init()
-        
+        gridNode?.waterfall(waterfall)
         gridNode?.dataSourceHelper.dataList = [data]
         gridNode?.dataSourceHelper.buildNodeFunc = { item in
             if let item = item as? D{
@@ -37,8 +38,9 @@ public class Grid<D>: ScrollView  {
         }
     }
     
-    public convenience init(sectionData: [[D]], @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
+    public convenience init(waterfall:Bool = false,sectionData: [[D]], @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
         self.init()
+        gridNode?.waterfall(waterfall)
         gridNode?.dataSourceHelper.dataList = sectionData
         gridNode?.dataSourceHelper.buildNodeFunc = { item in
             if let item = item as? D{
@@ -53,7 +55,7 @@ public class Grid<D>: ScrollView  {
 extension Grid{
     
     @discardableResult
-    public func sectionHeader(pinToVisibleBounds:Bool = false,@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+    public func sectionHeader(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         if let nodes = container.type.viewNodes() {
             gridNode?.headerSourceHelper.dataList = [nodes]
@@ -62,7 +64,7 @@ extension Grid{
     }
     
     @discardableResult
-    public func sectionHeader<T: ArgoKitIdentifiable>(pinToVisibleBounds:Bool = false,data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
+    public func sectionHeader<T: ArgoKitIdentifiable>(data: [T], @ArgoKitListBuilder headerContent: @escaping (T) -> View) -> Self {
         gridNode?.headerSourceHelper.dataList = [data]
         gridNode?.headerSourceHelper.buildNodeFunc = { item in
             if let item = item as? T{
@@ -74,7 +76,7 @@ extension Grid{
     }
     
     @discardableResult
-    public func sectionFooter(pinToVisibleBounds:Bool = false,@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+    public func sectionFooter(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         if let nodes = container.type.viewNodes() {
             gridNode?.footerSourceHelper.dataList = [nodes]
@@ -83,7 +85,7 @@ extension Grid{
     }
     
     @discardableResult
-    public func sectionFooter<T: ArgoKitIdentifiable>(pinToVisibleBounds:Bool = false,data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
+    public func sectionFooter<T: ArgoKitIdentifiable>(data: [T], @ArgoKitListBuilder footerContent: @escaping (T) -> View) -> Self {
         gridNode?.footerSourceHelper.dataList = [data]
         gridNode?.footerSourceHelper.buildNodeFunc = { item in
             if let item = item as? T {

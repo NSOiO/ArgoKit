@@ -29,46 +29,49 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-extension GridDelegateWaterfallLayout{
+public extension GridDelegateWaterfallLayout{
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize{
         CGSize.zero
     }
-
-    func collectionView(_ collectionView: UICollectionView,
-                                       layout collectionViewLayout: UICollectionViewLayout,
-                                       heightForHeaderIn section: Int) -> CGFloat{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         if let layout =  collectionViewLayout as? GridWaterfallLayout{
-            return layout.headerHeight
+            return CGSize(width:collectionView.frame.size.width,height:layout.headerHeight)
         }
-        return  0
+        return  CGSize.zero
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
-                                       layout collectionViewLayout: UICollectionViewLayout,
-                                       heightForFooterIn section: Int) -> CGFloat{
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize{
         if let layout =  collectionViewLayout as? GridWaterfallLayout{
-            return layout.footerHeight
+            return CGSize(width:collectionView.frame.size.width,height:layout.footerHeight)
         }
-        return  0
+        return  CGSize.zero
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                         layout collectionViewLayout: UICollectionViewLayout,
+                         insetForSectionAt section: Int) -> UIEdgeInsets{
+         if let layout =  collectionViewLayout as? GridWaterfallLayout{
+             return layout.sectionInset
+         }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+     }
 
     func collectionView(_ collectionView: UICollectionView,
                                        layout collectionViewLayout: UICollectionViewLayout,
-                                       insetsFor section: Int) -> UIEdgeInsets{
-        if let layout =  collectionViewLayout as? GridWaterfallLayout{
-            return layout.sectionInset
-        }
-        return  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-       
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                                       layout collectionViewLayout: UICollectionViewLayout,
-                                       minimumInteritemSpacingFor section: Int) -> CGFloat{
+                                       minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
         if let layout =  collectionViewLayout as? GridWaterfallLayout{
             return layout.minimumInteritemSpacing
+        }
+        return  0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
+        if let layout =  collectionViewLayout as? GridWaterfallLayout{
+            return layout.minimumLineSpacing
         }
         return  0
     }
@@ -87,90 +90,31 @@ public protocol GridDelegateWaterfallLayout: UICollectionViewDelegate {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
 
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize;
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize
+
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets
+
+    
     func collectionView(_ collectionView: UICollectionView,
                                        layout collectionViewLayout: UICollectionViewLayout,
-                                       heightForHeaderIn section: Int) -> CGFloat
+                                       minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
 
-    func collectionView(_ collectionView: UICollectionView,
-                                       layout collectionViewLayout: UICollectionViewLayout,
-                                       heightForFooterIn section: Int) -> CGFloat
-
-    func collectionView(_ collectionView: UICollectionView,
-                                       layout collectionViewLayout: UICollectionViewLayout,
-                                       insetsFor section: Int) -> UIEdgeInsets
-
-    func collectionView(_ collectionView: UICollectionView,
-                                       layout collectionViewLayout: UICollectionViewLayout,
-                                       minimumInteritemSpacingFor section: Int) -> CGFloat
-
+    
     func collectionView(_ collectionView: UICollectionView,
                                        layout collectionViewLayout: UICollectionViewLayout,
                                        columnCountFor section: Int) -> Int
 }
 
-
-extension GridWaterfallLayout {
-    public enum ItemRenderDirection: Int {
-        case shortestFirst
-        case leftToRight
-        case rightToLeft
-    }
-    
-    public enum WLSectionInsetReference {
-        case fromContentInset
-        case fromLayoutMargins
-        @available(iOS 11, *)
-        case fromSafeArea
-    }
-}
-
 public class GridWaterfallLayout: GridFlowLayout {
-    public override var columnCount: Int{
-        didSet {
-            invalidateLayout()
-        }
-    }
-    public override var minimumLineSpacing: CGFloat {
-        didSet {
-            invalidateLayout()
-        }
-    }
-    
-    public override var minimumInteritemSpacing: CGFloat{
-        didSet {
-            invalidateLayout()
-        }
-    }
-
-    public override var headerHeight: CGFloat{
-        didSet {
-            invalidateLayout()
-        }
-    }
-
-    public override var footerHeight: CGFloat{
-        didSet {
-            invalidateLayout()
-        }
-    }
-
-    public override var sectionInset: UIEdgeInsets{
-        didSet {
-            invalidateLayout()
-        }
-    }
-
-    public var itemRenderDirection: ItemRenderDirection = .shortestFirst {
-        didSet {
-            invalidateLayout()
-        }
-    }
-
-    public var wlsectionInsetReference: WLSectionInsetReference = .fromContentInset {
-        didSet {
-            invalidateLayout()
-        }
-    }
 
     public var delegate: GridDelegateWaterfallLayout? {
         get {
@@ -187,38 +131,6 @@ public class GridWaterfallLayout: GridFlowLayout {
     private var unionRects: [CGRect] = []
     private let unionSize = 20
 
-    private func columnCount(forSection section: Int) -> Int {
-        return delegate?.collectionView(collectionView!, layout: self, columnCountFor: section) ?? columnCount
-    }
-
-    private var collectionViewContentWidth: CGFloat {
-        let insets: UIEdgeInsets
-        switch wlsectionInsetReference {
-        case .fromContentInset:
-            insets = collectionView!.contentInset
-        case .fromSafeArea:
-            if #available(iOS 11.0, *) {
-                insets = collectionView!.safeAreaInsets
-            } else {
-                insets = .zero
-            }
-        case .fromLayoutMargins:
-            insets = collectionView!.layoutMargins
-        }
-        return collectionView!.bounds.size.width - insets.left - insets.right
-    }
-
-    private func collectionViewContentWidth(ofSection section: Int) -> CGFloat {
-        let insets = delegate?.collectionView(collectionView!, layout: self, insetsFor: section) ?? sectionInset
-        return collectionViewContentWidth - insets.left - insets.right
-    }
-    
-    public func itemWidth(inSection section: Int) -> CGFloat {
-        let columnCount = self.columnCount(forSection: section)
-        let spaceColumCount = CGFloat(columnCount - 1)
-        let width = collectionViewContentWidth(ofSection: section)
-        return floor((width - (spaceColumCount * minimumLineSpacing)) / CGFloat(columnCount))
-    }
 
     override public func prepare() {
         super.prepare()
@@ -243,19 +155,21 @@ public class GridWaterfallLayout: GridFlowLayout {
         var attributes = UICollectionViewLayoutAttributes()
 
         for section in 0 ..< numberOfSections {
-            // MARK: 1. Get section-specific metrics (minimumInteritemSpacing, sectionInset)
-            let minimumInteritemSpacing = delegate?.collectionView(collectionView!, layout: self, minimumInteritemSpacingFor: section)
-                ?? self.minimumInteritemSpacing
-            let sectionInsets = delegate?.collectionView(collectionView!, layout: self, insetsFor: section) ?? self.sectionInset
+            // MARK: 1. Get section-specific metrics (minimumLineSpacing, sectionInset)
+            let lineSpacing = delegate?.collectionView(collectionView!, layout: self, minimumLineSpacingForSectionAt: section)
+                ?? self.minimumLineSpacing
+            let sectionInsets = delegate?.collectionView(collectionView!, layout: self, insetForSectionAt: section) ?? self.sectionInset
             let columnCount = columnHeights[section].count
             let itemWidth = self.itemWidth(inSection: section)
 
             // MARK: 2. Section header
-            let heightHeader = delegate?.collectionView(collectionView!, layout: self, heightForHeaderIn: section)
-                ?? self.headerHeight
-            if heightHeader > 0 {
+            var headerSize = CGSize(width:collectionView!.frame.size.width,height: self.headerHeight)
+            if let size = delegate?.collectionView(collectionView!,layout:self,referenceSizeForHeaderInSection:section){
+                headerSize = size
+            }
+            if headerSize.height > 0 {
                 attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(row: 0, section: section))
-                attributes.frame = CGRect(x: 0, y: top, width: collectionView!.bounds.size.width, height: heightHeader)
+                attributes.frame = CGRect(x: 0, y: top, width: headerSize.width, height: headerSize.height)
                 headersAttributes[section] = attributes
                 allItemAttributes.append(attributes)
 
@@ -270,10 +184,12 @@ public class GridWaterfallLayout: GridFlowLayout {
 
             // Item will be put into shortest column.
             for idx in 0 ..< itemCount {
+                let interitemSpacing = delegate?.collectionView(collectionView!, layout: self, minimumInteritemSpacingForSectionAt: section)
+                    ?? self.minimumLineSpacing
                 let indexPath = IndexPath(item: idx, section: section)
 
                 let columnIndex = nextColumnIndexForItem(idx, inSection: section)
-                let xOffset = sectionInsets.left + (itemWidth + minimumLineSpacing) * CGFloat(columnIndex)
+                let xOffset = sectionInsets.left + (itemWidth + interitemSpacing) * CGFloat(columnIndex)
 
                 let yOffset = columnHeights[section][columnIndex]
                 var itemHeight: CGFloat = 0.0
@@ -282,25 +198,29 @@ public class GridWaterfallLayout: GridFlowLayout {
                     itemHeight = itemSize.height
                     if itemSize.width > 0 {
                         itemHeight = floor(itemHeight * itemWidth / itemSize.width)
-                    } // else use default item width based on other parameters
+                    }
                 }
 
                 attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 attributes.frame = CGRect(x: xOffset, y: yOffset, width: itemWidth, height: itemHeight)
                 itemAttributes.append(attributes)
                 allItemAttributes.append(attributes)
-                columnHeights[section][columnIndex] = attributes.frame.maxY + minimumInteritemSpacing
+                columnHeights[section][columnIndex] = attributes.frame.maxY + lineSpacing
             }
             sectionItemAttributes.append(itemAttributes)
 
             // MARK: 4. Section footer
             let columnIndex  = longestColumnIndex(inSection: section)
-            top = columnHeights[section][columnIndex] - minimumInteritemSpacing + sectionInsets.bottom
-            let footerHeight = delegate?.collectionView(collectionView!, layout: self, heightForFooterIn: section) ?? self.footerHeight
+            top = columnHeights[section][columnIndex] - lineSpacing + sectionInsets.bottom
+ 
+            var sizeFooter = CGSize(width:collectionView!.frame.size.width,height: self.footerHeight)
+            if let size = delegate?.collectionView(collectionView!,layout:self,referenceSizeForFooterInSection:section){
+                sizeFooter = size
+            }
 
-            if footerHeight > 0 {
+            if sizeFooter.height > 0 {
                 attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, with: IndexPath(item: 0, section: section))
-                attributes.frame = CGRect(x: 0, y: top, width: collectionView!.bounds.size.width, height: footerHeight)
+                attributes.frame = CGRect(x: 0, y: top, width: sizeFooter.width, height: sizeFooter.height)
                 footersAttributes[section] = attributes
                 allItemAttributes.append(attributes)
                 top = attributes.frame.maxY
@@ -326,7 +246,7 @@ public class GridWaterfallLayout: GridFlowLayout {
         }
 
         var contentSize = collectionView!.bounds.size
-        contentSize.width = collectionViewContentWidth
+        contentSize.width = contentWidth
 
         if let height = columnHeights.last?.first {
             contentSize.height = height
@@ -358,18 +278,63 @@ public class GridWaterfallLayout: GridFlowLayout {
 
     override public func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var begin = 0, end = unionRects.count
-
         if let i = unionRects.firstIndex(where: { rect.intersects($0) }) {
             begin = i * unionSize
         }
         if let i = unionRects.lastIndex(where: { rect.intersects($0) }) {
             end = min((i + 1) * unionSize, allItemAttributes.count)
         }
-        return allItemAttributes[begin..<end]
+        
+        if self.sectionHeadersPinToVisibleBounds {
+           stickyHeader()
+        }
+        return self.allItemAttributes[begin..<end]
             .filter { rect.intersects($0.frame) }
+    }
+    private func stickyHeader(){
+        for attr:UICollectionViewLayoutAttributes in self.allItemAttributes {
+            if attr.representedElementKind == UICollectionView.elementKindSectionHeader {
+                let section = attr.indexPath.section
+                
+                let numberOfItemsInSection = self.collectionView!.numberOfItems(inSection: section)
+                let firstCellIndexPath = IndexPath(item:0,section:section)
+                let item = Int(Float.maximum(0, Float(numberOfItemsInSection - 1)))
+                let lastCellIndexPath = IndexPath(item:item,section:section)
+                
+                var firstCellAttributes = self.layoutAttributesForItem(at: firstCellIndexPath)
+                var lastCellAttributes = self.layoutAttributesForItem(at: lastCellIndexPath)
+                if let first =  self.layoutAttributesForItem(at: firstCellIndexPath),
+                   let last = self.layoutAttributesForItem(at: lastCellIndexPath){
+                    firstCellAttributes = first
+                    lastCellAttributes = last
+                }else{
+                    firstCellAttributes = UICollectionViewLayoutAttributes()
+                    let y = attr.frame.maxY + self.sectionInset.top;
+                    firstCellAttributes?.frame = CGRect(x: 0, y: y, width: 0, height: 0);
+                    lastCellAttributes = firstCellAttributes;
+                }
+
+                let headerHeight = attr.frame.height
+                var frame = attr.frame
+                let offset = self.collectionView?.contentOffset.y ?? 0
+                let sectionInset = delegate?.collectionView(collectionView!, layout: self, insetForSectionAt: section) ?? self.sectionInset
+                let headerY = (firstCellAttributes?.frame.minY)!-headerHeight - sectionInset.top
+                let maxY = CGFloat.maximum(offset,headerY)
+                
+                let headerMissingY = (lastCellAttributes?.frame.maxY)! - headerHeight + sectionInset.bottom
+
+                frame.origin.y = CGFloat.minimum(maxY, headerMissingY)
+
+                attr.frame = frame
+                attr.zIndex = 1024
+            }
+        }
     }
 
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        if self.sectionHeadersPinToVisibleBounds {
+            invalidateLayout()
+        }
         return newBounds.width != collectionView?.bounds.width
     }
 
