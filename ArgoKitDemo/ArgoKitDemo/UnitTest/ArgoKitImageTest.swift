@@ -22,12 +22,15 @@ struct ArgoKitImageTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
+        let gesture = PanGesture(){ gesture in
+            
+        }
         Image("icybay.jpg")
             .height(100)
             .shrink(1)
             .aspect(ratio: 1)
             .margin(edge: .top, value: 40)
-            .circle()
+            .circle().gesture(gesture: gesture)
 
         Image("icybay.jpg")
             .width(100)

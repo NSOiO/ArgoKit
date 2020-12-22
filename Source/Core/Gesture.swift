@@ -60,10 +60,67 @@ public struct PanGesture:Gesture {
         pPanGesture
     }
     public init(minimumNumberOfTouches:Int = 1, maximumNumberOfTouches:Int = Int(INT_MAX),onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
-        pAction = onPanGesture
+        pAction = { gesture in
+            onPanGesture(gesture)
+            if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
+                switch gesture.state {
+                case .began:
+                    let point = gesture.translation(in: view)
+                    print("began \(point)")
+                    break
+                case .changed:
+                    let point = gesture.translation(in: view)
+                    print("changed \(point)")
+                    break
+                case .ended:
+                    let point = gesture.translation(in: view)
+                    print("ended \(point)")
+                    break
+                case .cancelled:
+                    let point = gesture.translation(in: view)
+                    print("cancelled \(point)")
+                    break
+                default:
+                    break
+                }
+            }
+            
+        }
         pPanGesture = UIPanGestureRecognizer()
         pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
         pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
+    }
+    
+//    public init(minimumNumberOfTouches:Int = 1, maximumNumberOfTouches:Int = Int(INT_MAX),onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,){
+//        pAction = { gesture in
+//            onPanGesture(gesture)
+//            if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
+//                switch gesture.state {
+//                case .began:
+//                    let point = gesture.translation(in: view)
+//                    print("began \(point)")
+//                    break
+//                case .changed:
+//                    let point = gesture.translation(in: view)
+//                    print("changed \(point)")
+//                    break
+//                case .ended:
+//                    let point = gesture.translation(in: view)
+//                    print("ended \(point)")
+//                    break
+//                case .cancelled:
+//                    let point = gesture.translation(in: view)
+//                    print("cancelled \(point)")
+//                    break
+//                default:
+//                    break
+//                }
+//            }
+//            
+//        }
+//        pPanGesture = UIPanGestureRecognizer()
+//        pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
+//        pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
     }
 }
 
