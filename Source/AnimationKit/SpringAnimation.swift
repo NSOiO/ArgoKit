@@ -85,7 +85,7 @@ public class SpringAnimation: Animation {
         }
         if let v = self.velocity {
             switch v {
-            case let v1 as CGFloat:
+            case let v1 as Float:
                 anim.velocity = v1
             case let v2 as Array<Float>:
                 switch v2.count {

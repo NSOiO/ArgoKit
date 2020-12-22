@@ -78,6 +78,7 @@
 		FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D581F254ABD1C002E2532 /* DemoContentView.swift */; };
 		FA5709BD25765303004A0EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335D1254133D20094676D /* ViewController.swift */; };
 		FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA624339258B4B1400D9C780 /* ArgoKitGridTest.swift */; };
+		FA6802F22591C5C80074B190 /* ArgoKitAnimationSpringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6802F12591C5C80074B190 /* ArgoKitAnimationSpringTest.swift */; };
 		FA9B4958258B7C02006DB896 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FA9B495C258C4CD1006DB896 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FAB3CE7925909DEB00EEE851 /* ArgoKitAnimationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */; };
@@ -198,6 +199,7 @@
 		FA0BFE1A258376D600D483EC /* ArgoKitOtherViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitOtherViewTest.swift; sourceTree = "<group>"; };
 		FA4D581F254ABD1C002E2532 /* DemoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContentView.swift; sourceTree = "<group>"; };
 		FA624339258B4B1400D9C780 /* ArgoKitGridTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitGridTest.swift; sourceTree = "<group>"; };
+		FA6802F12591C5C80074B190 /* ArgoKitAnimationSpringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationSpringTest.swift; sourceTree = "<group>"; };
 		FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationTest.swift; sourceTree = "<group>"; };
 		FAB3CE892590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationBlockTest.swift; sourceTree = "<group>"; };
 		FAE72A512589E8D00066B2CB /* AspectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectTests.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */,
 				FAB3CE892590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift */,
 				FAEBC97125919C2D00196254 /* ArgoKitAnimationProgressTest.swift */,
+				FA6802F12591C5C80074B190 /* ArgoKitAnimationSpringTest.swift */,
 			);
 			path = AnimationTest;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				00A906B5259048DC0052550C /* UserData.swift in Sources */,
 				FA4D5820254ABD1C002E2532 /* DemoContentView.swift in Sources */,
 				A4F5E669257B8771003D3591 /* ViewPageTest.swift in Sources */,
+				FA6802F22591C5C80074B190 /* ArgoKitAnimationSpringTest.swift in Sources */,
 				FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */,
 				FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */,
 				FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */,
