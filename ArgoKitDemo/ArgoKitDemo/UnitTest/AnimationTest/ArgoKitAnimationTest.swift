@@ -71,8 +71,17 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
                             .to(200, 200)
                     }
                     .startAnimation()
+                    .resetAnimationOnStop()
+                
             }
             .margin(edge: .left, value: 15)
+            
+            Button(text: "停止") {
+                self.text?.stopAnimation()
+            }
+            .margin(edge: .left, value: 5)
+            .backgroundColor(red: 255, green: 0, blue: 0)
+            
             
             Button(text: "旋转") {
                 self.text?

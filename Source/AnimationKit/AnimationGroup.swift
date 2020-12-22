@@ -205,6 +205,7 @@ public class AnimationGroup: AnimationBasic {
             }
         }
         let anim = animation!
+        anim.resetOnFinish = resetOnStop
         if let d = delay {
             anim.beginTime = NSNumber(value: d)
         }

@@ -10,6 +10,8 @@ import ArgoAnimation
 
 public class AnimationBasic: NSObject {
     
+    public var resetOnStop: Bool = false
+    
     @discardableResult
     func attach(_ view: View) -> Self {
         return self
@@ -355,6 +357,7 @@ public class Animation : AnimationBasic {
         let anim = animation!
         anim.fromValue = from
         anim.toValue = to
+        anim.resetOnFinish = resetOnStop
         
         if let d = delay {
             anim.beginTime = NSNumber(value: d)
