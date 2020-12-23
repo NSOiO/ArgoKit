@@ -52,7 +52,7 @@ public struct LongPressGesture:Gesture {
 
 
 public struct PanGesture:Gesture {
-    public typealias ObserverAction = ((_ view:UIView,_ pointX:CGFloat,_ pointY:CGFloat)->Void)?
+    public typealias ObserverAction = ((_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void)?
     private var pAction:(UIGestureRecognizer)->Void
     public var action: (UIGestureRecognizer) -> Void{
         pAction
@@ -72,29 +72,27 @@ public struct PanGesture:Gesture {
         pAction = { gesture in
             onPanGesture(gesture)
             if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
+                let location = gesture.translation(in: view)
+                let velocity = gesture.velocity(in: view)
                 switch gesture.state {
                 case .began:
-                    let point = gesture.translation(in: view)
                     if let began = began {
-                        began(view,point.x,point.y)
+                        began(gesture,location,velocity)
                     }
                     break
                 case .changed:
-                    let point = gesture.translation(in: view)
                     if let moved = moved {
-                        moved(view,point.x,point.y)
+                        moved(gesture,location,velocity)
                     }
                     break
                 case .ended:
-                    let point = gesture.translation(in: view)
                     if let ended = ended {
-                        ended(view,point.x,point.y)
+                        ended(gesture,location,velocity)
                     }
                     break
                 case .cancelled:
-                    let point = gesture.translation(in: view)
                     if let cancelled = cancelled {
-                        cancelled(view,point.x,point.y)
+                        cancelled(gesture,location,velocity)
                     }
                     break
                 default:
