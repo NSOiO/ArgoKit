@@ -13,11 +13,6 @@ public class AnimationBasic: NSObject {
     var resetOnStop: Bool = false
     
     @discardableResult
-    func attach(_ view: View) -> Self {
-        return self
-    }
-    
-    @discardableResult
     func attach(_ view: UIView) -> Self {
         return self
     }
@@ -213,14 +208,6 @@ public class Animation : AnimationBasic {
             prepareAnimation()
         }
         animation?.update(progress: CGFloat(progress))
-        return self
-    }
-    
-    @discardableResult
-    public override func attach(_ view: View) -> Self {
-        if let actualView = view.node?.view {
-            attach(actualView)
-        }
         return self
     }
     

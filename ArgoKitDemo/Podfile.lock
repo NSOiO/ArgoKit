@@ -13,6 +13,8 @@ PODS:
   - ArgoKit/Bind (1.0.5):
     - Yoga
   - ArgoKit/Core (1.0.5):
+    - ArgoKit/AnimationKit
+    - ArgoKit/Bind
     - Yoga
   - ArgoKitComponent (1.0.3):
     - ArgoKit
@@ -49,7 +51,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
-  ArgoKit: f7ebcb08aeebcd87b0e648842ed23d16d12d3bd1
+  ArgoKit: 4b0f55253f50cb2d3dc4536a77a818bd81ade7bb
   ArgoKitComponent: f13792da4531fe0fa7007c35b8c6c8c569d6fb3c
   ArgoKitPreview: 51bb277f592fb5508bce4a9a12fd2f6fa8b94d5b
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
