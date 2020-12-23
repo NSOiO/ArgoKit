@@ -188,18 +188,18 @@ class SessionRow:ArgoKit.View {
    }
     
    var body: ArgoKit.View{
-        MSUserInterractionHeaderView()
-            
-            .margin(edge: .top, value: 5)
-        .onTapGesture {[data = self.item] in
-            print(data)
-        }
-    
         MSUserInterractionContentView()
             .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
             .cornerRadius(5)
             .backgroundColor(UIColor(250,250,250))
             .grow(1)
+    
+        MSUserInterractionContentView()
+        .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
+        .cornerRadius(5)
+        .backgroundColor(UIColor(250,250,250))
+        .grow(1)
+    
     }
     
   

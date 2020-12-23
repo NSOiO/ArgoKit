@@ -6,6 +6,30 @@
 //
 
 import Foundation
+
+@propertyWrapper
+public class GestureValue<Value> {
+    private var _value: Value? = nil
+    
+    public init() {}
+    public init(wrappedValue value: Value?) {
+        self._value = value
+    }
+    
+    public var projectedValue: GestureValue<Value> {
+        return self
+    }
+
+    public var wrappedValue: Value? {
+        get {
+            return _value
+        }
+        set {
+            _value = newValue
+        }
+    }
+}
+
 public protocol Gesture{
     var gesture:UIGestureRecognizer{get}
     var action:(UIGestureRecognizer)->Void{get}
@@ -52,11 +76,18 @@ public struct LongPressGesture:Gesture {
 
 
 public struct PanGesture:Gesture {
-    public typealias ObserverAction = ((_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void)?
-    private var pAction:(UIGestureRecognizer)->Void
+    public typealias ObserverAction = (_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void
+//    private var onBeganAction:ObserverAction?
+    @GestureValue private var onBeganAction:ObserverAction?
+    private var onChangedAction:ObserverAction?
+    private var onEndedAction:ObserverAction?
+    private var onCancelledAction:ObserverAction?
+    
+    private var pAction: ((UIGestureRecognizer)->Void)?
     public var action: (UIGestureRecognizer) -> Void{
-        pAction
+        pAction!
     }
+    
     private var pPanGesture:UIPanGestureRecognizer
     public var gesture: UIGestureRecognizer{
         pPanGesture
@@ -64,12 +95,16 @@ public struct PanGesture:Gesture {
     public init(minimumNumberOfTouches:Int = 1,
                 maximumNumberOfTouches:Int = Int(INT_MAX),
                 onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,
-                began:ObserverAction = nil,
-                moved:ObserverAction = nil,
-                ended: ObserverAction = nil,
-                cancelled:ObserverAction = nil){
-    
-        pAction = { gesture in
+                began:ObserverAction? = nil,
+                moved:ObserverAction? = nil,
+                ended: ObserverAction? = nil,
+                cancelled:ObserverAction? = nil){
+        pPanGesture = UIPanGestureRecognizer()
+        pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
+        pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
+        pAction = onPanGesture
+        
+        pAction = {gesture in
             onPanGesture(gesture)
             if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
                 let location = gesture.translation(in: view)
@@ -99,11 +134,18 @@ public struct PanGesture:Gesture {
                     break
                 }
             }
-
         }
-        pPanGesture = UIPanGestureRecognizer()
-        pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
-        pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
+
+    }
+    
+    private func action(gesture:UIGestureRecognizer){
+        
+    }
+    
+    @discardableResult
+    public func onBegan(_ action:ObserverAction?) -> Self{
+        self.onBeganAction = action
+        return self
     }
 }
 

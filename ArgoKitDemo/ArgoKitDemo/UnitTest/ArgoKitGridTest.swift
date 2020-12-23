@@ -64,7 +64,7 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Grid(waterfall: true,sectionData:model.dataSource){ data in
+        Grid(sectionData:model.dataSource){ data in
             Text(data.headerName)
                 .lineLimit(0)
                 .alias(variable: &data.text)
@@ -76,7 +76,9 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .onTapGesture {
                     data.text?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
                 }
-           
+                .onTapGesture {
+                    
+                }
         }
        
         .grow(1.0)
