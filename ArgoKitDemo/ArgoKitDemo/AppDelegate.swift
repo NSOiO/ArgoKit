@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
-        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
+        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
 //        let contentView = GestureTests(model: GestureTestsModel())
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)

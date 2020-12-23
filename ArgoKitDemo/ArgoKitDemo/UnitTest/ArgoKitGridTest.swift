@@ -12,7 +12,7 @@ class ArgoKitGridTestModel {
     let titiles = ["chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlakechincoteague.jpgchincoteague.jpgchincoteague.jpg.jpg"]
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
-    var dataSource = [[ArgoKitGridCellTestModel]]()
+    var dataSource = [[Any]]()
     var headerSource = [ArgoKitGridHeaderTestModel]()
     init() {
         for session in 0..<10 {
@@ -21,7 +21,7 @@ class ArgoKitGridTestModel {
             headerModel.headerName = idetifier
             headerSource.append(headerModel)
             
-            var subDataSource = [ArgoKitGridCellTestModel]()
+            var subDataSource = [Any]()
             for index in 0..<20{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = titiles[index%5]
@@ -59,22 +59,26 @@ struct ArgoKitGridTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitGridTestModel
+    @DataBind var dataSource:[[Any]]?
     init(model: ArgoKitGridTestModel) {
         self.model = model
+        dataSource = self.model.dataSource
     }
     
     var body: ArgoKit.View {
-        Grid(waterfall: true,sectionData:model.dataSource){ data in
-            Text(data.headerName)
+        Grid<ArgoKitGridCellTestModel>(waterfall: true,data:$dataSource){ data in
+            Text("dsa")
                 .lineLimit(0)
-                .alias(variable: &data.text)
+//                .alias(variable: &data.text)
                 .textAlign(.center)
             
-            Image(data.imagePath)
+            Image("icybay.jpg")
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-                    data.text?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
+//                    data.text?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
+                    dataSource?[5][6] = ArgoKitGridCellTestModel()
+                    print("\(dataSource)")
                 }
            
         }
@@ -85,25 +89,25 @@ struct ArgoKitGridTest: ArgoKit.View {
         .lineSpacing(5)
         .layoutInset(top: 10, left:10, bottom: 10, right: 10)
         .showsScrollIndicator(true)
-        .cellWillAppear{ (data, indexpath) in
-
-        }
-        .cellDidDisappear({ (data, indexpath) in
-        })
-        .cellSelected({ (data, indexpath) in
-        })
-        .cellDeselected({ (data, indexpath) in
-        })
-        .willBeginDragging {
-            
-        }
-        .sectionHeader(data:model.headerSource) { data -> View in
-            Text(data.headerName)
-                .textAlign(.center)
-                .backgroundColor(.gray)
-                .lineLimit(0)
-            
-        }
+//        .cellWillAppear{ (_, indexpath) in
+//
+//        }
+//        .cellDidDisappear({ (data, indexpath) in
+//        })
+//        .cellSelected({ (data, indexpath) in
+//        })
+//        .cellDeselected({ (data, indexpath) in
+//        })
+//        .willBeginDragging {
+//
+//        }
+//        .sectionHeader(data:model.headerSource) { data -> View in
+//            Text(data.headerName)
+//                .textAlign(.center)
+//                .backgroundColor(.gray)
+//                .lineLimit(0)
+//
+//        }
         .headersPinToVisibleBounds(true)
 //        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
 //            Text(data.headerName)
