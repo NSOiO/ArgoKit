@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
-        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
+//        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
+        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
 //        let contentView = GestureTests(model: GestureTestsModel())
 //        let vc = ArgokitDemoController()
         let vc = UIHostingController(rootView: contentView)
@@ -39,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav = UINavigationController(rootViewController: vc)
         
         let window = UIWindow.init(frame: UIScreen.main.bounds)
-        window.rootViewController = nav
+        window.rootViewController = vc
         self.window = window
         window.makeKeyAndVisible()
         

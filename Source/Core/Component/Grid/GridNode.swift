@@ -20,7 +20,6 @@ class ArgoKitGridView: UICollectionView {
     }
 }
 
-
 class GridNode: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,

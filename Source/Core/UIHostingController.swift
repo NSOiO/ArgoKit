@@ -47,17 +47,30 @@ public struct HostView:View {
 
 public class UIHostingView:UIView{
     private var rootView:HostView?
+    private var safeArea:Bool? = false
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
             oldFrame = self.frame
             if let node = rootView?.node {
+             
                 let width:CGFloat = oldFrame.size.width as CGFloat
                 let height:CGFloat = oldFrame.size.height as CGFloat
                 node.width(point: width)
                 node.height(point: height)
                 node.frame = frame
                 node.resetOrigin = false
+                
+                if self.safeArea == true {
+                    var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                    if #available(iOS 11.0, *){
+                        insets = self.safeAreaInsets
+                    }
+                    node.paddingLeft(point: insets.left)
+                    node.paddingRight(point: insets.right)
+                    node.paddingTop(point: insets.top)
+                    node.paddingBottom(point: insets.bottom)
+                }
                 node.applyLayout()
             }
         }
@@ -65,12 +78,14 @@ public class UIHostingView:UIView{
     }
     
     
-    public init(content:View,frame:CGRect = CGRect.zero){
+    public init(content:View,frame:CGRect = CGRect.zero,safeArea:Bool = false){
         super.init(frame: frame)
+        self.safeArea = safeArea
         rootView = HostView(self){
             content.grow(1.0)
         }
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -80,14 +95,14 @@ public class UIHostingView:UIView{
 open class UIHostingController:UIViewController{
     var frame:CGRect = CGRect.zero
     private var hostView:UIHostingView
-    public init(rootView: View){
-        hostView = UIHostingView(content:rootView)
+    public init(rootView: View,safeArea:Bool = true){
+        hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(nibName: nil, bundle: nil)
         
     }
 
-    public init?(coder aDecoder: NSCoder, rootView: View){
-        hostView = UIHostingView(content:rootView)
+    public init?(coder aDecoder: NSCoder, rootView: View,safeArea:Bool = true){
+        hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(coder: aDecoder)
     }
     
@@ -98,7 +113,7 @@ open class UIHostingController:UIViewController{
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
-        self.edgesForExtendedLayout = UIRectEdge.init()
+//        self.edgesForExtendedLayout = UIRectEdge.init()
         self.view.addSubview(hostView)
         hostView.frame = self.view.bounds
     }
