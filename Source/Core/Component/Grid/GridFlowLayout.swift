@@ -6,34 +6,118 @@
 //
 
 import Foundation
-class GridFlowLayout: UICollectionViewFlowLayout {
-    var columCount:Int = 1
-    var width:CGFloat = 0
+extension GridDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView,
+                                       layout collectionViewLayout: UICollectionViewLayout,
+                                       columnCountFor section: Int) -> Int{
+        if let layout =  collectionViewLayout as? GridFlowLayout{
+            return layout.columnCount
+        }
+        return 1
+    }
+}
+public protocol GridDelegateFlowLayout:UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                                       layout collectionViewLayout: UICollectionViewLayout,
+                                       columnCountFor section: Int) -> Int
+}
+public class GridFlowLayout:UICollectionViewFlowLayout{
     var itemHeight:CGFloat = 0
-    var headerHeiht:CGFloat = 0
-    var footerHeiht:CGFloat = 0
-    override init() {
-        super.init()
+    
+    var columnCount:Int = 1{
+        didSet{
+            invalidateLayout()
+        }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    var headerHeight:CGFloat = 0{
+        didSet{
+            invalidateLayout()
+        }
     }
+    
+    var footerHeight:CGFloat = 0{
+        didSet{
+            invalidateLayout()
+        }
+    }
+    
+    var itemRenderDirection: ItemRenderDirection = .shortestFirst{
+        didSet{
+            invalidateLayout()
+        }
+    }
+    
+    var akSectionInsetReference: AKSectionInsetReference = .fromContentInset{
+        didSet{
+            invalidateLayout()
+        }
+    }
+    
+    var contentWidth: CGFloat = 0
     var frame:CGRect! = CGRect.zero{
         didSet{
-            let width_ = frame.size.width
-            let columSpace = minimumInteritemSpacing * CGFloat((columCount - 1))
-            width = (width_ - columSpace - sectionInset.left - sectionInset.right) / CGFloat(columCount)
-            width = floor(width)
-            if itemHeight == 0 {
-                itemSize = CGSize(width: width, height: itemHeight)
-            }else{
-                itemSize = CGSize(width: width, height: width)
-            }
+            contentWidth = contentWidth_
         }
+    }
+    
+    private var contentWidth_: CGFloat {
+        let insets: UIEdgeInsets
+        switch akSectionInsetReference {
+        case .fromContentInset:
+            insets = collectionView!.contentInset
+        case .fromSafeArea:
+            if #available(iOS 11.0, *) {
+                insets = collectionView!.safeAreaInsets
+            } else {
+                insets = .zero
+            }
+        case .fromLayoutMargins:
+            insets = collectionView!.layoutMargins
+        }
+        return frame.width - insets.left - insets.right
+    }
+    
+    public func columnCount(forSection section: Int) -> Int {
+        if let delegate = collectionView?.delegate as? GridNode {
+            return delegate.collectionView(collectionView!, layout: self, columnCountFor: section)
+        }
+        return columnCount
+    }
+
+    public func collectionViewContentWidth(ofSection section: Int) -> CGFloat {
+        if let delegate = collectionView?.delegate as? GridNode {
+            let insets = delegate.collectionView(collectionView!, layout: self, insetForSectionAt: section)
+            return contentWidth - insets.left - insets.right
+        }
+        return contentWidth - sectionInset.left - sectionInset.right
+    }
+    
+    public func itemWidth(inSection section: Int) -> CGFloat {
+        let columnCount = self.columnCount(forSection: section)
+        let spaceColumCount = CGFloat(columnCount - 1)
+        let width = collectionViewContentWidth(ofSection: section)
+        return floor((width - (spaceColumCount * minimumInteritemSpacing)) / CGFloat(columnCount))
     }
 }
 
+extension GridFlowLayout{
+    
+    public enum ItemRenderDirection: Int {
+        case shortestFirst
+        case leftToRight
+        case rightToLeft
+    }
+    
+    public enum AKSectionInsetReference:Int {
+        
+        case fromContentInset = 0
+        @available(iOS 11, *)
+        case fromSafeArea = 1
+
+        case fromLayoutMargins = 2
+    }
+}
 
 //MARK: item layout设置配置参数
 extension Grid{
@@ -43,46 +127,94 @@ extension Grid{
         return self
     }
     
+    public func headerHeight(_ value:CGFloat) -> Self {
+        gridNode?.headerHeight(value)
+        return self
+    }
+    
+    public func footerHeight(_ value:CGFloat) -> Self {
+        gridNode?.footerHeight(value)
+        return self
+    }
+    
     @discardableResult
-    public func columnCount(_ value:Int) -> Self{
+    public func columnCount(_ value:Int) -> Self {
         gridNode?.columnCount(value)
         return self
     }
-
+    @discardableResult
+    public func columCount(_ function:@escaping (_ section:Int)->Int) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:columnCountFor:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
+    @discardableResult
     public func columnSpacing(_ value:CGFloat) -> Self{
         gridNode?.columnSpacing(value)
         return self
-        
     }
-    
+    @discardableResult
+    public func columnSpacing(_ function:@escaping (_ section:Int)->CGFloat) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:minimumInteritemSpacingForSectionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
+    @discardableResult
     public func lineSpacing(_ value:CGFloat) -> Self{
         gridNode?.lineSpacing(value)
         return self
     }
-    
-    public func estimatedItemSize(_ value:CGSize) -> Self{
-        gridNode?.estimatedItemSize(value)
+    @discardableResult
+    public func lineSpacing(_ function:@escaping (_ section:Int)->CGFloat) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:minimumLineSpacingForSectionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
         return self
     }
-    
-    public func scrollDirection(_ value:UICollectionView.ScrollDirection)->Self{
-        gridNode?.scrollDirection(value)
-        return self
-    }
-    
-    public func headerReferenceSize(_ value:CGSize = CGSize.zero) ->Self {
-        gridNode?.headerReferenceSize(value)
-        return self
-    }
-    
-    public func footerReferenceSize(_ value:CGSize = CGSize.zero) ->Self {
-        gridNode?.footerReferenceSize(value)
-        return self
-    }
-
+    @discardableResult
     public func layoutInset(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         let value = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         gridNode?.sectionInset(value)
+        return self
+    }
+    @discardableResult
+    public func layoutInset(_ function:@escaping (_ section:Int)->UIEdgeInsets) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:insetForSectionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
+    @discardableResult
+    public func headersPinToVisibleBounds(_ value:Bool) -> Self {
+        gridNode?.sectionHeadersPinToVisibleBounds(value)
+        return self
+    }
+    
+    @discardableResult
+    public func scrollDirection(_ value:UICollectionView.ScrollDirection)->Self{
+        gridNode?.scrollDirection(value)
         return self
     }
     
@@ -92,13 +224,14 @@ extension Grid{
         return self
     }
     
-    public func sectionHeadersPinToVisibleBounds(_ value:Bool) -> Self {
-        gridNode?.sectionHeadersPinToVisibleBounds(value)
+    @discardableResult
+    public func itemRenderDirection(_ value :GridFlowLayout.ItemRenderDirection) ->Self {
+        gridNode?.itemRenderDirection(value)
         return self
     }
     
-    public func sectionFootersPinToVisibleBounds(_ value:Bool) -> Self {
-        gridNode?.sectionFootersPinToVisibleBounds(value)
-        return self
-    }
+
+    
+    
+    
 }

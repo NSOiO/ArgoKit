@@ -80,6 +80,16 @@ public class AnimationGroup: AnimationBasic {
     }
     
     @discardableResult
+    public override func update(serial: Bool = false, progress: Float) -> Self {
+        if serial {
+            updateSerial(progress: progress)
+        } else {
+            updateConcurrent(progress: progress)
+        }
+        return self
+    }
+    
+    @discardableResult
     public func updateSerial(progress: Float) -> Self {
         if animation == nil {
             prepareAnimationGroup()
@@ -195,6 +205,7 @@ public class AnimationGroup: AnimationBasic {
             }
         }
         let anim = animation!
+        anim.resetOnFinish = resetOnStop
         if let d = delay {
             anim.beginTime = NSNumber(value: d)
         }

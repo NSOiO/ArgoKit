@@ -23,6 +23,10 @@ extension UIView {
         }
     }
     
+    @objc public func argokit_updateAnimation(serial: Bool = false, progress: Float) {
+        self.argokit_animation?.update(serial: serial, progress: progress)
+    }
+    
     @objc public func argokit_startAnimation(serial: Bool = false) {
         self.argokit_animation?.start(serial: serial)
     }
@@ -52,6 +56,12 @@ extension View {
     public func addAnimation(@ArgoKitAnimationBuilder _ builder: () -> AnimationBasic) -> Self {
         let animation = builder()
         addAttribute(#selector(setter: UIView.argokit_animation), animation)
+        return self
+    }
+    
+    @discardableResult
+    public func updateAnimation(serial: Bool = false, progress: Float) -> Self {
+        addAttribute(#selector(UIView.argokit_updateAnimation(serial:progress:)), serial, progress)
         return self
     }
     

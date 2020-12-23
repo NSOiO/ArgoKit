@@ -9,6 +9,7 @@ import ArgoKit
 
 // view model.
 class ArgoKitGridTestModel {
+    let titiles = ["chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlakechincoteague.jpgchincoteague.jpgchincoteague.jpg.jpg"]
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
     var dataSource = [[ArgoKitGridCellTestModel]]()
@@ -23,7 +24,7 @@ class ArgoKitGridTestModel {
             var subDataSource = [ArgoKitGridCellTestModel]()
             for index in 0..<20{
                 let item = ArgoKitGridCellTestModel()
-                item.headerName = "\(index)"
+                item.headerName = titiles[index%5]
                 item.imagePath = images[index%5]
                 subDataSource.append(item)
             }
@@ -63,7 +64,7 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Grid(sectionData:model.dataSource){ data in
+        Grid(waterfall: true,sectionData:model.dataSource){ data in
             Text(data.headerName)
                 .lineLimit(0)
                 .alias(variable: &data.text)
@@ -77,10 +78,11 @@ struct ArgoKitGridTest: ArgoKit.View {
                 }
            
         }
+       
         .grow(1.0)
         .columnCount(3)
-        .columnSpacing(10)
-        .lineSpacing(10)
+        .columnSpacing(5)
+        .lineSpacing(5)
         .layoutInset(top: 10, left:10, bottom: 10, right: 10)
         .showsScrollIndicator(true)
         .cellWillAppear{ (data, indexpath) in
@@ -102,14 +104,13 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .lineLimit(0)
             
         }
-        .sectionHeadersPinToVisibleBounds(true)
+        .headersPinToVisibleBounds(true)
 //        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
 //            Text(data.headerName)
 //                .textAlign(.center)
 //                .backgroundColor(.yellow)
 //                .height(40)
 //        }
-//        .enableMoveItem(true)
         
 //        // ios13及以上
 //        .contextMenuConfiguration(title: "title") { (data, indexPath) -> [UIAction]? in

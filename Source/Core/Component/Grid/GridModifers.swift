@@ -8,7 +8,7 @@
 import Foundation
 extension Grid{
     @discardableResult
-    public func enableMoveItem(_ value:Bool) -> Self {
+    private func enableMoveItem(_ value:Bool) -> Self {
         gridNode?.enableMoveItem(value)
         return self
     }
