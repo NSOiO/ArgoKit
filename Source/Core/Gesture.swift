@@ -50,7 +50,9 @@ public struct LongPressGesture:Gesture {
     }
 }
 
+
 public struct PanGesture:Gesture {
+    public typealias ObserverAction = ((_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void)?
     private var pAction:(UIGestureRecognizer)->Void
     public var action: (UIGestureRecognizer) -> Void{
         pAction
@@ -59,8 +61,46 @@ public struct PanGesture:Gesture {
     public var gesture: UIGestureRecognizer{
         pPanGesture
     }
-    public init(minimumNumberOfTouches:Int = 1, maximumNumberOfTouches:Int = Int(INT_MAX),onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
-        pAction = onPanGesture
+    public init(minimumNumberOfTouches:Int = 1,
+                maximumNumberOfTouches:Int = Int(INT_MAX),
+                onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,
+                began:ObserverAction = nil,
+                moved:ObserverAction = nil,
+                ended: ObserverAction = nil,
+                cancelled:ObserverAction = nil){
+    
+        pAction = { gesture in
+            onPanGesture(gesture)
+            if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
+                let location = gesture.translation(in: view)
+                let velocity = gesture.velocity(in: view)
+                switch gesture.state {
+                case .began:
+                    if let began = began {
+                        began(gesture,location,velocity)
+                    }
+                    break
+                case .changed:
+                    if let moved = moved {
+                        moved(gesture,location,velocity)
+                    }
+                    break
+                case .ended:
+                    if let ended = ended {
+                        ended(gesture,location,velocity)
+                    }
+                    break
+                case .cancelled:
+                    if let cancelled = cancelled {
+                        cancelled(gesture,location,velocity)
+                    }
+                    break
+                default:
+                    break
+                }
+            }
+
+        }
         pPanGesture = UIPanGestureRecognizer()
         pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
         pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
