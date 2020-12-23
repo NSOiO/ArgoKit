@@ -50,7 +50,9 @@ public struct LongPressGesture:Gesture {
     }
 }
 
+
 public struct PanGesture:Gesture {
+    public typealias ObserverAction = ((_ view:UIView,_ pointX:CGFloat,_ pointY:CGFloat)->Void)?
     private var pAction:(UIGestureRecognizer)->Void
     public var action: (UIGestureRecognizer) -> Void{
         pAction
@@ -59,68 +61,51 @@ public struct PanGesture:Gesture {
     public var gesture: UIGestureRecognizer{
         pPanGesture
     }
-    public init(minimumNumberOfTouches:Int = 1, maximumNumberOfTouches:Int = Int(INT_MAX),onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
+    public init(minimumNumberOfTouches:Int = 1,
+                maximumNumberOfTouches:Int = Int(INT_MAX),
+                onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,
+                began:ObserverAction = nil,
+                moved:ObserverAction = nil,
+                ended: ObserverAction = nil,
+                cancelled:ObserverAction = nil){
+    
         pAction = { gesture in
             onPanGesture(gesture)
             if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
                 switch gesture.state {
                 case .began:
                     let point = gesture.translation(in: view)
-                    print("began \(point)")
+                    if let began = began {
+                        began(view,point.x,point.y)
+                    }
                     break
                 case .changed:
                     let point = gesture.translation(in: view)
-                    print("changed \(point)")
+                    if let moved = moved {
+                        moved(view,point.x,point.y)
+                    }
                     break
                 case .ended:
                     let point = gesture.translation(in: view)
-                    print("ended \(point)")
+                    if let ended = ended {
+                        ended(view,point.x,point.y)
+                    }
                     break
                 case .cancelled:
                     let point = gesture.translation(in: view)
-                    print("cancelled \(point)")
+                    if let cancelled = cancelled {
+                        cancelled(view,point.x,point.y)
+                    }
                     break
                 default:
                     break
                 }
             }
-            
+
         }
         pPanGesture = UIPanGestureRecognizer()
         pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
         pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
-    }
-    
-//    public init(minimumNumberOfTouches:Int = 1, maximumNumberOfTouches:Int = Int(INT_MAX),onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,){
-//        pAction = { gesture in
-//            onPanGesture(gesture)
-//            if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
-//                switch gesture.state {
-//                case .began:
-//                    let point = gesture.translation(in: view)
-//                    print("began \(point)")
-//                    break
-//                case .changed:
-//                    let point = gesture.translation(in: view)
-//                    print("changed \(point)")
-//                    break
-//                case .ended:
-//                    let point = gesture.translation(in: view)
-//                    print("ended \(point)")
-//                    break
-//                case .cancelled:
-//                    let point = gesture.translation(in: view)
-//                    print("cancelled \(point)")
-//                    break
-//                default:
-//                    break
-//                }
-//            }
-//            
-//        }
-//        pPanGesture = UIPanGestureRecognizer()
-//        pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
-//        pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
     }
 }
 

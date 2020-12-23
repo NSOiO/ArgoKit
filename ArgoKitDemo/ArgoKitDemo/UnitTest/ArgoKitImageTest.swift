@@ -22,9 +22,14 @@ struct ArgoKitImageTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        let gesture = PanGesture(){ gesture in
+        let gesture = PanGesture(onPanGesture:{gesture in
             
-        }
+        },began:{view,x,y in
+            print("began:\(x):\(y)")
+        },moved:{view,x,y in
+            view.argokit_origin = CGPoint.init(x: x, y: y)
+            print("moved:\(x):\(y)")
+        })
         Image("icybay.jpg")
             .height(100)
             .shrink(1)
