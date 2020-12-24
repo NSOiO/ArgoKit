@@ -19,24 +19,21 @@ class ArgoKitGridView: UICollectionView {
         super.layoutSubviews()
     }
 }
-
-
-class GridNode: ArgoKitScrollViewNode,
+class GridNode<D>: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,
                        GridDelegateFlowLayout,
-                       GridDelegateWaterfallLayout{
+                       GridDelegateWaterfallLayout
+{
+    
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
     
-    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper()
-    lazy var headerSourceHelper = ArgoKitGridDataSourceHelper()
-    lazy var footerSourceHelper = ArgoKitGridDataSourceHelper()
-    var dataSourceHelper_:Any?
-    var headerSourceHelper_:Any?
-    var footerSourceHelper_:Any?
+    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper<D>()
+    lazy var headerSourceHelper =  ArgoKitGridDataSourceHelper<D>()
+    lazy var footerSourceHelper = ArgoKitGridDataSourceHelper<D>()
     
     // 支持移动重排
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
@@ -98,146 +95,9 @@ class GridNode: ArgoKitScrollViewNode,
                 pGridView?.cancelInteractiveMovement()
         }
     }
-}
 
-// MARK: reload data
-extension GridNode {
-        
-//    public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
-//        
-//        if let data = data {
-//            self.dataSourceHelper.dataList = data
-//        }
-//        
-//        if let sectionHeaderData = sectionHeaderData {
-//            self.headerSourceHelper.dataList = [sectionHeaderData]
-//        }
-//        if let sectionFooterData =  sectionFooterData{
-//            self.footerSourceHelper.dataList = [sectionFooterData]
-//        }
-//        self.pGridView?.reloadData()
-//    }
-//        
-//    public func reloadSections(_ sectionData: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
-//        for (index, value) in sections.enumerated() {
-//            if let sectionData = sectionData {
-//                self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
-//            }
-//            if let sectionHeaderData = sectionHeaderData {
-//                self.headerSourceHelper.reloadRow(rowData: sectionHeaderData[index], row: value, at: 0)
-//            }
-//            if let sectionFooterData = sectionFooterData {
-//                self.footerSourceHelper.reloadRow(rowData: sectionFooterData[index], row: value, at: 0)
-//            }
-//        }
-//        self.pGridView?.reloadSections(sections)
-//    }
-//
-//    public func appendSections(_ data: [[ArgoKitIdentifiable]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, with animation: UITableView.RowAnimation) {
-//        
-//        let start = self.dataSourceHelper.dataList?.count ?? 0
-//        let end = start + data.count
-//        self.dataSourceHelper.appendSections(data)
-//        if let sectionHeaderData = sectionHeaderData {
-//            self.headerSourceHelper.appendRows(rowData: sectionHeaderData, at: 0)
-//        }
-//        if let sectionFooterData = sectionFooterData {
-//            self.footerSourceHelper.appendRows(rowData: sectionFooterData, at: 0)
-//        }
-//        self.pGridView?.insertSections(IndexSet(start..<end))
-//    }
-//    
-//    public func insertSections(_ sectionData: [[ArgoKitIdentifiable]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
-//                
-//        for (index, value) in sections.enumerated() {
-//            self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
-//            
-//            if let sectionHeaderData = sectionHeaderData {
-//                self.headerSourceHelper.insertRow(rowData: sectionHeaderData[index], row: value, at: 0)
-//            }
-//            if let sectionFooterData = sectionFooterData {
-//                self.footerSourceHelper.insertRow(rowData: sectionFooterData[index], row: value, at: 0)
-//            }
-//        }
-//        self.pGridView?.insertSections(sections)
-//    }
-//    
-//    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
-//        
-//        for index in sections {
-//            self.dataSourceHelper.deleteSection(index)
-//        }
-//        self.pGridView?.deleteSections(sections)
-//    }
-//    
-//    public func moveSection(_ section: Int, toSection newSection: Int) {
-//        
-//        self.dataSourceHelper.moveSection(section, toSection: newSection)
-//        self.pGridView?.moveSection(section, toSection: newSection)
-//    }
-//    
-//    public func reloadRows(_ rowData: [ArgoKitIdentifiable]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-//        
-//        if let datas = rowData {
-//            for (index, indexPath) in indexPaths.enumerated() {
-//                self.dataSourceHelper.reloadRow(rowData: datas[index], row: indexPath.row, at: indexPath.section)
-//            }
-//        }
-//        self.pGridView?.reloadItems(at: indexPaths)
-//    }
-//    
-//    public func appendRows(_ rowData: [ArgoKitIdentifiable], at section: Int = 0, with animation: UITableView.RowAnimation) {
-//        
-//        var start = 0
-//        if section > self.dataSourceHelper.dataList?.count ?? 0 {
-//            start = self.dataSourceHelper.dataList?.count ?? 0
-//        } else {
-//            start = self.dataSourceHelper.dataList?[section].count ?? 0
-//        }
-//        self.dataSourceHelper.appendRows(rowData: rowData, at: section)
-//        var indexPaths = [IndexPath]()
-//        for index in (0..<rowData.count) {
-//            indexPaths.append(IndexPath(row: start + index, section: section))
-//        }
-//        self.pGridView?.insertItems(at: indexPaths)
-//    }
-//    
-//    public func insertRows(_ rowData: [ArgoKitIdentifiable], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-//
-//        for (index, indexPath) in indexPaths.enumerated() {
-//            self.dataSourceHelper.insertRow(rowData: rowData[index], row: indexPath.row, at: indexPath.section)
-//        }
-//        self.pGridView?.insertItems(at: indexPaths)
-//    }
-//    
-//    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-//        
-//        for indexPath in indexPaths {
-//            self.dataSourceHelper.deleteRow(indexPath.row, at: indexPath.section)
-//        }
-//        self.pGridView?.deleteItems(at: indexPaths)
-//    }
     
-    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
-        
-        self.dataSourceHelper.moveRow(at: indexPath, to: newIndexPath)
-        self.pGridView?.moveItem(at: indexPath, to: newIndexPath)
-    }
-    
-    
-    
-    
-    public func scrollToItem(indexPath: IndexPath,scrollposition:UICollectionView.ScrollPosition,animated:Bool) {
-        pGridView?.scrollToItem(at: indexPath, at: scrollposition, animated: animated)
-    }
-    
-    public func reloadRowsHeight() {
-        self.pGridView?.performBatchUpdates(nil, completion: nil)
-    }
-}
-
-// MARK: UICollectionViewDataSource
-extension GridNode{
+    // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.dataSourceHelper.numberOfSection()
     }
@@ -273,7 +133,7 @@ extension GridNode{
     
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
-        var dataSourceHelper:ArgoKitGridDataSourceHelper? = nil
+        var dataSourceHelper:ArgoKitGridDataSourceHelper<D>? = nil
         var reuseIdentifier:String = kGridHeaderReuseIdentifier
         if kind ==  UICollectionView.elementKindSectionHeader{
             dataSourceHelper = self.headerSourceHelper
@@ -327,11 +187,11 @@ extension GridNode{
     }
 
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
-        var items = self.dataSourceHelper.dataList?.wrappedValue?[sourceIndexPath.section]
+        var items = self.dataSourceHelper.sectionDataSourceList?.wrappedValue?[sourceIndexPath.section]
         let temp = items?.remove(at: sourceIndexPath.item)
-        items?.insert(temp as Any, at: destinationIndexPath.item)
+        items?.insert((temp)!, at: destinationIndexPath.item)
         if let items = items{
-            self.dataSourceHelper.dataList?.wrappedValue?[sourceIndexPath.section] = items
+            self.dataSourceHelper.sectionDataSourceList?.wrappedValue?[sourceIndexPath.section] = items
         }
 
     }
@@ -351,10 +211,7 @@ extension GridNode{
         }
         return IndexPath(index: 0)
     }
-}
-
-// MARK: UICollectionViewDelegate Select
-extension GridNode{
+    
     
     /*
      // 使用默认实现
@@ -367,7 +224,7 @@ extension GridNode{
         return false
     }
  */
-
+    // MARK: UICollectionViewDelegate Select
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
@@ -383,10 +240,10 @@ extension GridNode{
         let sel = #selector(self.collectionView(_:didDeselectItemAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
-}
 
-// MARK: UICollectionViewDelegate Highlight
-extension GridNode{
+    
+    
+    // MARK: UICollectionViewDelegate Highlight
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool{
         return true
     }
@@ -413,10 +270,8 @@ extension GridNode{
             cell?.contentView.backgroundColor = color
         }
     }
-}
-
-// MARK: UICollectionViewDelegate Display
-extension GridNode{
+    
+    // MARK: UICollectionViewDelegate Display
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -447,36 +302,34 @@ extension GridNode{
     // MARK: HEADER OR FOOTER
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
-//        var dataSourceHelper:ArgoKitGridDataSourceHelper? = nil
-//        if elementKind ==  UICollectionView.elementKindSectionHeader{
-//            dataSourceHelper = self.headerSourceHelper
-//        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
-//            dataSourceHelper = self.footerSourceHelper
-//        }
-//        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
-//            node.observeFrameChanged {[weak self] (_, _) in
-//                self?.reloadRowsHeight()
-//            }
-//        }
+        var dataSourceHelper:ArgoKitGridDataSourceHelper<D>? = nil
+        if elementKind ==  UICollectionView.elementKindSectionHeader{
+            dataSourceHelper = self.headerSourceHelper
+        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
+            dataSourceHelper = self.footerSourceHelper
+        }
+        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
+            node.observeFrameChanged {[weak self] (_, _) in
+                self?.reloadRowsHeight()
+            }
+        }
     }
     
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath){
-//        var dataSourceHelper:ArgoKitGridDataSourceHelper? = nil
-//        if elementKind ==  UICollectionView.elementKindSectionHeader{
-//            dataSourceHelper = self.headerSourceHelper
-//        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
-//            dataSourceHelper = self.footerSourceHelper
-//        }
-//        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
-//            node.removeObservingFrameChanged()
-//        }
+        var dataSourceHelper:ArgoKitGridDataSourceHelper<D>? = nil
+        if elementKind ==  UICollectionView.elementKindSectionHeader{
+            dataSourceHelper = self.headerSourceHelper
+        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
+            dataSourceHelper = self.footerSourceHelper
+        }
+        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
+            node.removeObservingFrameChanged()
+        }
         
     }
-}
 
-// MARK: UICollectionViewDelegate Menu
-extension GridNode{
+    // MARK: UICollectionViewDelegate Menu
     func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return false
@@ -613,11 +466,7 @@ extension GridNode{
         
     }
 
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-extension GridNode{
-
+    // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                          layout collectionViewLayout: UICollectionViewLayout,
                          insetForSectionAt section: Int) -> UIEdgeInsets{
@@ -673,9 +522,53 @@ extension GridNode{
         }
         return 1
     }
+}
+
+
+// MARK: reload data
+extension GridNode {
+    public func reloadData(){
+        self.pGridView?.reloadData()
+    }
+    public func insertItems(at indexPaths: [IndexPath]){
+        self.pGridView?.insertItems(at: indexPaths)
+    }
+    public func reloadItems(at indexPaths: [IndexPath]){
+        self.pGridView?.reloadItems(at: indexPaths)
+    }
     
+    public func reloadSections(_ sections:IndexSet){
+        self.pGridView?.reloadSections(sections)
+    }
+    
+    
+    func insertSections(_ sections: IndexSet){
+        self.pGridView?.insertSections(sections)
+    }
 
+    func deleteSections(_ sections: IndexSet){
+        self.pGridView?.deleteSections(sections)
+    }
 
+    open func moveSection(_ section: Int, toSection newSection: Int){
+        self.pGridView?.moveSection(section,toSection: newSection)
+    }
+
+    open func deleteItems(at indexPaths: [IndexPath]){
+        self.pGridView?.deleteItems(at:indexPaths)
+    }
+
+    open func moveItem(at indexPath: IndexPath, to newIndexPath: IndexPath){
+        self.pGridView?.moveItem(at:indexPath,to: newIndexPath)
+    }
+    
+    public func scrollToItem(indexPath: IndexPath,scrollposition:UICollectionView.ScrollPosition,animated:Bool) {
+        pGridView?.scrollToItem(at: indexPath, at: scrollposition, animated: animated)
+    }
+    
+    public func reloadRowsHeight() {
+        self.pGridView?.performBatchUpdates(nil, completion: nil)
+    }
 }
 
 //MARK: 设置配置参数
@@ -736,3 +629,4 @@ extension GridNode{
     }
     
 }
+

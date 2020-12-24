@@ -7,10 +7,6 @@
 
 import ArgoKit
 
-class ListCellModel:  ArgoKitBaseModel {
-//    var reuseIdentifier = "idd"
-//    var name = "name.."
-}
 
 // view model.
 class ListCellTestsModel {

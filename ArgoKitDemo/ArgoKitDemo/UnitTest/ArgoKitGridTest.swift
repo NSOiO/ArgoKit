@@ -12,25 +12,40 @@ class ArgoKitGridTestModel {
     let titiles = ["chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlakechincoteague.jpgchincoteague.jpgchincoteague.jpg.jpg"]
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
-    var dataSource = [[Any]]()
-    var headerSource = [ArgoKitGridHeaderTestModel]()
+    
+    @DataSource var dataSource1:[[ArgoKitGridCellTestModel]]?
+    
+    var dataSource = [[ArgoKitGridCellTestModel]]()
+    @DataSource var headerSource:[ArgoKitGridCellTestModel]?
+    
+    var page = 1
+    
     init() {
-        for session in 0..<10 {
-            let idetifier = "session:\(session)"
-            let headerModel = ArgoKitGridHeaderTestModel()
+        dataSource1 = [[ArgoKitGridCellTestModel]]()
+        headerSource = [ArgoKitGridCellTestModel]()
+        reloadMoreData()
+    }
+   
+    func reloadMoreData(){
+        for index in 0..<page {
+            let idetifier = "session:\(page + index)"
+            let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
-            headerSource.append(headerModel)
-            
-            var subDataSource = [Any]()
-            for index in 0..<20{
+            headerSource?.append(headerModel)
+           
+            var subDataSource = [ArgoKitGridCellTestModel]()
+            for index in 0..<100{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = titiles[index%5]
                 item.imagePath = images[index%5]
                 subDataSource.append(item)
             }
-            dataSource.append(subDataSource)
+            dataSource1?.append(subDataSource)
+           
         }
+        page = page + 1
     }
+    
 
 }
 
@@ -59,36 +74,164 @@ struct ArgoKitGridTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitGridTestModel
-    @DataBind var dataSource:[[Any]]?
+    @Alias var grid:Grid<ArgoKitGridCellTestModel>?
+    @Alias var footerView:RefreshFooterView?
     init(model: ArgoKitGridTestModel) {
         self.model = model
-        dataSource = self.model.dataSource
     }
     
     var body: ArgoKit.View {
-        Grid<ArgoKitGridCellTestModel>(waterfall: true,data:$dataSource){ data in
+       
+        
+        Grid(){
             Text("dsa")
                 .lineLimit(0)
-//                .alias(variable: &data.text)
                 .textAlign(.center)
             
             Image("icybay.jpg")
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-//                    data.text?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
-                    dataSource?[5][6] = ArgoKitGridCellTestModel()
-                    print("\(dataSource)")
+                  
                 }
-           
+            Image("icybay.jpg")
+                .aspect(ratio: 1)
+                .circle()
+                .onTapGesture {
+                  
+                }
+            Image("icybay.jpg")
+                .aspect(ratio: 1)
+                .circle()
+                .onTapGesture {
+                  
+                }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                        .aspect(ratio: 1)
+                        .circle()
+                        .onTapGesture {
+                          
+                        }
+            Image("icybay.jpg")
+                            .aspect(ratio: 1)
+                            .circle()
+                            .onTapGesture {
+                              
+                            }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+                      
+                    }
+            Image("icybay.jpg")
+                        .aspect(ratio: 1)
+                        .circle()
+                        .onTapGesture {
+                          
+                        }
+            Image("icybay.jpg")
+                            .aspect(ratio: 1)
+                            .circle()
+                            .onTapGesture {
+                              
+                            }
+            Image("icybay.jpg")
+                                .aspect(ratio: 1)
+                                .circle()
+                                .onTapGesture {
+                                  
+                                }
+            
         }
-       
         .grow(1.0)
         .columnCount(3)
         .columnSpacing(5)
-        .lineSpacing(5)
-        .layoutInset(top: 10, left:10, bottom: 10, right: 10)
-        .showsScrollIndicator(true)
+        .sectionHeader { () -> View in
+            Text("scsdcsd").backgroundColor(.yellow)
+        }
+       
+//        Grid(sectionData:model.$dataSource1){ data in
+//
+//            Text("dsa")
+//                .lineLimit(0)
+//                .textAlign(.center)
+//
+//            Image("icybay.jpg")
+//                .aspect(ratio: 1)
+//                .circle()
+//                .onTapGesture {
+//
+//                }
+//
+//        }
+//        .alias(variable: $grid)
+       
+//        .grow(1.0)
+//        .columnCount(3)
+//        .columnSpacing(5)
+        /*
+//        .lineSpacing(5)
+//        .layoutInset(top: 10, left:10, bottom: 10, right: 10)
+//        .showsScrollIndicator(true)
 //        .cellWillAppear{ (_, indexpath) in
 //
 //        }
@@ -101,13 +244,13 @@ struct ArgoKitGridTest: ArgoKit.View {
 //        .willBeginDragging {
 //
 //        }
-//        .sectionHeader(data:model.headerSource) { data -> View in
-//            Text(data.headerName)
-//                .textAlign(.center)
-//                .backgroundColor(.gray)
-//                .lineLimit(0)
-//
-//        }
+        .sectionHeader(data:model.$headerSource) { data -> View in
+            Text(data.headerName)
+                .textAlign(.center)
+                .backgroundColor(.gray)
+                .lineLimit(0)
+
+        }
         .headersPinToVisibleBounds(true)
 //        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
 //            Text(data.headerName)
@@ -149,7 +292,10 @@ struct ArgoKitGridTest: ArgoKit.View {
         }
         .refreshFooterView { () -> RefreshFooterView in
             RefreshFooterView {
-                
+                model.reloadMoreData()
+                grid?.reloadData()
+                footerView?.endRefreshing()
+                footerView?.resetNoMoreData()
             } _: { () -> View in
                 Text("refresh_footer").backgroundColor(.red)
                 Image("chilkoottrail.jpg")
@@ -159,13 +305,17 @@ struct ArgoKitGridTest: ArgoKit.View {
             }
             .backgroundColor(.orange)
             .alignItems(.center)
+            .alias(variable: $footerView)
+            .autoRefreshOffPage(3)
         }
 //        .contentWidth(300)
 //        .scrollEnabled(true)
 //        .scrollDirection(UICollectionView.ScrollDirection.vertical)
 //        .showsScrollIndicator(true)
+         */
 
     }
+ 
 }
 
 

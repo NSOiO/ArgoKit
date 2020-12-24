@@ -7,7 +7,7 @@
 
 import ArgoKit
 
-struct HeaderModel: ArgoKitIdentifiable {
+class HeaderModel: ArgoKitIdentifiable {
     var reuseIdentifier: String { "idd" }
 }
 
