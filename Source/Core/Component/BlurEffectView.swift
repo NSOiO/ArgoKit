@@ -20,7 +20,7 @@ public class BlurEffectView: View {
     /// Initializer
     /// - Parameters:
     ///   - style: The intensity of the blur effect. See UIBlurEffect.Style for valid options.
-    ///   - builder: The content of the blur effect view
+    ///   - builder: A view builder that creates the content of this visual effect view.
     public init(style:UIBlurEffect.Style, @ArgoKitViewBuilder _ builder:@escaping () -> View) {
         let blurEffect:UIBlurEffect = UIBlurEffect(style: style)
         pNode = ArgoKitNode(viewClass: UIVisualEffectView.self)
