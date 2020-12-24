@@ -102,7 +102,7 @@ struct ArgoKitButtonTest: ArgoKit.View {
         .height(100)
         .textColor(.red)
         .font(style: AKFontStyle.bolditalic, size: 25)
-        .backgroundImage(path: "chilkoottrail.jpg", for: UIControl.State.normal)
+        .backgroundImage(named: "chilkoottrail.jpg", for: UIControl.State.normal)
         .margin(edge: .top, value: 20)
         .alignSelf(.center)
         
