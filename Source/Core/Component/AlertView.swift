@@ -25,6 +25,7 @@ public class AlertView: View {
     let alerView: UIAlertController
     var pTextField: UITextField?
     
+    /// The node behind the alert view.
     public var node: ArgoKitNode? {
         pNode
     }
