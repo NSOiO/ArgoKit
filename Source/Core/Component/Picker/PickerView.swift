@@ -10,6 +10,14 @@ import Foundation
 /// Wrapper of UIPickerView.
 ///
 ///A view that uses a spinning-wheel or slot-machine metaphor to show one or more sets of values.
+///```
+/// PickerView(["1","2","3","4","5"]){item in
+///       Text(item)
+///  }
+///  .width(100)
+///  .height(200)
+///  .backgroundColor(.yellow)
+///```
 public struct PickerView<T>: View {
     
     private var pickerView : UIPickerView

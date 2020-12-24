@@ -17,6 +17,14 @@ Supply additional configuration options such as minimum and maximum dates if req
 Connect an action method to the date picker.
 Set up Auto Layout rules to govern the position of the date picker in your interface.
 You use a date picker only for handling the selection of times and dates. If you want to handle the selection of arbitrary items from a list, use a UIPickerView object.
+ 
+ ```
+ DatePicker{ date in
+     print("\(date)")
+ }
+ .width(300)
+ .height(100)
+ ```
  */
 public struct DatePicker:View{
     public var body: View{
