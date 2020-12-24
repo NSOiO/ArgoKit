@@ -177,6 +177,7 @@ extension Text{
     ///   - style: font style
     ///   - size: font size
     /// - Returns: Self
+    ///
     /// ```
     /// // value of AKFontStyle
     /// public enum AKFontStyle{
@@ -224,6 +225,7 @@ extension Text{
     /// change the font style of the receiver's text
     /// - Parameter value: font style
     /// - Returns:Self
+    ///
     /// ```
     /// // value of AKFontStyle
     /// public enum AKFontStyle{
@@ -281,6 +283,7 @@ extension Text{
     /// set the textAlign of the back UILabel object.
     /// - Parameter value: new NSTextAlignment value
     /// - Returns: Self
+    ///
     ///```
     ///public enum NSTextAlignment : Int {
     ///    case left = 0 // Visually left aligned
@@ -347,6 +350,7 @@ extension Text{
     /// The technique for wrapping and truncating the label’s text. Call lineBreakMode of the UILabel directly.
     /// - Parameter value: new line break mode
     /// - Returns: Self
+    ///
     ///```
     ///public enum NSLineBreakMode : Int {
     ///
@@ -443,6 +447,7 @@ extension Text{
     /// An option that controls whether the text's baseline remains fixed when text needs to shrink to fit in the label.
     /// - Parameter value: new option
     /// - Returns: Self
+    /// 
     ///```
     ///public enum UIBaselineAdjustment : Int {
     ///

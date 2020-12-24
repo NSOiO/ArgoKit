@@ -30,6 +30,7 @@ public class VStack:View {
     
     /// initalize the VStack with view builder.
     /// - Parameter builder: view builder.
+    /// 
     ///```
     ///     VStack {
     ///         Text("1")

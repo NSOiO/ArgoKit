@@ -75,6 +75,7 @@ extension TextField {
     ///   - style: font style
     ///   - size: font size
     /// - Returns: Self
+    ///
     /// ```
     /// // value of AKFontStyle
     /// public enum AKFontStyle{
@@ -114,6 +115,7 @@ extension TextField {
     /// change the font style of the receiver's text
     /// - Parameter value: font style
     /// - Returns:Self
+    ///
     /// ```
     /// // value of AKFontStyle
     /// public enum AKFontStyle{
@@ -169,6 +171,7 @@ extension TextField {
     /// If you are using styled text, assigning a new value to this property causes the text alignment to be applied to the entire string int the attributedText peoperty. If you want to apply the alignment to only a portion of the text, create a new attributed string with the desired style infomation and associate it with the text field.
     /// - Parameter value:a new 
     /// - Returns: Self
+    ///
     /// ```
     ///    public enum NSTextAlignment : Int {
     ///
@@ -199,6 +202,7 @@ extension TextField {
     /// The default value for this property is UITextField.BorderStyle.none. If the value is set to the UITextField.BorderStyle.roundeRect style, the custom background image associated with the text field is ignored.
     /// - Parameter value: a new border style
     /// - Returns:Self
+    ///
     ///```
     /// public enum BorderStyle : Int {
     ///
@@ -344,6 +348,7 @@ extension TextField {
     /// The default value for this property is UITextField.ViewMode.never.
     /// - Parameter value: a new view mode
     /// - Returns: Self
+    /// 
     /// ```
     ///public enum ViewMode : Int {
     ///
@@ -644,6 +649,7 @@ extension TextField{
     ///   - edge: a ArgoEdge value.
     ///   - value: a ArgoValue value.
     /// - Returns: Self
+    ///
     ///```
     ///public enum ArgoEdge{
     ///    case left

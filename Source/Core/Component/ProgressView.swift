@@ -12,6 +12,7 @@ import Foundation
 ///
 ///The UIProgressView class provides properties for managing the style of the progress bar and for getting and setting values that are pinned to the progress of a task.
 ///For an indeterminate progress indicator—or, informally, a “spinner”—use an instance of the UIActivityIndicatorView class.
+///
 ///```
 /// ProgressView(0.5)
 ///     .width(100)
