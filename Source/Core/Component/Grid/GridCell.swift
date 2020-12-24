@@ -16,7 +16,6 @@ class GridCell: UICollectionViewCell {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.contentView.backgroundColor = .green
     }
     
     override func prepareForReuse() {

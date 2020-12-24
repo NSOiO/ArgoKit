@@ -17,40 +17,37 @@ struct LandmarkList: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     var toggleModel: ToggleRowModel
     @Alias var list: List<Landmark>? = nil
-    var datas: [Landmark]
+    @DataSource var datas: [Landmark]?
     
     private var model: UserData
     init(model: UserData) {
         self.model = model
-        self.datas = model.landmarks
-        
         self.toggleModel = ToggleRowModel()
+        self.datas = model.landmarks
         self.toggleModel.action = { [self] isOn in
             self.toggleModel.isON = isOn
             let datas = model.landmarks.filter { landmark -> Bool in
                 landmark.isFavorite || !isOn
             }
-            
 //            self.list?.reloadData(datas, sectionHeaderData: HeaderModel(), sectionFooterData: nil)
-            
             let count = model.landmarks.count
             var indexPaths = [IndexPath]()
             for idx in 0..<count {
                 indexPaths.append(IndexPath.init(row: idx, section: 0))
             }
-            self.list?.reloadRows(datas, at: indexPaths, with: .bottom)
+//            self.list?.reloadRows(datas, at: indexPaths, with: .bottom)
         }
     }
     
     var body: ArgoKit.View {
         VStack {
-            List(.grouped ,data: model.landmarks) { landmark in
+            List(.grouped ,data: $datas) { landmark in
                 LandmarkRow(model: landmark)
             }
             .height(100%)
-            .sectionHeader([HeaderModel()]) { _ in
-                ToggleRow(model: self.toggleModel)
-            }
+//            .sectionHeader([HeaderModel()]) { _ in
+//                ToggleRow(model: self.toggleModel)
+//            }
             .alias(variable: $list)
             
         }

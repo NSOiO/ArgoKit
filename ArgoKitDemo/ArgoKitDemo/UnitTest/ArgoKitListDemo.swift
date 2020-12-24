@@ -43,7 +43,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                     Text("姓名姓名姓名姓名姓姓名姓名姓名姓名姓姓名姓名姓名姓名姓姓名姓名姓名姓名姓")
+                     Text(                                      )
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
                          .shrink(1.0)
@@ -209,8 +209,9 @@ var footerView:RefreshFooterView?
 class ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
-    var items = [SessionItem]()
+    @DataSource var items:[SessionItem]?
     init() {
+        items = [SessionItem]()
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         for index in 1..<1000{
@@ -220,14 +221,14 @@ class ListDemo:ArgoKit.View{
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
-            items.append(item)
+            items?.append(item)
         }
     }
     
     var hidden:Bool = false
     
     var body: ArgoKit.View{
-        ArgoKit.List(data:items){ item in
+        ArgoKit.List(data:$items){ item in
             SessionRow(item: item)
         }
         .didSelectRow {item, indexPath in
@@ -252,8 +253,6 @@ class ListDemo:ArgoKit.View{
                 print("pullingDown\(String(describing: point))")
             }
             .height(100.0)
-//            .backgroundColor(.red)
-//            .alias(variable: &headerView)
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {

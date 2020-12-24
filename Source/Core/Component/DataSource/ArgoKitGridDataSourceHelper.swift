@@ -73,19 +73,6 @@ extension ArgoKitGridDataSourceHelper {
         return nil
     }
     
-    // 获取model唯一key
-    func dataIdForRow(_ row: Int, at section: Int) -> String {
-        if let item = dataForRow(row, at: section) {
-            if let reuseItem = item as? ArgoKitIdentifiable {
-                return reuseItem.identifier
-            }
-            if let hashItem = item as? NSObjectProtocol  {
-                return String(hashItem.hash)
-            }
-        }
-        return ""
-    }
-    
     open func dataForRow(_ row: Int, at section: Int) -> Any? {
         if let nodelist =  nodeSourceList?.wrappedValue,
            nodelist.count > section,

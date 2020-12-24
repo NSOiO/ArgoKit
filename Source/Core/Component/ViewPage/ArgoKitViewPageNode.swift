@@ -25,7 +25,9 @@ class ArgoKitViewPage: UICollectionView {
     }
 }
 
-class ArgoKitViewPageNode: ArgoKitScrollViewNode, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode,
+                           UICollectionViewDelegateFlowLayout,
+                           UICollectionViewDataSource {
     
     public var viewPage:UICollectionView {
         self.view as! UICollectionView
@@ -39,7 +41,7 @@ class ArgoKitViewPageNode: ArgoKitScrollViewNode, UICollectionViewDelegateFlowLa
         return layout
     }()
     
-    lazy var dataSourceHelper = ArgoKitDataSourceHelper()
+    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper<D>()
     
     private var isReuseEnable:Bool = true
     
@@ -55,11 +57,11 @@ class ArgoKitViewPageNode: ArgoKitScrollViewNode, UICollectionViewDelegateFlowLa
     private var pageTabScrollingListener:ViewPageTabScrollingListener?
     
     
-}
-
-// MARK: Node
-
-extension ArgoKitViewPageNode {
+//}
+//
+//// MARK: Node
+//
+//extension ArgoKitViewPageNode {
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let collectionView = ArgoKitViewPage(frame: frame, collectionViewLayout: viewPageLayout)
@@ -82,49 +84,12 @@ extension ArgoKitViewPageNode {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
-}
-
-// MARK: public method
-
-extension ArgoKitViewPageNode {
-    
-    public func reloadData() {
-        self.viewPage.reloadData()
-    }
-    
-    public func pageCount(pageCount:Int) {
-        self.pageCount = pageCount
-    }
-    
-    public func scrollToPage(index:Int) {
-        self.currentIndex = index
-        
-        if (self.view != nil) {
-            self.viewPage.scrollToItem(at: NSIndexPath(item: index, section: 0) as IndexPath, at: .centeredHorizontally, animated: false)
-        }
-    }
-    
-    public func spacing(spacing:CGFloat) {
-        self.itemSpacing = spacing
-    }
-    
-    public func reuseEnable(enable:Bool) {
-        self.isReuseEnable = enable
-    }
-    
-    public func onChangeSelected(selectedFunc:@escaping ViewPageChangedCloser) {
-        self.pageChangedFunc = selectedFunc
-    }
-    
-    public func setTabScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) {
-        self.pageTabScrollingListener = scrollListener
-    }
-    
-}
-
-// MARK: UICollectionViewDataSource
-
-extension ArgoKitViewPageNode {
+//}
+//
+//
+//// MARK: UICollectionViewDataSource
+//
+//extension ArgoKitViewPageNode {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -155,10 +120,10 @@ extension ArgoKitViewPageNode {
     }
     
     
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-extension ArgoKitViewPageNode {
+//}
+//
+//// MARK: UICollectionViewDelegateFlowLayout
+//extension ArgoKitViewPageNode {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -178,10 +143,10 @@ extension ArgoKitViewPageNode {
         return self.itemSpacing
     }
     
-}
-
-// MARK: Scroll
-extension ArgoKitViewPageNode {
+//}
+//
+//// MARK: Scroll
+//extension ArgoKitViewPageNode {
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         super.scrollViewWillBeginDragging(scrollView)
@@ -223,9 +188,9 @@ extension ArgoKitViewPageNode {
         
         if let changedFunc = self.pageChangedFunc {
             let count = self.dataSourceHelper.numberOfRows(section: 0)
-            var item:Any? = nil
+            var item:D? = nil
             if count > toIndex {
-                item = self.dataSourceHelper.dataList?[0][toIndex]
+                item = self.dataSourceHelper.dataSourceList?.wrappedValue?[toIndex]
             }
             changedFunc(item, toIndex)
         }
@@ -235,4 +200,43 @@ extension ArgoKitViewPageNode {
             listener(percentX, fromIndex, toIndex)
         }
     }
+}
+
+
+// MARK: public method
+
+extension ArgoKitViewPageNode {
+    
+    public func reloadData() {
+        self.viewPage.reloadData()
+    }
+    
+    public func pageCount(pageCount:Int) {
+        self.pageCount = pageCount
+    }
+    
+    public func scrollToPage(index:Int) {
+        self.currentIndex = index
+        
+        if (self.view != nil) {
+            self.viewPage.scrollToItem(at: NSIndexPath(item: index, section: 0) as IndexPath, at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    public func spacing(spacing:CGFloat) {
+        self.itemSpacing = spacing
+    }
+    
+    public func reuseEnable(enable:Bool) {
+        self.isReuseEnable = enable
+    }
+    
+    public func onChangeSelected(selectedFunc:@escaping ViewPageChangedCloser) {
+        self.pageChangedFunc = selectedFunc
+    }
+    
+    public func setTabScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) {
+        self.pageTabScrollingListener = scrollListener
+    }
+    
 }

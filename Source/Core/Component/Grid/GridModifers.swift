@@ -78,12 +78,11 @@ extension Grid{
 
 }
 
-/*
 // MARK: action observer
 extension Grid{
     @discardableResult
     public func cellSelected(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) ->Self {
-        let sel = #selector(GridNode.collectionView(_:didSelectItemAt:))
+        let sel = #selector(GridNode<D>.collectionView(_:didSelectItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2,
                let data = paramter?.first as? D ,
@@ -97,7 +96,7 @@ extension Grid{
     
     @discardableResult
     public func cellDeselected(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) ->Self {
-        let sel = #selector(GridNode.collectionView(_:didDeselectItemAt:))
+        let sel = #selector(GridNode<D>.collectionView(_:didDeselectItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2,
                let data = paramter?.first as? D ,
@@ -110,7 +109,7 @@ extension Grid{
     }
     
     public func cellWillAppear(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
-        let sel = #selector(GridNode.collectionView(_:willDisplay:forItemAt:))
+        let sel = #selector(GridNode<D>.collectionView(_:willDisplay:forItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2,
                let data = paramter?.first as? D,
@@ -123,7 +122,7 @@ extension Grid{
     }
     
     public func cellDidDisappear(_ function:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
-        let sel = #selector(GridNode.collectionView(_:didEndDisplaying:forItemAt:))
+        let sel = #selector(GridNode<D>.collectionView(_:didEndDisplaying:forItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 {
                 if let data = paramter?.first as? D,let indexPath = paramter?.last as? IndexPath {
@@ -136,7 +135,7 @@ extension Grid{
     }
     
     public func cellDidHighlight(_ function:@escaping () -> UIColor) -> Self{
-        let sel = #selector(GridNode.collectionView(_:didHighlightItemAt:))
+        let sel = #selector(GridNode<D>.collectionView(_:didHighlightItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return function()
         })
@@ -144,7 +143,7 @@ extension Grid{
     }
     
     public func cellDidUnhighlight(_ function:@escaping () -> UIColor) -> Self{
-        let sel = #selector(GridNode.collectionView(_:didUnhighlightItemAt:))
+        let sel = #selector(GridNode<D>.collectionView(_:didUnhighlightItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             return function()
         })
@@ -261,4 +260,3 @@ extension Grid{
         return self
     }
 }
-*/

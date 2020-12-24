@@ -10,34 +10,36 @@ import Foundation
 // MARK: Init
 public class ViewPage<T> : ScrollView {
     
-    private var viewPageNode : ArgoKitViewPageNode {
+    private var viewPageNode : ArgoKitViewPageNode<T> {
         pNode as! ArgoKitViewPageNode
+    }
+    
+    override func createNode() {
+        pNode = ArgoKitViewPageNode<T>(viewClass: UICollectionView.self)
+        pNode?.flexGrow(1.0)
     }
 
     internal required init() {
         super.init()
     }
     
-    public convenience init(@ArgoKitListBuilder content: @escaping () -> View) {
+    public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where T:ArgoKitNode{
         self.init()
         let container = content()
         if let nodes = container.type.viewNodes() {
-            viewPageNode.dataSourceHelper.dataList = [nodes]
+            viewPageNode.dataSourceHelper.nodeSourceList?.wrappedValue?.append(nodes)
         }
     }
     
-    public convenience init(data: [T], @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable{
+    public convenience init(data: DataSource<DataList<T>>, @ArgoKitListBuilder rowContent: @escaping (T) -> View) where T : ArgoKitIdentifiable{
         self.init()
-        viewPageNode.dataSourceHelper.dataList = [data]
+        viewPageNode.dataSourceHelper.dataSourceList = data
         viewPageNode.dataSourceHelper.buildNodeFunc = { item in
-            return rowContent(item as! T)
+            return rowContent(item)
         }
     }
     
-    override func createNode() {
-        pNode = ArgoKitViewPageNode(viewClass: UICollectionView.self)
-        pNode?.flexGrow(1.0)
-    }
+
     
 }
 

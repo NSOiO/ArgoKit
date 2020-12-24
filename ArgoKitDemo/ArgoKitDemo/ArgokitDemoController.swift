@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import ArgoKit
 public class SessionItem:ArgoKitIdentifiable{
+    var sectionHeader:String?
     private var reuser:String!
     public var reuseIdentifier: String{
         reuser
