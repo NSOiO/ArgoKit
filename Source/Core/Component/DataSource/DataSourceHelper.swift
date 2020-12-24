@@ -110,6 +110,8 @@ extension DataSourceHelper {
             return nil
         }
         if let sourceData = self.dataSource()?[section][row]{
+            
+            // MARK:数据源中存在重复的数据对象的兼容处理
             let indexPath = IndexPath(row: row, section: section)
             if let sourceData_ = sourceData as? ArgoKitIdentifiable,let indexPath_ =  sourceData_.indexpPath{
                 if !indexPath.elementsEqual(indexPath_) {

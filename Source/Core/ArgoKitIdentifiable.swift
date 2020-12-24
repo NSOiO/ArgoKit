@@ -37,8 +37,6 @@ extension ArgoKitIdentifiable {
     }
 }
 
-
-
 extension ArgoKitNode: ArgoKitIdentifiable {
     
     public var reuseIdentifier: String {
