@@ -117,7 +117,7 @@ open func addTextField(configurationHandler: ((UITextField) -> Void)? = nil)
  */
 extension AlertView {
     
-    /// Set the title of the alert.
+    /// Sets the title of the alert.
     /// - Parameter value: The title of the alert. Use this string to get the user’s attention and communicate the reason for the alert.
     /// - Returns: Self
     @discardableResult
@@ -126,7 +126,7 @@ extension AlertView {
         return self
     }
     
-    /// Set descriptive text that provides additional details about the reason for the alert.
+    /// Sets descriptive text that provides additional details about the reason for the alert.
     /// - Parameter value: Descriptive text that provides additional details about the reason for the alert.
     /// - Returns: Self
     @discardableResult

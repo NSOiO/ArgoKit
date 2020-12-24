@@ -41,7 +41,7 @@ public struct ActivityIndicatorView : View {
 
 extension ActivityIndicatorView {
     
-    /// Set the basic appearance of the activity indicator.
+    /// Sets the basic appearance of the activity indicator.
     /// - Parameter value: The basic appearance of the activity indicator.
     /// - Returns: Self
     @discardableResult
@@ -50,7 +50,7 @@ extension ActivityIndicatorView {
         return self
     }
     
-    /// Set a Boolean value that controls whether the receiver is hidden when the animation is stopped.
+    /// Sets a Boolean value that controls whether the receiver is hidden when the animation is stopped.
     /// - Parameter value: A Boolean value that controls whether the receiver is hidden when the animation is stopped.
     /// - Returns: Self
     @discardableResult
@@ -59,7 +59,7 @@ extension ActivityIndicatorView {
         return self
     }
     
-    /// Set the color of the activity indicator.
+    /// Sets the color of the activity indicator.
     /// - Parameter value: The color of the activity indicator.
     /// - Returns: Self
     @discardableResult

@@ -154,7 +154,7 @@ extension Image {
 
 extension Image {
     
-    /// Set the displayed image.
+    /// Sets the displayed image.
     /// - Parameter value: The image displayed in the image view.
     /// - Returns: Self
     @discardableResult
@@ -163,7 +163,7 @@ extension Image {
         return self
     }
     
-    /// Set the displayed image.
+    /// Sets the displayed image.
     /// - Parameters:
     ///   - value: The image displayed in the image view.
     ///   - placeholder: The placeholder image displayed in the image view if the value invalid
@@ -173,7 +173,7 @@ extension Image {
         return self.image(value ?? placeholder)
     }
     
-    /// Set the displayed image.
+    /// Sets the displayed image.
     /// - Parameters:
     ///   - url: The url of a image.
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
@@ -184,7 +184,7 @@ extension Image {
         return self
     }
     
-    /// Set the displayed image.
+    /// Sets the displayed image.
     /// - Parameters:
     ///   - urlString: The string represent a valid URL For a image
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
@@ -199,7 +199,7 @@ extension Image {
         return self
     }
     
-    /// Set the highlighted image displayed in the image view.
+    /// Sets the highlighted image displayed in the image view.
     /// - Parameter value: The highlighted image displayed in the image view.
     /// - Returns: Self
     @discardableResult
@@ -208,7 +208,7 @@ extension Image {
         return self
     }
     
-    /// Set the configuration values to use when rendering the image.
+    /// Sets the configuration values to use when rendering the image.
     /// - Parameter value: The configuration values to use when rendering the image.
     /// - Returns: Self
     @available(iOS 13.0, *)
@@ -218,7 +218,7 @@ extension Image {
         return self
     }
     
-    /// Set a Boolean value that determines whether user events are ignored and removed from the event queue.
+    /// Sets a Boolean value that determines whether user events are ignored and removed from the event queue.
     /// - Parameter value: A Boolean value that determines whether user events are ignored and removed from the event queue.
     /// - Returns: Self
     @discardableResult
@@ -227,7 +227,7 @@ extension Image {
         return self
     }
     
-    /// Set a Boolean value that determines whether the image is highlighted.
+    /// Sets a Boolean value that determines whether the image is highlighted.
     /// - Parameter value: A Boolean value that determines whether the image is highlighted.
     /// - Returns: Self
     @discardableResult
@@ -236,7 +236,7 @@ extension Image {
         return self
     }
     
-    /// Set an array of UIImage objects to use for an animation.
+    /// Sets an array of UIImage objects to use for an animation.
     /// - Parameter value: An array of UIImage objects to use for an animation.
     /// - Returns: Self
     @discardableResult
@@ -245,7 +245,7 @@ extension Image {
         return self
     }
     
-    /// Set an array of UIImage objects to use for an animation when the view is highlighted.
+    /// Sets an array of UIImage objects to use for an animation when the view is highlighted.
     /// - Parameter value: An array of UIImage objects to use for an animation when the view is highlighted.
     /// - Returns: Self
     @discardableResult
@@ -254,7 +254,7 @@ extension Image {
         return self
     }
     
-    /// Set the amount of time it takes to go through one cycle of the images.
+    /// Sets the amount of time it takes to go through one cycle of the images.
     /// - Parameter value: The amount of time it takes to go through one cycle of the images.
     /// - Returns: Self
     @discardableResult
@@ -273,7 +273,7 @@ extension Image {
         return self
     }
     
-    /// Set a color used to tint template images in the view hierarchy.
+    /// Sets a color used to tint template images in the view hierarchy.
     /// - Parameter value: A color used to tint template images in the view hierarchy.
     /// - Returns: Self
     @discardableResult
