@@ -30,9 +30,9 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
         return CGSize.zero
     }
     
-    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper<D>()
-    lazy var sectionHeaderSourceHelper =  ArgoKitGridDataSourceHelper<D>()
-    lazy var sectionFooterSourceHelper = ArgoKitGridDataSourceHelper<D>()
+    lazy var dataSourceHelper = DataSourceHelper<D>()
+    lazy var sectionHeaderSourceHelper =  DataSourceHelper<D>()
+    lazy var sectionFooterSourceHelper = DataSourceHelper<D>()
     
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none

@@ -9,30 +9,13 @@ import Foundation
 
 public protocol ArgoKitIdentifiable:class {
     var reuseIdentifier: String {get} // 复用标识，用于同样式的UI复用
-//    var identifier: String {get} // 唯一标识
 }
 
 private struct AssociatedNodeKey{
-       static var nodeIdentifier:Void?
-       static var nodeVaulekey:Void?
+      
+    static var nodeVaulekey:Void?
+    static var nodeIndePathKey:Void?
 }
-//extension ArgoKitIdentifiable {
-//
-//    public var identifier: String{
-//        get {
-//            if let rs = objc_getAssociatedObject(self, &AssociatedNodeKey.nodeIdentifier) as? String {
-//                return rs
-//            }else{
-//                let rs = Date().timeIntervalSince1970 * 1000.0
-//                let identifier_ =  String(rs)
-//                print("identifier_:\(identifier_)")
-//                 objc_setAssociatedObject(self, &AssociatedNodeKey.nodeIdentifier,identifier_, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-//                 return identifier_
-//            }
-//        }
-//    }
-//
-//}
 
 extension ArgoKitIdentifiable {
     var linkNode: ArgoKitNode? {
@@ -41,6 +24,15 @@ extension ArgoKitIdentifiable {
         }
         get {
             return  objc_getAssociatedObject(self, &AssociatedNodeKey.nodeVaulekey) as? ArgoKitNode
+        }
+    }
+    
+    var indexpPath: IndexPath? {
+        set(newValue) {
+            objc_setAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+        get {
+            return  objc_getAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey) as? IndexPath
         }
     }
 }

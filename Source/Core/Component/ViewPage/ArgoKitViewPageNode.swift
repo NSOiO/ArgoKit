@@ -41,7 +41,7 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode,
         return layout
     }()
     
-    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper<D>()
+    lazy var dataSourceHelper = DataSourceHelper<D>()
     
     private var isReuseEnable:Bool = true
     

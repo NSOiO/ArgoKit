@@ -31,9 +31,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return CGSize.zero
     }
     
-    lazy var dataSourceHelper = ArgoKitGridDataSourceHelper<D>()
-    lazy var headerSourceHelper =  ArgoKitGridDataSourceHelper<D>()
-    lazy var footerSourceHelper = ArgoKitGridDataSourceHelper<D>()
+    lazy var dataSourceHelper = DataSourceHelper<D>()
+    lazy var headerSourceHelper =  DataSourceHelper<D>()
+    lazy var footerSourceHelper = DataSourceHelper<D>()
     
     // 支持移动重排
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
@@ -133,7 +133,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
-        var dataSourceHelper:ArgoKitGridDataSourceHelper<D>? = nil
+        var dataSourceHelper:DataSourceHelper<D>? = nil
         var reuseIdentifier:String = kGridHeaderReuseIdentifier
         if kind ==  UICollectionView.elementKindSectionHeader{
             dataSourceHelper = self.headerSourceHelper
@@ -302,7 +302,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     // MARK: HEADER OR FOOTER
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
-        var dataSourceHelper:ArgoKitGridDataSourceHelper<D>? = nil
+        var dataSourceHelper:DataSourceHelper<D>? = nil
         if elementKind ==  UICollectionView.elementKindSectionHeader{
             dataSourceHelper = self.headerSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
@@ -317,7 +317,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath){
-        var dataSourceHelper:ArgoKitGridDataSourceHelper<D>? = nil
+        var dataSourceHelper:DataSourceHelper<D>? = nil
         if elementKind ==  UICollectionView.elementKindSectionHeader{
             dataSourceHelper = self.headerSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{

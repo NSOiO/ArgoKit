@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArgoKitGridDataSourceHelper<D>{
+class DataSourceHelper<D>{
     
     lazy var registedReuseIdSet = Set<String>()
 
@@ -40,7 +40,7 @@ class ArgoKitGridDataSourceHelper<D>{
     }
 }
 
-extension ArgoKitGridDataSourceHelper {
+extension DataSourceHelper {
     
     open func numberOfSection() -> Int {
         if let nodelist =  nodeSourceList?.wrappedValue, nodelist.count >= 1{
@@ -54,6 +54,7 @@ extension ArgoKitGridDataSourceHelper {
             return nodelist[section].count
         }
         if section < dataSource()?.count ?? 0 {
+            print("dataSource:\(dataSource()![section].count)")
             return dataSource()![section].count
         }
         return 0
@@ -109,7 +110,16 @@ extension ArgoKitGridDataSourceHelper {
             return nil
         }
         if let sourceData = self.dataSource()?[section][row]{
-            if let sourceData_ = sourceData as? ArgoKitIdentifiable,let node = sourceData_.linkNode as? ArgoKitCellNode {
+            let indexPath = IndexPath(row: row, section: section)
+            if let sourceData_ = sourceData as? ArgoKitIdentifiable,let indexPath_ =  sourceData_.indexpPath{
+                if !indexPath.elementsEqual(indexPath_) {
+                    sourceData_.linkNode = nil
+                    sourceData_.indexpPath = nil
+                }
+            }
+            if let sourceData_ = sourceData as? ArgoKitIdentifiable,
+               let node = sourceData_.linkNode as? ArgoKitCellNode {
+                sourceData_.indexpPath = indexPath
                 return node
             }
             if let view = self.buildNodeFunc?(sourceData) {
@@ -154,7 +164,7 @@ extension ArgoKitGridDataSourceHelper {
 }
 
 // 数据操作
-extension ArgoKitGridDataSourceHelper {
+extension DataSourceHelper {
     
     
     func reloadSection(data: [D], section: Int) {
