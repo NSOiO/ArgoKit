@@ -41,12 +41,12 @@ class ArgoKitImageNode: ArgoKitNode {
 }
 
 /// Wrapper of UIImageView
-/// a control that displays a single image or a sequence of animated images in your interface.
+/// A view that displays a single image or a sequence of animated images in your interface.
 public struct Image : View {
     
     private var pNode : ArgoKitImageNode
     
-    /// the node behind the Image.
+    /// The node behind the Image.
     public var node: ArgoKitNode? {
         pNode
     }
