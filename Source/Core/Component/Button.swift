@@ -30,7 +30,7 @@ public struct Button: View {
     ///   - builder: A view builder that creates the content of this button.
     public init(action: @escaping () -> Void, @ArgoKitViewBuilder builder: @escaping () -> View) {
         self.init(text: nil, action: action)
-        addSubNodes(builder: builder)
+        addSubViews(builder: builder)
     }
     
     /// Initializer

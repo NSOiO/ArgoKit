@@ -57,7 +57,7 @@ public class RefreshFooterView: View {
     public init(startRefreshing:(() -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = RefreshFooterNode(viewClass: ArgoKitRefreshAutoFooter.self)
         pNode?.refreshingBlock = startRefreshing
-        addSubNodes(builder:builder)
+        addSubViews(builder:builder)
     }
     
     @discardableResult
