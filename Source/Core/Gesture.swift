@@ -8,14 +8,14 @@
 import Foundation
 
 @propertyWrapper
-public class GestureAction<Value>{
+public class GestureProperty<Value>{
     private var _value: Value?
    
     public init() {}
     public init(wrappedValue value: Value?){
         self._value = value
     }
-    public var projectedValue: GestureAction<Value> {
+    public var projectedValue: GestureProperty<Value> {
         return self
     }
     public var wrappedValue: Value? {
@@ -130,17 +130,19 @@ public struct PanGesture:Gesture {
         pPanGesture
     }
     
-        /// Initializer
-        /// - Parameters:
-        ///   - minimumNumberOfTouches: The minimum number of fingers that can touch the view for gesture recognition.
-        ///   - maximumNumberOfTouches: The maximum number of fingers that can touch the view for gesture recognition.
-        ///   - onPanGesture: The action to handle the gesture recognized by the receiver.
-    var onGestureAction:GestureAction<((_ gesture:UIPanGestureRecognizer)->Void)> = GestureAction<((_ gesture:UIPanGestureRecognizer)->Void)>()
-    var beganAction:GestureAction<ObserverBeganAction> = GestureAction<ObserverBeganAction>()
-    var movedAction:GestureAction<ObserverAction> = GestureAction<ObserverAction>()
-    var endedAction:GestureAction<ObserverAction> = GestureAction<ObserverAction>()
-    var cancelledAction:GestureAction<ObserverAction> = GestureAction<ObserverAction>()
-    var moveView:GestureAction<Bool> = GestureAction<Bool>()
+
+    private var onGestureAction:GestureProperty<((_ gesture:UIPanGestureRecognizer)->Void)> = GestureProperty<((_ gesture:UIPanGestureRecognizer)->Void)>()
+    private var beganAction:GestureProperty<ObserverBeganAction> = GestureProperty<ObserverBeganAction>()
+    private var movedAction:GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
+    private var endedAction:GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
+    private var cancelledAction:GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
+    private var moveView:GestureProperty<Bool> = GestureProperty<Bool>()
+    
+    /// Initializer
+    /// - Parameters:
+    ///   - minimumNumberOfTouches: The minimum number of fingers that can touch the view for gesture recognition.
+    ///   - maximumNumberOfTouches: The maximum number of fingers that can touch the view for gesture recognition.
+    ///   - onPanGesture: The action to handle the gesture recognized by the receiver.
     public init(minimumNumberOfTouches:Int = 1,
                 maximumNumberOfTouches:Int = Int(INT_MAX),
                 onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
