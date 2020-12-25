@@ -47,9 +47,8 @@ class row: View{
 }
 class DemoContentView: View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
-    @DataSource var items:[ArgoKitItem]?
+    @DataSource var items:[ArgoKitItem] = [ArgoKitItem]()
     public init(){
-        items = [ArgoKitItem]()
         for index in 1..<100 {
             let item:ArgoKitItem = ArgoKitItem()
             item.text = String(index * index)
@@ -60,7 +59,7 @@ class DemoContentView: View {
                 item.reuseIdentifier = "200"
             }
             item.identifier = "\(index)"
-            items?.append(item)
+            items.append(item)
         }
     }
     

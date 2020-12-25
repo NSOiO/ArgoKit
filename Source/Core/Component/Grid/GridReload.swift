@@ -7,7 +7,7 @@
 
 import Foundation
 //MARK: Reload
-extension Grid {
+extension Grid{
     
     @discardableResult
     public func reloadData() ->Self {

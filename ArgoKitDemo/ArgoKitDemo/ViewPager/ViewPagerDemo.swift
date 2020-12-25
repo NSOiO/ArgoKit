@@ -59,12 +59,11 @@ struct ViewPageCell: ArgoKit.View {
 
 struct ViewPage1 : ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
-    @DataSource var items:[ViewPageCellItem]?
+    @DataSource var items:[ViewPageCellItem] = [ViewPageCellItem]()
     init() {
-        items = [ViewPageCellItem]()
         for index in 1...5{
             let item = ViewPageCellItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
-            items?.append(item)
+            items.append(item)
             if index % 2 == 0 {
                 item.bgColor = UIColor.gray
             }else {

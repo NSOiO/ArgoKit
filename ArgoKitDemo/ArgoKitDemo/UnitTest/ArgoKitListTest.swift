@@ -51,15 +51,14 @@ struct ArgoKitListTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitListTestModel
-    @DataSource var models:[ArgoKitListTestModel]?
+    @DataSource var models:[ArgoKitListTestModel] = [ArgoKitListTestModel]()
     init(model: ArgoKitListTestModel) {
         self.model = model
-        models = [ArgoKitListTestModel]()
         for index in 1..<1000{
             let item = ArgoKitListTestModel()
             item.sessionName = String(index)
             item.unreadCount = String(index)
-            models?.append(item)
+            models.append(item)
         }
     }
     

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-extension List {
+extension List{
     public func reloadData() ->Self{
         tableNode.reloadData()
         return self

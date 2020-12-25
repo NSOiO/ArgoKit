@@ -8,17 +8,17 @@
 import Foundation
 
 class DataSourceHelper<D>{
-    
+    weak var _rootNode : DataSourceReloadNode?
     lazy var registedReuseIdSet = Set<String>()
 
     public var sectionDataSourceList:DataSource<SectionDataList<D>>?{
         didSet{
-            
+            sectionDataSourceList?._rootNode = _rootNode
         }
     }
     public var dataSourceList:DataSource<DataList<D>>?{
         didSet{
-           
+            dataSourceList?._rootNode = _rootNode
         }
     }
     public var nodeSourceList:DataSource<SectionDataList<ArgoKitNode>>?
@@ -110,7 +110,6 @@ extension DataSourceHelper {
             return nil
         }
         if let sourceData = self.dataSource()?[section][row]{
-            
             // MARK:数据源中存在重复的数据对象的兼容处理
             let indexPath = IndexPath(row: row, section: section)
             if let sourceData_ = sourceData as? ArgoKitIdentifiable,let indexPath_ =  sourceData_.indexpPath{
@@ -135,10 +134,6 @@ extension DataSourceHelper {
                 }
             }
         }
-        
-
-        
-
         return nil
     }
     
@@ -167,95 +162,16 @@ extension DataSourceHelper {
 
 // 数据操作
 extension DataSourceHelper {
-    
-    
-    func reloadSection(data: [D], section: Int) {
-        if section >= dataSource()?.count ?? 0 {
-            return
-        }
-        sectionDataSourceList!.wrappedValue?[section] = data
-    }
-    
-    func reloadRow(rowData: D, row: Int, at section: Int) {
-        if section >= dataSource()?.count ?? 0
-            || row >= dataSource()?[section].count ?? 0 {
-            return
-        }
-        
-        sectionDataSourceList!.wrappedValue?[section][row] = rowData
-    }
-    
-    func appendSections(_ data: [[D]]) {
-        if dataSource() == nil {
-            sectionDataSourceList!.wrappedValue? = data
-            return
-        }
+    func deleteRow(_ indexPath: IndexPath,with animation: UITableView.RowAnimation) {
 
-        sectionDataSourceList?.wrappedValue?.append(contentsOf: data)
-    }
-    
-    func appendRows(rowData: [D], at section: Int) {
-        
-        if dataSource() == nil {
-            sectionDataSourceList!.wrappedValue? = [rowData]
+        if indexPath.section >= dataSource()?.count ?? 0
+            || indexPath.row >= dataSource()?[indexPath.section].count ?? 0 {
             return
         }
-
-        if section >= dataSource()?.count ?? 0 {
-            sectionDataSourceList?.wrappedValue?.append(contentsOf: [rowData])
-            return
-        }
-        
-        sectionDataSourceList?.wrappedValue?[section].append(contentsOf: rowData)
-    }
-    
-    func insertSection(data: [D], section: Int) {
-        
-        if section >= dataSource()?.count ?? 0 {
-            appendSections([data])
-            return
-        }
-        sectionDataSourceList?.wrappedValue?.insert(data, at: section)
-    }
-    
-    func insertRow(rowData: D, row: Int, at section: Int) {
-        
-        if section >= dataSource()?.count ?? 0
-            || row >= dataSource()?[section].count ?? 0 {
-            appendRows(rowData: [rowData], at: section)
-            return
-        }
-        
-        sectionDataSourceList?.wrappedValue?[section].insert(rowData, at: row)
-    }
-    
-    func deleteRow(_ row: Int, at section: Int) {
-                
-        if section >= dataSource()?.count ?? 0
-            || row >= dataSource()?[section].count ?? 0 {
-            return
-        }
-        
-        sectionDataSourceList?.wrappedValue?[section].remove(at: row)
-    }
-    
-    //注释掉，不需要
-    func deleteSection(_ section: Int) {
-        sectionDataSourceList?.wrappedValue?.remove(at: section)
-    }
-        
-    func moveSection(_ section: Int, toSection newSection: Int) {
-        
-        if section >= dataSource()?.count ?? 0 {
-            return
-        }
-        
-        let itemToMove = dataSource()![section]
-        sectionDataSourceList?.wrappedValue?.remove(at: section)
-        if newSection > section {
-            sectionDataSourceList?.wrappedValue?.insert(itemToMove, at: newSection-1)
-        } else {
-            sectionDataSourceList?.wrappedValue?.insert(itemToMove, at: newSection)
+        if let list =  self.sectionDataSourceList {
+            list.deleteRow(at: indexPath, with: animation)
+        }else if let list = self.dataSourceList{
+            list.deleteRow(at: indexPath, with: animation)
         }
     }
     
@@ -267,13 +183,98 @@ extension DataSourceHelper {
             return
         }
         
-        let itemToMove = dataSource()![indexPath.section][indexPath.row]
-        sectionDataSourceList?.wrappedValue?[indexPath.section].remove(at: indexPath.row)
-        if indexPath.section != newIndexPath.section
-            || newIndexPath.row < indexPath.row {
-            sectionDataSourceList?.wrappedValue?[newIndexPath.section].insert(itemToMove , at: newIndexPath.row)
-        } else {
-            sectionDataSourceList?.wrappedValue?[newIndexPath.section].insert(itemToMove , at: newIndexPath.row-1)
+        if let list =  self.sectionDataSourceList {
+            list.moveRow(at: indexPath, to: newIndexPath)
+        }else if let list = self.dataSourceList{
+            list.moveRow(at: indexPath, to: newIndexPath)
         }
     }
+}
+// MARK:暂时不需要
+extension DataSourceHelper {
+    
+    
+//    func reloadSection(data: [D], section: Int) {
+//        if section >= dataSource()?.count ?? 0 {
+//            return
+//        }
+//        sectionDataSourceList!.wrappedValue[section] = data
+//    }
+//
+//    func reloadRow(rowData: D, row: Int, at section: Int) {
+//        if section >= dataSource()?.count ?? 0
+//            || row >= dataSource()?[section].count ?? 0 {
+//            return
+//        }
+//
+//        sectionDataSourceList!.wrappedValue[section][row] = rowData
+//    }
+//
+//    func appendSections(_ data: [[D]]) {
+//        if dataSource() == nil {
+//            sectionDataSourceList!.wrappedValue = data
+//            return
+//        }
+//
+//        sectionDataSourceList?.wrappedValue.append(contentsOf: data)
+//    }
+//
+//    func appendRows(rowData: [D], at section: Int) {
+//
+//        if dataSource() == nil {
+//            sectionDataSourceList!.wrappedValue = [rowData]
+//            return
+//        }
+//
+//        if section >= dataSource()?.count ?? 0 {
+//            sectionDataSourceList?.wrappedValue.append(contentsOf: [rowData])
+//            return
+//        }
+//
+//        sectionDataSourceList?.wrappedValue[section].append(contentsOf: rowData)
+//    }
+//
+//    func insertSection(data: [D], section: Int) {
+//
+//        if section >= dataSource()?.count ?? 0 {
+//            appendSections([data])
+//            return
+//        }
+//        sectionDataSourceList?.wrappedValue.insert(data, at: section)
+//    }
+//
+//    func insertRow(rowData: D, row: Int, at section: Int) {
+//
+//        if section >= dataSource()?.count ?? 0
+//            || row >= dataSource()?[section].count ?? 0 {
+//            appendRows(rowData: [rowData], at: section)
+//            return
+//        }
+//
+//        sectionDataSourceList?.wrappedValue[section].insert(rowData, at: row)
+//    }
+    
+
+    
+    //注释掉，不需要
+//    func deleteSection(_ section: Int) {
+//        sectionDataSourceList?.wrappedValue.remove(at: section)
+//    }
+//
+//    func moveSection(_ section: Int, toSection newSection: Int) {
+//
+//        if section >= dataSource()?.count ?? 0 {
+//            return
+//        }
+//
+//        let itemToMove = dataSource()![section]
+//        sectionDataSourceList?.wrappedValue.remove(at: section)
+//        if newSection > section {
+//            sectionDataSourceList?.wrappedValue.insert(itemToMove, at: newSection-1)
+//        } else {
+//            sectionDataSourceList?.wrappedValue.insert(itemToMove, at: newSection)
+//        }
+//    }
+    
+
 }

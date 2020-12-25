@@ -31,7 +31,7 @@ public class List<D>: ScrollView  {
         self.init(style: style)
         let container = content()
         if let nodes = container.type.viewNodes() {
-            tableNode.dataSourceHelper.nodeSourceList?.wrappedValue?.append(nodes)
+            tableNode.dataSourceHelper.nodeSourceList?.wrappedValue.append(nodes)
         }
     }
 

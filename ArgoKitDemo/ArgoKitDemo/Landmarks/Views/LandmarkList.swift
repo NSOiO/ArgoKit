@@ -17,17 +17,17 @@ struct LandmarkList: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     var toggleModel: ToggleRowModel
     @Alias var list: List<Landmark>? = nil
-    @DataSource var datas: [Landmark]?
+    @DataSource var datas: [Landmark] = [Landmark]()
     
     private var model: UserData
     init(model: UserData) {
         self.model = model
         self.toggleModel = ToggleRowModel()
         datas = [Landmark]()
-        self.datas?.append(contentsOf:model.landmarks)
+        self.datas.append(contentsOf:model.landmarks)
         self.toggleModel.action = { [self] isOn in
             self.toggleModel.isON = isOn
-            let datas = model.landmarks.filter { landmark -> Bool in
+            _ = model.landmarks.filter { landmark -> Bool in
                 landmark.isFavorite || !isOn
             }
 //            self.list?.reloadData(datas, sectionHeaderData: HeaderModel(), sectionFooterData: nil)
@@ -45,8 +45,9 @@ struct LandmarkList: ArgoKit.View {
             List(.grouped ,data: $datas) { landmark in
                 LandmarkRow(model: landmark)
                     .onTapGesture {
-                    self.datas?.append(contentsOf: model.landmarks)
-                    list?.reloadData()
+                    self.datas.append(contentsOf: model.landmarks)
+//                    list?.reloadData()
+                     $datas.reloadData()
                 }
             }
          
@@ -58,7 +59,7 @@ struct LandmarkList: ArgoKit.View {
 //                ToggleRow(model: self.toggleModel)
 //            }
             
-            .alias(variable: $list)
+//            .alias(variable: $list)
             
         }
         

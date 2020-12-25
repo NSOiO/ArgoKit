@@ -6,6 +6,29 @@
 //
 
 import Foundation
+
+@propertyWrapper
+public class GestureAction<Value>{
+    private var _value: Value?
+   
+    public init() {}
+    public init(wrappedValue value: Value?){
+        self._value = value
+    }
+    public var projectedValue: GestureAction<Value> {
+        return self
+    }
+    public var wrappedValue: Value? {
+        get {
+            return _value
+        }
+        set {
+            _value = newValue
+        }
+    }
+}
+    
+
 public protocol Gesture{
     var gesture:UIGestureRecognizer{get}
     var action:(UIGestureRecognizer)->Void{get}
@@ -52,7 +75,7 @@ public struct LongPressGesture:Gesture {
 
 
 public struct PanGesture:Gesture {
-    public typealias ObserverAction = ((_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void)?
+    public typealias ObserverAction = (_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void
     private var pAction:(UIGestureRecognizer)->Void
     public var action: (UIGestureRecognizer) -> Void{
         pAction
@@ -61,15 +84,17 @@ public struct PanGesture:Gesture {
     public var gesture: UIGestureRecognizer{
         pPanGesture
     }
+    @GestureAction var beganAction:ObserverAction?
     public init(minimumNumberOfTouches:Int = 1,
                 maximumNumberOfTouches:Int = Int(INT_MAX),
                 onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,
-                began:ObserverAction = nil,
-                moved:ObserverAction = nil,
-                ended: ObserverAction = nil,
-                cancelled:ObserverAction = nil){
-    
-        pAction = { gesture in
+                began:ObserverAction? = nil,
+                moved:ObserverAction? = nil,
+                ended: ObserverAction? = nil,
+                cancelled:ObserverAction? = nil){
+       
+        pAction = onAction()
+            { gesture in
             onPanGesture(gesture)
             if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
                 let location = gesture.translation(in: view)
@@ -78,6 +103,9 @@ public struct PanGesture:Gesture {
                 case .began:
                     if let began = began {
                         began(gesture,location,velocity)
+                    }
+                    if let beganAction_ = $beganAction.wrappedValue {
+                        beganAction_(gesture,location,velocity)
                     }
                     break
                 case .changed:
@@ -104,6 +132,12 @@ public struct PanGesture:Gesture {
         pPanGesture = UIPanGestureRecognizer()
         pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
         pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
+    }
+    func onAction(_ gesture:UIGestureRecognizer)->Void{
+        
+    }
+    func onbegan(_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void{
+        
     }
 }
 

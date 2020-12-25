@@ -23,15 +23,21 @@ class GridNode<D>: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,
                        GridDelegateFlowLayout,
-                       GridDelegateWaterfallLayout
+                       GridDelegateWaterfallLayout,
+                       DataSourceReloadNode
 {
-    
-    
+
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
     
-    lazy var dataSourceHelper = DataSourceHelper<D>()
+    lazy var dataSourceHelper: DataSourceHelper<D> = {
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        return _dataSourceHelper
+    }()
+    
+//    lazy var dataSourceHelper = DataSourceHelper<D>()
     lazy var headerSourceHelper =  DataSourceHelper<D>()
     lazy var footerSourceHelper = DataSourceHelper<D>()
     
@@ -187,11 +193,11 @@ class GridNode<D>: ArgoKitScrollViewNode,
     }
 
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
-        var items = self.dataSourceHelper.sectionDataSourceList?.wrappedValue?[sourceIndexPath.section]
+        var items = self.dataSourceHelper.sectionDataSourceList?.wrappedValue[sourceIndexPath.section]
         let temp = items?.remove(at: sourceIndexPath.item)
         items?.insert((temp)!, at: destinationIndexPath.item)
         if let items = items{
-            self.dataSourceHelper.sectionDataSourceList?.wrappedValue?[sourceIndexPath.section] = items
+            self.dataSourceHelper.sectionDataSourceList?.wrappedValue[sourceIndexPath.section] = items
         }
 
     }
@@ -522,14 +528,52 @@ class GridNode<D>: ArgoKitScrollViewNode,
         }
         return 1
     }
+    
+    
 }
 
 
 // MARK: reload data
 extension GridNode {
+    
     public func reloadData(){
         self.pGridView?.reloadData()
     }
+    
+    func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        self.pGridView?.insertSections(sections)
+    }
+    
+    func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        self.pGridView?.deleteSections(sections)
+    }
+    
+    func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        self.pGridView?.reloadSections(sections)
+    }
+    
+    func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        self.pGridView?.insertItems(at: indexPaths)
+    }
+    
+    func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        self.pGridView?.deleteItems(at:indexPaths)
+    }
+    
+    func deleteRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
+        self.pGridView?.deleteItems(at:[indexPath])
+    }
+
+    func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        self.pGridView?.reloadItems(at: indexPaths)
+    }
+    
+    func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        self.pGridView?.moveItem(at:indexPath,to: newIndexPath)
+    }
+    
+    
+    
     public func insertItems(at indexPaths: [IndexPath]){
         self.pGridView?.insertItems(at: indexPaths)
     }

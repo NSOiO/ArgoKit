@@ -41,10 +41,9 @@ struct  ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ListTestsModel
-    @DataSource var dataSource:DataList<ListTestsModel>?
+    @DataSource var dataSource:DataList<ListTestsModel> = [ListTestsModel()]
     init(model: ListTestsModel) {
         self.model = model
-        dataSource = [ListTestsModel()]
     }
     
 //    var cellDatas = [ListCellModel]()

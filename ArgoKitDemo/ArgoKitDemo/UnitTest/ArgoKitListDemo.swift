@@ -209,9 +209,8 @@ var footerView:RefreshFooterView?
 class ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
-    @DataSource var items:[SessionItem]?
+    @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
-        items = [SessionItem]()
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         for index in 1..<1000{
@@ -221,7 +220,7 @@ class ListDemo:ArgoKit.View{
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
-            items?.append(item)
+            items.append(item)
         }
     }
     

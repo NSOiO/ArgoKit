@@ -13,7 +13,7 @@ class ArgoKitGridTestModel {
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
     
-    @DataSource var dataSource1:[[ArgoKitGridCellTestModel]]?
+    @DataSource var dataSource1:[[ArgoKitGridCellTestModel]]? = [[ArgoKitGridCellTestModel]]()
     
     var dataSource = [[ArgoKitGridCellTestModel]]()
     @DataSource var headerSource:[ArgoKitGridCellTestModel]?
