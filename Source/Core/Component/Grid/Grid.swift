@@ -17,14 +17,6 @@ public class Grid<D>: ScrollView{
         super.init()
     }
     
-//    public convenience init(waterfall:Bool = false,data: D, @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:RandomAccessCollection,D.Element:ArgoKitIdentifiable{
-//        self.init()
-//        gridNode?.waterfall(waterfall)
-//        gridNode?.dataSourceHelper.dataSourceList = data
-//        gridNode?.dataSourceHelper.buildNodeFunc = { item in
-//            return rowContent(item)
-//        }
-//    }
     
     public convenience init(waterfall:Bool = false,@ArgoKitListBuilder content: @escaping () -> View) where D:ArgoKitNode{
         self.init()
@@ -44,10 +36,10 @@ public class Grid<D>: ScrollView{
         }
     }
     
-    public convenience init(waterfall:Bool = false,sectionData: DataSource<SectionDataList<D>>, @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
+    public convenience init(waterfall:Bool = false,data: DataSource<SectionDataList<D>>, @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
         self.init()
         gridNode?.waterfall(waterfall)
-        gridNode?.dataSourceHelper.sectionDataSourceList = sectionData
+        gridNode?.dataSourceHelper.sectionDataSourceList = data
         gridNode?.dataSourceHelper.buildNodeFunc = { item in
             return rowContent(item)
         }

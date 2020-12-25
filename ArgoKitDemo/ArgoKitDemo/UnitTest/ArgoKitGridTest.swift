@@ -13,16 +13,18 @@ class ArgoKitGridTestModel {
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
     
-    @DataSource var dataSource1:[[ArgoKitGridCellTestModel]]? = [[ArgoKitGridCellTestModel]]()
+    @DataSource var dataSource1:[[ArgoKitGridCellTestModel]] = [[ArgoKitGridCellTestModel]]()
+    
+    @DataSource var dataSource2:[ArgoKitGridCellTestModel] = [ArgoKitGridCellTestModel]()
     
     var dataSource = [[ArgoKitGridCellTestModel]]()
-    @DataSource var headerSource:[ArgoKitGridCellTestModel]?
+    @DataSource var headerSource:[ArgoKitGridCellTestModel] = [ArgoKitGridCellTestModel]()
     
     var page = 1
     
     init() {
-        dataSource1 = [[ArgoKitGridCellTestModel]]()
-        headerSource = [ArgoKitGridCellTestModel]()
+//        dataSource1 = [[ArgoKitGridCellTestModel]]()
+//        headerSource = [ArgoKitGridCellTestModel]()
         reloadMoreData()
     }
    
@@ -31,7 +33,7 @@ class ArgoKitGridTestModel {
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
-            headerSource?.append(headerModel)
+            headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
             for index in 0..<100{
@@ -39,8 +41,9 @@ class ArgoKitGridTestModel {
                 item.headerName = titiles[index%5]
                 item.imagePath = images[index%5]
                 subDataSource.append(item)
+                dataSource2.append(item)
             }
-            dataSource1?.append(subDataSource)
+            dataSource1.append(subDataSource)
            
         }
         page = page + 1
@@ -83,134 +86,7 @@ struct ArgoKitGridTest: ArgoKit.View {
     var body: ArgoKit.View {
        
         
-        Grid(){
-            Text("dsa")
-                .lineLimit(0)
-                .textAlign(.center)
-            
-            Image("icybay.jpg")
-                .aspect(ratio: 1)
-                .circle()
-                .onTapGesture {
-                  
-                }
-            Image("icybay.jpg")
-                .aspect(ratio: 1)
-                .circle()
-                .onTapGesture {
-                  
-                }
-            Image("icybay.jpg")
-                .aspect(ratio: 1)
-                .circle()
-                .onTapGesture {
-                  
-                }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                        .aspect(ratio: 1)
-                        .circle()
-                        .onTapGesture {
-                          
-                        }
-            Image("icybay.jpg")
-                            .aspect(ratio: 1)
-                            .circle()
-                            .onTapGesture {
-                              
-                            }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-                      
-                    }
-            Image("icybay.jpg")
-                        .aspect(ratio: 1)
-                        .circle()
-                        .onTapGesture {
-                          
-                        }
-            Image("icybay.jpg")
-                            .aspect(ratio: 1)
-                            .circle()
-                            .onTapGesture {
-                              
-                            }
-            Image("icybay.jpg")
-                                .aspect(ratio: 1)
-                                .circle()
-                                .onTapGesture {
-                                  
-                                }
-            
-        }
-        .grow(1.0)
-        .columnCount(3)
-        .columnSpacing(5)
-        .sectionHeader { () -> View in
-            Text("scsdcsd").backgroundColor(.yellow)
-        }
-       
-//        Grid(sectionData:model.$dataSource1){ data in
-//
+//        Grid(){
 //            Text("dsa")
 //                .lineLimit(0)
 //                .textAlign(.center)
@@ -221,13 +97,166 @@ struct ArgoKitGridTest: ArgoKit.View {
 //                .onTapGesture {
 //
 //                }
+//            Image("icybay.jpg")
+//                .aspect(ratio: 1)
+//                .circle()
+//                .onTapGesture {
+//
+//                }
+//            Image("icybay.jpg")
+//                .aspect(ratio: 1)
+//                .circle()
+//                .onTapGesture {
+//
+//                }
+//            Text("scsdcsd")
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Text("scsdcsd")
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Text("scsdcsd")
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                        .aspect(ratio: 1)
+//                        .circle()
+//                        .onTapGesture {
+//
+//                        }
+//            Image("icybay.jpg")
+//                            .aspect(ratio: 1)
+//                            .circle()
+//                            .onTapGesture {
+//
+//                            }
+//            Text("scsdcsd")
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                        .aspect(ratio: 1)
+//                        .circle()
+//                        .onTapGesture {
+//
+//                        }
+//            Image("icybay.jpg")
+//                            .aspect(ratio: 1)
+//                            .circle()
+//                            .onTapGesture {
+//
+//                            }
+//            Image("icybay.jpg")
+//                                .aspect(ratio: 1)
+//                                .circle()
+//                                .onTapGesture {
+//
+//                                }
 //
 //        }
-//        .alias(variable: $grid)
-       
 //        .grow(1.0)
 //        .columnCount(3)
 //        .columnSpacing(5)
+//        .sectionHeader { () -> View in
+//            Text("scsdcsd").backgroundColor(.yellow)
+//        }
+       
+        Grid(waterfall: true,data:model.$dataSource2){ data in
+
+            Text(data.headerName)
+                .lineLimit(0)
+                .textAlign(.center)
+
+            Image(data.imagePath)
+                .aspect(ratio: 1)
+                .circle()
+                .onTapGesture {
+
+                }
+
+        }
+//        .alias(variable: $grid)
+//
+        .grow(1.0)
+        .columnCount(3)
+        .columnSpacing(5)
+        .sectionHeader(data:model.$headerSource) { data -> View in
+            Text(data.headerName)
+                .textAlign(.center)
+                .backgroundColor(.gray)
+                .lineLimit(0)
+
+        }
+        .refreshFooterView { () -> RefreshFooterView in
+            RefreshFooterView {
+                model.reloadMoreData()
+                model.$dataSource2.reloadData()
+                footerView?.endRefreshing()
+                footerView?.resetNoMoreData()
+            } _: { () -> View in
+                Text("refresh_footer").backgroundColor(.red)
+                Image("chilkoottrail.jpg")
+                    .width(50)
+                    .aspect(ratio: 1)
+                    .circle()
+            }
+            .backgroundColor(.orange)
+            .alignItems(.center)
+            .alias(variable: $footerView)
+            .autoRefreshOffPage(3)
+        
+        }
         /*
 //        .lineSpacing(5)
 //        .layoutInset(top: 10, left:10, bottom: 10, right: 10)
@@ -244,13 +273,7 @@ struct ArgoKitGridTest: ArgoKit.View {
 //        .willBeginDragging {
 //
 //        }
-        .sectionHeader(data:model.$headerSource) { data -> View in
-            Text(data.headerName)
-                .textAlign(.center)
-                .backgroundColor(.gray)
-                .lineLimit(0)
-
-        }
+   
         .headersPinToVisibleBounds(true)
 //        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
 //            Text(data.headerName)
@@ -307,12 +330,13 @@ struct ArgoKitGridTest: ArgoKit.View {
             .alignItems(.center)
             .alias(variable: $footerView)
             .autoRefreshOffPage(3)
-        }
+        
+        } */
 //        .contentWidth(300)
 //        .scrollEnabled(true)
 //        .scrollDirection(UICollectionView.ScrollDirection.vertical)
 //        .showsScrollIndicator(true)
-         */
+        
 
     }
  

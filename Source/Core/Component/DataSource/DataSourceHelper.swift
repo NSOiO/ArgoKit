@@ -54,7 +54,6 @@ extension DataSourceHelper {
             return nodelist[section].count
         }
         if section < dataSource()?.count ?? 0 {
-            print("dataSource:\(dataSource()![section].count)")
             return dataSource()![section].count
         }
         return 0

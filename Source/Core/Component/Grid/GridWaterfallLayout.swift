@@ -343,9 +343,7 @@ public class GridWaterfallLayout: GridFlowLayout {
             ignorPrepare = true
             return false
         }
-        let result = newBounds.width != collectionView?.bounds.width
-        print("shouldInvalidateLayout:\(result)")
-        return result
+        return newBounds.width != collectionView?.bounds.width
     }
 
     /// Find the shortest column.
