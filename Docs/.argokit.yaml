@@ -1,0 +1,41 @@
+output: ArgoKit
+clean: true
+podspec: ../ArgoKit.podspec
+module: ArgoKit
+theme: fullwidth
+include:
+  - ../Source/Core/Gesture.swift
+  - ../Source/Core/UIHostingController.swift
+  - ../Source/Core/Basic/View.swift
+  - ../Source/Core/Basic/View.Animation.swift
+  - ../Source/Core/Basic/ViewLayout.swift
+  - ../Source/Core/Component/ActivityIndicatorView.swift
+  - ../Source/Core/Component/AlertView.swift
+  - ../Source/Core/Component/BlurEffectView.swift
+  - ../Source/Core/Component/Button.swift  
+  - ../Source/Core/Component/EmptyView.swift  
+  - ../Source/Core/Component/ForEach.swift
+  - ../Source/Core/Component/Grid/Grid.swift
+  - ../Source/Core/Component/HStack.swift 
+  - ../Source/Core/Component/Image.swift    
+  - ../Source/Core/Component/List/List.swift
+  - ../Source/Core/Component/Picker/DatePicker.swift 
+  - ../Source/Core/Component/Picker/PickerView.swift   
+  - ../Source/Core/Component/ProgressView.swift  
+  - ../Source/Core/Component/ScrollView/ScrollView.swift  
+  - ../Source/Core/Component/SegmenteControl.swift  
+  - ../Source/Core/Component/Slider.swift
+  - ../Source/Core/Component/Spacer.swift  
+  - ../Source/Core/Component/Stepper.swift  
+  - ../Source/Core/Component/TabSegment/TabSegment.swift  
+  - ../Source/Core/Component/Text.swift  
+  - ../Source/Core/Component/TextFiled/TextField.swift  
+  - ../Source/Core/Component/TextView/TextView.swift  
+  - ../Source/Core/Component/Toggle.swift  
+  - ../Source/Core/Component/ViewPage/ViewPage.swift  
+  - ../Source/Core/Component/VStack.swift  
+  - ../Source/AnimationKit/*
+exclude:
+  - ../Source/AnimationKit/ViewAnimation.swift
+
+

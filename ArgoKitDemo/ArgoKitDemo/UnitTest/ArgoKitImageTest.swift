@@ -35,11 +35,6 @@ struct ArgoKitImageTest: ArgoKit.View {
         }) {(view, x, y) in
            
         }
-        .onBegan { (gesture,location,velocity) in
-            print("moved:\(location):velocity:\(velocity)")
-            gesture.view?.center = CGPoint(x: (gesture.view?.center.x)! + location.x, y: (gesture.view?.center.y)! + location.y)
-            gesture.setTranslation(CGPoint.zero, in: gesture.view?.superview)
-        }
         Image("icybay.jpg")
             .height(100)
             .shrink(1)

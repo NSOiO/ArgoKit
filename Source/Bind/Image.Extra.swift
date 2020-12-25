@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 extension Image {
     public func image(_ value: Property<UIImage?>?) -> Self {
         return self.watch(property: value, function: self.image, key: #function)
@@ -15,3 +15,4 @@ extension Image {
         return self.watch(property: value, function: self.image, key: #function)
     }
 }
+*/

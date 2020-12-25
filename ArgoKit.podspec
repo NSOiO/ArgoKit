@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
   spec.name = 'ArgoKit'
-  spec.version = '1.0.5'
+  spec.version = '1.0.6'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
   spec.documentation_url = 'argokit'
@@ -15,7 +15,7 @@ podspec = Pod::Spec.new do |spec|
 
   spec.authors = 'MoMo'
   spec.source = {
-    :git => 'argokit',
+    :git => 'https://git.wemomo.com/module/argokit.git',
     :tag => spec.name + '/' + spec.version.to_s,
   }
 
@@ -30,16 +30,6 @@ podspec = Pod::Spec.new do |spec|
 #  spec.module_map = 'Source/module.modulemap'
   
   spec.libraries = 'z','c++'
-
-  spec.subspec "Core" do |ss|
-    ss.source_files = 'Source/Core/**/*.{h,m,mm}','Source/Core/**/*.{swift}'
-#    ss.private_header_files = 'ArgoKit/Source/*.h'
-    ss.public_header_files = 'ArgoKit/Source/*.h'
-  end
-  
-  spec.subspec "Bind" do |s|
-    s.source_files = 'Source/Bind/**/*.{swift}'
-  end
   
   spec.subspec 'AnimationKit' do |ani|
     ani.name = 'AnimationKit'
@@ -48,7 +38,19 @@ podspec = Pod::Spec.new do |spec|
 #    ani.public_header_files = 'Source/AnimationKit/*.h', 'Source/AnimationKit/MLAnimator/*.h', 'Source/AnimationKit/MLAnimator/Animations/*.h'
 #    ani.compiler_flags = '-x objective-c++'
   end
-
+  
+  spec.subspec "Bind" do |s|
+    s.source_files = 'Source/Bind/**/*.{swift}'
+  end
+  
+  spec.subspec "Core" do |ss|
+    ss.source_files = 'Source/Core/**/*.{h,m,mm}','Source/Core/**/*.{swift}'
+    ss.dependency 'ArgoKit/AnimationKit'
+    ss.dependency 'ArgoKit/Bind'
+#    ss.private_header_files = 'ArgoKit/Source/*.h'
+    ss.public_header_files = 'ArgoKit/Source/*.h'
+  end
+  
 end
 
 # See https://github.com/facebook/yoga/pull/366

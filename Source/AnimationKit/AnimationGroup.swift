@@ -53,14 +53,6 @@ public class AnimationGroup: AnimationBasic {
     }
     
     @discardableResult
-    public override func attach(_ view: View) -> Self {
-        if let actualView = view.node?.view {
-            attach(actualView)
-        }
-        return self
-    }
-    
-    @discardableResult
     public override func attach(_ view: UIView) -> Self {
         guard target == nil else {
             assertionFailure("You cann't attach an animaionGroup to multiple views.")

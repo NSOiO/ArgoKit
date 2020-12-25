@@ -1,12 +1,12 @@
 //
-//  View.bind.Swift
+//  View.Bind.swift
 //  ArgoKit
 //
-//  Created by Dai on 2020-11-06.
+//  Created by Dongpeng Dai on 2020/12/23.
 //
 
 import Foundation
-/*
+
 extension View {
     private func p_watch<R: View,V>(properties: Property<V>..., function:@escaping (V) -> R, key: String) {
         self.p_watch(properties: properties, function: function, key: key)
@@ -100,12 +100,3 @@ extension View {
 //    }
 //    object.node?.bindProperties.setObject(cancel, forKey: key as NSString)
 //}
-
-extension View {
-    @discardableResult
-    public func alias(variable: Alias<Self>) -> Self {
-        variable.wrappedValue = self
-        return self
-    }
-}
-*/

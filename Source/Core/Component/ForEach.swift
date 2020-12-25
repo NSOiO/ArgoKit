@@ -42,19 +42,26 @@ public struct ForEach:View{
 }
 */
 
-
-
-public struct ForEach<T>:View{
+/// A structure that computes views on demand from an underlying collection of of data.
+public struct ForEach<T>: View {
     var nodeContainer:[ArgoKitNode] = []
     private var nodeType:ArgoKitNodeType
-    public var node: ArgoKitNode?{
+    
+    /// The node behind the ForEach.
+    public var node: ArgoKitNode? {
         nil
     }
-    public var type: ArgoKitNodeType{
+    
+    /// The type of the node.
+    public var type: ArgoKitNodeType {
         nodeType
     }
     
-    public init(_ data:Array<T>?,@ArgoKitViewBuilder _ builder:@escaping (T?)->View) {
+    /// Initializer
+    /// - Parameters:
+    ///   - data: The data that the ForEach instance uses to create views dynamically.
+    ///   - builder: The view builder that creates views dynamically.
+    public init(_ data: Array<T>?, @ArgoKitViewBuilder _ builder: @escaping (T?) -> View) {
         if let datas = data {
             for item in datas {
                 let container = builder(item)
@@ -73,7 +80,11 @@ public struct ForEach<T>:View{
         }
     }
     
-    public init(_ range:T,@ArgoKitViewBuilder _ builder:@escaping (Int)->View) where T == Range<Int>{
+    /// Initializer
+    /// - Parameters:
+    ///   - range: A constant range.
+    ///   - builder: The view builder that creates views dynamically.
+    public init(_ range:T, @ArgoKitViewBuilder _ builder: @escaping (Int) -> View) where T == Range<Int> {
         for item in range {
             let container = builder(item)
             if let nodes = container.type.viewNodes() {

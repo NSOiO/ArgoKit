@@ -7,27 +7,38 @@
 
 import Foundation
 
-public struct HostView:View {
-    public var body: View{
+/// A ArgoKit view that manages a ArgoKit view hierarchy.
+public struct HostView: View {
+    private var pNode: ArgoKitNode
+    private var pView: UIView
+    
+    /// The content and behavior of the view.
+    public var body: View {
         ViewEmpty()
     }
-    private var pNode:ArgoKitNode
+    
+    /// The node behind the HostView.
     public var node: ArgoKitNode?{
         pNode
     }
+    
+    /// The type of the node.
     public var type: ArgoKitNodeType{
         .single(pNode)
     }
     
-    private var pView:UIView
-    init(){
+    init() {
         pView = UIView();
         pNode = ArgoKitNode(view: pView);
         pNode.column()
         pNode.flexGrow(1.0)
     }
     
-    public init(_ view:UIView = UIView(),@ArgoKitViewBuilder _ builder:()->View) {
+    /// Initializer
+    /// - Parameters:
+    ///   - view: A UIKit view that hosts a ArgoKit view hierarchy.
+    ///   - builder: A view builder that creates the content of this HostView.
+    public init(_ view: UIView = UIView(), @ArgoKitViewBuilder _ builder: () -> View) {
         pView = view
         pNode = ArgoKitNode(view:view);
         pNode.width(point: view.frame.size.width)
@@ -43,12 +54,11 @@ public struct HostView:View {
     }
 }
 
-
-
 public class UIHostingView:UIView{
     private var rootView:HostView?
     private var safeArea:Bool? = false
     private var oldFrame = CGRect.zero
+    
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
             oldFrame = self.frame
@@ -91,14 +101,13 @@ public class UIHostingView:UIView{
     }
 }
 
-
-open class UIHostingController:UIViewController{
+/// A UIKit view controller that manages a ArgoKit view hierarchy.
+open class UIHostingController: UIViewController {
     var frame:CGRect = CGRect.zero
     private var hostView:UIHostingView
     public init(rootView: View,safeArea:Bool = true){
         hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(nibName: nil, bundle: nil)
-        
     }
 
     public init?(coder aDecoder: NSCoder, rootView: View,safeArea:Bool = true){
@@ -131,10 +140,4 @@ open class UIHostingController:UIViewController{
         hostView.frame = self.view.bounds
         super.viewDidLayoutSubviews()
     }
-    
-    deinit {
-        print("deinit")
-    }
-
-    
 }
