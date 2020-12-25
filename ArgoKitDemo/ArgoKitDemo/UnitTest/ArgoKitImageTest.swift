@@ -23,24 +23,34 @@ struct ArgoKitImageTest: ArgoKit.View {
     
     var body: ArgoKit.View {
         let gesture = PanGesture(onPanGesture:{gesture in
-            
-        },began:{gesture,location,velocity in
-            print("began:\(location):velocity\(velocity)")
-        },moved:{gesture,location,velocity in
-            print("moved:\(location):velocity:\(velocity)")
-            gesture.view?.center = CGPoint(x: (gesture.view?.center.x)! + location.x, y: (gesture.view?.center.y)! + location.y)
-            gesture.setTranslation(CGPoint.zero, in: gesture.view?.superview)
-        
-        },ended: { (_, _, _) in
-        }) {(view, x, y) in
-           
+        }).onMoved { gesture,location,velocity in
+            print("moved111:\(location):velocity:\(velocity)")
+        }.onBegan {  gesture,location,velocity,direction in
+            switch(direction){
+            case .top:
+                print("上")
+                break
+            case .left:
+                print("左")
+                break
+            case .bottom:
+                print("下")
+                break
+            case .right:
+                print("右")
+                break
+            default:
+                break
+            }
         }
+        
         Image("icybay.jpg")
             .height(100)
             .shrink(1)
             .aspect(ratio: 1)
             .margin(edge: .top, value: 40)
-            .circle().gesture(gesture: gesture)
+            .circle()
+            .gesture(gesture: gesture)
 
         Image("icybay.jpg")
             .width(100)

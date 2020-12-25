@@ -360,11 +360,11 @@ extension Text{
 
 
 extension Text{
-    @available(*, deprecated, message: "Text does not support padding!")
+    @available(*, unavailable, message: "Text does not support padding!")
     public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return self
     }
-    @available(*, deprecated, message: "Text does not support padding!")
+    @available(*, unavailable, message: "Text does not support padding!")
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         return self
     }

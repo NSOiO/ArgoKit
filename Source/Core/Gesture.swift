@@ -75,70 +75,141 @@ public struct LongPressGesture:Gesture {
 
 
 public struct PanGesture:Gesture {
+    public enum PanGestureDirection {
+        case left
+        case right
+        case top
+        case bottom
+    }
+    
+    public typealias ObserverBeganAction = (_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint,_ direction:PanGestureDirection?)->Void
+    
     public typealias ObserverAction = (_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void
-    private var pAction:(UIGestureRecognizer)->Void
+    
+    private var pAction:((UIGestureRecognizer)->Void)?
     public var action: (UIGestureRecognizer) -> Void{
-        pAction
+        pAction!
     }
     private var pPanGesture:UIPanGestureRecognizer
     public var gesture: UIGestureRecognizer{
         pPanGesture
     }
-    @GestureAction var beganAction:ObserverAction?
+    var onGestureAction:GestureAction<((_ gesture:UIPanGestureRecognizer)->Void)> = GestureAction<((_ gesture:UIPanGestureRecognizer)->Void)>()
+    var beganAction:GestureAction<ObserverBeganAction> = GestureAction<ObserverBeganAction>()
+    var movedAction:GestureAction<ObserverAction> = GestureAction<ObserverAction>()
+    var endedAction:GestureAction<ObserverAction> = GestureAction<ObserverAction>()
+    var cancelledAction:GestureAction<ObserverAction> = GestureAction<ObserverAction>()
+    var moveView:GestureAction<Bool> = GestureAction<Bool>()
     public init(minimumNumberOfTouches:Int = 1,
                 maximumNumberOfTouches:Int = Int(INT_MAX),
-                onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void,
-                began:ObserverAction? = nil,
-                moved:ObserverAction? = nil,
-                ended: ObserverAction? = nil,
-                cancelled:ObserverAction? = nil){
-       
+                onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
+        pPanGesture = UIPanGestureRecognizer()
+        pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
+        pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
+        moveView.wrappedValue = false
+        onGestureAction.wrappedValue = onPanGesture
         pAction = onAction()
-            { gesture in
-            onPanGesture(gesture)
+       
+    }
+    func onAction()->((UIGestureRecognizer)->Void){
+        return {gesture in
             if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
+               
+                if let onPanGesture = onGestureAction.wrappedValue  {
+                    onPanGesture(gesture)
+                }
                 let location = gesture.translation(in: view)
                 let velocity = gesture.velocity(in: view)
                 switch gesture.state {
                 case .began:
-                    if let began = began {
-                        began(gesture,location,velocity)
-                    }
-                    if let beganAction_ = $beganAction.wrappedValue {
-                        beganAction_(gesture,location,velocity)
+                    let direction = moveDeriction(gesture)
+                    if let beganAction = beganAction.wrappedValue {
+                        beganAction(gesture,location,velocity,direction)
                     }
                     break
                 case .changed:
-                    if let moved = moved {
-                        moved(gesture,location,velocity)
+                    if let movedAction = movedAction.wrappedValue {
+                        movedAction(gesture,location,velocity)
+                    }
+                    if moveView.wrappedValue == true {
+                        gesture.view?.center = CGPoint(x: (gesture.view?.center.x)! + location.x, y: (gesture.view?.center.y)! + location.y)
+                        gesture.setTranslation(CGPoint.zero, in: gesture.view?.superview)
                     }
                     break
                 case .ended:
-                    if let ended = ended {
-                        ended(gesture,location,velocity)
+                    if let endedAction = endedAction.wrappedValue {
+                        endedAction(gesture,location,velocity)
                     }
                     break
                 case .cancelled:
-                    if let cancelled = cancelled {
-                        cancelled(gesture,location,velocity)
+                    if let cancelledAction = cancelledAction.wrappedValue {
+                        cancelledAction(gesture,location,velocity)
                     }
                     break
                 default:
                     break
                 }
             }
-
         }
-        pPanGesture = UIPanGestureRecognizer()
-        pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
-        pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
     }
-    func onAction(_ gesture:UIGestureRecognizer)->Void{
-        
+    
+    @discardableResult
+    public func onBegan(_ action:@escaping ObserverBeganAction)->Self{
+        beganAction.wrappedValue = action
+        return self
     }
-    func onbegan(_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void{
-        
+    @discardableResult
+    public func onMoved(_ action:@escaping ObserverAction)->Self{
+        movedAction.wrappedValue = action
+        return self
     }
+    @discardableResult
+    public func onEnded(_ action:@escaping ObserverAction)->Self{
+        endedAction.wrappedValue = action
+        return self
+    }
+    @discardableResult
+    public func onCancelled(_ action:@escaping ObserverAction)->Self{
+        cancelledAction.wrappedValue = action
+        return self
+    }
+    @discardableResult
+    public func enabelGragView(_ value:Bool)->Self{
+        moveView.wrappedValue = value
+        return self
+    }
+    
+    @discardableResult
+    private func moveDeriction(_ gesture:UIPanGestureRecognizer)->PanGestureDirection?{
+        if let view = gesture.view {
+            let transP = gesture.translation(in: view)
+            let velocityP  = gesture.velocity(in: view)
+                switch gesture.state {
+                case .began:
+                    if transP.y >= 0 && velocityP.y > 0{
+                        if abs(transP.x) <= abs(transP.y) {
+                            return .bottom
+                        }else if transP.x <= 0 && velocityP.x < 0{
+                            return .left
+                        }else{
+                            return .right
+                        }
+                    }else{
+                        if abs(transP.x) <= abs(transP.y){
+                            return .top
+                        }else if transP.x < 0 && velocityP.x < 0{
+                            return .left
+                        }else{
+                            return .right
+                        }
+                    }
+                default:
+                    break
+                }
+        }
+        return nil
+    }
+    
 }
 
 public struct PinchGesture:Gesture {

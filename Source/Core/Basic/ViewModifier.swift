@@ -194,8 +194,28 @@ extension View{
         return self;
     }
     
+    @available(*, unavailable, renamed: "gone(_:)")
     @discardableResult
     public func display(_ value:Bool)->Self{
+        let display_ = !value
+        addAttribute(#selector(setter:UIView.isHidden),display_)
+        if let enable = self.node?.isEnabled {
+            if !enable && !display_ {
+                if let node =  self.node?.root{
+                    self.node?.isEnabled = !display_
+                    ArgoKitReusedLayoutHelper.appLayout(node)
+                }
+            }else{
+                self.node?.isEnabled = !display_
+            }
+        }else{
+            self.node?.isEnabled = !display_
+        }
+      
+        return self;
+    }
+    @discardableResult
+    public func gone(_ value:Bool)->Self{
         let display_ = !value
         addAttribute(#selector(setter:UIView.isHidden),display_)
         if let enable = self.node?.isEnabled {
