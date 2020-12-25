@@ -105,12 +105,12 @@ public class UIHostingView:UIView{
 open class UIHostingController: UIViewController {
     var frame:CGRect = CGRect.zero
     private var hostView:UIHostingView
-    public init(rootView: View,safeArea:Bool = true){
+    public init(rootView: View,safeArea:Bool = false){
         hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(nibName: nil, bundle: nil)
     }
 
-    public init?(coder aDecoder: NSCoder, rootView: View,safeArea:Bool = true){
+    public init?(coder aDecoder: NSCoder, rootView: View,safeArea:Bool = false){
         hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(coder: aDecoder)
     }

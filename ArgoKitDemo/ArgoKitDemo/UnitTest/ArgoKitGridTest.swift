@@ -229,7 +229,9 @@ struct ArgoKitGridTest: ArgoKit.View {
 //
         .grow(1.0)
         .columnCount(3)
-        .columnSpacing(5)
+        .columnSpacing(10)
+        .lineSpacing(10)
+        .layoutInset(top: 0, left: 10, bottom: 0, right: 10)
         .sectionHeader(data:model.$headerSource) { data -> View in
             Text(data.headerName)
                 .textAlign(.center)
@@ -253,7 +255,7 @@ struct ArgoKitGridTest: ArgoKit.View {
             .backgroundColor(.orange)
             .alignItems(.center)
             .alias(variable: $footerView)
-            .autoRefreshOffPage(3)
+            .autoRefreshOffPage(2)
         
         }
         /*
