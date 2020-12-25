@@ -142,70 +142,73 @@ extension Grid{
         gridNode?.columnCount(value)
         return self
     }
-//    @discardableResult
-//    public func columCount(_ function:@escaping (_ section:Int)->Int) -> Self {
-//        let sel = #selector(gridNode?.collectionView(_:layout:columnCountFor:))
-//        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
-//            if paramter?.count ?? 0 >= 1,
-//               let count = paramter?.first as? Int{
-//               return function(count)
-//            }
-//            return nil
-//        })
-//        return self
-//    }
+    @discardableResult
+    public func columCount(_ function:@escaping (_ section:Int)->Int) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:columnCountFor:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
     @discardableResult
     public func columnSpacing(_ value:CGFloat) -> Self{
         gridNode?.columnSpacing(value)
         return self
     }
-//    @discardableResult
-//    public func columnSpacing(_ function:@escaping (_ section:Int)->CGFloat) -> Self {
-//        let sel = #selector(gridNode?.collectionView(_:layout:minimumInteritemSpacingForSectionAt:))
-//        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
-//            if paramter?.count ?? 0 >= 1,
-//               let count = paramter?.first as? Int{
-//               return function(count)
-//            }
-//            return nil
-//        })
-//        return self
-//    }
-//    @discardableResult
-//    public func lineSpacing(_ value:CGFloat) -> Self{
-//        gridNode?.lineSpacing(value)
-//        return self
-//    }
-//    @discardableResult
-//    public func lineSpacing(_ function:@escaping (_ section:Int)->CGFloat) -> Self {
-//        let sel = #selector(gridNode?.collectionView(_:layout:minimumLineSpacingForSectionAt:))
-//        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
-//            if paramter?.count ?? 0 >= 1,
-//               let count = paramter?.first as? Int{
-//               return function(count)
-//            }
-//            return nil
-//        })
-//        return self
-//    }
-//    @discardableResult
-//    public func layoutInset(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-//        let value = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
-//        gridNode?.sectionInset(value)
-//        return self
-//    }
-//    @discardableResult
-//    public func layoutInset(_ function:@escaping (_ section:Int)->UIEdgeInsets) -> Self {
-//        let sel = #selector(gridNode?.collectionView(_:layout:insetForSectionAt:))
-//        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
-//            if paramter?.count ?? 0 >= 1,
-//               let count = paramter?.first as? Int{
-//               return function(count)
-//            }
-//            return nil
-//        })
-//        return self
-//    }
+    @discardableResult
+    public func columnSpacing(_ function:@escaping (_ section:Int)->CGFloat) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:minimumInteritemSpacingForSectionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
+    @discardableResult
+    public func lineSpacing(_ value:CGFloat) -> Self{
+        gridNode?.lineSpacing(value)
+        return self
+    }
+    @discardableResult
+    public func lineSpacing(_ function:@escaping (_ section:Int)->CGFloat) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:minimumLineSpacingForSectionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    @discardableResult
+    public func layoutInset(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
+        let value = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        gridNode?.sectionInset(value)
+        return self
+    }
+    
+    @discardableResult
+    public func layoutInset(_ function:@escaping (_ section:Int)->UIEdgeInsets) -> Self {
+        let sel = #selector(gridNode?.collectionView(_:layout:insetForSectionAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 1,
+               let count = paramter?.first as? Int{
+               return function(count)
+            }
+            return nil
+        })
+        return self
+    }
+    
     @discardableResult
     public func headersPinToVisibleBounds(_ value:Bool) -> Self {
         gridNode?.sectionHeadersPinToVisibleBounds(value)
@@ -229,9 +232,4 @@ extension Grid{
         gridNode?.itemRenderDirection(value)
         return self
     }
-    
-
-    
-    
-    
 }
