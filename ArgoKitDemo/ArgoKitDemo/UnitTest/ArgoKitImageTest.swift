@@ -43,6 +43,7 @@ struct ArgoKitImageTest: ArgoKit.View {
                 break
             }
         }
+//        .enabelGragView(true)
         
         Image("icybay.jpg")
             .height(100)
