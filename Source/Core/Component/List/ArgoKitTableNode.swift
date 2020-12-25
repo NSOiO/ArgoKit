@@ -61,6 +61,9 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
         if #available(iOS 10.0, *) {
             tableView.prefetchDataSource = self
         }
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
         if tableHeaderNode != nil {
             tableHeaderNode?.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
             tableView.tableHeaderView = tableHeaderNode?.view

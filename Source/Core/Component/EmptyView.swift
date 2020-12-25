@@ -6,12 +6,18 @@
 //  单独的View，可用来绘制线条等
 
 import Foundation
-import Foundation
+
+/// Wrapper of UIView
+/// An object that manages the content for a rectangular area on the screen.
 public struct EmptyView: View {
     private let pNode:ArgoKitNode
-    public var node: ArgoKitNode?{
+    
+    /// The node behind the empty view.
+    public var node: ArgoKitNode? {
         pNode
     }
+    
+    /// Initializer
     public init() {
         pNode = ArgoKitNode(viewClass: UIView.self)
     }

@@ -29,14 +29,14 @@ class ArgoKitGridTestModel {
     }
    
     func reloadMoreData(){
-        for index in 0..<page {
+        for index in 0..<1 {
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
             headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for index in 0..<100{
+            for index in 0..<20{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = titiles[index%5]
                 item.imagePath = images[index%5]
@@ -84,7 +84,6 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-       
         
 //        Grid(){
 //            Text("dsa")

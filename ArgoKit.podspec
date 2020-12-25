@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
   spec.name = 'ArgoKit'
-  spec.version = '1.0.5'
+  spec.version = '1.0.6'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
   spec.documentation_url = 'argokit'
@@ -15,7 +15,7 @@ podspec = Pod::Spec.new do |spec|
 
   spec.authors = 'MoMo'
   spec.source = {
-    :git => 'argokit',
+    :git => 'https://git.wemomo.com/module/argokit.git',
     :tag => spec.name + '/' + spec.version.to_s,
   }
 
