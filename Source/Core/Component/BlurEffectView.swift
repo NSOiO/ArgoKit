@@ -24,7 +24,7 @@ public class BlurEffectView: View {
     public init(style:UIBlurEffect.Style, @ArgoKitViewBuilder _ builder:@escaping () -> View) {
         let blurEffect:UIBlurEffect = UIBlurEffect(style: style)
         pNode = ArgoKitNode(viewClass: UIVisualEffectView.self)
-        addSubNodes(builder:builder)
+        addSubViews(builder:builder)
         addAttribute(#selector(setter:UIVisualEffectView.effect), blurEffect)
     }
 }

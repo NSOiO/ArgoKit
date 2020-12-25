@@ -24,7 +24,7 @@ public class ScrollView: View {
     /// - Parameter builder: view builder used for ScrollView
     public convenience init(@ArgoKitViewBuilder builder:@escaping () -> View) {
         self.init()
-        addSubNodes(builder: builder)
+        addSubViews(builder: builder)
     }
     
     func createNode() {
