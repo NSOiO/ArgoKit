@@ -11,7 +11,7 @@ fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
 fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 
-public class ArgoKitTableView:UITableView{
+public class TableView:UITableView{
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
@@ -22,7 +22,7 @@ public class ArgoKitTableView:UITableView{
     }
 }
 
-class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
+class TableNode<D>: ArgoKitScrollViewNode,
                         UITableViewDelegate,
                         UITableViewDataSource,
                         UITableViewDataSourcePrefetching,
@@ -35,7 +35,6 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
         _dataSourceHelper._rootNode = self
         return _dataSourceHelper
     }()
-//    lazy var dataSourceHelper = DataSourceHelper<D>()
     lazy var sectionHeaderSourceHelper =  DataSourceHelper<D>()
     lazy var sectionFooterSourceHelper = DataSourceHelper<D>()
     
@@ -55,7 +54,7 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
     public var sectionIndexTitles: [String]?
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        let tableView = ArgoKitTableView(frame: frame, style: style)
+        let tableView = TableView(frame: frame, style: style)
         tableView.delegate = self
         tableView.dataSource = self
         if #available(iOS 10.0, *) {
@@ -98,10 +97,10 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
         
         let identifier = self.dataSourceHelper.reuseIdForRow(indexPath.row, at: indexPath.section) ?? kCellReuseIdentifier
         if !self.dataSourceHelper.registedReuseIdSet.contains(identifier) {
-            tableView.register(ArgoKitListCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(ListCell.self, forCellReuseIdentifier: identifier)
             self.dataSourceHelper.registedReuseIdSet.insert(identifier)
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ArgoKitListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
@@ -266,10 +265,10 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
 
         let identifier = "Header" + (self.sectionHeaderSourceHelper.reuseIdForRow(section, at: 0) ?? kHeaderReuseIdentifier)
         if !self.sectionHeaderSourceHelper.registedReuseIdSet.contains(identifier) {
-            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
+            tableView.register(HeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
             self.sectionHeaderSourceHelper.registedReuseIdSet.insert(identifier)
         }
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! ArgoKitListHeaderFooterView
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! HeaderFooterView
         if let node = sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
             header.linkCellNode(node)
         }
@@ -280,10 +279,10 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
 
         let identifier = "Footer" + (self.sectionFooterSourceHelper.reuseIdForRow(section, at: 0) ?? kFooterReuseIdentifier)
         if !self.sectionFooterSourceHelper.registedReuseIdSet.contains(identifier) {
-            tableView.register(ArgoKitListHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
+            tableView.register(HeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
             self.sectionFooterSourceHelper.registedReuseIdSet.insert(identifier)
         }
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! ArgoKitListHeaderFooterView
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! HeaderFooterView
         if let node = sectionFooterSourceHelper.nodeForRow(section, at: 0) {
             footer.linkCellNode(node)
         }
@@ -578,7 +577,7 @@ class ArgoKitTableNode<D>: ArgoKitScrollViewNode,
 
 
 
-extension ArgoKitTableNode {
+extension TableNode {
     public func reloadData(){
         if let tableView = self.tableView{
             tableView.reloadData()
@@ -646,7 +645,7 @@ extension ArgoKitTableNode {
     }
 }
 
-extension ArgoKitTableNode{
+extension TableNode{
     //    public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
     //
     //        if let data = data{

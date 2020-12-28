@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArgoKitListHeaderFooterView: UITableViewHeaderFooterView {
+class HeaderFooterView: UITableViewHeaderFooterView {
   
     var contentNode: ArgoKitCellNode?
       

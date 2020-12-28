@@ -192,7 +192,7 @@ extension List {
         
     @discardableResult
     public func canEditRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:canEditRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:canEditRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -208,7 +208,7 @@ extension List {
     
     @discardableResult
     public func canMoveRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:canMoveRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:canMoveRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -229,7 +229,7 @@ extension List {
     
     @discardableResult
     public func commitEditingRow(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:commit:forRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:commit:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 3,
                 let editingStyle = paramter?[0] as? UITableViewCell.EditingStyle,
@@ -244,7 +244,7 @@ extension List {
     
     @discardableResult
     public func moveRow(_ action: @escaping (_ sourceData: D, _ destinationData: D, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:moveRowAt:to:))
+        let sel = #selector(TableNode<D>.tableView(_:moveRowAt:to:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 4,
@@ -264,7 +264,7 @@ extension List {
     
     @discardableResult
     public func prefetchRows(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:prefetchRowsAt:))
+        let sel = #selector(TableNode<D>.tableView(_:prefetchRowsAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1,
@@ -278,7 +278,7 @@ extension List {
     
     @discardableResult
     public func cancelPrefetchingRows(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:cancelPrefetchingForRowsAt:))
+        let sel = #selector(TableNode<D>.tableView(_:cancelPrefetchingForRowsAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1,
@@ -296,7 +296,7 @@ extension List {
     
     @discardableResult
     public func willDisplayRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willDisplay:forRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:willDisplay:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -311,7 +311,7 @@ extension List {
 
     @discardableResult
     public func willDisplayHeaderView(_ action: @escaping (_ data: ArgoKitIdentifiable, _ section: Int) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willDisplayHeaderView:forSection:))
+        let sel = #selector(TableNode<D>.tableView(_:willDisplayHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -326,7 +326,7 @@ extension List {
 
     @discardableResult
     public func willDisplayFooterView(_ action: @escaping (_ data: ArgoKitIdentifiable, _ section: Int) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willDisplayFooterView:forSection:))
+        let sel = #selector(TableNode<D>.tableView(_:willDisplayFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -341,7 +341,7 @@ extension List {
 
     @discardableResult
     public func didEndDisplayingRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didEndDisplaying:forRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didEndDisplaying:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -356,7 +356,7 @@ extension List {
 
     @discardableResult
     public func didEndDisplayingHeaderView(_ action: @escaping (_ data: ArgoKitIdentifiable, _ section: Int) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didEndDisplayingHeaderView:forSection:))
+        let sel = #selector(TableNode<D>.tableView(_:didEndDisplayingHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -371,7 +371,7 @@ extension List {
 
     @discardableResult
     public func didEndDisplayingFooterView(_ action: @escaping (_ data: ArgoKitIdentifiable, _ section: Int) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didEndDisplayingFooterView:forSection:))
+        let sel = #selector(TableNode<D>.tableView(_:didEndDisplayingFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -386,7 +386,7 @@ extension List {
     
     @discardableResult
     public func shouldHighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:shouldHighlightRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:shouldHighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -401,7 +401,7 @@ extension List {
 
     @discardableResult
     public func didHighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didHighlightRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didHighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -416,7 +416,7 @@ extension List {
 
     @discardableResult
     public func didUnhighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didUnhighlightRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didUnhighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -431,7 +431,7 @@ extension List {
 
     @discardableResult
     public func willSelectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willSelectRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:willSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -446,7 +446,7 @@ extension List {
 
     @discardableResult
     public func willDeselectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willDeselectRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:willDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -461,7 +461,7 @@ extension List {
 
     @discardableResult
     public func didSelectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didSelectRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -476,7 +476,7 @@ extension List {
 
     @discardableResult
     public func didDeselectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didDeselectRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -491,7 +491,7 @@ extension List {
     
     @discardableResult
     public func editingStyle(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> UITableViewCell.EditingStyle) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:editingStyleForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:editingStyleForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -506,7 +506,7 @@ extension List {
 
     @discardableResult
     public func titleForDeleteConfirmationButton(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> String?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:titleForDeleteConfirmationButtonForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 ,
                let data = paramter?.first as? D,
@@ -521,7 +521,7 @@ extension List {
     @available(iOS, introduced: 8.0, deprecated: 13.0)
     @discardableResult
     public func editActions(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> [ListRowAction]?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:editActionsForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:editActionsForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -537,7 +537,7 @@ extension List {
     @available(iOS 11.0, *)
     @discardableResult
     public func leadingSwipeActions(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -553,7 +553,7 @@ extension List {
     @available(iOS 11.0, *)
     @discardableResult
     public func trailingSwipeActions(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -568,7 +568,7 @@ extension List {
 
     @discardableResult
     public func shouldIndentWhileEditingRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:shouldIndentWhileEditingRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:shouldIndentWhileEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -583,7 +583,7 @@ extension List {
 
     @discardableResult
     public func willBeginEditingRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willBeginEditingRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:willBeginEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -598,7 +598,7 @@ extension List {
 
     @discardableResult
     public func didEndEditingRow(_ action: @escaping (_ data: D?, _ indexPath: IndexPath?) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didEndEditingRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didEndEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -615,7 +615,7 @@ extension List {
 
     @discardableResult
     public func targetIndexPathForMove(_ action: @escaping (_ sourceData: D, _ proposedDestinationData: D, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))
+        let sel = #selector(TableNode<D>.tableView(_:targetIndexPathForMoveFromRowAt:toProposedIndexPath:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 4,
@@ -632,7 +632,7 @@ extension List {
 
     @discardableResult
     public func indentationLevel(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Int) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:indentationLevelForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:indentationLevelForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -648,7 +648,7 @@ extension List {
     @available(iOS, introduced: 5.0, deprecated: 13.0)
     @discardableResult
     public func shouldShowMenu(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:shouldShowMenuForRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:shouldShowMenuForRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -664,7 +664,7 @@ extension List {
     @available(iOS, introduced: 5.0, deprecated: 13.0)
     @discardableResult
     public func canPerformAction(_ action: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:canPerformAction:forRowAt:withSender:))
+        let sel = #selector(TableNode<D>.tableView(_:canPerformAction:forRowAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3,
@@ -685,7 +685,7 @@ extension List {
     @available(iOS, introduced: 5.0, deprecated: 13.0)
     @discardableResult
     public func performAction(_ action: @escaping (_ action: Selector, _ data: D, _ indexPath: IndexPath, _ sender: Any?) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:performAction:forRowAt:withSender:))
+        let sel = #selector(TableNode<D>.tableView(_:performAction:forRowAt:withSender:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3,
@@ -705,7 +705,7 @@ extension List {
 
     @discardableResult
     public func canFocusRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:canFocusRowAt:))
+        let sel = #selector(TableNode<D>.tableView(_:canFocusRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -720,7 +720,7 @@ extension List {
 
     @discardableResult
     public func shouldUpdateFocus(_ action: @escaping (_ context: UITableViewFocusUpdateContext) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:shouldUpdateFocusIn:))
+        let sel = #selector(TableNode<D>.tableView(_:shouldUpdateFocusIn:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1,
@@ -734,7 +734,7 @@ extension List {
 
     @discardableResult
     public func didUpdateFocus(_ action: @escaping (_ context: UITableViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didUpdateFocusIn:with:))
+        let sel = #selector(TableNode<D>.tableView(_:didUpdateFocusIn:with:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -749,7 +749,7 @@ extension List {
 
     @discardableResult
     public func indexPathForPreferredFocusedView(_ action: @escaping () -> IndexPath?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.indexPathForPreferredFocusedView(in:))
+        let sel = #selector(TableNode<D>.indexPathForPreferredFocusedView(in:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             return action()
@@ -760,7 +760,7 @@ extension List {
     @available(iOS 11.0, *)
     @discardableResult
     public func shouldSpringLoadRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:shouldSpringLoadRowAt:with:))
+        let sel = #selector(TableNode<D>.tableView(_:shouldSpringLoadRowAt:with:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3,
@@ -777,7 +777,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func shouldBeginMultipleSelectionInteraction(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:shouldBeginMultipleSelectionInteractionAt:))
+        let sel = #selector(TableNode<D>.tableView(_:shouldBeginMultipleSelectionInteractionAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -793,7 +793,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func didBeginMultipleSelectionInteraction(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:didBeginMultipleSelectionInteractionAt:))
+        let sel = #selector(TableNode<D>.tableView(_:didBeginMultipleSelectionInteractionAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
@@ -809,7 +809,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func didEndMultipleSelectionInteraction(_ action: @escaping () -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableViewDidEndMultipleSelectionInteraction(_:))
+        let sel = #selector(TableNode<D>.tableViewDidEndMultipleSelectionInteraction(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             action()
@@ -821,7 +821,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func contextMenuConfiguration(_ action: @escaping (_ data: D, _ indexPath: IndexPath, _ point: CGPoint) -> UIContextMenuConfiguration?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:contextMenuConfigurationForRowAt:point:))
+        let sel = #selector(TableNode<D>.tableView(_:contextMenuConfigurationForRowAt:point:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 3 ,
@@ -838,7 +838,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func previewForHighlightingContextMenu(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:previewForHighlightingContextMenuWithConfiguration:))
+        let sel = #selector(TableNode<D>.tableView(_:previewForHighlightingContextMenuWithConfiguration:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1,
@@ -853,7 +853,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func previewForDismissingContextMenu(_ action: @escaping (_ configuration: UIContextMenuConfiguration) -> UITargetedPreview?) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:previewForDismissingContextMenuWithConfiguration:))
+        let sel = #selector(TableNode<D>.tableView(_:previewForDismissingContextMenuWithConfiguration:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 1,
                let configuration = paramter?[0] as? UIContextMenuConfiguration{
@@ -867,7 +867,7 @@ extension List {
     @available(iOS 13.0, *)
     @discardableResult
     public func willPerformPreviewAction(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionCommitAnimating) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willPerformPreviewActionForMenuWith:animator:))
+        let sel = #selector(TableNode<D>.tableView(_:willPerformPreviewActionForMenuWith:animator:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -884,7 +884,7 @@ extension List {
     @available(iOS 14.0, *)
     @discardableResult
     public func willDisplayContextMenu(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willDisplayContextMenu:animator:))
+        let sel = #selector(TableNode<D>.tableView(_:willDisplayContextMenu:animator:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1,
@@ -903,7 +903,7 @@ extension List {
     @available(iOS 14.0, *)
     @discardableResult
     public func willEndContextMenuInteraction(_ action: @escaping (_ configuration: UIContextMenuConfiguration, _ animator: UIContextMenuInteractionAnimating?) -> Void) -> Self {
-        let sel = #selector(ArgoKitTableNode<D>.tableView(_:willEndContextMenuInteraction:animator:))
+        let sel = #selector(TableNode<D>.tableView(_:willEndContextMenuInteraction:animator:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 1,

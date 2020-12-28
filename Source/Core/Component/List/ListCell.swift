@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArgoKitListCell: UITableViewCell {
+class ListCell: UITableViewCell {
   
     var contentNode: ArgoKitCellNode?
     var tempNode: ArgoKitCellNode?

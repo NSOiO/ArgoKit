@@ -9,12 +9,12 @@ import Foundation
 
 public class List<D>: ScrollView  {
         
-    var tableNode: ArgoKitTableNode<D> {
-        pNode as! ArgoKitTableNode
+    var tableNode: TableNode<D> {
+        pNode as! TableNode
     }
     
     override func createNode() {
-        pNode = ArgoKitTableNode<D>(viewClass: UITableView.self)
+        pNode = TableNode<D>(viewClass: UITableView.self)
         pNode?.flexGrow(1.0)
     }
     
