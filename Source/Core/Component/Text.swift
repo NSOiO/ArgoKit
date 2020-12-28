@@ -120,15 +120,30 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
     }
 }
 
+/// The View Representing of text，is implemented based on UILabel.
+///
+///```
+///             Text("content..")
+///                 .font(size: 25)
+///                 .textColor(.white)
+///                 .lineLimit(0)
+///                 .lineSpacing(10)
+///                 .backgroundColor(.orange)
+///```
+///
 public struct Text:View {
     private let pNode:ArgoKitTextNode
+    /// the node behind of Text
     public var node: ArgoKitNode?{
         pNode
     }
-
+    
+    /// initialize the Text with emptry
     public init() {
         pNode = ArgoKitTextNode(viewClass:UILabel.self)
     }
+    /// initialize the Text with a string
+    /// - Parameter text: a string value
     public init(_ text:String?) {
         self.init()
         addAttribute(#selector(setter:UILabel.text),text)
@@ -136,6 +151,9 @@ public struct Text:View {
 }
 
 extension Text{
+    /// set content of the Text
+    /// - Parameter value: a string value
+    /// - Returns: Self
     @discardableResult
     public func text(_ value:String?)->Self{
         addAttribute(#selector(setter:UILabel.text),value)
@@ -143,6 +161,9 @@ extension Text{
         return self
     }
     
+    /// set the font of the receiver's text.
+    /// - Parameter value: a UIFont value
+    /// - Returns: Self
     @discardableResult
     public func font(_ value:UIFont!)->Self{
         addAttribute(#selector(setter:UILabel.font),value)
@@ -150,6 +171,22 @@ extension Text{
         return self
     }
     
+    /// Set the font of the receiver's text.
+    /// - Parameters:
+    ///   - name: font name
+    ///   - style: font style
+    ///   - size: font size
+    /// - Returns: Self
+    ///
+    /// ```
+    /// // value of AKFontStyle
+    /// public enum AKFontStyle{
+    ///     case `default`
+    ///     case bold
+    ///     case italic
+    ///     case bolditalic
+    /// }
+    /// ```
     @discardableResult
     public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
         pNode.fontName = name
@@ -161,6 +198,9 @@ extension Text{
         return self
     }
     
+    /// change the font name of the receiver's text
+    /// - Parameter value: font name
+    /// - Returns: Self
     @discardableResult
     public func font(name value:String?)->Self{
         pNode.fontName = value
@@ -170,6 +210,9 @@ extension Text{
         return self
     }
     
+    /// change the font size of the receiver's text
+    /// - Parameter value: font size
+    /// - Returns: Self
     @discardableResult
     public  func font(size value:CGFloat)->Self{
         pNode.fontSize = value
@@ -179,6 +222,19 @@ extension Text{
         return self
     }
     
+    /// change the font style of the receiver's text
+    /// - Parameter value: font style
+    /// - Returns:Self
+    ///
+    /// ```
+    /// // value of AKFontStyle
+    /// public enum AKFontStyle{
+    ///     case `default`
+    ///     case bold
+    ///     case italic
+    ///     case bolditalic
+    /// }
+    /// ```
     @discardableResult
     public func font(style value:AKFontStyle)->Self{
         pNode.fontStyle = value
@@ -188,6 +244,9 @@ extension Text{
         return self
     }
     
+    /// change the color of the text
+    /// - Parameter value: the new color
+    /// - Returns: Self
     @discardableResult
     public func textColor(_ value:UIColor!)->Self{
         addAttribute(#selector(setter:UILabel.textColor),value)
@@ -195,6 +254,13 @@ extension Text{
         return self
     }
     
+    /// change the rgba-color of the text.
+    /// - Parameters:
+    ///   - r: the red value of the color object, data range from 0 to 255.
+    ///   - g: the green value of the color object, data range from 0 to 255.
+    ///   - b: the blue value of the color object, data range from 0 to 255.
+    ///   - a: the opacity value of the color object, data range from 0 to 1.
+    /// - Returns: Self
     @discardableResult
     public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
@@ -202,6 +268,11 @@ extension Text{
         return self;
     }
     
+    /// change the rgba-color of the text
+    /// - Parameters:
+    ///   - hex: rgb color, ex: 0xaabbcc representing the red value is 0xaa, the green value is 0xbb and the blue value is 0xcc.
+    ///   - a: the opacity value of the color object, data range from 0 to 1.
+    /// - Returns: Self
     @discardableResult
     public func textColor(hex:Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
@@ -209,6 +280,22 @@ extension Text{
         return self;
     }
     
+    /// set the textAlign of the back UILabel object.
+    /// - Parameter value: new NSTextAlignment value
+    /// - Returns: Self
+    ///
+    ///```
+    ///public enum NSTextAlignment : Int {
+    ///    case left = 0 // Visually left aligned
+    ///    case center = 1 // Visually centered
+    ///    case right = 2 // Visually right aligned
+    ///    /* !TARGET_ABI_USES_IOS_VALUES */
+    ///    // Visually right aligned
+    ///    // Visually centered
+    ///    case justified = 3 // Fully-justified. The last line in a paragraph is natural-aligned.
+    ///    case natural = 4 // Indicates the default alignment for script
+    ///}
+    ///```
     @discardableResult
     public func textAlign(_ value:NSTextAlignment)->Self{
         addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
@@ -216,18 +303,31 @@ extension Text{
         return self
     }
     
+    /// set the shadow offset, in points, for the text
+    /// - Parameter value: new offset value
+    /// - Returns: Self
     @discardableResult
     public func textShadowOffset(_ value:CGSize)->Self{
         addAttribute(#selector(setter:UILabel.shadowOffset),value)
         return self
     }
     
+    /// set the shadow color for the text
+    /// - Parameter value: a new color
+    /// - Returns: Self
     @discardableResult
     public func textShadowColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:UILabel.shadowColor),value)
         return self
     }
     
+    /// set the shadow color for the text, the color is generated by the rgba value.
+    /// - Parameters:
+    ///   - r: red value of the color object, data range form 0 to 255
+    ///   - g: green value of the color object, data range form 0 to 255
+    ///   - b: blue value of the color object, data range form 0 to 255
+    ///   - a: opacity value of the color object, data range form 0 to 255
+    /// - Returns: Self
     @discardableResult
     public func textShadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
@@ -235,6 +335,11 @@ extension Text{
         return self;
     }
     
+    /// set the shadow color for the text, the color is generated by the rgba value.
+    /// - Parameters:
+    ///   - hex: rgb value of the color object, ex: 0xaabbcc representing red value is 0xaa, green value is 0xbb, blue value is 0xcc.
+    ///   - a: opaity value of the color object, data range from 0 to 1.
+    /// - Returns: Self
     @discardableResult
     public func textShadowColor(hex :Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
@@ -242,25 +347,53 @@ extension Text{
         return self;
     }
     
+    /// The technique for wrapping and truncating the label’s text. Call lineBreakMode of the UILabel directly.
+    /// - Parameter value: new line break mode
+    /// - Returns: Self
+    ///
+    ///```
+    ///public enum NSLineBreakMode : Int {
+    ///
+    ///    case byWordWrapping = 0 // Wrap at word boundaries, default
+    ///
+    ///    case byCharWrapping = 1 // Wrap at character boundaries
+    ///
+    ///    case byClipping = 2 // Simply clip
+    ///
+    ///    case byTruncatingHead = 3 // Truncate at head of line: "...wxyz"
+    ///
+    ///    case byTruncatingTail = 4 // Truncate at tail of line: "abcd..."
+    ///
+    ///    case byTruncatingMiddle = 5 // Truncate middle of line:  "ab...yz"
+    ///}
+    ///```
     @discardableResult
     public func breakMode(_ value:NSLineBreakMode)->Self{
         addAttribute(#selector(setter:UILabel.lineBreakMode),value.rawValue)
-        
         return self
     }
     
+    /// set the styled text that the label displays.
+    /// - Parameter value: new styled text
+    /// - Returns: Self
     @discardableResult
     public func attributedText(_ value:NSAttributedString?)->Self{
         pNode.attributedText(attri: value)
         return self
     }
     
+    /// set the highlight color for the text.
+    /// - Parameter value: new color
+    /// - Returns: Self
     @discardableResult
     public func highlightedTextColor(_ value:UIColor?)->Self{
         addAttribute(#selector(setter:UILabel.highlightedTextColor),value)
         return self
     }
     
+    /// set a Boolean value that determines whether the label draws its text with a highlight.
+    /// - Parameter value: a Boolean value
+    /// - Returns: Self
     @discardableResult
     public func isHighlighted(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.isHighlighted),value)
@@ -268,42 +401,73 @@ extension Text{
     }
     
     
+    /// Set A Boolean value that determines whether the system ignores and removes user events for this label from the event queue.
+    /// - Parameter value: a Boolean value
+    /// - Returns: Self
     @discardableResult
     public func userInteractionEnabled(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.isUserInteractionEnabled),value)
         return self
     }
+    /// set a Boolean value that determines whether the back label draws its text in an enabled state.
+    /// - Parameter value: a Boolean value
+    /// - Returns: Self
     public func isEnabled(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.isEnabled),value)
         return self
     }
     
+    /// Set the maximum number of lines for rendering text. 0 representing unlimited.
+    /// - Parameter value: new maximum number of lines.
+    /// - Returns: Self
     @discardableResult
     public func lineLimit(_ value:Int)->Self{
         addAttribute(#selector(setter:UILabel.numberOfLines),value)
         return self
     }
     
+    ///  The distance in points between the bottom of one line fragment and the top of the next.
+    /// - Parameter value: new points value
+    /// - Returns: Self
     @discardableResult
     public func lineSpacing(_ value:CGFloat)->Self{
         pNode.lineSpacing(value)
         return self
     }
     
+    /// A Boolean value that determines whether the label reduces the text’s font size to fit the title string into the label’s bounding rectangle.
+    /// - Parameter value: a new Boolean value
+    /// - Returns: Self
     @discardableResult
     public func adjustsFontSizeToFitWidth(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.adjustsFontSizeToFitWidth),value)
         return self
     }
     
-    // default is UIBaselineAdjustmentAlignBaselines
+    /// An option that controls whether the text's baseline remains fixed when text needs to shrink to fit in the label.
+    /// - Parameter value: new option
+    /// - Returns: Self
+    /// 
+    ///```
+    ///public enum UIBaselineAdjustment : Int {
+    ///
+    ///    case alignBaselines = 0 // default. used when shrinking text to position based on the original baseline
+    ///
+    ///    case alignCenters = 1
+    ///
+    ///    case none = 2
+    ///}
+    ///```
     @discardableResult
     public func baselineAdjustment(_ value:UIBaselineAdjustment)->Self{
         addAttribute(#selector(setter:UILabel.baselineAdjustment),value)
         return self
     }
 
-
+    
+    /// The minimum scale factor for the label’s text.
+    /// - Parameter value: scale factor
+    /// - Returns: Self
     @available(iOS 6.0, *)
     @discardableResult
     public func minimumScaleFactor(_ value:CGFloat)->Self{
@@ -311,9 +475,12 @@ extension Text{
         return self
     }
 
-    
-    // Tightens inter-character spacing in attempt to fit lines wider than the available space if the line break mode is one of the truncation modes before starting to truncate.
-    // The maximum amount of tightening performed is determined by the system based on contexts such as font, line width, etc.
+    /// A Boolean value that determines whether the label tightens text before truncating.
+    ///
+    /// When the value of this property is true, the label tightens intercharacter spacing of its text before allowing any truncation to occur. The label determines the maximum amount of tightening automatically based on the font, current line width, line break mode, and other relevant information. This autoshrinking behavior is only intended for use with a single-line label.
+    /// The default value of this property is false.
+    /// - Parameter value: new Boolean value
+    /// - Returns: Self
     @available(iOS 9.0, *)
     @discardableResult
     public func allowsDefaultTighteningForTruncation(_ value:Bool)->Self{
@@ -321,19 +488,23 @@ extension Text{
         return self
     }
 
-    
-    // Specifies the line break strategies that may be used for laying out the text in this// label.
-    // If this property is not set, the default value is NSLineBreakStrategyStandard.
-    // If the label contains an attributed text with paragraph style(s) that specify a set of line break strategies, the set of strategies in the paragraph style(s) will be used instead of the set of strategies defined by this property.
-    
+    /// A Boolean value that determines whether the label tightens text before truncating.
+    ///
+    /// When the value of this property is true, the label tightens intercharacter spacing of its text before allowing any truncation to occur. The label determines the maximum amount of tightening automatically based on the font, current line width, line break mode, and other relevant information. This autoshrinking behavior is only intended for use with a single-line label.
+    /// The default value of this property is false.
+    /// - Parameter value: a new Boolean value.
+    /// - Returns: Self
     @discardableResult
     public func lineBreakStrategy(_ value:NSParagraphStyle.LineBreakStrategy)->Self{
         addAttribute(#selector(setter:UILabel.allowsDefaultTighteningForTruncation),value)
         return self
     }
 
-    // override points. can adjust rect before calling super.
-    // label has default content mode of UIViewContentModeRedraw
+    /// Returns the drawing rectangle for the label’s text. call textRect of the back label object directly.
+    /// - Parameters:
+    ///   - bounds: The bounding rectangle of the label.
+    ///   - numberOfLines: The maximum number of lines to use for the label. The value 0 indicates the label has no maximum number of lines and the rectangle should encompass all of the text.
+    /// - Returns: Self
     public func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect{
         if let label = self.node?.view as? UILabel {
             return label.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines);
@@ -341,14 +512,18 @@ extension Text{
         return CGRect.zero
     }
     
+    /// Draws the label’s text, or its shadow, in the specified rectangle.
+    /// - Parameter rect: The bounding rectangle of the label.
+    /// - Returns: Self
     @discardableResult
     public func drawText(in rect: CGRect)->Self{
         addAttribute(#selector(UILabel.drawText(in:)),[rect])
         return self
     }
 
-    // Support for constraint-based layout (auto layout)
-    // If nonzero, this is used when determining -intrinsicContentSize for multiline labels
+    /// The preferred maximum width, in points, for a multiline label.
+    /// - Parameter value: new value
+    /// - Returns: Self
     @available(iOS 6.0, *)
     @discardableResult
     public func preferredMaxLayoutWidth(in value: CGFloat)->Self{

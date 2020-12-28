@@ -7,9 +7,20 @@
 
 import UIKit
 
+/// The container that align children from top to bottom.
+/// same as the `flex-direction: column` in flexbox layout.
+///
+///```
+///     VStack {
+///         Text("1")
+///         Text("2")
+///         Text("3")
+///     }
+///```
 public class VStack:View {
   
     private var pNode:ArgoKitNode
+    /// the node behind the VStack
     public var node: ArgoKitNode?{
         pNode
     }
@@ -17,6 +28,16 @@ public class VStack:View {
         pNode = ArgoKitNode(viewClass:UIView.self);
     }
     
+    /// initalize the VStack with view builder.
+    /// - Parameter builder: view builder.
+    /// 
+    ///```
+    ///     VStack {
+    ///         Text("1")
+    ///         Text("2")
+    ///         Text("3")
+    ///     }
+    ///```
     public init(@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = ArgoKitNode(viewClass: UIView.self)
         pNode.column()

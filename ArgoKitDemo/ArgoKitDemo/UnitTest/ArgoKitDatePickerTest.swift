@@ -22,7 +22,7 @@ struct ArgoKitDatePickerTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
         DatePicker{ date in
             print("\(date)")
         }
