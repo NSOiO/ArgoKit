@@ -39,7 +39,6 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
             }
 
              
-            
              VStack{
                  HStack{
                     HStack{

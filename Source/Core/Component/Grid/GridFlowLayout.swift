@@ -79,17 +79,26 @@ public class GridFlowLayout:UICollectionViewFlowLayout{
     }
     
     public func columnCount(forSection section: Int) -> Int {
-//        if let delegate = collectionView?.delegate as? GridNode {
-//            return delegate.collectionView(collectionView!, layout: self, columnCountFor: section)
-//        }
+        if let delegate = collectionView?.delegate as? GridDelegateWaterfallLayout {
+            return delegate.collectionView(collectionView!, layout: self, columnCountFor: section)
+        }
+        
+        if let delegate = collectionView?.delegate as? GridDelegateFlowLayout {
+            return delegate.collectionView(collectionView!, layout: self, columnCountFor: section)
+        }
         return columnCount
     }
 
     public func collectionViewContentWidth(ofSection section: Int) -> CGFloat {
-//        if let delegate = collectionView?.delegate as? GridNode {
-//            let insets = delegate.collectionView(collectionView!, layout: self, insetForSectionAt: section)
-//            return contentWidth - insets.left - insets.right
-//        }
+        if let delegate = collectionView?.delegate as? GridDelegateWaterfallLayout {
+            let insets = delegate.collectionView(collectionView!, layout: self, insetForSectionAt: section)
+            return contentWidth - insets.left - insets.right
+        }
+        
+        if let delegate = collectionView?.delegate as? GridDelegateFlowLayout {
+            let insets = delegate.collectionView!(collectionView!, layout: self, insetForSectionAt: section)
+            return contentWidth - insets.left - insets.right
+        }
         return contentWidth - sectionInset.left - sectionInset.right
     }
     

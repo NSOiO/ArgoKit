@@ -14,7 +14,6 @@ public class DataSource<Value>{
     weak var _rootNode : DataSourceReloadNode?
     private var _value: Value
    
-//    public init() {}
     public init(wrappedValue value: Value){
         self._value = value
     }
@@ -41,47 +40,6 @@ public class DataSource<Value>{
         }
         return [[]]
     }
-    
-    
-    /*
-    if let value = _value as? SectionDataList<Any> {
-        for subValue in value {
-            if let item = subValue as? DataList<Any>{
-                for iv in item {
-                    if let item = iv  as? ArgoKitIdentifiable {
-                        property_getName(model: item)
-                    }
-                }
-            }
-        }
-    }
-    if let value = _value as? DataList<Any>{
-        for iv in value {
-            if let item = iv  as? ArgoKitIdentifiable {
-                property_getName(model: item)
-            }
-        }
-    }
-     
-    func property_getName(model:ArgoKitIdentifiable){
-        while true {
-            var count: UInt32 = 0;
-            var cls: AnyClass? = object_getClass(model);
-            let ivarList = class_copyIvarList(cls, &count);
-            for i in 0..<count {
-                let ivarName = ivar_getName(ivarList![Int(i)])
-                let key = String(cString: ivarName!)
-                debugPrint(key)
-            }
-            if let superCls = cls?.superclass(), superCls.self != NSObject.self {
-                   cls = superCls
-                } else {
-                    break
-                }
-        }
-       
-    }
-     */
     
     public func reloadData(){
         if let node = self._rootNode{
