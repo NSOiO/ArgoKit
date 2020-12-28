@@ -23,9 +23,12 @@ struct ArgoKitImageTest: ArgoKit.View {
     
     var body: ArgoKit.View {
         let gesture = PanGesture(onPanGesture:{gesture in
-        }).onMoved { gesture,location,velocity in
+            
+        })
+        .onMoved { gesture,location,velocity in
             print("moved111:\(location):velocity:\(velocity)")
-        }.onBegan {  gesture,location,velocity,direction in
+        }
+        .onBegan {  gesture,location,velocity,direction in
             switch(direction){
             case .top:
                 print("上")

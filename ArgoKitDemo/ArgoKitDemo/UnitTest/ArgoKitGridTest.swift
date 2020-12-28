@@ -17,14 +17,11 @@ class ArgoKitGridTestModel {
     
     @DataSource var dataSource2:[ArgoKitGridCellTestModel] = [ArgoKitGridCellTestModel]()
     
-    var dataSource = [[ArgoKitGridCellTestModel]]()
     @DataSource var headerSource:[ArgoKitGridCellTestModel] = [ArgoKitGridCellTestModel]()
     
     var page = 1
     
     init() {
-//        dataSource1 = [[ArgoKitGridCellTestModel]]()
-//        headerSource = [ArgoKitGridCellTestModel]()
         reloadMoreData()
     }
    
