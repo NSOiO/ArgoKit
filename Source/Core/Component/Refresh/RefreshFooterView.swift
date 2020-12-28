@@ -8,13 +8,14 @@
 import Foundation
 class RefreshFooterNode:ArgoKitNode{
 
-    var refreshingBlock: (() -> ())?
+    var refreshingBlock: ((RefreshFooter?) -> ())?
     var offPage:CGFloat?
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        let refreshFooterView:ArgoKitRefreshFooter = ArgoKitRefreshAutoFooter.footerWithRefreshingBlock {  [weak self] in
+        let refreshFooterView:RefreshFooter = ArgoKitRefreshAutoFooter()
+        refreshFooterView.setrefreshingBlock { [weak self] in
             if let startRefresh = self?.refreshingBlock{
-                startRefresh()
+                startRefresh(refreshFooterView)
             }
         }
         let width = frame.size.width
@@ -28,8 +29,8 @@ class RefreshFooterNode:ArgoKitNode{
         refreshFooterView.triggerAutomaticallyRefreshOffPages = offPage ?? 0
         return refreshFooterView
     }
-    func refreshFooter() -> ArgoKitRefreshFooter?{
-        if let refreshFooter = self.view as? ArgoKitRefreshFooter{
+    func refreshFooter() -> RefreshFooter?{
+        if let refreshFooter = self.view as? RefreshFooter{
            return refreshFooter
         }
         return nil
@@ -54,7 +55,7 @@ public class RefreshFooterView: View {
     public var node: ArgoKitNode?{
         pNode
     }
-    public init(startRefreshing:(() -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
+    public init(startRefreshing:((RefreshFooter?) -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
         pNode = RefreshFooterNode(viewClass: ArgoKitRefreshAutoFooter.self)
         pNode?.refreshingBlock = startRefreshing
         addSubViews(builder:builder)

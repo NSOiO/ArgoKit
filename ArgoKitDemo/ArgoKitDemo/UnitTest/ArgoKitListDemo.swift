@@ -238,7 +238,7 @@ class ListDemo:ArgoKit.View{
             .show()
         }
         .refreshHeaderView {
-            RefreshHeaderView(startRefreshing: {
+            RefreshHeaderView(startRefreshing: {_ in 
                 headerView?.endRefreshing()
             })
             {
@@ -252,7 +252,7 @@ class ListDemo:ArgoKit.View{
             .height(100.0)
         }
         .refreshFooterView{
-            RefreshFooterView(startRefreshing: {
+            RefreshFooterView(startRefreshing: {_ in 
                 print("footerhead")
             })
             {

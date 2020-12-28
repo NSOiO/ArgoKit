@@ -6,7 +6,7 @@
 //
 
 import Foundation
-open class ArgoKitRefreshFooter: ArgoKitRefreshComponent {
+open class RefreshFooter: RefreshComponent {
     ///忽略多少scrollView的contentInset的bottom
     public var ignoredScrollViewContentInsetBottom: CGFloat = 0
     
@@ -26,7 +26,7 @@ open class ArgoKitRefreshFooter: ArgoKitRefreshComponent {
     }
     
     //MARK: - 创建footer方法
-    public class func footerWithRefreshingBlock(_ refreshingBlock: Block) -> ArgoKitRefreshFooter {
+    public class func footerWithRefreshingBlock(_ refreshingBlock: Block) -> RefreshFooter {
         
         let cmp = self.init()
         cmp.refreshingBlock = refreshingBlock
@@ -34,15 +34,15 @@ open class ArgoKitRefreshFooter: ArgoKitRefreshComponent {
     }
 }
 
-extension ArgoKitRefreshFooter {
+extension RefreshFooter {
     override open func prepare() {
         super.prepare()
         // 设置自己的高度
-        argokit_height = ArgoKitRefreshConst.footerHeight
+        argokit_height = RefreshConst.footerHeight
     }
 }
 //MARK: - 公共方法
-extension ArgoKitRefreshFooter {
+extension RefreshFooter {
     public func endRefreshingWithNoMoreData() {
         DispatchQueue.main.async {[weak self] in
             self?.state = .NoMoreData
@@ -56,7 +56,7 @@ extension ArgoKitRefreshFooter {
 }
 
 
-open class ArgoKitRefreshAutoFooter: ArgoKitRefreshFooter {
+open class ArgoKitRefreshAutoFooter: RefreshFooter {
     
     ///当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新)
     public var triggerAutomaticallyRefreshPercent: CGFloat = 1.0

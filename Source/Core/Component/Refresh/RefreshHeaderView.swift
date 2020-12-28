@@ -9,14 +9,20 @@ import Foundation
 
 class RefreshHeaderNode:ArgoKitNode{
 
-    var refreshingBlock: (() -> ())?
+    var refreshingBlock: ((RefreshHeader?) -> ())?
     
     var pullingDownBlock: ((_ contentOffset:CGPoint?) -> ())?
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        let refreshHeaderView:ArgoKitRefreshHeader = ArgoKitRefreshHeader.headerWithRefreshingBlock { [weak self] in
+//        let refreshHeaderView:RefreshHeader = RefreshHeader.headerWithRefreshingBlock { [weak self] in
+//            if let startRefresh = self?.refreshingBlock{
+//                startRefresh()
+//            }
+//        }
+        let refreshHeaderView:RefreshHeader = RefreshHeader()
+        refreshHeaderView.setrefreshingBlock {[weak self] in
             if let startRefresh = self?.refreshingBlock{
-                startRefresh()
+                startRefresh(refreshHeaderView)
             }
         }
         let width = self.width()
@@ -32,8 +38,8 @@ class RefreshHeaderNode:ArgoKitNode{
         
         return refreshHeaderView
     }
-    func refreshHeader() -> ArgoKitRefreshHeader?{
-        if let refreshHeader = self.view as? ArgoKitRefreshHeader  {
+    func refreshHeader() -> RefreshHeader?{
+        if let refreshHeader = self.view as? RefreshHeader  {
            return refreshHeader
         }
         return nil
@@ -51,8 +57,8 @@ public class RefreshHeaderView: View {
     public var node: ArgoKitNode?{
         pNode
     }
-    public init(startRefreshing:(() -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = RefreshHeaderNode(viewClass: ArgoKitRefreshHeader.self)
+    public init(startRefreshing:((RefreshHeader?) -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
+        pNode = RefreshHeaderNode(viewClass: RefreshHeader.self)
         pNode?.refreshingBlock = startRefreshing
         addSubViews(builder:builder)
     }

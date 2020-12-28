@@ -21,7 +21,7 @@ public enum ArgoKitRefreshState: Int {
     case NoMoreData
 }
 
-open class ArgoKitRefreshComponent: UIView {
+open class RefreshComponent: UIView {
     public typealias Block = (() -> ())?
    
     //MARK: - 刷新回调
@@ -54,6 +54,9 @@ open class ArgoKitRefreshComponent: UIView {
         }
     }
     
+    public func setrefreshingBlock(_ value:Block){
+        self.refreshingBlock = value
+    }
     //MARK: - 交给子类去访问
     /// 记录scrollView刚开始的inset
     var scrollViewOriginalInset: UIEdgeInsets?
@@ -139,7 +142,7 @@ open class ArgoKitRefreshComponent: UIView {
     }
 }
 
-extension ArgoKitRefreshComponent {
+extension RefreshComponent {
     //MARK: - 刷新状态控制
     /// 进入刷新状态
     @objc public func beginRefreshing() {
@@ -179,7 +182,7 @@ extension ArgoKitRefreshComponent {
     }
 }
 //MARK: - 交给子类们去实现
-extension ArgoKitRefreshComponent {
+extension RefreshComponent {
     ///初始化
     @objc open func prepare() {
         // 基本属性
@@ -212,18 +215,18 @@ extension ArgoKitRefreshComponent {
     }
 }
 //MARK: - KVO监听
-extension ArgoKitRefreshComponent {
+extension RefreshComponent {
     func addObservers() {
         let options: NSKeyValueObservingOptions = [.new, .old]
-        scrollView?.addObserver(self, forKeyPath: ArgoKitRefreshKeyPath.contentOffset, options: options, context: nil)
-        scrollView?.addObserver(self, forKeyPath: ArgoKitRefreshKeyPath.contentSize, options: options, context: nil)
+        scrollView?.addObserver(self, forKeyPath: RefreshKeyPath.contentOffset, options: options, context: nil)
+        scrollView?.addObserver(self, forKeyPath: RefreshKeyPath.contentSize, options: options, context: nil)
         pan = scrollView?.panGestureRecognizer
-        pan?.addObserver(self, forKeyPath: ArgoKitRefreshKeyPath.panState, options: options, context: nil)
+        pan?.addObserver(self, forKeyPath: RefreshKeyPath.panState, options: options, context: nil)
     }
     func removeObservers() {
-        superview?.removeObserver(self, forKeyPath: ArgoKitRefreshKeyPath.contentOffset)
-        superview?.removeObserver(self, forKeyPath: ArgoKitRefreshKeyPath.contentSize)
-        pan?.removeObserver(self, forKeyPath: ArgoKitRefreshKeyPath.panState)
+        superview?.removeObserver(self, forKeyPath: RefreshKeyPath.contentOffset)
+        superview?.removeObserver(self, forKeyPath: RefreshKeyPath.contentSize)
+        pan?.removeObserver(self, forKeyPath: RefreshKeyPath.panState)
         pan = nil
     }
     
@@ -235,16 +238,16 @@ extension ArgoKitRefreshComponent {
         }
         
         // 这个就算看不见也需要处理
-        if keyPath == ArgoKitRefreshKeyPath.contentSize {
+        if keyPath == RefreshKeyPath.contentSize {
             scrollViewContentSizeDidChange(change)
         }
         //看不见
         if isHidden {
             return
         }
-        if keyPath == ArgoKitRefreshKeyPath.contentOffset {
+        if keyPath == RefreshKeyPath.contentOffset {
             scrollViewContentOffsetDidChange(change)
-        } else if keyPath == ArgoKitRefreshKeyPath.panState {
+        } else if keyPath == RefreshKeyPath.panState {
             scrollViewPanStateDidChange(change)
         }
     }
@@ -252,7 +255,7 @@ extension ArgoKitRefreshComponent {
 
 //MARK: - 公共方法
 //MARK: - 设置回调对象和回调方法
-extension ArgoKitRefreshComponent {
+extension RefreshComponent {
     /// 设置回调对象和回调方法
     func setRefreshing(_ target: Any?, _ action: Selector?) {
         refreshingTarget = target

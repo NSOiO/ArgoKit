@@ -237,11 +237,11 @@ struct ArgoKitGridTest: ArgoKit.View {
 
         }
         .refreshFooterView { () -> RefreshFooterView in
-            RefreshFooterView {
+            RefreshFooterView {refresh in
                 model.reloadMoreData()
                 model.$dataSource2.reloadData()
-                footerView?.endRefreshing()
-                footerView?.resetNoMoreData()
+                refresh?.endRefreshing()
+                refresh?.resetNoMoreData()
             } _: { () -> View in
                 Text("refresh_footer").backgroundColor(.red)
                 Image("chilkoottrail.jpg")

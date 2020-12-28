@@ -6,10 +6,10 @@
 //
 
 import Foundation
-open class ArgoKitRefreshHeader: ArgoKitRefreshComponent {
+open class RefreshHeader: RefreshComponent {
     
     //MARK: - 创建header方法
-    public class func headerWithRefreshingBlock(_ refreshingBlock: Block) -> ArgoKitRefreshHeader {
+    public class func headerWithRefreshingBlock(_ refreshingBlock: Block) -> RefreshHeader {
         
         let cmp = self.init()
         cmp.refreshingBlock = refreshingBlock
@@ -48,7 +48,7 @@ open class ArgoKitRefreshHeader: ArgoKitRefreshComponent {
                 UserDefaults.standard.synchronize()
                 
                 // 恢复inset和offset
-                UIView.animate(withDuration: ArgoKitRefreshConst.slowAnimationDuration, animations: {
+                UIView.animate(withDuration: RefreshConst.slowAnimationDuration, animations: {
                     self.scrollView?.argokit_insetTop += self.insetTDelta ?? 0
                     // 自动调整透明度
                     if self.automaticallyChangeAlpha ?? false {
@@ -61,7 +61,7 @@ open class ArgoKitRefreshHeader: ArgoKitRefreshComponent {
             } else if newState == .Refreshing {
                 DispatchQueue.main.async { [weak self] in
                     guard let `self` = self, let scrollViewOriginalInset = self.scrollViewOriginalInset, let scrollView = self.scrollView else {return}
-                    UIView.animate(withDuration: ArgoKitRefreshConst.fastAnimationDuration, animations: {
+                    UIView.animate(withDuration: RefreshConst.fastAnimationDuration, animations: {
                         let top = scrollViewOriginalInset.top + self.argokit_height
                         // 增加滚动区域top
                         scrollView.argokit_insetTop = top
@@ -82,13 +82,13 @@ open class ArgoKitRefreshHeader: ArgoKitRefreshComponent {
 }
 
 //MARK: - 覆盖父类的方法
-extension ArgoKitRefreshHeader {
+extension RefreshHeader {
     override open func prepare() {
         super.prepare()
         // 设置key
         lastUpdatedTimeKey = ArgoKitRefreshHead.lastUpdateTimeKey
         // 设置高度
-        argokit_height = ArgoKitRefreshConst.headerHeight
+        argokit_height = RefreshConst.headerHeight
     }
     override open func placeSubviews() {
         super.placeSubviews()
