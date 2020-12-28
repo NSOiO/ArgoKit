@@ -35,7 +35,7 @@ public struct TextField : View {
 extension TextField {
     /// set the text that text field displays.
     /// - Parameter value: new string vaue.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func text(_ value: String?) -> Self {
         addAttribute(#selector(setter:UITextField.text),value)
@@ -44,7 +44,7 @@ extension TextField {
     
     /// set the styled text that text field displays.
     /// - Parameter value: new styled text
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func attributedText(_ value: NSAttributedString?) -> Self {
         addAttribute(#selector(setter:UITextField.attributedText),value)
@@ -52,7 +52,7 @@ extension TextField {
     }
     /// change the color of the text
     /// - Parameter value: the new color
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textColor(_ value: UIColor?) -> Self {
         addAttribute(#selector(setter:UITextField.textColor),value)
@@ -62,7 +62,7 @@ extension TextField {
     
     /// change the font of the text.
     /// - Parameter value: new font value.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func font(_ value: UIFont?) -> Self {
         addAttribute(#selector(setter:UITextField.font),value)
@@ -74,7 +74,7 @@ extension TextField {
     ///   - name: font name
     ///   - style: font style
     ///   - size: font size
-    /// - Returns: Self
+    /// - Returns: self
     ///
     /// ```
     /// // value of AKFontStyle
@@ -96,7 +96,7 @@ extension TextField {
     
     /// change the font name of the receiver's text
     /// - Parameter value: font name
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func font(name value:String?)->Self{
         pNode.fontName = value
@@ -105,7 +105,7 @@ extension TextField {
     }
     /// change the font size of the receiver's text
     /// - Parameter value: font size
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public  func font(size value:CGFloat)->Self{
         pNode.fontSize = value
@@ -136,7 +136,7 @@ extension TextField {
     ///
     /// This value is nil by default. The placeholder string is drawn using a system-defined color.
     /// - Parameter value: new string value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func placeholder(_ value: String?) -> Self {
         addAttribute(#selector(setter:UITextField.placeholder),value)
@@ -146,7 +146,7 @@ extension TextField {
     
     /// The color for the placeholder string
     /// - Parameter value: a new color
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func placeholderColor(_ value: UIColor?) -> Self {
         pNode.placeholderColor = value
@@ -158,7 +158,7 @@ extension TextField {
     ///
     /// This property is nil by default. If set, the placeholder string is drawn using system-defined color and the remaining style information (except the text color) of the attributed string. Assigning a new value to this property also replaces the value of the placeholder property with the same string data, albeit without any formatting information. Assigning a new value to this property does not affect any other style-related properties of the text field.
     /// - Parameter value: a new styled string.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func attributedPlaceholder(_ value: NSAttributedString?) -> Self {
         addAttribute(#selector(setter:UITextField.attributedPlaceholder),value)
@@ -170,7 +170,7 @@ extension TextField {
     /// This property applies to the both main text string and the placeholder string. The default value os this property is NSTextAlignment.Left.
     /// If you are using styled text, assigning a new value to this property causes the text alignment to be applied to the entire string int the attributedText peoperty. If you want to apply the alignment to only a portion of the text, create a new attributed string with the desired style infomation and associate it with the text field.
     /// - Parameter value:a new 
-    /// - Returns: Self
+    /// - Returns: self
     ///
     /// ```
     ///    public enum NSTextAlignment : Int {
@@ -228,7 +228,7 @@ extension TextField {
     /// Setting this property applies the specified attributes to the entire text of the text field. Unset attributes maintain their default values.
     /// Getting this property returns the previously set attributes, which may have been modified by setting properties such as font and textColor.
     /// - Parameter value: a new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func defaultTextAttributes(_ value: [NSAttributedString.Key : Any]) -> Self {
         addAttribute(#selector(setter:UITextField.defaultTextAttributes),value)
@@ -243,7 +243,7 @@ extension TextField {
     ///
     ///Even if this property is set to true, the text field delegate can override this behavior by returning false from its textFieldShouldClear(_:) method.
     /// - Parameter value: a new Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func clearsOnBeginEditing(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextField.clearsOnBeginEditing),value)
@@ -256,7 +256,7 @@ extension TextField {
     ///
     /// The default value for this property is false. If you change it to true, you should also set an appropriate minimum font size by modifying the minimumFontSize property.
     /// - Parameter value: a new Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func adjustsFontSizeToFitWidth(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextField.adjustsFontSizeToFitWidth),value)
@@ -271,7 +271,7 @@ extension TextField {
     ///
     ///If you are using styled text in iOS 6 or later, assigning a new value to this property causes the minimum font size to be applied to the entirety of the string in the attributedText property. If you want to apply different minimum font sizes to different parts of your string, create a new attributed string with the desired style information and associate it with the text field.
     /// - Parameter value: a new size
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func minimumFontSize(_ value: CGFloat) -> Self {
         addAttribute(#selector(setter:UITextField.minimumFontSize),value)
@@ -282,7 +282,7 @@ extension TextField {
     ///
     /// A text field delegate responds to editing-related messages from the text field. You can use the delegate to respond to the text entered by the user and to some special commands, such as when the user taps Return.
     /// - Parameter value: a new delegate
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func delegate(_ value: UITextFieldDelegate?) -> Self {
         addAttribute(#selector(setter:UITextField.delegate),value)
@@ -295,7 +295,7 @@ extension TextField {
     ///
     /// This property is set to nil by default.
     /// - Parameter value: a new background
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func background(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UITextField.background),value)
@@ -308,7 +308,7 @@ extension TextField {
     ///
     /// This property is set to nil by default.
     /// - Parameter value: a new image or nil
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func disabledBackground(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UITextField.disabledBackground),value)
@@ -321,7 +321,7 @@ extension TextField {
     ///
     /// The default value of this property is false
     /// - Parameter value: a new Boolean value.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func allowsEditingTextAttributes(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextField.allowsEditingTextAttributes),value)
@@ -334,7 +334,7 @@ extension TextField {
     ///
     /// If the text field is not in editing mode, this property contains the value nil. Similarly, you cannot assign a value to this property unless the text field is currently in editing mode.
     /// - Parameter value: a new attributes
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func typingAttributes(_ value: [NSAttributedString.Key : Any]?) -> Self {
         addAttribute(#selector(setter:UITextField.typingAttributes),value)
@@ -347,7 +347,7 @@ extension TextField {
     ///
     /// The default value for this property is UITextField.ViewMode.never.
     /// - Parameter value: a new view mode
-    /// - Returns: Self
+    /// - Returns: self
     /// 
     /// ```
     ///public enum ViewMode : Int {
@@ -455,7 +455,7 @@ extension TextField {
     /// The default value of this property is nil. Assigning a view to this property causes that view to be displayed above the standard system keyboard (or above the custom input view if one is provided) when the text field becomes the first responder. For example, you could use this property to attach a custom toolbar to the keyboard.
     ///
     /// - Parameter content: a new view
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func inputAccessoryView(_ content:()->View) -> Self {
         let inAcView = content()
@@ -473,7 +473,7 @@ extension TextField {
     ///
     /// The default value of this property is false. When the value of this property is true and the text field is in editing mode, the selection UI is hidden and inserting new text clears the contents of the text field and sets the value of this property back to false.
     /// - Parameter value: a new Boolean value.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func clearsOnInsertion(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UITextField.clearsOnInsertion),value)
@@ -502,7 +502,7 @@ extension TextField {
     
     /// Tells the callback when editing begins in the specified text field.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didBeginEditing(_ action: @escaping (_ text: String?) -> Void) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldDidBeginEditing(_:))
@@ -519,7 +519,7 @@ extension TextField {
     
     /// Asks the callback whether to stop editing in the specified text field.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func shouldEndEditing(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldEndEditing(_:))
@@ -536,7 +536,7 @@ extension TextField {
     
     /// Tells the callback when editing stops for the specified text field, and the reason it stopped.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 10.0, *)
     @discardableResult
     public func didEndEditing(_ action: @escaping (_ text: String?, _ reason: UITextField.DidEndEditingReason) -> Void) -> Self {
@@ -555,7 +555,7 @@ extension TextField {
     
     /// Asks the callback whether to change characters.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func shouldChangeCharacters(_ action: @escaping (_ text: String?, _ range: NSRange, _ replacementString: String) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textField(_:shouldChangeCharactersIn:replacementString:))
@@ -574,7 +574,7 @@ extension TextField {
     
     /// Tells the callback when the text selection changes in the specified text field.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 13.0, *)
     @discardableResult
     public func didChangeSelection(_ action: @escaping (_ text: String?) -> Void) -> Self {
@@ -592,7 +592,7 @@ extension TextField {
     
     /// Asks the callback whether to remove the text field’s current contents.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func shouldClear(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldClear(_:))
@@ -609,7 +609,7 @@ extension TextField {
     
     /// Asks the callback whether to process the pressing of the Return button for the text field.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func shouldReturn(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldReturn(_:))
@@ -635,7 +635,7 @@ extension TextField{
     ///   - right: right side value
     ///   - bottom: bottom side value
     ///   - left: left side value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return padding(edge: .top, value: top)
@@ -648,7 +648,7 @@ extension TextField{
     /// - Parameters:
     ///   - edge: a ArgoEdge value.
     ///   - value: a ArgoValue value.
-    /// - Returns: Self
+    /// - Returns: self
     ///
     ///```
     ///public enum ArgoEdge{
@@ -670,7 +670,6 @@ extension TextField{
     ///    case percent(CGFloat)
     ///}
     ///```
-    
     @discardableResult
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         switch edge {

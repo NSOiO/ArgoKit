@@ -72,7 +72,7 @@ extension PickerView {
     ///
     /// Calling this method causes the picker view to query the delegate for new data for all components.
     /// - Parameter data: the new data source
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func reloadAllComponents(_ data: [[T]]?) -> Self {
         pNode.reloadAllComponents(data)
@@ -85,7 +85,7 @@ extension PickerView {
     /// - Parameters:
     ///   - data: the new data source
     ///   - component: A zero-indexed number identifying a component of the picker view.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func reloadComponent(_ data: [Any]?, inComponent component: Int) -> Self {
         pNode.reloadComponent(data, inComponent:component)
@@ -98,7 +98,7 @@ extension PickerView {
     ///   - row: A zero-indexed number identifying a row of component.
     ///   - component: A zero-indexed number identifying a component of the picker view.
     ///   - animated: true to animate the selection by spinning the wheel (component) to the new value; if you specify false, the new selection is shown immediately.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func selectRow(_ row: Int, inComponent component: Int, animated: Bool) -> Self {
         pickerView.selectRow(row, inComponent: component, animated: animated)
@@ -107,7 +107,7 @@ extension PickerView {
     
     /// set the callback called when the row is selected
     /// - Parameter action: the callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didSelectRow(_ action: @escaping (_ data: T, _ row: Int, _ component: Int) -> Void) -> Self {
         self.pNode.observeAction(pickerView) { target, paramter in
