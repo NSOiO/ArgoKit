@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import SwiftUI
 import ArgoKit
-
 //var host: UIHostingController?
 var hostView: HostView?
 var current_tables = [UITableView: (UITableViewDataSource & UITableViewDelegate)]()
@@ -44,7 +43,7 @@ public struct ArgoRender: UIViewRepresentable {
     }
     */
     
-    static func createView(_ content: View) -> UIView {
+    static func createView(_ content: ArgoKit.View) -> UIView {
         let ss = UIScreen.main.bounds.size
         let view = UIHostingView(content: content, frame: .init(origin: .zero, size: ss))
 //        view.backgroundColor = .lightGray

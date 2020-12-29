@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
     spec.name = 'ArgoKitPreview'
-    spec.version = '1.0.7'
+    spec.version = '1.0.8'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
     # spec.documentation_url = 'argokit'
@@ -28,9 +28,9 @@ podspec = Pod::Spec.new do |spec|
     spec.dependency 'ArgoKitComponent'
     
     spec.module_name = 'ArgoKitPreview'
-    spec.source_files = "Source/Preview/**/*.{h,m,mm,swift}"
+    spec.source_files = "Source/Preview/src/**/*.{h,m,mm,swift}"
 #    spec.resources = ['Source/Script/**/*']
-    spec.resources = ['Source/Script/*']
+    spec.resources = ['Source/Script/*', 'Source/Preview/*.swift']
     spec.prepare_command = <<-CMD
         path=./Source//Script/config.sh
         if [ -f "$path" ]; then

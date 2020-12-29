@@ -144,9 +144,9 @@ public struct Text:View {
     }
     /// initialize the Text with a string
     /// - Parameter text: a string value
-    public init(_ text:String?) {
+    public init(_ text:@escaping @autoclosure () -> String?) {
         self.init()
-        addAttribute(#selector(setter:UILabel.text),text)
+        self.text(text())
     }
 }
 
@@ -155,20 +155,22 @@ extension Text{
     /// - Parameter value: a string value
     /// - Returns: self
     @discardableResult
-    public func text(_ value:String?)->Self{
-        addAttribute(#selector(setter:UILabel.text),value)
-        pNode.handleLineSpacing()
-        return self
+    public func text(_ value:@escaping @autoclosure () -> String?)->Self{
+        return self.bindCallback({
+            addAttribute(#selector(setter:UILabel.text),value())
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// set the font of the receiver's text.
     /// - Parameter value: a UIFont value
     /// - Returns: self
     @discardableResult
-    public func font(_ value:UIFont!)->Self{
-        addAttribute(#selector(setter:UILabel.font),value)
-        pNode.handleLineSpacing()
-        return self
+    public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
+        return self.bindCallback({
+            addAttribute(#selector(setter:UILabel.font),value())
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// Set the font of the receiver's text.
@@ -188,38 +190,44 @@ extension Text{
     /// }
     /// ```
     @discardableResult
-    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
-        pNode.fontName = name
-        pNode.fontSize = size
-        pNode.fontStyle = style
-        let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
+        return self.bindCallback({
+            let f_name = name(), f_size = size(), f_style = style()
+            pNode.fontName = f_name
+            pNode.fontSize = f_size
+            pNode.fontStyle = f_style
+            let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the font name of the receiver's text
     /// - Parameter value: font name
     /// - Returns: self
     @discardableResult
-    public func font(name value:String?)->Self{
-        pNode.fontName = value
-        let font = UIFont.font(fontName: value, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public func font(name value: @escaping @autoclosure () -> String?)->Self{
+        return self.bindCallback({
+            let f_name = value()
+            pNode.fontName = f_name
+            let font = UIFont.font(fontName: f_name, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the font size of the receiver's text
     /// - Parameter value: font size
     /// - Returns: self
     @discardableResult
-    public  func font(size value:CGFloat)->Self{
-        pNode.fontSize = value
-        let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: value)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
+        return self.bindCallback({
+            let f_size = value()
+            pNode.fontSize = f_size
+            let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: f_size)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the font style of the receiver's text
@@ -236,12 +244,14 @@ extension Text{
     /// }
     /// ```
     @discardableResult
-    public func font(style value:AKFontStyle)->Self{
-        pNode.fontStyle = value
-        let font = UIFont.font(fontName: pNode.fontName, fontStyle: value, fontSize: pNode.fontSize)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
+        return self.bindCallback({
+            let f_style = value()
+            pNode.fontStyle = value()
+            let font = UIFont.font(fontName: pNode.fontName, fontStyle: f_style, fontSize: pNode.fontSize)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the color of the text
