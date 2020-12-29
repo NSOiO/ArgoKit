@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (47% documented)
+         (52% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -252,7 +252,34 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>A scrollable, multiline text region.
+ Wrapper of UITextView</p>
+
+<p>UITextView supports the display of text using custom style information and also supports text editing. You typically use a text view to display multiple lines of text, such as when displaying the body of a large text document.
+This class supports multiple text styles through use of the attributedText property. (Styled text is not supported in versions of iOS earlier than iOS 6.) Setting a value for this property causes the text view to use the style information provided in the attributed string. You can still use the font, textColor, and textAlignment properties to set style attributes, but those properties apply to all of the text in the text view. It’s recommended that you use a text view—and not a UIWebView object—to display both plain and rich text in your app.</p>
+<pre class="highlight swift"><code><span class="kt">TextView</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"Hello, World!"</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">height</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">font</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">font</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">bold</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">margin</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">96</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">backgroundColor</span><span class="p">(</span><span class="o">.</span><span class="n">yellow</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">cornerRadius</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+     <span class="o">.</span><span class="n">didEndEditing</span> <span class="p">{</span> <span class="n">text</span> <span class="k">in</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+     <span class="p">}</span>
+     <span class="o">.</span><span class="n">shouldEndEditing</span> <span class="p">{</span> <span class="n">text</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">in</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+         <span class="k">return</span> <span class="kc">true</span>
+     <span class="p">}</span>
+     <span class="o">.</span><span class="n">didChangeText</span> <span class="p">{</span> <span class="n">text</span> <span class="k">in</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+     <span class="p">}</span><span class="o">.</span><span class="nf">gesture</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">getstur</span><span class="p">)</span>
+     <span class="o">.</span><span class="n">onTapGesture</span> <span class="p">{</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"on tap"</span><span class="p">)</span>
+     <span class="p">}</span><span class="o">.</span><span class="nf">onLongPressGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"on long press"</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
 
           </div>
         </section>
@@ -274,7 +301,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Create a new TextView with specified text string.</p>
 
                       </div>
                       <div class="declaration">
@@ -284,6 +311,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a string value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -301,7 +347,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Create a new TextView with specified text container.</p>
 
                       </div>
                       <div class="declaration">
@@ -311,6 +357,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">textContainer</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">NSTextContainer</span><span class="p">?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>textContainer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new text container.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -328,7 +393,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The text that the text view displays.
+In iOS6 and later, assigning a new value to this property also replaces the value of the attributedText property with the same text, albeit without any inherent style attributes. Instead the text view styles the new string using the font, textColor, and other style-related properties of the class.</p>
 
                       </div>
                       <div class="declaration">
@@ -339,6 +405,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">text</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new string value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -356,7 +445,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The font of the text</p>
+
+<p>This property applies to the entire text string. The default value of this property is the body style of the system font.</p>
 
                       </div>
                       <div class="declaration">
@@ -367,6 +458,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIFont</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new font value</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -384,7 +498,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Set the font of the text, the font is created by the specified name and style.</p>
+<pre class="highlight swift"><code>     <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AKFontStyle</span><span class="p">{</span>
+         <span class="k">case</span> <span class="p">`</span><span class="nv">default</span><span class="p">`</span>
+         <span class="k">case</span> <span class="n">bold</span>
+         <span class="k">case</span> <span class="n">italic</span>
+         <span class="k">case</span> <span class="n">bolditalic</span>
+     <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -395,6 +516,53 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">style</span><span class="p">:</span> <span class="kt">AKFontStyle</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>font name</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>style</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>font style</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>font size</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -412,7 +580,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Change the font name of the text.</p>
 
                       </div>
                       <div class="declaration">
@@ -423,6 +591,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">name</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new font name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -440,7 +631,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Change the font size of the text.</p>
 
                       </div>
                       <div class="declaration">
@@ -451,6 +642,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">size</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new font size.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -468,7 +682,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Change the font style of the text.</p>
+<pre class="highlight swift"><code>     <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AKFontStyle</span><span class="p">{</span>
+         <span class="k">case</span> <span class="p">`</span><span class="nv">default</span><span class="p">`</span>
+         <span class="k">case</span> <span class="n">bold</span>
+         <span class="k">case</span> <span class="n">italic</span>
+         <span class="k">case</span> <span class="n">bolditalic</span>
+     <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -479,6 +700,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">style</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">AKFontStyle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new style</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -496,7 +740,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The color of the text.</p>
+
+<p>This property applies to the entire text string. The default text color is black.
+In iOS 6 and later, assigning a new value to this property causes the new text color to be applied to the entire contents of the text view. If you want to apply the color to only a portion of the text, you must create a new attributed string with the desired style information and assign it to the attributedText property.</p>
 
                       </div>
                       <div class="declaration">
@@ -507,6 +754,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">textColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new color</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -524,7 +794,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Change the color the text, the color is created by the rgba value.</p>
 
                       </div>
                       <div class="declaration">
@@ -535,6 +805,65 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">textColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>r</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the red value of the color object, data range from 0 to 255.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>g</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the green value of the color object, data range from 0 to 255.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>b</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the blue value of the color object, data range from 0 to 255.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the opacity value of the color object, data range from 0 to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>description</p>
                       </div>
                     </section>
                   </div>
@@ -552,7 +881,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Change the color of the text, the color is created by the hex and alpha.</p>
 
                       </div>
                       <div class="declaration">
@@ -563,6 +892,41 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">textColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>hex number</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>alpha value</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -580,7 +944,29 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The technique for aligning the text. See:UITextView.textAlignment</p>
+
+<p>This property applies to the entire text string. The default value of this property is NSTextAlignment.natural.
+ Assigning a new value to this property causes the new text alignment to be applied to the entire contents of the text view. If you want to apply the alignment to only a portion of the text, you must create a new attributed string with the desired style information and assign it to the attributedText property.</p>
+<pre class="highlight swift"><code>    <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NSTextAlignment</span> <span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+
+
+       <span class="k">case</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">// Visually left aligned</span>
+
+
+       <span class="k">case</span> <span class="n">center</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">// Visually centered</span>
+
+       <span class="k">case</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">// Visually right aligned</span>
+
+        <span class="cm">/* !TARGET_ABI_USES_IOS_VALUES */</span>
+        <span class="c1">// Visually right aligned</span>
+        <span class="c1">// Visually centered</span>
+
+        <span class="k">case</span> <span class="n">justified</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">// Fully-justified. The last line in a paragraph is natural-aligned.</span>
+
+        <span class="k">case</span> <span class="n">natural</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1">// Indicates the default alignment for script</span>
+    <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -591,6 +977,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">textAlign</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">NSTextAlignment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new test alignment</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -608,7 +1017,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The current selection range of the text view. See: UITextView.selectedRange</p>
+
+<p>In iOS 2.2 and earlier, the length of the selection range is always 0, indicating that the selection is actually an insertion point. In iOS 3.0 and later, the length of the selection range may be non-zero.</p>
 
                       </div>
                       <div class="declaration">
@@ -619,6 +1030,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">selectedRange</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a range value</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -636,7 +1070,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A Boolean value that indicates whether the text view is editable.</p>
+
+<p>See: UITextView.isEditable
+The default value of this property is true.</p>
 
                       </div>
                       <div class="declaration">
@@ -647,6 +1084,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">isEditable</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new Boolean value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -664,7 +1124,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A Boolean value that indicates whether the text view is selectable.</p>
+
+<p>See: UITextView.isSelectable
+This property controls the ability of the user to select content and interact with URLs and text attachments. The default value is true.</p>
 
                       </div>
                       <div class="declaration">
@@ -675,6 +1138,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">isSelectable</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new Boolean value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -692,7 +1178,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The types of data that convert to tappable URLs in the text view.</p>
+
+<p>See: UITextView.dataDetectorTypes
+You can use this property to specify the types of data (phone numbers, http links, and so on) that should be automatically converted to URLs in the text view. When tapped, the text view opens the application responsible for handling the URL type and passes it the URL. Note that data detection does not occur if the text view&rsquo;s isEditable property is set to true.</p>
 
                       </div>
                       <div class="declaration">
@@ -703,6 +1192,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">dataDetectorTypes</span><span class="p">(</span><span class="n">detectorType</span> <span class="nv">value</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIDataDetectorTypes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new UIDataDetectorTypes value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -720,7 +1232,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A Boolean value that indicates whether the text view allows the user to edit style information.</p>
+
+<p>See: UITextView.allowsEditingTextAttributes
+ When set to true, the text view allows the user to change the basic styling of the currently selected text. The available style options are listed in the edit menu and only apply to the selection.
+ The default value of this property is false.</p>
 
                       </div>
                       <div class="declaration">
@@ -731,6 +1247,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">allowsEditingTextAttributes</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new Boolean value</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -748,7 +1287,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The styled text that the text view displays.</p>
+
+<p>See: UITextView.attributedText.
+Assigning a new value to this property also replaces the value of the text property with the same string data, albeit without any formatting information. In addition, the font, textColor, and textAlignment properties are updated to reflect the typing attributes of the text view.</p>
 
                       </div>
                       <div class="declaration">
@@ -759,6 +1301,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">attributedText</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">NSAttributedString</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new NSAttributedString value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -776,7 +1341,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The attributes to apply to new text that the user enters.</p>
+
+<p>See: UITextView.typingAttributes
+This dictionary contains the attribute keys (and corresponding values) to apply to newly typed text. When the text view’s selection changes, the contents of the dictionary are cleared automatically.</p>
 
                       </div>
                       <div class="declaration">
@@ -787,6 +1355,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">typingAttributes</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSAttributedString</span><span class="o">.</span><span class="kt">Key</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>new attributes</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -804,7 +1395,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Scrolls the text view until the text in the specified range is visible.</p>
+
+<p>See: UITextView.scrollRangeToVisible</p>
 
                       </div>
                       <div class="declaration">
@@ -815,6 +1408,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">scrollRangeToVisible</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range of text to scroll into view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -832,7 +1448,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The custom input view to display when the text view becomes the first responder.</p>
+
+<p>See: UITextView.inputView
+If the value in this property is nil, the text view displays the standard system keyboard when it becomes first responder. Assigning a custom view to this property causes that view to be presented instead.
+The default value of this property is nil.</p>
 
                       </div>
                       <div class="declaration">
@@ -843,6 +1463,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">inputView</span><span class="p">(</span><span class="n">_</span> <span class="nv">content</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the content of input view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -860,7 +1503,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The custom accessory view to display when the text view becomes the first responder.</p>
+
+<p>See: UITextView.inputAccessoryView
+The default value of this property is nil. Assigning a view to this property causes that view to be displayed above the standard system keyboard (or above the custom input view if one is provided) when the text view becomes the first responder. For example, you could use this property to attach a custom toolbar to the keyboard.</p>
 
                       </div>
                       <div class="declaration">
@@ -871,6 +1517,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">inputAccessoryView</span><span class="p">(</span><span class="n">_</span> <span class="nv">content</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the content of inputAccessoryView.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -888,7 +1557,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A Boolean value that indicates whether inserting text replaces the previous contents.</p>
+
+<p>The default value of this property is false. When the value of this property is true and the text view is in editing mode, the selection UI is hidden and inserting new text clears the contents of the text view and sets the value of this property back to false.</p>
 
                       </div>
                       <div class="declaration">
@@ -899,6 +1570,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">clearsOnInsertion</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new Boolean value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -916,7 +1610,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The inset of the text container&rsquo;s layout area within the text view&rsquo;s content area.</p>
+
+<p>See: UITextView.textContainerInset.
+This property provides text margins for text laid out in the text view. By default the value of this property is (8, 0, 8, 0).</p>
 
                       </div>
                       <div class="declaration">
@@ -927,6 +1624,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">textContainerInset</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIEdgeInsets</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>new edge insets.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -944,7 +1664,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The attributes to apply to links.</p>
+
+<p>See: UITextView.linkTextAttributes.
+The default attributes specify blue text with a single underline and the pointing hand cursor.</p>
 
                       </div>
                       <div class="declaration">
@@ -955,6 +1678,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">linkTextAttributes</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSAttributedString</span><span class="o">.</span><span class="kt">Key</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>new attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -972,17 +1718,47 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A Boolean value that determines the rendering scale of the text.</p>
+
+<p>See: UITextView.usesStandardTextScaling
+When the value of this property is true, UIKit automatically adjusts the rendering of the text in the text view to match the standard text scaling.
+When using the standard text scaling, font sizes in the text view appear visually similar to how they would render in macOS and non-Apple platforms, and copying the contents of the text view to the pasteboard preserves the original font point sizes. This effectively changes the display size of the text without changing the actual font point size. For example, text using a 13-point font in iOS looks like text using a 13-point font in macOS.
+If your app is built with Mac Catalyst, or if your text view’s contents save to a document that a user can view in macOS or other platforms, set this property to true.
+The default value of this property is false.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">usesStandardTextScaling</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a new Boolean value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1000,7 +1776,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>set the callback of which return value determine whether to begin editing in the specified text view.</p>
 
                       </div>
                       <div class="declaration">
@@ -1011,6 +1787,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldBeginEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -1028,7 +1827,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Asks the callback whether to stop editing in the specified text view.</p>
 
                       </div>
                       <div class="declaration">
@@ -1039,6 +1838,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldEndEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1056,7 +1878,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Tells the callback when editing begins in the specified text view.</p>
 
                       </div>
                       <div class="declaration">
@@ -1067,6 +1889,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">didBeginEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1084,7 +1929,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Tells the callback when editing stops for the specified text view, and the reason it stopped.</p>
 
                       </div>
                       <div class="declaration">
@@ -1095,6 +1940,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">didEndEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1112,7 +1980,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Asks the callback whether to change the text at the specified range.</p>
 
                       </div>
                       <div class="declaration">
@@ -1123,6 +1991,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldChangeText</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">,</span> <span class="n">_</span> <span class="nv">replacementText</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1140,7 +2031,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Tells the callback the text at the specified range had been changed.</p>
 
                       </div>
                       <div class="declaration">
@@ -1151,6 +2042,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">didChangeText</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1168,7 +2082,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Tells the callback when the text selection changes in the specified text view.</p>
 
                       </div>
                       <div class="declaration">
@@ -1179,6 +2093,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">didChangeSelection</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">selectedRange</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1196,17 +2133,43 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Asks the callback whether the specified text view allows user interaction with the specified URL in the specified range of text.</p>
+
+<p>See: UITextViewDelegate</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldInteractWithURL</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="n">_</span> <span class="kt">URL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">_</span> <span class="nv">characterRange</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">,</span> <span class="n">_</span> <span class="nv">interaction</span><span class="p">:</span> <span class="kt">UITextItemInteraction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1224,17 +2187,43 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Asks the callback whether the specified text view allows user interaction with the provided text attachment in the specified range of text.</p>
+
+<p>See: UITextViewDelegate</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldInteractWithTextAttachment</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">textAttachment</span><span class="p">:</span> <span class="kt">NSTextAttachment</span><span class="p">,</span> <span class="n">_</span> <span class="nv">characterRange</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">,</span> <span class="n">_</span> <span class="nv">interaction</span><span class="p">:</span> <span class="kt">UITextItemInteraction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>callback</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1247,7 +2236,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-29)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
