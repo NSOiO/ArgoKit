@@ -6,15 +6,17 @@
 //
 
 import Foundation
+
 public typealias SectionDataList<T> = [[T]]
 public typealias DataList<T> = [T]
+
 @propertyWrapper
-public class DataSource<Value>{
+public class DataSource<Value> {
     
     weak var _rootNode : DataSourceReloadNode?
     private var _value: Value
    
-    public init(wrappedValue value: Value){
+    public init(wrappedValue value: Value) {
         self._value = value
     }
     
@@ -31,11 +33,10 @@ public class DataSource<Value>{
         }
 
     }
-    
 }
 
-
-extension DataSource{
+extension DataSource {
+    
     private func dataSource()->Array<Array<Any>>? {
         if let value = _value as? SectionDataList<Any> {
             return value
@@ -45,65 +46,64 @@ extension DataSource{
         return [[]]
     }
     
-    public func reloadData(){
-        if let node = self._rootNode{
+    public func reloadData() {
+        if let node = self._rootNode {
             node.reloadData()
         }
     }
     
-    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
+    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
             for indexPath in indexPaths {
                 if indexPath.section >= dataSource()?.count ?? 0
                     || indexPath.row >= dataSource()?[indexPath.section].count ?? 0{
                     continue
                 }
-                if let data = dataSource()?[indexPath.section][indexPath.row] as? ArgoKitIdentifiable{
-                    data.linkNode = nil
+                if let data = dataSource()?[indexPath.section][indexPath.row] as? ArgoKitIdentifiable {
+                    data.argokit_linkNode = nil
                 }
             }
             node.reloadRows(at: indexPaths, with: animation)
         }
     }
     
-    public func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation){
+    public func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
             node.insertSections(sections,with: animation)
         }
     }
 
-
-
-    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation){
+    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
             node.reloadSections(sections,with: animation)
         }
     }
 
-    public func moveSection(_ section: Int, toSection newSection: Int){
+    public func moveSection(_ section: Int, toSection newSection: Int) {
         if let node = self._rootNode{
             node.moveSection(section,toSection: newSection)
         }
     }
 
-    public func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
+    public func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
             node.insertRows(at: indexPaths, with: animation)
         }
     }
     
-    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation){
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
             node.deleteSections(sections,with: animation)
         }
     }
-    public func deleteSection(_ sections: IndexSet, with animation: UITableView.RowAnimation){
+    
+    public func deleteSection(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
             node.deleteSections(sections,with: animation)
         }
     }
 
-    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         for indexPath in indexPaths {
             if var value = _value as? SectionDataList<Any> {
                 value[indexPath.section].remove(at:indexPath.row)
@@ -117,12 +117,12 @@ extension DataSource{
             node.deleteRows(at: indexPaths, with: animation)
         }
     }
-    func deleteRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation){
+    
+    func deleteRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
         self.deleteRows(at: [indexPath], with: animation)
     }
 
-
-    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath){
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
         
         if indexPath.section >= dataSource()?.count ?? 0
             || indexPath.row >= dataSource()?[indexPath.section].count ?? 0

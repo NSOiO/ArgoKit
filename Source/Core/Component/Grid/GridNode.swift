@@ -6,11 +6,15 @@
 //
 
 import Foundation
+
 fileprivate let kGridCellReuseIdentifier = "kGridCellReuseIdentifier"
 fileprivate let kGridHeaderReuseIdentifier = "kGridHeaderReuseIdentifier"
 fileprivate let kGridFooterReuseIdentifier = "kGridFooterReuseIdentifier"
+
 class ArgoKitGridView: UICollectionView {
+    
     private var oldFrame = CGRect.zero
+    
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
             ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
@@ -19,6 +23,7 @@ class ArgoKitGridView: UICollectionView {
         super.layoutSubviews()
     }
 }
+
 class GridNode<D>: ArgoKitScrollViewNode,
                        UICollectionViewDelegate,
                        UICollectionViewDataSource,
@@ -55,7 +60,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         }
     }
     
-    private var pGridView:ArgoKitGridView?
+    private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
         flowLayout.frame = frame
@@ -254,7 +259,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return true
     }
 
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath){
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
@@ -263,10 +268,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.contentView.backgroundColor = color
         }
-
     }
 
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath){
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }

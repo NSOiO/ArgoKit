@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DataSourceHelper<D>{
+class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     lazy var registedReuseIdSet = Set<String>()
 

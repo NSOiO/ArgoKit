@@ -19,7 +19,7 @@ import Foundation
 ///         @DataSource var headerDataSource: [Model] = [Model]()
 ///         @DataSource var footerDataSource: [Model] = [Model]()
 ///
-///         var body: ArgoKit.View {
+///         var body: View {
 ///
 ///             List(data:$dataSource){ data in
 ///                 Row(data)
@@ -98,7 +98,7 @@ public class List<D>: ScrollView  {
     ///
     public convenience init(_ style: UITableView.Style? = .plain,
                             data: DataSource<DataList<D>>,
-                            @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
+                            @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D : ArgoKitIdentifiable {
         self.init(style: style)
         
         tableNode.dataSourceHelper.dataSourceList = data
@@ -121,7 +121,7 @@ public class List<D>: ScrollView  {
     ///
     public convenience init(_ style: UITableView.Style? = .plain,
                             data: DataSource<SectionDataList<D>>,
-                            @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
+                            @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D : ArgoKitIdentifiable {
         self.init(style: style)
         tableNode.dataSourceHelper.sectionDataSourceList = data
         tableNode.dataSourceHelper.buildNodeFunc = { item in
@@ -158,7 +158,7 @@ extension List{
     ///   - headerContent: A view builder that creates the view for section header.
     /// - Returns: Self
     @discardableResult
-    public func sectionHeader(_ data:  DataSource<DataList<D>>, @ArgoKitListBuilder headerContent: @escaping (D) -> View) -> Self where D:ArgoKitIdentifiable{
+    public func sectionHeader(_ data:  DataSource<DataList<D>>, @ArgoKitListBuilder headerContent: @escaping (D) -> View) -> Self where D : ArgoKitIdentifiable {
         tableNode.sectionHeaderSourceHelper.dataSourceList = data
         tableNode.sectionHeaderSourceHelper.buildNodeFunc = { item in
             return headerContent(item)
@@ -172,7 +172,7 @@ extension List{
     ///   - footerContent: A view builder that creates the view for section footer.
     /// - Returns: Self
     @discardableResult
-    public func sectionFooter(_ data: DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self where D:ArgoKitIdentifiable{
+    public func sectionFooter(_ data: DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self where D : ArgoKitIdentifiable {
         tableNode.sectionFooterSourceHelper.dataSourceList = data
         tableNode.sectionFooterSourceHelper.buildNodeFunc = { item in
             return footerContent(item)

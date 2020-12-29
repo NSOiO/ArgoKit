@@ -21,9 +21,6 @@ class GridCell: UICollectionViewCell {
     override func prepareForReuse() {
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
     
     public func linkCellNode(_ node: ArgoKitCellNode) {
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
