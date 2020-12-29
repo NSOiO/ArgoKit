@@ -29,8 +29,12 @@ public class GestureProperty<Value>{
 }
     
 /// The base protocol for concrete gesture recognizers.
-public protocol Gesture{
+public protocol Gesture {
+    
+    /// The gesture behind the TapGesture.
     var gesture:UIGestureRecognizer {get}
+    
+    /// The action to handle the gesture recognized by the receiver.
     var action:(UIGestureRecognizer) ->Void {get}
 }
 

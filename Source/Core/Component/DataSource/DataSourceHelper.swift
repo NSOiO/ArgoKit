@@ -89,17 +89,17 @@ extension DataSourceHelper {
         return dataSource()![section][row]
     }
     
-    open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode?{
+    open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
         if let nodelist =  nodeSourceList?.wrappedValue,
            nodelist.count > section,
            nodelist[section].count > row{
             let node = nodelist[section][row]
-            if let node_ = node.linkNode as? ArgoKitCellNode{
+            if let node_ = node.argokit_linkNode as? ArgoKitCellNode {
                 return node_
             }
             let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
             cellNode.addChildNode(node)
-            node.linkNode = cellNode
+            node.argokit_linkNode = cellNode
             return cellNode
         }
         
@@ -111,15 +111,15 @@ extension DataSourceHelper {
         if let sourceData = self.dataSource()?[section][row]{
             // MARK:数据源中存在重复的数据对象的兼容处理
             let indexPath = IndexPath(row: row, section: section)
-            if let sourceData_ = sourceData as? ArgoKitIdentifiable,let indexPath_ =  sourceData_.indexpPath{
+            if let sourceData_ = sourceData as? ArgoKitIdentifiable,let indexPath_ =  sourceData_.argokit_indexPath {
                 if !indexPath.elementsEqual(indexPath_) {
-                    sourceData_.linkNode = nil
-                    sourceData_.indexpPath = nil
+                    sourceData_.argokit_linkNode = nil
+                    sourceData_.argokit_indexPath = nil
                 }
             }
             if let sourceData_ = sourceData as? ArgoKitIdentifiable,
-               let node = sourceData_.linkNode as? ArgoKitCellNode {
-                sourceData_.indexpPath = indexPath
+               let node = sourceData_.argokit_linkNode as? ArgoKitCellNode {
+                sourceData_.argokit_indexPath = indexPath
                 return node
             }
             if let view = self.buildNodeFunc?(sourceData) {
@@ -127,7 +127,7 @@ extension DataSourceHelper {
                     let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
                     cellNode.addChildNodes(nodes)
                     if let sourceData_ = sourceData as? ArgoKitIdentifiable{
-                        sourceData_.linkNode = cellNode
+                        sourceData_.argokit_linkNode = cellNode
                     }
                     return cellNode
                 }

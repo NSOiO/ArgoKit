@@ -28,6 +28,9 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 @end
  
 @interface ArgoKitNode : NSObject
+
+@property (nonatomic, strong) NSString *identifiable; // default is self.hash string value
+
 /* 是否为根节点*/
 @property (nonatomic, assign, readonly)BOOL isRootNode;
 /* 顶层根节点*/

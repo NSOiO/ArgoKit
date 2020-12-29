@@ -7,8 +7,44 @@
 
 import Foundation
 
+/// Wrapper of UITableView
+/// A view that presents data using rows arranged in a single column.
+///
+/// Example:
+///
+///```
+///     struct ListView: View {
+///
+///         @DataSource var dataSource: [Model] = [Model]()
+///         @DataSource var headerDataSource: [Model] = [Model]()
+///         @DataSource var footerDataSource: [Model] = [Model]()
+///
+///         var body: ArgoKit.View {
+///
+///             List(data:$dataSource){ data in
+///                 Row(data)
+///             }
+///             .sectionHeader($headerDataSource) { data in
+///                 Header(data)
+///             }
+///             .sectionFooter($footerDataSource) { data in
+///                 Footer(data)
+///             }
+///             .didSelectRow { (data, index) in
+///                 // Did Select row action
+///             }
+///         }
+///
+///         func appendData(data: Model) {
+///             models.append(data)
+///             $dataSource.reloadData()
+///         }
+///     }
+///```
+///
 public class List<D>: ScrollView  {
-        
+    
+    /// The node behind the list.
     var tableNode: TableNode<D> {
         pNode as! TableNode
     }
@@ -23,10 +59,23 @@ public class List<D>: ScrollView  {
         tableNode.style = style ?? .plain
     }
     
-    required public convenience init() {
+    required convenience init() {
         self.init(style: .plain)
     }
     
+    /// Initializer
+    /// - Parameters:
+    ///   - style: Constants for the list styles.
+    ///   - content: The content of the list.
+    ///
+    ///```
+    ///     List {
+    ///         Row1()
+    ///         Row2()
+    ///         Row3()
+    ///     }
+    ///```
+    ///
     public convenience init(style: UITableView.Style? = .plain, @ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
         self.init(style: style)
         let container = content()
@@ -34,7 +83,19 @@ public class List<D>: ScrollView  {
             tableNode.dataSourceHelper.nodeSourceList?.wrappedValue.append(nodes)
         }
     }
-
+    
+    /// Initializer
+    /// - Parameters:
+    ///   - style: Constants for the list styles.
+    ///   - data: The data for populating the list.
+    ///   - rowContent: A view builder that creates the view for a single row of the list.
+    ///
+    ///```
+    ///     List(data: $dataSource) { item in
+    ///         Row(item)
+    ///     }
+    ///```
+    ///
     public convenience init(_ style: UITableView.Style? = .plain,
                             data: DataSource<DataList<D>>,
                             @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
@@ -46,6 +107,18 @@ public class List<D>: ScrollView  {
         }
     }
     
+    /// Initializer
+    /// - Parameters:
+    ///   - style: Constants for the list styles.
+    ///   - data: The section data for populating the list.
+    ///   - rowContent: A view builder that creates the view for a single row of the list.
+    ///
+    ///```
+    ///     List(data: $sectionDataSource) { item in
+    ///         Row(item)
+    ///     }
+    ///```
+    ///
     public convenience init(_ style: UITableView.Style? = .plain,
                             data: DataSource<SectionDataList<D>>,
                             @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D:ArgoKitIdentifiable{
@@ -58,20 +131,32 @@ public class List<D>: ScrollView  {
 }
 
 extension List{
+    
+    /// The view that is displayed above the list's content.
+    /// - Parameter headerContent: A view builder that creates the view for header.
+    /// - Returns: Self
     @discardableResult
-    public func tableHeaderView(@ArgoKitViewBuilder headerContent: @escaping () -> View) -> Self {
+    public func tableHeaderView(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         tableNode.tableHeaderNode = container.type.viewNode()
         return self
     }
     
+    /// The view that is displayed below the list's content.
+    /// - Parameter footerContent: A view builder that creates the view for footer.
+    /// - Returns: Self
     @discardableResult
-    public func tableFooterView(@ArgoKitViewBuilder footerContent: @escaping () -> View) -> Self {
+    public func tableFooterView(@ArgoKitListBuilder footerContent: @escaping () -> View) -> Self {
         let container = footerContent()
         tableNode.tableFooterNode = container.type.viewNode()
         return self
     }
     
+    /// The view that is displayed in the header of the specified section of the list.
+    /// - Parameters:
+    ///   - data: The data for populating the section header.
+    ///   - headerContent: A view builder that creates the view for section header.
+    /// - Returns: Self
     @discardableResult
     public func sectionHeader(_ data:  DataSource<DataList<D>>, @ArgoKitListBuilder headerContent: @escaping (D) -> View) -> Self where D:ArgoKitIdentifiable{
         tableNode.sectionHeaderSourceHelper.dataSourceList = data
@@ -81,6 +166,11 @@ extension List{
         return self
     }
     
+    /// The view that is displayed in the footer of the specified section of the list.
+    /// - Parameters:
+    ///   - data: The data for populating the section footer.
+    ///   - footerContent: A view builder that creates the view for section footer.
+    /// - Returns: Self
     @discardableResult
     public func sectionFooter(_ data: DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self where D:ArgoKitIdentifiable{
         tableNode.sectionFooterSourceHelper.dataSourceList = data

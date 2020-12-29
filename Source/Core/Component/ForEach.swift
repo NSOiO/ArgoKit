@@ -43,6 +43,12 @@ public struct ForEach:View{
 */
 
 /// A structure that computes views on demand from an underlying collection of of data.
+///
+///```
+///     ForEach(model.titles) { item in
+///         Text(item).margin(edge: .top, value: 23)
+///     }
+///```
 public struct ForEach<T>: View {
     var nodeContainer:[ArgoKitNode] = []
     private var nodeType:ArgoKitNodeType

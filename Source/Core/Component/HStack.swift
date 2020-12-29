@@ -8,6 +8,15 @@
 import UIKit
 
 /// A view that arranges its children in a horizontal line.
+/// same as the `flex-direction: row` in flexbox layout.
+///
+///```
+///     HStack {
+///         Text("1")
+///         Text("2")
+///         Text("3")
+///     }
+///```
 public class HStack: View {
     private let pNode:ArgoKitNode
     
