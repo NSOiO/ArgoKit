@@ -144,31 +144,33 @@ public struct Text:View {
     }
     /// initialize the Text with a string
     /// - Parameter text: a string value
-    public init(_ text:String?) {
+    public init(_ text:@escaping @autoclosure () -> String?) {
         self.init()
-        addAttribute(#selector(setter:UILabel.text),text)
+        self.text(text())
     }
 }
 
 extension Text{
     /// set content of the Text
     /// - Parameter value: a string value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
-    public func text(_ value:String?)->Self{
-        addAttribute(#selector(setter:UILabel.text),value)
-        pNode.handleLineSpacing()
-        return self
+    public func text(_ value:@escaping @autoclosure () -> String?)->Self{
+        return self.bindCallback({
+            addAttribute(#selector(setter:UILabel.text),value())
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// set the font of the receiver's text.
     /// - Parameter value: a UIFont value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
-    public func font(_ value:UIFont!)->Self{
-        addAttribute(#selector(setter:UILabel.font),value)
-        pNode.handleLineSpacing()
-        return self
+    public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
+        return self.bindCallback({
+            addAttribute(#selector(setter:UILabel.font),value())
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// Set the font of the receiver's text.
@@ -176,7 +178,7 @@ extension Text{
     ///   - name: font name
     ///   - style: font style
     ///   - size: font size
-    /// - Returns: Self
+    /// - Returns: self
     ///
     /// ```
     /// // value of AKFontStyle
@@ -188,38 +190,44 @@ extension Text{
     /// }
     /// ```
     @discardableResult
-    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
-        pNode.fontName = name
-        pNode.fontSize = size
-        pNode.fontStyle = style
-        let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
+        return self.bindCallback({
+            let f_name = name(), f_size = size(), f_style = style()
+            pNode.fontName = f_name
+            pNode.fontSize = f_size
+            pNode.fontStyle = f_style
+            let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the font name of the receiver's text
     /// - Parameter value: font name
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
-    public func font(name value:String?)->Self{
-        pNode.fontName = value
-        let font = UIFont.font(fontName: value, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public func font(name value: @escaping @autoclosure () -> String?)->Self{
+        return self.bindCallback({
+            let f_name = value()
+            pNode.fontName = f_name
+            let font = UIFont.font(fontName: f_name, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the font size of the receiver's text
     /// - Parameter value: font size
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
-    public  func font(size value:CGFloat)->Self{
-        pNode.fontSize = value
-        let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: value)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
+        return self.bindCallback({
+            let f_size = value()
+            pNode.fontSize = f_size
+            let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: f_size)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the font style of the receiver's text
@@ -236,17 +244,19 @@ extension Text{
     /// }
     /// ```
     @discardableResult
-    public func font(style value:AKFontStyle)->Self{
-        pNode.fontStyle = value
-        let font = UIFont.font(fontName: pNode.fontName, fontStyle: value, fontSize: pNode.fontSize)
-        addAttribute(#selector(setter:UILabel.font),font)
-        pNode.handleLineSpacing()
-        return self
+    public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
+        return self.bindCallback({
+            let f_style = value()
+            pNode.fontStyle = value()
+            let font = UIFont.font(fontName: pNode.fontName, fontStyle: f_style, fontSize: pNode.fontSize)
+            addAttribute(#selector(setter:UILabel.font),font)
+            pNode.handleLineSpacing()
+        }, forKey: #function)
     }
     
     /// change the color of the text
     /// - Parameter value: the new color
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textColor(_ value:UIColor!)->Self{
         addAttribute(#selector(setter:UILabel.textColor),value)
@@ -260,7 +270,7 @@ extension Text{
     ///   - g: the green value of the color object, data range from 0 to 255.
     ///   - b: the blue value of the color object, data range from 0 to 255.
     ///   - a: the opacity value of the color object, data range from 0 to 1.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
@@ -272,7 +282,7 @@ extension Text{
     /// - Parameters:
     ///   - hex: rgb color, ex: 0xaabbcc representing the red value is 0xaa, the green value is 0xbb and the blue value is 0xcc.
     ///   - a: the opacity value of the color object, data range from 0 to 1.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textColor(hex:Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
@@ -282,7 +292,7 @@ extension Text{
     
     /// set the textAlign of the back UILabel object.
     /// - Parameter value: new NSTextAlignment value
-    /// - Returns: Self
+    /// - Returns: self
     ///
     ///```
     ///public enum NSTextAlignment : Int {
@@ -305,7 +315,7 @@ extension Text{
     
     /// set the shadow offset, in points, for the text
     /// - Parameter value: new offset value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textShadowOffset(_ value:CGSize)->Self{
         addAttribute(#selector(setter:UILabel.shadowOffset),value)
@@ -314,7 +324,7 @@ extension Text{
     
     /// set the shadow color for the text
     /// - Parameter value: a new color
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textShadowColor(_ value:UIColor)->Self{
         addAttribute(#selector(setter:UILabel.shadowColor),value)
@@ -327,7 +337,7 @@ extension Text{
     ///   - g: green value of the color object, data range form 0 to 255
     ///   - b: blue value of the color object, data range form 0 to 255
     ///   - a: opacity value of the color object, data range form 0 to 255
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textShadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
         let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
@@ -339,7 +349,7 @@ extension Text{
     /// - Parameters:
     ///   - hex: rgb value of the color object, ex: 0xaabbcc representing red value is 0xaa, green value is 0xbb, blue value is 0xcc.
     ///   - a: opaity value of the color object, data range from 0 to 1.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textShadowColor(hex :Int,alpha a:Float = 1)->Self{
         let value = ArgoKitUtils.color(withHex: hex,alpha:a)
@@ -349,7 +359,7 @@ extension Text{
     
     /// The technique for wrapping and truncating the label’s text. Call lineBreakMode of the UILabel directly.
     /// - Parameter value: new line break mode
-    /// - Returns: Self
+    /// - Returns: self
     ///
     ///```
     ///public enum NSLineBreakMode : Int {
@@ -375,7 +385,7 @@ extension Text{
     
     /// set the styled text that the label displays.
     /// - Parameter value: new styled text
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func attributedText(_ value:NSAttributedString?)->Self{
         pNode.attributedText(attri: value)
@@ -384,7 +394,7 @@ extension Text{
     
     /// set the highlight color for the text.
     /// - Parameter value: new color
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func highlightedTextColor(_ value:UIColor?)->Self{
         addAttribute(#selector(setter:UILabel.highlightedTextColor),value)
@@ -393,7 +403,7 @@ extension Text{
     
     /// set a Boolean value that determines whether the label draws its text with a highlight.
     /// - Parameter value: a Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func isHighlighted(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.isHighlighted),value)
@@ -403,7 +413,7 @@ extension Text{
     
     /// Set A Boolean value that determines whether the system ignores and removes user events for this label from the event queue.
     /// - Parameter value: a Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func userInteractionEnabled(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.isUserInteractionEnabled),value)
@@ -411,7 +421,7 @@ extension Text{
     }
     /// set a Boolean value that determines whether the back label draws its text in an enabled state.
     /// - Parameter value: a Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     public func isEnabled(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.isEnabled),value)
         return self
@@ -419,7 +429,7 @@ extension Text{
     
     /// Set the maximum number of lines for rendering text. 0 representing unlimited.
     /// - Parameter value: new maximum number of lines.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func lineLimit(_ value:Int)->Self{
         addAttribute(#selector(setter:UILabel.numberOfLines),value)
@@ -428,7 +438,7 @@ extension Text{
     
     ///  The distance in points between the bottom of one line fragment and the top of the next.
     /// - Parameter value: new points value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func lineSpacing(_ value:CGFloat)->Self{
         pNode.lineSpacing(value)
@@ -437,7 +447,7 @@ extension Text{
     
     /// A Boolean value that determines whether the label reduces the text’s font size to fit the title string into the label’s bounding rectangle.
     /// - Parameter value: a new Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func adjustsFontSizeToFitWidth(_ value:Bool)->Self{
         addAttribute(#selector(setter:UILabel.adjustsFontSizeToFitWidth),value)
@@ -446,7 +456,7 @@ extension Text{
     
     /// An option that controls whether the text's baseline remains fixed when text needs to shrink to fit in the label.
     /// - Parameter value: new option
-    /// - Returns: Self
+    /// - Returns: self
     /// 
     ///```
     ///public enum UIBaselineAdjustment : Int {
@@ -467,7 +477,7 @@ extension Text{
     
     /// The minimum scale factor for the label’s text.
     /// - Parameter value: scale factor
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 6.0, *)
     @discardableResult
     public func minimumScaleFactor(_ value:CGFloat)->Self{
@@ -480,7 +490,7 @@ extension Text{
     /// When the value of this property is true, the label tightens intercharacter spacing of its text before allowing any truncation to occur. The label determines the maximum amount of tightening automatically based on the font, current line width, line break mode, and other relevant information. This autoshrinking behavior is only intended for use with a single-line label.
     /// The default value of this property is false.
     /// - Parameter value: new Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 9.0, *)
     @discardableResult
     public func allowsDefaultTighteningForTruncation(_ value:Bool)->Self{
@@ -493,7 +503,7 @@ extension Text{
     /// When the value of this property is true, the label tightens intercharacter spacing of its text before allowing any truncation to occur. The label determines the maximum amount of tightening automatically based on the font, current line width, line break mode, and other relevant information. This autoshrinking behavior is only intended for use with a single-line label.
     /// The default value of this property is false.
     /// - Parameter value: a new Boolean value.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func lineBreakStrategy(_ value:NSParagraphStyle.LineBreakStrategy)->Self{
         addAttribute(#selector(setter:UILabel.allowsDefaultTighteningForTruncation),value)
@@ -504,7 +514,7 @@ extension Text{
     /// - Parameters:
     ///   - bounds: The bounding rectangle of the label.
     ///   - numberOfLines: The maximum number of lines to use for the label. The value 0 indicates the label has no maximum number of lines and the rectangle should encompass all of the text.
-    /// - Returns: Self
+    /// - Returns: self
     public func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect{
         if let label = self.node?.view as? UILabel {
             return label.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines);
@@ -514,7 +524,7 @@ extension Text{
     
     /// Draws the label’s text, or its shadow, in the specified rectangle.
     /// - Parameter rect: The bounding rectangle of the label.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func drawText(in rect: CGRect)->Self{
         addAttribute(#selector(UILabel.drawText(in:)),[rect])
@@ -523,7 +533,7 @@ extension Text{
 
     /// The preferred maximum width, in points, for a multiline label.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 6.0, *)
     @discardableResult
     public func preferredMaxLayoutWidth(in value: CGFloat)->Self{

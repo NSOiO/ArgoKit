@@ -43,7 +43,7 @@ extension ActivityIndicatorView {
     
     /// Sets the basic appearance of the activity indicator.
     /// - Parameter value: The basic appearance of the activity indicator.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func style(_ value: UIActivityIndicatorView.Style) -> Self {
         addAttribute(#selector(setter:UIActivityIndicatorView.style),value.rawValue)
@@ -52,7 +52,7 @@ extension ActivityIndicatorView {
     
     /// Sets a Boolean value that controls whether the receiver is hidden when the animation is stopped.
     /// - Parameter value: A Boolean value that controls whether the receiver is hidden when the animation is stopped.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func hidesWhenStopped(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIActivityIndicatorView.hidesWhenStopped),value)
@@ -61,7 +61,7 @@ extension ActivityIndicatorView {
     
     /// Sets the color of the activity indicator.
     /// - Parameter value: The color of the activity indicator.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func color(_ value: UIColor!) -> Self {
         addAttribute(#selector(setter:UIActivityIndicatorView.color),value)
@@ -69,7 +69,7 @@ extension ActivityIndicatorView {
     }
     
     /// Starts the animation of the progress indicator.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func startAnimating() -> Self {
         addAttribute(#selector(UIActivityIndicatorView.startAnimating))
@@ -77,7 +77,7 @@ extension ActivityIndicatorView {
     }
     
     /// Stops the animation of the progress indicator.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func stopAnimating() -> Self {
         addAttribute(#selector(UIActivityIndicatorView.stopAnimating))

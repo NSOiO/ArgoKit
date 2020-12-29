@@ -9,6 +9,8 @@ import UIKit
 import ArgoKit
 import SwiftUI
 
+var argokit_dep = ArgoKit.Dep()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-    
+        #if DEBUG
+        _argokit_preview_config_()
+        #endif
         
         var nav: UINavigationController?
-        
         //SwiftUI
 //        if #available(iOS 13.0.0, *) {
 ////            let content = LandmarkList_Previews.previews
@@ -31,10 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
-        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+//        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
 //        let contentView = LandmarkList(model: UserData())
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()
+        let contentView = TextBindTests(model: TextBindTestsModel()).padding(edge: .top, value: 200)
         let vc = UIHostingController(rootView: contentView)
 //        let vc = ViewController()
         nav = UINavigationController(rootViewController: vc)

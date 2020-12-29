@@ -7,31 +7,36 @@
 
 import Foundation
 
-final class Dep {
-    private static var subscriber:(() -> Void)?
-    private static var cancellables:[Cancellable] = []
+public final class Dep {
+    private static var shared: Dep = Dep()
+    private var subscriber:(() -> Void)?
+    private var cancellables:[Cancellable] = []
+    
+    public init(){ }
+    public static func registerDep(_ dep: Dep) {
+        self.shared = dep
+    }
     
     static func setSub(_ sub: @escaping (()->Void)) {
-        self.subscriber = sub;
+        self.shared.subscriber = sub
     }
     
     static func removeSub() {
-        self.subscriber = nil
+        self.shared.subscriber = nil
     }
     
     static func getSub() -> (() -> Void)? {
-        return self.subscriber
+        return self.shared.subscriber
     }
     
     /// Cancellable
     static func pushCancellable(_ cancel: Cancellable) {
-        self.cancellables.append(cancel)
+        self.shared.cancellables.append(cancel)
     }
     
     static func popAllCancellables() -> [Cancellable]{
-        let r = self.cancellables
-        self.cancellables.removeAll()
+        let r = self.shared.cancellables
+        self.shared.cancellables.removeAll()
         return r
     }
-    
 }

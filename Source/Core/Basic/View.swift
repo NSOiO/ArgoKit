@@ -88,7 +88,7 @@ extension View {
     
     /// Assigns the view to the specified variable or property.
     /// - Parameter variable: The specified variable or property that is  assigned with the view.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func alias(variable: Alias<Self>) -> Self {
         variable.wrappedValue = self
@@ -114,7 +114,7 @@ extension View {
     
     /// Causes the view (or one of its embedded text fields) to resign the first responder status.
     /// - Parameter force: Specify true to force the first responder to resign, regardless of whether it wants to do so.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func endEditing(_ force: Bool) -> Self {
         addAttribute(#selector(UIView.endEditing(_:)), force)

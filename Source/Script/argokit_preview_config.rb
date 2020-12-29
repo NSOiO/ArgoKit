@@ -17,7 +17,7 @@ require "pathname"
 class APGConstant
     @@argokit_prefix = "[ArgoKitPreview]"
     @@ap_group = 'ArgoKitPreviewFiles'
-    @@ap_files = ["/Source/Preview/ArgoKitPreviewTypes.swift"]
+    @@ap_files = ["/Source/Preview/ArgoKitPreviewTypes.swift", "/Source/Preview/ArgoKitPreviewConfig.swift"]
     
     def self.argokit_prefix
         @@argokit_prefix

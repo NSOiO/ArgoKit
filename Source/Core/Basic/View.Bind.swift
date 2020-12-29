@@ -66,7 +66,12 @@ extension View {
     }
     
     private func setCancellables(_ cancellables: [Cancellable], forKey key: String) {
-        self.node?.bindProperties.setObject(cancellables, forKey: key as NSString)
+        if let node = self.node {
+            node.bindProperties.setObject(cancellables, forKey: key as NSString)
+        } else {
+            fatalError("node should not be nil")
+        }
+//        self.node?.bindProperties.setObject(cancellables, forKey: key as NSString)
     }
     
     private func removeCancellables(forKey key: String) {

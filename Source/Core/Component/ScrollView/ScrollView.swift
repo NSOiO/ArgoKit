@@ -38,7 +38,7 @@ extension ScrollView {
     
     /// Set the cotentOffset of the UIScrollView behind the wrapper.
     /// - Parameter value: the new offset
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func contentOffset(_ value: CGPoint) -> Self {
         addAttribute(#selector(setter:UIScrollView.contentOffset),value)
@@ -47,7 +47,7 @@ extension ScrollView {
     
     /// Set the content size
     /// - Parameter value: the new size
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func contentSize(_ value: CGSize) -> Self {
         pNode?.contentSize(value)
@@ -56,7 +56,7 @@ extension ScrollView {
     
     /// Set the content width
     /// - Parameter value: new width
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func contentWidth(_ value: CGFloat) -> Self {
         pNode?.contentWidth(value)
@@ -65,7 +65,7 @@ extension ScrollView {
     
     /// Set the content height
     /// - Parameter value: new height
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func contentHeight(_ value: CGFloat) -> Self {
         pNode?.contentHeight(value)
@@ -74,7 +74,7 @@ extension ScrollView {
     
     /// Set the content inset of the UIScrollView behind the wrapper.
     /// - Parameter value: new content inste
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func contentInset(_ value: UIEdgeInsets) -> Self {
         addAttribute(#selector(setter:UIScrollView.contentInset),value)
@@ -90,7 +90,7 @@ extension ScrollView {
     
     /// Set the contentInsetAdjustmentBehavior of the UIScrollview behind the wrapper.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 11.0, *)
     @discardableResult
     public func contentInsetAdjustmentBehavior(_ value: UIScrollView.ContentInsetAdjustmentBehavior) -> Self {
@@ -100,7 +100,7 @@ extension ScrollView {
     
     /// Set automaticallyAdjustsScrollIndicatorInsets of the UIScrollView behind the wrapper.
     /// - Parameter value: true to adjust automatically
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 13.0, *)
     @discardableResult
     public func automaticallyAdjustsScrollIndicatorInsets(_ value: Bool) -> Self {
@@ -112,7 +112,7 @@ extension ScrollView {
     ///
     /// A Boolean value that determines whether scrolling is disabled in a particular direction.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func isDirectionalLockEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.isDirectionalLockEnabled),value)
@@ -123,7 +123,7 @@ extension ScrollView {
     ///
     /// A Boolean value that controls whether the scroll view bounces past the edge of content and back again.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func bounces(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.bounces),value)
@@ -134,7 +134,7 @@ extension ScrollView {
     ///
     /// A Boolean value that determines whether bouncing always occurs when vertical scrolling reaches the end of the content.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func alwaysBounceVertical(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.alwaysBounceVertical),value)
@@ -145,7 +145,7 @@ extension ScrollView {
     ///
     /// A Boolean value that determines whether bouncing always occurs when horizontal scrolling reaches the end of the content view.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func alwaysBounceHorizontal(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.alwaysBounceHorizontal),value)
@@ -156,7 +156,7 @@ extension ScrollView {
     ///
     ///A Boolean value that determines whether paging is enabled for the scroll view.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func isPagingEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.isPagingEnabled),value)
@@ -167,7 +167,7 @@ extension ScrollView {
     ///
     ///A Boolean value that determines whether scrolling is enabled.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func scrollEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.isScrollEnabled),value)
@@ -178,7 +178,7 @@ extension ScrollView {
     ///
     ///A Boolean value that controls whether the vertical scroll indicator is visible.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func showsVerticalScrollIndicator(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
@@ -189,7 +189,7 @@ extension ScrollView {
     ///
     ///A Boolean value that controls whether the horizontal scroll indicator is visible.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func showsHorizontalScrollIndicator(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
@@ -198,7 +198,7 @@ extension ScrollView {
     
     /// Set both showsVerticalScrollIndicator and showsHorizontalScrollIndicator at the same time.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func showsScrollIndicator(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
@@ -210,7 +210,7 @@ extension ScrollView {
     ///
     /// The style of the scroll indicators. The default style is UIScrollView.IndicatorStyle.default.
     /// - Parameter value: new style
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func indicatorStyle(_ value: UIScrollView.IndicatorStyle) -> Self {
         addAttribute(#selector(setter:UIScrollView.indicatorStyle),value.rawValue)
@@ -219,7 +219,7 @@ extension ScrollView {
     
     /// Set the verticalScrollIndicatorInsets of the UIScrollView behind the wrapper.
     /// - Parameter value: new insets
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 11.1, *)
     @discardableResult
     public func verticalScrollIndicatorInsets(_ value: UIEdgeInsets) -> Self {
@@ -229,7 +229,7 @@ extension ScrollView {
     
     /// Set the horizontalScrollIndicatorInsets of the UIScrollView behind the wrapper.
     /// - Parameter value: new insets
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 11.1, *)
     @discardableResult
     public func horizontalScrollIndicatorInsets(_ value: UIEdgeInsets) -> Self {
@@ -241,7 +241,7 @@ extension ScrollView {
     ///
     /// Set the scrollIndicatorInsets of the UIScrollView behind the wrapper.
     /// - Parameter value: new UIEdgeInsets value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func scrollIndicatorInsets(_ value: UIEdgeInsets) -> Self {
         addAttribute(#selector(setter:UIScrollView.scrollIndicatorInsets),value)
@@ -252,7 +252,7 @@ extension ScrollView {
     ///
     /// A floating-point value that determines the rate of deceleration after the user lifts their finger.
     /// - Parameter value: new rate
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func decelerationRate(_ value: UIScrollView.DecelerationRate) -> Self {
         addAttribute(#selector(setter:UIScrollView.decelerationRate),value.rawValue)
@@ -263,7 +263,7 @@ extension ScrollView {
     ///
     /// The manner in which the index is shown while the user is scrolling.
     /// - Parameter value: new mode
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func indexDisplayMode(_ value: UIScrollView.IndexDisplayMode) -> Self {
         addAttribute(#selector(setter:UIScrollView.indexDisplayMode),value.rawValue)
@@ -276,7 +276,7 @@ extension ScrollView {
     /// - Parameters:
     ///   - contentOffset: A point (expressed in points) that is offset from the content view’s origin.
     ///   - animated: true to animate the transition at a constant velocity to the new offset, false to make the transition immediate.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func setContentOffset(_ contentOffset: CGPoint, animated: Bool) -> Self {
         addAttribute(#selector(UIScrollView.setContentOffset(_:animated:)), contentOffset, animated)
@@ -289,7 +289,7 @@ extension ScrollView {
     /// - Parameters:
     ///   - rect: A rectangle defining an area of the content view. The rectangle should be in the coordinate space of the scroll view.
     ///   - animated: true if the scrolling should be animated, false if it should be immediate.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func scrollRectToVisible(_ rect: CGRect, animated: Bool) -> Self {
         addAttribute(#selector(UIScrollView.scrollRectToVisible(_:animated:)), rect, animated)
@@ -299,7 +299,7 @@ extension ScrollView {
     /// Call the flashScrollIndicators of the UIScrollView behind the wrapper.
     ///
     ///Displays the scroll indicators momentarily.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func flashScrollIndicators() -> Self {
         addAttribute(#selector(UIScrollView.flashScrollIndicators))
@@ -310,7 +310,7 @@ extension ScrollView {
     ///
     /// A Boolean value that determines whether the scroll view delays the handling of touch-down gestures.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func delaysContentTouches(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.delaysContentTouches),value)
@@ -321,7 +321,7 @@ extension ScrollView {
     ///
     ///A Boolean value that controls whether touches in the content view always lead to tracking.
     /// - Parameter value: new value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func canCancelContentTouches(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.canCancelContentTouches),value)
@@ -332,7 +332,7 @@ extension ScrollView {
     ///
     ///A floating-point value that specifies the minimum scale factor that can be applied to the scroll view's content.
     /// - Parameter value: new point value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func minimumZoomScale(_ value: CGFloat) -> Self {
         addAttribute(#selector(setter:UIScrollView.minimumZoomScale),value)
@@ -343,7 +343,7 @@ extension ScrollView {
     ///
     ///A floating-point value that specifies the maximum scale factor that can be applied to the scroll view's content.
     /// - Parameter value: new point value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func maximumZoomScale(_ value: CGFloat) -> Self {
         addAttribute(#selector(setter:UIScrollView.maximumZoomScale),value)
@@ -354,7 +354,7 @@ extension ScrollView {
     ///
     /// A floating-point value that specifies the current scale factor applied to the scroll view's content.
     /// - Parameter value: new float value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func zoomScale(_ value: CGFloat) -> Self {
         addAttribute(#selector(setter:UIScrollView.zoomScale),value)
@@ -367,7 +367,7 @@ extension ScrollView {
     /// - Parameters:
     ///   - scale: The new value to scale the content to.
     ///   - animated: true to animate the transition to the new scale, false to make the transition immediate.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func setZoomScale(_ scale: CGFloat, animated: Bool) -> Self {
         addAttribute(#selector(UIScrollView.setZoomScale(_:animated:)), scale, animated)
@@ -380,7 +380,7 @@ extension ScrollView {
     /// - Parameters:
     ///   - rect: A rectangle defining an area of the content view. The rectangle should be in the coordinate space of the view returned by viewForZooming(in:).
     ///   - animated: true if the scrolling should be animated, false if it should be immediate.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func zoom(to rect: CGRect, animated: Bool) -> Self {
         addAttribute(#selector(UIScrollView.zoom(to:animated:)), rect, animated)
@@ -391,7 +391,7 @@ extension ScrollView {
     ///
     /// A Boolean value that determines whether the scroll view animates the content scaling when the scaling exceeds the maximum or minimum limits.
     /// - Parameter value: new Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func bouncesZoom(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.bouncesZoom),value)
@@ -402,7 +402,7 @@ extension ScrollView {
     ///
     /// A Boolean value that controls whether the scroll-to-top gesture is enabled.
     /// - Parameter value: new Boolean value
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func scrollsToTop(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIScrollView.scrollsToTop),value)
@@ -413,7 +413,7 @@ extension ScrollView {
     ///
     /// The manner in which the keyboard is dismissed when a drag begins in the scroll view.
     /// - Parameter value: new mode
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func keyboardDismissMode(_ value: UIScrollView.KeyboardDismissMode) -> Self {
         addAttribute(#selector(setter:UIScrollView.keyboardDismissMode),value.rawValue)
@@ -424,7 +424,7 @@ extension ScrollView {
     ///
     /// The refresh control associated with the scroll view.
     /// - Parameter value: new UIRefreshControl value
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 10.0, *)
     @discardableResult
     public func refreshControl(_ value: UIRefreshControl) -> Self {
@@ -436,7 +436,7 @@ extension ScrollView {
 extension ScrollView {
     /// Set the callback called when the user scrolls the content view within the receiver.
     /// - Parameter action: the callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didScroll(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidScroll(_:))
@@ -449,7 +449,7 @@ extension ScrollView {
     
     /// Set the callback called when the scroll view’s zoom factor changed.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didZoom(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidZoom(_:))
@@ -462,7 +462,7 @@ extension ScrollView {
     
     /// Set the callback called when  the scroll view is about to start scrolling the content.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func willBeginDragging(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewWillBeginDragging(_:))
@@ -475,7 +475,7 @@ extension ScrollView {
     
     /// Set the callback called when the user finishes scrolling the content.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func willEndDragging(_ action: @escaping (_ velocity: CGPoint, _ targetContentOffset:  UnsafeMutablePointer<CGPoint>) -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewWillEndDragging(_:withVelocity:targetContentOffset:))
@@ -492,7 +492,7 @@ extension ScrollView {
     
     /// Set the callback called when dragging ended in the scroll view.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didEndDragging(_ action: @escaping (_ decelerate: Bool) -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndDragging(_:willDecelerate:))
@@ -508,7 +508,7 @@ extension ScrollView {
     
     /// Set the callback called when  the scroll view is starting to decelerate the scrolling movement.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func willBeginDecelerating(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewWillBeginDecelerating(_:))
@@ -521,7 +521,7 @@ extension ScrollView {
     
     /// Set the calback called when  the scroll view has ended decelerating the scrolling movement.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didEndDecelerating(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndDecelerating(_:))
@@ -534,7 +534,7 @@ extension ScrollView {
     
     /// Set the callback called when a scrolling animation in the scroll view concludes.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didEndScrollingAnimation(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndScrollingAnimation(_:))
@@ -556,7 +556,7 @@ extension ScrollView {
     
     /// Set the callback called when zooming of the content in the scroll view is about to commence.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func willBeginZooming(_ action: @escaping (_ view: UIView?) -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewWillBeginZooming(_:with:))
@@ -574,7 +574,7 @@ extension ScrollView {
     
     /// Set the callback called when zooming of the content in the scroll view completed.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didEndZooming(_ action: @escaping (_ view: UIView?, _ atScale: Float) -> Void?) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndZooming(_:with:atScale:))
@@ -595,7 +595,7 @@ extension ScrollView {
     /// Set the calback that returns the Boolean value.
     ///  to determine if the scroll view should scroll to the top of the content.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func shouldScrollToTop(_ action: @escaping () -> Bool) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewShouldScrollToTop(_:))
@@ -607,7 +607,7 @@ extension ScrollView {
     
     /// Set the callback called when the scroll view scrolled to the top of the content.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func didScrollToTop(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidScrollToTop(_:))
@@ -620,7 +620,7 @@ extension ScrollView {
     
     /// Set the callback called when the scroll view's inset values changed.
     /// - Parameter action: callback
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 11.0, *)
     @discardableResult
     public func didChangeAdjustedContentInset(_ action: @escaping () -> Void) -> Self {

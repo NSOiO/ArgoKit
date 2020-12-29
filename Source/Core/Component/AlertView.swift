@@ -47,7 +47,7 @@ extension AlertView {
     /// - Parameters:
     ///   - title: The text to use for the button title. The value you specify should be localized for the user’s current language.
     ///   - handler: A block to execute when the user selects the action. This block has no return value and takes the selected action object as its only parameter.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func `default`(title: String?, handler: ((String?) -> Void)?) -> Self {
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.default) { [weak self] action in
@@ -63,7 +63,7 @@ extension AlertView {
     /// - Parameters:
     ///   - title: The text to use for the button title. The value you specify should be localized for the user’s current language.
     ///   - handler: A block to execute when the user selects the action. This block has no return value and takes the selected action object as its only parameter.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func cancel(title: String?, handler: (() -> Void)?) -> Self {
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.cancel) { action in
@@ -79,7 +79,7 @@ extension AlertView {
     /// - Parameters:
     ///   - title: The text to use for the button title. The value you specify should be localized for the user’s current language.
     ///   - handler: A block to execute when the user selects the action. This block has no return value and takes the selected action object as its only parameter.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func destructive(title: String?, handler: ((String?) -> Void)?) -> Self {
         let alertAction:UIAlertAction = UIAlertAction(title: title, style: UIAlertAction.Style.destructive) { [weak self] action in
@@ -92,7 +92,7 @@ extension AlertView {
     }
     
     /// Add TextField.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func textField() -> Self {
         alerView.addTextField { [weak self] textFiled in
@@ -119,7 +119,7 @@ extension AlertView {
     
     /// Sets the title of the alert.
     /// - Parameter value: The title of the alert. Use this string to get the user’s attention and communicate the reason for the alert.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func titile(_ value: String?) -> Self {
         alerView.title = value
@@ -128,7 +128,7 @@ extension AlertView {
     
     /// Sets descriptive text that provides additional details about the reason for the alert.
     /// - Parameter value: Descriptive text that provides additional details about the reason for the alert.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func message(_ value: String?) -> Self {
         alerView.message = value
@@ -140,7 +140,7 @@ extension View {
     
     /// Add alert View
     /// - Parameter content: the builder of alert View
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func alert(_ content:()->AlertView) -> Self{
         let alertView = content()

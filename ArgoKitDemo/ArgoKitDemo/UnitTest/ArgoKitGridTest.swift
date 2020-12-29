@@ -253,7 +253,6 @@ struct ArgoKitGridTest: ArgoKit.View {
             .alignItems(.center)
             .alias(variable: $footerView)
             .autoRefreshOffPage(2)
-        
         }
         /*
 //        .lineSpacing(5)

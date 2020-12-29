@@ -1,30 +1,45 @@
-//___FILEHEADER___
+//
+//  TextBindTests.swift
+//  ArgoKitDemo
+//
+//  Created by Dongpeng Dai on 2020/12/28.
+//
 
 import ArgoKit
 
 // view model.
-class ___FILEBASENAMEASIDENTIFIER___Model {
-
+class TextBindTestsModel {
+    @Property var fontSize = 12
+    @Property var fontStyle: AKFontStyle = AKFontStyle.default
+    @Property var myTitle: String = "text"
 }
 
 // view
-struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
+struct TextBindTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
-    private var model: ___FILEBASENAMEASIDENTIFIER___Model
-    init(model: ___FILEBASENAMEASIDENTIFIER___Model) {
+    private var model: TextBindTestsModel
+    init(model: TextBindTestsModel) {
         self.model = model
     }
     
+    func getTitle() -> String {
+        return model.$myTitle.wrappedValue
+    }
+    
     var body: ArgoKit.View {
-        Text("Hello, ArgoKit!")
+        Text()
+            .text(model.myTitle)
+            .onTapGesture {
+                model.myTitle = "change"
+            }
     }
 }
 
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 // mock data.
-class ___FILEBASENAMEASIDENTIFIER___Model_Previews:  ___FILEBASENAMEASIDENTIFIER___Model {
+class TextBindTestsModel_Previews:  TextBindTestsModel {
     override init() {
         super.init()
     }
@@ -42,12 +57,12 @@ fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKi
 }
 
 @available(iOS 13.0.0, *)
-struct ___FILEBASENAMEASIDENTIFIER____Previews: PreviewProvider {
+struct TextBindTests_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         // 数组中可以添加其他设备进行多设备预览
         SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
-                ___FILEBASENAMEASIDENTIFIER___(model: ___FILEBASENAMEASIDENTIFIER___Model_Previews())
+                TextBindTests(model: TextBindTestsModel_Previews())
             }
             .previewDevice(item.device)
             .previewDisplayName(item.name)

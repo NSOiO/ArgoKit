@@ -11,7 +11,7 @@ extension AnimationBasic {
     
     /// Attachs this animation to specified view.
     /// - Parameter view: The view that attachs this animation.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func attach(_ view: View) -> Self {
         view.addAttribute(#selector(setter: UIView.argokit_animation), self)
@@ -23,7 +23,7 @@ extension View {
     
     /// Add the specified animation object to this view
     /// - Parameter animation: The animation to be added to this view
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func addAnimation(animation: AnimationBasic) -> Self {
         addAttribute(#selector(setter: UIView.argokit_animation), animation)
@@ -32,7 +32,7 @@ extension View {
     
     /// Add the specified animation object to the view
     /// - Parameter builder: An animation builder that creates the animation added to this view.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func addAnimation(@ArgoKitAnimationBuilder _ builder: () -> AnimationBasic) -> Self {
         let animation = builder()
@@ -44,7 +44,7 @@ extension View {
     /// - Parameters:
     ///   - serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
     ///   - progress: the progess of the animation. 0.0~1.0
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func updateAnimation(serial: Bool = false, progress: Float) -> Self {
         addAttribute(#selector(UIView.argokit_updateAnimation(serial:progress:)), serial, progress)
@@ -53,7 +53,7 @@ extension View {
     
     /// Starts the animation in the receiver.
     /// - Parameter serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func startAnimation(serial: Bool = false) -> Self {
         addAttribute(#selector(UIView.argokit_startAnimation), serial)
@@ -61,7 +61,7 @@ extension View {
     }
     
     /// Pauses the animation in the receiver.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func pauseAnimation() -> Self {
         addAttribute(#selector(UIView.argokit_pauseAnimation))
@@ -69,7 +69,7 @@ extension View {
     }
     
     /// Resumes the animation in the receiver.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func resumeAnimation() -> Self {
         addAttribute(#selector(UIView.argokit_resumeAnimation))
@@ -77,7 +77,7 @@ extension View {
     }
     
     /// Stops the animation in the receiver.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func stopAnimation() -> Self {
         addAttribute(#selector(UIView.argokit_stopAnimation))

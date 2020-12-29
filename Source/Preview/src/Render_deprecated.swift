@@ -9,11 +9,11 @@ import UIKit
 import SwiftUI
 import ArgoKit
 
-var host: UIHostingController?
+var host: ArgoKit.UIHostingController?
 
 @available(iOS 13.0, *)
 public struct ArgoRender2: UIViewRepresentable {
-    let builder:() -> View
+    let builder:() -> ArgoKit.View
     
     public init (@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) {
         self.builder = builder

@@ -131,7 +131,7 @@ extension Image {
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
     ///   - resizingMode: The mode with which the interior of the image is resized.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func resizable(capInsets: UIEdgeInsets = UIEdgeInsets(), resizingMode: UIImage.ResizingMode = .stretch) -> Self {
         if let image = pNode.image() {
@@ -142,7 +142,7 @@ extension Image {
     
     /// Adjust the rendering mode of the image.
     /// - Parameter renderingMode: The rendering mode to use for the new image.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func renderingMode(_ renderingMode: UIImage.RenderingMode = .automatic) -> Self {
         if let image = pNode.image() {
@@ -156,7 +156,7 @@ extension Image {
     
     /// Sets the displayed image.
     /// - Parameter value: The image displayed in the image view.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func image(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.image),value)
@@ -167,7 +167,7 @@ extension Image {
     /// - Parameters:
     ///   - value: The image displayed in the image view.
     ///   - placeholder: The placeholder image displayed in the image view if the value invalid
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func image(_ value: UIImage?, placeholder: UIImage?) -> Self {
         return self.image(value ?? placeholder)
@@ -177,7 +177,7 @@ extension Image {
     /// - Parameters:
     ///   - url: The url of a image.
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func image(url: URL?, placeholder: String?) -> Self {
         pNode.image(url: url, placeholder: placeholder)
@@ -188,7 +188,7 @@ extension Image {
     /// - Parameters:
     ///   - urlString: The string represent a valid URL For a image
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func image(urlString: String?, placeholder: String?) -> Self {
         var url:URL? = nil
@@ -201,7 +201,7 @@ extension Image {
     
     /// Sets the highlighted image displayed in the image view.
     /// - Parameter value: The highlighted image displayed in the image view.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func highlightedImage(_ value: UIImage?) -> Self {
         addAttribute(#selector(setter:UIImageView.highlightedImage),value)
@@ -210,7 +210,7 @@ extension Image {
     
     /// Sets the configuration values to use when rendering the image.
     /// - Parameter value: The configuration values to use when rendering the image.
-    /// - Returns: Self
+    /// - Returns: self
     @available(iOS 13.0, *)
     @discardableResult
     public func preferredSymbolConfiguration(_ value: UIImage.SymbolConfiguration?) -> Self {
@@ -220,7 +220,7 @@ extension Image {
     
     /// Sets a Boolean value that determines whether user events are ignored and removed from the event queue.
     /// - Parameter value: A Boolean value that determines whether user events are ignored and removed from the event queue.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func isUserInteractionEnabled(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIImageView.isUserInteractionEnabled),value)
@@ -229,7 +229,7 @@ extension Image {
     
     /// Sets a Boolean value that determines whether the image is highlighted.
     /// - Parameter value: A Boolean value that determines whether the image is highlighted.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func isHighlighted(_ value: Bool) -> Self {
         addAttribute(#selector(setter:UIImageView.isHighlighted),value)
@@ -238,7 +238,7 @@ extension Image {
     
     /// Sets an array of UIImage objects to use for an animation.
     /// - Parameter value: An array of UIImage objects to use for an animation.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func animationImages(_ value: [UIImage]?) -> Self {
         addAttribute(#selector(setter:UIImageView.animationImages),value)
@@ -247,7 +247,7 @@ extension Image {
     
     /// Sets an array of UIImage objects to use for an animation when the view is highlighted.
     /// - Parameter value: An array of UIImage objects to use for an animation when the view is highlighted.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func highlightedAnimationImages(_ value: [UIImage]?) -> Self {
         addAttribute(#selector(setter:UIImageView.highlightedAnimationImages),value)
@@ -256,7 +256,7 @@ extension Image {
     
     /// Sets the amount of time it takes to go through one cycle of the images.
     /// - Parameter value: The amount of time it takes to go through one cycle of the images.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func animationDuration(_ value: TimeInterval) -> Self {
         addAttribute(#selector(setter:UIImageView.animationDuration),value)
@@ -266,7 +266,7 @@ extension Image {
     
     /// Specifies the number of times to repeat the animation.
     /// - Parameter value: the number of times to repeat the animation.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func animationRepeatCount(_ value: Int) -> Self {
         addAttribute(#selector(setter:UIImageView.animationRepeatCount),value)
@@ -275,7 +275,7 @@ extension Image {
     
     /// Sets a color used to tint template images in the view hierarchy.
     /// - Parameter value: A color used to tint template images in the view hierarchy.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func tintColor(_ value: UIColor!) -> Self {
         addAttribute(#selector(setter:UIImageView.tintColor),value)
@@ -283,7 +283,7 @@ extension Image {
     }
     
     /// Starts animating the images in the receiver.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func startAnimating() -> Self {
         addAttribute(#selector(UIImageView.startAnimating))
@@ -291,7 +291,7 @@ extension Image {
     }
     
     /// Stops animating the images in the receiver.
-    /// - Returns: Self
+    /// - Returns: self
     @discardableResult
     public func stopAnimating() -> Self {
         addAttribute(#selector(UIImageView.stopAnimating))
