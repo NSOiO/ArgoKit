@@ -32,6 +32,10 @@ public class DataSource<Value>{
 
     }
     
+}
+
+
+extension DataSource{
     private func dataSource()->Array<Array<Any>>? {
         if let value = _value as? SectionDataList<Any> {
             return value
@@ -49,6 +53,15 @@ public class DataSource<Value>{
     
     public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
         if let node = self._rootNode{
+            for indexPath in indexPaths {
+                if indexPath.section >= dataSource()?.count ?? 0
+                    || indexPath.row >= dataSource()?[indexPath.section].count ?? 0{
+                    continue
+                }
+                if let data = dataSource()?[indexPath.section][indexPath.row] as? ArgoKitIdentifiable{
+                    data.linkNode = nil
+                }
+            }
             node.reloadRows(at: indexPaths, with: animation)
         }
     }
