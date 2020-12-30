@@ -351,6 +351,13 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self;
 }
 
+- (NSString *)identifiable {
+    if (!_identifiable) {
+        _identifiable = [NSString stringWithFormat:@"%lud", (unsigned long)[self hash]];
+    }
+    return _identifiable;
+}
+
 - (void)setUpNode:(Class)viewClass {
     _viewClass = viewClass;
     _resetOrigin = YES;

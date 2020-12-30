@@ -9,6 +9,15 @@ import Foundation
 
 /// Wrapper of UIButton
 /// A control that executes your custom code in response to user interactions.
+///
+///```
+///         Button {
+///             // click action
+///         } builder: {
+///             // content
+///         }
+///```
+///
 public struct Button: View {
     private let pNode:ArgoKitArttibuteNode
     private var label:Text?

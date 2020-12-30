@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (47% documented)
+         (65% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -73,6 +73,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListContextualAction.html">ListContextualAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListRowAction.html">ListRowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListSwipeActionsConfiguration.html">ListSwipeActionsConfiguration</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ProgressViewStyleConfiguration.html">ProgressViewStyleConfiguration</a>
@@ -148,8 +157,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNode.html">ArgoKitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNodeViewModifier.html">ArgoKitNodeViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/Gesture.html">Gesture</a>
               </li>
@@ -409,7 +435,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -463,7 +489,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -529,7 +555,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -583,7 +609,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -618,7 +644,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -653,7 +679,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -688,7 +714,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -771,6 +797,13 @@ Required. Default implementations provided.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Assigns the view to the specified variable or property.</p>
+<pre class="highlight swift"><code>    <span class="kd">struct</span> <span class="kt">DemoView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kd">@Alias</span> <span class="k">var</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">Text</span><span class="p">?</span>
+        <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+            <span class="kt">Text</span><span class="p">(</span><span class="s">"Hello, ArgoKit"</span><span class="p">)</span><span class="o">.</span><span class="nf">alias</span><span class="p">(</span><span class="nv">variable</span><span class="p">:</span> <span class="err">$</span><span class="n">text</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -803,7 +836,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -906,6 +939,294 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
+                        <p>self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE7gestureADxAA7Gesture_p_tF"></a>
+                    <a name="//apple_ref/swift/Method/gesture(gesture:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE7gestureADxAA7Gesture_p_tF">gesture(gesture:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds the gesture to this View</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">gesture</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Gesture.html">Gesture</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gesture</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gesture that is added to this view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE13removeGesture7gesturexAA0E0_p_tF"></a>
+                    <a name="//apple_ref/swift/Method/removeGesture(gesture:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE13removeGesture7gesturexAA0E0_p_tF">removeGesture(gesture:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes the gesture from this view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeGesture</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Gesture.html">Gesture</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gesture</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gesture that is removed from this view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE12onTapGesture12numberOfTaps0gH7Touches6actionxSi_SiyyctF"></a>
+                    <a name="//apple_ref/swift/Method/onTapGesture(numberOfTaps:numberOfTouches:action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE12onTapGesture12numberOfTaps0gH7Touches6actionxSi_SiyyctF">onTapGesture(numberOfTaps:<wbr>numberOfTouches:<wbr>action:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds tap gesture to this View</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">onTapGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfTaps</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of taps necessary for gesture recognition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfTouches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of fingers that the user must tap for gesture recognition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action to handle the gesture recognized by the receiver.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE18onLongPressGesture12numberOfTaps0hI7Touches07minimumF8Duration17allowableMovement6actionxSi_SiSd12CoreGraphics7CGFloatVyyctF"></a>
+                    <a name="//apple_ref/swift/Method/onLongPressGesture(numberOfTaps:numberOfTouches:minimumPressDuration:allowableMovement:action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE18onLongPressGesture12numberOfTaps0hI7Touches07minimumF8Duration17allowableMovement6actionxSi_SiSd12CoreGraphics7CGFloatVyyctF">onLongPressGesture(numberOfTaps:<wbr>numberOfTouches:<wbr>minimumPressDuration:<wbr>allowableMovement:<wbr>action:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds long press gesture to this View</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">onLongPressGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">minimumPressDuration</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nv">allowableMovement</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfTaps</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of taps on the view necessary for gesture recognition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfTouches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of fingers that must touch the view for gesture recognition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>minimumPressDuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The minimum time that the user must press on the view for the gesture to be recognized.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowableMovement</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum movement of the fingers on the view before the gesture fails.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action to handle the gesture recognized by the receiver.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
                         <p>Self</p>
                       </div>
                     </section>
@@ -968,7 +1289,8 @@ Required. Default implementations provided.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">applyLayout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">applyLayout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
 
                         </div>
                       </div>
@@ -1002,7 +1324,8 @@ Required. Default implementations provided.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">applyLayout</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">applyLayout</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
 
                         </div>
                       </div>
@@ -1055,7 +1378,8 @@ Required. Default implementations provided.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">calculateLayout</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">calculateLayout</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
 
                         </div>
                       </div>
@@ -1134,7 +1458,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1188,7 +1512,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1242,7 +1566,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1296,7 +1620,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1350,7 +1674,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1404,7 +1728,7 @@ Required. Default implementations provided.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1459,7 +1783,7 @@ If wrapping is allowed items are wrapped into multiple lines along the main axis
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1573,7 +1897,7 @@ If wrapping is allowed items are wrapped into multiple lines along the main axis
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1628,7 +1952,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1682,7 +2006,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1736,7 +2060,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1826,7 +2150,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1892,7 +2216,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1982,7 +2306,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2048,7 +2372,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2138,7 +2462,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2204,7 +2528,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2270,7 +2594,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2324,7 +2648,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2378,7 +2702,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2432,7 +2756,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2486,7 +2810,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2540,7 +2864,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2594,7 +2918,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2852,6 +3176,2463 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
+                        <p>self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE12addAttribute9isCALayer0F5Dirty__ySb_Sb10ObjectiveC8SelectorVypSgdtF"></a>
+                    <a name="//apple_ref/swift/Method/addAttribute(isCALayer:isDirty:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE12addAttribute9isCALayer0F5Dirty__ySb_Sb10ObjectiveC8SelectorVypSgdtF">addAttribute(isCALayer:<wbr>isDirty:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds attribute to the UIKit View</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addAttribute</span><span class="p">(</span><span class="nv">isCALayer</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">isDirty</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">_</span> <span class="nv">selector</span><span class="p">:</span> <span class="kt">Selector</span><span class="p">,</span> <span class="n">_</span> <span class="nv">patamter</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?</span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isCALayer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>trueif is calayer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isDirty</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>true if the attribute may change the view layout</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>selector</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The selector of the attribute.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>patamter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>patamter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE24isUserInteractionEnabledyxSbF"></a>
+                    <a name="//apple_ref/swift/Method/isUserInteractionEnabled(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE24isUserInteractionEnabledyxSbF">isUserInteractionEnabled(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether user events are ignored and removed from the event queue.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">isUserInteractionEnabled</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether user events are ignored and removed from the event queue.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE3tagyxSiF"></a>
+                    <a name="//apple_ref/swift/Method/tag(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE3tagyxSiF">tag(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets an integer that you can use to identify view objects in your application.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">tag</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An integer that you can use to identify view objects in your application.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE3tagSiSgyF"></a>
+                    <a name="//apple_ref/swift/Method/tag()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE3tagSiSgyF">tag()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets an integer that you can use to identify view objects in your application.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tag</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An integer that you can use to identify view objects in your application.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE5layerSo7CALayerCSgyF"></a>
+                    <a name="//apple_ref/swift/Method/layer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE5layerSo7CALayerCSgyF">layer()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets the view’s Core Animation layer used for rendering.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">layer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CALayer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The view’s Core Animation layer used for rendering.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE16canBecomeFocusedSbSgyF"></a>
+                    <a name="//apple_ref/swift/Method/canBecomeFocused()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE16canBecomeFocusedSbSgyF">canBecomeFocused()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets a Boolean value that indicates whether the view is currently capable of being focused.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">9.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">canBecomeFocused</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Boolean value that indicates whether the view is currently capable of being focused.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE9isFocusedSbSgyF"></a>
+                    <a name="//apple_ref/swift/Method/isFocused()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE9isFocusedSbSgyF">isFocused()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets a Boolean value that indicates whether the item is currently focused.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">9.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">isFocused</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Boolean value that indicates whether the item is currently focused.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE20focusGroupIdentifieryxSSSgF"></a>
+                    <a name="//apple_ref/swift/Method/focusGroupIdentifier(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE20focusGroupIdentifieryxSSSgF">focusGroupIdentifier(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview&rsquo;s focus group.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">focusGroupIdentifier</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview&rsquo;s focus group.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE20focusGroupIdentifierSSSgyF"></a>
+                    <a name="//apple_ref/swift/Method/focusGroupIdentifier()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE20focusGroupIdentifierSSSgyF">focusGroupIdentifier()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets the identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview&rsquo;s focus group.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">focusGroupIdentifier</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview&rsquo;s focus group.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE24semanticContentAttributeyxSo010UISemanticeF0VF"></a>
+                    <a name="//apple_ref/swift/Method/semanticContentAttribute(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE24semanticContentAttributeyxSo010UISemanticeF0VF">semanticContentAttribute(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">9.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">semanticContentAttribute</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UISemanticContentAttribute</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE24semanticContentAttributeSo010UISemanticeF0VSgyF"></a>
+                    <a name="//apple_ref/swift/Method/semanticContentAttribute()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE24semanticContentAttributeSo010UISemanticeF0VSgyF">semanticContentAttribute()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets a semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">semanticContentAttribute</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UISemanticContentAttribute</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE37effectiveUserInterfaceLayoutDirectionSo06UIUserfgH0VSgyF"></a>
+                    <a name="//apple_ref/swift/Method/effectiveUserInterfaceLayoutDirection()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE37effectiveUserInterfaceLayoutDirectionSo06UIUserfgH0VSgyF">effectiveUserInterfaceLayoutDirection()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets the user interface layout direction appropriate for arranging the immediate content of the view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">effectiveUserInterfaceLayoutDirection</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIUserInterfaceLayoutDirection</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The user interface layout direction appropriate for arranging the immediate content of the view.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE15backgroundColoryxSo7UIColorCF"></a>
+                    <a name="//apple_ref/swift/Method/backgroundColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE15backgroundColoryxSo7UIColorCF">backgroundColor(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the view’s background color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">backgroundColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view’s background color.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE15backgroundColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/backgroundColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE15backgroundColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF">backgroundColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the view’s background color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">backgroundColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>r</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The red value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>g</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The green value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>b</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The blue value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE15backgroundColor3hex5alphaxSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/backgroundColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE15backgroundColor3hex5alphaxSi_SftF">backgroundColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the view’s background color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">backgroundColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The hex value of the color object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE5alphayx12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/alpha(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE5alphayx12CoreGraphics7CGFloatVF">alpha(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the view’s alpha value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">alpha</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view’s alpha value, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE6opaqueyxSbF"></a>
+                    <a name="//apple_ref/swift/Method/opaque(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE6opaqueyxSbF">opaque(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets a Boolean value that determines whether the view is opaque.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">opaque</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether the view is opaque.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE26clearsContextBeforeDrawingyxSbF"></a>
+                    <a name="//apple_ref/swift/Method/clearsContextBeforeDrawing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE26clearsContextBeforeDrawingyxSbF">clearsContextBeforeDrawing(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether the view’s bounds should be automatically cleared before drawing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">clearsContextBeforeDrawing</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether the view’s bounds should be automatically cleared before drawing.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE6hiddenyxSbF"></a>
+                    <a name="//apple_ref/swift/Method/hidden(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE6hiddenyxSbF">hidden(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether the view is hidden.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">hidden</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether the view is hidden.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE4goneyxSbF"></a>
+                    <a name="//apple_ref/swift/Method/gone(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE4goneyxSbF">gone(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether the view is hidden and styling properties should be applied</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">gone</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>true if you want to hide the view and not applied styling properties.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11contentModeyxSo013UIViewContentE0VF"></a>
+                    <a name="//apple_ref/swift/Method/contentMode(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11contentModeyxSo013UIViewContentE0VF">contentMode(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets options to specify how a view adjusts its content when its size changes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">contentMode</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIView</span><span class="o">.</span><span class="kt">ContentMode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Options to specify how a view adjusts its content when its size changes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE9tintColoryxSo7UIColorCF"></a>
+                    <a name="//apple_ref/swift/Method/tintColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE9tintColoryxSo7UIColorCF">tintColor(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE9tintColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/tintColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE9tintColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF">tintColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>r</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The red value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>g</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The green value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>b</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The blue value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE9tintColor3hex5alphaxSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/tintColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE9tintColor3hex5alphaxSi_SftF">tintColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The hex value of the color object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE18tintAdjustmentModeyxSo010UIViewTinteF0VF"></a>
+                    <a name="//apple_ref/swift/Method/tintAdjustmentMode(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE18tintAdjustmentModeyxSo010UIViewTinteF0VF">tintAdjustmentMode(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the first non-default tint adjustment mode value in the view’s hierarchy, ascending from and starting with the view itself.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintAdjustmentMode</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIView</span><span class="o">.</span><span class="kt">TintAdjustmentMode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The first non-default tint adjustment mode value in the view’s hierarchy, ascending from and starting with the view itself.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE13clipsToBoundsyxSbF"></a>
+                    <a name="//apple_ref/swift/Method/clipsToBounds(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE13clipsToBoundsyxSbF">clipsToBounds(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether subviews are confined to the bounds of the view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">clipsToBounds</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether subviews are confined to the bounds of the view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE12cornerRadiusyx12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/cornerRadius(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE12cornerRadiusyx12CoreGraphics7CGFloatVF">cornerRadius(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the corner radius of this view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cornerRadius</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The corner radius of this view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE12cornerRadius7topLeft0F5Right06bottomG00iH0x12CoreGraphics7CGFloatV_A3KtF"></a>
+                    <a name="//apple_ref/swift/Method/cornerRadius(topLeft:topRight:bottomLeft:bottomRight:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE12cornerRadius7topLeft0F5Right06bottomG00iH0x12CoreGraphics7CGFloatV_A3KtF">cornerRadius(topLeft:<wbr>topRight:<wbr>bottomLeft:<wbr>bottomRight:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the radius of this view&rsquo;s corner.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cornerRadius</span><span class="p">(</span><span class="nv">topLeft</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">topRight</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">bottomLeft</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">bottomRight</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>topLeft</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of this view&rsquo;s top left corner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>topRight</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of this view&rsquo;s top right corner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bottomLeft</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of this view&rsquo;s bottom left corner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bottomRight</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of this view&rsquo;s bottom right corner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11borderWidthyx12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/borderWidth(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11borderWidthyx12CoreGraphics7CGFloatVF">borderWidth(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the width of this view&rsquo;s border.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderWidth</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The border width of this view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11borderColoryxSo7UIColorCF"></a>
+                    <a name="//apple_ref/swift/Method/borderColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11borderColoryxSo7UIColorCF">borderColor(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the color of this view&rsquo;s border.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The border color of this view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11borderColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/borderColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11borderColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF">borderColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the color of this view&rsquo;s border.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>r</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The red value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>g</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The green value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>b</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The blue value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11borderColor3hex5alphaxSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/borderColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11borderColor3hex5alphaxSi_SftF">borderColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the color of this view&rsquo;s border.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The hex value of the color object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE6circlexyF"></a>
+                    <a name="//apple_ref/swift/Method/circle()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE6circlexyF">circle()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Clip this view to circle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">circle</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11shadowColoryxSo7UIColorCSgF"></a>
+                    <a name="//apple_ref/swift/Method/shadowColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11shadowColoryxSo7UIColorCSgF">shadowColor(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the color of the layer’s shadow. Animatable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadowColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The color of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11shadowColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/shadowColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11shadowColor3red5green4blue5alphaxSi_S2i12CoreGraphics7CGFloatVtF">shadowColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the color of the layer’s shadow. Animatable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadowColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>r</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The red value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>g</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The green value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>b</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The blue value of the color object. 0~255</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE11shadowColor3hex5alphaxSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/shadowColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE11shadowColor3hex5alphaxSi_SftF">shadowColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the color of the layer’s shadow. Animatable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadowColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The hex value of the color object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>a</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity value of the color object, specified as a value from 0.0 to 1.0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE6shadow6offset6radius7opacityxSo6CGSizeV_12CoreGraphics7CGFloatVSftF"></a>
+                    <a name="//apple_ref/swift/Method/shadow(offset:radius:opacity:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE6shadow6offset6radius7opacityxSo6CGSizeV_12CoreGraphics7CGFloatVSftF">shadow(offset:<wbr>radius:<wbr>opacity:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the the offset, radius and opacity of the layer’s shadow. Animatable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadow</span><span class="p">(</span><span class="nv">offset</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">,</span> <span class="nv">radius</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">opacity</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>offset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The offset of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>radius</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>opacity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE6shadow5color6offset6radius7opacity7cornersxSo7UIColorCSg_So6CGSizeV12CoreGraphics7CGFloatVSfSo12UIRectCornerVtF"></a>
+                    <a name="//apple_ref/swift/Method/shadow(color:offset:radius:opacity:corners:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE6shadow5color6offset6radius7opacity7cornersxSo7UIColorCSg_So6CGSizeV12CoreGraphics7CGFloatVSfSo12UIRectCornerVtF">shadow(color:<wbr>offset:<wbr>radius:<wbr>opacity:<wbr>corners:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Config the layer’s shadow. Animatable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadow</span><span class="p">(</span><span class="nv">color</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="nv">offset</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">,</span> <span class="nv">radius</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">opacity</span><span class="p">:</span> <span class="kt">Float</span><span class="p">,</span> <span class="nv">corners</span><span class="p">:</span> <span class="kt">UIRectCorner</span> <span class="o">=</span> <span class="o">.</span><span class="n">allCorners</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>color</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The color of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>offset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The offset of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>radius</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>opacity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The opacity of the layer’s shadow.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>corners</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radius of this view&rsquo;s corner.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE13gradientColor05startE003endE09directionxSo7UIColorCSg_AjA0aB12GradientTypeVSgtF"></a>
+                    <a name="//apple_ref/swift/Method/gradientColor(startColor:endColor:direction:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE13gradientColor05startE003endE09directionxSo7UIColorCSg_AjA0aB12GradientTypeVSgtF">gradientColor(startColor:<wbr>endColor:<wbr>direction:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the view’s background gradient color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">gradientColor</span><span class="p">(</span><span class="nv">startColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="nv">endColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="nv">direction</span><span class="p">:</span> <span class="kt">ArgoKitGradientType</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>startColor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The start color of the gradient.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endColor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The end color of the gradient.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The direction of the gradient.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE18cleanGradientLayerxyF"></a>
+                    <a name="//apple_ref/swift/Method/cleanGradientLayer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE18cleanGradientLayerxyF">cleanGradientLayer()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Clean the view’s background gradient color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cleanGradientLayer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE13addBlurEffect5style5alpha5colorxSo06UIBlurF5StyleV_12CoreGraphics7CGFloatVSgSo7UIColorCSgtF"></a>
+                    <a name="//apple_ref/swift/Method/addBlurEffect(style:alpha:color:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE13addBlurEffect5style5alpha5colorxSo06UIBlurF5StyleV_12CoreGraphics7CGFloatVSgSo7UIColorCSgtF">addBlurEffect(style:<wbr>alpha:<wbr>color:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds blur effect to this view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">addBlurEffect</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">UIBlurEffect</span><span class="o">.</span><span class="kt">Style</span><span class="p">,</span> <span class="nv">alpha</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">color</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>style</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intensity of the blur effect. See UIBlurEffect.Style for valid options.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>alpha</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The alpha of the blur effect.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>color</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The color of the blur effect.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4ViewPAAE16removeBlurEffectxyF"></a>
+                    <a name="//apple_ref/swift/Method/removeBlurEffect()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ViewPAAE16removeBlurEffectxyF">removeBlurEffect()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes blur effect.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeBlurEffect</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
                         <p>Self</p>
                       </div>
                     </section>
@@ -2906,7 +5687,7 @@ This property specifies how much of the remaining space in the flex container sh
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2949,7 +5730,7 @@ This property specifies how much of the remaining space in the flex container sh
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

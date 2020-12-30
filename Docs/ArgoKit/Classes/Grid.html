@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (47% documented)
+         (65% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -73,6 +73,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListContextualAction.html">ListContextualAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListRowAction.html">ListRowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListSwipeActionsConfiguration.html">ListSwipeActionsConfiguration</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ProgressViewStyleConfiguration.html">ProgressViewStyleConfiguration</a>
@@ -148,8 +157,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNode.html">ArgoKitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNodeViewModifier.html">ArgoKitNodeViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/Gesture.html">Gesture</a>
               </li>
@@ -252,7 +278,38 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Wrapper of UICollectionView
+ An object that manages an ordered collection of data items and presents them using customizable layouts.</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code>     <span class="kd">struct</span> <span class="kt">GridView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">dataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">headerDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">footerDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+
+         <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+
+             <span class="kt">Grid</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span><span class="err">$</span><span class="n">dataSource</span><span class="p">){</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Item</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="nf">sectionHeader</span><span class="p">(</span><span class="err">$</span><span class="n">headerDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Header</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="nf">sectionFooter</span><span class="p">(</span><span class="err">$</span><span class="n">footerDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Footer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="n">cellSelected</span> <span class="p">{</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="k">in</span>
+                 <span class="c1">// Did Select item action</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+
+         <span class="kd">func</span> <span class="nf">appendData</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Model</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">models</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="err">$</span><span class="n">dataSource</span><span class="o">.</span><span class="nf">reloadData</span><span class="p">()</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+</code></pre>
 
           </div>
         </section>
@@ -261,33 +318,6 @@
           <div class="section-content">
             <div class="task-group">
               <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4GridCACyxGycfc"></a>
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4GridCACyxGycfc">init()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -301,7 +331,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializer</p>
+<pre class="highlight swift"><code>     <span class="kt">Grid</span> <span class="p">{</span>
+         <span class="kt">Item1</span><span class="p">()</span>
+         <span class="kt">Item2</span><span class="p">()</span>
+         <span class="kt">Item3</span><span class="p">()</span>
+     <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -312,15 +348,46 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>waterfall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the grid syle is waterfall.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content of the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4GridC9waterfall4data10rowContentACyxGSb_AA10DataSourceCySayxGGAA4View_pxctcAA0aB12IdentifiableRzlufc"></a>
-                    <a name="//apple_ref/swift/Method/init(waterfall:data:rowContent:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4GridC9waterfall4data10rowContentACyxGSb_AA10DataSourceCySayxGGAA4View_pxctcAA0aB12IdentifiableRzlufc">init(waterfall:<wbr>data:<wbr>rowContent:<wbr>)</a>
+                    <a name="/s:7ArgoKit4GridC9waterfall4data11itemContentACyxGSb_AA10DataSourceCySayxGGAA4View_pxctcAA0aB12IdentifiableRzlufc"></a>
+                    <a name="//apple_ref/swift/Method/init(waterfall:data:itemContent:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC9waterfall4data11itemContentACyxGSb_AA10DataSourceCySayxGGAA4View_pxctcAA0aB12IdentifiableRzlufc">init(waterfall:<wbr>data:<wbr>itemContent:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -328,16 +395,63 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializer</p>
+<pre class="highlight swift"><code>     <span class="kt">Grid</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="err">$</span><span class="n">dataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">item</span> <span class="k">in</span>
+         <span class="kt">Item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">waterfall</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">DataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">rowContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt">ArgoKitIdentifiable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">waterfall</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">DataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">itemContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>waterfall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the grid syle is waterfall.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data for populating the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A view builder that creates the view for a single item of the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -345,9 +459,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4GridC9waterfall4data10rowContentACyxGSb_AA10DataSourceCySaySayxGGGAA4View_pxctcAA0aB12IdentifiableRzlufc"></a>
-                    <a name="//apple_ref/swift/Method/init(waterfall:data:rowContent:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4GridC9waterfall4data10rowContentACyxGSb_AA10DataSourceCySaySayxGGGAA4View_pxctcAA0aB12IdentifiableRzlufc">init(waterfall:<wbr>data:<wbr>rowContent:<wbr>)</a>
+                    <a name="/s:7ArgoKit4GridC9waterfall4data11itemContentACyxGSb_AA10DataSourceCySaySayxGGGAA4View_pxctcAA0aB12IdentifiableRzlufc"></a>
+                    <a name="//apple_ref/swift/Method/init(waterfall:data:itemContent:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC9waterfall4data11itemContentACyxGSb_AA10DataSourceCySaySayxGGGAA4View_pxctcAA0aB12IdentifiableRzlufc">init(waterfall:<wbr>data:<wbr>itemContent:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -355,16 +469,63 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializer</p>
+<pre class="highlight swift"><code>     <span class="kt">Grid</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="err">$</span><span class="n">sectionDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">item</span> <span class="k">in</span>
+         <span class="kt">Item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">waterfall</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">SectionDataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">rowContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt">ArgoKitIdentifiable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">waterfall</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">SectionDataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">itemContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>waterfall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the grid syle is waterfall.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The section data for populating the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A view builder that creates the view for a single item of the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -382,7 +543,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The view that is displayed in the header of the specified section of the grid.</p>
 
                       </div>
                       <div class="declaration">
@@ -393,6 +554,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">sectionHeader</span><span class="p">(</span><span class="kd">@ArgoKitListBuilder</span> <span class="nv">headerContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headerContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A view builder that creates the view for section header.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -410,7 +594,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The view that is displayed in the header of the specified section of the grid.</p>
 
                       </div>
                       <div class="declaration">
@@ -418,9 +602,44 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sectionHeader</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">DataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">headerContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt">ArgoKitIdentifiable</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sectionHeader</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">DataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">headerContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data for populating the section header.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headerContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A view builder that creates the view for section header.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -438,7 +657,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The view that is displayed in the footer of the specified section of the grid.</p>
 
                       </div>
                       <div class="declaration">
@@ -449,6 +668,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">sectionFooter</span><span class="p">(</span><span class="kd">@ArgoKitListBuilder</span> <span class="nv">footerContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>footerContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A view builder that creates the view for section footer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -466,7 +708,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The view that is displayed in the footer of the specified section of the grid.</p>
 
                       </div>
                       <div class="declaration">
@@ -474,9 +716,1480 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sectionFooter</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">DataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">footerContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt">ArgoKitIdentifiable</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sectionFooter</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">DataList</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="kd">@ArgoKitListBuilder</span> <span class="nv">footerContent</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data for populating the section footer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>footerContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A view builder that creates the view for section footer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC12scrollToItem9indexPath14scrollposition8animatedACyxGXD10Foundation05IndexH0V_So30UICollectionViewScrollPositionVSbtF"></a>
+                    <a name="//apple_ref/swift/Method/scrollToItem(indexPath:scrollposition:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC12scrollToItem9indexPath14scrollposition8animatedACyxGXD10Foundation05IndexH0V_So30UICollectionViewScrollPositionVSbtF">scrollToItem(indexPath:<wbr>scrollposition:<wbr>animated:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Scrolls the grid contents until the specified item is visible.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">scrollToItem</span><span class="p">(</span><span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="nv">scrollposition</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path of the item to scroll into view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>scrollposition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option that specifies where the item should be positioned when scrolling finishes. For a list of possible values, see UICollectionView.ScrollPosition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify true to animate the scrolling behavior or false to adjust the scroll view’s visible content immediately.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC12scrollToItem4rect8animatedACyxGXDSo6CGRectV_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/scrollToItem(rect:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC12scrollToItem4rect8animatedACyxGXDSo6CGRectV_SbtF">scrollToItem(rect:<wbr>animated:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Scrolls a specific area of the content so that it is visible in the receiver.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">scrollToItem</span><span class="p">(</span><span class="nv">rect</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rect</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A rectangle defining an area of the content view. The rectangle should be in the coordinate space of the scroll view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>true if the scrolling should be animated, false if it should be immediate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC15allowsSelectionyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/allowsSelection(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC15allowsSelectionyACyxGXDSbF">allowsSelection(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that indicates whether users can select items in the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">allowsSelection</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that indicates whether users can select items in the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC23allowsMultipleSelectionyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/allowsMultipleSelection(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC23allowsMultipleSelectionyACyxGXDSbF">allowsMultipleSelection(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether users can select more than one item in the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">allowsMultipleSelection</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether users can select more than one item in the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC7editingyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/editing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC7editingyACyxGXDSbF">editing(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether the grid is in editing mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">editing</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether the grid is in editing mode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC28allowsSelectionDuringEditingyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/allowsSelectionDuringEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC28allowsSelectionDuringEditingyACyxGXDSbF">allowsSelectionDuringEditing(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether users can select cells while the grid is in editing mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">allowsSelectionDuringEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether users can select cells while the grid is in editing mode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC36allowsMultipleSelectionDuringEditingyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/allowsMultipleSelectionDuringEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC36allowsMultipleSelectionDuringEditingyACyxGXDSbF">allowsMultipleSelectionDuringEditing(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that controls whether users can select more than one cell simultaneously in editing mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">allowsMultipleSelectionDuringEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that controls whether users can select more than one cell simultaneously in editing mode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC21selectionFollowsFocusyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/selectionFollowsFocus(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC21selectionFollowsFocusyACyxGXDSbF">selectionFollowsFocus(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that triggers an automatic selection when focus moves to a cell.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">selectionFollowsFocus</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that triggers an automatic selection when focus moves to a cell.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC14bounceVerticalyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/bounceVertical(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC14bounceVerticalyACyxGXDSbF">bounceVertical(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether bouncing always occurs when vertical scrolling reaches the end of the content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">bounceVertical</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether bouncing always occurs when vertical scrolling reaches the end of the content.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC16bounceHorizontalyACyxGXDSbF"></a>
+                    <a name="//apple_ref/swift/Method/bounceHorizontal(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC16bounceHorizontalyACyxGXDSbF">bounceHorizontal(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a Boolean value that determines whether bouncing always occurs when horizontal scrolling reaches the end of the content view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">bounceHorizontal</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that determines whether bouncing always occurs when horizontal scrolling reaches the end of the content view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/action%20observer"></a>
+                <a name="//apple_ref/swift/Section/action observer" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/action%20observer"></a>
+                  <h3 class="section-name"><p>action observer</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC12cellSelectedyACyxGXDyx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellSelected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC12cellSelectedyACyxGXDyx_10Foundation9IndexPathVtcF">cellSelected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle the item at the specified index path was selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellSelected</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle the item at the specified index path was selected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC14cellDeselectedyACyxGXDyx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellDeselected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC14cellDeselectedyACyxGXDyx_10Foundation9IndexPathVtcF">cellDeselected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle the item at the specified path was deselected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellDeselected</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle the item at the specified path was deselected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC14cellWillAppearyACyxGXDyx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellWillAppear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC14cellWillAppearyACyxGXDyx_10Foundation9IndexPathVtcF">cellWillAppear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle the specified cell is about to be displayed in the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellWillAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle the specified cell is about to be displayed in the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC16cellDidDisappearyACyxGXDyx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellDidDisappear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC16cellDidDisappearyACyxGXDyx_10Foundation9IndexPathVtcF">cellDidDisappear(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle the specified cell was removed from the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellDidDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle the specified cell was removed from the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC16cellDidHighlightyACyxGXDSo7UIColorCycF"></a>
+                    <a name="//apple_ref/swift/Method/cellDidHighlight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC16cellDidHighlightyACyxGXDSo7UIColorCycF">cellDidHighlight(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle the item at the specified index path was highlighted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellDidHighlight</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle the item at the specified index path was highlighted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC18cellDidUnhighlightyACyxGXDSo7UIColorCycF"></a>
+                    <a name="//apple_ref/swift/Method/cellDidUnhighlight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC18cellDidUnhighlightyACyxGXDSo7UIColorCycF">cellDidUnhighlight(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle the highlight was removed from the item at the specified index path.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellDidUnhighlight</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle the highlight was removed from the item at the specified index path.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC14shouldShowMenuyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/shouldShowMenu(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC14shouldShowMenuyACyxGXDSbx_10Foundation9IndexPathVtcF">shouldShowMenu(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asks the delegate if an action menu should be displayed for the specified item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="nv">introduced</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nv">deprecated</span><span class="p">:</span> <span class="mf">13.0</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldShowMenu</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Result of the ask.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC16canPerformActionyACyxGXDSb10ObjectiveC8SelectorV_x10Foundation9IndexPathVypSgtcF"></a>
+                    <a name="//apple_ref/swift/Method/canPerformAction(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC16canPerformActionyACyxGXDSb10ObjectiveC8SelectorV_x10Foundation9IndexPathVypSgtcF">canPerformAction(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asks the delegate if it can perform the specified action on an item in the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="nv">introduced</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nv">deprecated</span><span class="p">:</span> <span class="mf">13.0</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">canPerformAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Selector</span><span class="p">,</span> <span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Result of the ask.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC13performActionyACyxGXDy10ObjectiveC8SelectorV_x10Foundation9IndexPathVypSgtcF"></a>
+                    <a name="//apple_ref/swift/Method/performAction(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC13performActionyACyxGXDy10ObjectiveC8SelectorV_x10Foundation9IndexPathVypSgtcF">performAction(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the action that handle perform the specified action on an item in the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="nv">introduced</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nv">deprecated</span><span class="p">:</span> <span class="mf">13.0</span><span class="p">)</span>
+<span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">performAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Selector</span><span class="p">,</span> <span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that handle perform the specified action on an item in the grid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC11indexTitlesyACyxGXDSaySSGSgycF"></a>
+                    <a name="//apple_ref/swift/Method/indexTitles(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC11indexTitlesyACyxGXDSaySSGSgycF">indexTitles(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asks the data source to return the titles for the index items to display for the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">indexTitles</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Result of the ask.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC22indexPathForIndexTitleyACyxGXD10Foundation0gE0VSS_SitcF"></a>
+                    <a name="//apple_ref/swift/Method/indexPathForIndexTitle(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC22indexPathForIndexTitleyACyxGXD10Foundation0gE0VSS_SitcF">indexPathForIndexTitle(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asks the data source to return the index path of a grid item that corresponds to one of your index entries.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">indexPathForIndexTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Result of the ask.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC24contextMenuConfiguration5title11menuActionsACyxGXDSS_SaySo8UIActionCGSgx_10Foundation9IndexPathVtctF"></a>
+                    <a name="//apple_ref/swift/Method/contextMenuConfiguration(title:menuActions:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC24contextMenuConfiguration5title11menuActionsACyxGXDSS_SaySo8UIActionCGSgx_10Foundation9IndexPathVtctF">contextMenuConfiguration(title:<wbr>menuActions:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a context menu configuration for the item at a point.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">contextMenuConfiguration</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span><span class="kt">String</span><span class="p">,</span>
+                                     <span class="nv">menuActions</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span><span class="o">-&gt;</span><span class="p">[</span><span class="kt">UIAction</span><span class="p">]?)</span><span class="o">-&gt;</span><span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The title of the menu action</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>menuActions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns a context menu configuration for the item at a point.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC21previewForContextMenuyACyxGXDAA4View_pycF"></a>
+                    <a name="//apple_ref/swift/Method/previewForContextMenu(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC21previewForContextMenuyACyxGXDAA4View_pycF">previewForContextMenu(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the destination view when dismissing a context menu.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">previewForContextMenu</span><span class="p">(</span><span class="n">_</span> <span class="nv">content</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns the destination view when dismissing a context menu.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Reload"></a>
+                <a name="//apple_ref/swift/Section/Reload" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Reload"></a>
+                  <h3 class="section-name"><p>Reload</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC10reloadDataACyxGXDyF"></a>
+                    <a name="//apple_ref/swift/Method/reloadData()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC10reloadDataACyxGXDyF">reloadData()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reloads all of the data for the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">reloadData</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC14reloadSections8sectionsACyxGXD10Foundation8IndexSetV_tF"></a>
+                    <a name="//apple_ref/swift/Method/reloadSections(sections:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC14reloadSections8sectionsACyxGXD10Foundation8IndexSetV_tF">reloadSections(sections:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reloads the data in the specified sections of the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">reloadSections</span><span class="p">(</span><span class="nv">sections</span><span class="p">:</span> <span class="kt">IndexSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sections</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The indexes of the sections to reload.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC11reloadItems2atACyxGXDSay10Foundation9IndexPathVG_tF"></a>
+                    <a name="//apple_ref/swift/Method/reloadItems(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC11reloadItems2atACyxGXDSay10Foundation9IndexPathVG_tF">reloadItems(at:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reloads just the items at the specified index paths.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">reloadItems</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPaths</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of IndexPath objects identifying the items you want to update.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit4GridC11insertItems2atACyxGXDSay10Foundation9IndexPathVG_tF"></a>
+                    <a name="//apple_ref/swift/Method/insertItems(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4GridC11insertItems2atACyxGXDSay10Foundation9IndexPathVG_tF">insertItems(at:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Inserts new items at the specified index paths.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">insertItems</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPaths</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of IndexPath objects, each of which contains a section index and item index at which to insert a new cell. This parameter must not be nil.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -489,7 +2202,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

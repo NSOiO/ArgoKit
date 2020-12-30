@@ -23,6 +23,13 @@ class ArgoKitIndicatorViewNode: ArgoKitNode {
 
 /// Wrapper of UIActivityIndicatorView
 /// A view that shows that a task is in progress.
+///
+///```
+///         ActivityIndicatorView(style: .large)
+///             .hidesWhenStopped(false)
+///             .startAnimating()
+///```
+///
 public struct ActivityIndicatorView : View {
     private var pNode : ArgoKitIndicatorViewNode
     

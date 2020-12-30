@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (47% documented)
+         (65% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -73,6 +73,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListContextualAction.html">ListContextualAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListRowAction.html">ListRowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListSwipeActionsConfiguration.html">ListSwipeActionsConfiguration</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ProgressViewStyleConfiguration.html">ProgressViewStyleConfiguration</a>
@@ -148,8 +157,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNode.html">ArgoKitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNodeViewModifier.html">ArgoKitNodeViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/Gesture.html">Gesture</a>
               </li>
@@ -325,9 +351,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextVyACSSSgcfc"></a>
+                    <a name="/s:7ArgoKit4TextVyACSSSgyXAcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextVyACSSSgcfc">init(_:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextVyACSSSgyXAcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -342,7 +368,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -371,9 +397,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextV4textyACSSSgF"></a>
+                    <a name="/s:7ArgoKit4TextV4textyACSSSgyXAF"></a>
                     <a name="//apple_ref/swift/Method/text(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextV4textyACSSSgF">text(_:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextV4textyACSSSgyXAF">text(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -389,7 +415,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">text</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">text</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
 
                         </div>
                       </div>
@@ -414,7 +440,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -422,9 +448,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextV4fontyACSo6UIFontCSgF"></a>
+                    <a name="/s:7ArgoKit4TextV4fontyACSo6UIFontCyXAF"></a>
                     <a name="//apple_ref/swift/Method/font(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextV4fontyACSo6UIFontCSgF">font(_:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextV4fontyACSo6UIFontCyXAF">font(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -440,7 +466,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIFont</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIFont</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
 
                         </div>
                       </div>
@@ -465,7 +491,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -473,9 +499,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextV4font4name5style4sizeACSSSg_AA11AKFontStyleO12CoreGraphics7CGFloatVtF"></a>
+                    <a name="/s:7ArgoKit4TextV4font4name5style4sizeACSSSgyXA_AA11AKFontStyleOyXA12CoreGraphics7CGFloatVyXAtF"></a>
                     <a name="//apple_ref/swift/Method/font(name:style:size:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextV4font4name5style4sizeACSSSg_AA11AKFontStyleO12CoreGraphics7CGFloatVtF">font(name:<wbr>style:<wbr>size:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextV4font4name5style4sizeACSSSgyXA_AA11AKFontStyleOyXA12CoreGraphics7CGFloatVyXAtF">font(name:<wbr>style:<wbr>size:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -499,7 +525,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">style</span><span class="p">:</span> <span class="kt">AKFontStyle</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">style</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AKFontStyle</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
 
                         </div>
                       </div>
@@ -548,7 +574,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -556,9 +582,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextV4font4nameACSSSg_tF"></a>
+                    <a name="/s:7ArgoKit4TextV4font4nameACSSSgyXA_tF"></a>
                     <a name="//apple_ref/swift/Method/font(name:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextV4font4nameACSSSg_tF">font(name:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextV4font4nameACSSSgyXA_tF">font(name:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -574,7 +600,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">name</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">name</span> <span class="nv">value</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
 
                         </div>
                       </div>
@@ -599,7 +625,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -607,9 +633,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextV4font4sizeAC12CoreGraphics7CGFloatV_tF"></a>
+                    <a name="/s:7ArgoKit4TextV4font4sizeAC12CoreGraphics7CGFloatVyXA_tF"></a>
                     <a name="//apple_ref/swift/Method/font(size:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextV4font4sizeAC12CoreGraphics7CGFloatV_tF">font(size:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextV4font4sizeAC12CoreGraphics7CGFloatVyXA_tF">font(size:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -625,7 +651,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">size</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">size</span> <span class="nv">value</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
 
                         </div>
                       </div>
@@ -650,7 +676,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -658,9 +684,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4TextV4font5styleAcA11AKFontStyleO_tF"></a>
+                    <a name="/s:7ArgoKit4TextV4font5styleAcA11AKFontStyleOyXA_tF"></a>
                     <a name="//apple_ref/swift/Method/font(style:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4TextV4font5styleAcA11AKFontStyleO_tF">font(style:<wbr>)</a>
+                    <a class="token" href="#/s:7ArgoKit4TextV4font5styleAcA11AKFontStyleOyXA_tF">font(style:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -684,7 +710,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">style</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">AKFontStyle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">style</span> <span class="nv">value</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AKFontStyle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Text</span></code></pre>
 
                         </div>
                       </div>
@@ -760,7 +786,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -847,7 +873,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -910,7 +936,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -972,7 +998,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1023,7 +1049,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1074,7 +1100,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1161,7 +1187,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1224,7 +1250,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1290,7 +1316,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1341,7 +1367,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1392,7 +1418,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1443,7 +1469,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1494,7 +1520,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1544,7 +1570,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1595,7 +1621,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1646,7 +1672,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1697,7 +1723,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1757,7 +1783,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1809,7 +1835,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1864,7 +1890,7 @@ The default value of this property is false.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1918,7 +1944,7 @@ The default value of this property is false.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -1980,7 +2006,7 @@ The default value of this property is false.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2031,7 +2057,7 @@ The default value of this property is false.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2083,7 +2109,7 @@ The default value of this property is false.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Self</p>
+                        <p>self</p>
                       </div>
                     </section>
                   </div>
@@ -2096,7 +2122,7 @@ The default value of this property is false.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -23,13 +23,15 @@ public class TableView:UITableView{
 }
 
 class TableNode<D>: ArgoKitScrollViewNode,
-                        UITableViewDelegate,
-                        UITableViewDataSource,
-                        UITableViewDataSourcePrefetching,
-                        DataSourceReloadNode{
+                    UITableViewDelegate,
+                    UITableViewDataSource,
+                    UITableViewDataSourcePrefetching,
+                    DataSourceReloadNode {
+    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
+    
     lazy var dataSourceHelper: DataSourceHelper<D> = {
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
@@ -77,11 +79,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
         return tableView
     }
-//}
-//
-//
-//
-//extension ArgoKitTableNode {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -160,10 +157,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         self.sendAction(withObj: String(_sel: sel), paramter: [sourceData, destinationData, sourceIndexPath, destinationIndexPath])
         self.dataSourceHelper.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     }
-//}
-//
-//extension ArgoKitTableNode {
-    
+
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let sel = #selector(self.tableView(_:prefetchRowsAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPaths])
@@ -173,9 +167,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
         let sel = #selector(self.tableView(_:cancelPrefetchingForRowsAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPaths])
     }
-//}
-//
-//extension ArgoKitTableNode {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -574,197 +565,70 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 }
 
-
-
-
 extension TableNode {
-    public func reloadData(){
-        if let tableView = self.tableView{
+    
+    public func reloadData() {
+        if let tableView = self.tableView {
             tableView.reloadData()
         }
     }
-    public func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation){
-        if let tableView = self.tableView{
+    
+    public func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        if let tableView = self.tableView {
             tableView.insertSections(sections, with: animation)
         }
     }
 
-    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation){
-        if let tableView = self.tableView{
+    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        if let tableView = self.tableView {
             tableView.deleteSections(sections, with: animation)
         }
     }
 
-    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation){
-        if let tableView = self.tableView{
+    public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+        if let tableView = self.tableView {
             tableView.reloadSections(sections, with: animation)
         }
     }
 
-    public func moveSection(_ section: Int, toSection newSection: Int){
-        if let tableView = self.tableView{
+    public func moveSection(_ section: Int, toSection newSection: Int) {
+        if let tableView = self.tableView {
             tableView.moveSection(section, toSection: newSection)
         }
     }
 
-    
-    public func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
-        if let tableView = self.tableView{
+    public func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        if let tableView = self.tableView {
             tableView.insertRows(at:indexPaths, with: animation)
         }
     }
 
-    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
-        if let tableView = self.tableView{
+    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        if let tableView = self.tableView {
             tableView.deleteRows(at:indexPaths, with: animation)
         }
     }
+    
     func deleteRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
-        if let tableView = self.tableView{
+        if let tableView = self.tableView {
             tableView.deleteRows(at:[indexPath],with: animation)
         }
     }
 
-    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation){
-        if let tableView = self.tableView{
+    public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        if let tableView = self.tableView {
             tableView.reloadRows(at:indexPaths, with: animation)
         }
     }
 
-    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath){
-        if let tableView = self.tableView{
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        if let tableView = self.tableView {
             tableView.moveRow(at:indexPath, to: newIndexPath)
         }
     }
-        
 
-    
     public func reloadRowsHeight() {
         tableView?.beginUpdates()
         tableView?.endUpdates()
     }
-}
-
-extension TableNode{
-    //    public func reloadData(data: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil) {
-    //
-    //        if let data = data{
-    //            self.dataSourceHelper.dataList = data
-    //        }
-    //        if let sectionHeaderData = sectionHeaderData {
-    //            self.sectionHeaderSourceHelper.dataList = [sectionHeaderData]
-    //        }
-    //        if let sectionFooterData = sectionFooterData {
-    //            self.sectionFooterSourceHelper.dataList = [sectionFooterData]
-    //        }
-    //        self.tableView?.reloadData()
-    //    }
-    //
-    //    public func reloadSections(_ sectionData: [[ArgoKitIdentifiable]]?, sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, sections: IndexSet, with animation: UITableView.RowAnimation) {
-    //
-    //        for (index, value) in sections.enumerated() {
-    //            if let sectionData = sectionData {
-    //                self.dataSourceHelper.reloadSection(data: sectionData[index], section: value)
-    //            }
-    //            if let sectionHeaderData = sectionHeaderData {
-    //                self.sectionHeaderSourceHelper.reloadRow(rowData: sectionHeaderData[index], row: value, at: 0)
-    //            }
-    //            if let sectionFooterData = sectionFooterData {
-    //                self.sectionFooterSourceHelper.reloadRow(rowData: sectionFooterData[index], row: value, at: 0)
-    //            }
-    //        }
-    //        self.tableView?.reloadSections(sections, with: animation)
-    //    }
-    //
-    //    public func appendSections(_ data: [[ArgoKitIdentifiable]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, with animation: UITableView.RowAnimation) {
-    //
-    //        let start = self.dataSourceHelper.dataList?.count ?? 0
-    //        let end = start + data.count
-    //        self.dataSourceHelper.appendSections(data)
-    //        if let sectionHeaderData = sectionHeaderData {
-    //            self.sectionHeaderSourceHelper.appendRows(rowData: sectionHeaderData, at: 0)
-    //        }
-    //        if let sectionFooterData = sectionFooterData {
-    //            self.sectionFooterSourceHelper.appendRows(rowData: sectionFooterData, at: 0)
-    //        }
-    //        self.tableView?.insertSections(IndexSet(start..<end), with: animation)
-    //    }
-    //
-    //    public func insertSections(_ sectionData: [[ArgoKitIdentifiable]], sectionHeaderData: [ArgoKitIdentifiable]? = nil, sectionFooterData: [ArgoKitIdentifiable]? = nil, at sections: IndexSet, with animation: UITableView.RowAnimation) {
-    //
-    //        for (index, value) in sections.enumerated() {
-    //            self.dataSourceHelper.insertSection(data: sectionData[index], section: value)
-    //
-    //            if let sectionHeaderData = sectionHeaderData {
-    //                self.sectionHeaderSourceHelper.insertRow(rowData: sectionHeaderData[index], row: value, at: 0)
-    //            }
-    //            if let sectionFooterData = sectionFooterData {
-    //                self.sectionFooterSourceHelper.insertRow(rowData: sectionFooterData[index], row: value, at: 0)
-    //            }
-    //        }
-    //
-    //        self.tableView?.insertSections(sections, with: animation)
-    //    }
-    //
-    //    public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
-    //
-    //        for index in sections {
-    //            self.dataSourceHelper.deleteSection(index)
-    //        }
-    //        self.tableView?.deleteSections(sections, with: animation)
-    //    }
-    //
-    //    public func moveSection(_ section: Int, toSection newSection: Int) {
-    //
-    //        self.dataSourceHelper.moveSection(section, toSection: newSection)
-    //        self.tableView?.moveSection(section, toSection: newSection)
-    //    }
-    //
-    //    public func reloadRows(_ rowData: [ArgoKitIdentifiable]?, at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-    //
-    //        if let datas = rowData {
-    //            for (index, indexPath) in indexPaths.enumerated() {
-    //                self.dataSourceHelper.reloadRow(rowData: datas[index], row: indexPath.row, at: indexPath.section)
-    //            }
-    //        }
-    //        self.tableView?.reloadRows(at: indexPaths, with: animation)
-    //    }
-    //
-    //    public func appendRows(_ rowData: [ArgoKitIdentifiable], at section: Int = 0, with animation: UITableView.RowAnimation) {
-    //
-    //        var start = 0
-    //        if section > self.dataSourceHelper.dataList?.count ?? 0 {
-    //            start = self.dataSourceHelper.dataList?.count ?? 0
-    //        } else {
-    //            start = self.dataSourceHelper.dataList?[section].count ?? 0
-    //        }
-    //        self.dataSourceHelper.appendRows(rowData: rowData, at: section)
-    //        var indesPaths = [IndexPath]()
-    //        for index in (0..<rowData.count) {
-    //            indesPaths.append(IndexPath(row: start + index, section: section))
-    //        }
-    //        self.tableView?.insertRows(at: indesPaths, with: animation)
-    //    }
-    //
-    //    public func insertRows(_ rowData: [ArgoKitIdentifiable], at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-    //
-    //        for (index, indexPath) in indexPaths.enumerated() {
-    //            self.dataSourceHelper.insertRow(rowData: rowData[index], row: indexPath.row, at: indexPath.section)
-    //        }
-    //        self.tableView?.insertRows(at: indexPaths, with: animation)
-    //    }
-    //
-    //    public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-    //
-    //        for indexPath in indexPaths {
-    //            self.dataSourceHelper.deleteRow(indexPath.row, at: indexPath.section)
-    //        }
-    //        self.tableView?.deleteRows(at: indexPaths, with: animation)
-    //    }
-    //
-    //    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
-    //
-    //        self.dataSourceHelper.moveRow(at: indexPath, to: newIndexPath)
-    //        self.tableView?.moveRow(at: indexPath, to: newIndexPath)
-    //    }
 }

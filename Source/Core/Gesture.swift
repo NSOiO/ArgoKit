@@ -29,8 +29,12 @@ public class GestureProperty<Value>{
 }
     
 /// The base protocol for concrete gesture recognizers.
-public protocol Gesture{
+public protocol Gesture {
+    
+    /// The gesture behind the TapGesture.
     var gesture:UIGestureRecognizer {get}
+    
+    /// The action to handle the gesture recognized by the receiver.
     var action:(UIGestureRecognizer) ->Void {get}
 }
 
@@ -40,6 +44,13 @@ public extension Gesture {
 
 /// Wrapper of UITapGestureRecognizer
 /// A discrete gesture recognizer that interprets single or multiple taps.
+///
+/// ```
+///         TapGesture(numberOfTaps: 1, numberOfTouches: 1) { tap in
+///             // tap action
+///         }
+/// ```
+///
 public struct TapGesture: Gesture {
     
     private var pAction: (UIGestureRecognizer) -> Void
@@ -70,6 +81,13 @@ public struct TapGesture: Gesture {
 
 /// Wrapper of UILongPressGestureRecognizer
 /// A discrete gesture recognizer that interprets long-press gestures.
+///
+/// ```
+///        LongPressGesture(numberOfTaps: 1, numberOfTouches: 1, minimumPressDuration: 0.5, allowableMovement: 10) { longPress in
+///            // long press action
+///        }
+/// ```
+///
 public struct LongPressGesture: Gesture {
     private var pAction: (UIGestureRecognizer) -> Void
     private var pLongPressGesture: UILongPressGestureRecognizer
@@ -103,9 +121,28 @@ public struct LongPressGesture: Gesture {
 
 /// Wrapper of UIPanGestureRecognizer
 /// A discrete gesture recognizer that interprets panning gestures.
-public struct PanGesture:Gesture {
+///
+/// ```
+///        PanGesture(minimumNumberOfTouches: 1, maximumNumberOfTouches: 10) { pan in
+///            // pan action
+///        }
+///        .onBegan { (pan, location, velocity, direction) in
+///            // on began action
+///        }
+///        .onMoved { (pan, location, velocity) in
+///            // on moved acton
+///        }
+///        .onEnded { (pan, location, velocity) in
+///            // on ended action
+///        }
+///        .onCancelled { (pan, location, velocity) in
+///            // on cancelled action
+///        }
+///        .enableDragView(true)
+/// ```
+///
+public struct PanGesture: Gesture {
    
-    
     public enum PanGestureDirection {
         case left
         case right
@@ -113,12 +150,12 @@ public struct PanGesture:Gesture {
         case bottom
     }
     
-    public typealias ObserverBeganAction = (_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint,_ direction:PanGestureDirection?)->Void
+    public typealias ObserverBeganAction = (_ gesture: UIPanGestureRecognizer, _ location: CGPoint, _ velocity: CGPoint ,_ direction: PanGestureDirection?) -> Void
     
-    public typealias ObserverAction = (_ gesture:UIPanGestureRecognizer,_ location:CGPoint,_ velocity:CGPoint)->Void
+    public typealias ObserverAction = (_ gesture: UIPanGestureRecognizer, _ location: CGPoint, _ velocity: CGPoint) -> Void
     
     
-    private var pAction:((UIGestureRecognizer)->Void)?
+    private var pAction: ((UIGestureRecognizer) -> Void)?
     private var pPanGesture: UIPanGestureRecognizer
     /// The action to handle the gesture recognized by the receiver.
     public var action: (UIGestureRecognizer) -> Void {
@@ -131,12 +168,12 @@ public struct PanGesture:Gesture {
     }
     
 
-    private var onGestureAction:GestureProperty<((_ gesture:UIPanGestureRecognizer)->Void)> = GestureProperty<((_ gesture:UIPanGestureRecognizer)->Void)>()
-    private var beganAction:GestureProperty<ObserverBeganAction> = GestureProperty<ObserverBeganAction>()
-    private var movedAction:GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
-    private var endedAction:GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
-    private var cancelledAction:GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
-    private var moveView:GestureProperty<Bool> = GestureProperty<Bool>()
+    private var onGestureAction: GestureProperty<((_ gesture:UIPanGestureRecognizer)->Void)> = GestureProperty<((_ gesture:UIPanGestureRecognizer)->Void)>()
+    private var beganAction: GestureProperty<ObserverBeganAction> = GestureProperty<ObserverBeganAction>()
+    private var movedAction: GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
+    private var endedAction: GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
+    private var cancelledAction: GestureProperty<ObserverAction> = GestureProperty<ObserverAction>()
+    private var moveView: GestureProperty<Bool> = GestureProperty<Bool>()
     
     /// Initializer
     /// - Parameters:
@@ -145,7 +182,7 @@ public struct PanGesture:Gesture {
     ///   - onPanGesture: The action to handle the gesture recognized by the receiver.
     public init(minimumNumberOfTouches:Int = 1,
                 maximumNumberOfTouches:Int = Int(INT_MAX),
-                onPanGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
+                onPanGesture:@escaping (_ gesture: UIGestureRecognizer) -> Void) {
         pPanGesture = UIPanGestureRecognizer()
         pPanGesture.minimumNumberOfTouches = minimumNumberOfTouches
         pPanGesture.maximumNumberOfTouches = maximumNumberOfTouches
@@ -154,7 +191,8 @@ public struct PanGesture:Gesture {
         pAction = onAction()
        
     }
-    func onAction()->((UIGestureRecognizer)->Void){
+    
+    func onAction() -> ((UIGestureRecognizer) -> Void) {
         return {gesture in
             if let gesture = gesture as? UIPanGestureRecognizer,let view = gesture.view {
                
@@ -196,28 +234,47 @@ public struct PanGesture:Gesture {
         }
     }
     
+    /// Sets the action to handle the gesture recognized by the receiver when state is began.
+    /// - Parameter action: The action to handle the gesture recognized by the receiver when state is began.
+    /// - Returns: Self
     @discardableResult
-    public func onBegan(_ action:@escaping ObserverBeganAction)->Self{
+    public func onBegan(_ action:@escaping ObserverBeganAction) -> Self {
         beganAction.wrappedValue = action
         return self
     }
+    
+    /// Sets the action to handle the gesture recognized by the receiver when state is changed.
+    /// - Parameter action: The action to handle the gesture recognized by the receiver when state is changed.
+    /// - Returns: Self
     @discardableResult
-    public func onMoved(_ action:@escaping ObserverAction)->Self{
+    public func onMoved(_ action:@escaping ObserverAction) -> Self {
         movedAction.wrappedValue = action
         return self
     }
+    
+    /// Sets the action to handle the gesture recognized by the receiver when state is ended.
+    /// - Parameter action: The action to handle the gesture recognized by the receiver when state is ended.
+    /// - Returns: Self
     @discardableResult
-    public func onEnded(_ action:@escaping ObserverAction)->Self{
+    public func onEnded(_ action:@escaping ObserverAction) -> Self {
         endedAction.wrappedValue = action
         return self
     }
+    
+    /// Sets the action to handle the gesture recognized by the receiver when state is cancelled.
+    /// - Parameter action: The action to handle the gesture recognized by the receiver when state is cancelled.
+    /// - Returns: Self
     @discardableResult
-    public func onCancelled(_ action:@escaping ObserverAction)->Self{
+    public func onCancelled(_ action:@escaping ObserverAction) -> Self {
         cancelledAction.wrappedValue = action
         return self
     }
+    
+    /// Enable drag the view which adds the gesture when the gesture recognized by the receiver.
+    /// - Parameter value: true if you want to drag the view when the gesture recognized by the receiver.
+    /// - Returns: Self
     @discardableResult
-    public func enabelGragView(_ value:Bool)->Self{
+    public func enableDragView(_ value: Bool) -> Self {
         moveView.wrappedValue = value
         return self
     }
@@ -256,6 +313,13 @@ public struct PanGesture:Gesture {
 
 /// Wrapper of UIPinchGestureRecognizer
 /// A discrete gesture recognizer that interprets pinching gestures involving two touches.
+///
+/// ```
+///        PinchGesture(scale: 3) { pinch in
+///            // pinch action
+///        }
+/// ```
+///
 public struct PinchGesture: Gesture {
     private var pAction: (UIGestureRecognizer) -> Void
     private var pPinchGesture: UIPinchGestureRecognizer
@@ -274,7 +338,7 @@ public struct PinchGesture: Gesture {
     /// - Parameters:
     ///   - scale: The scale factor relative to the points of the two touches in screen coordinates.
     ///   - onPinchGesture: The action to handle the gesture recognized by the receiver.
-    public init(scale:CGFloat,onPinchGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
+    public init(scale: CGFloat, onPinchGesture: @escaping (_ gesture:UIGestureRecognizer) -> Void) {
         pAction = onPinchGesture
         pPinchGesture = UIPinchGestureRecognizer()
         pPinchGesture.scale = scale
@@ -310,6 +374,13 @@ public struct RotationGesture: Gesture {
 
 /// Wrapper of UISwipeGestureRecognizer
 /// A discrete gesture recognizer that interprets swiping gestures in one or more directions.
+///
+/// ```
+///        SwipeGesture(numberOfTouchesRequired: 1, direction:.right) { swipe in
+///            // swipe action
+///        }
+/// ```
+///
 public struct SwipeGesture: Gesture {
     private var pAction: (UIGestureRecognizer) -> Void
     private var pSwipeGesture: UISwipeGestureRecognizer
@@ -339,6 +410,13 @@ public struct SwipeGesture: Gesture {
 
 /// Wrapper of UIScreenEdgePanGestureRecognizer
 /// A discrete gesture recognizer that interprets panning gestures that start near an edge of the screen.
+///
+/// ```
+///        ScreenEdgePanGesture(edges: .right) { pan in
+///            // screen edge pan action
+///        }
+/// ```
+///
 public struct ScreenEdgePanGesture: Gesture {
     private var pAction: (UIGestureRecognizer) -> Void
     private var pScreenEdgePanGesture: UIScreenEdgePanGestureRecognizer
@@ -357,7 +435,7 @@ public struct ScreenEdgePanGesture: Gesture {
     /// - Parameters:
     ///   - edges: The acceptable starting edges for the gesture.
     ///   - onSwipeGesture: The action to handle the gesture recognized by the receiver.
-    public init(edges:UIRectEdge,onSwipeGesture:@escaping (_ gesture:UIGestureRecognizer)->Void){
+    public init(edges: UIRectEdge, onSwipeGesture: @escaping (_ gesture: UIGestureRecognizer) -> Void) {
         pAction = onSwipeGesture
         pScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer()
         pScreenEdgePanGesture.edges = edges

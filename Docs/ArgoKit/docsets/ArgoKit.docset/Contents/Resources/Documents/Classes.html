@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (47% documented)
+         (65% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -73,6 +73,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ListContextualAction.html">ListContextualAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ListRowAction.html">ListRowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ListSwipeActionsConfiguration.html">ListSwipeActionsConfiguration</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/ProgressViewStyleConfiguration.html">ProgressViewStyleConfiguration</a>
@@ -148,8 +157,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/ArgoKitNode.html">ArgoKitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/ArgoKitNodeViewModifier.html">ArgoKitNodeViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/Gesture.html">Gesture</a>
               </li>
@@ -380,7 +406,16 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Wrapper of UIAlertController
-An object that displays an alert message to the user.</p>
+ An object that displays an alert message to the user.</p>
+<pre class="highlight swift"><code>         <span class="kt">AlertView</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Title"</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"Message"</span><span class="p">,</span> <span class="nv">preferredStyle</span><span class="p">:</span> <span class="kt">UIAlertController</span><span class="o">.</span><span class="kt">Style</span><span class="o">.</span><span class="n">alert</span><span class="p">)</span>
+         <span class="o">.</span><span class="nf">destructive</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Delete"</span><span class="p">)</span> <span class="p">{</span> <span class="n">text</span> <span class="k">in</span>
+             <span class="c1">// delete action</span>
+         <span class="p">}</span>
+         <span class="o">.</span><span class="nf">cancel</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Cancel"</span><span class="p">)</span> <span class="p">{</span>
+             <span class="c1">// cancel action</span>
+         <span class="p">}</span>
+         <span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre>
 
                         <a href="Classes/AlertView.html" class="slightly-smaller">See more</a>
                       </div>
@@ -409,7 +444,11 @@ An object that displays an alert message to the user.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Wrapper of UIVisualEffectView
-An object that implements some complex visual effects.</p>
+ An object that implements some complex visual effects.</p>
+<pre class="highlight swift"><code>         <span class="kt">BlurEffectView</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span><span class="o">.</span><span class="n">dark</span><span class="p">)</span> <span class="p">{</span>
+             <span class="c1">// content</span>
+         <span class="p">}</span>
+</code></pre>
 
                         <a href="Classes/BlurEffectView.html" class="slightly-smaller">See more</a>
                       </div>
@@ -437,7 +476,38 @@ An object that implements some complex visual effects.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Wrapper of UICollectionView
+ An object that manages an ordered collection of data items and presents them using customizable layouts.</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code>     <span class="kd">struct</span> <span class="kt">GridView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">dataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">headerDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">footerDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+
+         <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+
+             <span class="kt">Grid</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span><span class="err">$</span><span class="n">dataSource</span><span class="p">){</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Item</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="nf">sectionHeader</span><span class="p">(</span><span class="err">$</span><span class="n">headerDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Header</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="nf">sectionFooter</span><span class="p">(</span><span class="err">$</span><span class="n">footerDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Footer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="n">cellSelected</span> <span class="p">{</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="k">in</span>
+                 <span class="c1">// Did Select item action</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+
+         <span class="kd">func</span> <span class="nf">appendData</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Model</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">models</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="err">$</span><span class="n">dataSource</span><span class="o">.</span><span class="nf">reloadData</span><span class="p">()</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+</code></pre>
 
                         <a href="Classes/Grid.html" class="slightly-smaller">See more</a>
                       </div>
@@ -465,7 +535,14 @@ An object that implements some complex visual effects.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A view that arranges its children in a horizontal line.</p>
+                        <p>A view that arranges its children in a horizontal line.
+ same as the <code>flex-direction: row</code> in flexbox layout.</p>
+<pre class="highlight swift"><code>     <span class="kt">HStack</span> <span class="p">{</span>
+         <span class="kt">Text</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span>
+         <span class="kt">Text</span><span class="p">(</span><span class="s">"2"</span><span class="p">)</span>
+         <span class="kt">Text</span><span class="p">(</span><span class="s">"3"</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
 
                         <a href="Classes/HStack.html" class="slightly-smaller">See more</a>
                       </div>
@@ -493,7 +570,38 @@ An object that implements some complex visual effects.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Wrapper of UITableView
+ A view that presents data using rows arranged in a single column.</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code>     <span class="kd">struct</span> <span class="kt">ListView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">dataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">headerDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+         <span class="kd">@DataSource</span> <span class="k">var</span> <span class="nv">footerDataSource</span><span class="p">:</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Model</span><span class="p">]()</span>
+
+         <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+
+             <span class="kt">List</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span><span class="err">$</span><span class="n">dataSource</span><span class="p">){</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Row</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="nf">sectionHeader</span><span class="p">(</span><span class="err">$</span><span class="n">headerDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Header</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="nf">sectionFooter</span><span class="p">(</span><span class="err">$</span><span class="n">footerDataSource</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+                 <span class="kt">Footer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="p">}</span>
+             <span class="o">.</span><span class="n">didSelectRow</span> <span class="p">{</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="k">in</span>
+                 <span class="c1">// Did Select row action</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+
+         <span class="kd">func</span> <span class="nf">appendData</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Model</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">models</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="err">$</span><span class="n">dataSource</span><span class="o">.</span><span class="nf">reloadData</span><span class="p">()</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+</code></pre>
 
                         <a href="Classes/List.html" class="slightly-smaller">See more</a>
                       </div>
@@ -502,6 +610,93 @@ An object that implements some complex visual effects.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">List</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Classes/ScrollView.html">ScrollView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ArgoKit@objc(cs)ListRowAction"></a>
+                    <a name="//apple_ref/swift/Class/ListRowAction" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ArgoKit@objc(cs)ListRowAction">ListRowAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A single action to present when the user swipes horizontally in a list row.</p>
+
+                        <a href="Classes/ListRowAction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span><span class="p">,</span> <span class="nv">introduced</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span> <span class="nv">deprecated</span><span class="p">:</span> <span class="mf">13.0</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"Use ListContextualAction and related APIs instead."</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ListRowAction</span> <span class="p">:</span> <span class="kt">UITableViewRowAction</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ArgoKit@objc(cs)ListContextualAction"></a>
+                    <a name="//apple_ref/swift/Class/ListContextualAction" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ArgoKit@objc(cs)ListContextualAction">ListContextualAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An action to display when the user swipes a list row.</p>
+
+                        <a href="Classes/ListContextualAction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">11.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ListContextualAction</span> <span class="p">:</span> <span class="kt">UIContextualAction</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ArgoKit@objc(cs)ListSwipeActionsConfiguration"></a>
+                    <a name="//apple_ref/swift/Class/ListSwipeActionsConfiguration" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ArgoKit@objc(cs)ListSwipeActionsConfiguration">ListSwipeActionsConfiguration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The set of actions to perform when swiping on rows of a list.</p>
+
+                        <a href="Classes/ListSwipeActionsConfiguration.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">11.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">ListSwipeActionsConfiguration</span> <span class="p">:</span> <span class="kt">UISwipeActionsConfiguration</span></code></pre>
 
                         </div>
                       </div>
@@ -605,7 +800,34 @@ An object that implements some complex visual effects.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A scrollable, multiline text region.
+ Wrapper of UITextView</p>
+
+<p>UITextView supports the display of text using custom style information and also supports text editing. You typically use a text view to display multiple lines of text, such as when displaying the body of a large text document.
+This class supports multiple text styles through use of the attributedText property. (Styled text is not supported in versions of iOS earlier than iOS 6.) Setting a value for this property causes the text view to use the style information provided in the attributed string. You can still use the font, textColor, and textAlignment properties to set style attributes, but those properties apply to all of the text in the text view. It’s recommended that you use a text view—and not a UIWebView object—to display both plain and rich text in your app.</p>
+<pre class="highlight swift"><code><span class="kt">TextView</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"Hello, World!"</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">height</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">font</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">font</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">bold</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">margin</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">96</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">backgroundColor</span><span class="p">(</span><span class="o">.</span><span class="n">yellow</span><span class="p">)</span>
+     <span class="o">.</span><span class="nf">cornerRadius</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+     <span class="o">.</span><span class="n">didEndEditing</span> <span class="p">{</span> <span class="n">text</span> <span class="k">in</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+     <span class="p">}</span>
+     <span class="o">.</span><span class="n">shouldEndEditing</span> <span class="p">{</span> <span class="n">text</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">in</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+         <span class="k">return</span> <span class="kc">true</span>
+     <span class="p">}</span>
+     <span class="o">.</span><span class="n">didChangeText</span> <span class="p">{</span> <span class="n">text</span> <span class="k">in</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+     <span class="p">}</span><span class="o">.</span><span class="nf">gesture</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">getstur</span><span class="p">)</span>
+     <span class="o">.</span><span class="n">onTapGesture</span> <span class="p">{</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"on tap"</span><span class="p">)</span>
+     <span class="p">}</span><span class="o">.</span><span class="nf">onLongPressGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nf">print</span><span class="p">(</span><span class="s">"on long press"</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
 
                         <a href="Classes/TextView.html" class="slightly-smaller">See more</a>
                       </div>
@@ -738,7 +960,12 @@ An object that implements some complex visual effects.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A UIKit view that hosts a ArgoKit view hierarchy.</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code>         <span class="k">let</span> <span class="nv">hostView</span><span class="p">:</span> <span class="kt">UIHostingView</span> <span class="o">=</span> <span class="kt">UIHostingView</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">Content</span><span class="p">(),</span> <span class="nv">frame</span><span class="p">:</span><span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+         <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">hostView</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Classes/UIHostingView.html" class="slightly-smaller">See more</a>
                       </div>
@@ -768,6 +995,25 @@ An object that implements some complex visual effects.</p>
                       <div class="abstract">
                         <p>A UIKit view controller that manages a ArgoKit view hierarchy.</p>
 
+<p>Example:</p>
+<pre class="highlight swift"><code>     <span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span> <span class="p">{</span>
+
+         <span class="k">var</span> <span class="nv">window</span><span class="p">:</span> <span class="kt">UIWindow</span><span class="p">?</span>
+
+         <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplication</span><span class="o">.</span><span class="kt">LaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+             <span class="c1">// Override point for customization after application launch.</span>
+
+             <span class="k">let</span> <span class="nv">rootVC</span> <span class="o">=</span> <span class="kt">UIHostingController</span><span class="p">(</span><span class="nv">rootView</span><span class="p">:</span> <span class="kt">RootView</span><span class="p">())</span>
+             <span class="k">let</span> <span class="nv">window</span> <span class="o">=</span> <span class="kt">UIWindow</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+             <span class="n">window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">rootVC</span>
+             <span class="k">self</span><span class="o">.</span><span class="n">window</span> <span class="o">=</span> <span class="n">window</span>
+             <span class="n">window</span><span class="o">.</span><span class="nf">makeKeyAndVisible</span><span class="p">()</span>
+
+             <span class="k">return</span> <span class="kc">true</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+</code></pre>
+
                         <a href="Classes/UIHostingController.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -789,7 +1035,7 @@ An object that implements some complex visual effects.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

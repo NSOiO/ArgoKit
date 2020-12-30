@@ -22,10 +22,8 @@ class ListCell: UITableViewCell {
     
     // 清空视图属性
     override func prepareForReuse() {
+        super.prepareForReuse()
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
     }
     
     public func linkCellNode(_ node: ArgoKitCellNode) {
@@ -41,6 +39,4 @@ class ListCell: UITableViewCell {
         }
         ArgoKitReusedLayoutHelper.addLayoutNode(node)
     }
-    
-    
 }

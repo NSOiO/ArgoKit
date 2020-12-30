@@ -204,14 +204,14 @@ class SessionRow:ArgoKit.View {
 }
 var headerView:RefreshHeaderView?
 var footerView:RefreshFooterView?
-class ListDemo:ArgoKit.View{
+struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 1..<1000{
+        for index in 0..<10{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -237,6 +237,17 @@ class ListDemo:ArgoKit.View{
             .cancel(title: "取消") {}
             .show()
         }
+        .canEditRow({ (item, indx) -> Bool in
+            return true
+        })
+        .trailingSwipeActions({ (data, indexPath) -> ListSwipeActionsConfiguration? in
+            let action = UIContextualAction(style: UIContextualAction.Style.normal, title: "delete") { (action, view, block) in
+                print("data\(data)")
+                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
+            }
+            return ListSwipeActionsConfiguration(actions: [action])
+        })
+        
         .refreshHeaderView {
             RefreshHeaderView(startRefreshing: {_ in 
                 headerView?.endRefreshing()
@@ -264,6 +275,7 @@ class ListDemo:ArgoKit.View{
             
         }
     }
+    
     
     func getTimeLabel()->String{
         let formatter:DateFormatter = DateFormatter()

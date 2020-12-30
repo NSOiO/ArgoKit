@@ -367,6 +367,13 @@ extension TextField {
         return self
     }
     
+    /// The custom left view for the overlay view that displays on the left (or leading) side of the text field.
+    ///
+    /// You can use the left overlay view to indicate the intended behavior of the text field. For example, you might display a magnifying glass in this location to indicate that the text field is a search field. The left overlay view flips automatically in a right-to-left user interface.
+    ///
+    /// The default value of this property is nil.
+    /// - Parameter content: a new left View
+    /// - Returns:Self
     @discardableResult
     public func leftView(_ content:()->View) -> Self {
         let lfView = content()
@@ -397,6 +404,13 @@ extension TextField {
         return self
     }
     
+    /// The custom right view for the overlay view that displays on the right (or trailing) side of the text field.
+    ///
+    /// You can use the right overlay view to provide indicate additional features available for the text field.
+    ///
+    /// The default value of this property is nil.
+    /// - Parameter content: a new left View
+    /// - Returns:Self
     @discardableResult
     public func rightView(_ content:()->View) -> Self {
         let rtView = content()

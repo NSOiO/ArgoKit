@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (47% documented)
+         (65% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -73,6 +73,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ListContextualAction.html">ListContextualAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ListRowAction.html">ListRowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ListSwipeActionsConfiguration.html">ListSwipeActionsConfiguration</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/ProgressViewStyleConfiguration.html">ProgressViewStyleConfiguration</a>
@@ -148,8 +157,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/ArgoKitNode.html">ArgoKitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/ArgoKitNodeViewModifier.html">ArgoKitNodeViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/Gesture.html">Gesture</a>
               </li>
@@ -297,7 +323,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Wrapper of UIActivityIndicatorView
-A view that shows that a task is in progress.</p>
+ A view that shows that a task is in progress.</p>
+<pre class="highlight swift"><code>         <span class="kt">ActivityIndicatorView</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">large</span><span class="p">)</span>
+             <span class="o">.</span><span class="nf">hidesWhenStopped</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+             <span class="o">.</span><span class="nf">startAnimating</span><span class="p">()</span>
+</code></pre>
 
                         <a href="Structs/ActivityIndicatorView.html" class="slightly-smaller">See more</a>
                       </div>
@@ -326,7 +356,13 @@ A view that shows that a task is in progress.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Wrapper of UIButton
-A control that executes your custom code in response to user interactions.</p>
+ A control that executes your custom code in response to user interactions.</p>
+<pre class="highlight swift"><code>         <span class="kt">Button</span> <span class="p">{</span>
+             <span class="c1">// click action</span>
+         <span class="p">}</span> <span class="nv">builder</span><span class="p">:</span> <span class="p">{</span>
+             <span class="c1">// content</span>
+         <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/Button.html" class="slightly-smaller">See more</a>
                       </div>
@@ -384,6 +420,10 @@ An object that manages the content for a rectangular area on the screen.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A structure that computes views on demand from an underlying collection of of data.</p>
+<pre class="highlight swift"><code>     <span class="kt">ForEach</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">titles</span><span class="p">)</span> <span class="p">{</span> <span class="n">item</span> <span class="k">in</span>
+         <span class="kt">Text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="nf">margin</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">23</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/ForEach.html" class="slightly-smaller">See more</a>
                       </div>
@@ -412,7 +452,11 @@ An object that manages the content for a rectangular area on the screen.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Wrapper of UIImageView
-A view that displays a single image or a sequence of animated images in your interface.</p>
+ A view that displays a single image or a sequence of animated images in your interface.</p>
+<pre class="highlight swift"><code>         <span class="kt">Image</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span>
+         <span class="kt">Image</span><span class="p">(</span><span class="s">"./doc/name.jpg"</span><span class="p">)</span>
+         <span class="kt">Image</span><span class="p">(</span><span class="s">"https://www.example.com"</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/Image.html" class="slightly-smaller">See more</a>
                       </div>
@@ -742,6 +786,10 @@ same as the view of which felxGrow is 1.0.</p>
                       <div class="abstract">
                         <p>Wrapper of UITapGestureRecognizer
 A discrete gesture recognizer that interprets single or multiple taps.</p>
+<pre class="highlight swift"><code>        <span class="kt">TapGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="n">tap</span> <span class="k">in</span>
+            <span class="c1">// tap action</span>
+        <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/TapGesture.html" class="slightly-smaller">See more</a>
                       </div>
@@ -771,6 +819,10 @@ A discrete gesture recognizer that interprets single or multiple taps.</p>
                       <div class="abstract">
                         <p>Wrapper of UILongPressGestureRecognizer
 A discrete gesture recognizer that interprets long-press gestures.</p>
+<pre class="highlight swift"><code>       <span class="kt">LongPressGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">minimumPressDuration</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nv">allowableMovement</span><span class="p">:</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span> <span class="n">longPress</span> <span class="k">in</span>
+           <span class="c1">// long press action</span>
+       <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/LongPressGesture.html" class="slightly-smaller">See more</a>
                       </div>
@@ -800,6 +852,23 @@ A discrete gesture recognizer that interprets long-press gestures.</p>
                       <div class="abstract">
                         <p>Wrapper of UIPanGestureRecognizer
 A discrete gesture recognizer that interprets panning gestures.</p>
+<pre class="highlight swift"><code>       <span class="kt">PanGesture</span><span class="p">(</span><span class="nv">minimumNumberOfTouches</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">maximumNumberOfTouches</span><span class="p">:</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span> <span class="n">pan</span> <span class="k">in</span>
+           <span class="c1">// pan action</span>
+       <span class="p">}</span>
+       <span class="o">.</span><span class="n">onBegan</span> <span class="p">{</span> <span class="p">(</span><span class="n">pan</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span> <span class="k">in</span>
+           <span class="c1">// on began action</span>
+       <span class="p">}</span>
+       <span class="o">.</span><span class="n">onMoved</span> <span class="p">{</span> <span class="p">(</span><span class="n">pan</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span> <span class="k">in</span>
+           <span class="c1">// on moved acton</span>
+       <span class="p">}</span>
+       <span class="o">.</span><span class="n">onEnded</span> <span class="p">{</span> <span class="p">(</span><span class="n">pan</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span> <span class="k">in</span>
+           <span class="c1">// on ended action</span>
+       <span class="p">}</span>
+       <span class="o">.</span><span class="n">onCancelled</span> <span class="p">{</span> <span class="p">(</span><span class="n">pan</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">velocity</span><span class="p">)</span> <span class="k">in</span>
+           <span class="c1">// on cancelled action</span>
+       <span class="p">}</span>
+       <span class="o">.</span><span class="nf">enableDragView</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Structs/PanGesture.html" class="slightly-smaller">See more</a>
                       </div>
@@ -829,6 +898,10 @@ A discrete gesture recognizer that interprets panning gestures.</p>
                       <div class="abstract">
                         <p>Wrapper of UIPinchGestureRecognizer
 A discrete gesture recognizer that interprets pinching gestures involving two touches.</p>
+<pre class="highlight swift"><code>       <span class="kt">PinchGesture</span><span class="p">(</span><span class="nv">scale</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="n">pinch</span> <span class="k">in</span>
+           <span class="c1">// pinch action</span>
+       <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/PinchGesture.html" class="slightly-smaller">See more</a>
                       </div>
@@ -887,6 +960,10 @@ A discrete gesture recognizer that interprets rotation gestures involving two to
                       <div class="abstract">
                         <p>Wrapper of UISwipeGestureRecognizer
 A discrete gesture recognizer that interprets swiping gestures in one or more directions.</p>
+<pre class="highlight swift"><code>       <span class="kt">SwipeGesture</span><span class="p">(</span><span class="nv">numberOfTouchesRequired</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">direction</span><span class="p">:</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span> <span class="n">swipe</span> <span class="k">in</span>
+           <span class="c1">// swipe action</span>
+       <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/SwipeGesture.html" class="slightly-smaller">See more</a>
                       </div>
@@ -916,6 +993,10 @@ A discrete gesture recognizer that interprets swiping gestures in one or more di
                       <div class="abstract">
                         <p>Wrapper of UIScreenEdgePanGestureRecognizer
 A discrete gesture recognizer that interprets panning gestures that start near an edge of the screen.</p>
+<pre class="highlight swift"><code>       <span class="kt">ScreenEdgePanGesture</span><span class="p">(</span><span class="nv">edges</span><span class="p">:</span> <span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span> <span class="n">pan</span> <span class="k">in</span>
+           <span class="c1">// screen edge pan action</span>
+       <span class="p">}</span>
+</code></pre>
 
                         <a href="Structs/ScreenEdgePanGesture.html" class="slightly-smaller">See more</a>
                       </div>
@@ -966,7 +1047,7 @@ A discrete gesture recognizer that interprets panning gestures that start near a
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

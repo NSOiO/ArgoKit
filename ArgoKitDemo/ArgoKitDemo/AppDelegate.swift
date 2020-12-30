@@ -34,12 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
-//        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
 //        let contentView = LandmarkList(model: UserData())
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()
-        let contentView = TextBindTests(model: TextBindTestsModel()).padding(edge: .top, value: 200)
-        let vc = UIHostingController(rootView: contentView)
+//        let contentView = ListDemo()//TextBindTests(model: TextBindTestsModel()).padding(edge: .top, value: 200)
+        let vc = UIHostingController(rootView: contentView,safeArea: true)
 //        let vc = ViewController()
         nav = UINavigationController(rootViewController: vc)
         
