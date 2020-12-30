@@ -49,6 +49,7 @@ public struct ForEach:View{
 ///         Text(item).margin(edge: .top, value: 23)
 ///     }
 ///```
+///
 public struct ForEach<T>: View {
     var nodeContainer:[ArgoKitNode] = []
     private var nodeType:ArgoKitNodeType

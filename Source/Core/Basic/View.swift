@@ -89,6 +89,16 @@ extension View {
     /// Assigns the view to the specified variable or property.
     /// - Parameter variable: The specified variable or property that is  assigned with the view.
     /// - Returns: self
+    ///
+    ///```
+    ///    struct DemoView: View {
+    ///        @Alias var text: Text?
+    ///        var body: View {
+    ///            Text("Hello, ArgoKit").alias(variable: $text)
+    ///        }
+    ///    }
+    ///```
+    ///
     @discardableResult
     public func alias(variable: Alias<Self>) -> Self {
         variable.wrappedValue = self

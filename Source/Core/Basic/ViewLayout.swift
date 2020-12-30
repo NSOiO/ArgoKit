@@ -26,6 +26,7 @@ extension View {
     
     /// Perform a layout calculation and update the frames of the views in the hierarchy with the results. If the origin is not preserved, the root view's layout results will applied from {0,0}.
     /// - Returns: The size of the view based on provided constraints.
+    @discardableResult
     public func applyLayout() -> CGSize {
         return self.node?.applyLayout() ?? CGSize.zero
     }
@@ -33,6 +34,7 @@ extension View {
     /// Perform a layout calculation and update the frames of the views in the hierarchy with the results. Pass NaN for an unconstrained dimension.
     /// - Parameter size: The size for which the view should calculate its best-fitting size.
     /// - Returns: The size of the view based on provided constraints.
+    @discardableResult
     public func applyLayout(size:CGSize) -> CGSize {
         return self.node?.applyLayout(size:size) ?? CGSize.zero
     }
@@ -40,6 +42,7 @@ extension View {
     /// Perform a layout calculation but do not update the frames of the views in the hierarchy with the results. Pass NaN for an unconstrained dimension.
     /// - Parameter size: The size for which the view should calculate its best-fitting size.
     /// - Returns: The size of the view based on provided constraints.
+    @discardableResult
     public func calculateLayout(size:CGSize) -> CGSize {
         return self.node?.calculateLayout(size:size) ?? CGSize.zero
     }

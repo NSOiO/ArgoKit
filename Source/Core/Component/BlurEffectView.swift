@@ -9,6 +9,13 @@ import Foundation
 
 /// Wrapper of UIVisualEffectView
 /// An object that implements some complex visual effects.
+///
+///```
+///         BlurEffectView(style:.dark) {
+///             // content
+///         }
+///```
+///
 public class BlurEffectView: View {
     private var pNode:ArgoKitNode
     

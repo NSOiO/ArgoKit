@@ -20,6 +20,18 @@ import Foundation
 
 /// Wrapper of UIAlertController
 /// An object that displays an alert message to the user.
+///
+///```
+///         AlertView(title: "Title", message: "Message", preferredStyle: UIAlertController.Style.alert)
+///         .destructive(title: "Delete") { text in
+///             // delete action
+///         }
+///         .cancel(title: "Cancel") {
+///             // cancel action
+///         }
+///         .show()
+///```
+///
 public class AlertView: View {
     let pNode: ArgokitAlertViewNode
     let alerView: UIAlertController

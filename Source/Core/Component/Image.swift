@@ -42,6 +42,13 @@ class ArgoKitImageNode: ArgoKitNode {
 
 /// Wrapper of UIImageView
 /// A view that displays a single image or a sequence of animated images in your interface.
+///
+///```
+///         Image("name")
+///         Image("./doc/name.jpg")
+///         Image("https://www.example.com")
+///```
+///
 public struct Image : View {
     
     private var pNode : ArgoKitImageNode

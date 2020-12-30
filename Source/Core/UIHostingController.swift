@@ -18,12 +18,12 @@ public struct HostView: View {
     }
     
     /// The node behind the HostView.
-    public var node: ArgoKitNode?{
+    public var node: ArgoKitNode? {
         pNode
     }
     
     /// The type of the node.
-    public var type: ArgoKitNodeType{
+    public var type: ArgoKitNodeType {
         .single(pNode)
     }
     
@@ -40,7 +40,7 @@ public struct HostView: View {
     ///   - builder: A view builder that creates the content of this HostView.
     public init(_ view: UIView = UIView(), @ArgoKitViewBuilder _ builder: () -> View) {
         pView = view
-        pNode = ArgoKitNode(view:view);
+        pNode = ArgoKitNode(view: view);
         pNode.width(point: view.frame.size.width)
         pNode.height(point: view.frame.size.height)
         pNode.column()
@@ -54,9 +54,18 @@ public struct HostView: View {
     }
 }
 
-public class UIHostingView:UIView{
-    private var rootView:HostView?
-    private var safeArea:Bool? = false
+/// A UIKit view that hosts a ArgoKit view hierarchy.
+///
+/// Example:
+///
+///```
+///         let hostView: UIHostingView = UIHostingView(content: Content(), frame:self.view.bounds)
+///         self.view.addSubview(hostView)
+///```
+///
+public class UIHostingView: UIView {
+    private var rootView: HostView?
+    private var safeArea: Bool? = false
     private var oldFrame = CGRect.zero
     
     public override func layoutSubviews() {
@@ -87,11 +96,15 @@ public class UIHostingView:UIView{
         super.layoutSubviews()
     }
     
-    
-    public init(content:View,frame:CGRect = CGRect.zero,safeArea:Bool = false){
+    /// Initializer
+    /// - Parameters:
+    ///   - content: The root view of the ArgoKit view hierarchy that you want to manage using this hosting controller.
+    ///   - frame: The frame rectangle for the new view object.
+    ///   - safeArea: true if you want to add the insets that you use to determine the safe area for this view.
+    public init(content: View, frame: CGRect = CGRect.zero, safeArea: Bool = false){
         super.init(frame: frame)
         self.safeArea = safeArea
-        rootView = HostView(self){
+        rootView = HostView(self) {
             content.grow(1.0)
         }
     }
@@ -102,15 +115,47 @@ public class UIHostingView:UIView{
 }
 
 /// A UIKit view controller that manages a ArgoKit view hierarchy.
+///
+/// Example:
+///
+///```
+///     class AppDelegate: UIResponder, UIApplicationDelegate {
+///
+///         var window: UIWindow?
+///
+///         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+///             // Override point for customization after application launch.
+///
+///             let rootVC = UIHostingController(rootView: RootView())
+///             let window = UIWindow.init(frame: UIScreen.main.bounds)
+///             window.rootViewController = rootVC
+///             self.window = window
+///             window.makeKeyAndVisible()
+///
+///             return true
+///         }
+///     }
+///```
+///
 open class UIHostingController: UIViewController {
     var frame:CGRect = CGRect.zero
-    private var hostView:UIHostingView
-    public init(rootView: View,safeArea:Bool = false){
+    private var hostView: UIHostingView
+    
+    /// Initializer
+    /// - Parameters:
+    ///   - rootView: The root view of the ArgoKit view hierarchy that you want to manage using the hosting view controller.
+    ///   - safeArea: ture if you want to add the insets that you use to determine the safe area for this view.
+    public init(rootView: View, safeArea: Bool = false) {
         hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(nibName: nil, bundle: nil)
     }
-
-    public init?(coder aDecoder: NSCoder, rootView: View,safeArea:Bool = false){
+    
+    /// Initializer
+    /// - Parameters:
+    ///   - aDecoder: An unarchiver object.
+    ///   - rootView: The root view of the ArgoKit view hierarchy that you want to manage using the hosting view controller.
+    ///   - safeArea: ture if you want to add the insets that you use to determine the safe area for this view.
+    public init?(coder aDecoder: NSCoder, rootView: View, safeArea: Bool = false) {
         hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(coder: aDecoder)
     }
