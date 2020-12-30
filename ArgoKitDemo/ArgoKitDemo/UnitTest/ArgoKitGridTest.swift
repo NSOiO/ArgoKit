@@ -35,7 +35,7 @@ class ArgoKitGridTestModel {
             var subDataSource = [ArgoKitGridCellTestModel]()
             for index in 0..<20{
                 let item = ArgoKitGridCellTestModel()
-                item.headerName = titiles[index%5]
+                item.headerName = "点击图片改变文本内容"
                 item.imagePath = images[index%5]
                 subDataSource.append(item)
                 dataSource2.append(item)
@@ -54,8 +54,8 @@ class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
     var reuseIdentifier: String{
         _reuseIdentifier
     }
-    var headerName = "title"
-    var imagePath = "icybay.jpg"
+    @Property var headerName = "title"
+    @Property var imagePath = "icybay.jpg"
     
     var text:Text?
    
@@ -218,12 +218,11 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-
+                    data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
                 }
 
         }
-//        .alias(variable: $grid)
-//
+        
         .grow(1.0)
         .columnCount(3)
         .columnSpacing(10)
