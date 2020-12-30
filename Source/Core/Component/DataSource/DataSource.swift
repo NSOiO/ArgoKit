@@ -54,15 +54,6 @@ extension DataSource {
     
     public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         if let node = self._rootNode{
-            for indexPath in indexPaths {
-                if indexPath.section >= dataSource()?.count ?? 0
-                    || indexPath.row >= dataSource()?[indexPath.section].count ?? 0{
-                    continue
-                }
-                if let data = dataSource()?[indexPath.section][indexPath.row] as? ArgoKitIdentifiable {
-                    data.argokit_linkNode = nil
-                }
-            }
             node.reloadRows(at: indexPaths, with: animation)
         }
     }
