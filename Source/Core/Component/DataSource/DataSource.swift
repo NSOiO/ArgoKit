@@ -95,12 +95,15 @@ extension DataSource {
     }
 
     public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+
         for indexPath in indexPaths {
             if var value = _value as? SectionDataList<Any> {
                 value[indexPath.section].remove(at:indexPath.row)
+                _value = value as! Value
             }
             if var value = _value as? DataList<Any>{
                 value.remove(at:indexPath.row)
+                _value = value as! Value
             }
         }
         
@@ -109,7 +112,7 @@ extension DataSource {
         }
     }
     
-    func deleteRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
+    public func deleteRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
         self.deleteRows(at: [indexPath], with: animation)
     }
 
@@ -124,21 +127,27 @@ extension DataSource {
         let itemToMove = dataSource()![indexPath.section][indexPath.row]
         if var value = _value as? SectionDataList<Any> {
             value[indexPath.section].remove(at:indexPath.row)
+            _value = value as! Value
         }else if var value = _value as? DataList<Any>{
             value.remove(at:indexPath.row)
+            _value = value as! Value
         }
         if indexPath.section != newIndexPath.section
             || newIndexPath.row < indexPath.row {
             if var value = _value as? SectionDataList<Any> {
                 value[newIndexPath.section].insert(itemToMove,at:newIndexPath.row)
+                _value = value as! Value
             }else if var value = _value as? DataList<Any>{
                 value.insert(itemToMove,at:newIndexPath.row)
+                _value = value as! Value
             }
         } else {
             if var value = _value as? SectionDataList<Any> {
                 value[newIndexPath.section].insert(itemToMove,at:newIndexPath.row - 1)
+                _value = value as! Value
             }else if var value = _value as? DataList<Any>{
                 value.insert(itemToMove,at:newIndexPath.row - 1)
+                _value = value as! Value
             }
         }
         
