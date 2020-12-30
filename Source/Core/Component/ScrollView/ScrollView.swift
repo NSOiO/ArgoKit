@@ -81,6 +81,8 @@ extension ScrollView {
         return self
     }
 
+    /// Called when the adjusted content insets of the scroll view change.
+    /// - Returns: self
     @available(iOS 11.0, *)
     @discardableResult
     public func adjustedContentInsetDidChange() -> Self {
@@ -545,6 +547,9 @@ extension ScrollView {
         return self
     }
     
+    /// Set the callback called for the view to scale when zooming is about to occur in the scroll view.
+    /// - Parameter action: callback
+    /// - Returns: self
     @discardableResult
     public func viewForZooming(_ action: @escaping () -> UIView?) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.viewForZooming(in:))
