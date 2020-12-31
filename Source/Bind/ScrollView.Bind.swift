@@ -12,45 +12,50 @@ extension ScrollView {
     /// - Parameter value: the new offset
     /// - Returns: self
     @discardableResult
-    public func contentOffset(_ value: CGPoint) -> Self {
-        addAttribute(#selector(setter:UIScrollView.contentOffset),value)
-        return self
+    public func contentOffset(_ value: @escaping @autoclosure () -> CGPoint) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.contentOffset),value())
+		}, forKey: #function)
     }
     
     /// Set the content size
     /// - Parameter value: the new size
     /// - Returns: self
     @discardableResult
-    public func contentSize(_ value: CGSize) -> Self {
-        pNode?.contentSize(value)
-        return self
+    public func contentSize(_ value: @escaping @autoclosure () -> CGSize) -> Self {
+		return self.bindCallback({ [self] in 
+			pNode?.contentSize(value())
+		}, forKey: #function)
     }
     
     /// Set the content width
     /// - Parameter value: new width
     /// - Returns: self
     @discardableResult
-    public func contentWidth(_ value: CGFloat) -> Self {
-        pNode?.contentWidth(value)
-        return self
+    public func contentWidth(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			pNode?.contentWidth(value())
+		}, forKey: #function)
     }
     
     /// Set the content height
     /// - Parameter value: new height
     /// - Returns: self
     @discardableResult
-    public func contentHeight(_ value: CGFloat) -> Self {
-        pNode?.contentHeight(value)
-        return self
+    public func contentHeight(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			pNode?.contentHeight(value())
+		}, forKey: #function)
     }
     
     /// Set the content inset of the UIScrollView behind the wrapper.
     /// - Parameter value: new content inste
     /// - Returns: self
     @discardableResult
-    public func contentInset(_ value: UIEdgeInsets) -> Self {
-        addAttribute(#selector(setter:UIScrollView.contentInset),value)
-        return self
+    public func contentInset(_ value: @escaping @autoclosure () -> UIEdgeInsets) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.contentInset),value())
+		}, forKey: #function)
     }
     
     /// Set the contentInsetAdjustmentBehavior of the UIScrollview behind the wrapper.
@@ -58,9 +63,10 @@ extension ScrollView {
     /// - Returns: self
     @available(iOS 11.0, *)
     @discardableResult
-    public func contentInsetAdjustmentBehavior(_ value: UIScrollView.ContentInsetAdjustmentBehavior) -> Self {
-        addAttribute(#selector(setter:UIScrollView.contentInsetAdjustmentBehavior),value.rawValue)
-        return self
+    public func contentInsetAdjustmentBehavior(_ value: @escaping @autoclosure () -> UIScrollView.ContentInsetAdjustmentBehavior) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.contentInsetAdjustmentBehavior),value().rawValue)
+		}, forKey: #function)
     }
     
     /// Set automaticallyAdjustsScrollIndicatorInsets of the UIScrollView behind the wrapper.
@@ -68,9 +74,10 @@ extension ScrollView {
     /// - Returns: self
     @available(iOS 13.0, *)
     @discardableResult
-    public func automaticallyAdjustsScrollIndicatorInsets(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.automaticallyAdjustsScrollIndicatorInsets),value)
-        return self
+    public func automaticallyAdjustsScrollIndicatorInsets(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.automaticallyAdjustsScrollIndicatorInsets),value())
+		}, forKey: #function)
     }
     
     /// call the isDirectionalLockEnabled of the UIScrollView behind the wrapper.
@@ -79,9 +86,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func isDirectionalLockEnabled(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.isDirectionalLockEnabled),value)
-        return self
+    public func isDirectionalLockEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.isDirectionalLockEnabled),value())
+		}, forKey: #function)
     }
     
     /// Set the bounces of the UIScrollView behind the wrapper.
@@ -90,9 +98,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func bounces(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.bounces),value)
-        return self
+    public func bounces(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.bounces),value())
+		}, forKey: #function)
     }
     
     /// Set the alwaysBounceVertical of the UIScrollView behind the wrapper.
@@ -101,9 +110,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func alwaysBounceVertical(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.alwaysBounceVertical),value)
-        return self
+    public func alwaysBounceVertical(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.alwaysBounceVertical),value())
+		}, forKey: #function)
     }
     
     /// Set the alwaysBounceHorizontal of the UIScrollView behind the wrapper.
@@ -112,9 +122,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func alwaysBounceHorizontal(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.alwaysBounceHorizontal),value)
-        return self
+    public func alwaysBounceHorizontal(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.alwaysBounceHorizontal),value())
+		}, forKey: #function)
     }
     
     ///Set the isPagingEnabled of the UIScrollView behind the wrapper.
@@ -123,9 +134,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func isPagingEnabled(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.isPagingEnabled),value)
-        return self
+    public func isPagingEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.isPagingEnabled),value())
+		}, forKey: #function)
     }
     
     /// Set the isScrollEnabled of the UIScrollView behind the wrapper.
@@ -134,9 +146,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func scrollEnabled(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.isScrollEnabled),value)
-        return self
+    public func scrollEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.isScrollEnabled),value())
+		}, forKey: #function)
     }
     
     /// Set the showsVerticalScrollIndicator of the UIScrollView behind the wrapper.
@@ -145,9 +158,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func showsVerticalScrollIndicator(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
-        return self
+    public func showsVerticalScrollIndicator(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value())
+		}, forKey: #function)
     }
     
     ///Set the showsHorizontalScrollIndicator of the UIScrollView behind the wrapper.
@@ -156,19 +170,21 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func showsHorizontalScrollIndicator(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
-        return self
+    public func showsHorizontalScrollIndicator(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value())
+		}, forKey: #function)
     }
     
     /// Set both showsVerticalScrollIndicator and showsHorizontalScrollIndicator at the same time.
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func showsScrollIndicator(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value)
-        addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value)
-        return self
+    public func showsScrollIndicator(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.showsVerticalScrollIndicator),value())
+			addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value())
+		}, forKey: #function)
     }
     
     /// Call the delaysContentTouches of the UIScrollView behind the wrapper.
@@ -177,9 +193,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func delaysContentTouches(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.delaysContentTouches),value)
-        return self
+    public func delaysContentTouches(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.delaysContentTouches),value())
+		}, forKey: #function)
     }
     
     /// Call the canCancelContentTouches of the UIScrollView behind the wrapper.
@@ -188,9 +205,10 @@ extension ScrollView {
     /// - Parameter value: new value
     /// - Returns: self
     @discardableResult
-    public func canCancelContentTouches(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.canCancelContentTouches),value)
-        return self
+    public func canCancelContentTouches(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.canCancelContentTouches),value())
+		}, forKey: #function)
     }
     
     /// Call the minimumZoomScale of the UIScrollView behind the wrapper.
@@ -199,9 +217,10 @@ extension ScrollView {
     /// - Parameter value: new point value
     /// - Returns: self
     @discardableResult
-    public func minimumZoomScale(_ value: CGFloat) -> Self {
-        addAttribute(#selector(setter:UIScrollView.minimumZoomScale),value)
-        return self
+    public func minimumZoomScale(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.minimumZoomScale),value())
+		}, forKey: #function)
     }
     
     /// Call the maximumZoomScale of the UIScrollView behind the wrapper.
@@ -210,9 +229,10 @@ extension ScrollView {
     /// - Parameter value: new point value
     /// - Returns: self
     @discardableResult
-    public func maximumZoomScale(_ value: CGFloat) -> Self {
-        addAttribute(#selector(setter:UIScrollView.maximumZoomScale),value)
-        return self
+    public func maximumZoomScale(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.maximumZoomScale),value())
+		}, forKey: #function)
     }
     
     /// Call the zoomScale of the UIScrollView behind the wrapper.
@@ -221,9 +241,10 @@ extension ScrollView {
     /// - Parameter value: new float value
     /// - Returns: self
     @discardableResult
-    public func zoomScale(_ value: CGFloat) -> Self {
-        addAttribute(#selector(setter:UIScrollView.zoomScale),value)
-        return self
+    public func zoomScale(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.zoomScale),value())
+		}, forKey: #function)
     }
     
     /// Call the setZoomScale of the UIScrollView behind the wrapper.
@@ -234,9 +255,10 @@ extension ScrollView {
     ///   - animated: true to animate the transition to the new scale, false to make the transition immediate.
     /// - Returns: self
     @discardableResult
-    public func setZoomScale(_ scale: CGFloat, animated: Bool) -> Self {
-        addAttribute(#selector(UIScrollView.setZoomScale(_:animated:)), scale, animated)
-        return self
+    public func setZoomScale(_ scale: @escaping @autoclosure () -> CGFloat, animated: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(UIScrollView.setZoomScale(_:animated:)), scale(), animated())
+		}, forKey: #function)
     }
     
     /// Call the zoom of the UIScrollView behind the wrapper.
@@ -247,9 +269,10 @@ extension ScrollView {
     ///   - animated: true if the scrolling should be animated, false if it should be immediate.
     /// - Returns: self
     @discardableResult
-    public func zoom(to rect: CGRect, animated: Bool) -> Self {
-        addAttribute(#selector(UIScrollView.zoom(to:animated:)), rect, animated)
-        return self
+    public func zoom(to rect: @escaping @autoclosure () -> CGRect, animated: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(UIScrollView.zoom(to:animated:)), rect(), animated())
+		}, forKey: #function)
     }
     
     /// Call the bouncesZoom of the UIScrollView behind the wrapper.
@@ -258,9 +281,10 @@ extension ScrollView {
     /// - Parameter value: new Boolean value
     /// - Returns: self
     @discardableResult
-    public func bouncesZoom(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.bouncesZoom),value)
-        return self
+    public func bouncesZoom(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.bouncesZoom),value())
+		}, forKey: #function)
     }
     
     /// Set the scrollsToTop of the UIScrollView behind the wrapper.
@@ -269,8 +293,9 @@ extension ScrollView {
     /// - Parameter value: new Boolean value
     /// - Returns: self
     @discardableResult
-    public func scrollsToTop(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIScrollView.scrollsToTop),value)
-        return self
+    public func scrollsToTop(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIScrollView.scrollsToTop),value())
+		}, forKey: #function)
     }
 }

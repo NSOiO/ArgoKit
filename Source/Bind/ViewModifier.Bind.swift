@@ -13,18 +13,20 @@ extension View {
     /// - Parameter value: A Boolean value that determines whether user events are ignored and removed from the event queue.
     /// - Returns: Self
     @discardableResult
-    public func isUserInteractionEnabled(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
-        return self
+    public func isUserInteractionEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value())
+		}, forKey: #function)
     }
     
     /// Sets the view’s background color.
     /// - Parameter value: The view’s background color.
     /// - Returns: Self
     @discardableResult
-    public func backgroundColor(_ value: UIColor) -> Self {
-        addAttribute(#selector(setter:UIView.backgroundColor),value)
-        return self;
+    public func backgroundColor(_ value: @escaping @autoclosure () -> UIColor) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.backgroundColor),value());
+		}, forKey: #function)
     }
     
     /// Sets the view’s background color.
@@ -35,10 +37,11 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func backgroundColor(red r: Int, green g: Int, blue b: Int, alpha a: CGFloat = 1) -> Self {
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(#selector(setter:UIView.backgroundColor),value)
-        return self;
+    public func backgroundColor(red r: @escaping @autoclosure () -> Int, green g: @escaping @autoclosure () -> Int, blue b: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> CGFloat = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
+			addAttribute(#selector(setter:UIView.backgroundColor),value);
+		}, forKey: #function)
     }
     
     /// Sets the view’s background color.
@@ -47,46 +50,51 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func backgroundColor(hex: Int, alpha a: Float = 1) -> Self {
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(#selector(setter:UIView.backgroundColor),value)
-        return self;
+    public func backgroundColor(hex: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> Float = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
+			addAttribute(#selector(setter:UIView.backgroundColor),value);
+		}, forKey: #function)
     }
     
     /// Sets the view’s alpha value.
     /// - Parameter value: The view’s alpha value, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func alpha(_ value: CGFloat) -> Self {
-        addAttribute(#selector(setter:UIView.alpha),value)
-        return self;
+    public func alpha(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.alpha),value());
+		}, forKey: #function)
     }
     
     /// Gets a Boolean value that determines whether the view is opaque.
     /// - Parameter value: A Boolean value that determines whether the view is opaque.
     /// - Returns: Self
     @discardableResult
-    public func opaque(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIView.isOpaque),value)
-        return self;
+    public func opaque(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.isOpaque),value());
+		}, forKey: #function)
     }
     
     /// Sets a Boolean value that determines whether the view’s bounds should be automatically cleared before drawing.
     /// - Parameter value: A Boolean value that determines whether the view’s bounds should be automatically cleared before drawing.
     /// - Returns: Self
     @discardableResult
-    public func clearsContextBeforeDrawing(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
-        return self;
+    public func clearsContextBeforeDrawing(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value());
+		}, forKey: #function)
     }
     
     /// Sets a Boolean value that determines whether the view is hidden.
     /// - Parameter value: A Boolean value that determines whether the view is hidden.
     /// - Returns: Self
     @discardableResult
-    public func hidden(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIView.isHidden),value)
-        return self;
+    public func hidden(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.isHidden),value());
+		}, forKey: #function)
     }
     
     @available(*, unavailable, renamed: "gone(_:)")
@@ -135,18 +143,20 @@ extension View {
     /// - Parameter value: Options to specify how a view adjusts its content when its size changes.
     /// - Returns: Self
     @discardableResult
-    public func contentMode(_ value: UIView.ContentMode) -> Self {
-        addAttribute(#selector(setter:UIView.contentMode),value.rawValue)
-        return self;
+    public func contentMode(_ value: @escaping @autoclosure () -> UIView.ContentMode) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.contentMode),value().rawValue);
+		}, forKey: #function)
     }
     
     /// Sets the first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.
     /// - Parameter value: The first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.
     /// - Returns: Self
     @discardableResult
-    public func tintColor(_ value: UIColor) -> Self {
-        addAttribute(#selector(setter:UIView.tintColor),value)
-        return self;
+    public func tintColor(_ value: @escaping @autoclosure () -> UIColor) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.tintColor),value());
+		}, forKey: #function)
     }
     
     /// Sets the first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.
@@ -157,10 +167,11 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func tintColor(red r: Int, green g: Int, blue b: Int, alpha a: CGFloat = 1) -> Self {
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(#selector(setter:UIView.tintColor),value)
-        return self;
+    public func tintColor(red r: @escaping @autoclosure () -> Int, green g: @escaping @autoclosure () -> Int, blue b: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> CGFloat = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
+			addAttribute(#selector(setter:UIView.tintColor),value);
+		}, forKey: #function)
     }
     
     /// Sets the first nondefault tint color value in the view’s hierarchy, ascending from and starting with the view itself.
@@ -169,36 +180,41 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func tintColor(hex: Int, alpha a: Float = 1) -> Self {
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(#selector(setter:UIView.tintColor),value)
-        return self;
+    public func tintColor(hex: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> Float = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
+			addAttribute(#selector(setter:UIView.tintColor),value);
+		}, forKey: #function)
     }
     
     /// Sets the first non-default tint adjustment mode value in the view’s hierarchy, ascending from and starting with the view itself.
     /// - Parameter value: The first non-default tint adjustment mode value in the view’s hierarchy, ascending from and starting with the view itself.
     /// - Returns: Self
     @discardableResult
-    public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
-        addAttribute(#selector(setter:UIView.tintAdjustmentMode),value.rawValue)
-        return self;
+    public func tintAdjustmentMode(_ value:@escaping @autoclosure () -> UIView.TintAdjustmentMode)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.tintAdjustmentMode),value().rawValue);
+		}, forKey: #function)
     }
     
     /// Sets a Boolean value that determines whether subviews are confined to the bounds of the view.
     /// - Parameter value: A Boolean value that determines whether subviews are confined to the bounds of the view.
     /// - Returns: Self
     @discardableResult
-    public func clipsToBounds(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.clipsToBounds),value)
-        return self;
+    public func clipsToBounds(_ value:@escaping @autoclosure () -> Bool)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIView.clipsToBounds),value());
+		}, forKey: #function)
     }
     
     /// Sets the corner radius of this view.
     /// - Parameter value: The corner radius of this view.
     /// - Returns: Self
     @discardableResult
-    public func cornerRadius(_ value: CGFloat) -> Self {
-        return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
+    public func cornerRadius(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			self.cornerRadius(topLeft: value(), topRight: value(), bottomLeft: value(), bottomRight: value());
+		}, forKey: #function)
     }
     
     /// Sets the radius of this view's corner.
@@ -209,12 +225,12 @@ extension View {
     ///   - bottomRight: The radius of this view's bottom right corner.
     /// - Returns: Self
     @discardableResult
-    public func cornerRadius(topLeft: CGFloat, topRight: CGFloat, bottomLeft: CGFloat, bottomRight: CGFloat) -> Self {
-        let multiRadius = ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
-        self.node?.maskLayerOperation?.updateCornersRadius(multiRadius)
-        
-        self.node?.borderLayerOperation?.updateCornersRadius(multiRadius)
-        return self;
+    public func cornerRadius(topLeft: @escaping @autoclosure () -> CGFloat, topRight: @escaping @autoclosure () -> CGFloat, bottomLeft: @escaping @autoclosure () -> CGFloat, bottomRight: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			let multiRadius = ArgoKitCornerRadius(topLeft: topLeft(), topRight: topRight(), bottomLeft: bottomLeft(), bottomRight: bottomRight())
+			self.node?.maskLayerOperation?.updateCornersRadius(multiRadius)
+			self.node?.borderLayerOperation?.updateCornersRadius(multiRadius);
+		}, forKey: #function)
     }
     
     /// Sets the width of this view's border.
@@ -243,10 +259,11 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func borderColor(red r: Int, green g: Int, blue b: Int, alpha a: CGFloat = 1) -> Self {
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
-        return self;
+    public func borderColor(red r: @escaping @autoclosure () -> Int, green g: @escaping @autoclosure () -> Int, blue b: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> CGFloat = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
+			addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor);
+		}, forKey: #function)
     }
     
     /// Sets the color of this view's border.
@@ -255,19 +272,21 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func borderColor(hex: Int, alpha a: Float = 1) -> Self {
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
-        return self;
+    public func borderColor(hex: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> Float = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
+			addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor);
+		}, forKey: #function)
     }
     
     /// Sets the color of the layer’s shadow. Animatable.
     /// - Parameter value: The color of the layer’s shadow.
     /// - Returns: Self
     @discardableResult
-    public func shadowColor(_ value: UIColor?) -> Self {
-        self.node?.shadowOperation?.updateShadowColor(value)
-        return self
+    public func shadowColor(_ value: @escaping @autoclosure () -> UIColor?) -> Self {
+		return self.bindCallback({ [self] in 
+			self.node?.shadowOperation?.updateShadowColor(value())
+		}, forKey: #function)
     }
     
     /// Sets the color of the layer’s shadow. Animatable.
@@ -278,10 +297,11 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func shadowColor(red r: Int, green g: Int, blue b: Int, alpha a: CGFloat = 1) -> Self {
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        self.node?.shadowOperation?.updateShadowColor(value)
-        return self;
+    public func shadowColor(red r: @escaping @autoclosure () -> Int, green g: @escaping @autoclosure () -> Int, blue b: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> CGFloat = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
+			self.node?.shadowOperation?.updateShadowColor(value);
+		}, forKey: #function)
     }
     
     /// Sets the color of the layer’s shadow. Animatable.
@@ -290,10 +310,11 @@ extension View {
     ///   - a: The opacity value of the color object, specified as a value from 0.0 to 1.0.
     /// - Returns: Self
     @discardableResult
-    public func shadowColor(hex: Int, alpha a: Float = 1) -> Self {
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        self.node?.shadowOperation?.updateShadowColor(value)
-        return self;
+    public func shadowColor(hex: @escaping @autoclosure () -> Int, alpha a: @escaping @autoclosure () -> Float = 1) -> Self {
+		return self.bindCallback({ [self] in 
+			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
+			self.node?.shadowOperation?.updateShadowColor(value);
+		}, forKey: #function)
     }
     
     /// Sets the the offset, radius and opacity of the layer’s shadow. Animatable.
@@ -303,9 +324,10 @@ extension View {
     ///   - opacity: The opacity of the layer’s shadow.
     /// - Returns: Self
     @discardableResult
-    public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
-        self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
-        return self
+    public func shadow(offset: @escaping @autoclosure () -> CGSize, radius: @escaping @autoclosure () -> CGFloat, opacity: @escaping @autoclosure () -> Float) -> Self {
+		return self.bindCallback({ [self] in 
+			self.node?.shadowOperation?.updateShadow(offset: offset(), radius: radius(), opacity: opacity())
+		}, forKey: #function)
     }
     
     /// Config the layer’s shadow. Animatable.
@@ -317,9 +339,10 @@ extension View {
     ///   - corners: The radius of this view's corner.
     /// - Returns: Self
     @discardableResult
-    public func shadow(color: UIColor? = .gray, offset: CGSize, radius: CGFloat, opacity: Float, corners: UIRectCorner = .allCorners) -> Self {
-        self.node?.shadowOperation?.updateCornersRadius(shadowColor: color, shadowOffset: offset, shadowRadius: radius, shadowOpacity: opacity, corners: corners)
-        return self;
+    public func shadow(color: @escaping @autoclosure () -> UIColor? = .gray, offset: @escaping @autoclosure () -> CGSize, radius: @escaping @autoclosure () -> CGFloat, opacity: @escaping @autoclosure () -> Float, corners: @escaping @autoclosure () -> UIRectCorner = .allCorners) -> Self {
+		return self.bindCallback({ [self] in 
+			self.node?.shadowOperation?.updateCornersRadius(shadowColor: color(), shadowOffset: offset(), shadowRadius: radius(), shadowOpacity: opacity(), corners: corners());
+		}, forKey: #function)
     }
     
     /// Sets the view’s background gradient color.
@@ -329,9 +352,10 @@ extension View {
     ///   - direction: The direction of the gradient.
     /// - Returns: Self
     @discardableResult
-    public func gradientColor(startColor: UIColor?, endColor: UIColor?, direction: ArgoKitGradientType?) -> Self {
-        self.node?.gradientLayerOperation?.updateGradientLayer(startColor: startColor, endColor: endColor, direction: direction)
-        return self
+    public func gradientColor(startColor: @escaping @autoclosure () -> UIColor?, endColor: @escaping @autoclosure () -> UIColor?, direction: @escaping @autoclosure () -> ArgoKitGradientType?) -> Self {
+		return self.bindCallback({ [self] in 
+			self.node?.gradientLayerOperation?.updateGradientLayer(startColor: startColor(), endColor: endColor(), direction: direction())
+		}, forKey: #function)
     }
     
 }

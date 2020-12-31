@@ -14,9 +14,10 @@ extension DatePicker {
     /// - Parameter value: the mode, default is UIDatePickerModeDateAndTime
     /// - Returns: self
     @discardableResult
-    public func datePickerMode(_ value:UIDatePicker.Mode)->Self{
-        addAttribute(#selector(setter:UIDatePicker.datePickerMode),value.rawValue)
-        return self
+    public func datePickerMode(_ value:@escaping @autoclosure () -> UIDatePicker.Mode)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.datePickerMode),value().rawValue)
+		}, forKey: #function)
     }
 
     /// Set the  locale used by the date picker.
@@ -25,9 +26,10 @@ extension DatePicker {
     /// - Parameter value: the local value.
     /// - Returns: self
     @discardableResult
-    public func locale(_ value:Locale?)->Self{
-        addAttribute(#selector(setter:UIDatePicker.locale),value)
-        return self
+    public func locale(_ value:@escaping @autoclosure () -> Locale?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.locale),value())
+		}, forKey: #function)
     }
     
     /// Set the calendar used for the date picker.
@@ -36,9 +38,10 @@ extension DatePicker {
     /// - Parameter value: the calendar
     /// - Returns: self
     @discardableResult
-    public func calendar(_ value:Calendar!)->Self{
-        addAttribute(#selector(setter:UIDatePicker.calendar),value)
-        return self
+    public func calendar(_ value:@escaping @autoclosure () -> Calendar)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.calendar),value())
+		}, forKey: #function)
     }
     
     /// Set  time zone reflected in the date displayed by the date picker.
@@ -47,9 +50,10 @@ extension DatePicker {
     /// - Parameter value: the timezone
     /// - Returns: self
     @discardableResult
-    public func timeZone(_ value:TimeZone?)->Self{
-        addAttribute(#selector(setter:UIDatePicker.timeZone),value)
-        return self
+    public func timeZone(_ value:@escaping @autoclosure () -> TimeZone?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.timeZone),value())
+		}, forKey: #function)
     }
     
     /// Set the date displayed by the date picker.
@@ -58,9 +62,10 @@ extension DatePicker {
     /// - Parameter value: the date
     /// - Returns: self
     @discardableResult
-    public func date(_ value:Date)->Self{
-        addAttribute(#selector(setter:UIDatePicker.date),value)
-        return self
+    public func date(_ value:@escaping @autoclosure () -> Date)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.date),value())
+		}, forKey: #function)
     }
     
     /// Set minimum date that a date picker can show.
@@ -69,9 +74,10 @@ extension DatePicker {
     /// - Parameter value: the min date
     /// - Returns: self
     @discardableResult
-    public func minimumDate(_ value:Date?)->Self{
-        addAttribute(#selector(setter:UIDatePicker.minimumDate),value)
-        return self
+    public func minimumDate(_ value:@escaping @autoclosure () -> Date?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.minimumDate),value())
+		}, forKey: #function)
     }
     
     /// Set maximum date that a date picker can show.
@@ -80,9 +86,10 @@ extension DatePicker {
     /// - Parameter value: the max date
     /// - Returns: self
     @discardableResult
-    public func maximumDate(_ value:Date?)->Self{
-        addAttribute(#selector(setter:UIDatePicker.maximumDate),value)
-        return self
+    public func maximumDate(_ value:@escaping @autoclosure () -> Date?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.maximumDate),value())
+		}, forKey: #function)
     }
     
     /// Set value displayed by the date picker when the mode property is set to show a countdown time.
@@ -91,9 +98,10 @@ extension DatePicker {
     /// - Parameter value: currently selected value
     /// - Returns: self
     @discardableResult
-    public func countDownDuration(_ value:TimeInterval)->Self{
-        addAttribute(#selector(setter:UIDatePicker.countDownDuration),value)
-        return self
+    public func countDownDuration(_ value:@escaping @autoclosure () -> TimeInterval)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.countDownDuration),value())
+		}, forKey: #function)
     }
 
     /// Set the interval at which the date picker should display minutes.
@@ -102,9 +110,10 @@ extension DatePicker {
     /// - Parameter value: interval displayed by the minutes wheel
     /// - Returns: self
     @discardableResult
-    public func minuteInterval(_ value:Int)->Self{
-        addAttribute(#selector(setter:UIDatePicker.minuteInterval),value)
-        return self
+    public func minuteInterval(_ value:@escaping @autoclosure () -> Int)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.minuteInterval),value())
+		}, forKey: #function)
     }
     
     /// Sets the date to display in the date picker, with an option to animate the setting.
@@ -115,9 +124,10 @@ extension DatePicker {
     ///   - animated: true to animate the setting of the new date, otherwise false. The animation rotates the wheels until the new date and time is shown under the highlight rectangle.
     /// - Returns: self
     @discardableResult
-    public func setDate(_ date: Date, animated: Bool)->Self{
-        addAttribute(#selector(UIDatePicker.setDate),date,animated)
-        return self
+    public func setDate(_ date: @escaping @autoclosure () -> Date, animated: @escaping @autoclosure () -> Bool)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(UIDatePicker.setDate),date(),animated())
+		}, forKey: #function)
     }
     
     /// Sets preferred style of the date picker.
@@ -127,8 +137,9 @@ extension DatePicker {
     /// - Returns: self
     @available(iOS 13.4, *)
     @discardableResult
-    public func preferredDatePickerStyle(_ value:UIDatePickerStyle)->Self{
-        addAttribute(#selector(setter:UIDatePicker.preferredDatePickerStyle),value)
-        return self
+    public func preferredDatePickerStyle(_ value:@escaping @autoclosure () -> UIDatePickerStyle)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIDatePicker.preferredDatePickerStyle),value())
+		}, forKey: #function)
     }
 }

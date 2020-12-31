@@ -9,52 +9,60 @@ import Foundation
 
 extension Toggle {
     @discardableResult
-    public func onTintColor(_ value:UIColor?)->Self{
-        addAttribute(#selector(setter:UISwitch.onTintColor),value)
-        return self
+    public func onTintColor(_ value:@escaping @autoclosure () -> UIColor?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.onTintColor),value())
+		}, forKey: #function)
     }
     
     @discardableResult
-    public func thumbTintColor(_ value:UIColor?)->Self{
-        addAttribute(#selector(setter:UISwitch.thumbTintColor),value)
-        return self
+    public func thumbTintColor(_ value:@escaping @autoclosure () -> UIColor?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.thumbTintColor),value())
+		}, forKey: #function)
     }
     
     @discardableResult
-    public func onImage(_ value:UIImage?)->Self{
-        addAttribute(#selector(setter:UISwitch.onImage),value)
-        return self
+    public func onImage(_ value:@escaping @autoclosure () -> UIImage?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.onImage),value())
+		}, forKey: #function)
     }
     
     @discardableResult
-    public func offImage(_ value:UIImage?)->Self{
-        addAttribute(#selector(setter:UISwitch.offImage),value)
-        return self
+    public func offImage(_ value:@escaping @autoclosure () -> UIImage?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.offImage),value())
+		}, forKey: #function)
     }
     
     @discardableResult
     @available(iOS 14.0, *)
-    public func title(_ value:String?)->Self{
-        addAttribute(#selector(setter:UISwitch.title),value)
-        return self
+    public func title(_ value:@escaping @autoclosure () -> String?)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.title),value())
+		}, forKey: #function)
     }
     
     @discardableResult
     @available(iOS 14.0, *)
-    public func preferredStyle(_ value:UISwitch.Style)->Self{
-        addAttribute(#selector(setter:UISwitch.preferredStyle),value.rawValue)
-        return self
+    public func preferredStyle(_ value:@escaping @autoclosure () -> UISwitch.Style)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.preferredStyle),value().rawValue)
+		}, forKey: #function)
     }
     
     @discardableResult
-    public func isOn(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UISwitch.isOn),value)
-        return self
+    public func isOn(_ value:@escaping @autoclosure () -> Bool)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UISwitch.isOn),value())
+		}, forKey: #function)
     }
     
     @discardableResult
-    public func setOn(_ on: Bool, animated: Bool)->Self{
-        addAttribute(#selector(UISwitch.setOn(_:animated:)),isOn,animated)
-        return self
+    public func setOn(_ on: @escaping @autoclosure () -> Bool, animated: @escaping @autoclosure () -> Bool)->Self{
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(UISwitch.setOn(_:animated:)),isOn,animated())
+		}, forKey: #function)
     }
 }

@@ -12,26 +12,29 @@ extension ActivityIndicatorView {
     /// - Parameter value: The basic appearance of the activity indicator.
     /// - Returns: self
     @discardableResult
-    public func style(_ value: UIActivityIndicatorView.Style) -> Self {
-        addAttribute(#selector(setter:UIActivityIndicatorView.style),value.rawValue)
-        return self
+    public func style(_ value: @escaping @autoclosure () -> UIActivityIndicatorView.Style) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIActivityIndicatorView.style),value().rawValue)
+		}, forKey: #function)
     }
     
     /// Sets a Boolean value that controls whether the receiver is hidden when the animation is stopped.
     /// - Parameter value: A Boolean value that controls whether the receiver is hidden when the animation is stopped.
     /// - Returns: self
     @discardableResult
-    public func hidesWhenStopped(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIActivityIndicatorView.hidesWhenStopped),value)
-        return self
+    public func hidesWhenStopped(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIActivityIndicatorView.hidesWhenStopped),value())
+		}, forKey: #function)
     }
     
     /// Sets the color of the activity indicator.
     /// - Parameter value: The color of the activity indicator.
     /// - Returns: self
     @discardableResult
-    public func color(_ value: UIColor!) -> Self {
-        addAttribute(#selector(setter:UIActivityIndicatorView.color),value)
-        return self
+    public func color(_ value: @escaping @autoclosure () -> UIColor) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIActivityIndicatorView.color),value())
+		}, forKey: #function)
     }
 }

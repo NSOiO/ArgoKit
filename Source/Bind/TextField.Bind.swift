@@ -12,27 +12,30 @@ extension TextField {
     /// - Parameter value: new string vaue.
     /// - Returns: self
     @discardableResult
-    public func text(_ value: String?) -> Self {
-        addAttribute(#selector(setter:UITextField.text),value)
-        return self
+    public func text(_ value: @escaping @autoclosure () -> String?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.text),value())
+		}, forKey: #function)
     }
     
     /// set the styled text that text field displays.
     /// - Parameter value: new styled text
     /// - Returns: self
     @discardableResult
-    public func attributedText(_ value: NSAttributedString?) -> Self {
-        addAttribute(#selector(setter:UITextField.attributedText),value)
-        return self
+    public func attributedText(_ value: @escaping @autoclosure () -> NSAttributedString?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.attributedText),value())
+		}, forKey: #function)
     }
     
     /// change the font of the text.
     /// - Parameter value: new font value.
     /// - Returns: self
     @discardableResult
-    public func font(_ value: UIFont?) -> Self {
-        addAttribute(#selector(setter:UITextField.font),value)
-        return self
+    public func font(_ value: @escaping @autoclosure () -> UIFont?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.font),value())
+		}, forKey: #function)
     }
     
     /// The styled string displays when thers is no other text in the text field.
@@ -41,9 +44,10 @@ extension TextField {
     /// - Parameter value: a new styled string.
     /// - Returns: self
     @discardableResult
-    public func attributedPlaceholder(_ value: NSAttributedString?) -> Self {
-        addAttribute(#selector(setter:UITextField.attributedPlaceholder),value)
-        return self
+    public func attributedPlaceholder(_ value: @escaping @autoclosure () -> NSAttributedString?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.attributedPlaceholder),value())
+		}, forKey: #function)
     }
     
     /// The techinque for aligning the text
@@ -73,9 +77,10 @@ extension TextField {
     ///    }
     /// ```
     @discardableResult
-    public func textAlign(_ value: NSTextAlignment) -> Self {
-        addAttribute(#selector(setter:UITextField.textAlignment),value.rawValue)
-        return self
+    public func textAlign(_ value: @escaping @autoclosure () -> NSTextAlignment) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.textAlignment),value().rawValue)
+		}, forKey: #function)
     }
     
     /// The border style of the text.
@@ -98,9 +103,10 @@ extension TextField {
     ///```
     ///
     @discardableResult
-    public func borderStyle(_ value: UITextField.BorderStyle) -> Self {
-        addAttribute(#selector(setter:UITextField.borderStyle),value)
-        return self
+    public func borderStyle(_ value: @escaping @autoclosure () -> UITextField.BorderStyle) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.borderStyle),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that determines whether the text field removes old text when editing begins.
@@ -113,9 +119,10 @@ extension TextField {
     /// - Parameter value: a new Boolean value
     /// - Returns: self
     @discardableResult
-    public func clearsOnBeginEditing(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextField.clearsOnBeginEditing),value)
-        return self
+    public func clearsOnBeginEditing(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.clearsOnBeginEditing),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that indicates whether to reduce the font size to fit the text string into the text field’s bounding rectangle.
@@ -126,9 +133,10 @@ extension TextField {
     /// - Parameter value: a new Boolean value
     /// - Returns: self
     @discardableResult
-    public func adjustsFontSizeToFitWidth(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextField.adjustsFontSizeToFitWidth),value)
-        return self
+    public func adjustsFontSizeToFitWidth(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.adjustsFontSizeToFitWidth),value())
+		}, forKey: #function)
     }
     
     /// The size of the smallest permissible font when drawing the text field’s text.
@@ -141,9 +149,10 @@ extension TextField {
     /// - Parameter value: a new size
     /// - Returns: self
     @discardableResult
-    public func minimumFontSize(_ value: CGFloat) -> Self {
-        addAttribute(#selector(setter:UITextField.minimumFontSize),value)
-        return self
+    public func minimumFontSize(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.minimumFontSize),value())
+		}, forKey: #function)
     }
     
     /// The image that represents the background appearance of the text field when it is in an enabled state.
@@ -154,9 +163,10 @@ extension TextField {
     /// - Parameter value: a new background
     /// - Returns: self
     @discardableResult
-    public func background(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UITextField.background),value)
-        return self
+    public func background(_ value: @escaping @autoclosure () -> UIImage?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.background),value())
+		}, forKey: #function)
     }
     
     /// The image that represents the background appearance of the text field when it is in a disabled state.
@@ -167,9 +177,10 @@ extension TextField {
     /// - Parameter value: a new image or nil
     /// - Returns: self
     @discardableResult
-    public func disabledBackground(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UITextField.disabledBackground),value)
-        return self
+    public func disabledBackground(_ value: @escaping @autoclosure () -> UIImage?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.disabledBackground),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that determines whether the user can edit the attributes of the text in the text field.
@@ -180,9 +191,10 @@ extension TextField {
     /// - Parameter value: a new Boolean value.
     /// - Returns: self
     @discardableResult
-    public func allowsEditingTextAttributes(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextField.allowsEditingTextAttributes),value)
-        return self
+    public func allowsEditingTextAttributes(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.allowsEditingTextAttributes),value())
+		}, forKey: #function)
     }
     
     /// A mode that controls when the standard Clear button appears in the text field.
@@ -206,9 +218,10 @@ extension TextField {
     ///}
     /// ```
     @discardableResult
-    public func clearButtonMode(_ value: UITextField.ViewMode) -> Self {
-        addAttribute(#selector(setter:UITextField.clearButtonMode),value)
-        return self
+    public func clearButtonMode(_ value: @escaping @autoclosure () -> UITextField.ViewMode) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.clearButtonMode),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that determines whether inserting text replaces the previous contents.
@@ -217,8 +230,9 @@ extension TextField {
     /// - Parameter value: a new Boolean value.
     /// - Returns: self
     @discardableResult
-    public func clearsOnInsertion(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextField.clearsOnInsertion),value)
-        return self
+    public func clearsOnInsertion(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.clearsOnInsertion),value())
+		}, forKey: #function)
     }
 }

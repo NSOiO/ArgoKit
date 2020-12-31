@@ -13,9 +13,10 @@ extension TextView {
     /// - Parameter value: a new string value.
     /// - Returns: self
     @discardableResult
-    public func text(_ value: String?) -> Self {
-        addAttribute(#selector(setter:UITextView.text),value)
-        return self
+    public func text(_ value: @escaping @autoclosure () -> String?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.text),value())
+		}, forKey: #function)
     }
     
     /// The font of the text
@@ -24,9 +25,10 @@ extension TextView {
     /// - Parameter value: a new font value
     /// - Returns: self
     @discardableResult
-    public func font(_ value: UIFont?) -> Self {
-        addAttribute(#selector(setter:UITextView.font),value)
-        return self
+    public func font(_ value: @escaping @autoclosure () -> UIFont?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.font),value())
+		}, forKey: #function)
     }
     
     /// The color of the text.
@@ -36,9 +38,10 @@ extension TextView {
     /// - Parameter value: a new color
     /// - Returns: self
     @discardableResult
-    public func textColor(_ value: UIColor?) -> Self {
-        addAttribute(#selector(setter:UITextView.textColor),value)
-        return self
+    public func textColor(_ value: @escaping @autoclosure () -> UIColor?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.textColor),value())
+		}, forKey: #function)
     }
     
     /// Change the color the text, the color is created by the rgba value.
@@ -49,10 +52,11 @@ extension TextView {
     ///   - a: the opacity value of the color object, data range from 0 to 1.
     /// - Returns: description
     @discardableResult
-    public func textColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(#selector(setter:UITextView.textColor),value)
-        return self;
+    public func textColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat = 1)->Self{
+		return self.bindCallback({ [self] in 
+			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
+			addAttribute(#selector(setter:UITextView.textColor),value);
+		}, forKey: #function)
     }
     
     /// Change the color of the text, the color is created by the hex and alpha.
@@ -61,10 +65,11 @@ extension TextView {
     ///   - a: alpha value
     /// - Returns: self
     @discardableResult
-    public func textColor(hex:Int,alpha a:Float = 1)->Self{
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(#selector(setter:UITextView.textColor),value)
-        return self;
+    public func textColor(hex:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float = 1)->Self{
+		return self.bindCallback({ [self] in 
+			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
+			addAttribute(#selector(setter:UITextView.textColor),value);
+		}, forKey: #function)
     }
     
     /// The technique for aligning the text. See:UITextView.textAlignment
@@ -95,9 +100,10 @@ extension TextView {
     ///    }
     ///```
     @discardableResult
-    public func textAlign(_ value: NSTextAlignment) -> Self {
-        addAttribute(#selector(setter:UITextView.textAlignment),value.rawValue)
-        return self
+    public func textAlign(_ value: @escaping @autoclosure () -> NSTextAlignment) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.textAlignment),value().rawValue)
+		}, forKey: #function)
     }
     
     /// A Boolean value that indicates whether the text view is editable.
@@ -107,9 +113,10 @@ extension TextView {
     /// - Parameter value: a new Boolean value.
     /// - Returns: self
     @discardableResult
-    public func isEditable(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextView.isEditable),value)
-        return self
+    public func isEditable(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.isEditable),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that indicates whether the text view is selectable.
@@ -119,9 +126,10 @@ extension TextView {
     /// - Parameter value: a new Boolean value.
     /// - Returns: self
     @discardableResult
-    public func isSelectable(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextView.isSelectable),value)
-        return self
+    public func isSelectable(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.isSelectable),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that indicates whether the text view allows the user to edit style information.
@@ -132,9 +140,10 @@ extension TextView {
     /// - Parameter value: a new Boolean value
     /// - Returns: self
     @discardableResult
-    public func allowsEditingTextAttributes(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextView.allowsEditingTextAttributes),value)
-        return self
+    public func allowsEditingTextAttributes(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.allowsEditingTextAttributes),value())
+		}, forKey: #function)
     }
     
     /// The styled text that the text view displays.
@@ -144,9 +153,10 @@ extension TextView {
     /// - Parameter value: a new NSAttributedString value.
     /// - Returns: self
     @discardableResult
-    public func attributedText(_ value: NSAttributedString!) -> Self {
-        addAttribute(#selector(setter:UITextView.attributedText),value)
-        return self
+    public func attributedText(_ value: @escaping @autoclosure () -> NSAttributedString) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.attributedText),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that indicates whether inserting text replaces the previous contents.
@@ -155,9 +165,10 @@ extension TextView {
     /// - Parameter value:a new Boolean value.
     /// - Returns: self
     @discardableResult
-    public func clearsOnInsertion(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextView.clearsOnInsertion),value)
-        return self
+    public func clearsOnInsertion(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.clearsOnInsertion),value())
+		}, forKey: #function)
     }
     
     /// A Boolean value that determines the rendering scale of the text.
@@ -171,8 +182,9 @@ extension TextView {
     /// - Returns: self
     @available(iOS 13.0, *)
     @discardableResult
-    public func usesStandardTextScaling(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UITextView.usesStandardTextScaling),value)
-        return self
+    public func usesStandardTextScaling(_ value: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextView.usesStandardTextScaling),value())
+		}, forKey: #function)
     }
 }

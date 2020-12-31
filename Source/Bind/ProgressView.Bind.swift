@@ -14,9 +14,10 @@ extension ProgressView {
     /// - Parameter value: current style
     /// - Returns: self
     @discardableResult
-    public func progressViewStyle(_ value: UIProgressView.Style) -> Self {
-        addAttribute(#selector(setter:UIProgressView.progressViewStyle),value.rawValue)
-        return self
+    public func progressViewStyle(_ value: @escaping @autoclosure () -> UIProgressView.Style) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.progressViewStyle),value().rawValue)
+		}, forKey: #function)
     }
     /// Set current progress shown by the receiver.
     ///
@@ -24,41 +25,46 @@ extension ProgressView {
     /// - Parameter value: the number
     /// - Returns: self
     @discardableResult
-    public func progress(_ value: Float) -> Self {
-        addAttribute(#selector(setter:UIProgressView.progress),value)
-        return self
+    public func progress(_ value: @escaping @autoclosure () -> Float) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.progress),value())
+		}, forKey: #function)
     }
     /// Set the color shown for the portion of the progress bar that is filled.
     /// - Parameter value: the color
     /// - Returns: self
     @discardableResult
-    public func progressTintColor(_ value: UIColor?) -> Self {
-        addAttribute(#selector(setter:UIProgressView.progressTintColor),value)
-        return self
+    public func progressTintColor(_ value: @escaping @autoclosure () -> UIColor?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.progressTintColor),value())
+		}, forKey: #function)
     }
     /// Set color shown for the portion of the progress bar that is not filled.
     /// - Parameter value: the color
     /// - Returns: self
     @discardableResult
-    public func trackTintColor(_ value: UIColor?) -> Self {
-        addAttribute(#selector(setter:UIProgressView.trackTintColor),value)
-        return self
+    public func trackTintColor(_ value: @escaping @autoclosure () -> UIColor?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.trackTintColor),value())
+		}, forKey: #function)
     }
     /// Set An image to use for the portion of the progress bar that is filled.
     /// - Parameter value: an image
     /// - Returns: self
     @discardableResult
-    public func progressImage(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UIProgressView.progressImage),value)
-        return self
+    public func progressImage(_ value: @escaping @autoclosure () -> UIImage?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.progressImage),value())
+		}, forKey: #function)
     }
     /// Set An image to use for the portion of the track that is not filled.
     /// - Parameter value: an image
     /// - Returns: self
     @discardableResult
-    public func trackImage(_ value: UIImage?) -> Self {
-        addAttribute(#selector(setter:UIProgressView.trackImage),value)
-        return self
+    public func trackImage(_ value: @escaping @autoclosure () -> UIImage?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.trackImage),value())
+		}, forKey: #function)
     }
     /// Adjusts the current progress shown by the receiver, optionally animating the change.
     ///
@@ -68,9 +74,10 @@ extension ProgressView {
     ///   - animated: true if the change should be animated, false if the change should happen immediately.
     /// - Returns: self
     @discardableResult
-    public func setProgress(_ value: Float, animated: Bool) -> Self {
-        addAttribute(#selector(UIProgressView.setProgress),value,animated)
-        return self
+    public func setProgress(_ value: @escaping @autoclosure () -> Float, animated: @escaping @autoclosure () -> Bool) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(UIProgressView.setProgress),value(),animated())
+		}, forKey: #function)
     }
     
     /// The progress object to use for updating the progress view.
@@ -81,8 +88,9 @@ extension ProgressView {
     /// - Returns: self
     @available(iOS 9.0, *)
     @discardableResult
-    public func observedProgress(_ value: Progress?) -> Self {
-        addAttribute(#selector(setter:UIProgressView.observedProgress),value)
-        return self
+    public func observedProgress(_ value: @escaping @autoclosure () -> Progress?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UIProgressView.observedProgress),value())
+		}, forKey: #function)
     }
 }
