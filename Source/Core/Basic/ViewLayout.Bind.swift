@@ -17,11 +17,13 @@ extension View {
     ///   - left: The width of the left border of this view.
     /// - Returns: self
     @discardableResult
-    private func  borderWidth(top:CGFloat,right:CGFloat,bottom:CGFloat,left:CGFloat)->Self{
-        return self.borderWidth(edge: .top, value: top)
-            .borderWidth(edge: .right, value: right)
-            .borderWidth(edge: .bottom, value: bottom)
-            .borderWidth(edge: .left, value: left)
+    private func  borderWidth(top:@escaping @autoclosure () -> CGFloat,right:@escaping @autoclosure () -> CGFloat,bottom:@escaping @autoclosure () -> CGFloat,left:@escaping @autoclosure () -> CGFloat)->Self{
+        return self.bindCallback({ [self] in
+            self.borderWidth(edge: .top, value: top())
+                .borderWidth(edge: .right, value: right())
+                .borderWidth(edge: .bottom, value: bottom())
+                .borderWidth(edge: .left, value: left())
+        }, forKey: #function)
     }
     
     /// Sets the width of this view's border.
@@ -30,33 +32,34 @@ extension View {
     ///   - value: The width of the border of this view.
     /// - Returns: self
     @discardableResult
-    private func  borderWidth(edge: ArgoEdge, value: CGFloat) -> Self {
-        switch edge {
-        case .left:
-            self.node?.borderLeftWidth(value)
-            break
-        case .top:
-            self.node?.borderTopWidth(value)
-            break
-        case .right:
-            self.node?.borderRightWidth(value)
-            break
-        case .bottom:
-            self.node?.borderBottomWidth(value)
-            break
-        case .start:
-            self.node?.borderStartWidth(value)
-            break
-        case .end:
-            self.node?.borderEndWidth(value)
-            break
-        case .all:
-            self.node?.borderWidth(value)
-            break
-        default:
-            break
-        }
-        return self
+    private func  borderWidth(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            switch edge(){
+            case .left:
+                self.node?.borderLeftWidth(value())
+                break
+            case .top:
+                self.node?.borderTopWidth(value())
+                break
+            case .right:
+                self.node?.borderRightWidth(value())
+                break
+            case .bottom:
+                self.node?.borderBottomWidth(value())
+                break
+            case .start:
+                self.node?.borderStartWidth(value())
+                break
+            case .end:
+                self.node?.borderEndWidth(value())
+                break
+            case .all:
+                self.node?.borderWidth(value())
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
 }
 
@@ -66,152 +69,157 @@ extension View {
     /// - Parameter value: The type of flex direction.
     /// - Returns: self
     @discardableResult
-    public func flexDirection(_ value: ArgoFlexDirection) -> Self {
-        switch value {
-        case .column:
-            self.node?.column()
-            break
-        case .columnReverse:
-            self.node?.columnREV()
-            break
-        case .row:
-            self.node?.row()
-            break
-        case .rowReverse:
-            self.node?.rowREV()
-            break
-        }
-        return self
+    public func flexDirection(_ value: @escaping @autoclosure () -> ArgoFlexDirection) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .column:
+                self.node?.column()
+                break
+            case .columnReverse:
+                self.node?.columnREV()
+                break
+            case .row:
+                self.node?.row()
+                break
+            case .rowReverse:
+                self.node?.rowREV()
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Ustify content describes how to align children within the main axis of their container. For example, you can use this property to center a child horizontally within a container with flex direction set to row or vertically within a container with flex direction set to column.
     /// - Parameter value: The type of justify content.
     /// - Returns: self
     @discardableResult
-    public func justifyContent(_ value: ArgoJustify) -> Self {
-        switch value {
-        case .start:
-            self.node?.justifyContentFlexStart()
-            break
-        case .center:
-            self.node?.justifyContentCenter()
-            break
-        case .end:
-            self.node?.justifyContentFlexEnd()
-            break
-        case .between:
-            self.node?.justifyContentSpaceBetween()
-            break
-        case .around:
-            self.node?.justifyContentSpaceAround()
-            break
-        case .evenly:
-            self.node?.justifyContentSpaceEvenly()
-            break
-        }
-        return self
+    public func justifyContent(_ value: @escaping @autoclosure () -> ArgoJustify) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .start:
+                self.node?.justifyContentFlexStart()
+                break
+            case .center:
+                self.node?.justifyContentCenter()
+                break
+            case .end:
+                self.node?.justifyContentFlexEnd()
+                break
+            case .between:
+                self.node?.justifyContentSpaceBetween()
+                break
+            case .around:
+                self.node?.justifyContentSpaceAround()
+                break
+            case .evenly:
+                self.node?.justifyContentSpaceEvenly()
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Align content defines the distribution of lines along the cross-axis. This only has effect when items are wrapped to multiple lines using flex wrap.
     /// - Parameter value: The type of align content.
     /// - Returns: self
     @discardableResult
-    public func alignContent(_ value: ArgoAlign) -> Self {
-        switch value{
-        case .auto:
-            self.node?.alignContentAuto()
-            break
-        case .start:
-            self.node?.alignContentFlexStart()
-            break
-        case .center:
-            self.node?.alignContentCenter()
-            break
-        case .end:
-            self.node?.alignContentFlexEnd()
-            break
-        case .stretch:
-            self.node?.alignContentStretch()
-            break
-        case .baseline:
-            self.node?.alignContentBaseline()
-            break
-        case .between:
-            self.node?.alignContentSpaceBetween()
-            break
-        case .around:
-            self.node?.alignContentSpaceAround()
-            break
-        }
-        return self
+    public func alignContent(_ value: @escaping @autoclosure () -> ArgoAlign) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .auto:
+                self.node?.alignContentAuto()
+                break
+            case .start:
+                self.node?.alignContentFlexStart()
+                break
+            case .center:
+                self.node?.alignContentCenter()
+                break
+            case .end:
+                self.node?.alignContentFlexEnd()
+                break
+            case .stretch:
+                self.node?.alignContentStretch()
+                break
+            case .baseline:
+                self.node?.alignContentBaseline()
+                break
+            case .between:
+                self.node?.alignContentSpaceBetween()
+                break
+            case .around:
+                self.node?.alignContentSpaceAround()
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Align items describes how to align children along the cross axis of their container. Align items is very similar to justify content but instead of applying to the main axis, align items applies to the cross axis.
     /// - Parameter value: The type of align items.
     /// - Returns: self
     @discardableResult
-    public func alignItems(_ value: ArgoAlign) -> Self {
-        switch value{
-        case .auto:
-            self.node?.alignContentAuto()
-            break
-        case .start:
-            self.node?.alignItemsFlexStart()
-            break
-        case .center:
-            self.node?.alignItemsCenter()
-            break
-        case .end:
-            self.node?.alignItemsFlexEnd()
-            break
-        case .stretch:
-            self.node?.alignItemsStretch()
-            break
-        case .baseline:
-            self.node?.alignItemsBaseline()
-            break
-        case .between:
-            self.node?.alignItemsSpaceBetween()
-            break
-        case .around:
-            self.node?.alignItemsSpaceAround()
-            break
-        }
-        return self
+    public func alignItems(_ value: @escaping @autoclosure () -> ArgoAlign) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .auto:
+                self.node?.alignContentAuto()
+                break
+            case .start:
+                self.node?.alignItemsFlexStart()
+                break
+            case .center:
+                self.node?.alignItemsCenter()
+                break
+            case .end:
+                self.node?.alignItemsFlexEnd()
+                break
+            case .stretch:
+                self.node?.alignItemsStretch()
+                break
+            case .baseline:
+                self.node?.alignItemsBaseline()
+                break
+            case .between:
+                self.node?.alignItemsSpaceBetween()
+                break
+            case .around:
+                self.node?.alignItemsSpaceAround()
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Align self has the same options and effect as align items but instead of affecting the children within a container, you can apply this property to a single child to change its alignment within its parent. align self overrides any option set by the parent with align items.
     /// - Parameter value: The type of align self.
     /// - Returns: self
     @discardableResult
-    public func alignSelf(_ value: ArgoAlign) -> Self {
-        switch value {
-        case .auto:
-            self.node?.alignSelfAuto()
-            break
-        case .start:
-            self.node?.alignSelfFlexStart()
-            break
-        case .center:
-            self.node?.alignSelfCenter()
-            break
-        case .end:
-            self.node?.alignSelfFlexEnd()
-            break
-        case .stretch:
-            self.node?.alignSelfStretch()
-            break
-        case .baseline:
-            self.node?.alignSelfBaseline()
-            break
-        case .between:
-            self.node?.alignSelfSpaceBetween()
-            break
-        case .around:
-            self.node?.alignSelfSpaceAround()
-            break
-        }
-        return self
+    public func alignSelf(_ value: @escaping @autoclosure () -> ArgoAlign) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .auto:
+                self.node?.alignSelfAuto()
+                break
+            case .start:
+                self.node?.alignSelfFlexStart()
+                break
+            case .center:
+                self.node?.alignSelfCenter()
+                break
+            case .end:
+                self.node?.alignSelfFlexEnd()
+                break
+            case .stretch:
+                self.node?.alignSelfStretch()
+                break
+            case .baseline:
+                self.node?.alignSelfBaseline()
+                break
+            case .between:
+                self.node?.alignSelfSpaceBetween()
+                break
+            case .around:
+                self.node?.alignSelfSpaceAround()
+                break
+            }
+        }, forKey: #function)
     }
 }
 
@@ -222,28 +230,30 @@ extension View {
     /// - Parameter value: The type of flex wrap.
     /// - Returns: self
     @discardableResult
-    public func wrap(_ value:ArgoWrapType) -> Self {
-        switch value {
-        case .noWrap:
-            self.node?.flexWrapNoWrap()
-            break
-        case .wrap:
-            self.node?.flexWrapWrap()
-            break
-        case .wrapReverse:
-            self.node?.flexWrapWrapREV()
-            break
-        }
-        return self
+    public func wrap(_ value:@escaping @autoclosure () -> ArgoWrapType) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .noWrap:
+                self.node?.flexWrapNoWrap()
+                break
+            case .wrap:
+                self.node?.flexWrapWrap()
+                break
+            case .wrapReverse:
+                self.node?.flexWrapWrapREV()
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets how a flex item will grow or shrink to fit the space available in its flex container.
     /// - Parameter value: The value of flex.
     /// - Returns: self
     @discardableResult
-    public func flex(_ value: CGFloat) -> Self {
-        self.node?.flex(value)
-        return self
+    public func flex(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            self.node?.flex(value())
+        }, forKey: #function)
     }
     
     /// Sets the flex grow factor of a flex item's main size.
@@ -251,39 +261,42 @@ extension View {
     /// - Parameter value: The value of grow.
     /// - Returns: self
     @discardableResult
-    public func grow(_ value: CGFloat) -> Self {
-        self.node?.flexGrow(value)
-        return self
+    public func grow(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            self.node?.flexGrow(value())
+        }, forKey: #function)
     }
     
     /// Sets the flex shrink factor of a flex item. If the size of all flex items is larger than the flex container, items shrink to fit according to flex-shrink.
     /// - Parameter value: The value of shrink.
     /// - Returns: self
     @discardableResult
-    public func shrink(_ value: CGFloat) -> Self {
-        self.node?.flexShrink(value)
-        return self
+    public func shrink(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            self.node?.flexShrink(value())
+        }, forKey: #function)
     }
     
     /// Sets the initial main size of a flex item.
     /// - Parameter value: The type of basis.
     /// - Returns: self
     @discardableResult
-    public func basis(_ value: ArgoValue) -> Self {
-        switch value {
-        case .auto:
-            self.node?.flexBasisAuto()
-            break
-        case .point(let value):
-            self.node?.flexBasis(point: value)
-            break
-        case .percent(let value):
-            self.node?.flexBasis(percent: value)
-            break
-        default:
-            break
-        }
-        return self
+    public func basis(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .auto:
+                self.node?.flexBasisAuto()
+                break
+            case .point(let value):
+                self.node?.flexBasis(point: value)
+                break
+            case .percent(let value):
+                self.node?.flexBasis(percent: value)
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
 }
@@ -294,16 +307,17 @@ extension View {
     /// - Parameter value: The type of position.
     /// - Returns: self
     @discardableResult
-    public func positionType(_ value: ArgoPositionType) -> Self {
-        switch value {
-        case .relative:
-            self.node?.positionRelative()
-            break
-        case .absolute:
-            self.node?.positionAbsolute()
-            break
-        }
-        return self
+    public func positionType(_ value: @escaping @autoclosure () -> ArgoPositionType) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .relative:
+                self.node?.positionRelative()
+                break
+            case .absolute:
+                self.node?.positionAbsolute()
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets how this view is positioned in a view.
@@ -314,11 +328,13 @@ extension View {
     ///   - left: The left style attribute defines the offset between the left margin boundary of the positioned element and the left boundary of its containing block.
     /// - Returns: self
     @discardableResult
-    public func position(top: ArgoValue, right: ArgoValue, bottom: ArgoValue, left: ArgoValue) -> Self {
-        return position(edge: .top, value: top)
-            .position(edge: .left, value: left)
-            .position(edge: .bottom, value: bottom)
-            .position(edge: .right, value:right)
+    public func position(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            position(edge: .top, value: top())
+                .position(edge: .left, value: left())
+                .position(edge: .bottom, value: bottom())
+                .position(edge: .right, value:right())
+        }, forKey: #function)
     }
     
     /// Sets how this view is positioned in a view.
@@ -327,103 +343,104 @@ extension View {
     ///   - value: The value offset.
     /// - Returns: self
     @discardableResult
-    public func position(edge: ArgoEdge, value: ArgoValue) -> Self {
-        switch edge {
-        case .left:
-            switch value {
-            case .point(let value):
-                self.node?.left(point: value)
+    public func position(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch edge(){
+            case .left:
+                switch value(){
+                case .point(let value):
+                    self.node?.left(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.left(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
-            case .percent(let value):
-                self.node?.left(percent: value)
+            case .top:
+                switch value(){
+                case .point(let value):
+                    self.node?.top(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.top(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .right:
+                switch value(){
+                case .point(let value):
+                    self.node?.right(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.right(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .bottom:
+                switch value(){
+                case .point(let value):
+                    self.node?.bottom(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.bottom(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .start:
+                switch value(){
+                case .point(let value):
+                    self.node?.start(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.start(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .end:
+                switch value(){
+                case .point(let value):
+                    self.node?.end(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.end(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .all:
+                switch value(){
+                case .point(let value):
+                    self.node?.top(point: value)
+                    self.node?.left(point: value)
+                    self.node?.bottom(point: value)
+                    self.node?.right(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.top(percent: value)
+                    self.node?.left(percent: value)
+                    self.node?.bottom(percent: value)
+                    self.node?.right(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
             default:
                 break
+                
             }
-            break
-        case .top:
-            switch value {
-            case .point(let value):
-                self.node?.top(point: value)
-                break
-            case .percent(let value):
-                self.node?.top(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .right:
-            switch value{
-            case .point(let value):
-                self.node?.right(point: value)
-                break
-            case .percent(let value):
-                self.node?.right(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .bottom:
-            switch value {
-            case .point(let value):
-                self.node?.bottom(point: value)
-                break
-            case .percent(let value):
-                self.node?.bottom(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .start:
-            switch value {
-            case .point(let value):
-                self.node?.start(point: value)
-                break
-            case .percent(let value):
-                self.node?.start(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .end:
-            switch value {
-            case .point(let value):
-                self.node?.end(point: value)
-                break
-            case .percent(let value):
-                self.node?.end(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .all:
-            switch value {
-            case .point(let value):
-                self.node?.top(point: value)
-                self.node?.left(point: value)
-                self.node?.bottom(point: value)
-                self.node?.right(point: value)
-                break
-            case .percent(let value):
-                self.node?.top(percent: value)
-                self.node?.left(percent: value)
-                self.node?.bottom(percent: value)
-                self.node?.right(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        default:
-            break
-            
-        }
-        return self
+        }, forKey: #function)
     }
     
     /// Sets the margin area on all four sides of this view.
@@ -434,11 +451,13 @@ extension View {
     ///   - left: The margin area on the left side of this view.
     /// - Returns: self
     @discardableResult
-    public func margin(top: ArgoValue, right: ArgoValue, bottom: ArgoValue, left: ArgoValue) -> Self {
-        return margin(edge: .top, value: top)
-            .margin(edge: .left, value: left)
-            .margin(edge: .bottom, value: bottom)
-            .margin(edge: .right, value:right)
+    public func margin(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            margin(edge: .top, value: top())
+                .margin(edge: .left, value: left())
+                .margin(edge: .bottom, value: bottom())
+                .margin(edge: .right, value:right())
+        }, forKey: #function)
     }
     
     /// Sets the margin area on specified side of this view.
@@ -447,118 +466,119 @@ extension View {
     ///   - value: The margin area on the edge of this view.
     /// - Returns: self
     @discardableResult
-    public func margin(edge: ArgoEdge, value: ArgoValue) -> Self {
-        switch edge {
-        case .left:
-            switch value {
-            case .point(let value):
-                self.node?.marginLeft(point: value)
+    public func margin(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch edge(){
+            case .left:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginLeft(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginLeft(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
-            case .percent(let value):
-                self.node?.marginLeft(percent: value)
+            case .top:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginTop(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginTop(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
-            default:
+            case .right:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginRight(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginRight(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .bottom:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginBottom(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginBottom(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .start:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginStart(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginStart(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .end:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginEnd(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginEnd(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .horizontal:
+                switch value(){
+                case .point (let value):
+                    self.node?.marginH(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginH(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .vertical:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginV(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginV(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .all:
+                switch value(){
+                case .point(let value):
+                    self.node?.marginAll(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.marginAll(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
             }
-            break
-        case .top:
-            switch value {
-            case .point(let value):
-                self.node?.marginTop(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginTop(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .right:
-            switch value {
-            case .point(let value):
-                self.node?.marginRight(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginRight(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .bottom:
-            switch value {
-            case .point(let value):
-                self.node?.marginBottom(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginBottom(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .start:
-            switch value {
-            case .point(let value):
-                self.node?.marginStart(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginStart(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .end:
-            switch value {
-            case .point(let value):
-                self.node?.marginEnd(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginEnd(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .horizontal:
-            switch value {
-            case .point (let value):
-                self.node?.marginH(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginH(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .vertical:
-            switch value {
-            case .point(let value):
-                self.node?.marginV(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginV(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .all:
-            switch value {
-            case .point(let value):
-                self.node?.marginAll(point: value)
-                break
-            case .percent(let value):
-                self.node?.marginAll(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        }
-        return self
+        }, forKey: #function)
     }
     
     /// Sets the padding area on all four sides of this view at once.
@@ -569,11 +589,13 @@ extension View {
     ///   - left: The width of the padding area to the left of this view.
     /// - Returns: self
     @discardableResult
-    public func padding(top: ArgoValue, right: ArgoValue, bottom: ArgoValue, left: ArgoValue) -> Self {
-        return padding(edge: .top, value: top)
-            .padding(edge: .left, value: left)
-            .padding(edge: .bottom, value: bottom)
-            .padding(edge: .right, value:right)
+    public func padding(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            padding(edge: .top, value: top())
+                .padding(edge: .left, value: left())
+                .padding(edge: .bottom, value: bottom())
+                .padding(edge: .right, value:right())
+        }, forKey: #function)
     }
     
     /// Sets the padding area on specified side  of this view.
@@ -582,118 +604,119 @@ extension View {
     ///   - value: The padding area on the edge of this view.
     /// - Returns: self
     @discardableResult
-    public func padding(edge: ArgoEdge, value: ArgoValue) -> Self {
-        switch edge {
-        case .left:
-            switch value {
-            case .point(let value):
-                self.node?.paddingLeft(point: value)
+    public func padding(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch edge(){
+            case .left:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingLeft(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingLeft(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
-            case .percent(let value):
-                self.node?.paddingLeft(percent: value)
+            case .top:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingTop(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingTop(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
-            default:
+            case .right:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingRight(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingRight(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .bottom:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingBottom(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingBottom(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .start:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingStart(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingStart(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .end:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingEnd(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingEnd(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .horizontal:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingH(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingH(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .vertical:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingV(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingV(percent: value)
+                    break
+                default:
+                    break
+                }
+                break
+            case .all:
+                switch value(){
+                case .point(let value):
+                    self.node?.paddingAll(point: value)
+                    break
+                case .percent(let value):
+                    self.node?.paddingAll(percent: value)
+                    break
+                default:
+                    break
+                }
                 break
             }
-            break
-        case .top:
-            switch value {
-            case .point(let value):
-                self.node?.paddingTop(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingTop(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .right:
-            switch value {
-            case .point(let value):
-                self.node?.paddingRight(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingRight(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .bottom:
-            switch value {
-            case .point(let value):
-                self.node?.paddingBottom(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingBottom(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .start:
-            switch value {
-            case .point(let value):
-                self.node?.paddingStart(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingStart(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .end:
-            switch value {
-            case .point(let value):
-                self.node?.paddingEnd(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingEnd(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .horizontal:
-            switch value {
-            case .point(let value):
-                self.node?.paddingH(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingH(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .vertical:
-            switch value {
-            case .point(let value):
-                self.node?.paddingV(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingV(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        case .all:
-            switch value {
-            case .point(let value):
-                self.node?.paddingAll(point: value)
-                break
-            case .percent(let value):
-                self.node?.paddingAll(percent: value)
-                break
-            default:
-                break
-            }
-            break
-        }
-        return self
+        }, forKey: #function)
     }
 }
 
@@ -703,114 +726,120 @@ extension View {
     /// - Parameter value: The width of this view.
     /// - Returns: self
     @discardableResult
-    public func width(_ value: ArgoValue) -> Self {
-        switch value {
-        case .point(let value):
-            self.node?.width(point: value)
-            break
-        case .percent(let value):
-            self.node?.width(percent:value)
-            break
-        case .auto:
-            self.node?.widthAuto()
-            break
-        default:
-            break
-        }
-        return self
+    public func width(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .point(let value):
+                self.node?.width(point: value)
+                break
+            case .percent(let value):
+                self.node?.width(percent:value)
+                break
+            case .auto:
+                self.node?.widthAuto()
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets the height of this view.
     /// - Parameter value: The height of this view.
     /// - Returns: self
     @discardableResult
-    public func height(_ value: ArgoValue) -> Self {
-        switch value {
-        case .point(let value):
-            self.node?.height(point: value)
-            break
-        case .percent(let value):
-            self.node?.height(percent: value)
-            break
-        case .auto:
-            self.node?.heightAuto()
-            break
-        default:
-            break
-        }
-        return self
+    public func height(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .point(let value):
+                self.node?.height(point: value)
+                break
+            case .percent(let value):
+                self.node?.height(percent: value)
+                break
+            case .auto:
+                self.node?.heightAuto()
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets the minimum width of this view.
     /// - Parameter value: The minimum width of this view.
     /// - Returns: self
     @discardableResult
-    public func minWidth(_ value: ArgoValue) -> Self {
-        switch value {
-        case .point(let value):
-            self.node?.minWidth(point: value)
-            break
-        case .percent(let value):
-            self.node?.minWidth(percent: value)
-            break
-        default:
-            break
-        }
-        return self
+    public func minWidth(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .point(let value):
+                self.node?.minWidth(point: value)
+                break
+            case .percent(let value):
+                self.node?.minWidth(percent: value)
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets the minimum height of this view.
     /// - Parameter value: The minimum height of this view.
     /// - Returns: self
     @discardableResult
-    public func minHeight(_ value: ArgoValue) -> Self {
-        switch value {
-        case .point(let value):
-            self.node?.minHeight(point: value)
-            break
-        case .percent(let value):
-            self.node?.minHeight(percent: value)
-            break
-        default:
-            break
-        }
-        return self
+    public func minHeight(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .point(let value):
+                self.node?.minHeight(point: value)
+                break
+            case .percent(let value):
+                self.node?.minHeight(percent: value)
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets the maximal width of this view.
     /// - Parameter value: The maximal width of this view.
     /// - Returns: self
     @discardableResult
-    public func maxWidth(_ value: ArgoValue) -> Self {
-        switch value {
-        case .point(let value):
-            self.node?.maxWidth(point: value)
-            break
-        case .percent(let value):
-            self.node?.maxWidth(percent: value)
-            break
-        default:
-            break
-        }
-        return self
+    public func maxWidth(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .point(let value):
+                self.node?.maxWidth(point: value)
+                break
+            case .percent(let value):
+                self.node?.maxWidth(percent: value)
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets the maximal height of this view.
     /// - Parameter value: The maximal height of this view.
     /// - Returns: self
     @discardableResult
-    public func maxHeight(_ value: ArgoValue) -> Self {
-        switch value {
-        case .point(let value):
-            self.node?.maxHeight(point:value)
-            break
-        case .percent(let value):
-            self.node?.maxHeight(percent: value)
-            break
-        default:
-            break
-        }
-        return self
+    public func maxHeight(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            switch value(){
+            case .point(let value):
+                self.node?.maxHeight(point:value)
+                break
+            case .percent(let value):
+                self.node?.maxHeight(percent: value)
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
     }
     
     /// Sets the size of this view.
@@ -819,8 +848,10 @@ extension View {
     ///   - height: The height of this view.
     /// - Returns: self
     @discardableResult
-    public func size(width: ArgoValue, height: ArgoValue) -> Self {
-        return self.width(width).height(height)
+    public func size(width: @escaping @autoclosure () -> ArgoValue, height: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            self.width(width()).height(height())
+        }, forKey: #function)
     }
 }
 
@@ -830,8 +861,9 @@ extension View {
     /// - Parameter value: The aspect ratio of this view.
     /// - Returns: self
     @discardableResult
-    public func aspect(ratio: CGFloat) -> Self {
-        self.node?.aspect(ratio:ratio)
-        return self
+    public func aspect(ratio: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            self.node?.aspect(ratio:ratio())
+        }, forKey: #function)
     }
 }
