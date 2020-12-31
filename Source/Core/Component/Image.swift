@@ -51,7 +51,7 @@ class ArgoKitImageNode: ArgoKitNode {
 ///
 public struct Image : View {
     
-    private var pNode : ArgoKitImageNode
+    var pNode : ArgoKitImageNode
     
     /// The node behind the Image.
     public var node: ArgoKitNode? {
@@ -160,32 +160,6 @@ extension Image {
 }
 
 extension Image {
-    
-    /// Sets the displayed image.
-    /// - Parameters:
-    ///   - url: The url of a image.
-    ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    /// - Returns: self
-    @discardableResult
-    public func image(url: URL?, placeholder: String?) -> Self {
-        pNode.image(url: url, placeholder: placeholder)
-        return self
-    }
-    
-    /// Sets the displayed image.
-    /// - Parameters:
-    ///   - urlString: The string represent a valid URL For a image
-    ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    /// - Returns: self
-    @discardableResult
-    public func image(urlString: String?, placeholder: String?) -> Self {
-        var url:URL? = nil
-        if let urlString = urlString {
-            url = URL(string: urlString)
-        }
-        pNode.image(url: url, placeholder: placeholder)
-        return self
-    }
         
     /// Starts animating the images in the receiver.
     /// - Returns: self

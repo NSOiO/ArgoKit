@@ -18,6 +18,110 @@ extension TextField {
 		}, forKey: #function)
     }
     
+    /// change the color of the text
+    /// - Parameter value: the new color
+    /// - Returns: self
+    @discardableResult
+    public func textColor(_ value: @escaping @autoclosure () -> UIColor?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.textColor),value())
+		}, forKey: #function)
+    }
+    
+    /// Set the font of the receiver's text.
+    /// - Parameters:
+    ///   - name: font name
+    ///   - style: font style
+    ///   - size: font size
+    /// - Returns: self
+    ///
+    /// ```
+    /// // value of AKFontStyle
+    /// public enum AKFontStyle{
+    ///     case `default`
+    ///     case bold
+    ///     case italic
+    ///     case bolditalic
+    /// }
+    /// ```
+    @discardableResult
+    public func font(name: @escaping @autoclosure () -> String?, style:@escaping @autoclosure () -> AKFontStyle,size:@escaping @autoclosure () -> CGFloat)->Self{
+		return self.bindCallback({ [self] in 
+        pNode.fontName = name()
+        pNode.fontStyle = style()
+        pNode.fontSize = size()
+			let font = UIFont.font(fontName: name(), fontStyle: style(), fontSize: size())
+			self.font(font)
+		}, forKey: #function)
+    }
+    
+    /// change the font name of the receiver's text
+    /// - Parameter value: font name
+    /// - Returns: self
+    @discardableResult
+    public func font(name value:@escaping @autoclosure () -> String?)->Self{
+		return self.bindCallback({ [self] in 
+        pNode.fontName = value()
+			let font = UIFont.font(fontName: value(), fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
+			self.font(font)
+		}, forKey: #function)
+    }
+    /// change the font size of the receiver's text
+    /// - Parameter value: font size
+    /// - Returns: self
+    @discardableResult
+    public  func font(size value:@escaping @autoclosure () -> CGFloat)->Self{
+		return self.bindCallback({ [self] in 
+        pNode.fontSize = value()
+			let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: value())
+			self.font(font)
+		}, forKey: #function)
+    }
+    /// change the font style of the receiver's text
+    /// - Parameter value: font style
+    /// - Returns:Self
+    ///
+    /// ```
+    /// // value of AKFontStyle
+    /// public enum AKFontStyle{
+    ///     case `default`
+    ///     case bold
+    ///     case italic
+    ///     case bolditalic
+    /// }
+    /// ```
+    @discardableResult
+    public func font(style value:@escaping @autoclosure () -> AKFontStyle)->Self{
+		return self.bindCallback({ [self] in 
+        pNode.fontStyle = value()
+			let font = UIFont.font(fontName: pNode.fontName, fontStyle: value(), fontSize: pNode.fontSize)
+			self.font(font)
+		}, forKey: #function)
+    }
+    
+    /// The string that displays when there is no other text in the text field.
+    ///
+    /// This value is nil by default. The placeholder string is drawn using a system-defined color.
+    /// - Parameter value: new string value
+    /// - Returns: self
+    @discardableResult
+    public func placeholder(_ value: @escaping @autoclosure () -> String?) -> Self {
+		return self.bindCallback({ [self] in 
+			addAttribute(#selector(setter:UITextField.placeholder),value())
+        pNode.placeholder = value()
+		}, forKey: #function)
+    }
+    
+    /// The color for the placeholder string
+    /// - Parameter value: a new color
+    /// - Returns: self
+    @discardableResult
+    public func placeholderColor(_ value: @escaping @autoclosure () -> UIColor?) -> Self {
+		return self.bindCallback({ [self] in 
+        pNode.placeholderColor = value()
+		}, forKey: #function)
+    }
+    
     /// set the styled text that text field displays.
     /// - Parameter value: new styled text
     /// - Returns: self

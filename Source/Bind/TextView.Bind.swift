@@ -106,6 +106,77 @@ extension TextView {
 		}, forKey: #function)
     }
     
+    /// Set the font of the text, the font is created by the specified name and style.
+    /// - Parameters:
+    ///   - name: font name
+    ///   - style: font style
+    ///   - size: font size
+    /// - Returns: self
+    ///
+    ///```
+    ///     public enum AKFontStyle{
+    ///         case `default`
+    ///         case bold
+    ///         case italic
+    ///         case bolditalic
+    ///     }
+    ///```
+    @discardableResult
+    public func font(name: @escaping @autoclosure () -> String?, style:@escaping @autoclosure () -> AKFontStyle,size:@escaping @autoclosure () -> CGFloat)->Self{
+		return self.bindCallback({ [self] in 
+        textViewNode.fontName = name()
+        textViewNode.fontStyle = style()
+        textViewNode.fontSize = size()
+			let font = UIFont.font(fontName: name(), fontStyle: style(), fontSize: size())
+			self.font(font)
+		}, forKey: #function)
+    }
+    
+    /// Change the font name of the text.
+    /// - Parameter value: a new font name.
+    /// - Returns: self
+    @discardableResult
+    public func font(name value:@escaping @autoclosure () -> String?)->Self{
+		return self.bindCallback({ [self] in 
+        textViewNode.fontName = value()
+			let font = UIFont.font(fontName: value(), fontStyle: textViewNode.fontStyle, fontSize: textViewNode.fontSize)
+			self.font(font)
+		}, forKey: #function)
+    }
+    
+    /// Change the font size of the text.
+    /// - Parameter value: a new font size.
+    /// - Returns: self
+    @discardableResult
+    public  func font(size value:@escaping @autoclosure () -> CGFloat)->Self{
+		return self.bindCallback({ [self] in 
+        textViewNode.fontSize = value()
+			let font = UIFont.font(fontName: textViewNode.fontName, fontStyle:  textViewNode.fontStyle, fontSize: value())
+			self.font(font)
+		}, forKey: #function)
+    }
+    
+    /// Change the font style of the text.
+    /// - Parameter value: a new style
+    /// - Returns: self
+    ///
+    ///```
+    ///     public enum AKFontStyle{
+    ///         case `default`
+    ///         case bold
+    ///         case italic
+    ///         case bolditalic
+    ///     }
+    ///```
+    @discardableResult
+    public func font(style value:@escaping @autoclosure () -> AKFontStyle)->Self{
+		return self.bindCallback({ [self] in 
+        textViewNode.fontStyle = value()
+			let font = UIFont.font(fontName: textViewNode.fontName, fontStyle: value(), fontSize: textViewNode.fontSize)
+			self.font(font)
+		}, forKey: #function)
+    }
+    
     /// A Boolean value that indicates whether the text view is editable.
     ///
     /// See: UITextView.isEditable

@@ -10,7 +10,7 @@ import Foundation
 /// An object that displays an editable text area in your interface.
 /// Wrapper of UITextField.
 public struct TextField : View {
-    private var pNode : ArgoKitTextFieldNode
+    var pNode : ArgoKitTextFieldNode
     /// the node behind the TextField
     public var node: ArgoKitNode? {
         pNode
@@ -33,100 +33,6 @@ public struct TextField : View {
 }
 
 extension TextField {
-    /// change the color of the text
-    /// - Parameter value: the new color
-    /// - Returns: self
-    @discardableResult
-    public func textColor(_ value: UIColor?) -> Self {
-        addAttribute(#selector(setter:UITextField.textColor),value)
-        pNode.updateAttributePlaceholder()
-        return self
-    }
-    
-    /// Set the font of the receiver's text.
-    /// - Parameters:
-    ///   - name: font name
-    ///   - style: font style
-    ///   - size: font size
-    /// - Returns: self
-    ///
-    /// ```
-    /// // value of AKFontStyle
-    /// public enum AKFontStyle{
-    ///     case `default`
-    ///     case bold
-    ///     case italic
-    ///     case bolditalic
-    /// }
-    /// ```
-    @discardableResult
-    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
-        pNode.fontName = name
-        pNode.fontStyle = style
-        pNode.fontSize = size
-        let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
-        return self.font(font)
-    }
-    
-    /// change the font name of the receiver's text
-    /// - Parameter value: font name
-    /// - Returns: self
-    @discardableResult
-    public func font(name value:String?)->Self{
-        pNode.fontName = value
-        let font = UIFont.font(fontName: value, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
-        return self.font(font)
-    }
-    /// change the font size of the receiver's text
-    /// - Parameter value: font size
-    /// - Returns: self
-    @discardableResult
-    public  func font(size value:CGFloat)->Self{
-        pNode.fontSize = value
-        let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: value)
-        return self.font(font)
-    }
-    /// change the font style of the receiver's text
-    /// - Parameter value: font style
-    /// - Returns:Self
-    ///
-    /// ```
-    /// // value of AKFontStyle
-    /// public enum AKFontStyle{
-    ///     case `default`
-    ///     case bold
-    ///     case italic
-    ///     case bolditalic
-    /// }
-    /// ```
-    @discardableResult
-    public func font(style value:AKFontStyle)->Self{
-        pNode.fontStyle = value
-        let font = UIFont.font(fontName: pNode.fontName, fontStyle: value, fontSize: pNode.fontSize)
-        return self.font(font)
-    }
-    
-    /// The string that displays when there is no other text in the text field.
-    ///
-    /// This value is nil by default. The placeholder string is drawn using a system-defined color.
-    /// - Parameter value: new string value
-    /// - Returns: self
-    @discardableResult
-    public func placeholder(_ value: String?) -> Self {
-        addAttribute(#selector(setter:UITextField.placeholder),value)
-        pNode.placeholder = value
-        return self
-    }
-    
-    /// The color for the placeholder string
-    /// - Parameter value: a new color
-    /// - Returns: self
-    @discardableResult
-    public func placeholderColor(_ value: UIColor?) -> Self {
-        pNode.placeholderColor = value
-        pNode.updateAttributePlaceholder()
-        return self
-    }
     
     /// The default attributes to apply to the text.
     ///

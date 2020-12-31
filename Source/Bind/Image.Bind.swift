@@ -8,6 +8,34 @@
 import Foundation
 
 extension Image {
+    /// Sets the displayed image.
+    /// - Parameters:
+    ///   - url: The url of a image.
+    ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
+    /// - Returns: self
+    @discardableResult
+    public func image(url: @escaping @autoclosure () -> URL?, placeholder: @escaping @autoclosure () -> String?) -> Self {
+		return self.bindCallback({ [self] in 
+			pNode.image(url: url(), placeholder: placeholder())
+		}, forKey: #function)
+    }
+    
+    /// Sets the displayed image.
+    /// - Parameters:
+    ///   - urlString: The string represent a valid URL For a image
+    ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
+    /// - Returns: self
+    @discardableResult
+    public func image(urlString: @escaping @autoclosure () -> String?, placeholder: @escaping @autoclosure () -> String?) -> Self {
+        return self.bindCallback({
+            var url:URL? = nil
+            if let urlString = urlString() {
+                url = URL(string: urlString)
+            }
+            pNode.image(url: url, placeholder: placeholder())
+        }, forKey: #function)
+    }
+    
     /// Sets the highlighted image displayed in the image view.
     /// - Parameter value: The highlighted image displayed in the image view.
     /// - Returns: self

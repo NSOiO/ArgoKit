@@ -19,7 +19,7 @@ import Foundation
 ///```
 ///
 public struct Button: View {
-    private let pNode:ArgoKitArttibuteNode
+    let pNode:ArgoKitArttibuteNode
     private var label:Text?
     
     /// The node behind the button.
@@ -59,43 +59,6 @@ public struct Button: View {
             }
             setValue(pNode, #selector(setter: UILabel.text), t)
         }
-    }
-}
-
-
-extension Button {
-    
-    /// Sets the color of the text.
-    /// - Parameter color: The color of the text.
-    /// - Returns: self
-    @discardableResult
-    public func textColor(_ color: UIColor?) -> Self {
-        setValue(pNode, #selector(setter: UILabel.textColor), color)
-        return self
-    }
-    
-    /// Sets the font of the text.
-    /// - Parameter value: The font of the text.
-    /// - Returns: self
-    @discardableResult
-    public func font(_ value: UIFont!) -> Self {
-        setValue(pNode, #selector(setter: UILabel.font), value)
-        return self
-    }
-    
-    /// Sets the font of the text.
-    /// - Parameters:
-    ///   - name: The fully specified name of the font. This name incorporates both the font family name and the specific style information for the font.
-    ///   - style: The text style for which to return a font. See AKFontStyle for recognized values.
-    ///   - size: The size (in points) to which the font is scaled. This value must be greater than 0.0.
-    /// - Returns: self
-    @discardableResult
-    public func font(name: String? = nil, style: AKFontStyle, size: CGFloat) -> Self {
-        pNode.fontName = name
-        pNode.fontSize = size
-        pNode.fontStyle = style
-        let f = UIFont.font(fontName:name, fontStyle:style, fontSize:size)
-        return font(f)
     }
 }
 

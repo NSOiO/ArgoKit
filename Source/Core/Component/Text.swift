@@ -132,7 +132,7 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
 ///```
 ///
 public struct Text:View {
-    private let pNode:ArgoKitTextNode
+    let pNode:ArgoKitTextNode
     /// the node behind of Text
     public var node: ArgoKitNode?{
         pNode
@@ -151,150 +151,6 @@ public struct Text:View {
 }
 
 extension Text{
-    /// set content of the Text
-    /// - Parameter value: a string value
-    /// - Returns: self
-    @discardableResult
-    public func text(_ value:@escaping @autoclosure () -> String?)->Self{
-        return self.bindCallback({
-            addAttribute(#selector(setter:UILabel.text),value())
-            pNode.handleLineSpacing()
-        }, forKey: #function)
-    }
-    
-    /// set the font of the receiver's text.
-    /// - Parameter value: a UIFont value
-    /// - Returns: self
-    @discardableResult
-    public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
-        return self.bindCallback({
-            addAttribute(#selector(setter:UILabel.font),value())
-            pNode.handleLineSpacing()
-        }, forKey: #function)
-    }
-    
-    /// Set the font of the receiver's text.
-    /// - Parameters:
-    ///   - name: font name
-    ///   - style: font style
-    ///   - size: font size
-    /// - Returns: self
-    ///
-    /// ```
-    /// // value of AKFontStyle
-    /// public enum AKFontStyle{
-    ///     case `default`
-    ///     case bold
-    ///     case italic
-    ///     case bolditalic
-    /// }
-    /// ```
-    @discardableResult
-    public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
-        return self.bindCallback({
-            let f_name = name(), f_size = size(), f_style = style()
-            pNode.fontName = f_name
-            pNode.fontSize = f_size
-            pNode.fontStyle = f_style
-            let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
-            addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
-        }, forKey: #function)
-    }
-    
-    /// change the font name of the receiver's text
-    /// - Parameter value: font name
-    /// - Returns: self
-    @discardableResult
-    public func font(name value: @escaping @autoclosure () -> String?)->Self{
-        return self.bindCallback({
-            let f_name = value()
-            pNode.fontName = f_name
-            let font = UIFont.font(fontName: f_name, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
-            addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
-        }, forKey: #function)
-    }
-    
-    /// change the font size of the receiver's text
-    /// - Parameter value: font size
-    /// - Returns: self
-    @discardableResult
-    public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
-        return self.bindCallback({
-            let f_size = value()
-            pNode.fontSize = f_size
-            let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: f_size)
-            addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
-        }, forKey: #function)
-    }
-    
-    /// change the font style of the receiver's text
-    /// - Parameter value: font style
-    /// - Returns:Self
-    ///
-    /// ```
-    /// // value of AKFontStyle
-    /// public enum AKFontStyle{
-    ///     case `default`
-    ///     case bold
-    ///     case italic
-    ///     case bolditalic
-    /// }
-    /// ```
-    @discardableResult
-    public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
-        return self.bindCallback({
-            let f_style = value()
-            pNode.fontStyle = value()
-            let font = UIFont.font(fontName: pNode.fontName, fontStyle: f_style, fontSize: pNode.fontSize)
-            addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
-        }, forKey: #function)
-    }
-    
-    /// change the color of the text
-    /// - Parameter value: the new color
-    /// - Returns: self
-    @discardableResult
-    public func textColor(_ value:UIColor!)->Self{
-        addAttribute(#selector(setter:UILabel.textColor),value)
-        pNode.handleLineSpacing()
-        return self
-    }
-    
-    /// set the textAlign of the back UILabel object.
-    /// - Parameter value: new NSTextAlignment value
-    /// - Returns: self
-    ///
-    ///```
-    ///public enum NSTextAlignment : Int {
-    ///    case left = 0 // Visually left aligned
-    ///    case center = 1 // Visually centered
-    ///    case right = 2 // Visually right aligned
-    ///    /* !TARGET_ABI_USES_IOS_VALUES */
-    ///    // Visually right aligned
-    ///    // Visually centered
-    ///    case justified = 3 // Fully-justified. The last line in a paragraph is natural-aligned.
-    ///    case natural = 4 // Indicates the default alignment for script
-    ///}
-    ///```
-    @discardableResult
-    public func textAlign(_ value:NSTextAlignment)->Self{
-        addAttribute(#selector(setter:UILabel.textAlignment),value.rawValue)
-        pNode.handleLineSpacing()
-        return self
-    }
-    
-    /// set the styled text that the label displays.
-    /// - Parameter value: new styled text
-    /// - Returns: self
-    @discardableResult
-    public func attributedText(_ value:NSAttributedString?)->Self{
-        pNode.attributedText(attri: value)
-        return self
-    }
     
     /// Returns the drawing rectangle for the label’s text. call textRect of the back label object directly.
     /// - Parameters:
@@ -314,15 +170,6 @@ extension Text{
     @discardableResult
     public func drawText(in rect: CGRect)->Self{
         addAttribute(#selector(UILabel.drawText(in:)),[rect])
-        return self
-    }
-    
-    ///  The distance in points between the bottom of one line fragment and the top of the next.
-    /// - Parameter value: new points value
-    /// - Returns: self
-    @discardableResult
-    public func lineSpacing(_ value:CGFloat)->Self{
-        pNode.lineSpacing(value)
         return self
     }
 }

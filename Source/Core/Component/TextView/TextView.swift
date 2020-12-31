@@ -41,7 +41,7 @@ public class TextView : ScrollView {
     private var fontStyle:AKFontStyle = .default
     private var font:UIFont
     private var fontName:String?
-    private var textViewNode: ArgoKitTextViewNode {
+    var textViewNode: ArgoKitTextViewNode {
         pNode as! ArgoKitTextViewNode
     }
     
@@ -75,68 +75,6 @@ public class TextView : ScrollView {
 }
 
 extension TextView {
-    /// Set the font of the text, the font is created by the specified name and style.
-    /// - Parameters:
-    ///   - name: font name
-    ///   - style: font style
-    ///   - size: font size
-    /// - Returns: self
-    ///
-    ///```
-    ///     public enum AKFontStyle{
-    ///         case `default`
-    ///         case bold
-    ///         case italic
-    ///         case bolditalic
-    ///     }
-    ///```
-    @discardableResult
-    public func font(name: String?, style:AKFontStyle,size:CGFloat)->Self{
-        textViewNode.fontName = name
-        textViewNode.fontStyle = style
-        textViewNode.fontSize = size
-        let font = UIFont.font(fontName: name, fontStyle: style, fontSize: size)
-        return self.font(font)
-    }
-    
-    /// Change the font name of the text.
-    /// - Parameter value: a new font name.
-    /// - Returns: self
-    @discardableResult
-    public func font(name value:String?)->Self{
-        textViewNode.fontName = value
-        let font = UIFont.font(fontName: value, fontStyle: textViewNode.fontStyle, fontSize: textViewNode.fontSize)
-        return self.font(font)
-    }
-    
-    /// Change the font size of the text.
-    /// - Parameter value: a new font size.
-    /// - Returns: self
-    @discardableResult
-    public  func font(size value:CGFloat)->Self{
-        textViewNode.fontSize = value
-        let font = UIFont.font(fontName: textViewNode.fontName, fontStyle:  textViewNode.fontStyle, fontSize: value)
-        return self.font(font)
-    }
-    
-    /// Change the font style of the text.
-    /// - Parameter value: a new style
-    /// - Returns: self
-    ///
-    ///```
-    ///     public enum AKFontStyle{
-    ///         case `default`
-    ///         case bold
-    ///         case italic
-    ///         case bolditalic
-    ///     }
-    ///```
-    @discardableResult
-    public func font(style value:AKFontStyle)->Self{
-        textViewNode.fontStyle = value
-        let font = UIFont.font(fontName: textViewNode.fontName, fontStyle: value, fontSize: textViewNode.fontSize)
-        return self.font(font)
-    }
     
     /// The current selection range of the text view. See: UITextView.selectedRange
     ///

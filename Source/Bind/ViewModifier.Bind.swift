@@ -99,44 +99,46 @@ extension View {
     
     @available(*, unavailable, renamed: "gone(_:)")
     @discardableResult
-    public func display(_ value: Bool) -> Self {
-        let display_ = !value
-        addAttribute(#selector(setter:UIView.isHidden),display_)
-        if let enable = self.node?.isEnabled {
-            if !enable && !display_ {
-                if let node =  self.node?.root{
+    public func display(_ value: @escaping @autoclosure () -> Bool) -> Self {
+        return self.bindCallback({
+            let display_ = !value()
+            addAttribute(#selector(setter:UIView.isHidden),display_)
+            if let enable = self.node?.isEnabled {
+                if !enable && !display_ {
+                    if let node =  self.node?.root{
+                        self.node?.isEnabled = !display_
+                        ArgoKitReusedLayoutHelper.appLayout(node)
+                    }
+                }else{
                     self.node?.isEnabled = !display_
-                    ArgoKitReusedLayoutHelper.appLayout(node)
                 }
             }else{
                 self.node?.isEnabled = !display_
             }
-        }else{
-            self.node?.isEnabled = !display_
-        }
-      
-        return self;
+        }, forKey: #function)
     }
     
     /// Sets a Boolean value that determines whether the view is hidden and styling properties should be applied
     /// - Parameter value: true if you want to hide the view and not applied styling properties.
     /// - Returns: Self
     @discardableResult
-    public func gone(_ value: Bool) -> Self {
-        addAttribute(#selector(setter:UIView.isHidden),value)
-        if let enable = self.node?.isEnabled {
-            if !enable && !value {
-                if let node =  self.node?.root {
-                    self.node?.isEnabled = !value
-                    ArgoKitReusedLayoutHelper.appLayout(node)
+    public func gone(_ value: @escaping @autoclosure () -> Bool) -> Self {
+        return self.bindCallback({
+            let _value = value()
+            addAttribute(#selector(setter:UIView.isHidden), _value)
+            if let enable = self.node?.isEnabled {
+                if !enable && !_value {
+                    if let node =  self.node?.root {
+                        self.node?.isEnabled = !_value
+                        ArgoKitReusedLayoutHelper.appLayout(node)
+                    }
+                }else{
+                    self.node?.isEnabled = !_value
                 }
             }else{
-                self.node?.isEnabled = !value
+                self.node?.isEnabled = !_value
             }
-        }else{
-            self.node?.isEnabled = !value
-        }
-        return self;
+        }, forKey: #function)
     }
     
     /// Sets options to specify how a view adjusts its content when its size changes.
@@ -237,18 +239,20 @@ extension View {
     /// - Parameter value: The border width of this view.
     /// - Returns: Self
     @discardableResult
-    public func borderWidth(_ value: CGFloat) -> Self {
-        self.node?.borderLayerOperation?.borderWidth = value
-        return self;
+    public func borderWidth(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in 
+        self.node?.borderLayerOperation?.borderWidth = value();
+		}, forKey: #function)
     }
     
     /// Sets the color of this view's border.
     /// - Parameter value: The border color of this view.
     /// - Returns: Self
     @discardableResult
-    public func borderColor(_ value: UIColor) -> Self {
-        self.node?.borderLayerOperation?.borderColor = value
-        return self;
+    public func borderColor(_ value: @escaping @autoclosure () -> UIColor) -> Self {
+		return self.bindCallback({ [self] in 
+        self.node?.borderLayerOperation?.borderColor = value();
+		}, forKey: #function)
     }
     
     /// Sets the color of this view's border.
