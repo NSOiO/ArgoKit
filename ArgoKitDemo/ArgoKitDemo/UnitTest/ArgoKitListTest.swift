@@ -78,7 +78,7 @@ struct ArgoKitListTest: ArgoKit.View {
                     data.textCom?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
                 }
         }.grow(1.0)
-        .didSelectRow { (mode, index) in
+        .cellSelected { (mode, index) in
             print("\(mode)")
         }
     }

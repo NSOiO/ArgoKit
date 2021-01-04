@@ -52,7 +52,7 @@ struct LandmarkList: ArgoKit.View {
             }
          
             .height(100%)
-            .didSelectRow({ (data, index) in
+            .cellSelected({ (data, index) in
     
             })
 //            .sectionHeader([HeaderModel()]) { _ in

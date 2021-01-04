@@ -192,6 +192,10 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return CGSize(width:width, height: height)
     }
     
+    
+    
+    
+    
 
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool{
         return moveItem
@@ -318,12 +322,34 @@ class GridNode<D>: ArgoKitScrollViewNode,
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
             dataSourceHelper = self.footerSourceHelper
         }
-        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
+        if let node = dataSourceHelper?.nodeForRow(indexPath.section, at: 0) {
             node.observeFrameChanged {[weak self] (_, _) in
                 self?.reloadRowsHeight()
             }
         }
+        guard let data = dataSourceHelper?.dataForRow(indexPath.section, at: 0) else {
+            return
+        }
+        if elementKind ==  UICollectionView.elementKindSectionHeader{
+            self.collectionView(collectionView,willDisplayHeaderData: data,at: indexPath)
+        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
+            self.collectionView(collectionView,willDisplayFooterData: data,at: indexPath)
+        }
     }
+    
+    @objc @available(iOS 8.0, *)
+    func collectionView(_ collectionView: UICollectionView, willDisplayHeaderData data: Any, at indexPath: IndexPath){
+        let sel = #selector(self.collectionView(_:willDisplayHeaderData:at:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
+    }
+    
+    @objc @available(iOS 8.0, *)
+    func collectionView(_ collectionView: UICollectionView, willDisplayFooterData data: Any, at indexPath: IndexPath){
+        let sel = #selector(self.collectionView(_:willDisplayFooterData:at:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
+    }
+    
+    
     
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath){
@@ -336,7 +362,26 @@ class GridNode<D>: ArgoKitScrollViewNode,
         if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
             node.removeObservingFrameChanged()
         }
-        
+        guard let data = dataSourceHelper?.dataForRow(indexPath.section, at: 0) else {
+            return
+        }
+        if elementKind ==  UICollectionView.elementKindSectionHeader{
+            self.collectionView(collectionView,didEndDisplayingHeaderData: data,at: indexPath)
+        }else if elementKind ==  UICollectionView.elementKindSectionFooter{
+            self.collectionView(collectionView,didEndDisplayingFooterData: data,at: indexPath)
+        }
+    }
+    
+    @objc @available(iOS 8.0, *)
+    func collectionView(_ collectionView: UICollectionView,  didEndDisplayingHeaderData data: Any, at indexPath: IndexPath){
+        let sel = #selector(self.collectionView(_:didEndDisplayingHeaderData:at:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
+    }
+    
+    @objc @available(iOS 8.0, *)
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingFooterData data: Any, at indexPath: IndexPath){
+        let sel = #selector(self.collectionView(_:didEndDisplayingFooterData:at:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
 
     // MARK: UICollectionViewDelegate Menu

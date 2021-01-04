@@ -178,7 +178,74 @@ extension Grid {
         let sel = #selector(GridNode<D>.collectionView(_:didEndDisplaying:forItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 {
-                if let data = paramter?.first as? D,let indexPath = paramter?.last as? IndexPath {
+                if let data = paramter?.first as? D,
+                   let indexPath = paramter?.last as? IndexPath {
+                    action(data, indexPath)
+                }
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified header view is about to be displayed in the grid.
+    /// - Parameter action: The action that handle the specified cell is about to be displayed in the grid.
+    /// - Returns: Self
+    public func headerWillAppear(_ action:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
+        let sel = #selector(GridNode<D>.collectionView(_:willDisplayHeaderData:at:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?[0] as? D,
+               let indexPath = paramter?[1] as? IndexPath{
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified header view was removed from the grid.
+    /// - Parameter action: The action that handle the specified cell was removed from the grid.
+    /// - Returns: Self
+    public func headerDidDisappear(_ action:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
+        let sel = #selector(GridNode<D>.collectionView(_:didEndDisplayingHeaderData:at:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2 {
+                if let data = paramter?[0] as? D,
+                   let indexPath = paramter?[1] as? IndexPath{
+                    action(data, indexPath)
+                }
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified footer view is about to be displayed in the grid.
+    /// - Parameter action: The action that handle the specified cell is about to be displayed in the grid.
+    /// - Returns: Self
+    public func footerWillAppear(_ action:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
+        let sel = #selector(GridNode<D>.collectionView(_:willDisplayFooterData:at:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?[0] as? D,
+               let indexPath = paramter?[1] as? IndexPath{
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified footer view was removed from the grid.
+    /// - Parameter action: The action that handle the specified cell was removed from the grid.
+    /// - Returns: Self
+    public func footerDidDisappear(_ action:@escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self{
+        let sel = #selector(GridNode<D>.collectionView(_:didEndDisplayingFooterData:at:))
+        node?.observeAction(String(_sel: sel), actionBlock: {(obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2 {
+                if let data = paramter?.first as? D,
+                   let indexPath = paramter?.last as? IndexPath{
                     action(data, indexPath)
                 }
             }
@@ -190,10 +257,16 @@ extension Grid {
     /// Sets the action that handle the item at the specified index path was highlighted.
     /// - Parameter action: The action that handle the item at the specified index path was highlighted.
     /// - Returns: Self
-    public func cellDidHighlight(_ action:@escaping () -> UIColor) -> Self {
+    public func cellDidHighlight(_ action:@escaping (_ data: D, _ indexPath: IndexPath) -> UIColor?) -> Self {
         let sel = #selector(GridNode<D>.collectionView(_:didHighlightItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
+            if paramter?.count ?? 0 >= 2 {
+                if let data = paramter?.first as? D,
+                   let indexPath = paramter?.last as? IndexPath{
+                    return action(data, indexPath)
+                }
+            }
+            return nil
         })
         return self
     }
@@ -201,10 +274,16 @@ extension Grid {
     /// Sets the action that handle the highlight was removed from the item at the specified index path.
     /// - Parameter action: The action that handle the highlight was removed from the item at the specified index path.
     /// - Returns: Self
-    public func cellDidUnhighlight(_ action:@escaping () -> UIColor) -> Self {
+    public func cellDidUnhighlight(_ action:@escaping (_ data: D, _ indexPath: IndexPath) -> UIColor?) -> Self {
         let sel = #selector(GridNode<D>.collectionView(_:didUnhighlightItemAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            return action()
+            if paramter?.count ?? 0 >= 2 {
+                if let data = paramter?.first as? D,
+                   let indexPath = paramter?.last as? IndexPath{
+                    return action(data, indexPath)
+                }
+            }
+            return nil
         })
         return self
     }

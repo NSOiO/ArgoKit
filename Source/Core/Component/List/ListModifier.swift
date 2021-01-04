@@ -375,11 +375,28 @@ extension List {
     /// Sets the action that handle the list is about to draw a cell for a particular row.
     /// - Parameter action: The action that handle the list is about to draw a cell for a particular row.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "cellWillAppear(_:)")
     @discardableResult
     public func willDisplayRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:willDisplay:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            
+            if paramter?.count ?? 0 >= 2 ,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath{
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the list is about to draw a cell for a particular row.
+    /// - Parameter action: The action that handle the list is about to draw a cell for a particular row.
+    /// - Returns: Self
+    @discardableResult
+    public func cellWillAppear(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:willDisplay:forRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 ,
                let data = paramter?.first as? D,
                let indexPath = paramter?.last as? IndexPath{
@@ -393,8 +410,27 @@ extension List {
     /// Sets the action that handle the table is about to display the header view for the specified section.
     /// - Parameter action: The action that handle the table is about to display the header view for the specified section.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "headerWillAppear(_:)")
     @discardableResult
     public func willDisplayHeaderView(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:willDisplayHeaderView:forSection:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 ,
+               let data = paramter?.first as? D,
+               let section = paramter?.last as? Int{
+                action(data, section)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the table is about to display the header view for the specified section.
+    /// - Parameter action: The action that handle the table is about to display the header view for the specified section.
+    /// - Returns: Self
+    @discardableResult
+    public func headerWillAppear(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:willDisplayHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -411,8 +447,27 @@ extension List {
     /// Sets the action that handle the table is about to display the footer view for the specified section.
     /// - Parameter action: The action that handle the table is about to display the footer view for the specified section.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "headerDidDisappear(_:)")
     @discardableResult
     public func willDisplayFooterView(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:willDisplayFooterView:forSection:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2,
+                let data = paramter?[0] as? D,
+                let section = paramter?[1] as? Int{
+                action(data, section)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the table is about to display the footer view for the specified section.
+    /// - Parameter action: The action that handle the table is about to display the footer view for the specified section.
+    /// - Returns: Self
+    @discardableResult
+    public func headerDidDisappear(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:willDisplayFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -429,8 +484,27 @@ extension List {
     /// Sets the action that handle the specified cell was removed from the table.
     /// - Parameter action: The action that handle the specified cell was removed from the table.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "cellDidDisappear(_:)")
     @discardableResult
     public func didEndDisplayingRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:didEndDisplaying:forRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath{
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified cell was removed from the table.
+    /// - Parameter action: The action that handle the specified cell was removed from the table.
+    /// - Returns: Self
+    @discardableResult
+    public func cellDidDisappear(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didEndDisplaying:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -447,8 +521,27 @@ extension List {
     /// Sets the action that handle the specified header view was removed from the table.
     /// - Parameter action: The action that handle the specified header view was removed from the table.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "footerWillAppear(_:)")
     @discardableResult
     public func didEndDisplayingHeaderView(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:didEndDisplayingHeaderView:forSection:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2,
+                let data = paramter?[0] as? D,
+                let section = paramter?[1] as? Int {
+                action(data, section)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified header view was removed from the table.
+    /// - Parameter action: The action that handle the specified header view was removed from the table.
+    /// - Returns: Self
+    @discardableResult
+    public func footerWillAppear(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didEndDisplayingHeaderView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -465,8 +558,27 @@ extension List {
     /// Sets the action that handle the specified footer view was removed from the table.
     /// - Parameter action: The action that handle the specified footer view was removed from the table.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "footerWillAppear(_:)")
     @discardableResult
     public func didEndDisplayingFooterView(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:didEndDisplayingFooterView:forSection:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2,
+                let data = paramter?[0] as? D,
+                let section = paramter?[1] as? Int{
+                action(data, section)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified footer view was removed from the table.
+    /// - Parameter action: The action that handle the specified footer view was removed from the table.
+    /// - Returns: Self
+    @discardableResult
+    public func footerDidDisappear(_ action: @escaping (_ data: D, _ section: Int) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didEndDisplayingFooterView:forSection:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -501,9 +613,45 @@ extension List {
     /// Sets the action that handle the specified row was highlighted.
     /// - Parameter action: The action that handle the specified row was highlighted.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "cellDidHighlight(_:)")
     @discardableResult
     public func didHighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didHighlightRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath {
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the specified row was highlighted.
+    /// - Parameter action: The action that handle the specified row was highlighted.
+    /// - Returns: Self
+    @discardableResult
+    public func cellDidHighlight(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:didHighlightRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath {
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Sets the action that handle the highlight was removed from the row at the specified index path.
+    /// - Parameter action: The action that handle the highlight was removed from the row at the specified index path.
+    /// - Returns: Self
+    @available(*, unavailable, renamed: "cellDidUnhighlight(_:)")
+    @discardableResult
+    public func didUnhighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:didUnhighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2,
@@ -520,7 +668,7 @@ extension List {
     /// - Parameter action: The action that handle the highlight was removed from the row at the specified index path.
     /// - Returns: Self
     @discardableResult
-    public func didUnhighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+    public func cellDidUnhighlight(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didUnhighlightRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -534,11 +682,30 @@ extension List {
         return self
     }
     
+//    /// Sets the action that handle a row is about to be selected.
+//    /// - Parameter action: The action that handle a row is about to be selected.
+//    /// - Returns: Self
+//    @available(*, unavailable, renamed: "cellWillSelect(_:)")
+//    @discardableResult
+//    public func willSelectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+//        let sel = #selector(TableNode<D>.tableView(_:willSelectRowAt:))
+//        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+//
+//            if paramter?.count ?? 0 >= 2,
+//               let data = paramter?.first as? D,
+//               let indexPath = paramter?.last as? IndexPath {
+//                return action(data, indexPath)
+//            }
+//            return nil
+//        })
+//        return self
+//    }
+    
     /// Sets the action that handle a row is about to be selected.
     /// - Parameter action: The action that handle a row is about to be selected.
     /// - Returns: Self
     @discardableResult
-    public func willSelectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+    public func cellWillSelect(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:willSelectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -552,11 +719,30 @@ extension List {
         return self
     }
     
+//    /// Sets the action that handle a specified row is about to be deselected.
+//    /// - Parameter action: The action that handle a specified row is about to be deselected.
+//    /// - Returns: Self
+//    @available(*, unavailable, renamed: "cellWillDeselect(_:)")
+//    @discardableResult
+//    public func willDeselectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+//        let sel = #selector(TableNode<D>.tableView(_:willDeselectRowAt:))
+//        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+//
+//            if paramter?.count ?? 0 >= 2,
+//               let data = paramter?.first as? D,
+//               let indexPath = paramter?.last as? IndexPath {
+//                return action(data, indexPath)
+//            }
+//            return nil
+//        })
+//        return self
+//    }
+    
     /// Sets the action that handle a specified row is about to be deselected.
     /// - Parameter action: The action that handle a specified row is about to be deselected.
     /// - Returns: Self
     @discardableResult
-    public func willDeselectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
+    public func cellWillDeselect(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> IndexPath?) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:willDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -573,6 +759,7 @@ extension List {
     /// Sets the action that handle a row is selected.
     /// - Parameter action: The action that handle a row is selected.
     /// - Returns: Self
+    @available(*, unavailable, renamed: "cellSelected(_:)")
     @discardableResult
     public func didSelectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didSelectRowAt:))
@@ -588,11 +775,45 @@ extension List {
         return self
     }
     
-    /// Sets the action that handle the specified row is now deselected.
-    /// - Parameter action: The action that handle the specified row is now deselected.
+    /// Sets the action that handle a row is selected.
+    /// - Parameter action: The action that handle a row is selected.
     /// - Returns: Self
     @discardableResult
-    public func didDeselectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+    public func cellSelected(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:didSelectRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            
+            if paramter?.count ?? 0 >= 2 ,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath{
+                action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+//    /// Sets the action that handle the specified row is now deselected.
+//    /// - Parameter action: The action that handle the specified row is now deselected.
+//    /// - Returns: Self
+//    @available(*, unavailable, renamed: "cellDeselected(_:)")
+//    @discardableResult
+//    public func didDeselectRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+//        let sel = #selector(TableNode<D>.tableView(_:didDeselectRowAt:))
+//        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+//
+//            if paramter?.count ?? 0 >= 2 ,
+//               let data = paramter?.first as? D,
+//               let indexPath = paramter?.last as? IndexPath{
+//                return action(data, indexPath)
+//            }
+//            return nil
+//        })
+//        return self
+//    }
+    
+    @discardableResult
+    public func cellDeselected(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             

@@ -228,7 +228,7 @@ struct ListDemo:ArgoKit.View{
         ArgoKit.List(data:$items){ item in
             SessionRow(item: item)
         }
-        .didSelectRow {item, indexPath in
+        .cellSelected {item, indexPath in
             AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
             .textField()
             .destructive(title: "确认") { text in

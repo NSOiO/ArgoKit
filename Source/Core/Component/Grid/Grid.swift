@@ -167,7 +167,7 @@ extension Grid {
     /// - Returns: Self
     @discardableResult
     public func sectionFooter(data:DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self where D: ArgoKitIdentifiable {
-        gridNode?.headerSourceHelper.dataSourceList = data
+        gridNode?.footerSourceHelper.dataSourceList = data
         gridNode?.footerSourceHelper.buildNodeFunc = { item in
             return footerContent(item)
         }

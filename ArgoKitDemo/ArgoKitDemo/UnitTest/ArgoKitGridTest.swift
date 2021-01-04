@@ -26,14 +26,14 @@ class ArgoKitGridTestModel {
     }
    
     func reloadMoreData(){
-        for index in 0..<1 {
+        for index in 0..<20 {
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
             headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for index in 0..<20{
+            for index in 0..<10{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = "点击图片改变文本内容"
                 item.imagePath = images[index%5]
@@ -146,7 +146,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         }
  */
        
-        Grid(waterfall: true,data:model.$dataSource2){ data in
+        Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
                 .lineLimit(0)
@@ -187,13 +187,19 @@ struct ArgoKitGridTest: ArgoKit.View {
         .willBeginDragging {
         
         }
-        .sectionHeader(data:model.$headerSource) { data -> View in
+        .sectionFooter(data:model.$headerSource) { data -> View in
             Text(data.headerName)
                 .textAlign(.center)
                 .backgroundColor(.gray)
                 .lineLimit(0)
 
         }
+        .footerWillAppear({ (data, indexpath) in
+            print("footerWillAppear==indexpath:\(indexpath)")
+        })
+        .footerDidDisappear({ (data, indexpath) in
+            print("footerDidDisappear==indexpath:\(indexpath)")
+        })
         .refreshFooterView { () -> RefreshFooterView in
             RefreshFooterView {refresh in
                 model.reloadMoreData()
