@@ -65,9 +65,9 @@ public struct Image : View {
     
     /// Initializer
     /// - Parameter name: The name of the image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    public init(_ name: String) {
-        let image: UIImage? =  UIImage(named: name, in: nil, compatibleWith: nil)
-        self.init(image: image, highlightedImage: nil)
+    public init(_ name: @escaping @autoclosure () -> String) {
+        let image: () -> UIImage? = { UIImage(named: name(), in: nil, compatibleWith: nil) }
+        self.init(image: image(), highlightedImage: nil)
     }
     
     /// Initializer
@@ -96,16 +96,16 @@ public struct Image : View {
     /// - Parameters:
     ///   - name: The name of the image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
     ///   - bundle: The bundle containing the image file or asset catalog. Specify nil to search the app’s main bundle.
-    public init(_ name: String, bundle: Bundle) {
-        let image: UIImage? =  UIImage(named: name, in: bundle, compatibleWith: nil)
-        self.init(image: image, highlightedImage: nil)
+    public init(_ name: @escaping @autoclosure () -> String, bundle: @escaping @autoclosure () -> Bundle) {
+        let image: () -> UIImage? = { UIImage(named: name(), in: bundle(), compatibleWith: nil) }
+        self.init(image: image(), highlightedImage: nil)
     }
     
     /// Initializer
     /// - Parameter name: The name of the system symbol image. Use the SF Symbols app to look up the names of system symbol images. You can download this app from the design resources page at developer.apple.com.
     @available(iOS 13.0, *)
-    public init(systemName name: String) {
-        self.init(image: UIImage(systemName: name), highlightedImage: nil)
+    public init(systemName name: @escaping @autoclosure () -> String) {
+        self.init(image: UIImage(systemName: name()), highlightedImage: nil)
     }
     
     /// Initializer
@@ -121,14 +121,16 @@ public struct Image : View {
     /// - Parameters:
     ///   - image: The initial image to display in the image view. You may specify an image object that contains an animated sequence of images.
     ///   - highlightedImage: The image to display when the image view is highlighted. You may specify an image object that contains an animated sequence of images.
-    public init(image: UIImage?, highlightedImage: UIImage? = nil) {
+    public init(image: @escaping @autoclosure () -> UIImage?, highlightedImage: @escaping @autoclosure () -> UIImage? = nil) {
         pNode = ArgoKitImageNode(viewClass: UIImageView.self)
-        if let img = image {
-            addAttribute(#selector(setter:UIImageView.image),img)
-        }
-        if let hightImg = highlightedImage{
-            addAttribute(#selector(setter:UIImageView.highlightedImage),hightImg)
-        }
+        self.bindCallback({ [self] in
+            if let img = image() {
+                addAttribute(#selector(setter:UIImageView.image),img)
+            }
+            if let hightImg = highlightedImage() {
+                addAttribute(#selector(setter:UIImageView.highlightedImage),hightImg)
+            }
+        }, forKey: #function)
     }
 }
 

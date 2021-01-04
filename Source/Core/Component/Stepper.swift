@@ -16,12 +16,12 @@ public struct Stepper:View{
     public var node: ArgoKitNode?{
         pNode
     }
-    public init<V>(value: V, in bounds: ClosedRange<V> = 0...1,step:Double = 1.0, onValueChanged: @escaping (_ value:Double) -> Void = { _ in })where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{
+    public init<V>(value: @escaping @autoclosure () -> V, in bounds: @escaping @autoclosure () -> ClosedRange<V> = 0...1,step:Double = 1.0, onValueChanged: @escaping (_ value:Double) -> Void = { _ in })where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{
         pNode = ArgoKitNode(viewClass:UIStepper.self)
         
-        addAttribute(#selector(setter:UIStepper.stepValue),step)
-        addAttribute(#selector(setter:UIStepper.minimumValue),Double(bounds.lowerBound))
-        addAttribute(#selector(setter:UIStepper.maximumValue),Double(bounds.upperBound))
+        self.stepValue(Double(value()))
+        self.minimumValue(Double(bounds().lowerBound))
+        self.maximumValue(Double(bounds().upperBound))
         
         pNode.addAction({ (obj, paramter) -> Any? in
             if let stepper = obj as? UIStepper {

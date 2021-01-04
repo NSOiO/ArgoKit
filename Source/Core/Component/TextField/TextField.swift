@@ -24,11 +24,10 @@ public struct TextField : View {
     /// - Parameters:
     ///   - text: string or nil
     ///   - placeholder: string for placeholder or nil
-    public init(text: String? = nil, placeholder: String? = nil) {
+    public init(text: @escaping @autoclosure () -> String? = nil, placeholder: @escaping @autoclosure () -> String? = nil) {
         pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
-        pNode.placeholder = placeholder
-        addAttribute(#selector(setter:UITextField.text),text)
-        addAttribute(#selector(setter:UITextField.placeholder),placeholder)
+        self.text(text())
+        self.placeholder(placeholder())
     }
 }
 

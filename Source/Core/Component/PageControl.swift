@@ -16,11 +16,11 @@ public struct PageControl:View{
     public var node: ArgoKitNode?{
         pNode
     }
-    public init(currentPage:Int,numberOfPages:Int,onPageChange:@escaping(_ currentPage:Int)->Void){
+    public init(currentPage: @escaping @autoclosure () -> Int, numberOfPages: @escaping @autoclosure () -> Int, onPageChange: @escaping(_ currentPage:Int) -> Void) {
         pNode = ArgoKitPageControlNode(viewClass: UIPageControl.self)
-        addAttribute(#selector(setter:UIPageControl.currentPage),currentPage)
-        addAttribute(#selector(setter:UIPageControl.numberOfPages),numberOfPages)
-        
+        self.currentPage(currentPage())
+        self.numberOfPages(numberOfPages())
+
         pNode.addAction({ (obj, paramter) -> Any? in
             if let pageControl = obj as? UIPageControl {
                 onPageChange(pageControl.currentPage)

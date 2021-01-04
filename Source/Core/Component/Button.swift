@@ -46,19 +46,19 @@ public struct Button: View {
     /// - Parameters:
     ///   - text: A string that describes the purpose of the button’s action.
     ///   - action: The action to perform when the user triggers the button.
-    public init(text: String?, action: @escaping () -> Void) {
+    public init(text: @escaping @autoclosure () -> String?, action: @escaping () -> Void) {
         self.init()
         pNode.addAction({ (obj, paramter) -> Any? in
             action();
         }, for: UIControl.Event.touchUpInside)
         
-        if let t = text {
-            label = Text(t).alignSelf(.center).textAlign(.center).grow(1)
-            if let node = label?.node {
-                pNode.addChildNode(node)
-            }
-            setValue(pNode, #selector(setter: UILabel.text), t)
+        label = Text(text()).alignSelf(.center).textAlign(.center).grow(1)
+        if let node = label?.node {
+            pNode.addChildNode(node)
         }
+        self.bindCallback({ [self] in
+            setValue(pNode, #selector(setter: UILabel.text), text())
+        }, forKey: #function)
     }
 }
 

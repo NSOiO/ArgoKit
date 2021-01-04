@@ -52,12 +52,10 @@ public class TextView : ScrollView {
     
     /// Create a new TextView with specified text string.
     /// - Parameter text: a string value.
-    public init(text: String?) {
+    public init(text: @escaping @autoclosure () ->  String?) {
         font = UIFont.systemFont(ofSize:fontSize)
         super.init()
-        if text != nil {
-            addAttribute(#selector(setter:UITextView.text),text)
-        }
+        self.text(text())
     }
     
     

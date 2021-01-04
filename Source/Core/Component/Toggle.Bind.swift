@@ -62,7 +62,7 @@ extension Toggle {
     @discardableResult
     public func setOn(_ on: @escaping @autoclosure () -> Bool, animated: @escaping @autoclosure () -> Bool)->Self{
 		return self.bindCallback({ [self] in 
-			addAttribute(#selector(UISwitch.setOn(_:animated:)),isOn,animated())
+			addAttribute(#selector(UISwitch.setOn(_:animated:)),on(),animated())
 		}, forKey: #function)
     }
 }

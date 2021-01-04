@@ -32,9 +32,9 @@ public struct ProgressView : View {
     ///
     /// The current progress is represented by a floating-point value between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the task. The default value is 0.0. Values less than 0.0 and greater than 1.0 are pinned to those limits.
     /// - Parameter progress: The current progress shown by the receiver.
-    public init(_ progress: Float?) {
+    public init(_ progress: @escaping @autoclosure () -> Float?) {
         self.init(progressViewStyle: .default)
-        addAttribute(#selector(setter:UIProgressView.progress),progress ?? 0.0)
+        self.progress(progress() ?? 0.0)
     }
     
     /// init the ProgressView use the progress object to use for updating the progress view.
@@ -43,18 +43,18 @@ public struct ProgressView : View {
     /// For more information about configuring a progress object to manage progress information, see Progress.
     /// - Parameter observedProgress: the progress object
     @available(iOS 9.0, *)
-    public init(_ observedProgress: Progress) {
+    public init(_ observedProgress: @escaping @autoclosure () -> Progress) {
         self.init(progressViewStyle: .default)
-        addAttribute(#selector(setter:UIProgressView.observedProgress),observedProgress)
+        self.observedProgress(observedProgress())
     }
     
     /// init the ProgressView use the current graphical style of the receiver.
     ///
     ///The value of this property is a constant that specifies the style of the progress view. The default style is UIProgressView.Style.default. For more on these constants, see UIProgressView.Style.
     /// - Parameter style: the style
-    public init(progressViewStyle style: UIProgressView.Style) {
+    public init(progressViewStyle style: @escaping @autoclosure () -> UIProgressView.Style) {
         pNode = ArgoKitNode(viewClass:UIProgressView.self)
-        addAttribute(#selector(setter:UIProgressView.progressViewStyle),style.rawValue)
+        self.progressViewStyle(style())
     }
     
     /// init the ProgressView use the ProgressViewStyleConfiguration
