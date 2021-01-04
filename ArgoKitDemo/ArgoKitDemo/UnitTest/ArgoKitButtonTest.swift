@@ -10,7 +10,9 @@ import ArgoKit
 // view model.
 class ArgoKitButtonTestModel {
     var btn:Button?
-
+    var action:()->Void = {
+        print("hahahh")
+    }
 }
 
 // view
@@ -26,19 +28,18 @@ struct ArgoKitButtonTest: ArgoKit.View {
     var body: ArgoKit.View {
         HStack{
             // 设置按钮title
-            Button(text: "按钮titlevfdvvdfvdcdcdjkjjjsvfdvdfvdfvdfvdvfdv") {
+            Button(text: "按钮titlevfdvvdfvdcdcdjkjjjsvfdvdf") {
             }
 
 
         }.alignItems(.start)
         VStack {
-            Text("wweweddeddsdcdtest11111111111dgzhangshuishen哈").alias(variable: $text)
-            Button(text: "busdcsdcd") {
-                text?.text("aacsdcscdcsdcsdcccc")
-            }
+            Text("wweweddcddcc").alias(variable: $text)
+            Button(text: "busdcsdcddcd",action: self.model.action)
         }
         .alignItems(.start)
         .backgroundColor(.yellow)
+        
         
         
 

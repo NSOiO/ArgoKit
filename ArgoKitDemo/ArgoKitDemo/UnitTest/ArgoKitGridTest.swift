@@ -203,7 +203,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         .refreshFooterView { () -> RefreshFooterView in
             RefreshFooterView {refresh in
                 model.reloadMoreData()
-                model.$dataSource1.reloadData()
+                model.$dataSource2.reloadData()
                 refresh?.endRefreshing()
                 refresh?.resetNoMoreData()
             } _: { () -> View in
