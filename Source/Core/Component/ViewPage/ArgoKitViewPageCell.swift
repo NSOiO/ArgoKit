@@ -30,7 +30,7 @@ class ArgoKitViewPageCell: UICollectionViewCell {
             node.bindView(self.contentView)
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation(withView: true)
-            ArgoKitLayoutHelper.addLayoutNode(node)
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             return
         }
         

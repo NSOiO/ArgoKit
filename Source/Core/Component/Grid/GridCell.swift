@@ -27,7 +27,7 @@ class GridCell: UICollectionViewCell {
             node.bindView(self.contentView)
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation(withView: true)
-            ArgoKitLayoutHelper.addLayoutNode(node)
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             return
         }
         if self.contentView.subviews.count != 0 && self.contentNode != nil{

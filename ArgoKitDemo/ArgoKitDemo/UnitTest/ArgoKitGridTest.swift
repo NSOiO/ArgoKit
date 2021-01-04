@@ -156,8 +156,7 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-                    data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
-                    data.imagePath = "icybay.jpg"
+                   
                 }
 
         }
@@ -173,6 +172,15 @@ struct ArgoKitGridTest: ArgoKit.View {
         .cellDidDisappear({ (data, indexpath) in
         })
         .cellSelected({ (data, indexpath) in
+            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
+            data.imagePath = "icybay.jpg"
+//            AlertView(title: data.headerName, message: data.headerName, preferredStyle: UIAlertController.Style.alert)
+//            .textField()
+//            .destructive(title: "确认") { text in
+//                print(text ?? "")
+//            }
+//            .cancel(title: "取消") {}
+//            .show()
         })
         .cellDeselected({ (data, indexpath) in
         })
