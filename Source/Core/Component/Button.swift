@@ -30,7 +30,7 @@ public struct Button: View {
     private init() {
         pNode = ArgoKitArttibuteNode(viewClass: UIButton.self)
         pNode.row()
-        pNode.alignItemsCenter()
+//        pNode.alignItemsCenter()
     }
     
     /// Initializer

@@ -32,8 +32,8 @@ struct ArgoKitButtonTest: ArgoKit.View {
 
         }.alignItems(.start)
         VStack {
-            Text("aacsdcscdcsdcsdcddsdsds").alias(variable: $text)
-            Button(text: "busdcsdcsdsvzcscsbhhbhhcdscd") {
+            Text("wweweddeddsdcdtest11111111111dgzhangshuishen哈").alias(variable: $text)
+            Button(text: "busdcsdcd") {
                 text?.text("aacsdcscdcsdcsdcccc")
             }
         }
@@ -49,7 +49,7 @@ struct ArgoKitButtonTest: ArgoKit.View {
             // 点击事件
             model.btn?.backgroundColor(.yellow)
         }
-        .font(style: AKFontStyle.default, size: 19)
+        .font(style: AKFontStyle.default, size: 25)
         // 指定宽高
         .width(300)
         .height(100)
@@ -61,9 +61,8 @@ struct ArgoKitButtonTest: ArgoKit.View {
         // 圆角
         .cornerRadius(15)
         // 线条和颜色
-        .borderWidth(3)
+        .borderWidth(1)
         .borderColor(.gray)
-        .alias(variable: &model.btn)
 
         // 设置按钮title混排
         Button {
@@ -77,17 +76,33 @@ struct ArgoKitButtonTest: ArgoKit.View {
             Text("按钮title 2")
                 .backgroundColor(.cyan)
                 .font(size: 16)
+            Text("按钮title 2")
+                .backgroundColor(.cyan)
+            Text("按钮title 3")
+                .font(size: 25)
+                .backgroundColor(.orange)
+
+            Text("按钮title 4")
+                .backgroundColor(.cyan)
+                .font(size: 16)
+            Text("按钮title 5")
+                .backgroundColor(.cyan)
 
         }
+        .wrap(.wrap)
+        .flexDirection(.row)
+        .justifyContent(.start)
+        .alignItems(.start)
+        .alignContent(.around)
         .font(style: AKFontStyle.default, size: 20)
         .width(300)
-        .height(100)
+        .height(150)
         .backgroundColor(.green)
-
         .margin(edge: .top, value: 20)
-        .alignSelf(.start)
 
-        .gradientColor(startColor: .red, endColor: .yellow, direction: ArgoKitGradientType.TopToBottom)
+        .alignSelf(.center)
+
+//        .gradientColor(startColor: .red, endColor: .yellow, direction: ArgoKitGradientType.TopToBottom)
 
 
         // 设置按钮文字图片混排
