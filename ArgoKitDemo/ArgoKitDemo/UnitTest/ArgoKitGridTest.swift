@@ -203,14 +203,14 @@ struct ArgoKitGridTest: ArgoKit.View {
             } _: { () -> View in
                 Text("refresh_footer").backgroundColor(.red)
                 Image("chilkoottrail.jpg")
-                    .width(50)
+                    .width(30)
                     .aspect(ratio: 1)
                     .circle()
             }
             .backgroundColor(.orange)
             .alignItems(.center)
             .alias(variable: $footerView)
-            .autoRefreshOffPage(2)
+            .autoRefreshOffPage(3)
         }
     }
  

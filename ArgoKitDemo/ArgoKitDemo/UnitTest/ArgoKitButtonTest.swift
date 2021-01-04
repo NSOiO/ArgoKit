@@ -26,21 +26,19 @@ struct ArgoKitButtonTest: ArgoKit.View {
     var body: ArgoKit.View {
         HStack{
             // 设置按钮title
-            Button(text: "按钮titlevfdvvdfvdcdcdsvfdvdfvdfvdfvdvfdv") {
+            Button(text: "按钮titlevfdvvdfvdcdcdjkjjjsvfdvdfvdfvdfvdvfdv") {
             }
 
 
         }.alignItems(.start)
         VStack {
-            Text("aacsdcscdcsdcsdc").alias(variable: $text)
+            Text("aacsdcscdcsdcsdcddsdsds").alias(variable: $text)
             Button(text: "busdcsdcsdsvzcscsbhhbhhcdscd") {
                 text?.text("aacsdcscdcsdcsdcccc")
             }
         }
         .alignItems(.start)
-        
-        
-//        .backgroundColor(.yellow)
+        .backgroundColor(.yellow)
         
         
 
