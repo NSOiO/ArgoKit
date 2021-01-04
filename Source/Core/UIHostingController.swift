@@ -84,11 +84,11 @@ public class UIHostingView: UIView {
                     var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                     if #available(iOS 11.0, *){
                         insets = self.safeAreaInsets
+                        node.paddingLeft(point: insets.left)
+                        node.paddingRight(point: insets.right)
+                        node.paddingTop(point: insets.top)
+                        node.paddingBottom(point: insets.bottom)
                     }
-                    node.paddingLeft(point: insets.left)
-                    node.paddingRight(point: insets.right)
-                    node.paddingTop(point: insets.top)
-                    node.paddingBottom(point: insets.bottom)
                 }
                 node.applyLayout()
             }
