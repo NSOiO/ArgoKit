@@ -7,6 +7,7 @@
 
 import Foundation
 struct TextCalculation {
+    static let calculationLable:UILabel = UILabel()
     private static var calculationLableCache = Array<UILabel>()
     static func removeAllLableCache() -> Void {
         if calculationLableCache.count > 0 {
@@ -19,10 +20,10 @@ struct TextCalculation {
 }
 class ArgoKitTextNode: ArgoKitArttibuteNode {
     
-    override func createNodeViewIfNeed(_ frame: CGRect) {
-        super.createNodeViewIfNeed(frame)
-        TextCalculation.removeAllLableCache()
-    }
+//    override func createNodeViewIfNeed(_ frame: CGRect) {
+//        super.createNodeViewIfNeed(frame)
+//        TextCalculation.removeAllLableCache()
+//    }
     var lineSpacing:CGFloat = 0
     
     func lineSpacing(_ value:CGFloat){
@@ -101,8 +102,8 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let lable:UILabel = UILabel()//TextCalculation.calculationLable
-        TextCalculation.AddLableCache(lable)
+        let lable:UILabel = TextCalculation.calculationLable
+//        TextCalculation.AddLableCache(lable)
         if let text =  self.text(){
             if text.count > 0 {
                 lable.text = text
@@ -114,6 +115,9 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
             }
         }
         if let font = self.font() {
+            lable.font = font
+        }else{
+            let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
             lable.font = font
         }
         lable.numberOfLines = self.numberOfLines()

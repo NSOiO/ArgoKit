@@ -660,7 +660,9 @@ extension GridNode {
     }
     
     public func reloadRowsHeight() {
-        self.pGridView?.performBatchUpdates(nil, completion: nil)
+        if let gridView = self.pGridView{
+            gridView.performBatchUpdates(nil, completion: nil)
+        }
     }
 }
 
