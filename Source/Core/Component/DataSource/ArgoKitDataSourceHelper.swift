@@ -9,7 +9,7 @@ import Foundation
 class ArgoKitCellNode: ArgoKitNode {
     
     var cellSourceData: Any?
-    
+    var isPreviewing:Bool = false
     var frameObserber: NSKeyValueObservation?
     
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {

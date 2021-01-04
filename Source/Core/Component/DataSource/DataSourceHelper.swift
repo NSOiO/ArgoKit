@@ -128,6 +128,8 @@ extension DataSourceHelper {
                     cellNode.addChildNodes(nodes)
                     if let sourceData_ = sourceData as? ArgoKitIdentifiable{
                         sourceData_.argokit_linkNode = cellNode
+                    }else{
+                        cellNode.isPreviewing = true
                     }
                     return cellNode
                 }

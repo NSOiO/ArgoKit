@@ -81,132 +81,70 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        
-//        Grid(){
-//            Text("dsa")
-//                .lineLimit(0)
-//                .textAlign(.center)
-//
-//            Image("icybay.jpg")
-//                .aspect(ratio: 1)
-//                .circle()
-//                .onTapGesture {
-//
-//                }
-//            Image("icybay.jpg")
-//                .aspect(ratio: 1)
-//                .circle()
-//                .onTapGesture {
-//
-//                }
-//            Image("icybay.jpg")
-//                .aspect(ratio: 1)
-//                .circle()
-//                .onTapGesture {
-//
-//                }
-//            Text("scsdcsd")
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Text("scsdcsd")
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Text("scsdcsd")
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                        .aspect(ratio: 1)
-//                        .circle()
-//                        .onTapGesture {
-//
-//                        }
-//            Image("icybay.jpg")
-//                            .aspect(ratio: 1)
-//                            .circle()
-//                            .onTapGesture {
-//
-//                            }
-//            Text("scsdcsd")
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                        .aspect(ratio: 1)
-//                        .circle()
-//                        .onTapGesture {
-//
-//                        }
-//            Image("icybay.jpg")
-//                            .aspect(ratio: 1)
-//                            .circle()
-//                            .onTapGesture {
-//
-//                            }
-//            Image("icybay.jpg")
-//                                .aspect(ratio: 1)
-//                                .circle()
-//                                .onTapGesture {
-//
-//                                }
-//
-//        }
-//        .grow(1.0)
-//        .columnCount(3)
-//        .columnSpacing(5)
-//        .sectionHeader { () -> View in
-//            Text("scsdcsd").backgroundColor(.yellow)
-//        }
+        /*
+        Grid(){
+            Text("dsa")
+                .lineLimit(0)
+                .textAlign(.center)
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                        .aspect(ratio: 1)
+                        .circle()
+                        .onTapGesture {
+
+                        }
+            Image("icybay.jpg")
+                            .aspect(ratio: 1)
+                            .circle()
+                            .onTapGesture {
+
+                            }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                                .aspect(ratio: 1)
+                                .circle()
+                                .onTapGesture {
+
+                                }
+
+        }
+        .grow(1.0)
+        .columnCount(3)
+        .columnSpacing(5)
+        .sectionHeader { () -> View in
+            Text("scsdcsd").backgroundColor(.yellow)
+        }
+ */
        
         Grid(waterfall: true,data:model.$dataSource2){ data in
 
@@ -219,6 +157,7 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .circle()
                 .onTapGesture {
                     data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
+                    data.imagePath = "icybay.jpg"
                 }
 
         }
@@ -228,6 +167,18 @@ struct ArgoKitGridTest: ArgoKit.View {
         .columnSpacing(10)
         .lineSpacing(10)
         .layoutInset(top: 0, left: 10, bottom: 0, right: 10)
+        .cellWillAppear{ (_, indexpath) in
+        
+        }
+        .cellDidDisappear({ (data, indexpath) in
+        })
+        .cellSelected({ (data, indexpath) in
+        })
+        .cellDeselected({ (data, indexpath) in
+        })
+        .willBeginDragging {
+        
+        }
         .sectionHeader(data:model.$headerSource) { data -> View in
             Text(data.headerName)
                 .textAlign(.center)
@@ -253,87 +204,6 @@ struct ArgoKitGridTest: ArgoKit.View {
             .alias(variable: $footerView)
             .autoRefreshOffPage(2)
         }
-        /*
-//        .lineSpacing(5)
-//        .layoutInset(top: 10, left:10, bottom: 10, right: 10)
-//        .showsScrollIndicator(true)
-//        .cellWillAppear{ (_, indexpath) in
-//
-//        }
-//        .cellDidDisappear({ (data, indexpath) in
-//        })
-//        .cellSelected({ (data, indexpath) in
-//        })
-//        .cellDeselected({ (data, indexpath) in
-//        })
-//        .willBeginDragging {
-//
-//        }
-   
-        .headersPinToVisibleBounds(true)
-//        .sectionFooter([ArgoKitGridHeaderTestModel()]){data->View in
-//            Text(data.headerName)
-//                .textAlign(.center)
-//                .backgroundColor(.yellow)
-//                .height(40)
-//        }
-        
-//        // ios13及以上
-//        .contextMenuConfiguration(title: "title") { (data, indexPath) -> [UIAction]? in
-//            // 第一个
-//            let favorite = UIAction(title: "Favorite", image: UIImage(systemName: "heart.fill")) { action in
-//                print("favorite")
-//            }
-//
-//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up.fill")) { action in
-//                print("share")
-//            }
-//
-//            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), attributes: [.destructive]) { action in
-//                print("delete")
-//            }
-//            return [favorite,share,delete]
-//        }
-//        .previewForContextMenu { () -> View in
-//            HStack{
-//                Text("previewForContextMenu")
-//            }
-//            .backgroundColor(.red)
-//            .height(100)
-//        }
-        .refreshHeaderView { () -> RefreshHeaderView in
-            RefreshHeaderView {
-                
-            } _: { () -> View in
-                Text("refresh_header").alignSelf(.center)
-            }
-            .backgroundColor(.red)
-        }
-        .refreshFooterView { () -> RefreshFooterView in
-            RefreshFooterView {
-                model.reloadMoreData()
-                grid?.reloadData()
-                footerView?.endRefreshing()
-                footerView?.resetNoMoreData()
-            } _: { () -> View in
-                Text("refresh_footer").backgroundColor(.red)
-                Image("chilkoottrail.jpg")
-                    .width(50)
-                    .aspect(ratio: 1)
-                    .circle()
-            }
-            .backgroundColor(.orange)
-            .alignItems(.center)
-            .alias(variable: $footerView)
-            .autoRefreshOffPage(3)
-        
-        } */
-//        .contentWidth(300)
-//        .scrollEnabled(true)
-//        .scrollDirection(UICollectionView.ScrollDirection.vertical)
-//        .showsScrollIndicator(true)
-        
-
     }
  
 }

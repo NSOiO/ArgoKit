@@ -7,10 +7,22 @@
 
 import Foundation
 struct TextCalculation {
-    static let calculationLable:UILabel = UILabel()
+    private static var calculationLableCache = Array<UILabel>()
+    static func removeAllLableCache() -> Void {
+        if calculationLableCache.count > 0 {
+            calculationLableCache.removeAll()
+        }
+    }
+    static func AddLableCache(_ value:UILabel) -> Void {
+        calculationLableCache.append(value)
+    }
 }
 class ArgoKitTextNode: ArgoKitArttibuteNode {
     
+    override func createNodeViewIfNeed(_ frame: CGRect) {
+        super.createNodeViewIfNeed(frame)
+        TextCalculation.removeAllLableCache()
+    }
     var lineSpacing:CGFloat = 0
     
     func lineSpacing(_ value:CGFloat){
@@ -89,13 +101,8 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var result:CGSize = size
-//        if let view = self.view {
-//            result = view.sizeThatFits(size)
-//        }else{
-//
-//        }
-        let lable:UILabel = TextCalculation.calculationLable
+        let lable:UILabel = UILabel()//TextCalculation.calculationLable
+        TextCalculation.AddLableCache(lable)
         if let text =  self.text(){
             if text.count > 0 {
                 lable.text = text
@@ -111,7 +118,7 @@ class ArgoKitTextNode: ArgoKitArttibuteNode {
         }
         lable.numberOfLines = self.numberOfLines()
         lable.lineBreakMode = self.lineBreakMode()
-        result = lable.sizeThatFits(size)
+        var result = lable.sizeThatFits(size)
         let width = ceil(result.width);
         let height = ceil(result.height);
         result = CGSize(width: width, height: height)

@@ -23,7 +23,14 @@ class GridCell: UICollectionViewCell {
     }
     
     public func linkCellNode(_ node: ArgoKitCellNode) {
-        if self.contentView.subviews.count != 0 && self.contentNode != nil {
+        if node.isPreviewing {
+            node.bindView(self.contentView)
+            self.contentNode = node
+            self.contentNode?.applyLayoutAferCalculation(withView: true)
+            ArgoKitLayoutHelper.addLayoutNode(node)
+            return
+        }
+        if self.contentView.subviews.count != 0 && self.contentNode != nil{
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculation(withView:false)
             }

@@ -61,7 +61,7 @@ struct ViewPage1 : ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     @DataSource var items:[ViewPageCellItem] = [ViewPageCellItem]()
     init() {
-        for index in 1...5{
+        for index in 1...10{
             let item = ViewPageCellItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             items.append(item)
             if index % 2 == 0 {
@@ -74,7 +74,7 @@ struct ViewPage1 : ArgoKit.View {
         }
     }
     
-    let tab = TabSegment(["A", "B", "C", "D", "E"]) {
+    let tab = TabSegment(["A", "B", "C", "D", "E", "F", "G","H","I","J"]) {
         Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
     }
     
