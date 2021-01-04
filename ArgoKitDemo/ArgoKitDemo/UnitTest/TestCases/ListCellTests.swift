@@ -9,8 +9,12 @@ import ArgoKit
 
 
 // view model.
-class ListCellTestsModel {
+class ListCellTestsModel: ArgoKitIdentifiable {
+    var reuseIdentifier: String = "cell"
+    
     var title: String = ""
+    var userName = "Emily"
+    var userAge = 25
     var placeHolder = "turtlerock"
     var iconURL: URL? = nil
     var photoURLs: [URL] = []
@@ -47,23 +51,6 @@ struct ListCellTests: ArgoKit.View {
         self.model = model
     }
     
-    private func createButton(action: @escaping () -> Void, title: String) -> ArgoKit.Button {
-        Button(action: action) {
-            HStack {
-                Image(model.placeHolder)
-                    .height(24)
-                    .width(24)
-                
-                Text(title)
-                    .font(size: 10)
-                    .textColor(.init(60, 60, 60))
-                    .backgroundColor(.blue)
-            }
-            .alignItems(.center)
-            .backgroundColor(.red)
-        }
-    }
-    
     var body: ArgoKit.View {
         VStack {
             // icon
@@ -72,8 +59,20 @@ struct ListCellTests: ArgoKit.View {
                     .width(40)
                     .height(40)
                     .circle()
+                    .margin(edge: .right, value: 10)
+                
+                VStack {
+                    Text(model.userName)
+                        .font(size: 16)
+                    
+                    Text("\(model.userAge)")
+                        .font(size: 14)
+                        .backgroundColor(red: 239, green: 66, blue: 66)
+                        .textAlign(.center)
+                        .cornerRadius(10)
+                        .circle()
+                }
             }
-            .backgroundColor(.lightGray)
             .margin(edge: .bottom, value: 5)
             
             // Title
@@ -109,22 +108,37 @@ struct ListCellTests: ArgoKit.View {
                 .margin(edge: .bottom, value: 5)
             
             HStack {
-                createButton(action: {
+                bottomButton(action: {
                     
-                }, title: "\(model.likes)")
+                }, imageName: "like", title: "\(model.likes)")
                 
-                createButton(action: {
+                bottomButton(action: {
                     
-                }, title: "\(model.comments)")
+                }, imageName: "conversation", title: "\(model.comments)")
                 
-                createButton(action: {
+                bottomButton(action: {
                     
-                }, title: "\(model.conversation)")
+                }, imageName: "conversation", title: "\(model.conversation)")
             }
             .justifyContent(.between)
             .padding(edge: .left, value: 30)
             .padding(edge: .right, value: 30)
                         
+        }
+    }
+    
+    private func bottomButton(action: @escaping () -> Void, imageName: String, title: String) -> ArgoKit.Button {
+        Button(action: action) {
+            HStack {
+                Image(imageName)
+                    .height(24)
+                    .width(24)
+                
+                Text(title)
+                    .font(size: 10)
+                    .textColor(.init(60, 60, 60))
+            }
+            .alignItems(.center)
         }
     }
 }

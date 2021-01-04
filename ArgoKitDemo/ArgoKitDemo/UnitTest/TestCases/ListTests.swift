@@ -33,64 +33,25 @@ struct LandRow: View {
 class ListTestsModel:  ArgoKitIdentifiable {
     var reuseIdentifier = "idd"
     var name = "name..ss"
-}
+    @DataSource var dataSource:DataList<ListCellTestsModel> = []
 
+}
 
 // view
 struct  ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ListTestsModel
-    @DataSource var dataSource:DataList<ListTestsModel> = [ListTestsModel()]
     init(model: ListTestsModel) {
         self.model = model
     }
-    
-//    var cellDatas = [ListCellModel]()
-    
-    var body: ArgoKit.View {
         
-//        let data = [landmarkDatopa[0]]
-//        cellDatas.append(ListCellModel())
-    
-        return VStack {
-            Text("aa")
-            ArgoKit.List(data:$dataSource) {landmark in
-                VStack {
-                    Text(landmark.name)
-                    Text("t1")
-                        .height(100)
-                        .backgroundColor(.lightText)
-                        .margin(edge: .bottom, value:10)
-                    Text("t222")
-                        .backgroundColor(.lightText)
-                }
-                .borderWidth(5)
-                .borderColor(.cyan)
-                .padding(edge: .horizontal, value: 5)
-            }
-            .tableHeaderView {
-                Text("This is tableHeader")
-            }
-            .tableFooterView {
-                Text("This is tableFooter")
-            }
+    var body: ArgoKit.View {
+        List(data: model.$dataSource) { cellModel in
+            ListCellTests(model: cellModel)
+                .padding(edge: .bottom, value: 10)
         }
         .height(100%)
-        .backgroundColor(.lightGray)
-        
-//        ArgoKit.List(data:landmarkData) { landmark in
-////            switch landmark.reuseIdentifier {
-////            case "LandmarkRow1":
-////                LandmarkRow1(landmark: landmark)
-////            case "LandmarkRow2":
-////                LandmarkRow2(landmark: landmark)
-////            default:
-////                LandmarkRow(landmark: landmark)
-////            }
-//            LandmarkRow2(landmark: landmark)
-//        }
-//        .size(width: 100%, height: 100%)
     }
 }
 
@@ -102,7 +63,14 @@ import SwiftUI
 
 // mock data.
 class ListTestsModel_Previews:  ListTestsModel {
-
+    override init() {
+        super.init()
+        var datas = [ListCellTestsModel_Previews]()
+        for _ in 0..<10 {
+            datas.append(ListCellTestsModel_Previews())
+        }
+        self.dataSource = datas
+    }
 }
 
 @available(iOS 13.0.0, *)
