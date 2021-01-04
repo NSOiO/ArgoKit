@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (65% documented)
+         (84% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -278,7 +278,11 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>An object that allows multiple animations to be grouped and run concurrently.</p>
+<pre class="highlight swift"><code>        <span class="kt">AnimationGroup</span><span class="p">()</span>
+            <span class="o">.</span><span class="nf">delay</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">animations</span><span class="p">([</span><span class="kt">Animation</span><span class="p">])</span>
+</code></pre>
 
           </div>
         </section>
@@ -309,7 +313,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Specifies the amount of time (measured in seconds) to wait before beginning the animations.</p>
 
                       </div>
                       <div class="declaration">
@@ -320,6 +324,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">delay</span><span class="p">(</span><span class="n">_</span> <span class="nv">delay</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>delay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The amount of time (measured in seconds) to wait before beginning the animations. Specify a value of 0 to begin the animations immediately.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -337,7 +364,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Determines the number of times the animation group will repeat.</p>
 
                       </div>
                       <div class="declaration">
@@ -348,6 +375,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">repeatCount</span><span class="p">(</span><span class="n">_</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of times the animation group will repeat.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -365,7 +415,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets a Boolean value that controls whether that repeats this animation group forever.</p>
 
                       </div>
                       <div class="declaration">
@@ -376,6 +426,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">repeatForever</span><span class="p">(</span><span class="n">_</span> <span class="nv">forever</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forever</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that controls whether that repeats this animation group forever.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -393,7 +466,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Determines if the animation group plays in the reverse upon completion.</p>
 
                       </div>
                       <div class="declaration">
@@ -404,6 +477,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">autoReverse</span><span class="p">(</span><span class="n">_</span> <span class="nv">reverse</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reverse</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>true if you want to this animaiton  group plays in the reverse upon completion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -421,7 +517,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Attach this animation group to the specific UIKit view.</p>
 
                       </div>
                       <div class="declaration">
@@ -432,6 +528,29 @@
 <span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">attach</span><span class="p">(</span><span class="n">_</span> <span class="nv">view</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>view</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The UIKit view that attachs this animation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -449,7 +568,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets multiple animations to be grouped.</p>
 
                       </div>
                       <div class="declaration">
@@ -460,6 +579,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">animations</span><span class="p">(</span><span class="n">_</span> <span class="nv">animations</span><span class="p">:</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Animation.html">Animation</a></span><span class="o">&gt;</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animations</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiple animations that to be grouped.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -477,7 +619,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Updates this animation group.</p>
 
                       </div>
                       <div class="declaration">
@@ -488,6 +630,41 @@
 <span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">serial</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>serial</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The progess of the animation. 0.0~1.0</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -505,7 +682,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Updates this animation group serially.</p>
 
                       </div>
                       <div class="declaration">
@@ -516,6 +693,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateSerial</span><span class="p">(</span><span class="nv">progress</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The progess of the animation group. 0.0~1.0</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -533,7 +733,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Updates this animation group concurrently.</p>
 
                       </div>
                       <div class="declaration">
@@ -544,6 +744,29 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateConcurrent</span><span class="p">(</span><span class="nv">progress</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The progess of the animation group. 0.0~1.0</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -561,7 +784,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Starts this animation group.</p>
 
                       </div>
                       <div class="declaration">
@@ -571,6 +794,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">serial</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>serial</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -588,7 +830,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Starts this animation group serially.</p>
 
                       </div>
                       <div class="declaration">
@@ -615,7 +857,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Starts this animation group concurrently.</p>
 
                       </div>
                       <div class="declaration">
@@ -642,7 +884,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Pauses this animation group.</p>
 
                       </div>
                       <div class="declaration">
@@ -669,7 +911,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Resumes this animation group.</p>
 
                       </div>
                       <div class="declaration">
@@ -696,7 +938,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Stops this animation group.</p>
 
                       </div>
                       <div class="declaration">
@@ -723,7 +965,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the call back of start animation.</p>
 
                       </div>
                       <div class="declaration">
@@ -733,6 +975,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">startCallback</span><span class="p">(</span><span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MLAAnimationStartBlock</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The call back of start animation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -750,7 +1015,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the call back of pause animation.</p>
 
                       </div>
                       <div class="declaration">
@@ -760,6 +1025,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">pauseCallback</span><span class="p">(</span><span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MLAAnimationPauseBlock</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The call back of pause animation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -777,7 +1065,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the call back of resume animation.</p>
 
                       </div>
                       <div class="declaration">
@@ -787,6 +1075,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resumeCallback</span><span class="p">(</span><span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MLAAnimationResumeBlock</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The call back of resume animation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -804,7 +1115,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the call back of repeat animation.</p>
 
                       </div>
                       <div class="declaration">
@@ -814,6 +1125,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">repeatCallback</span><span class="p">(</span><span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MLAAnimationRepeatBlock</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The call back of repeat animation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -831,7 +1165,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the call back of finish animation.</p>
 
                       </div>
                       <div class="declaration">
@@ -841,6 +1175,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finishCallback</span><span class="p">(</span><span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MLAAnimationFinishBlock</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The call back of finish animation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
                       </div>
                     </section>
                   </div>
@@ -858,7 +1215,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Builds animation group with elements.</p>
+<pre class="highlight swift"><code>        <span class="k">let</span> <span class="nv">config</span><span class="p">:</span> <span class="p">[</span><span class="kt">AnimationGroupElement</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="o">.</span><span class="nf">view</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">animations</span><span class="p">([</span><span class="kt">Animation</span><span class="p">])</span>
+        <span class="p">]</span>
+        <span class="k">let</span> <span class="nv">animationGroup</span> <span class="o">=</span> <span class="kt">AnimationGroup</span><span class="o">.</span><span class="nf">build</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
@@ -868,6 +1231,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">build</span><span class="p">(</span><span class="n">_</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/AnimationGroupElement.html">AnimationGroupElement</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">AnimationGroup</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>elements</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element of the animation group.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The animation group object.</p>
                       </div>
                     </section>
                   </div>
@@ -880,7 +1266,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
+      <p>&copy; 2021 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2021-01-04)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

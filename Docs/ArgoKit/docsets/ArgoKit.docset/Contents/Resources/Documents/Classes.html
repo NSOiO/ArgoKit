@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (65% documented)
+         (84% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -293,7 +293,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The abstract superclass for animations in Argo Animation.
+You do not create instance of CAAnimation: to animate UIKit view or ArgoKit objects, create instances of the concrete subclasses Animation, SpringAnimation, or AnimationGroup.</p>
 
                         <a href="Classes/AnimationBasic.html" class="slightly-smaller">See more</a>
                       </div>
@@ -321,7 +322,38 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The basic class for single-keyframe animations.</p>
+<pre class="highlight swift"><code>        <span class="kt">Animation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">color</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="kt">UIColor</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="kt">UIColor</span><span class="p">)</span>
+
+        <span class="kt">Animation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">textColor</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="kt">UIColor</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="kt">UIColor</span><span class="p">)</span>
+
+        <span class="kt">Animation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">position</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">resetOnStop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+
+        <span class="kt">Animation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">rotation</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="n">fromValue</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="n">toValue</span><span class="p">)</span>
+
+        <span class="kt">Animation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">scale</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="n">xScale</span><span class="p">,</span> <span class="n">yScale</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="n">xScale</span><span class="p">,</span> <span class="n">yScale</span><span class="p">)</span>
+
+        <span class="kt">Animation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">contentOffset</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Classes/Animation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -349,7 +381,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An object that allows multiple animations to be grouped and run concurrently.</p>
+<pre class="highlight swift"><code>        <span class="kt">AnimationGroup</span><span class="p">()</span>
+            <span class="o">.</span><span class="nf">delay</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">animations</span><span class="p">([</span><span class="kt">Animation</span><span class="p">])</span>
+</code></pre>
 
                         <a href="Classes/AnimationGroup.html" class="slightly-smaller">See more</a>
                       </div>
@@ -377,7 +413,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An animation that applies a spring-like force to a layer&rsquo;s properties.</p>
+<pre class="highlight swift"><code>        <span class="kt">SpringAnimation</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">position</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">resetOnStop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">springVelocity</span><span class="p">(</span><span class="kt">Velocity</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">springBounciness</span><span class="p">(</span><span class="kt">Bounciness</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">springSpeed</span><span class="p">(</span><span class="kt">Speed</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">springTension</span><span class="p">(</span><span class="kt">Tension</span><span class="p">)</span>
+</code></pre>
 
                         <a href="Classes/SpringAnimation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1035,7 +1081,7 @@ This class supports multiple text styles through use of the attributedText prope
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2020-12-30)</p>
+      <p>&copy; 2021 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2021-01-04)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

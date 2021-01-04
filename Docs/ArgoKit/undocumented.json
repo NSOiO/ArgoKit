@@ -1,1154 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 10,
-      "symbol": "AnimationBasic",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 10,
-      "symbol": "AnimationBasic",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 11,
-      "symbol": "AnimationBasic",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 11,
-      "symbol": "AnimationBasic",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 11,
-      "symbol": "AnimationBasic",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 26,
-      "symbol": "AnimationBasic.resetOnStop(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 26,
-      "symbol": "AnimationBasic.resetOnStop(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 26,
-      "symbol": "AnimationBasic.resetOnStop(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 48,
-      "symbol": "AnimationTimingFunc",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 48,
-      "symbol": "AnimationTimingFunc",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 48,
-      "symbol": "AnimationTimingFunc",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 49,
-      "symbol": "AnimationTimingFunc.defaultValue",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 49,
-      "symbol": "AnimationTimingFunc.defaultValue",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 49,
-      "symbol": "AnimationTimingFunc.defaultValue",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 50,
-      "symbol": "AnimationTimingFunc.linear",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 50,
-      "symbol": "AnimationTimingFunc.linear",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 50,
-      "symbol": "AnimationTimingFunc.linear",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 51,
-      "symbol": "AnimationTimingFunc.easeIn",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 51,
-      "symbol": "AnimationTimingFunc.easeIn",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 51,
-      "symbol": "AnimationTimingFunc.easeIn",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 52,
-      "symbol": "AnimationTimingFunc.easeOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 52,
-      "symbol": "AnimationTimingFunc.easeOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 52,
-      "symbol": "AnimationTimingFunc.easeOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 53,
-      "symbol": "AnimationTimingFunc.easeInEaseOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 53,
-      "symbol": "AnimationTimingFunc.easeInEaseOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 53,
-      "symbol": "AnimationTimingFunc.easeInEaseOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 56,
-      "symbol": "AnimationType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 56,
-      "symbol": "AnimationType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 56,
-      "symbol": "AnimationType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 57,
-      "symbol": "Animation",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 57,
-      "symbol": "Animation",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 57,
-      "symbol": "Animation",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 57,
-      "symbol": "AnimationType.alpha",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 57,
-      "symbol": "AnimationType.alpha",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 57,
-      "symbol": "AnimationType.alpha",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 58,
-      "symbol": "AnimationType.color",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 58,
-      "symbol": "AnimationType.color",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 58,
-      "symbol": "AnimationType.color",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 58,
-      "symbol": "AnimationType.textColor",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 58,
-      "symbol": "AnimationType.textColor",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 58,
-      "symbol": "AnimationType.textColor",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.position",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.position",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.position",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.positionX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.positionX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.positionX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.positionY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.positionY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 59,
-      "symbol": "AnimationType.positionY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scale",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scale",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scale",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scaleX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scaleX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scaleX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scaleY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scaleY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 60,
-      "symbol": "AnimationType.scaleY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotation",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotation",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotation",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotationX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotationX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotationX",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotationY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotationY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 61,
-      "symbol": "AnimationType.rotationY",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 62,
-      "symbol": "AnimationType.contentOffset",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 62,
-      "symbol": "AnimationType.contentOffset",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 62,
-      "symbol": "AnimationType.contentOffset",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 65,
-      "symbol": "Animation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 65,
-      "symbol": "Animation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 65,
-      "symbol": "Animation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 86,
-      "symbol": "Animation.init(type:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 86,
-      "symbol": "Animation.init(type:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 86,
-      "symbol": "Animation.init(type:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 92,
-      "symbol": "Animation.duration(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 92,
-      "symbol": "Animation.duration(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 92,
-      "symbol": "Animation.duration(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 98,
-      "symbol": "Animation.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 98,
-      "symbol": "Animation.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 98,
-      "symbol": "Animation.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 104,
-      "symbol": "Animation.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 104,
-      "symbol": "Animation.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 104,
-      "symbol": "Animation.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 110,
-      "symbol": "Animation.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 110,
-      "symbol": "Animation.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 110,
-      "symbol": "Animation.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 116,
-      "symbol": "Animation.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 116,
-      "symbol": "Animation.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 116,
-      "symbol": "Animation.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 122,
-      "symbol": "Animation.timingFunc(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 122,
-      "symbol": "Animation.timingFunc(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 122,
-      "symbol": "Animation.timingFunc(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 137,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 137,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 137,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 142,
-      "symbol": "Animation.from(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 142,
-      "symbol": "Animation.from(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 142,
-      "symbol": "Animation.from(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 147,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 147,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 147,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 152,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 152,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 152,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 157,
-      "symbol": "Animation.from(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 157,
-      "symbol": "Animation.from(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 157,
-      "symbol": "Animation.from(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 162,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 162,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 162,
-      "symbol": "Animation.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 176,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 176,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 176,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 181,
-      "symbol": "Animation.to(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 181,
-      "symbol": "Animation.to(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 181,
-      "symbol": "Animation.to(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 186,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 186,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 186,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 191,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 191,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 191,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 196,
-      "symbol": "Animation.to(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 196,
-      "symbol": "Animation.to(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 196,
-      "symbol": "Animation.to(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 201,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 201,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 201,
-      "symbol": "Animation.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 206,
-      "symbol": "Animation.update(serial:progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 206,
-      "symbol": "Animation.update(serial:progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 206,
-      "symbol": "Animation.update(serial:progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 215,
-      "symbol": "Animation.attach(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 215,
-      "symbol": "Animation.attach(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 215,
-      "symbol": "Animation.attach(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 223,
-      "symbol": "Animation.start(serial:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 223,
-      "symbol": "Animation.start(serial:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 223,
-      "symbol": "Animation.start(serial:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 228,
-      "symbol": "Animation.pause()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 228,
-      "symbol": "Animation.pause()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 228,
-      "symbol": "Animation.pause()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 233,
-      "symbol": "Animation.resume()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 233,
-      "symbol": "Animation.resume()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 233,
-      "symbol": "Animation.resume()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 238,
-      "symbol": "Animation.stop()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 238,
-      "symbol": "Animation.stop()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 238,
-      "symbol": "Animation.stop()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 242,
-      "symbol": "Animation.startCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 242,
-      "symbol": "Animation.startCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 242,
-      "symbol": "Animation.startCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 250,
-      "symbol": "Animation.pauseCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 250,
-      "symbol": "Animation.pauseCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 250,
-      "symbol": "Animation.pauseCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 258,
-      "symbol": "Animation.resumeCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 258,
-      "symbol": "Animation.resumeCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 258,
-      "symbol": "Animation.resumeCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 266,
-      "symbol": "Animation.repeatCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 266,
-      "symbol": "Animation.repeatCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 266,
-      "symbol": "Animation.repeatCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 274,
-      "symbol": "Animation.finishCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 274,
-      "symbol": "Animation.finishCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/Animation.swift",
-      "line": 274,
-      "symbol": "Animation.finishCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
       "line": 10,
       "symbol": "AnimationValue",
@@ -1272,1266 +124,6 @@
       "line": 15,
       "symbol": "AnimationValue.color(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 18,
-      "symbol": "AnimationElement",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 18,
-      "symbol": "AnimationElement",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 18,
-      "symbol": "AnimationElement",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 19,
-      "symbol": "AnimationElement.type(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 19,
-      "symbol": "AnimationElement.type(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 19,
-      "symbol": "AnimationElement.type(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 20,
-      "symbol": "AnimationElement.view(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 20,
-      "symbol": "AnimationElement.view(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 20,
-      "symbol": "AnimationElement.view(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 21,
-      "symbol": "AnimationElement.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 21,
-      "symbol": "AnimationElement.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 21,
-      "symbol": "AnimationElement.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 22,
-      "symbol": "AnimationElement.duration(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 22,
-      "symbol": "AnimationElement.duration(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 22,
-      "symbol": "AnimationElement.duration(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 23,
-      "symbol": "AnimationElement.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 23,
-      "symbol": "AnimationElement.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 23,
-      "symbol": "AnimationElement.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 24,
-      "symbol": "AnimationElement.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 24,
-      "symbol": "AnimationElement.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 24,
-      "symbol": "AnimationElement.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 25,
-      "symbol": "AnimationElement.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 25,
-      "symbol": "AnimationElement.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 25,
-      "symbol": "AnimationElement.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 26,
-      "symbol": "AnimationElement.timingFunc(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 26,
-      "symbol": "AnimationElement.timingFunc(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 26,
-      "symbol": "AnimationElement.timingFunc(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 27,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 27,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 27,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 28,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 28,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 28,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 30,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 30,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 30,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 33,
-      "symbol": "AnimationElement.from(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 33,
-      "symbol": "AnimationElement.from(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 33,
-      "symbol": "AnimationElement.from(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 36,
-      "symbol": "AnimationElement.from(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 36,
-      "symbol": "AnimationElement.from(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 36,
-      "symbol": "AnimationElement.from(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 39,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 39,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 39,
-      "symbol": "AnimationElement.from(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 43,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 43,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 43,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 46,
-      "symbol": "AnimationElement.to(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 46,
-      "symbol": "AnimationElement.to(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 46,
-      "symbol": "AnimationElement.to(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 49,
-      "symbol": "AnimationElement.to(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 49,
-      "symbol": "AnimationElement.to(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 49,
-      "symbol": "AnimationElement.to(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 52,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 52,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 52,
-      "symbol": "AnimationElement.to(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 59,
-      "symbol": "Animation.build(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 59,
-      "symbol": "Animation.build(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationBuilder.swift",
-      "line": 59,
-      "symbol": "Animation.build(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 11,
-      "symbol": "AnimationGroup",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 11,
-      "symbol": "AnimationGroup",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 11,
-      "symbol": "AnimationGroup",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 19,
-      "symbol": "AnimationGroup",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 19,
-      "symbol": "AnimationGroup",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 19,
-      "symbol": "AnimationGroup",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 32,
-      "symbol": "AnimationGroup.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 32,
-      "symbol": "AnimationGroup.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 32,
-      "symbol": "AnimationGroup.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 38,
-      "symbol": "AnimationGroup.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 38,
-      "symbol": "AnimationGroup.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 38,
-      "symbol": "AnimationGroup.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 44,
-      "symbol": "AnimationGroup.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 44,
-      "symbol": "AnimationGroup.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 44,
-      "symbol": "AnimationGroup.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 50,
-      "symbol": "AnimationGroup.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 50,
-      "symbol": "AnimationGroup.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 50,
-      "symbol": "AnimationGroup.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 56,
-      "symbol": "AnimationGroup.attach(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 56,
-      "symbol": "AnimationGroup.attach(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 56,
-      "symbol": "AnimationGroup.attach(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 66,
-      "symbol": "AnimationGroup.animations(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 66,
-      "symbol": "AnimationGroup.animations(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 66,
-      "symbol": "AnimationGroup.animations(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 75,
-      "symbol": "AnimationGroup.update(serial:progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 75,
-      "symbol": "AnimationGroup.update(serial:progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 75,
-      "symbol": "AnimationGroup.update(serial:progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 85,
-      "symbol": "AnimationGroup.updateSerial(progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 85,
-      "symbol": "AnimationGroup.updateSerial(progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 85,
-      "symbol": "AnimationGroup.updateSerial(progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 95,
-      "symbol": "AnimationGroup.updateConcurrent(progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 95,
-      "symbol": "AnimationGroup.updateConcurrent(progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 95,
-      "symbol": "AnimationGroup.updateConcurrent(progress:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 104,
-      "symbol": "AnimationGroup.start(serial:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 104,
-      "symbol": "AnimationGroup.start(serial:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 104,
-      "symbol": "AnimationGroup.start(serial:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 112,
-      "symbol": "AnimationGroup.startSerial()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 112,
-      "symbol": "AnimationGroup.startSerial()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 112,
-      "symbol": "AnimationGroup.startSerial()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 122,
-      "symbol": "AnimationGroup.startConcurrent()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 122,
-      "symbol": "AnimationGroup.startConcurrent()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 122,
-      "symbol": "AnimationGroup.startConcurrent()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 132,
-      "symbol": "AnimationGroup.pause()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 132,
-      "symbol": "AnimationGroup.pause()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 132,
-      "symbol": "AnimationGroup.pause()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 137,
-      "symbol": "AnimationGroup.resume()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 137,
-      "symbol": "AnimationGroup.resume()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 137,
-      "symbol": "AnimationGroup.resume()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 142,
-      "symbol": "AnimationGroup.stop()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 142,
-      "symbol": "AnimationGroup.stop()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 142,
-      "symbol": "AnimationGroup.stop()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 146,
-      "symbol": "AnimationGroup.startCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 146,
-      "symbol": "AnimationGroup.startCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 146,
-      "symbol": "AnimationGroup.startCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 154,
-      "symbol": "AnimationGroup.pauseCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 154,
-      "symbol": "AnimationGroup.pauseCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 154,
-      "symbol": "AnimationGroup.pauseCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 162,
-      "symbol": "AnimationGroup.resumeCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 162,
-      "symbol": "AnimationGroup.resumeCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 162,
-      "symbol": "AnimationGroup.resumeCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 170,
-      "symbol": "AnimationGroup.repeatCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 170,
-      "symbol": "AnimationGroup.repeatCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 170,
-      "symbol": "AnimationGroup.repeatCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 178,
-      "symbol": "AnimationGroup.finishCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 178,
-      "symbol": "AnimationGroup.finishCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroup.swift",
-      "line": 178,
-      "symbol": "AnimationGroup.finishCallback(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 10,
-      "symbol": "AnimationGroupElement",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 10,
-      "symbol": "AnimationGroupElement",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 10,
-      "symbol": "AnimationGroupElement",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 11,
-      "symbol": "AnimationGroupElement.view(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 11,
-      "symbol": "AnimationGroupElement.view(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 11,
-      "symbol": "AnimationGroupElement.view(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 12,
-      "symbol": "AnimationGroupElement.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 12,
-      "symbol": "AnimationGroupElement.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 12,
-      "symbol": "AnimationGroupElement.delay(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 13,
-      "symbol": "AnimationGroupElement.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 13,
-      "symbol": "AnimationGroupElement.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 13,
-      "symbol": "AnimationGroupElement.repeatCount(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 14,
-      "symbol": "AnimationGroupElement.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 14,
-      "symbol": "AnimationGroupElement.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 14,
-      "symbol": "AnimationGroupElement.repeatForever(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 15,
-      "symbol": "AnimationGroupElement.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 15,
-      "symbol": "AnimationGroupElement.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 15,
-      "symbol": "AnimationGroupElement.autoReverse(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 16,
-      "symbol": "AnimationGroupElement.animations(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 16,
-      "symbol": "AnimationGroupElement.animations(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 16,
-      "symbol": "AnimationGroupElement.animations(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 20,
-      "symbol": "AnimationGroup.build(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 20,
-      "symbol": "AnimationGroup.build(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 20,
-      "symbol": "AnimationGroup.build(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 43,
-      "symbol": "ArgoKitAnimationBuilder",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 43,
-      "symbol": "ArgoKitAnimationBuilder",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 43,
-      "symbol": "ArgoKitAnimationBuilder",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 44,
-      "symbol": "ArgoKitAnimationBuilder.buildBlock(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 44,
-      "symbol": "ArgoKitAnimationBuilder.buildBlock(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/AnimationGroupBuilder.swift",
-      "line": 44,
-      "symbol": "ArgoKitAnimationBuilder.buildBlock(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 11,
-      "symbol": "SpringAnimation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 11,
-      "symbol": "SpringAnimation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 11,
-      "symbol": "SpringAnimation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 29,
-      "symbol": "SpringAnimation.springVelocity(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 29,
-      "symbol": "SpringAnimation.springVelocity(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 29,
-      "symbol": "SpringAnimation.springVelocity(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 34,
-      "symbol": "SpringAnimation.springVelocity(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 34,
-      "symbol": "SpringAnimation.springVelocity(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 34,
-      "symbol": "SpringAnimation.springVelocity(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 40,
-      "symbol": "SpringAnimation.springBounciness(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 40,
-      "symbol": "SpringAnimation.springBounciness(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 40,
-      "symbol": "SpringAnimation.springBounciness(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 46,
-      "symbol": "SpringAnimation.springSpeed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 46,
-      "symbol": "SpringAnimation.springSpeed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 46,
-      "symbol": "SpringAnimation.springSpeed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 52,
-      "symbol": "SpringAnimation.springTension(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 52,
-      "symbol": "SpringAnimation.springTension(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 52,
-      "symbol": "SpringAnimation.springTension(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 58,
-      "symbol": "SpringAnimation.springFriction(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 58,
-      "symbol": "SpringAnimation.springFriction(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 58,
-      "symbol": "SpringAnimation.springFriction(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 64,
-      "symbol": "SpringAnimation.springMass(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 64,
-      "symbol": "SpringAnimation.springMass(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/AnimationKit/SpringAnimation.swift",
-      "line": 64,
-      "symbol": "SpringAnimation.springMass(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -2676,476 +268,476 @@
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 123,
+      "line": 98,
       "symbol": "ArgoJustify",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 123,
+      "line": 98,
       "symbol": "ArgoJustify",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 176,
+      "line": 119,
       "symbol": "ArgoAlign",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 176,
+      "line": 119,
       "symbol": "ArgoAlign",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 178,
+      "line": 121,
       "symbol": "ArgoAlign.auto",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 178,
+      "line": 121,
       "symbol": "ArgoAlign.auto",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 313,
+      "line": 145,
       "symbol": "ArgoPositionType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 313,
+      "line": 145,
       "symbol": "ArgoPositionType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 341,
+      "line": 154,
       "symbol": "ArgoWrapType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 341,
+      "line": 154,
       "symbol": "ArgoWrapType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 392,
-      "symbol": "View.displayFlex()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 392,
-      "symbol": "View.displayFlex()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 397,
-      "symbol": "View.displayNone()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 397,
-      "symbol": "View.displayNone()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 455,
-      "symbol": "ArgoEdge",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 455,
-      "symbol": "ArgoEdge",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 456,
-      "symbol": "ArgoEdge.left",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 456,
-      "symbol": "ArgoEdge.left",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 457,
-      "symbol": "ArgoEdge.top",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 457,
-      "symbol": "ArgoEdge.top",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 458,
-      "symbol": "ArgoEdge.right",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 458,
-      "symbol": "ArgoEdge.right",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 459,
-      "symbol": "ArgoEdge.bottom",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 459,
-      "symbol": "ArgoEdge.bottom",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 460,
-      "symbol": "ArgoEdge.start",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 460,
-      "symbol": "ArgoEdge.start",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 461,
-      "symbol": "ArgoEdge.end",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 461,
-      "symbol": "ArgoEdge.end",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 462,
-      "symbol": "ArgoEdge.horizontal",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 462,
-      "symbol": "ArgoEdge.horizontal",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 463,
-      "symbol": "ArgoEdge.vertical",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 463,
-      "symbol": "ArgoEdge.vertical",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 464,
-      "symbol": "ArgoEdge.all",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
-      "line": 464,
-      "symbol": "ArgoEdge.all",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
-      "line": 41,
-      "symbol": "ArgoKitNodeViewModifier.addAttribute(isCALayer:isDirty:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
-      "line": 41,
-      "symbol": "ArgoKitNodeViewModifier.addAttribute(isCALayer:isDirty:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
-      "line": 44,
-      "symbol": "ArgoKitNodeViewModifier._addAttribute_(isCALayer:isDirty:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
-      "line": 44,
-      "symbol": "ArgoKitNodeViewModifier._addAttribute_(isCALayer:isDirty:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 339,
-      "symbol": "ForEach.tag()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 339,
-      "symbol": "ForEach.tag()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 342,
-      "symbol": "ForEach.layer()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 342,
-      "symbol": "ForEach.layer()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 347,
-      "symbol": "ForEach.canBecomeFocused()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 347,
-      "symbol": "ForEach.canBecomeFocused()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 352,
-      "symbol": "ForEach.isFocused()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 352,
-      "symbol": "ForEach.isFocused()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 374,
-      "symbol": "ForEach.semanticContentAttribute()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 374,
-      "symbol": "ForEach.semanticContentAttribute()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 378,
-      "symbol": "ForEach.effectiveUserInterfaceLayoutDirection()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 378,
-      "symbol": "ForEach.effectiveUserInterfaceLayoutDirection()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 543,
-      "symbol": "ForEach.addSubNodes(builder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
-      "line": 543,
-      "symbol": "ForEach.addSubNodes(builder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/List/ListRowAction.swift",
-      "line": 91,
-      "symbol": "Array.swipeActionsConfiguration()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/List/ListRowAction.swift",
-      "line": 91,
-      "symbol": "Array.swipeActionsConfiguration()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 153,
-      "symbol": "View.progressViewStyle(style:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 153,
-      "symbol": "View.progressViewStyle(style:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 171,
-      "symbol": "ProgressViewStyle",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 171,
-      "symbol": "ProgressViewStyle",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 173,
-      "symbol": "ProgressViewStyle.Body",
-      "symbol_kind": "source.lang.swift.decl.associatedtype",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 173,
-      "symbol": "ProgressViewStyle.Body",
-      "symbol_kind": "source.lang.swift.decl.associatedtype",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 175,
-      "symbol": "ProgressViewStyle.makeBody(configuration:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 175,
-      "symbol": "ProgressViewStyle.makeBody(configuration:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 177,
-      "symbol": "ProgressViewStyle.Configuration",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 177,
-      "symbol": "ProgressViewStyle.Configuration",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 180,
-      "symbol": "ProgressViewStyleConfiguration",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 180,
-      "symbol": "ProgressViewStyleConfiguration",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
       "line": 182,
+      "symbol": "View.displayFlex()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 182,
+      "symbol": "View.displayFlex()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 187,
+      "symbol": "View.displayNone()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 187,
+      "symbol": "View.displayNone()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 193,
+      "symbol": "ArgoEdge",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 193,
+      "symbol": "ArgoEdge",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 194,
+      "symbol": "ArgoEdge.left",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 194,
+      "symbol": "ArgoEdge.left",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 195,
+      "symbol": "ArgoEdge.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 195,
+      "symbol": "ArgoEdge.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 196,
+      "symbol": "ArgoEdge.right",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 196,
+      "symbol": "ArgoEdge.right",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 197,
+      "symbol": "ArgoEdge.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 197,
+      "symbol": "ArgoEdge.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 198,
+      "symbol": "ArgoEdge.start",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 198,
+      "symbol": "ArgoEdge.start",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 199,
+      "symbol": "ArgoEdge.end",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 199,
+      "symbol": "ArgoEdge.end",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 200,
+      "symbol": "ArgoEdge.horizontal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 200,
+      "symbol": "ArgoEdge.horizontal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 201,
+      "symbol": "ArgoEdge.vertical",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 201,
+      "symbol": "ArgoEdge.vertical",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 202,
+      "symbol": "ArgoEdge.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewLayout.swift",
+      "line": 202,
+      "symbol": "ArgoEdge.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
+      "line": 41,
+      "symbol": "ArgoKitNodeViewModifier.addAttribute(isCALayer:isDirty:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
+      "line": 41,
+      "symbol": "ArgoKitNodeViewModifier.addAttribute(isCALayer:isDirty:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
+      "line": 44,
+      "symbol": "ArgoKitNodeViewModifier._addAttribute_(isCALayer:isDirty:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Basic/ViewModifier.swift",
+      "line": 44,
+      "symbol": "ArgoKitNodeViewModifier._addAttribute_(isCALayer:isDirty:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 339,
+      "symbol": "ForEach.tag()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 339,
+      "symbol": "ForEach.tag()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 342,
+      "symbol": "ForEach.layer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 342,
+      "symbol": "ForEach.layer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 347,
+      "symbol": "ForEach.canBecomeFocused()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 347,
+      "symbol": "ForEach.canBecomeFocused()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 352,
+      "symbol": "ForEach.isFocused()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 352,
+      "symbol": "ForEach.isFocused()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 374,
+      "symbol": "ForEach.semanticContentAttribute()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 374,
+      "symbol": "ForEach.semanticContentAttribute()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 378,
+      "symbol": "ForEach.effectiveUserInterfaceLayoutDirection()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 378,
+      "symbol": "ForEach.effectiveUserInterfaceLayoutDirection()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 543,
+      "symbol": "ForEach.addSubNodes(builder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ForEach.swift",
+      "line": 543,
+      "symbol": "ForEach.addSubNodes(builder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/List/ListRowAction.swift",
+      "line": 91,
+      "symbol": "Array.swipeActionsConfiguration()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/List/ListRowAction.swift",
+      "line": 91,
+      "symbol": "Array.swipeActionsConfiguration()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 72,
+      "symbol": "View.progressViewStyle(style:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 72,
+      "symbol": "View.progressViewStyle(style:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 90,
+      "symbol": "ProgressViewStyle",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 90,
+      "symbol": "ProgressViewStyle",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 92,
+      "symbol": "ProgressViewStyle.Body",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 92,
+      "symbol": "ProgressViewStyle.Body",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 94,
+      "symbol": "ProgressViewStyle.makeBody(configuration:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 94,
+      "symbol": "ProgressViewStyle.makeBody(configuration:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 96,
+      "symbol": "ProgressViewStyle.Configuration",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 96,
+      "symbol": "ProgressViewStyle.Configuration",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 99,
+      "symbol": "ProgressViewStyleConfiguration",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 99,
+      "symbol": "ProgressViewStyleConfiguration",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 101,
       "symbol": "ProgressViewStyleConfiguration.node",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ProgressView.swift",
-      "line": 182,
+      "line": 101,
       "symbol": "ProgressViewStyleConfiguration.node",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -3459,216 +1051,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 28,
-      "symbol": "Slider",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 28,
-      "symbol": "Slider",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 31,
-      "symbol": "Slider.value(_:animated:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 31,
-      "symbol": "Slider.value(_:animated:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 37,
-      "symbol": "Slider.minimumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 37,
-      "symbol": "Slider.minimumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 43,
-      "symbol": "Slider.maximumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 43,
-      "symbol": "Slider.maximumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 49,
-      "symbol": "Slider.minimumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 49,
-      "symbol": "Slider.minimumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 55,
-      "symbol": "Slider.minimumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 55,
-      "symbol": "Slider.minimumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 63,
-      "symbol": "Slider.maximumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 63,
-      "symbol": "Slider.maximumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 69,
-      "symbol": "Slider.maximumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 69,
-      "symbol": "Slider.maximumValueImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 77,
-      "symbol": "Slider.isContinuous(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 77,
-      "symbol": "Slider.isContinuous(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 83,
-      "symbol": "Slider.minimumTrackTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 83,
-      "symbol": "Slider.minimumTrackTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 89,
-      "symbol": "Slider.maximumTrackTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 89,
-      "symbol": "Slider.maximumTrackTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 95,
-      "symbol": "Slider.thumbTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 95,
-      "symbol": "Slider.thumbTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 101,
-      "symbol": "Slider.thumbImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 101,
-      "symbol": "Slider.thumbImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 107,
-      "symbol": "Slider.minimumTrackImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 107,
-      "symbol": "Slider.minimumTrackImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 113,
-      "symbol": "Slider.maximumTrackImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Slider.swift",
-      "line": 113,
-      "symbol": "Slider.maximumTrackImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Spacer.swift",
       "line": 26,
       "symbol": "Spacer.init()",
@@ -3707,174 +1089,6 @@
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
       "line": 19,
       "symbol": "Stepper.init(value:in:step:onValueChanged:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 34,
-      "symbol": "Stepper",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 34,
-      "symbol": "Stepper",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 37,
-      "symbol": "Stepper.isContinuous(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 37,
-      "symbol": "Stepper.isContinuous(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 44,
-      "symbol": "Stepper.autorepeat(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 44,
-      "symbol": "Stepper.autorepeat(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 51,
-      "symbol": "Stepper.wraps(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 51,
-      "symbol": "Stepper.wraps(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 58,
-      "symbol": "Stepper.value(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 58,
-      "symbol": "Stepper.value(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 65,
-      "symbol": "Stepper.minimumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 65,
-      "symbol": "Stepper.minimumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 72,
-      "symbol": "Stepper.maximumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 72,
-      "symbol": "Stepper.maximumValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 79,
-      "symbol": "Stepper.stepValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 79,
-      "symbol": "Stepper.stepValue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 87,
-      "symbol": "Stepper.setBackgroundImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 87,
-      "symbol": "Stepper.setBackgroundImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 95,
-      "symbol": "Stepper.setDividerImage(_:forLeftSegmentState:rightSegmentState:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 95,
-      "symbol": "Stepper.setDividerImage(_:forLeftSegmentState:rightSegmentState:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 103,
-      "symbol": "Stepper.setIncrementImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 103,
-      "symbol": "Stepper.setIncrementImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 111,
-      "symbol": "Stepper.setDecrementImage(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Stepper.swift",
-      "line": 111,
-      "symbol": "Stepper.setDecrementImage(_:for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -4033,132 +1247,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 32,
-      "symbol": "Toggle",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 32,
-      "symbol": "Toggle",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 35,
-      "symbol": "Toggle.onTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 35,
-      "symbol": "Toggle.onTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 41,
-      "symbol": "Toggle.thumbTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 41,
-      "symbol": "Toggle.thumbTintColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 47,
-      "symbol": "Toggle.onImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 47,
-      "symbol": "Toggle.onImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 53,
-      "symbol": "Toggle.offImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 53,
-      "symbol": "Toggle.offImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 60,
-      "symbol": "Toggle.title(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 60,
-      "symbol": "Toggle.title(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 67,
-      "symbol": "Toggle.preferredStyle(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 67,
-      "symbol": "Toggle.preferredStyle(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 73,
-      "symbol": "Toggle.isOn(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 73,
-      "symbol": "Toggle.isOn(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 79,
-      "symbol": "Toggle.setOn(_:animated:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/Toggle.swift",
-      "line": 79,
-      "symbol": "Toggle.setOn(_:animated:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/VStack.swift",
       "line": 27,
       "symbol": "VStack.init()",
@@ -4245,97 +1333,27 @@
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
       "line": 55,
-      "symbol": "ViewPage.scrollToPage(index:)",
+      "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
       "line": 55,
-      "symbol": "ViewPage.scrollToPage(index:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 60,
-      "symbol": "ViewPage.pageCount(pageCount:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 60,
-      "symbol": "ViewPage.pageCount(pageCount:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 65,
-      "symbol": "ViewPage.scrollEnable(enable:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 65,
-      "symbol": "ViewPage.scrollEnable(enable:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 70,
-      "symbol": "ViewPage.reuseEnable(enable:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 70,
-      "symbol": "ViewPage.reuseEnable(enable:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 75,
-      "symbol": "ViewPage.spacing(spacing:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 75,
-      "symbol": "ViewPage.spacing(spacing:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 80,
       "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 80,
-      "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 85,
+      "line": 60,
       "symbol": "ViewPage.setTabScrollingListener(scrollListener:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/momo/WorkSpace/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 85,
+      "line": 60,
       "symbol": "ViewPage.setTabScrollingListener(scrollListener:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

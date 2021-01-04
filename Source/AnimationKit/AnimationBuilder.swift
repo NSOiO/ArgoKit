@@ -15,40 +15,103 @@ public enum AnimationValue {
     case color(UIColor)
 }
 
+/// The element of animation that used to describe the animation properties you want to set.
 public enum AnimationElement {
+    
+    /// Sets the type of the animation.
     case type(AnimationType)
+    
+    /// Attach this animation to the specific UIKit view.
     case view(UIView?)
+    
+    /// Specifies the amount of time (measured in seconds) to wait before beginning the animations.
     case delay(Float)
+    
+    /// Specifies the basic duration of the animation, in seconds.
     case duration(Float)
+    
+    /// Determines the number of times the animation will repeat.
     case repeatCount(Int)
+    
+    /// Sets a Boolean value that controls whether that repeats this animation forever.
     case repeatForever(Bool)
+    
+    /// Determines if the animation plays in the reverse upon completion.
     case autoReverse(Bool)
+    
+    /// Sets an optional timing function defining the pacing of the animation.
     case timingFunc(AnimationTimingFunc)
+    
+    /// Defines the value the animation uses to start interpolation.
     case from(AnimationValue)
+    
+    /// Defines the value the animation uses to end interpolation.
     case to(AnimationValue)
     
+    /// Defines the float value the animation uses to start interpolation.
+    /// - Parameter v1: The float value the animation uses to end interpolation.
+    /// - Returns: Self
     public static func from(_ v1: Float) -> Self {
         return .from(AnimationValue.float(v1))
     }
+    
+    /// Defines the point value the animation uses to start interpolation.
+    /// - Parameters:
+    ///   - v1: The x of the point.
+    ///   - v2: The y of the point.
+    /// - Returns: Self
     public static func from(_ v1: Float, _ v2: Float) -> Self {
         return .from(AnimationValue.float2(v1, v2))
     }
+    
+    /// Defines the color value the animation uses to start interpolation.
+    /// - Parameters:
+    ///   - v1: The red value of the color object. 0~ 255
+    ///   - v2: The green value of the color object. 0~ 255
+    ///   - v3: The blue value of the color object. 0~ 255
+    ///   - v4: The opacity value of the color object, specified as a value from 0.0 to 1.0.
+    /// - Returns: Self
     public static func from(_ v1: Float, _ v2: Float, _ v3: Float, _ v4: Float) -> Self {
         return .from(AnimationValue.float4(v1, v2, v3, v4))
     }
+    
+    /// Defines the color value the animation uses to start interpolation.
+    /// - Parameter color: The color value the animation uses to start interpolation.
+    /// - Returns: Self
     public static func from(_ color: UIColor) -> Self {
         return .from(AnimationValue.color(color))
     }
     
+    /// Defines the float value the animation uses to end interpolation.
+    /// - Parameter v1: The float value the animation uses to end interpolation.
+    /// - Returns: Self
     public static func to(_ v1: Float) -> Self {
         return .to(AnimationValue.float(v1))
     }
+    
+    /// Defines the point value the animation uses to end interpolation.
+    /// - Parameters:
+    ///   - v1: The x of the point.
+    ///   - v2: The y of the point.
+    /// - Returns: Self
     public static func to(_ v1: Float, _ v2: Float) -> Self {
         return .to(AnimationValue.float2(v1, v2))
     }
+    
+    /// Defines the color value the animation uses to end interpolation.
+    /// - Parameters:
+    ///   - v1: The red value of the color object. 0~ 255
+    ///   - v2: The green value of the color object. 0~ 255
+    ///   - v3: The blue value of the color object. 0~ 255
+    ///   - v4: The opacity value of the color object, specified as a value from 0.0 to 1.0.
+    /// - Returns: Self
     public static func to(_ v1: Float, _ v2: Float, _ v3: Float, _ v4: Float) -> Self {
         return .to(AnimationValue.float4(v1, v2, v3, v4))
     }
+    
+    /// Defines the color value the animation uses to end interpolation.
+    /// - Parameter color: The color value the animation uses to end interpolation.
+    /// - Returns: Self
     public static func to(_ color: UIColor) -> Self {
         return .to(AnimationValue.color(color))
     }
@@ -56,6 +119,21 @@ public enum AnimationElement {
 
 extension Animation {
     
+    /// Builds animation with elements.
+    /// - Parameter elements: The element of the animation.
+    /// - Returns: The animation object.
+    ///
+    /// ```
+    ///         let config: [AnimationElement] = [
+    ///             .type(type),
+    ///             .duration(duration),
+    ///             .from(from),
+    ///             .to(to),
+    ///             .view(view)
+    ///         ]
+    ///         let animation = Animation.build(config)
+    /// ```
+    ///
     public static func build(_ elements: [AnimationElement]) -> Animation {
         var type: AnimationType?
         var view: UIView?

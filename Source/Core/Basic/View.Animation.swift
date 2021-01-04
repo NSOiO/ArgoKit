@@ -43,7 +43,7 @@ extension View {
     /// Updates the animation in the receiver.
     /// - Parameters:
     ///   - serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
-    ///   - progress: the progess of the animation. 0.0~1.0
+    ///   - progress: The progess of the animation. 0.0~1.0
     /// - Returns: self
     @discardableResult
     public func updateAnimation(serial: Bool = false, progress: Float) -> Self {

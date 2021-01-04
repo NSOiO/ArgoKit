@@ -8,6 +8,14 @@
 import Foundation
 import ArgoAnimation
 
+/// An object that allows multiple animations to be grouped and run concurrently.
+///
+/// ```
+///         AnimationGroup()
+///             .delay(delay)
+///             .animations([Animation])
+/// ```
+///
 public class AnimationGroup: AnimationBasic {
     
     private var delay: Float?
@@ -28,30 +36,46 @@ public class AnimationGroup: AnimationBasic {
     private var rawAnimations = [MLAAnimation]()
     
     // MARK: - Public
+    
+    /// Specifies the amount of time (measured in seconds) to wait before beginning the animations.
+    /// - Parameter delay: The amount of time (measured in seconds) to wait before beginning the animations. Specify a value of 0 to begin the animations immediately.
+    /// - Returns: Self
     @discardableResult
     public func delay(_ delay: Float) -> Self {
         self.delay = delay
         return self
     }
     
+    /// Determines the number of times the animation group will repeat.
+    /// - Parameter count: The number of times the animation group will repeat.
+    /// - Returns: Self
     @discardableResult
     public func repeatCount(_ count: Int) -> Self {
         self.repeatCount = count
         return self
     }
     
+    /// Sets a Boolean value that controls whether that repeats this animation group forever.
+    /// - Parameter forever: A Boolean value that controls whether that repeats this animation group forever.
+    /// - Returns: Self
     @discardableResult
     public func repeatForever(_ forever: Bool) -> Self {
         self.repeatForever = forever
         return self
     }
     
+    /// Determines if the animation group plays in the reverse upon completion.
+    /// - Parameter reverse: true if you want to this animaiton  group plays in the reverse upon completion.
+    /// - Returns: Self
     @discardableResult
     public func autoReverse(_ reverse: Bool) -> Self {
         self.autoReverse = reverse
         return self
     }
     
+    /// Attach this animation group to the specific UIKit view.
+    /// - Parameter view: The UIKit view that attachs this animation.
+    /// - Returns: Self
     @discardableResult
     public override func attach(_ view: UIView) -> Self {
         guard target == nil else {
@@ -62,6 +86,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Sets multiple animations to be grouped.
+    /// - Parameter animations: The multiple animations that to be grouped.
+    /// - Returns: Self
     @discardableResult
     public func animations(_ animations: Array<Animation>?) -> Self {
         guard let array = animations else {
@@ -71,6 +98,11 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Updates this animation group.
+    /// - Parameters:
+    ///   - serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
+    ///   - progress: The progess of the animation. 0.0~1.0
+    /// - Returns: Self
     @discardableResult
     public override func update(serial: Bool = false, progress: Float) -> Self {
         if serial {
@@ -81,6 +113,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Updates this animation group serially.
+    /// - Parameter progress: The progess of the animation group. 0.0~1.0
+    /// - Returns: Self
     @discardableResult
     public func updateSerial(progress: Float) -> Self {
         if animation == nil {
@@ -91,6 +126,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Updates this animation group concurrently.
+    /// - Parameter progress: The progess of the animation group. 0.0~1.0
+    /// - Returns: Self
     @discardableResult
     public func updateConcurrent(progress: Float) -> Self {
         if animation == nil {
@@ -101,6 +139,8 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Starts this animation group.
+    /// - Parameter serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
     public override func start(serial: Bool) {
         if serial {
             startSerial()
@@ -109,6 +149,7 @@ public class AnimationGroup: AnimationBasic {
         }
     }
     
+    /// Starts this animation group serially.
     public func startSerial() {
         prepareAnimationGroup()
         guard let group = animation else {
@@ -119,6 +160,7 @@ public class AnimationGroup: AnimationBasic {
         group.start()
     }
     
+    /// Starts this animation group concurrently.
     public func startConcurrent() {
         prepareAnimationGroup()
         guard let group = animation else {
@@ -129,20 +171,26 @@ public class AnimationGroup: AnimationBasic {
         group.start()
     }
     
+    /// Pauses this animation group.
     public override func pause() {
         animPaused = true
         animation?.pause()
     }
     
+    /// Resumes this animation group.
     public override func resume() {
         animPaused = false
         animation?.resume()
     }
     
+    /// Stops this animation group.
     public override func stop() {
         animation?.finish()
     }
-
+    
+    /// Sets the call back of start animation.
+    /// - Parameter callback: The call back of start animation.
+    /// - Returns: Self
     public func startCallback(_ callback: @escaping MLAAnimationStartBlock) -> Self {
         startCallback = callback
         if let anim = animation {
@@ -151,6 +199,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Sets the call back of pause animation.
+    /// - Parameter callback: The call back of pause animation.
+    /// - Returns: Self
     public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) -> Self {
         pauseCallback = callback
         if let anim = animation {
@@ -159,6 +210,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Sets the call back of resume animation.
+    /// - Parameter callback: The call back of resume animation.
+    /// - Returns: Self
     public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) -> Self {
         resumeCallback = callback
         if let anim = animation {
@@ -167,6 +221,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Sets the call back of repeat animation.
+    /// - Parameter callback: The call back of repeat animation.
+    /// - Returns: Self
     public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) -> Self {
         repeatCallback = callback
         if let anim = animation {
@@ -175,6 +232,9 @@ public class AnimationGroup: AnimationBasic {
         return self
     }
     
+    /// Sets the call back of finish animation.
+    /// - Parameter callback: The call back of finish animation.
+    /// - Returns: Self
     public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) -> Self {
         finishCallback = callback
         if let anim = animation {
