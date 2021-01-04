@@ -10,7 +10,7 @@ import Foundation
 // MARK: Init
 public class ViewPage<T> : ScrollView {
     
-    private var viewPageNode : ArgoKitViewPageNode<T> {
+    var viewPageNode : ArgoKitViewPageNode<T> {
         pNode as! ArgoKitViewPageNode
     }
     
@@ -49,31 +49,6 @@ extension ViewPage {
     @discardableResult
     public func reloadData() -> Self {
         viewPageNode.reloadData()
-        return self
-    }
-    @discardableResult
-    public func scrollToPage(index:Int) -> Self {
-        viewPageNode.scrollToPage(index: index)
-        return self
-    }
-    @discardableResult
-    public func pageCount(pageCount:Int) -> Self {
-        viewPageNode.pageCount(pageCount: pageCount)
-        return self
-    }
-    @discardableResult
-    public func scrollEnable(enable:Bool) -> Self {
-        addAttribute(#selector(setter: UICollectionView.isScrollEnabled), enable)
-        return self
-    }
-    @discardableResult
-    public func reuseEnable(enable:Bool) -> Self {
-        viewPageNode.reuseEnable(enable: enable)
-        return self
-    }
-    @discardableResult
-    public func spacing(spacing:CGFloat) -> Self {
-        viewPageNode.spacing(spacing: spacing)
         return self
     }
     @discardableResult
