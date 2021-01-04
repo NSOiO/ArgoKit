@@ -9,9 +9,14 @@ import ArgoKit
 
 // view model.
 class TextBindTestsModel {
-    @Property var fontSize = 12
+    @Property var fontSize: CGFloat = 12
     @Property var fontStyle: AKFontStyle = AKFontStyle.default
+    
     @Property var myTitle: String = "text"
+    @Property var myTitleA: String = "textA"
+    @Alias var titleText: Text?
+    
+    var count: Int = 0
 }
 
 // view
@@ -28,11 +33,36 @@ struct TextBindTests: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        Text()
-            .text(model.myTitle)
-            .onTapGesture {
-                model.myTitle = "change"
+        VStack {
+            Text(model.myTitle)
+                .font(size: model.fontSize)
+                .onTapGesture {
+//                    model.myTitle = "change"
+                }
+                .backgroundColor(.lightGray)
+                .alias(variable: model.$titleText)
+
+            
+            Button {
+                model.count += 1
+                model.myTitle = "text \(model.count)"
+                model.myTitleA = "textA \(model.count)"
+            } builder: {
+                Text("button-11")
             }
+            .backgroundColor(.yellow)
+            .alignItems(.start)
+            
+            Button {
+                model.titleText?.text(model.myTitleA)
+            } builder: {
+                Text("change")
+            }
+            .backgroundColor(.yellow)
+            .alignItems(.start)
+            
+        }
+        .alignItems(.start)
     }
 }
 
