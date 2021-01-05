@@ -81,7 +81,6 @@ extension TextField {
     public func leftView(_ content:()->View) -> Self {
         let lfView = content()
         if let node = lfView.alignSelf(.start).node {
-            
             let maxHeight = pNode.height()
             let maxWidth = pNode.width()
             let maxValue = CGFloat.minimum(maxHeight, maxWidth)
@@ -92,13 +91,11 @@ extension TextField {
             if width == 0 {
                 width = maxValue
             }
-            
             if height == 0 {
                 height = maxValue
             }
 
-            
-            node.width(point: height)
+            node.width(point: width)
             node.height(point: height)
             
             addAttribute(#selector(setter:ArgoKitTextField.leftPadding),width)
@@ -119,7 +116,6 @@ extension TextField {
         let rtView = content()
         if let node = rtView.alignSelf(.end).node {
             
-           
             let maxHeight = pNode.height()
             let maxWidth = pNode.width()
             let maxValue = CGFloat.minimum(maxHeight, maxWidth)
@@ -136,7 +132,7 @@ extension TextField {
             }
 
             
-            node.width(point: height)
+            node.width(point: width)
             node.height(point: height)
         
             node.positionAbsolute()

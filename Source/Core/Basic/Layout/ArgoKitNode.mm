@@ -618,7 +618,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)insertYGNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (!node) return;
     if(!(YGNodeGetChild(self.layout.ygnode, (int)index) ==  node.layout.ygnode)){
-        YGNodeSetMeasureFunc(node.layout.ygnode, NULL); // ensure the node being inserted no measure func
+        YGNodeSetMeasureFunc(self.layout.ygnode, NULL); // ensure the node being inserted no measure func
         YGNodeInsertChild(self.layout.ygnode, node.layout.ygnode, (const uint32_t)index);
     }
 }

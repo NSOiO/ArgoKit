@@ -127,12 +127,12 @@ public class UIHostingView: UIView {
         }
     }
     
-    @available(iOS 11.0, *)
-    public override func safeAreaInsetsDidChange() {
-        let insets = self.safeAreaInsets
-        print("insets11:\(insets)")
-        super.safeAreaInsetsDidChange()
-    }
+//    @available(iOS 11.0, *)
+//    public override func safeAreaInsetsDidChange() {
+//        let insets = self.safeAreaInsets
+//        print("insets11:\(insets)")
+//        super.safeAreaInsetsDidChange()
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

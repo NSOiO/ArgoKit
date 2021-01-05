@@ -11,15 +11,14 @@ import ArgoKit
 class ArgoKitButtonTestModel {
     var btn:Button?
     @Property var text:String = "titlevfdvvdfvdcdcdjkjjjsvfdvdf"
-    @Property var showKeyBoard:Bool = false
+    @Property var hidKeyBoard:Bool = false
     var action:(()->Void)?
     init() {
         action = {[self] in
             self.text = "bainh😸😸😸😸😸uananb"
-            self.showKeyBoard = true
+            self.hidKeyBoard = true
         }
     }
-   
 }
 
 // view
@@ -41,38 +40,42 @@ struct ArgoKitButtonTest: ArgoKit.View {
 //
 //        }.alignItems(.start)
         
-        VStack {
-            Text(self.model.text).alias(variable: $text).showKeyBoard(self.model.showKeyBoard)
-            Button(text: "busdc😸😸😸😸😸😸😸sdcddcd",action: self.model.action!)
-                .backgroundColor(.orange)
-            
-            Button(action: self.model.action!, builder: { () -> View in
-                HStack{
-                    VStack{
-                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
-                            .alignSelf(.start)
-                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
-                            .alignSelf(.start)
-                            .onTapGesture{
-                                self.model.text = "Text===Text"
-                            }
-                    }
-                    .backgroundColor(.purple)
-                }
-                .backgroundColor(.brown)
-            })
-            .alignItems(.center)
-            .margin(edge: .top, value: 10)
-            
-            
-//            TextField(text: "HAHHAH")
-//                .width(300)
-//                .height(50)
+//        VStack {
+//            Text(self.model.text).alias(variable: $text)
+//            Button(text: "busdc😸😸😸😸😸😸😸sdcddcd",action: self.model.action!)
+//                .backgroundColor(.orange)
+//            
+//            Button(action: self.model.action!, builder: { () -> View in
+//                HStack{
+//                    VStack{
+//                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+//                            .alignSelf(.start)
+//                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+//                            .alignSelf(.start)
+//                            .onTapGesture{
+//                                self.model.text = "Text===Text"
+//                            }
+//                    }
+//                    .backgroundColor(.purple)
+//                }
 //                .backgroundColor(.brown)
-//                .userInteractionEnabled(true)
-        }
-        .alignItems(.start)
-        .backgroundColor(.yellow)
+//            })
+//            .alignItems(.center)
+//            .margin(edge: .top, value: 10)
+            
+            
+            TextField(text: "HAHHAH")
+                .width(300)
+                .height(50)
+                .backgroundColor(.brown)
+                .hidKeyBoard(self.model.hidKeyBoard)
+                .rightView { () -> View in
+                    Text("RIGHT VIEW")
+                        .backgroundColor(.red)
+                }
+//        }
+//        .alignItems(.start)
+//        .backgroundColor(.yellow)
         
         
         

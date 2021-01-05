@@ -341,22 +341,27 @@ extension View {
 		}, forKey: #function)
     }
     
-    /// Removes blur effect.
+    /// hid key board
+    /// - Parameter value: resignFirstResponder when the value is true
+    /// - Returns: Self
+    @discardableResult
+    public func hidKeyBoard(_ value:@escaping @autoclosure () -> Bool) -> Self {
+        return self.bindCallback({ [self] in
+            if value() == true {
+                self.node?.view?.resignFirstResponder()
+            }
+        }, forKey: #function)
+    }
+    
+    /// show key board
+    /// - Parameter value: becomeFirstResponder when the value is true
     /// - Returns: Self
     @discardableResult
     public func showKeyBoard(_ value:@escaping @autoclosure () -> Bool) -> Self {
         return self.bindCallback({ [self] in
-            var ret:Bool? = true
-            self.node?.view?.isUserInteractionEnabled = true
             if value() == true {
-                ret = self.node?.view?.becomeFirstResponder()
-            }else{
-                ret = self.node?.view?.resignFirstResponder()
+                self.node?.view?.becomeFirstResponder()
             }
-            print("showKeyBoard= \(ret)")
         }, forKey: #function)
     }
-    
-
-    
 }
