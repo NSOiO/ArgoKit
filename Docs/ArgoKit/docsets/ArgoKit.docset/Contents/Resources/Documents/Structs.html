@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (84% documented)
+         (83% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -530,12 +530,20 @@ You use a date picker only for handling the selection of times and dates. If you
                         <p>Wrapper of UIPickerView.</p>
 
 <p>A view that uses a spinning-wheel or slot-machine metaphor to show one or more sets of values.</p>
-<pre class="highlight swift"><code> <span class="kt">PickerView</span><span class="p">([</span><span class="s">"1"</span><span class="p">,</span><span class="s">"2"</span><span class="p">,</span><span class="s">"3"</span><span class="p">,</span><span class="s">"4"</span><span class="p">,</span><span class="s">"5"</span><span class="p">]){</span><span class="n">item</span> <span class="k">in</span>
-       <span class="kt">Text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-  <span class="p">}</span>
-  <span class="o">.</span><span class="nf">width</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-  <span class="o">.</span><span class="nf">height</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-  <span class="o">.</span><span class="nf">backgroundColor</span><span class="p">(</span><span class="o">.</span><span class="n">yellow</span><span class="p">)</span>
+<pre class="highlight swift"><code>         <span class="kt">PickerView</span><span class="p">(</span><span class="err">$</span><span class="n">pickerData</span><span class="p">)</span> <span class="p">{</span> <span class="n">item</span> <span class="k">in</span>
+             <span class="kt">Text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="nf">grow</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="nf">textAlign</span><span class="p">(</span><span class="o">.</span><span class="n">center</span><span class="p">)</span>
+         <span class="p">}</span>
+         <span class="o">.</span><span class="nf">width</span><span class="p">(</span><span class="mi">100</span><span class="o">%</span><span class="p">)</span>
+         <span class="o">.</span><span class="nf">height</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+         <span class="o">.</span><span class="nf">widthForComponent</span><span class="p">({</span> <span class="p">(</span><span class="n">component</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Float</span> <span class="k">in</span>
+             <span class="k">return</span> <span class="mi">50</span>
+         <span class="p">})</span>
+         <span class="o">.</span><span class="nf">rowHeightForComponent</span><span class="p">({</span> <span class="p">(</span><span class="n">component</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Float</span> <span class="k">in</span>
+             <span class="k">return</span> <span class="mi">44</span>
+         <span class="p">})</span>
+         <span class="o">.</span><span class="nf">didSelectRow</span><span class="p">({</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span> <span class="k">in</span>
+             <span class="c1">// Did select action</span>
+         <span class="p">})</span>
 </code></pre>
 
                         <a href="Structs/PickerView.html" class="slightly-smaller">See more</a>
