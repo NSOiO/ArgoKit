@@ -47,17 +47,21 @@ struct ArgoKitButtonTest: ArgoKit.View {
                 .backgroundColor(.orange)
             
             Button(action: self.model.action!, builder: { () -> View in
-                VStack{
-                    Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
-                        .alignSelf(.start)
-                    Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
-                        .alignSelf(.start)
+                HStack{
+                    VStack{
+                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+                            .alignSelf(.start)
+                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+                            .alignSelf(.start)
+                            .onTapGesture{
+                                self.model.text = "Text===Text"
+                            }
+                    }
+                    .backgroundColor(.purple)
                 }
-                .backgroundColor(.purple)
-                .userInteractionEnabled(false)
+                .backgroundColor(.brown)
             })
             .alignItems(.center)
-            .backgroundColor(.purple)
             .margin(edge: .top, value: 10)
             
             

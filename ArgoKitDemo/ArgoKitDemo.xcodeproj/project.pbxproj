@@ -103,6 +103,7 @@
 		FAC41C52258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		FAC41C53258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		FAC41C61258B37920006AE78 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		FAE2A42F25A302A000F8ACA7 /* ImageBindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2A42E25A302A000F8ACA7 /* ImageBindTests.swift */; };
 		FAE72A582589E8D10066B2CB /* AspectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A512589E8D00066B2CB /* AspectTests.swift */; };
 		FAE72A592589E8D10066B2CB /* ListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A522589E8D10066B2CB /* ListCellTests.swift */; };
 		FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A532589E8D10066B2CB /* VStackAlignTests.swift */; };
@@ -211,6 +212,7 @@
 		FA6802F12591C5C80074B190 /* ArgoKitAnimationSpringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationSpringTest.swift; sourceTree = "<group>"; };
 		FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationTest.swift; sourceTree = "<group>"; };
 		FAB3CE892590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationBlockTest.swift; sourceTree = "<group>"; };
+		FAE2A42E25A302A000F8ACA7 /* ImageBindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBindTests.swift; sourceTree = "<group>"; };
 		FAE72A512589E8D00066B2CB /* AspectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectTests.swift; sourceTree = "<group>"; };
 		FAE72A522589E8D10066B2CB /* ListCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCellTests.swift; sourceTree = "<group>"; };
 		FAE72A532589E8D10066B2CB /* VStackAlignTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackAlignTests.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				009319182599C5CB0051238B /* TextBindTests.swift */,
+				FAE2A42E25A302A000F8ACA7 /* ImageBindTests.swift */,
 			);
 			path = DataBind;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				FA6802F22591C5C80074B190 /* ArgoKitAnimationSpringTest.swift in Sources */,
 				FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */,
 				FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */,
+				FAE2A42F25A302A000F8ACA7 /* ImageBindTests.swift in Sources */,
 				FA62433A258B4B1400D9C780 /* ArgoKitGridTest.swift in Sources */,
 				CC277FB02338E844863A2EE9 /* BuildFile in Sources */,
 				5C9C0E6111CFB46305184E8C /* BuildFile in Sources */,
