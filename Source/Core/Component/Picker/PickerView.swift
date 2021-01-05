@@ -9,20 +9,28 @@ import Foundation
 
 /// Wrapper of UIPickerView.
 ///
-///A view that uses a spinning-wheel or slot-machine metaphor to show one or more sets of values.
+/// A view that uses a spinning-wheel or slot-machine metaphor to show one or more sets of values.
 ///
 ///```
-/// PickerView(["1","2","3","4","5"]){item in
-///       Text(item)
-///  }
-///  .width(100)
-///  .height(200)
-///  .backgroundColor(.yellow)
+///         PickerView($pickerData) { item in
+///             Text(item).grow(1).textAlign(.center)
+///         }
+///         .width(100%)
+///         .height(50)
+///         .widthForComponent({ (component) -> Float in
+///             return 50
+///         })
+///         .rowHeightForComponent({ (component) -> Float in
+///             return 44
+///         })
+///         .didSelectRow({ (text, row, component) in
+///             // Did select action
+///         })
 ///```
 public struct PickerView<T>: View {
     
-    private var pickerView : UIPickerView
-    private var pNode : ArgoKitPickerNode
+    private var pickerView: UIPickerView
+    private var pNode: PickerNode<T>
     
     public var body: View {
         ViewEmpty()
@@ -38,18 +46,18 @@ public struct PickerView<T>: View {
     
     private init() {
         pickerView = UIPickerView();
-        pNode = ArgoKitPickerNode(view: pickerView)
+        pNode = PickerNode(view: pickerView)
     }
     
     /// init the PickerView
     /// - Parameters:
     ///   - data: data source of the picker view
     ///   - rowContent: View Builder for the picker view
-    public init(_ data: [T], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
+    public init(_ data: DataSource<DataList<T>>, @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
         self.init()
-        self.pNode.dataSourceHelper.dataList = [data]
+        self.pNode.dataSourceHelper.dataSourceList = data
         self.pNode.dataSourceHelper.buildNodeFunc = { item in
-            return rowContent(item as! T)
+            return rowContent(item)
         }
     }
     
@@ -57,11 +65,11 @@ public struct PickerView<T>: View {
     /// - Parameters:
     ///   - data: data source of the picker view
     ///   - rowContent: View Builder for the picker view
-    public init(_ data: [[T]], @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
+    public init(_ data: DataSource<SectionDataList<T>>, @ArgoKitViewBuilder rowContent: @escaping (T) -> View) {
         self.init()
-        self.pNode.dataSourceHelper.dataList = data
+        self.pNode.dataSourceHelper.sectionDataSourceList = data
         self.pNode.dataSourceHelper.buildNodeFunc = { item in
-            return rowContent(item as! T)
+            return rowContent(item)
         }
     }
 }
@@ -74,8 +82,8 @@ extension PickerView {
     /// - Parameter data: the new data source
     /// - Returns: self
     @discardableResult
-    public func reloadAllComponents(_ data: [[T]]?) -> Self {
-        pNode.reloadAllComponents(data)
+    public func reloadAllComponents() -> Self {
+        pNode.reloadData()
         return self
     }
     
@@ -87,8 +95,8 @@ extension PickerView {
     ///   - component: A zero-indexed number identifying a component of the picker view.
     /// - Returns: self
     @discardableResult
-    public func reloadComponent(_ data: [Any]?, inComponent component: Int) -> Self {
-        pNode.reloadComponent(data, inComponent:component)
+    public func reloadComponent(_ component: Int) -> Self {
+        pNode.reloadComponent(component)
         return self
     }
     
@@ -105,16 +113,49 @@ extension PickerView {
         return self
     }
     
+    /// set the callback called when it needs the row width to use for drawing row content.
+    /// - Parameter action: the callback
+    /// - Returns: Self
+    @discardableResult
+    public func widthForComponent(_ action: @escaping (_ component: Int) -> Float) -> Self {
+        let sel = #selector(PickerNode<T>.pickerView(_:widthForComponent:))
+        self.pNode.observeAction(String(_sel: sel)) { target, paramter in
+            if paramter?.count ?? 0 >= 1,
+               let component = paramter![0] as? Int {
+                return action(component)
+            }
+            return 0
+        }
+        return self
+    }
+    
+    /// set the callback called when it needs the row height to use for drawing row content.
+    /// - Parameter action: the callback
+    /// - Returns: Self
+    @discardableResult
+    public func rowHeightForComponent(_ action: @escaping (_ component: Int) -> Float) -> Self {
+        let sel = #selector(PickerNode<T>.pickerView(_:rowHeightForComponent:))
+        self.pNode.observeAction(String(_sel: sel)) { target, paramter in
+            if paramter?.count ?? 0 >= 1,
+               let component = paramter![0] as? Int {
+                return action(component)
+            }
+            return 0
+        }
+        return self
+    }
+    
     /// set the callback called when the row is selected
     /// - Parameter action: the callback
     /// - Returns: self
     @discardableResult
     public func didSelectRow(_ action: @escaping (_ data: T, _ row: Int, _ component: Int) -> Void) -> Self {
-        self.pNode.observeAction(pickerView) { target, paramter in
-            if paramter?.count ?? 0 >= 3 {
-                let data: T = paramter![0] as! T
-                let row: Int = paramter![1] as! Int
-                let component: Int = paramter![2] as! Int
+        let sel = #selector(PickerNode<T>.pickerView(_:didSelectRow:inComponent:))
+        self.pNode.observeAction(String(_sel: sel)) { target, paramter in
+            if paramter?.count ?? 0 >= 3,
+               let data = paramter![0] as? T,
+               let row = paramter![1] as? Int,
+               let component = paramter![2] as? Int {
                 action(data, row, component)
             }
             return nil

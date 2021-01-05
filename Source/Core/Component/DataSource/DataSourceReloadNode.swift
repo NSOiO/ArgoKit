@@ -6,7 +6,9 @@
 //
 
 import Foundation
-public protocol DataSourceReloadNode:class {
+
+public protocol DataSourceReloadNode: class {
+    
     func reloadData()
     
     func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation)
@@ -26,7 +28,17 @@ public protocol DataSourceReloadNode:class {
     func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation)
     
     func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath)
+    
+    func reloadComponent(_ component: Int)
 }
+
+extension DataSourceReloadNode {
+    
+    func reloadComponent(_ component: Int) {
+        
+    }
+}
+
 //extension DataSourceReloadNode{
 //        public func reloadData() ->Self{
 //            return self
