@@ -10,9 +10,11 @@ import ArgoKit
 // view model.
 class ArgoKitButtonTestModel {
     var btn:Button?
-    var action:()->Void = {
-        print("hahahh")
+    @Property var text:String = "titlevfdvvdfvdcdcdjkjjjsvfdvdf"
+    var action:(()->Void)?
+    init() {
     }
+   
 }
 
 // view
@@ -23,6 +25,9 @@ struct ArgoKitButtonTest: ArgoKit.View {
     @Alias var text:Text?
     init(model: ArgoKitButtonTestModel) {
         self.model = model
+        model.action = {
+            model.text = "bainhuananb"
+        }
     }
     
     var body: ArgoKit.View {
@@ -34,8 +39,8 @@ struct ArgoKitButtonTest: ArgoKit.View {
 
         }.alignItems(.start)
         VStack {
-            Text("wweweddcddcc").alias(variable: $text)
-            Button(text: "busdcsdcddcd",action: self.model.action)
+            Text(self.model.text).alias(variable: $text)
+            Button(text: "busdcsdcddcd",action: self.model.action!)
         }
         .alignItems(.start)
         .backgroundColor(.yellow)
