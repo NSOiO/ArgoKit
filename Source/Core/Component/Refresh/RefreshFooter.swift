@@ -7,11 +7,9 @@
 
 import Foundation
 open class RefreshFooter: RefreshComponent {
-    ///忽略多少scrollView的contentInset的bottom
     public var ignoredScrollViewContentInsetBottom: CGFloat = 0
     
     
-    ///是否自动刷新(默认为YES)
     public var automaticallyRefresh: Bool = true
     
     public var _triggerAutomaticallyRefreshOffPages: CGFloat = 0
@@ -25,7 +23,6 @@ open class RefreshFooter: RefreshComponent {
         }
     }
     
-    //MARK: - 创建footer方法
     public class func footerWithRefreshingBlock(_ refreshingBlock: Block) -> RefreshFooter {
         
         let cmp = self.init()
@@ -37,11 +34,9 @@ open class RefreshFooter: RefreshComponent {
 extension RefreshFooter {
     override open func prepare() {
         super.prepare()
-        // 设置自己的高度
         argokit_height = RefreshConst.footerHeight
     }
 }
-//MARK: - 公共方法
 extension RefreshFooter {
     public func endRefreshingWithNoMoreData() {
         DispatchQueue.main.async {[weak self] in
@@ -58,24 +53,19 @@ extension RefreshFooter {
 
 open class ArgoKitRefreshAutoFooter: RefreshFooter {
     
-    ///当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新)
     public var triggerAutomaticallyRefreshPercent: CGFloat = 1.0
     
-    ///是否每一次拖拽只发一次请求
     public var onlyRefreshPerDrag: Bool = false
-    /// 一个新的拖拽
     var oneNewPan: Bool = false
     
     override open var state: ArgoKitRefreshState {
         set(newState) {
-            // 状态检查
             let oldState = self.state
             if oldState == newState {
                 return
             }
             super.state = newState
             
-            // 根据状态做事情
             if newState == .Refreshing {
                 executeRefreshingCallback()
             } else if newState == .NoMoreData || state == .Idle {

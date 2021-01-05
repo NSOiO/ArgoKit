@@ -32,39 +32,39 @@ struct ArgoKitButtonTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-//        HStack{
-//            // 设置按钮title
-//            Button(text: "按钮titlevfdvvdf😸vdcdcdjkjjjsvfdvdf") {
-//            }
-//
-//
-//        }.alignItems(.start)
+        HStack{
+            // 设置按钮title
+            Button(text: "按钮titlevfdvvdf😸vdcdcdjkjjjsvfdvdf") {
+            }
+
+
+        }.alignItems(.start)
         
-//        VStack {
-//            Text(self.model.text).alias(variable: $text)
-//            Button(text: "busdc😸😸😸😸😸😸😸sdcddcd",action: self.model.action!)
-//                .backgroundColor(.orange)
-//            
-//            Button(action: self.model.action!, builder: { () -> View in
-//                HStack{
-//                    VStack{
-//                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
-//                            .alignSelf(.start)
-//                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
-//                            .alignSelf(.start)
-//                            .onTapGesture{
-//                                self.model.text = "Text===Text"
-//                            }
-//                    }
-//                    .backgroundColor(.purple)
-//                }
-//                .backgroundColor(.brown)
-//            })
-//            .alignItems(.center)
-//            .margin(edge: .top, value: 10)
+        VStack {
+            Text(self.model.text).alias(variable: $text)
+            Button(text: "busdc😸😸😸😸😸😸😸sdcddcd",action: self.model.action!)
+                .backgroundColor(.orange)
+            
+            Button(action: self.model.action!, builder: { () -> View in
+                HStack{
+                    VStack{
+                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+                            .alignSelf(.start)
+                        Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+                            .alignSelf(.start)
+                            .onTapGesture{
+                                self.model.text = "Text===Text"
+                            }
+                    }
+                    .backgroundColor(.purple)
+                }
+                .backgroundColor(.brown)
+            })
+            .alignItems(.center)
+            .margin(edge: .top, value: 10)
             
             
-            TextField(text: "HAHHAH")
+            TextField(text: "HAHHAH",placeholder: "12345678")
                 .width(300)
                 .height(50)
                 .backgroundColor(.brown)
@@ -72,16 +72,21 @@ struct ArgoKitButtonTest: ArgoKit.View {
                 .rightView { () -> View in
                     Text("RIGHT VIEW")
                         .backgroundColor(.red)
+                        .width(100)
+                        .onTapGesture {
+                            self.model.hidKeyBoard = true
+                            print("RIGHT VIEW")
+                        }
                 }
-//        }
-//        .alignItems(.start)
-//        .backgroundColor(.yellow)
+        }
+        .alignItems(.start)
+        .backgroundColor(.yellow)
         
         
         
 
         
-        /*
+   
 //        // 设置按钮title
         Button(text: "按钮title") {
             // 点击事件
@@ -175,7 +180,6 @@ struct ArgoKitButtonTest: ArgoKit.View {
         .backgroundImage(named: "chilkoottrail.jpg", for: UIControl.State.normal)
         .margin(edge: .top, value: 20)
         .alignSelf(.start)
- */
     }
 }
 
