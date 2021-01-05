@@ -34,10 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
 //        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
-//        let contentView = ListCellTests(model: ListCellTestsModel_Previews())
-//        contentView.padding(edge: .top, value: 100)
+        let contentView = ListCellTests(model: ListCellTestsModel_Previews())
+        contentView.padding(edge: .top, value: 100)
         
-        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
+//        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()
 //        let contentView = ListDemo()//TextBindTests(model: TextBindTestsModel()).padding(edge: .top, value: 200)

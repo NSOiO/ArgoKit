@@ -79,11 +79,11 @@ extension PageControl{
 
 
 extension PageControl{
-   @available(*, unavailable, message: "PageControl does not support padding!")
+   @available(*, deprecated, message: "PageControl does not support padding!")
     public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return self
     }
-   @available(*, unavailable, message: "PageControl does not support padding!")
+   @available(*, deprecated, message: "PageControl does not support padding!")
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         return self
     }

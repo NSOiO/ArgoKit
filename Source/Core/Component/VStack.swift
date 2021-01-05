@@ -17,7 +17,7 @@ import UIKit
 ///         Text("3")
 ///     }
 ///```
-public class VStack:View {
+public struct VStack:View {
   
     private var pNode:ArgoKitNode
     /// the node behind the VStack
@@ -25,7 +25,9 @@ public class VStack:View {
         pNode
     }
     public init(){
-        pNode = ArgoKitNode(viewClass:UIView.self);
+        pNode = ArgoKitNode(viewClass: UIView.self)
+        pNode.column()
+        pNode.alignItemsFlexStart()
     }
     
     /// initalize the VStack with view builder.
@@ -39,15 +41,7 @@ public class VStack:View {
     ///     }
     ///```
     public init(@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = ArgoKitNode(viewClass: UIView.self)
-        pNode.column()
-        addSubViews(builder:builder)
-    }
-    
-    //TODO:是否考虑支持兼容/混合布局
-    private init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = ArgoKitNode(view:view);
-        pNode.column();
+        self.init()
         addSubViews(builder:builder)
     }
 }

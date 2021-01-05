@@ -211,7 +211,7 @@ open class UIHostingController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
-        self.edgesForExtendedLayout = UIRectEdge.init()
+//        self.edgesForExtendedLayout = UIRectEdge.init()
         self.view.addSubview(hostView)
         hostView.frame = self.view.bounds
     }

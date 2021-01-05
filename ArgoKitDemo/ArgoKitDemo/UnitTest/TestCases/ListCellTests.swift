@@ -54,8 +54,9 @@ struct ListCellTests: ArgoKit.View {
                         .font(size: 14)
                         .backgroundColor(red: 239, green: 66, blue: 66)
                         .textAlign(.center)
-                        .cornerRadius(10)
                         .circle()
+                        .padding(top: 0, right: 10, bottom: 0, left: 10)
+                    
                 }
             }
             .margin(edge: .bottom, value: 5)
@@ -68,27 +69,31 @@ struct ListCellTests: ArgoKit.View {
             
             HStack {
                 ForEach(model.photoURLs) { item in
-                    Image(url: item, placeholder: model.placeHolder)
-                        .height(100)
+                    Image(url: nil, placeholder: nil)
+                        .width(30%)
                         .aspect(ratio: 1)
-                        .margin(edge: .right, value: 10)
                         .margin(edge: .bottom, value: 10)
                         .cornerRadius(5)
-                        .grow(1)
+                        .padding(top: 10, right: 10, bottom: 10, left: 10)
+                        .backgroundColor(.red)
+                    
                 }
             }
             .wrap(.wrap)
-            .justifyContent(.between)
+            .justifyContent(.around)
             .margin(edge: .bottom, value: 5)
+            
+            
+            
             
             Text("\(model.time)小时前发布 · \(model.distance)km")
                 .font(size: 10)
                 .textColor(.init(60, 60, 60))
                 .margin(edge: .bottom, value: 5)
                 
-            Text("")
+            EmptyView()
                 .width(100%)
-                .height(1)
+                .height(0.5)
                 .backgroundColor(.lightGray)
                 .margin(edge: .bottom, value: 5)
             
@@ -106,11 +111,11 @@ struct ListCellTests: ArgoKit.View {
                 }, imageName: "conversation", title: "\(model.conversation)")
                 
             }
+//            .alignItems(.between)
             .justifyContent(.between)
             .padding(edge: .left, value: 30)
             .padding(edge: .right, value: 30)
-                        
-        }
+        }.alignItems(.stretch)
     }
     
     private func bottomButton(action: @escaping () -> Void, imageName: @escaping @autoclosure () -> String, title: @escaping @autoclosure () -> String) -> ArgoKit.Button {
@@ -140,7 +145,7 @@ import SwiftUI
 class ListCellTestsModel_Previews:  ListCellTestsModel {
     override init() {
         super.init()
-        self.title = "   军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
+        self.title = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
         self.iconURL = URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp")
         let array = [
             URL(string: "http://img.momocdn.com/feedimage/A1/24/A124B7A3-AF51-43B2-9DB0-D56E32D1809520201211_400x400.webp")!,

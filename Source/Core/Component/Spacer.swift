@@ -30,11 +30,11 @@ public struct Spacer: View {
 }
 
 extension Spacer{
-    @available(*, unavailable, message: "Spacer does not support padding!")
+    @available(*, deprecated, message: "Spacer does not support padding!")
     public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
         return self
     }
-    @available(*, unavailable, message: "Spacer does not support padding!")
+    @available(*, deprecated, message: "Spacer does not support padding!")
     public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
         return self
     }

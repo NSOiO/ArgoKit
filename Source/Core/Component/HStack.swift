@@ -17,7 +17,7 @@ import UIKit
 ///         Text("3")
 ///     }
 ///```
-public class HStack: View {
+public struct HStack: View {
     private let pNode:ArgoKitNode
     
     /// The node behind the HStack.
@@ -27,21 +27,15 @@ public class HStack: View {
     
     /// Initializer
     public init() {
-        pNode = ArgoKitNode(viewClass:UIView.self);
+        pNode = ArgoKitNode(viewClass:UIView.self)
+        pNode.row()
+        pNode.alignItemsFlexStart()
     }
 
     /// Initializer
     /// - Parameter builder: A view builder that creates the content of this stack.
     public init(@ArgoKitViewBuilder _ builder: @escaping () -> View) {
-        pNode = ArgoKitNode(viewClass:UIView.self);
-        pNode.row();
-        addSubViews(builder:builder)
-    }
-    
-    //TODO:是否考虑支持兼容/混合布局
-    private init(_ view:UIView!,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = ArgoKitNode(view:view);
-        pNode.row();
+        self.init()
         addSubViews(builder:builder)
     }
 }

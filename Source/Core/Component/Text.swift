@@ -185,14 +185,3 @@ extension Text{
     }
 }
 
-
-extension Text{
-    @available(*, unavailable, message: "Text does not support padding!")
-    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
-        return self
-    }
-    @available(*, unavailable, message: "Text does not support padding!")
-    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
-        return self
-    }
-}
