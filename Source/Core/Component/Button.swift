@@ -30,7 +30,6 @@ public struct Button: View {
     private init() {
         pNode = ArgoKitArttibuteNode(viewClass: UIButton.self)
         pNode.row()
-//        pNode.alignItemsCenter()
     }
     
     /// Initializer
@@ -38,7 +37,8 @@ public struct Button: View {
     ///   - action: The action to perform when the user triggers the button.
     ///   - builder: A view builder that creates the content of this button.
     public init(action: @escaping () -> Void, @ArgoKitViewBuilder builder: @escaping () -> View) {
-        self.init(text: nil, action: action)
+        self.init()
+        self.addAction(action: action)
         addSubViews(builder: builder)
     }
     
@@ -48,9 +48,7 @@ public struct Button: View {
     ///   - action: The action to perform when the user triggers the button.
     public init(text: @escaping @autoclosure () -> String?, action: @escaping () -> Void) {
         self.init()
-        pNode.addAction({ (obj, paramter) -> Any? in
-            action();
-        }, for: UIControl.Event.touchUpInside)
+        self.addAction(action: action)
         
         label = Text(text()).alignSelf(.center).textAlign(.center).grow(1)
         if let node = label?.node {
@@ -59,6 +57,11 @@ public struct Button: View {
         self.bindCallback({ [self] in
             setValue(pNode, #selector(setter: UILabel.text), text())
         }, forKey: #function)
+    }
+    private func addAction(action: @escaping () -> Void){
+        pNode.addAction({ (obj, paramter) -> Any? in
+            action();
+        }, for: UIControl.Event.touchUpInside)
     }
 }
 

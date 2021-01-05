@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         _argokit_preview_config_()
         #endif
-        
         var nav: UINavigationController?
         //SwiftUI
 //        if #available(iOS 13.0.0, *) {

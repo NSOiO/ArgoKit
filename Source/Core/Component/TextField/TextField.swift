@@ -320,7 +320,6 @@ extension TextField {
     public func shouldReturn(_ action: @escaping (_ text: String?) -> Bool) -> Self {
         let sel = #selector(ArgoKitTextFieldNode.textFieldShouldReturn(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            
             if paramter?.count ?? 0 >= 1 {
                 let textField: UITextField = paramter![0] as! UITextField
                 return action(textField.text)

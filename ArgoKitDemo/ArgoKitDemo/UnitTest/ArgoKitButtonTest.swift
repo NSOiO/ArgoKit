@@ -13,6 +13,9 @@ class ArgoKitButtonTestModel {
     @Property var text:String = "titlevfdvvdfvdcdcdjkjjjsvfdvdf"
     var action:(()->Void)?
     init() {
+        action = {[self] in
+            self.text = "bainh😸😸😸😸😸uananb"
+        }
     }
    
 }
@@ -25,22 +28,42 @@ struct ArgoKitButtonTest: ArgoKit.View {
     @Alias var text:Text?
     init(model: ArgoKitButtonTestModel) {
         self.model = model
-        model.action = {
-            model.text = "bainhuananb"
-        }
     }
     
     var body: ArgoKit.View {
-        HStack{
-            // 设置按钮title
-            Button(text: "按钮titlevfdvvdfvdcdcdjkjjjsvfdvdf") {
-            }
-
-
-        }.alignItems(.start)
+//        HStack{
+//            // 设置按钮title
+//            Button(text: "按钮titlevfdvvdf😸vdcdcdjkjjjsvfdvdf") {
+//            }
+//
+//
+//        }.alignItems(.start)
+        
         VStack {
             Text(self.model.text).alias(variable: $text)
-            Button(text: "busdcsdcddcd",action: self.model.action!)
+            Button(text: "busdc😸😸😸😸😸😸😸sdcddcd",action: self.model.action!)
+                .backgroundColor(.orange)
+            
+            Button(action: self.model.action!, builder: { () -> View in
+                HStack{
+                    Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+                        .alignSelf(.start)
+                }
+                .backgroundColor(.purple)
+                .userInteractionEnabled(false)
+               
+                
+            })
+            .alignItems(.center)
+            .backgroundColor(.purple)
+            .margin(edge: .top, value: 10)
+            
+            
+            TextField(text: "HAHHAH")
+                .width(300)
+                .height(50)
+                .backgroundColor(.brown)
+                .userInteractionEnabled(true)
         }
         .alignItems(.start)
         .backgroundColor(.yellow)
@@ -49,7 +72,7 @@ struct ArgoKitButtonTest: ArgoKit.View {
         
 
         
-        
+        /*
 //        // 设置按钮title
         Button(text: "按钮title") {
             // 点击事件
@@ -143,6 +166,7 @@ struct ArgoKitButtonTest: ArgoKit.View {
         .backgroundImage(named: "chilkoottrail.jpg", for: UIControl.State.normal)
         .margin(edge: .top, value: 20)
         .alignSelf(.start)
+ */
     }
 }
 

@@ -61,7 +61,7 @@ extension Image {
     /// - Parameter value: A Boolean value that determines whether user events are ignored and removed from the event queue.
     /// - Returns: self
     @discardableResult
-    public func isUserInteractionEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
+    public func userInteractionEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIImageView.isUserInteractionEnabled),value())
 		}, forKey: #function)

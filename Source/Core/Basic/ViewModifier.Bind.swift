@@ -13,7 +13,7 @@ extension View {
     /// - Parameter value: A Boolean value that determines whether user events are ignored and removed from the event queue.
     /// - Returns: Self
     @discardableResult
-    public func isUserInteractionEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
+    public func userInteractionEnabled(_ value: @escaping @autoclosure () -> Bool) -> Self {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value())
 		}, forKey: #function)
@@ -95,27 +95,6 @@ extension View {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIView.isHidden),value());
 		}, forKey: #function)
-    }
-    
-    @available(*, unavailable, renamed: "gone(_:)")
-    @discardableResult
-    public func display(_ value: @escaping @autoclosure () -> Bool) -> Self {
-        return self.bindCallback({
-            let display_ = !value()
-            addAttribute(#selector(setter:UIView.isHidden),display_)
-            if let enable = self.node?.isEnabled {
-                if !enable && !display_ {
-                    if let node =  self.node?.root{
-                        self.node?.isEnabled = !display_
-                        ArgoKitReusedLayoutHelper.appLayout(node)
-                    }
-                }else{
-                    self.node?.isEnabled = !display_
-                }
-            }else{
-                self.node?.isEnabled = !display_
-            }
-        }, forKey: #function)
     }
     
     /// Sets a Boolean value that determines whether the view is hidden and styling properties should be applied

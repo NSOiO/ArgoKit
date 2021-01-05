@@ -109,6 +109,13 @@ public class UIHostingView: UIView {
         }
     }
     
+//    @available(iOS 11.0, *)
+//    public override func safeAreaInsetsDidChange() {
+//        let insets = self.safeAreaInsets
+//        print("insets:\(insets)")
+//        super.safeAreaInsetsDidChange()
+//    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -149,7 +156,7 @@ open class UIHostingController: UIViewController {
         hostView = UIHostingView(content:rootView,safeArea: safeArea)
         super.init(nibName: nil, bundle: nil)
     }
-    
+     
     /// Initializer
     /// - Parameters:
     ///   - aDecoder: An unarchiver object.
@@ -163,7 +170,9 @@ open class UIHostingController: UIViewController {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+//    open override var prefersStatusBarHidden: Bool {
+//        true
+//    }
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
@@ -185,4 +194,10 @@ open class UIHostingController: UIViewController {
         hostView.frame = self.view.bounds
         super.viewDidLayoutSubviews()
     }
+//    @available(iOS 11.0, *)
+//    open override func viewSafeAreaInsetsDidChange() {
+//        let insets = self.view.safeAreaInsets
+//        print("insets:\(insets)")
+//        super.viewSafeAreaInsetsDidChange()
+//    }
 }
