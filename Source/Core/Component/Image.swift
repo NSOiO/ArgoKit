@@ -67,22 +67,26 @@ public struct Image : View {
     /// - Parameters:
     ///   - url: The url of a image.
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    public init(url: URL?, placeholder: String?) {
+    public init(url: @escaping @autoclosure () -> URL?, placeholder: @escaping @autoclosure () -> String?) {
         self.init(image: nil, highlightedImage: nil)
-        pNode.image(url: url, placeholder: placeholder)
+        self.bindCallback({ [self] in
+            pNode.image(url: url(), placeholder: placeholder())
+        }, forKey: #function)
     }
     
     /// Initializer
     /// - Parameters:
     ///   - urlString: The string represent a valid URL For a image
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    public init(urlString: String?, placeholder: String?) {
+    public init(urlString: @escaping @autoclosure () -> String?, placeholder: @escaping @autoclosure () -> String?) {
         self.init(image: nil, highlightedImage: nil)
         var url:URL? = nil
-        if let urlString = urlString {
-            url = URL(string: urlString)
-        }
-        pNode.image(url: url, placeholder: placeholder)
+        self.bindCallback({ [self] in
+            if let urlString = urlString() {
+                url = URL(string: urlString)
+            }
+            pNode.image(url: url, placeholder: placeholder())
+        }, forKey: #function)
     }
     
     /// Initializer
