@@ -11,10 +11,12 @@ import ArgoKit
 class ArgoKitButtonTestModel {
     var btn:Button?
     @Property var text:String = "titlevfdvvdfvdcdcdjkjjjsvfdvdf"
+    @Property var showKeyBoard:Bool = false
     var action:(()->Void)?
     init() {
         action = {[self] in
             self.text = "bainh😸😸😸😸😸uananb"
+            self.showKeyBoard = true
         }
     }
    
@@ -40,30 +42,30 @@ struct ArgoKitButtonTest: ArgoKit.View {
 //        }.alignItems(.start)
         
         VStack {
-            Text(self.model.text).alias(variable: $text)
+            Text(self.model.text).alias(variable: $text).showKeyBoard(self.model.showKeyBoard)
             Button(text: "busdc😸😸😸😸😸😸😸sdcddcd",action: self.model.action!)
                 .backgroundColor(.orange)
             
             Button(action: self.model.action!, builder: { () -> View in
-                HStack{
+                VStack{
+                    Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
+                        .alignSelf(.start)
                     Text(self.model.text).alias(variable: $text).backgroundColor(.orange)
                         .alignSelf(.start)
                 }
                 .backgroundColor(.purple)
                 .userInteractionEnabled(false)
-               
-                
             })
             .alignItems(.center)
             .backgroundColor(.purple)
             .margin(edge: .top, value: 10)
             
             
-            TextField(text: "HAHHAH")
-                .width(300)
-                .height(50)
-                .backgroundColor(.brown)
-                .userInteractionEnabled(true)
+//            TextField(text: "HAHHAH")
+//                .width(300)
+//                .height(50)
+//                .backgroundColor(.brown)
+//                .userInteractionEnabled(true)
         }
         .alignItems(.start)
         .backgroundColor(.yellow)

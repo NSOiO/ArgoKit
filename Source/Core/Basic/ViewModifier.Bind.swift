@@ -341,4 +341,22 @@ extension View {
 		}, forKey: #function)
     }
     
+    /// Removes blur effect.
+    /// - Returns: Self
+    @discardableResult
+    public func showKeyBoard(_ value:@escaping @autoclosure () -> Bool) -> Self {
+        return self.bindCallback({ [self] in
+            var ret:Bool? = true
+            self.node?.view?.isUserInteractionEnabled = true
+            if value() == true {
+                ret = self.node?.view?.becomeFirstResponder()
+            }else{
+                ret = self.node?.view?.resignFirstResponder()
+            }
+            print("showKeyBoard= \(ret)")
+        }, forKey: #function)
+    }
+    
+
+    
 }

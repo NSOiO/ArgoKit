@@ -59,9 +59,10 @@ public struct Button: View {
         }, forKey: #function)
     }
     private func addAction(action: @escaping () -> Void){
-        pNode.addAction({ (obj, paramter) -> Any? in
-            action();
-        }, for: UIControl.Event.touchUpInside)
+        self.onTapGesture(action: action)
+//        pNode.addAction({ (obj, paramter) -> Any? in
+//            action();
+//        }, for: UIControl.Event.touchUpInside)
     }
 }
 

@@ -65,9 +65,12 @@ public struct HostView: View {
 ///
 public class UIHostingView: UIView {
     private var rootView: HostView?
-    private var safeArea: Bool? = false
+    private var useSafeArea: Bool? = false
     private var oldFrame = CGRect.zero
-    
+    public var useSafeAreaTop = false
+    public var useSafeAreaLeft = false
+    public var useSafeAreaBottom = false
+    public var useSafeAreaRight = false
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
             oldFrame = self.frame
@@ -80,14 +83,22 @@ public class UIHostingView: UIView {
                 node.frame = frame
                 node.resetOrigin = false
                 
-                if self.safeArea == true {
+                if self.useSafeArea == true {
                     var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                     if #available(iOS 11.0, *){
                         insets = self.safeAreaInsets
-                        node.paddingLeft(point: insets.left)
-                        node.paddingRight(point: insets.right)
-                        node.paddingTop(point: insets.top)
-                        node.paddingBottom(point: insets.bottom)
+                        if self.useSafeAreaTop{
+                            node.paddingTop(point: insets.top)
+                        }
+                        if self.useSafeAreaLeft{
+                            node.paddingLeft(point: insets.left)
+                        }
+                        if self.useSafeAreaBottom{
+                            node.paddingBottom(point: insets.bottom)
+                        }
+                        if self.useSafeAreaRight{
+                            node.paddingRight(point: insets.right)
+                        }
                     }
                 }
                 node.applyLayout()
@@ -101,20 +112,27 @@ public class UIHostingView: UIView {
     ///   - content: The root view of the ArgoKit view hierarchy that you want to manage using this hosting controller.
     ///   - frame: The frame rectangle for the new view object.
     ///   - safeArea: true if you want to add the insets that you use to determine the safe area for this view.
-    public init(content: View, frame: CGRect = CGRect.zero, safeArea: Bool = false){
+    public init(content: View, frame: CGRect = CGRect.zero, useSafeArea: Bool = false){
         super.init(frame: frame)
-        self.safeArea = safeArea
+        self.useSafeArea = useSafeArea
+        if useSafeArea {
+            useSafeAreaTop = true
+            useSafeAreaLeft = true
+            useSafeAreaBottom = true
+            useSafeAreaRight = true
+            
+        }
         rootView = HostView(self) {
             content.grow(1.0)
         }
     }
     
-//    @available(iOS 11.0, *)
-//    public override func safeAreaInsetsDidChange() {
-//        let insets = self.safeAreaInsets
-//        print("insets:\(insets)")
-//        super.safeAreaInsetsDidChange()
-//    }
+    @available(iOS 11.0, *)
+    public override func safeAreaInsetsDidChange() {
+        let insets = self.safeAreaInsets
+        print("insets11:\(insets)")
+        super.safeAreaInsetsDidChange()
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -152,8 +170,8 @@ open class UIHostingController: UIViewController {
     /// - Parameters:
     ///   - rootView: The root view of the ArgoKit view hierarchy that you want to manage using the hosting view controller.
     ///   - safeArea: ture if you want to add the insets that you use to determine the safe area for this view.
-    public init(rootView: View, safeArea: Bool = false) {
-        hostView = UIHostingView(content:rootView,safeArea: safeArea)
+    public init(rootView: View, useSafeArea: Bool = false) {
+        hostView = UIHostingView(content:rootView,useSafeArea: useSafeArea)
         super.init(nibName: nil, bundle: nil)
     }
      
@@ -162,17 +180,34 @@ open class UIHostingController: UIViewController {
     ///   - aDecoder: An unarchiver object.
     ///   - rootView: The root view of the ArgoKit view hierarchy that you want to manage using the hosting view controller.
     ///   - safeArea: ture if you want to add the insets that you use to determine the safe area for this view.
-    public init?(coder aDecoder: NSCoder, rootView: View, safeArea: Bool = false) {
-        hostView = UIHostingView(content:rootView,safeArea: safeArea)
+    public init?(coder aDecoder: NSCoder, rootView: View, useSafeArea: Bool = false) {
+        hostView = UIHostingView(content:rootView,useSafeArea: useSafeArea)
         super.init(coder: aDecoder)
     }
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    open override var prefersStatusBarHidden: Bool {
-//        true
-//    }
+    public var useSafeAreaTop:Bool?{
+        didSet{
+            hostView.useSafeAreaTop = useSafeAreaTop ?? false
+        }
+    }
+    public var useSafeAreaLeft :Bool?{
+        didSet{
+            hostView.useSafeAreaLeft = useSafeAreaLeft ?? false
+        }
+    }
+    public var useSafeAreaBottom :Bool?{
+        didSet{
+            hostView.useSafeAreaBottom = useSafeAreaBottom ?? false
+        }
+    }
+    public var useSafeAreaRight :Bool?{
+        didSet{
+            hostView.useSafeAreaRight = useSafeAreaRight ?? false
+        }
+    }
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white;
@@ -194,10 +229,4 @@ open class UIHostingController: UIViewController {
         hostView.frame = self.view.bounds
         super.viewDidLayoutSubviews()
     }
-//    @available(iOS 11.0, *)
-//    open override func viewSafeAreaInsetsDidChange() {
-//        let insets = self.view.safeAreaInsets
-//        print("insets:\(insets)")
-//        super.viewSafeAreaInsetsDidChange()
-//    }
 }

@@ -214,4 +214,12 @@ extension View{
         self.node?.blurEffectOperation?.removeBlurEffect()
         return self
     }
+    
+    /// hid key board
+    /// - Returns: Self
+    @discardableResult
+    public func hidKeyBoard() -> Self {
+        self.node?.view?.resignFirstResponder()
+        return self
+    }
 }
