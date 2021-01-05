@@ -17,6 +17,8 @@ class TextBindTestsModel {
     @Alias var titleText: Text?
     
     var count: Int = 0
+    
+    @Property var icon = "star.fill"
 }
 
 // view
@@ -42,6 +44,15 @@ struct TextBindTests: ArgoKit.View {
                 .backgroundColor(.lightGray)
                 .alias(variable: model.$titleText)
 
+            Image().image(UIImage(named: model.icon))
+                .onTapGesture {
+                    if model.icon == "star" {
+                        model.icon = "star.fill"
+                    } else {
+                        model.icon = "star"
+                    }
+                }
+                .size(width: 50, height: 50)
             
             Button {
                 model.count += 1
@@ -60,7 +71,6 @@ struct TextBindTests: ArgoKit.View {
             }
             .backgroundColor(.yellow)
             .alignItems(.start)
-            
         }
         .alignItems(.start)
     }

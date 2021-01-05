@@ -7,6 +7,25 @@
 
 import Foundation
 
+class ArgoKitCellNode: ArgoKitNode {
+    
+    var cellSourceData: Any?
+    var isPreviewing:Bool = false
+    var frameObserber: NSKeyValueObservation?
+
+    public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
+        removeObservingFrameChanged()
+        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
+    }
+    
+    public func removeObservingFrameChanged() {
+        if frameObserber != nil {
+            frameObserber?.invalidate()
+            frameObserber = nil
+        }
+    }
+}
+
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     lazy var registedReuseIdSet = Set<String>()

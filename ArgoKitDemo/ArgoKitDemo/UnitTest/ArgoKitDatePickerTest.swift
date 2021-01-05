@@ -16,6 +16,10 @@ class ArgoKitDatePickerTestModel {
 struct ArgoKitDatePickerTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
+    
+    @DataSource var pickerData = [["1","2","3","4","5"],["1","2","3","4","5"],["1","2","3","4","5"]]
+    @Alias var label: Text?
+    
     private var model: ArgoKitDatePickerTestModel
     init(model: ArgoKitDatePickerTestModel) {
         self.model = model
@@ -29,11 +33,27 @@ struct ArgoKitDatePickerTest: ArgoKit.View {
         .width(300)
         .height(100)
         
-        Text("11111")
-        PickerView(["1","2","3","4","5"]){item in
-            Text(item)
-        }.width(100)
+        Text("11111").alias(variable: $label)
+        PickerView($pickerData) { item in
+            Text(item).backgroundColor(.red).grow(1).textAlign(.center)
+        }.width(100%)
         .height(200)
+        .widthForComponent({ (component) -> Float in
+            switch component {
+            case 1:
+                return 50
+            case 2:
+                return 60
+            default:
+                return 40
+            }
+        })
+        .rowHeightForComponent({ (component) -> Float in
+            return 44
+        })
+        .didSelectRow({ (text, row, component) in
+            self.label?.text("\(text) \(row) \(component)")
+        })
         .backgroundColor(.yellow)
         
         

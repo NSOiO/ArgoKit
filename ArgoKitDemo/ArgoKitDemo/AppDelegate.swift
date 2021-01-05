@@ -33,7 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
-        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
+//        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+        let contentView = ListCellTests(model: ListCellTestsModel_Previews())
+        contentView.padding(edge: .top, value: 100)
+        
 //        let contentView = LandmarkList(model: UserData())
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()

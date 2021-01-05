@@ -9,8 +9,12 @@ import ArgoKit
 
 
 // view model.
-class ListCellTestsModel {
+class ListCellTestsModel: ArgoKitIdentifiable {
+    var reuseIdentifier: String = "cell"
+    
     var title: String = ""
+    var userName = "Emily"
+    var userAge = 25
     var placeHolder = "turtlerock"
     var iconURL: URL? = nil
     var photoURLs: [URL] = []
@@ -18,25 +22,10 @@ class ListCellTestsModel {
     var distance: Float = 0.1
     
     var likes: Int = 0
+    @Property var isLiked: Bool = false
     var comments: Int = 0
     var conversation: String = "对话"
 }
-
-//struct ListCellButton: ArgoKit.View {
-//    var node: ArgoKitNode? = ArgoKitNode()
-//    var body: ArgoKit.View {
-//        Button {
-//
-//        } builder: {
-//            Image(model.placeHolder)
-//                .height(24)
-//                .aspect(ratio: 1)
-//            Text("\(model.likes)")
-//                .font(size: 10)
-//                .textColor(.init(60, 60, 60))
-//        }
-//    }
-//}
 
 // view
 struct ListCellTests: ArgoKit.View {
@@ -47,23 +36,6 @@ struct ListCellTests: ArgoKit.View {
         self.model = model
     }
     
-    private func createButton(action: @escaping () -> Void, title: String) -> ArgoKit.Button {
-        Button(action: action) {
-            HStack {
-                Image(model.placeHolder)
-                    .height(24)
-                    .width(24)
-                
-                Text(title)
-                    .font(size: 10)
-                    .textColor(.init(60, 60, 60))
-                    .backgroundColor(.blue)
-            }
-            .alignItems(.center)
-            .backgroundColor(.red)
-        }
-    }
-    
     var body: ArgoKit.View {
         VStack {
             // icon
@@ -72,8 +44,20 @@ struct ListCellTests: ArgoKit.View {
                     .width(40)
                     .height(40)
                     .circle()
+                    .margin(edge: .right, value: 10)
+                
+                VStack {
+                    Text(model.userName)
+                        .font(size: 16)
+                    
+                    Text("\(model.userAge)")
+                        .font(size: 14)
+                        .backgroundColor(red: 239, green: 66, blue: 66)
+                        .textAlign(.center)
+                        .cornerRadius(10)
+                        .circle()
+                }
             }
-            .backgroundColor(.lightGray)
             .margin(edge: .bottom, value: 5)
             
             // Title
@@ -109,22 +93,39 @@ struct ListCellTests: ArgoKit.View {
                 .margin(edge: .bottom, value: 5)
             
             HStack {
-                createButton(action: {
-                    
-                }, title: "\(model.likes)")
+                bottomButton(action: {
+                    model.isLiked = !model.isLiked
+                }, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
                 
-                createButton(action: {
+                bottomButton(action: {
                     
-                }, title: "\(model.comments)")
+                }, imageName: "conversation", title: "\(model.comments)")
                 
-                createButton(action: {
+                bottomButton(action: {
                     
-                }, title: "\(model.conversation)")
+                }, imageName: "conversation", title: "\(model.conversation)")
+                
             }
             .justifyContent(.between)
             .padding(edge: .left, value: 30)
             .padding(edge: .right, value: 30)
                         
+        }
+    }
+    
+    private func bottomButton(action: @escaping () -> Void, imageName: @escaping @autoclosure () -> String, title: @escaping @autoclosure () -> String) -> ArgoKit.Button {
+        Button(action: action) {
+            HStack {
+                Image()
+                    .image(UIImage(named: imageName()))
+                    .height(24)
+                    .width(24)
+                
+                Text(title())
+                    .font(size: 10)
+                    .textColor(.init(60, 60, 60))
+            }
+            .alignItems(.center)
         }
     }
 }
