@@ -22,25 +22,10 @@ class ListCellTestsModel: ArgoKitIdentifiable {
     var distance: Float = 0.1
     
     var likes: Int = 0
+    @Property var isLiked: Bool = false
     var comments: Int = 0
     var conversation: String = "对话"
 }
-
-//struct ListCellButton: ArgoKit.View {
-//    var node: ArgoKitNode? = ArgoKitNode()
-//    var body: ArgoKit.View {
-//        Button {
-//
-//        } builder: {
-//            Image(model.placeHolder)
-//                .height(24)
-//                .aspect(ratio: 1)
-//            Text("\(model.likes)")
-//                .font(size: 10)
-//                .textColor(.init(60, 60, 60))
-//        }
-//    }
-//}
 
 // view
 struct ListCellTests: ArgoKit.View {
@@ -109,8 +94,8 @@ struct ListCellTests: ArgoKit.View {
             
             HStack {
                 bottomButton(action: {
-                    
-                }, imageName: "like", title: "\(model.likes)")
+                    model.isLiked = !model.isLiked
+                }, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
                 
                 bottomButton(action: {
                     
@@ -119,6 +104,7 @@ struct ListCellTests: ArgoKit.View {
                 bottomButton(action: {
                     
                 }, imageName: "conversation", title: "\(model.conversation)")
+                
             }
             .justifyContent(.between)
             .padding(edge: .left, value: 30)
@@ -127,14 +113,15 @@ struct ListCellTests: ArgoKit.View {
         }
     }
     
-    private func bottomButton(action: @escaping () -> Void, imageName: String, title: String) -> ArgoKit.Button {
+    private func bottomButton(action: @escaping () -> Void, imageName: @escaping @autoclosure () -> String, title: @escaping @autoclosure () -> String) -> ArgoKit.Button {
         Button(action: action) {
             HStack {
-                Image(imageName)
+                Image()
+                    .image(UIImage(named: imageName()))
                     .height(24)
                     .width(24)
                 
-                Text(title)
+                Text(title())
                     .font(size: 10)
                     .textColor(.init(60, 60, 60))
             }
