@@ -31,9 +31,7 @@ struct ButtonTests: ArgoKit.View {
     var body: ArgoKit.View {
         HStack {
             bottomButton(action: {
-                    model.isLiked = !model.isLiked
-//                model.likeButton?.backgroundColor(.red)
-                
+                model.isLiked = !model.isLiked                
             }, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
             .alias(variable: model.$likeButton)
             .margin(edge: .right, value: 10)
@@ -51,7 +49,7 @@ struct ButtonTests: ArgoKit.View {
             .margin(edge: .right, value: 10)
 
             Button(text: "test button") {
-                model.likeButton?.backgroundColor(.red)
+                model.isLiked = !model.isLiked
             }
         }
     }
