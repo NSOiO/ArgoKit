@@ -13,20 +13,13 @@ class ArgoKitImageNode: ArgoKitNode {
         return temp_size
     }
     
-    
     public func image(url: URL?, placeholder: String?) {
-        if url == nil {
-            guard let image = placeholder != nil ? UIImage(named: placeholder!) : nil else {
-                return
-            }
+        let image = placeholder != nil ? UIImage(named: placeholder!) : nil
+        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+        
+        ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
             ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-            return
-        }
-        ArgoKitInstance.imageLoader()?.loadImage(url: url, placeHolder: placeholder) { image in
-            if let img = image {
-                ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), img)
-            }
-        } failure: {
+        } failure: { _ in
             // 图像加载失败
         }
     }
