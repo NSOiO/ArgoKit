@@ -16,7 +16,7 @@ class ArgoKitListTestModel :ArgoKitIdentifiable{
     var timeLabel:String?
     var unreadCount:String?
 
-    var textCom:Text?
+    @Alias var textCom:Text?
     var hidden:Bool = false
 }
 
@@ -29,7 +29,7 @@ class ArgoKitListCellModel :ArgoKitIdentifiable{
     var timeLabel:String?
     var unreadCount:String?
 
-    var textCom:Text?
+    @Alias var textCom:Text?
     var hidden:Bool = false
 }
 // view
@@ -69,8 +69,7 @@ struct ArgoKitListTest: ArgoKit.View {
             Text(data.sessionName)
                 .lineLimit(2)
                 .width(150)
-                .alias(variable: &data.textCom)
-            
+                .alias(variable: data.$textCom)
             
             Image("icybay.jpg")
                 .aspect(ratio: 1)

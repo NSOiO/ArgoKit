@@ -78,13 +78,14 @@ extension View {
 }
 
 extension View {
-    
+    /*
     @discardableResult
     @available(*, deprecated, message: "alias(variable ptr:inout) had been deprecated")
     public func alias<T>(variable ptr:inout T?) -> Self where T: View{
         ptr = self as? T
         return self
     }
+    */
     
     /// Assigns the view to the specified variable or property.
     /// - Parameter variable: The specified variable or property that is  assigned with the view.
