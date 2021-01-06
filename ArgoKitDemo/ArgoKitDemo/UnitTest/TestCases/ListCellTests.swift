@@ -21,7 +21,7 @@ class ListCellTestsModel: ArgoKitIdentifiable {
     var time: Int = 1
     var distance: Float = 0.1
     
-    var likes: Int = 0
+    @Property var likes: Int = 0
     @Property var isLiked: Bool = false
     var comments: Int = 0
     var conversation: String = "对话"
@@ -69,14 +69,12 @@ struct ListCellTests: ArgoKit.View {
             
             HStack {
                 ForEach(model.photoURLs) { item in
-                    Image(url: nil, placeholder: nil)
+                    Image(url: item, placeholder: model.placeHolder)
                         .width(30%)
                         .aspect(ratio: 1)
                         .margin(edge: .bottom, value: 10)
                         .cornerRadius(5)
-                        .padding(top: 10, right: 10, bottom: 10, left: 10)
-                        .backgroundColor(.red)
-                    
+//                        .grow(1)
                 }
             }
             .wrap(.wrap)
@@ -101,7 +99,7 @@ struct ListCellTests: ArgoKit.View {
                 bottomButton(action: {
                     model.isLiked = !model.isLiked
                 }, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
-                
+              
                 bottomButton(action: {
                     
                 }, imageName: "conversation", title: "\(model.comments)")
@@ -111,11 +109,11 @@ struct ListCellTests: ArgoKit.View {
                 }, imageName: "conversation", title: "\(model.conversation)")
                 
             }
-//            .alignItems(.between)
+            .width(100%)
             .justifyContent(.between)
             .padding(edge: .left, value: 30)
             .padding(edge: .right, value: 30)
-        }.alignItems(.stretch)
+        }
     }
     
     private func bottomButton(action: @escaping () -> Void, imageName: @escaping @autoclosure () -> String, title: @escaping @autoclosure () -> String) -> ArgoKit.Button {

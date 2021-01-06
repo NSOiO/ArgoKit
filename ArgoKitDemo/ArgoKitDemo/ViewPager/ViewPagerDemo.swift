@@ -63,7 +63,7 @@ struct ViewPage1 : ArgoKit.View {
     init() {
         for index in 1...10{
             let item = ViewPageCellItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
-            items.append(item)
+            $items.append(data:item)
             if index % 2 == 0 {
                 item.bgColor = UIColor.gray
             }else {

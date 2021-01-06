@@ -202,11 +202,11 @@ class GridNode<D>: ArgoKitScrollViewNode,
     }
 
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
-        var items = self.dataSourceHelper.sectionDataSourceList?.wrappedValue[sourceIndexPath.section]
+        var items = self.dataSourceHelper.sectionDataSourceList?.dataSource[sourceIndexPath.section]
         let temp = items?.remove(at: sourceIndexPath.item)
         items?.insert((temp)!, at: destinationIndexPath.item)
         if let items = items{
-            self.dataSourceHelper.sectionDataSourceList?.wrappedValue[sourceIndexPath.section] = items
+            self.dataSourceHelper.sectionDataSourceList?.dataSource[sourceIndexPath.section] = items
         }
 
     }

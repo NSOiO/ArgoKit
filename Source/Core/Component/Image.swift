@@ -186,26 +186,13 @@ extension Image {
     }
 }
 
-//extension Image{
-//   @available(*, deprecated, message: "Image does not support padding!")
-//    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
-//        return self
-//    }
-//   @available(*, deprecated, message: "Image does not support padding!")
-//    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
-//        return self
-//    }
-//    
-//    @available(*, deprecated, message: "Image does not support padding!")
-//    @discardableResult
-//    public func padding(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
-//        return self
-//    }
-//    
-//
-//    @available(*, deprecated, message: "Image does not support padding!")
-//    @discardableResult
-//    public func padding(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
-//        return self
-//    }
-//}
+extension Image{
+   @available(*, deprecated, message: "Image does not support padding!")
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return self
+    }
+   @available(*, deprecated, message: "Image does not support padding!")
+    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
+        return self
+    }
+}

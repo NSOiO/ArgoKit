@@ -190,7 +190,7 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode,
             let count = self.dataSourceHelper.numberOfRows(section: 0)
             var item:D? = nil
             if count > toIndex {
-                item = self.dataSourceHelper.dataSourceList?.wrappedValue[toIndex]
+                item = self.dataSourceHelper.dataSourceList?.getDataSource()[toIndex]
             }
             changedFunc(item, toIndex)
         }

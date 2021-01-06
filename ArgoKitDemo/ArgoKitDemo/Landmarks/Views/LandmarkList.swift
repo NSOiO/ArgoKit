@@ -46,8 +46,7 @@ struct LandmarkList: ArgoKit.View {
                 LandmarkRow(model: landmark)
                     .onTapGesture {
                     self.datas.append(contentsOf: model.landmarks)
-//                    list?.reloadData()
-                     $datas.reloadData()
+                    $datas.apply()
                 }
             }
          

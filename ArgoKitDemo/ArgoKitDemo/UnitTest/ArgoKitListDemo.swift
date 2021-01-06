@@ -209,16 +209,17 @@ struct ListDemo:ArgoKit.View{
     typealias View = ArgoKit.View
     @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
+        
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<10{
+        for index in 0..<4{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
-            items.append(item)
+            $items.append(data:item)
         }
     }
     
@@ -243,7 +244,22 @@ struct ListDemo:ArgoKit.View{
         .trailingSwipeActions({ (data, indexPath) -> ListSwipeActionsConfiguration? in
             let action = UIContextualAction(style: UIContextualAction.Style.normal, title: "delete") { (action, view, block) in
                 print("data\(data)")
-                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
+                
+//                $items.delete(at: indexPath).apply(with: UITableView.RowAnimation.top)
+//
+//                $items.delete().apply().insert().apply(.Fade) // deleteRow
+                
+//                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
+                let ip = IndexPath(row: 1, section: 0)
+                $items.insert(data: items.first!, at: ip).apply(with: .bottom)
+                
+                
+                //1. guai
+                //2. data, IndexPath -
+                
+                //1. insert /insert / reload
+                
+                
             }
             return ListSwipeActionsConfiguration(actions: [action])
         })
