@@ -58,7 +58,12 @@ struct ViewPageCell: ArgoKit.View {
 struct ViewPage1 : ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     @DataSource var items:[ViewPageCellItem] = [ViewPageCellItem]()
+    
+    var page: ArgoKit.ViewPage<ViewPageCellItem>?
+    var tab: TabSegment?
+    
     init() {
+        
         for index in 1...10{
             let item = ViewPageCellItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             items.append(item)
@@ -67,28 +72,27 @@ struct ViewPage1 : ArgoKit.View {
             }else {
                 item.bgColor = UIColor.blue
             }
-            
             item.text = "test>>>>>>>>" + String(index) + ""
+        }
+        
+        page = ArgoKit.ViewPage(data: $items) { item in
+            ViewPageCell(it: item)
+        }
+        tab = TabSegment(["A", "B", "C", "D", "E", "F", "G","H","I","J"]) {
+            Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
         }
     }
     
-    let tab = TabSegment(["A", "B", "C", "D", "E", "F", "G","H","I","J"]) {
-        Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
-    }
-    
     var body: ArgoKit.View {
-        
-        tab
+        tab!
             .margin(top: 100, right: 0, bottom: 0, left: 0)
             .backgroundColor(.yellow)
             .clickedCallback { (index, anim) in
-                
+                page?.scrollToPage(index: index)
             }
         
         ArgoKit.HStack {
-            ArgoKit.ViewPage(data: $items) { item in
-                ViewPageCell(it: item)
-            }
+            page!
             .grow(1)
             .height(300)
             .backgroundColor(UIColor.orange)
@@ -100,8 +104,8 @@ struct ViewPage1 : ArgoKit.View {
 //                if Float(percent) >= Float(from) {
 //                    value = 1
 //                }
-                NSLog("percent: %f == from:%d == to:%d", value, from, to)
-                self.tab.scroll(toIndex: to, progress: Float(value))
+                NSLog("percent: %f === value: %f == from:%d == to:%d", percent, value, from, to)
+                tab?.scroll(toIndex: to, progress: Float(value))
             }
             .onChangeSelected { (item, to) in
                 NSLog(">>> %d", to)

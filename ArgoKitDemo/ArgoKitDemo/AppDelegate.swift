@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()
 //        let contentView = ListDemo()//TextBindTests(model: TextBindTestsModel()).padding(edge: .top, value: 200)
-        let vc = UIHostingController(rootView: contentView,useSafeArea: true)
-//        let vc = ViewController()
+//        let vc = UIHostingController(rootView: contentView,useSafeArea: true)
+        let vc = ViewPagerController()
         nav = UINavigationController(rootViewController: vc)
         
         let window = UIWindow.init(frame: UIScreen.main.bounds)
