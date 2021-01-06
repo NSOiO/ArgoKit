@@ -25,9 +25,9 @@ PODS:
   - ArgoKitPreview (1.0.8):
     - ArgoKit
     - ArgoKitComponent
-  - SDWebImage (5.10.0):
-    - SDWebImage/Core (= 5.10.0)
-  - SDWebImage/Core (5.10.0)
+  - SDWebImage (5.10.2):
+    - SDWebImage/Core (= 5.10.2)
+  - SDWebImage/Core (5.10.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -54,7 +54,7 @@ SPEC CHECKSUMS:
   ArgoKit: 9051ef3585ab0eadc025d66740bbc801937fdda2
   ArgoKitComponent: c0cb9f7619b921fa50d6cbffcb26d5e86ce52353
   ArgoKitPreview: 8769d931c05c787887d2c3ebd7dc70be96eeb729
-  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+  SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
 PODFILE CHECKSUM: a01b97cff3acf3a4d0e6c5e5a6258b3c18d9af6b

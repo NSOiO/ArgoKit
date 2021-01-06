@@ -99,15 +99,15 @@ struct ViewPage1 : ArgoKit.View {
             .reuseEnable(enable: false)
             .scrollToPage(index: 2)
 //            .scrollEnable(enable: false)
-            .setTabScrollingListener { (percent, from, to) in
-                let value = Float(percent) - Float(from)
+            .pageScrollingListener { (percent, from, to, isScroll) in
+//                let value = Float(percent) - Float(from)
 //                if Float(percent) >= Float(from) {
 //                    value = 1
 //                }
-                NSLog("percent: %f === value: %f == from:%d == to:%d", percent, value, from, to)
-                tab?.scroll(toIndex: to, progress: Float(value))
+                NSLog("percent: %f === value: %f == from:%d == to:%d", percent, 0, from, to)
+                tab?.scroll(toIndex: to, progress: Float(percent))
             }
-            .onChangeSelected { (item, to) in
+            .onChangeSelected { (item, to, from) in
                 NSLog(">>> %d", to)
             }
         }

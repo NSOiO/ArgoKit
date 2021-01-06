@@ -46,18 +46,21 @@ public class ViewPage<T> : ScrollView {
 // MARK: UI Method
 
 extension ViewPage {
+    
     @discardableResult
     public func reloadData() -> Self {
         viewPageNode.reloadData()
         return self
     }
+    
     @discardableResult
     public func onChangeSelected(selectedFunc:@escaping ViewPageChangedCloser) -> Self {
         viewPageNode.onChangeSelected(selectedFunc: selectedFunc)
         return self
     }
+    
     @discardableResult
-    public func setTabScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) -> Self {
+    public func pageScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) -> Self {
         viewPageNode.setTabScrollingListener(scrollListener: scrollListener)
         return self
     }

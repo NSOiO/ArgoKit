@@ -11,9 +11,10 @@ extension ViewPage {
     @discardableResult
     public func scrollToPage(index:@escaping @autoclosure () -> Int) -> Self {
 		return self.bindCallback({ [self] in 
-			viewPageNode.scrollToPage(index: index())
+			viewPageNode.scrollToPage(to: index())
 		}, forKey: #function)
     }
+    
     @discardableResult
     public func pageCount(pageCount:@escaping @autoclosure () -> Int) -> Self {
 		return self.bindCallback({ [self] in 
