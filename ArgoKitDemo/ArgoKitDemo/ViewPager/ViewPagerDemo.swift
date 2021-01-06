@@ -5,8 +5,6 @@
 //  Created by sun-zt on 2020/12/3.
 //
 
-import SwiftUI
-import ArgoKitPreview
 import ArgoKit
 
 //struct ViewPagerDemo: ArgoKit.View {
@@ -115,12 +113,26 @@ struct ViewPage1 : ArgoKit.View {
 
 }
 
+#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
+import ArgoKitComponent
+import SwiftUI
+import ArgoKitPreview
+
+@available(iOS 13.0.0, *)
+fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
+    ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+    ArgoKit.Dep.registerDep( _argokit__preview_dep_ )
+    return ArgoRender(builder: builder)
+}
+
 @available(iOS 13.0.0, *)
 struct ViewPagerDemo_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoRender {
+        ArgoKitRender {
 //            ViewPagerDemo().body
             ViewPage1().body
         }
     }
 }
+#endif

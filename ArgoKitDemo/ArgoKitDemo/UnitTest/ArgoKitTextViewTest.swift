@@ -69,10 +69,17 @@ class ArgoKitTextViewTestModel_Previews:  ArgoKitTextViewTestModel {
 }
 
 @available(iOS 13.0.0, *)
+fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
+    ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+    ArgoKit.Dep.registerDep( _argokit__preview_dep_ )
+    return ArgoRender(builder: builder)
+}
+
+@available(iOS 13.0.0, *)
 struct ArgoKitTextViewTest_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
-        return ArgoRender {
+        ArgoKitRender {
             ArgoKitTextViewTest(model: ArgoKitTextViewTestModel_Previews())
         }
     }

@@ -239,6 +239,7 @@ class ArgoKitGridTestModel_Previews:  ArgoKitGridTestModel {
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
     ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+    ArgoKit.Dep.registerDep( _argokit__preview_dep_ )
     return ArgoRender(builder: builder)
 }
 
