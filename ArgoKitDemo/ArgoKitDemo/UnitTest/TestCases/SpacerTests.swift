@@ -62,10 +62,18 @@ class SpacerTestsModel_Previews:  SpacerTestsModel {
 }
 
 @available(iOS 13.0.0, *)
+fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
+    ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+    ArgoKit.Dep.registerDep( _argokit__preview_dep_ )
+    return ArgoRender(builder: builder)
+}
+
+@available(iOS 13.0.0, *)
 struct SpacerTests_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
-        return ArgoRender {
+        return ArgoKitRender {
             SpacerTests(model: SpacerTestsModel_Previews())
         }
     }

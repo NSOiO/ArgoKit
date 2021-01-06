@@ -25,6 +25,15 @@ class ListCellTestsModel: ArgoKitIdentifiable {
     @Property var isLiked: Bool = false
     var comments: Int = 0
     var conversation: String = "对话"
+
+    func likeButtonAction() {
+        self.isLiked = !self.isLiked
+        if self.isLiked {
+            self.likes += 1
+        } else {
+            self.likes -= 1
+        }
+    }
 }
 
 // view
@@ -82,8 +91,6 @@ struct ListCellTests: ArgoKit.View {
             .margin(edge: .bottom, value: 5)
             
             
-            
-            
             Text("\(model.time)小时前发布 · \(model.distance)km")
                 .font(size: 10)
                 .textColor(.init(60, 60, 60))
@@ -96,14 +103,7 @@ struct ListCellTests: ArgoKit.View {
                 .margin(edge: .bottom, value: 5)
             
             HStack {
-                bottomButton(action: {
-                    model.isLiked = !model.isLiked
-                    if model.isLiked {
-                        model.likes += 1
-                    } else {
-                        model.likes -= 1
-                    }
-                }, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
+                bottomButton(action: model.likeButtonAction, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
                 
                 bottomButton(action: {
                     
@@ -170,6 +170,7 @@ class ListCellTestsModel_Previews:  ListCellTestsModel {
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
     ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+    ArgoKit.Dep.registerDep( _argokit__preview_dep_ )
     return ArgoRender(builder: builder)
 }
 
