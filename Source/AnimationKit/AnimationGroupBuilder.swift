@@ -78,3 +78,11 @@ extension AnimationGroup {
         return group
     }
 }
+
+/// A custom parameter attribute that constructs animations from closures.
+@_functionBuilder public struct ArgoKitAnimationsBuilder {
+    /// Passes animations written as animation group through unmodified.
+    public static func buildBlock(_ items:Animation...) -> [AnimationBasic] {
+        return items
+    }
+}

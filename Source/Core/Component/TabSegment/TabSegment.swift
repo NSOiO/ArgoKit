@@ -428,10 +428,10 @@ extension TabSegment {
         
         if autoAnim {
             posXAnim.start()
-            widthGroup.startSerial()
+            widthGroup.serial(true).start()
         } else {
             posXAnim.update(progress: progress)
-            widthGroup.updateSerial(progress: progress)
+            widthGroup.serial(true).update(progress: progress)
         }
     }
     

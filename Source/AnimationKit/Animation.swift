@@ -12,6 +12,8 @@ import ArgoAnimation
 /// You do not create instance of CAAnimation: to animate UIKit view or ArgoKit objects, create instances of the concrete subclasses Animation, SpringAnimation, or AnimationGroup.
 public class AnimationBasic: NSObject {
     
+    var serial = false
+
     var resetOnStop: Bool = false
     
     /// Attach this animation to the specific UIKit view.
@@ -24,11 +26,10 @@ public class AnimationBasic: NSObject {
     
     /// Updates this animation.
     /// - Parameters:
-    ///   - serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
     ///   - progress: The progess of the animation. 0.0~1.0
     /// - Returns: Self
     @discardableResult
-    func update(serial: Bool = false, progress: Float) -> Self {
+    func update(progress: Float) -> Self {
         return self
     }
     
@@ -41,9 +42,18 @@ public class AnimationBasic: NSObject {
         return self
     }
     
+    /// Set the order of animations.
+    /// - serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
+    /// - Returns: Self
+    @discardableResult
+    public func serial(_ serial: Bool) -> Self {
+        self.serial = serial
+        return self
+    }
+    
     /// Starts this animation.
     /// - Parameter serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
-    func start(serial: Bool) {
+    func start() {
         
     }
     
@@ -356,11 +366,10 @@ public class Animation : AnimationBasic {
     
     /// Updates this animation.
     /// - Parameters:
-    ///   - serial: Not working in this class.
     ///   - progress: The progess of the animation. 0.0~1.0
     /// - Returns: Self
     @discardableResult
-    public override func update(serial: Bool = false, progress: Float) -> Self {
+    public override func update(progress: Float) -> Self {
         if animation == nil {
             prepareAnimation()
         }
@@ -382,7 +391,7 @@ public class Animation : AnimationBasic {
     
     /// Starts this animation.
     /// - Parameter serial: Not working in this class.
-    public override func start(serial: Bool = false) {
+    public override func start() {
         prepareAnimation()
         animation?.start()
     }

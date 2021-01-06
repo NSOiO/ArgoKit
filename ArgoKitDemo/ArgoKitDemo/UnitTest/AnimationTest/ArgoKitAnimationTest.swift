@@ -16,7 +16,7 @@ class ArgoKitMoveAnimationTestModel {
 struct ArgoKitMoveAnimationTest: ArgoKit.View {
     typealias View = ArgoKit.View
     @Alias var text: Text?
-    @Alias var alphaAnimation: Animation? = nil
+    var alphaAnimation = Animation(type: .alpha).to(0).autoReverse(true)
     
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitMoveAnimationTestModel
@@ -27,12 +27,9 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
     var body: ArgoKit.View {
         
         HStack {
-            
             Button(text: "透明度") {
                 self.text?
-                    .addAnimation {
-
-                    }
+                    .addAnimation(animation: alphaAnimation)
                     .startAnimation()
             }.margin(edge: .left, value: 15)
             
@@ -43,6 +40,7 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
                             .duration(3.0)
                             .from(UIColor.clear)
                             .to(UIColor.red)
+                            
                     }
                     .startAnimation()
             }.margin(edge: .left, value: 5)

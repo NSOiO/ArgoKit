@@ -35,6 +35,7 @@ public class AnimationGroup: AnimationBasic {
     private var animations: [Animation]?
     private var rawAnimations = [MLAAnimation]()
     
+    override init() { super.init() }
     // MARK: - Public
     
     /// Specifies the amount of time (measured in seconds) to wait before beginning the animations.
@@ -104,8 +105,8 @@ public class AnimationGroup: AnimationBasic {
     ///   - progress: The progess of the animation. 0.0~1.0
     /// - Returns: Self
     @discardableResult
-    public override func update(serial: Bool = false, progress: Float) -> Self {
-        if serial {
+    public override func update(progress: Float) -> Self {
+        if self.serial {
             updateSerial(progress: progress)
         } else {
             updateConcurrent(progress: progress)
@@ -117,7 +118,7 @@ public class AnimationGroup: AnimationBasic {
     /// - Parameter progress: The progess of the animation group. 0.0~1.0
     /// - Returns: Self
     @discardableResult
-    public func updateSerial(progress: Float) -> Self {
+    private func updateSerial(progress: Float) -> Self {
         if animation == nil {
             prepareAnimationGroup()
             animation?.runSequentially(rawAnimations)
@@ -130,7 +131,7 @@ public class AnimationGroup: AnimationBasic {
     /// - Parameter progress: The progess of the animation group. 0.0~1.0
     /// - Returns: Self
     @discardableResult
-    public func updateConcurrent(progress: Float) -> Self {
+    private func updateConcurrent(progress: Float) -> Self {
         if animation == nil {
             prepareAnimationGroup()
             animation?.runTogether(rawAnimations)
@@ -141,8 +142,8 @@ public class AnimationGroup: AnimationBasic {
     
     /// Starts this animation group.
     /// - Parameter serial: A Boolean value that controls whether the animation is serial executed. Only works when there are multiple animations.
-    public override func start(serial: Bool) {
-        if serial {
+    public override func start() {
+        if self.serial {
             startSerial()
         } else {
             startConcurrent()
@@ -150,7 +151,7 @@ public class AnimationGroup: AnimationBasic {
     }
     
     /// Starts this animation group serially.
-    public func startSerial() {
+    private func startSerial() {
         prepareAnimationGroup()
         guard let group = animation else {
             assertionFailure("The animationGroup's raw animation is nil.")
@@ -161,7 +162,7 @@ public class AnimationGroup: AnimationBasic {
     }
     
     /// Starts this animation group concurrently.
-    public func startConcurrent() {
+    private func startConcurrent() {
         prepareAnimationGroup()
         guard let group = animation else {
             assertionFailure("The animationGroup's raw animation is nil.")
