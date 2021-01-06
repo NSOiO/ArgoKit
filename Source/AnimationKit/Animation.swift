@@ -229,6 +229,7 @@ public class Animation : AnimationBasic {
     func from(_ values: [Any]) -> Self {
         if let fromValue = handleValues(values) {
             from = fromValue
+            animation?.fromValue = fromValue
         }
         return self
     }
@@ -294,6 +295,7 @@ public class Animation : AnimationBasic {
     func to(_ values: [Any]) -> Self {
         if let toValue = handleValues(values) {
             to = toValue
+            animation?.toValue = toValue
         }
         return self
     }

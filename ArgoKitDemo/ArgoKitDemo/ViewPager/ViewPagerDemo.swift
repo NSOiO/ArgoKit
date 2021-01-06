@@ -104,8 +104,8 @@ struct ViewPage1 : ArgoKit.View {
 //                if Float(percent) >= Float(from) {
 //                    value = 1
 //                }
-                NSLog("percent: %f === value: %f == from:%d == to:%d", percent, 0, from, to)
-                tab?.scroll(toIndex: to, progress: Float(percent))
+                NSLog("percent: %f == from:%d == to:%d == isscroll: %d", percent, from, to, isScroll)
+                tab?.scroll(from, to, Float(percent), !isScroll)
             }
             .onChangeSelected { (item, to, from) in
                 NSLog(">>> %d", to)

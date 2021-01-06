@@ -7,9 +7,9 @@
 
 import Foundation
 
-private let ProgressBarWidth: Float = 20
-private let AnimationDuration: Float = 0.25
-private let ItemSpaceValue: Float = 15
+private let DefaultProgressBarWidth: Float = 20
+private let DefaultAnimationDuration: Float = 0.25
+private let DefaultItemSpaceValue: Float = 15
 private let DefaultScaleFromValue: Float = 1.0
 private let DefaultScaleToValue: Float = 1.3
 
@@ -21,6 +21,7 @@ public class TabSegment: View {
     
     private var _datas: [Any] = []
     private var _createContentItem: ((Any)->View)?
+    private let _itemSpaceValue: Float
     
     private var _animType: AnimationType = .scale // default
     private var _fromValue: AnimationValue?
@@ -36,7 +37,9 @@ public class TabSegment: View {
     
     private let containerNodeObserver = ArgoKitNodeObserver()
     private let itemStackNodeObserver = ArgoKitNodeObserver()
+    private let itemNodeObserver = ArgoKitNodeObserver()
     private let progressBarNodeObserver = ArgoKitNodeObserver()
+    
     
     private let _container: VStack = {
         return VStack().alignSelf(.stretch)
@@ -48,7 +51,7 @@ public class TabSegment: View {
     }()
     
     private let _progressBar: Image = {
-        return Image().backgroundColor(.black).width(ArgoValue(ProgressBarWidth)).height(5).cornerRadius(2)
+        return Image().backgroundColor(.black).width(ArgoValue(DefaultProgressBarWidth)).height(5).cornerRadius(2)
     }()
     
     private var _scrollView: UIScrollView? {
@@ -58,7 +61,8 @@ public class TabSegment: View {
         return nil
     }
     
-    public init() {
+    public init(_ itemSpace: Float) {
+        _itemSpaceValue = itemSpace
         _node = ArgoKitTabSegmentNode(viewClass: UIScrollView.self)
         _node.row();
         _node.maxWidth(percent: 100)
@@ -70,7 +74,11 @@ public class TabSegment: View {
     public var node: ArgoKitNode? { _node }
     
     convenience public init(_ datas: Array<Any>, @ArgoKitViewBuilder content: @escaping (Any) -> View) {
-        self.init()
+        self.init(datas, itemSpace: DefaultItemSpaceValue, content: content)
+    }
+    
+    convenience public init(_ datas: Array<Any>, itemSpace: Float, @ArgoKitViewBuilder content: @escaping (Any) -> View) {
+        self.init(itemSpace)
         _contentView.node?.row()
         _container.node?.addChildNode(_contentView.node!)
         _container.node?.addChildNode(_progressBar.node!)
@@ -112,15 +120,25 @@ public class TabSegment: View {
     }
     
     @discardableResult
-    public func scroll(toIndex: Int, progress: Float) -> Self {
-        if _fromIndex == toIndex {
+    public func scroll(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ scrollFinish: Bool) -> Self {
+        guard toIndex > -1 && toIndex < _contentNodes.count else {
+            assertionFailure("The toIndex is invalid, it should be greater than -1 and less than \(_contentNodes.count) (TabSegment subviews count is \(_contentNodes.count)). ")
             return self
         }
-        updateContentUI(_fromIndex, toIndex, max(min(1, progress), 0), false)
-        if progress >= 0.999 {
-            _fromIndex = _toIndex
+        if scrollFinish {
+            _fromIndex = fromIndex
             _toIndex = toIndex
+            resetAnimationState()
+            return self
         }
+        if _toIndex == toIndex {
+            return self
+        }
+        if fromIndex == toIndex {
+            return self
+        }
+        _isDoingAnimation = true
+        updateContentUI(fromIndex, toIndex, max(min(1, progress), 0), false)
         return self
     }
     
@@ -138,10 +156,13 @@ public class TabSegment: View {
             return
         }
         _datas = datas
-   
-        for data in datas {
+        
+        for (_, data) in datas.enumerated() {
             let container = createItem(data)
             if let node = container.type.viewNodes()?.first {
+                node.marginLeft(point: 0)
+                node.marginRight(point: 0)
+                node.addNode(observer: itemNodeObserver)
                 _contentNodes.append(node)
                 let stack = HStack().onTapGesture {
                     let index = self._contentNodes.firstIndex(of: node)!
@@ -150,7 +171,7 @@ public class TabSegment: View {
                 stack.node?.marginTop(point: 10)
                 stack.node?.addChildNode(node)
                 stack.node?.addNode(observer: itemStackNodeObserver)
-                stack.node?.marginLeft(point: CGFloat(ItemSpaceValue))
+                stack.node?.marginLeft(point: CGFloat(_itemSpaceValue))
                 _contentView.node?.addChildNode(stack.node!)
             }
         }
@@ -162,13 +183,23 @@ public class TabSegment: View {
         
         containerNodeObserver.setFrameChange { [self] (frame) in
             if let scrollView = _node.view as? UIScrollView {
-                scrollView.contentSize = frame.size
+                if _animType == .scale || _animType == .scaleX {
+                    let from_to = dereferenceScaleValue()
+                    let scale = (from_to.1 - from_to.0) / Float(_contentNodes.count) + from_to.0
+                    let size = CGSize(width: frame.width * CGFloat(scale), height: frame.height)
+                    scrollView.contentSize = size
+                } else {
+                    scrollView.contentSize = frame.size
+                }
             }
         }
         itemStackNodeObserver.setCreateViewBlock { view in
             let frame = view.frame
             view.layer.anchorPoint = CGPoint(x: 0, y: 1)
             view.frame = frame
+        }
+        itemNodeObserver.setCreateViewBlock { (view) in
+            self.doContentItemViewScaleAnimation(view, false, 1.0)
         }
         progressBarNodeObserver.setCreateViewBlock { (view) in
             self.clickContentItem(nil, false) // 在TabSegment上所有子视图创建完再执行默认初始动画(progressBar为最后一个子视图)
@@ -186,11 +217,19 @@ public class TabSegment: View {
         _fromIndex = _toIndex
         _toIndex = toIndex
         updateContentUI(_fromIndex, toIndex, 1.0, anim)
+        
+        _isDoingAnimation = true
+        if anim {
+            let duration: Int = Int(DefaultAnimationDuration * 1000)
+            DispatchQueue.main.asyncAfter(deadline:.now() + .milliseconds(duration)) {
+                self.resetAnimationState()
+            }
+        } else {
+            resetAnimationState()
+        }
     }
     
     private func updateContentUI(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
-        print("==== update from: \(fromIndex) === to: \(toIndex) == progress: \(progress)")
-        
         if _animType == .scale || _animType == .scaleX {
             prepareContentItemViewScaleAnimation(fromIndex, toIndex, progress, autoAnim)
         } else {
@@ -198,22 +237,6 @@ public class TabSegment: View {
         }
         doProgressBarAnimation(fromIndex, toIndex, progress, autoAnim)
         doScrollViewContentOffsetAnimation(toIndex, progress, autoAnim)
-        
-        updateAnimationState(autoAnim, progress)
-    }
-    
-    private func updateAnimationState(_ autoAnim: Bool, _ progress: Float) {
-        if autoAnim {
-            _isDoingAnimation = true
-            let duration: Int = Int(AnimationDuration * 1000)
-            DispatchQueue.main.asyncAfter(deadline:.now() + .milliseconds(duration)) {
-                self.resetAnimationState()
-            }
-        } else {
-            if progress >= 1.0 || progress < 0 {
-                resetAnimationState()
-            }
-        }
     }
     
     private func resetAnimationState() {
@@ -265,7 +288,7 @@ public class TabSegment: View {
             doContentItemViewScaleAnimation(new.view, true, progress)
         }
         
-        var left = ItemSpaceValue
+        var left = _itemSpaceValue
         for item in _contentNodes { // 调整每个item的frame.origin.x
             if let superview = item.view?.superview {
                 var frame = superview.akAnimationFrame
@@ -273,7 +296,7 @@ public class TabSegment: View {
                 superview.akAnimationFrame = frame
                 let xScale = superview.layer.sublayerTransform.m11
                 let scaleWidth = xScale * frame.width;
-                left += Float(scaleWidth) + ItemSpaceValue
+                left += Float(scaleWidth) + _itemSpaceValue
             }
         }
     }
@@ -282,26 +305,9 @@ public class TabSegment: View {
         guard let itemView = view else {
             return
         }
-        
-        var from: Float = DefaultScaleFromValue
-        switch _fromValue {
-        case .float(let value):
-            from = value
-        case .float2(let value, _):
-            from = value
-        default:
-            break
-        }
-        
-        var to: Float = DefaultScaleToValue
-        switch _toValue {
-        case .float(let value):
-            to = value
-        case .float2(let value, _):
-            to = value
-        default:
-            break
-        }
+        let from_to = dereferenceScaleValue()
+        let from = from_to.0
+        let to = from_to.1
         
         var scale: Float = 1.0
         if positive {
@@ -340,7 +346,7 @@ public class TabSegment: View {
                 if let anim = cachAnim {
                     resolveValuesForAnimation(anim, from, to)
                     if autoAnim {
-                        anim.duration(AnimationDuration)
+                        anim.duration(DefaultAnimationDuration)
                         anim.start()
                     } else {
                         anim.update(progress: progress)
@@ -350,14 +356,13 @@ public class TabSegment: View {
         }
         
         if fromIndex > -1 {
-            var from = _fromValue
-            if (from == nil) {
+            if (_fromValue == nil) {
                 if let view = _contentNodes[toIndex].view {
-                    from = currentAnimationValueForView(view)
+                    _fromValue = currentAnimationValueForView(view)
                 }
             }
             let newFromValue = toValue
-            guard let newToValue = from else { return }
+            guard let newToValue = _fromValue else { return }
             startAnimation(fromIndex, newFromValue, newToValue)
         }
         
@@ -387,14 +392,14 @@ public class TabSegment: View {
             let widthAnim1 = Animation(type: .scaleX)
             widthAnim1.attach(_progressBar)
             let offset = (fromView != nil) ? (abs(ViewCenterX(toView) - ViewCenterX(fromView!)) / Float((abs(toIndex - fromIndex) + 2))) : 0
-            let maxWidth = ProgressBarWidth + offset
-            widthAnim1.from(1).to(maxWidth / ProgressBarWidth)
-            widthAnim1.duration(AnimationDuration / 2)
+            let maxWidth = DefaultProgressBarWidth + offset
+            widthAnim1.from(1).to(maxWidth / DefaultProgressBarWidth)
+            widthAnim1.duration(DefaultAnimationDuration / 2)
             
             let widthAnim2 = Animation(type: .scaleX)
             widthAnim2.attach(_progressBar)
-            widthAnim2.from(maxWidth / ProgressBarWidth).to(1)
-            widthAnim2.duration(AnimationDuration / 2)
+            widthAnim2.from(maxWidth / DefaultProgressBarWidth).to(1)
+            widthAnim2.duration(DefaultAnimationDuration / 2)
             
             cacheWidth = AnimationGroup()
             cacheWidth?.animations([widthAnim1, widthAnim2])
@@ -405,8 +410,8 @@ public class TabSegment: View {
         guard let posXAnim = cachePosX else { return }
         guard let widthGroup = cacheWidth else { return }
 
-        posXAnim.to((itemViewCenterX(toIndex) - ProgressBarWidth / 2))
-        posXAnim.duration(AnimationDuration)
+        posXAnim.to((itemViewCenterX(toIndex) - DefaultProgressBarWidth / 2))
+        posXAnim.duration(DefaultAnimationDuration)
         
         if autoAnim {
             posXAnim.start()
@@ -443,7 +448,7 @@ public class TabSegment: View {
         }
         anim.to(offset, 0)
         if autoAnim {
-            anim.duration(AnimationDuration)
+            anim.duration(DefaultAnimationDuration)
             anim.start()
         } else {
             anim.update(progress: progress)
@@ -511,19 +516,33 @@ public class TabSegment: View {
         }
     }
     
+    private func dereferenceScaleValue() -> (Float, Float) {
+        var from: Float = DefaultScaleFromValue
+        var to: Float = DefaultScaleToValue
+        switch _fromValue {
+        case .float(let value): from = value
+        case .float2(let value, _): from = value
+        default: break
+        }
+        switch _toValue {
+        case .float(let value): to = value
+        case .float2(let value, _): to = value
+        default: break
+        }
+        return (from, to)
+    }
+    
     private func ViewCenterX(_ view: UIView) -> Float {
         return Float(view.frame.origin.x + view.frame.size.width / 2)
     }
     
     private func itemViewCenterX(_ itemIndex: Int) -> Float {
-        var scale: Float = DefaultScaleFromValue
+        var fromScale: Float = 1.0
+        var toScale: Float = 1.0
         if _animType == .scale || _animType == .scaleX {
-            scale = DefaultScaleToValue
-            switch _toValue {
-            case .float(let value): scale = value
-            case .float2(let value, _): scale = value
-            default: break
-            }
+            let from_to = dereferenceScaleValue()
+            fromScale = from_to.0
+            toScale = from_to.1
         }
 
         var xOffset: Float = 0.0
@@ -532,10 +551,10 @@ public class TabSegment: View {
                 continue
             }
             if i == itemIndex {
-                xOffset += ItemSpaceValue + Float(nodeStackView.bounds.width) * scale / 2
+                xOffset += _itemSpaceValue + Float(nodeStackView.bounds.width) * toScale / 2
                 break
             }
-            xOffset += ItemSpaceValue + Float(nodeStackView.bounds.width)
+            xOffset += _itemSpaceValue + Float(nodeStackView.bounds.width) * fromScale
         }
         return xOffset
     }
