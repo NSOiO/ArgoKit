@@ -13,9 +13,6 @@ public class ViewPage<T> : ScrollView {
     var viewPageNode : ArgoKitViewPageNode<T> {
         pNode as! ArgoKitViewPageNode
     }
-
-    private var innerScrollListener: ViewPageTabScrollingListener?
-    private var externalScrollListener: ViewPageTabScrollingListener?
     
     override func createNode() {
         pNode = ArgoKitViewPageNode<T>(viewClass: UICollectionView.self)
@@ -24,7 +21,6 @@ public class ViewPage<T> : ScrollView {
 
     internal required init() {
         super.init()
-        setupTabScrollingListener()
     }
     
     public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where T:ArgoKitNode{
@@ -42,18 +38,6 @@ public class ViewPage<T> : ScrollView {
             return rowContent(item)
         }
     }
-    
-    private func setupTabScrollingListener() {
-        viewPageNode.setTabScrollingListener { [unowned self] (percent, from, to, scrolling) in
-            if let inner = innerScrollListener {
-                inner(percent, from, to, scrolling)
-            }
-            if let external = externalScrollListener {
-                external(percent, from, to, scrolling)
-            }
-        }
-    }
-    
 }
 
 // MARK: UI Method
@@ -74,7 +58,7 @@ extension ViewPage {
     
     @discardableResult
     public func pageScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) -> Self {
-        externalScrollListener = scrollListener
+        viewPageNode.setTabScrollingListener(scrollListener: scrollListener)
         return self
     }
 }
@@ -83,11 +67,11 @@ extension ViewPage {
     @discardableResult
     public func link(tabSegment tab: TabSegment?) -> Self {
         if let tab = tab {
-            innerScrollListener = { (percent, from, to, scrolling) in
+            viewPageNode.setTabInternalScrollingListener { (percent, from, to, scrolling) in
                 tab.scroll(from, to, Float(percent), !scrolling)
             }
-            tab.clickedInternalCallback { [weak self] (index, shouldAnim) in
-                self?.scrollToPage(index: index, callScrollListener: false)
+            tab.clickedInternalCallback { [weak viewPageNode] (index, shouldAnim) in
+                viewPageNode?.scrollToPage(to: index, callScrollListener: false)
             }
         }
         return self
@@ -96,7 +80,7 @@ extension ViewPage {
     @discardableResult
     public func unlink(tabSegment tab: TabSegment?) -> Self {
         if let tab = tab {
-            innerScrollListener = nil
+            viewPageNode.setTabInternalScrollingListener(nil)
             tab.clickedInternalCallback(nil)
         }
         return self

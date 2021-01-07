@@ -96,9 +96,9 @@ struct ViewPage1 : ArgoKit.View {
             .scrollToPage(index: 2)
             .link(tabSegment: self.tab)
 //            .scrollEnable(enable: false)
-//            .pageScrollingListener { (percent, from, to, isScroll) in
-//                NSLog("percent: %f == from:%d == to:%d == isscroll: %d", percent, from, to, isScroll)
-//            }
+            .pageScrollingListener { (percent, from, to, isScroll) in
+                NSLog("percent: %f == from:%d == to:%d == isscroll: %d", percent, from, to, isScroll)
+            }
 //            .onChangeSelected { (item, to, from) in
 //                NSLog(">>> %d", to)
 //            }

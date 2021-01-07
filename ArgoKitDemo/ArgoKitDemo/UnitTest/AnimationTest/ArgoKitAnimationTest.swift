@@ -66,6 +66,18 @@ struct ArgoKitMoveAnimationTest: ArgoKit.View {
                             .from(15,0)
                             .to(200, 200)
                             .resetOnStop(true)
+                            .startCallback { (anim) in
+                                print("start callback: \(anim)")
+                            }
+                            .pauseCallback { (anim) in
+                                print("pause callback: \(anim)")
+                            }
+                            .resumeCallback { (anim) in
+                                print("resume callback: \(anim)")
+                            }
+                            .finishCallback { (anim, finish) in
+                                print("finish callback: \(anim) finish: \(finish)")
+                            }
                     }
                     .startAnimation()
                 
