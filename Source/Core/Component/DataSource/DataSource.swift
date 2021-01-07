@@ -103,7 +103,7 @@ extension DataSource{
         }
     }
     
-    private func _moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath){
+    private func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath){
         if let _ = reloadAction {
             self.reloadData()
         }else{
@@ -153,7 +153,7 @@ extension DataSource{
     }
     
     @discardableResult
-    public func insert<D>(datas:[D],at indexPaths: [IndexPath],with animation: UITableView.RowAnimation = .none) -> Self
+    public func insert<D>(datas:[D],at indexPaths: [IndexPath]) -> Self
     where Value == DataList<D>, D:ArgoKitIdentifiable{
         if datas.count !=  indexPaths.count{
             return self
@@ -171,7 +171,7 @@ extension DataSource{
     }
     
     @discardableResult
-    public func insert<D>(datas:[D],at indexPaths: [IndexPath],with animation: UITableView.RowAnimation = .none) -> Self
+    public func insert<D>(datas:[D],at indexPaths: [IndexPath]) -> Self
     where Value == SectionDataList<D>, D:ArgoKitIdentifiable{
         if datas.count !=  indexPaths.count{
             return self;
@@ -192,34 +192,34 @@ extension DataSource{
     }
     
     @discardableResult
-    public func insert<D>(data:D,at indexPath: IndexPath,with animation: UITableView.RowAnimation = .none) -> Self
+    public func insert<D>(data:D,at indexPath: IndexPath) -> Self
     where Value == DataList<D>,D:ArgoKitIdentifiable{
         return insert(datas: [data], at: [indexPath])
     }
     
     @discardableResult
-    public func insert<D>(data:D,at indexPath: IndexPath,with animation: UITableView.RowAnimation = .none)
+    public func insert<D>(data:D,at indexPath: IndexPath)
     -> Self
     where Value == SectionDataList<D>,D:ArgoKitIdentifiable{
         return insert(datas: [data], at: [indexPath])
     }
     
     @discardableResult
-    public func delete<D>(at indexPath: IndexPath, with animation: UITableView.RowAnimation = .none)
+    public func delete<D>(at indexPath: IndexPath)
     -> Self
     where Value == DataList<D>,D:ArgoKitIdentifiable{
-        return self.delete(at: [indexPath], with: animation)
+        return self.delete(at: [indexPath])
     }
     
     @discardableResult
-    public func delete<D>(at indexPath: IndexPath, with animation: UITableView.RowAnimation = .none)
+    public func delete<D>(at indexPath: IndexPath)
     -> Self
     where Value == SectionDataList<D>,D:ArgoKitIdentifiable{
-        return self.delete(at: [indexPath], with: animation)
+        return self.delete(at: [indexPath])
     }
     
     @discardableResult
-    public func delete<D>(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation = .none)
+    public func delete<D>(at indexPaths: [IndexPath])
     -> Self
     where Value == DataList<D>,D:ArgoKitIdentifiable{
         for indexPath in indexPaths {
@@ -233,7 +233,7 @@ extension DataSource{
     }
     
     @discardableResult
-    public func delete<D>(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation = .none)
+    public func delete<D>(at indexPaths: [IndexPath])
     -> Self
     where Value == SectionDataList<D>,D:ArgoKitIdentifiable {
         for indexPath in indexPaths {
@@ -250,7 +250,7 @@ extension DataSource{
     }
     
     @discardableResult
-    public func replace<D>(datas:[D],at replaceIndexPaths: [IndexPath], with animation: UITableView.RowAnimation = .none) -> Self
+    public func replace<D>(datas:[D],at replaceIndexPaths: [IndexPath]) -> Self
     where Value == DataList<D>, D:ArgoKitIdentifiable{
         if datas.count !=  replaceIndexPaths.count{
             return self
@@ -261,14 +261,15 @@ extension DataSource{
             if dataSource.count <= indexPath.row {
               continue
             }
-            dataSource.replaceSubrange(Range(uncheckedBounds: (lower: indexPath.row, upper: indexPath.row)), with: [data])
+            dataSource.remove(at: indexPath.row)
+            dataSource.insert(data, at: indexPath.row)
         }
         self.reloadRows(at: replaceIndexPaths)
         return self
     }
     
     @discardableResult
-    public func replace<D>(datas:[D],at replaceIndexPaths: [IndexPath], with animation: UITableView.RowAnimation = .none) -> Self
+    public func replace<D>(datas:[D],at replaceIndexPaths: [IndexPath]) -> Self
     where Value == SectionDataList<D>, D:ArgoKitIdentifiable{
         if datas.count !=  replaceIndexPaths.count{
             return self
@@ -282,21 +283,22 @@ extension DataSource{
             if dataSource[indexPath.section].count <= indexPath.row {
                 continue
             }
-            dataSource[indexPath.section].replaceSubrange(Range(uncheckedBounds: (lower: indexPath.row, upper: indexPath.row)), with: [data])
+            dataSource[indexPath.section].remove(at: indexPath.row)
+            dataSource[indexPath.section].insert(data, at: indexPath.row)
         }
         self.reloadRows(at: replaceIndexPaths)
         return self
     }
     
     @discardableResult
-    public func replace<D>(data:D,at indexPath: IndexPath,with animation: UITableView.RowAnimation = .none)
+    public func replace<D>(data:D,at indexPath: IndexPath)
     -> Self
     where Value == DataList<D>,D:ArgoKitIdentifiable{
-        return replace(datas: [data], at: [indexPath],with: animation)
+        return replace(datas: [data], at: [indexPath])
     }
     
     @discardableResult
-    public func replace<D>(data:D,at indexPath: IndexPath,with animation: UITableView.RowAnimation = .none)
+    public func replace<D>(data:D,at indexPath: IndexPath)
     -> Self
     where Value == SectionDataList<D>,D:ArgoKitIdentifiable{
         return replace(datas: [data], at: [indexPath])
@@ -313,7 +315,7 @@ extension DataSource{
         }
         swap(&dataSource, indexPath.row, newIndexPath.row)
         
-        self._moveRow(at: indexPath, to: newIndexPath)
+        self.moveRow(at: indexPath, to: newIndexPath)
         return self
     }
 
@@ -332,7 +334,7 @@ extension DataSource{
         
         swap(&dataSource[indexPath.section], indexPath.row, newIndexPath.row)
         
-        self._moveRow(at: indexPath, to: newIndexPath)
+        self.moveRow(at: indexPath, to: newIndexPath)
         return self
     }
     
