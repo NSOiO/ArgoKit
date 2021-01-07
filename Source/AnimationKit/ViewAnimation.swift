@@ -24,11 +24,11 @@ extension UIView {
     }
     
     @objc public func argokit_updateAnimation(serial: Bool = false, progress: Float) {
-        self.argokit_animation?.update(serial: serial, progress: progress)
+        self.argokit_animation?.serial(serial).update(progress: progress)
     }
     
     @objc public func argokit_startAnimation(serial: Bool = false) {
-        self.argokit_animation?.start(serial: serial)
+        self.argokit_animation?.serial(serial).start()
     }
     
     @objc public func argokit_pauseAnimation() {
