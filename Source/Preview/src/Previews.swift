@@ -4,7 +4,7 @@
 //
 //  Created by Dai on 2020-12-14.
 //
-#if canImport(SwiftUI) 
+#if canImport(SwiftUI) && DEBUG
 import Foundation
 import SwiftUI
 

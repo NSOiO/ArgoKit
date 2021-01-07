@@ -6,7 +6,7 @@ use_modular_headers!
 
 target 'ArgoKitDemo' do
   pod 'ArgoKit', :path=>'../'
-  pod 'ArgoKitPreview', :path=>'../' #, :link_style => 'weak'
+  pod 'ArgoKitPreview', :path=>'../' , :configuration => 'Debug'#, :link_style => 'weak'
   pod 'ArgoKitComponent', :path =>'../'
 end
 

@@ -40,8 +40,6 @@ podspec = Pod::Spec.new do |spec|
         fi
     CMD
   end
-  
-  # See https://github.com/facebook/yoga/pull/366
-  #podspec.attributes_hash["readme"] = "argokit/README.md"
+        
 
   
