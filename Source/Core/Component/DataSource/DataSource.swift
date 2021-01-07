@@ -33,8 +33,9 @@ public class DataSource<Value>  {
             return dataSource
         }
         set {
-//            dataSource = newValue
-//            fatalError("$")
+            #if DEBUG
+                fatalError("Please prefix an instance of a DataSource with $")
+            #endif
         }
     }
 }
@@ -125,14 +126,14 @@ extension DataSource{
     
     
     @discardableResult
-    public func append<D>(data:D) -> Self
+    public func append<D>(_ data:D) -> Self
     where Value == DataList<D>,D:ArgoKitIdentifiable{
         dataSource.append(data)
         return self
     }
     
     @discardableResult
-    public func append<D>(data:DataList<D>) -> Self
+    public func append<D>(_ data:DataList<D>) -> Self
     where Value == SectionDataList<D>,D:ArgoKitIdentifiable{
         dataSource.append(data)
         return self
