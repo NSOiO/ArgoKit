@@ -149,7 +149,7 @@ public class TabSegment: View {
     }
     
     // MARK: Internal
-    internal func clickedCallback(_ callback: @escaping (Int, Bool) -> Void) {
+    internal func clickedInternalCallback(_ callback: ((Int, Bool) -> Void)?) {
         _innerClickCallback = callback
     }
     

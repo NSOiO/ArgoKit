@@ -8,13 +8,30 @@
 import Foundation
 import ArgoAnimation
 
+public typealias StartCallback = (AnimationBasic) -> Void
+public typealias PauseCallback = (AnimationBasic) -> Void
+public typealias ResumeCallback = (AnimationBasic) -> Void
+public typealias RepeatCallback = (AnimationBasic, Int) -> Void
+public typealias FinishCallback = (AnimationBasic, Bool) -> Void
+
 /// The abstract superclass for animations in Argo Animation.
 /// You do not create instance of CAAnimation: to animate UIKit view or ArgoKit objects, create instances of the concrete subclasses Animation, SpringAnimation, or AnimationGroup.
 public class AnimationBasic: NSObject {
-    
     var serial = false
-
+    var animPaused = false
     var resetOnStop: Bool = false
+    
+    weak var target: UIView?
+    var delay: Float?
+    var repeatCount: Int?
+    var repeatForever: Bool?
+    var autoReverse: Bool?
+    
+    var startCallback: StartCallback?
+    var pauseCallback: PauseCallback?
+    var resumeCallback: ResumeCallback?
+    var repeatCallback: RepeatCallback?
+    var finishCallback: FinishCallback?
     
     /// Attach this animation to the specific UIKit view.
     /// - Parameter view: The UIKit view that attachs this animation.
@@ -70,6 +87,15 @@ public class AnimationBasic: NSObject {
     /// Stops this animation.
     func stop() {
         
+    }
+
+    func prepareAnimation() {
+        assertionFailure("Subclass should override this method.")
+    }
+    
+    func rawAnimation() -> MLAAnimation? {
+        assertionFailure("Subclass should override this method.")
+        return nil
     }
 }
 
@@ -153,22 +179,10 @@ public class Animation : AnimationBasic {
 
     // MARK: - Private
     private var duration: Float?
-    private var delay: Float?
-    private var repeatCount: Int?
-    private var repeatForever: Bool?
-    private var autoReverse: Bool?
     private var timingFunc = AnimationTimingFunc.defaultValue
     private let type: AnimationType!
-    private weak var target: UIView?
     private var from: Any?, to: Any?
     private var animation: MLAValueAnimation?
-    private var animPaused = false
-    
-    private var startCallback: MLAAnimationStartBlock?
-    private var pauseCallback: MLAAnimationPauseBlock?
-    private var resumeCallback: MLAAnimationResumeBlock?
-    private var repeatCallback: MLAAnimationRepeatBlock?
-    private var finishCallback: MLAAnimationFinishBlock?
     
     /// Initializer
     /// - Parameter type: The type of the animation.
@@ -416,10 +430,10 @@ public class Animation : AnimationBasic {
     /// Sets the call back of start animation.
     /// - Parameter callback: The call back of start animation.
     /// - Returns: Self
-    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) -> Self {
+    public func startCallback(_ callback: @escaping StartCallback) -> Self {
         startCallback = callback
         if let anim = animation {
-            anim.startBlock = callback
+            anim.startBlock = {_ in callback(self) }
         }
         return self
     }
@@ -427,10 +441,10 @@ public class Animation : AnimationBasic {
     /// Sets the call back of pause animation.
     /// - Parameter callback: The call back of pause animation.
     /// - Returns: Self
-    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) -> Self {
+    public func pauseCallback(_ callback: @escaping PauseCallback) -> Self {
         pauseCallback = callback
         if let anim = animation {
-            anim.pauseBlock = callback
+            anim.pauseBlock = {_ in callback(self) }
         }
         return self
     }
@@ -438,10 +452,10 @@ public class Animation : AnimationBasic {
     /// Sets the call back of resume animation.
     /// - Parameter callback: The call back of resume animation.
     /// - Returns: Self
-    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) -> Self {
+    public func resumeCallback(_ callback: @escaping ResumeCallback) -> Self {
         resumeCallback = callback
         if let anim = animation {
-            anim.resumeBlock = callback
+            anim.resumeBlock = {_ in callback(self) }
         }
         return self
     }
@@ -449,10 +463,10 @@ public class Animation : AnimationBasic {
     /// Sets the call back of repeat animation.
     /// - Parameter callback: The call back of repeat animation.
     /// - Returns: Self
-    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) -> Self {
+    public func repeatCallback(_ callback: @escaping RepeatCallback) -> Self {
         repeatCallback = callback
         if let anim = animation {
-            anim.repeatBlock = callback
+            anim.repeatBlock = { callback(self, Int($1)) }
         }
         return self
     }
@@ -460,19 +474,65 @@ public class Animation : AnimationBasic {
     /// Sets the call back of finish animation.
     /// - Parameter callback: The call back of finish animation.
     /// - Returns: Self
-    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) -> Self {
+    public func finishCallback(_ callback: @escaping FinishCallback) -> Self {
         finishCallback = callback
         if let anim = animation {
-            anim.finishBlock = callback
+            anim.finishBlock = { callback(self, $1) }
         }
         return self
     }
     
-    // MARK: - Private
-    internal func rawAnimation() -> MLAAnimation? {
+    // MARK: - Override
+    override func prepareAnimation() {
+        guard let view = target else {
+            assertionFailure("The animation has not yet been added to the view.")
+            return
+        }
+        if animation == nil {
+            animation = createAnimation(type: animationTypeValue(type), view: view)
+            if animPaused { // 在调用start前，先调用了pause的情况
+                animation!.pause()
+            }
+        }
+        let anim = animation!
+        anim.fromValue = from
+        anim.toValue = to
+        anim.resetOnFinish = resetOnStop
+        
+        if let d = delay {
+            anim.beginTime = NSNumber(value: d)
+        }
+        if let r = repeatCount {
+            anim.repeatCount = NSNumber(value: r)
+        }
+        if let r = repeatForever {
+            anim.repeatForever = NSNumber(value: r)
+        }
+        if let a = autoReverse {
+            anim.autoReverses = NSNumber(value: a)
+        }
+        if let sc = startCallback {
+            anim.startBlock = {_ in sc(self)}
+        }
+        if let pc = pauseCallback {
+            anim.pauseBlock = {_ in pc(self)}
+        }
+        if let rc = resumeCallback {
+            anim.resumeBlock = {_ in rc(self)}
+        }
+        if let rc = repeatCallback {
+            anim.repeatBlock = {rc(self, Int($1))}
+        }
+        if let fb = finishCallback {
+            anim.finishBlock = {fb(self, $1)}
+        }
+    }
+   
+    override func rawAnimation() -> MLAAnimation? {
         return animation
     }
     
+    // MARK: - Private
     private func handleValues(_ values: [Any]) -> Any? {
         guard values.count > 0 else {
             return nil
@@ -523,51 +583,6 @@ public class Animation : AnimationBasic {
         default: break
         }
         return 0
-    }
-    
-    internal func prepareAnimation() {
-        guard let view = target else {
-            assertionFailure("The animation has not yet been added to the view.")
-            return
-        }
-        if animation == nil {
-            animation = createAnimation(type: animationTypeValue(type), view: view)
-            if animPaused { // 在调用start前，先调用了pause的情况
-                animation!.pause()
-            }
-        }
-        let anim = animation!
-        anim.fromValue = from
-        anim.toValue = to
-        anim.resetOnFinish = resetOnStop
-        
-        if let d = delay {
-            anim.beginTime = NSNumber(value: d)
-        }
-        if let r = repeatCount {
-            anim.repeatCount = NSNumber(value: r)
-        }
-        if let r = repeatForever {
-            anim.repeatForever = NSNumber(value: r)
-        }
-        if let a = autoReverse {
-            anim.autoReverses = NSNumber(value: a)
-        }
-        if let sc = startCallback {
-            anim.startBlock = sc
-        }
-        if let pc = pauseCallback {
-            anim.pauseBlock = pc
-        }
-        if let rc = resumeCallback {
-            anim.resumeBlock = rc
-        }
-        if let rc = repeatCallback {
-            anim.repeatBlock = rc
-        }
-        if let fb = finishCallback {
-            anim.finishBlock = fb
-        }
     }
     
     internal func createAnimation(type: String, view: UIView) -> MLAValueAnimation {

@@ -58,10 +58,12 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode, UICollectionViewDelegateFlo
     private var isScrolling:Bool = false
     
     private var pageChangedFunc:ViewPageChangedCloser?
-    private var pageTabScrollingListener:ViewPageTabScrollingListener?
     
     private var pageScrollInfo: ArgoKitViewPageScrollInfo?
     
+    private var innerScrollListener: ViewPageTabScrollingListener?
+    private var externalScrollListener: ViewPageTabScrollingListener?
+    private var hasScrollListener: Bool {(innerScrollListener != nil) || (externalScrollListener != nil)}
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let collectionView = ArgoKitViewPage(frame: frame, collectionViewLayout: viewPageLayout)
@@ -176,7 +178,7 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode, UICollectionViewDelegateFlo
     
     func scrollViewScrollPercent(_ scrollView: UIScrollView) {
         guard self.isScrolling else { return }
-        guard self.pageTabScrollingListener != nil else { return }
+        guard hasScrollListener else { return }
         
         let offsetX = scrollView.contentOffset.x
         if offsetX < 0
@@ -218,7 +220,7 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode, UICollectionViewDelegateFlo
             changedFunc(item, toIndex, fromIndex)
         }
         
-        if self.pageTabScrollingListener != nil {
+        if hasScrollListener {
             calculateScrollPercent(scrollView, from: fromIndex, to: toIndex, isScroll: false)
         }
     }
@@ -250,7 +252,12 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode, UICollectionViewDelegateFlo
         }else {
             percentX = abs(CGFloat(from) - percentX)
         }
-        self.pageTabScrollingListener!(percentX, from, to, isScroll)
+        if let listener = innerScrollListener {
+            listener(percentX, from, to, isScroll)
+        }
+        if let listener = externalScrollListener {
+            listener(percentX, from, to, isScroll)
+        }
     }
     
     private func pageWidth() -> CGFloat {
@@ -259,9 +266,14 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode, UICollectionViewDelegateFlo
     
     private func autoScrollPercent(_ scrollView: UIScrollView,_ isScroll: Bool) {
         guard let info = self.pageScrollInfo else { return }
-        guard let listener = self.pageTabScrollingListener else { return }
+        guard hasScrollListener else { return }
         let percent = (scrollView.contentOffset.x - CGFloat(info.from) * pageWidth()) / (CGFloat(info.to - info.from) * pageWidth())
-        listener(abs(percent), info.from, info.to, isScroll)
+        if let listener = innerScrollListener {
+            listener(abs(percent), info.from, info.to, isScroll)
+        }
+        if let listener = externalScrollListener {
+            listener(abs(percent), info.from, info.to, isScroll)
+        }
     }
     
     private func autoScrollEnd(_ scrollView: UIScrollView) {
@@ -308,7 +320,10 @@ extension ArgoKitViewPageNode {
     }
     
     public func setTabScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) {
-        self.pageTabScrollingListener = scrollListener
+        self.externalScrollListener = scrollListener
     }
     
+    internal func setTabInternalScrollingListener(_ listener: ViewPageTabScrollingListener?) {
+        self.innerScrollListener = listener
+    }
 }

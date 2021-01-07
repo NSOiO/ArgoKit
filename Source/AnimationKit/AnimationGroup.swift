@@ -17,22 +17,9 @@ import ArgoAnimation
 /// ```
 ///
 public class AnimationGroup: AnimationBasic {
-    
-    private var delay: Float?
-    private var repeatCount: Int?
-    private var repeatForever: Bool?
-    private var autoReverse: Bool?
-    
-    private var startCallback: MLAAnimationStartBlock?
-    private var pauseCallback: MLAAnimationPauseBlock?
-    private var resumeCallback: MLAAnimationResumeBlock?
-    private var repeatCallback: MLAAnimationRepeatBlock?
-    private var finishCallback: MLAAnimationFinishBlock?
-    
-    private weak var target: UIView?
+
     private var animation: MLAMultiAnimation?
-    private var animPaused = false
-    private var animations: [Animation]?
+    private var animations: [AnimationBasic]?
     private var rawAnimations = [MLAAnimation]()
     
     override init() { super.init() }
@@ -91,7 +78,7 @@ public class AnimationGroup: AnimationBasic {
     /// - Parameter animations: The multiple animations that to be grouped.
     /// - Returns: Self
     @discardableResult
-    public func animations(_ animations: Array<Animation>?) -> Self {
+    public func animations(_ animations: Array<AnimationBasic>?) -> Self {
         guard let array = animations else {
             return self
         }
@@ -120,7 +107,7 @@ public class AnimationGroup: AnimationBasic {
     @discardableResult
     private func updateSerial(progress: Float) -> Self {
         if animation == nil {
-            prepareAnimationGroup()
+            prepareAnimation()
             animation?.runSequentially(rawAnimations)
         }
         animation?.update(progress: CGFloat(progress))
@@ -133,7 +120,7 @@ public class AnimationGroup: AnimationBasic {
     @discardableResult
     private func updateConcurrent(progress: Float) -> Self {
         if animation == nil {
-            prepareAnimationGroup()
+            prepareAnimation()
             animation?.runTogether(rawAnimations)
         }
         animation?.update(progress: CGFloat(progress))
@@ -152,7 +139,7 @@ public class AnimationGroup: AnimationBasic {
     
     /// Starts this animation group serially.
     private func startSerial() {
-        prepareAnimationGroup()
+        prepareAnimation()
         guard let group = animation else {
             assertionFailure("The animationGroup's raw animation is nil.")
             return
@@ -163,7 +150,7 @@ public class AnimationGroup: AnimationBasic {
     
     /// Starts this animation group concurrently.
     private func startConcurrent() {
-        prepareAnimationGroup()
+        prepareAnimation()
         guard let group = animation else {
             assertionFailure("The animationGroup's raw animation is nil.")
             return
@@ -192,10 +179,10 @@ public class AnimationGroup: AnimationBasic {
     /// Sets the call back of start animation.
     /// - Parameter callback: The call back of start animation.
     /// - Returns: Self
-    public func startCallback(_ callback: @escaping MLAAnimationStartBlock) -> Self {
+    public func startCallback(_ callback: @escaping StartCallback) -> Self {
         startCallback = callback
         if let anim = animation {
-            anim.startBlock = callback
+            anim.startBlock = {_ in callback(self)}
         }
         return self
     }
@@ -203,10 +190,10 @@ public class AnimationGroup: AnimationBasic {
     /// Sets the call back of pause animation.
     /// - Parameter callback: The call back of pause animation.
     /// - Returns: Self
-    public func pauseCallback(_ callback: @escaping MLAAnimationPauseBlock) -> Self {
+    public func pauseCallback(_ callback: @escaping PauseCallback) -> Self {
         pauseCallback = callback
         if let anim = animation {
-            anim.pauseBlock = callback
+            anim.pauseBlock = {_ in callback(self)}
         }
         return self
     }
@@ -214,10 +201,10 @@ public class AnimationGroup: AnimationBasic {
     /// Sets the call back of resume animation.
     /// - Parameter callback: The call back of resume animation.
     /// - Returns: Self
-    public func resumeCallback(_ callback: @escaping MLAAnimationResumeBlock) -> Self {
+    public func resumeCallback(_ callback: @escaping ResumeCallback) -> Self {
         resumeCallback = callback
         if let anim = animation {
-            anim.resumeBlock = callback
+            anim.resumeBlock = {_ in callback(self)}
         }
         return self
     }
@@ -225,10 +212,10 @@ public class AnimationGroup: AnimationBasic {
     /// Sets the call back of repeat animation.
     /// - Parameter callback: The call back of repeat animation.
     /// - Returns: Self
-    public func repeatCallback(_ callback: @escaping MLAAnimationRepeatBlock) -> Self {
+    public func repeatCallback(_ callback: @escaping RepeatCallback) -> Self {
         repeatCallback = callback
         if let anim = animation {
-            anim.repeatBlock = callback
+            anim.repeatBlock = {callback(self, Int($1))}
         }
         return self
     }
@@ -236,16 +223,16 @@ public class AnimationGroup: AnimationBasic {
     /// Sets the call back of finish animation.
     /// - Parameter callback: The call back of finish animation.
     /// - Returns: Self
-    public func finishCallback(_ callback: @escaping MLAAnimationFinishBlock) -> Self {
+    public func finishCallback(_ callback: @escaping FinishCallback) -> Self {
         finishCallback = callback
         if let anim = animation {
-            anim.finishBlock = callback
+            anim.finishBlock = {callback(self, $1)}
         }
         return self
     }
     
-    // MARK: - Private
-    private func prepareAnimationGroup() {
+    // MARK: - Override
+    override func prepareAnimation() {
         guard let array = animations else {
             assertionFailure("The animationGroup has no animation, please call `animations` method firstly.")
             return
@@ -272,19 +259,19 @@ public class AnimationGroup: AnimationBasic {
             anim.autoReverses = NSNumber(value: a)
         }
         if let sc = startCallback {
-            anim.startBlock = sc
+            anim.startBlock = {_ in sc(self)}
         }
         if let pc = pauseCallback {
-            anim.pauseBlock = pc
+            anim.pauseBlock = {_ in pc(self)}
         }
         if let rc = resumeCallback {
-            anim.resumeBlock = rc
+            anim.resumeBlock = {_ in rc(self)}
         }
         if let rc = repeatCallback {
-            anim.repeatBlock = rc
+            anim.repeatBlock = {rc(self, Int($1))}
         }
         if let fb = finishCallback {
-            anim.finishBlock = fb
+            anim.finishBlock = {fb(self, $1)}
         }
         
         rawAnimations.removeAll()
@@ -298,5 +285,8 @@ public class AnimationGroup: AnimationBasic {
             }
         }
     }
-
+    
+    override func rawAnimation() -> MLAAnimation? {
+        return animation
+    }
 }
