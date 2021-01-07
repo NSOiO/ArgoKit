@@ -41,6 +41,7 @@ public class TabSegment: View {
     private let itemNodeObserver = ArgoKitNodeObserver()
     private let progressBarNodeObserver = ArgoKitNodeObserver()
     
+    public var node: ArgoKitNode? { _node }
     
     private let _container: VStack = {
         return VStack().alignSelf(.stretch)
@@ -62,6 +63,7 @@ public class TabSegment: View {
         return nil
     }
     
+    // MARK: - Public
     public init(_ itemSpace: Float) {
         _itemSpaceValue = itemSpace
         _node = ArgoKitTabSegmentNode(viewClass: UIScrollView.self)
@@ -70,9 +72,6 @@ public class TabSegment: View {
         _node.alignItemsFlexStart()
         _node.addChildNode(_container.node!)
     }
-    
-    // MARK: - Public
-    public var node: ArgoKitNode? { _node }
     
     convenience public init(_ datas: Array<Any>, @ArgoKitViewBuilder content: @escaping (Any) -> View) {
         self.init(datas, itemSpace: DefaultItemSpaceValue, content: content)
@@ -149,14 +148,14 @@ public class TabSegment: View {
         return self
     }
     
-    // MARK: - Internal
-    
+    // MARK: Internal
     internal func clickedCallback(_ callback: @escaping (Int, Bool) -> Void) {
         _innerClickCallback = callback
     }
     
-    // MARK: - Private
-    
+}
+
+extension TabSegment {
     private func createSubviews(_ datas: Array<Any>, _ content: ((Any) -> View)?) {
         guard let createItem = content else { return }
         guard datas.isEmpty == false else {
@@ -254,8 +253,10 @@ public class TabSegment: View {
         _isDoingAnimation = false
         _animCache.removeAll()
     }
+}
+
+extension TabSegment {
     
-    // MARK: - Scale Animation
     private func prepareContentItemViewScaleAnimation(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
         if autoAnim {
             removeScaleAnimationDisplayLink()
@@ -311,6 +312,9 @@ public class TabSegment: View {
             }
         }
     }
+}
+
+extension TabSegment {
     
     private func doContentItemViewScaleAnimation(_ view: UIView?, _ positive: Bool, _ progress: Float) {
         guard let itemView = view else {
@@ -333,7 +337,6 @@ public class TabSegment: View {
         }
     }
     
-    // MARK: - Other Animation
     private func doContentItemViewOtherAnimation(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
         guard _animType != .scale && _animType != .scaleX else {
             assertionFailure("The scale animation of TabSegment should implement by using Timer.")
@@ -382,7 +385,6 @@ public class TabSegment: View {
         }
     }
     
-    // MARK: ProgressBar Animation
     private func doProgressBarAnimation(_ fromIndex: Int, _ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
         var fromView: UIView?
         if fromIndex > -1 {
@@ -433,7 +435,6 @@ public class TabSegment: View {
         }
     }
     
-    // MARK: ScrollView ContentOffset Animation
     private func doScrollViewContentOffsetAnimation(_ toIndex: Int, _ progress: Float, _ autoAnim: Bool) {
         var cachAnim: Animation?
         if let cache = _animCache[_scrollView] {
@@ -465,8 +466,9 @@ public class TabSegment: View {
             anim.update(progress: progress)
         }
     }
-    
-    // MARK: -
+}
+
+extension TabSegment {
     private func resolveValuesForAnimation(_ anim: Animation, _ from: AnimationValue?, _ to: AnimationValue) {
         switch from {
         case .float(let value):
