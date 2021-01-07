@@ -45,8 +45,8 @@ struct ViewPageCell: ArgoKit.View {
         item = it
     }
     var body: ArgoKit.View {
-        ArgoKit.HStack {
-            ArgoKit.Text(item.text)
+        HStack {
+            Text(item.text)
                 .font(size: 20)
         }
         .height(100)
@@ -58,12 +58,9 @@ struct ViewPageCell: ArgoKit.View {
 struct ViewPage1 : ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     @DataSource var items:[ViewPageCellItem] = [ViewPageCellItem]()
-    
-    var page: ArgoKit.ViewPage<ViewPageCellItem>?
-    var tab: TabSegment?
+    @Alias var tab: TabSegment?
     
     init() {
-        
         for index in 1...10{
             let item = ViewPageCellItem(identifier:String(index), reuseIdentifier:"reuseIdentifier")
             $items.append(item)
@@ -74,31 +71,30 @@ struct ViewPage1 : ArgoKit.View {
             }
             item.text = "test>>>>>>>>" + String(index) + ""
         }
-        
-        page = ArgoKit.ViewPage(data: $items) { item in
-            ViewPageCell(it: item)
-        }
-        tab = TabSegment(["A", "B", "C", "D", "E", "F", "G","H","I","J"]) {
-            Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
-        }
     }
     
     var body: ArgoKit.View {
-        tab!
-            .margin(top: 100, right: 0, bottom: 0, left: 0)
-            .backgroundColor(.yellow)
-//            .clickedCallback { (index) in
-//                print("click \(index)")
-//            }
+    
+        TabSegment(["A", "B", "C", "D", "E", "F", "G","H","I","J"]) {
+            Text($0 as? String).textAlign(.center).width(100).height(50).backgroundColor(.blue)
+        }
+        .margin(top: 100, right: 0, bottom: 0, left: 0)
+        .backgroundColor(.yellow)
+        .clickedCallback { (index) in
+                print("click \(index)")
+        }
+        .alias(variable: $tab)
         
-        ArgoKit.HStack {
-            page!
+        HStack {
+            ViewPage(data: $items) { item in
+                ViewPageCell(it: item)
+            }
             .grow(1)
             .height(300)
             .backgroundColor(UIColor.orange)
             .reuseEnable(enable: false)
             .scrollToPage(index: 2)
-            .link(tabSegment: tab!)
+            .link(tabSegment: self.tab)
 //            .scrollEnable(enable: false)
 //            .pageScrollingListener { (percent, from, to, isScroll) in
 //                NSLog("percent: %f == from:%d == to:%d == isscroll: %d", percent, from, to, isScroll)

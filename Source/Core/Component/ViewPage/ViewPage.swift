@@ -81,12 +81,23 @@ extension ViewPage {
 
 extension ViewPage {
     @discardableResult
-    public func link(tabSegment tab: TabSegment) -> Self {
-        innerScrollListener = { (percent, from, to, scrolling) in
-            tab.scroll(from, to, Float(percent), !scrolling)
+    public func link(tabSegment tab: TabSegment?) -> Self {
+        if let tab = tab {
+            innerScrollListener = { (percent, from, to, scrolling) in
+                tab.scroll(from, to, Float(percent), !scrolling)
+            }
+            tab.clickedInternalCallback { [weak self] (index, shouldAnim) in
+                self?.scrollToPage(index: index, callScrollListener: false)
+            }
         }
-        tab.clickedCallback { [weak self] (index, shouldAnim) in
-            self?.scrollToPage(index: index, callScrollListener: false)
+        return self
+    }
+    
+    @discardableResult
+    public func unlink(tabSegment tab: TabSegment?) -> Self {
+        if let tab = tab {
+            innerScrollListener = nil
+            tab.clickedInternalCallback(nil)
         }
         return self
     }
