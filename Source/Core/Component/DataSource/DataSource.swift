@@ -14,14 +14,12 @@ public typealias DataList<T> = [T]
 public class DataSource<Value>  {
     
     weak var _rootNode : DataSourceReloadNode?
-    public var _value: Value
     public var dataSource: Value
     
     public var reloadAction:((UITableView.RowAnimation)->Void)?
    
     public init<D>(wrappedValue value: Value) where Value == DataList<D>{
         self.dataSource = value
-        _value = value
     }
     
     public var projectedValue: DataSource<Value> {
@@ -569,7 +567,7 @@ extension DataSource{
     ///     @DataSource var dataSource:[[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5, 7], [15, 13, 12,24,1]]
     ///     $dataSource.move(at:IndexPath(row: 1, section: 0), at:IndexPath(row: 2, section: 1))
     ///     print(dataSource)
-    ///     // Prints "[1, 9, 5, 12, 15, 13, 12]"
+    ///     // Prints "[[1, 9, 12, 15, 13, 12],[1, 5,5, 7], [15, 13, 12,24,1]]"
     ///```
     ///
     /// - Parameter indexPath: The  position that element will move from.
@@ -591,7 +589,7 @@ extension DataSource{
             && indexPath.row == newIndexPath.row{
             return self
         }
-        if indexPath.section > section - 1 &&
+        if indexPath.section > section - 1 ||
             newIndexPath.section > section - 1{
             return self
         }
@@ -620,17 +618,17 @@ extension DataSource{
     }
     
     private func move<T>(_ datas:inout[T],_ indexPath:IndexPath,_ newIndexPath:IndexPath) -> Bool{
-        let count = datas.count;
-        if indexPath.row > count - 1 {
-            return false
-        }
-        if newIndexPath.row >= count {
-            return false
-        }
         if newIndexPath.section < 0
             || newIndexPath.row < 0
             || indexPath.section < 0
             || indexPath.row < 0{
+            return false
+        }
+        let count = datas.count
+        if indexPath.row > count - 1 {
+            return false
+        }
+        if newIndexPath.row >= count {
             return false
         }
         let data = datas[indexPath.row]
