@@ -21,8 +21,8 @@ public class ScrollView: View {
     }
     
     /// init the ScrollView
-    /// - Parameter builder: view builder used for ScrollView
-    public convenience init(@ArgoKitViewBuilder builder:@escaping () -> View) {
+    /// - Parameter builder: view builder used for ScrollView ArgoKitListBuilder
+    public convenience init(@ArgoKitListBuilder builder:@escaping () -> View) {
         self.init()
         addSubViews(builder: builder)
     }

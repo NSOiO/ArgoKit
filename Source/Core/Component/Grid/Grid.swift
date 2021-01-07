@@ -57,6 +57,26 @@ public class Grid<D>: ScrollView {
     
     /// Initializer
     /// - Parameters:
+    ///   - content: The content of the grid.
+    ///
+    ///```
+    ///     Grid {
+    ///         Item1()
+    ///         Item2()
+    ///         Item3()
+    ///     }
+    ///```
+    ///
+    public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
+        self.init()
+        let container = content()
+        if let nodes = container.type.viewNodes() {
+            gridNode?.dataSourceHelper.nodeSourceList?.append(contentsOf: [nodes])
+        }
+    }
+    
+    /// Initializer
+    /// - Parameters:
     ///   - waterfall: Whether the grid syle is waterfall.
     ///   - content: The content of the grid.
     ///

@@ -183,9 +183,11 @@ class SessionRow:ArgoKit.View {
    typealias View = ArgoKit.View
    var item:SessionItem
    var hidden:Bool = true
+    var models:NSArray = NSArray()
    init(item:SessionItem) {
        self.item = item
    }
+ 
     
    var body: ArgoKit.View{
         MSUserInterractionHeaderView(item: item)
@@ -208,9 +210,10 @@ var footerView:RefreshFooterView?
 struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
+    var dataspource1:NSArray = NSArray()
+    
     @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
-        
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         for index in 0..<4{
@@ -243,14 +246,16 @@ struct ListDemo:ArgoKit.View{
             item.sessionName = "hahahaha"
             item.lastMessage = "hahahaha"
             item.timeLabel = getTimeLabel()
-            $items.replace(data: item, at: indexPath).apply(with: .none)
+//            $items.replace(data: item, at: indexPath).apply(with: .none)
+            $items.move(at: indexPath, to: IndexPath(row: indexPath.row + 2, section: indexPath.section)).apply(with: .none)
         }
-        .canEditRow({ (item, indx) -> Bool in
+        .cellCanEdit({ (item, indx) -> Bool in
             return true
         })
         .trailingSwipeActions({ (data, indexPath) -> ListSwipeActionsConfiguration? in
             let action = UIContextualAction(style: UIContextualAction.Style.normal, title: "delete") { (action, view, block) in
                 print("data\(data)")
+               
     
 //                $items.delete(at: indexPath).apply(with: UITableView.RowAnimation.top)
 //

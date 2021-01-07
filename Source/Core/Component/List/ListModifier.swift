@@ -44,7 +44,7 @@ extension List {
     ///   - animated: true if you want to animate the change in position; false if it should be immediate.
     /// - Returns: Self
     @discardableResult
-    public func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) -> Self {
+    public func cellScrollTo(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) -> Self {
         addAttribute(#selector(UITableView.scrollToRow(at:at:animated:)),indexPath, scrollPosition.rawValue, animated)
         return self
     }
@@ -55,7 +55,7 @@ extension List {
     ///   - animated: true if you want to animate the change in position; false if it should be immediate.
     /// - Returns: Self
     @discardableResult
-    public func scrollToNearestSelectedRow(at scrollPosition: UITableView.ScrollPosition, animated: Bool) -> Self {
+    public func cellScrollToNearestSelected(at scrollPosition: UITableView.ScrollPosition, animated: Bool) -> Self {
         addAttribute(#selector(UITableView.scrollToNearestSelectedRow(at:animated:)), scrollPosition.rawValue, animated)
         return self
     }
@@ -114,7 +114,7 @@ extension List {
     ///   - scrollPosition: A constant that identifies a relative position in the list (top, middle, bottom) for the row when scrolling concludes. See UITableView.ScrollPosition for descriptions of valid constants.
     /// - Returns: Self
     @discardableResult
-    public func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) -> Self {
+    public func cellSelectIndexPath(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) -> Self {
         addAttribute(#selector(UITableView.selectRow(at:animated:scrollPosition:)), indexPath, animated, scrollPosition.rawValue)
         return self
     }
@@ -125,7 +125,7 @@ extension List {
     ///   - animated: true if you want to animate the deselection, and false if the change should be immediate.
     /// - Returns: Self
     @discardableResult
-    public func deselectRow(at indexPath: IndexPath, animated: Bool) -> Self {
+    public func cellDeselectIndexPath(at indexPath: IndexPath, animated: Bool) -> Self {
         addAttribute(#selector(UITableView.deselectRow(at:animated:)), indexPath, animated)
         return self
     }
@@ -251,7 +251,7 @@ extension List {
     /// - Parameter action: Result of the ask.
     /// - Returns: Self
     @discardableResult
-    public func canEditRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func cellCanEdit(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:canEditRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -270,7 +270,7 @@ extension List {
     /// - Parameter action: Result of the ask.
     /// - Returns: Self
     @discardableResult
-    public func canMoveRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func cellCanMove(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:canMoveRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -297,7 +297,7 @@ extension List {
     /// - Parameter action: Result of the ask.
     /// - Returns: Self
     @discardableResult
-    public func commitEditingRow(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+    public func cellCommitEditing(_ action: @escaping (_ editingStyle: UITableViewCell.EditingStyle, _ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:commit:forRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 3,
@@ -315,7 +315,7 @@ extension List {
     /// - Parameter action: The action that handle tells the data source to move a row at a specific location in the list to another location.
     /// - Returns: Self
     @discardableResult
-    public func moveRow(_ action: @escaping (_ sourceData: D, _ destinationData: D, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
+    public func cellMove(_ action: @escaping (_ sourceData: D, _ destinationData: D, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:moveRowAt:to:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -338,7 +338,7 @@ extension List {
     /// - Parameter action: The action to prefetch data source.
     /// - Returns: Self
     @discardableResult
-    public func prefetchRows(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
+    public func cellsPrefetch(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:prefetchRowsAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -355,7 +355,7 @@ extension List {
     /// - Parameter action: The action to cancel a previously triggered data prefetch request.
     /// - Returns: Self
     @discardableResult
-    public func cancelPrefetchingRows(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
+    public func cellsCancelPrefetching(_ action: @escaping (_ indexPaths: [IndexPath]) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:cancelPrefetchingForRowsAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -479,23 +479,6 @@ extension List {
         return self
     }
     
-    /// Asks the delegate if the specified row should be highlighted.
-    /// - Parameter action: Result of the ask.
-    /// - Returns: Self
-    @discardableResult
-    public func shouldHighlightRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
-        let sel = #selector(TableNode<D>.tableView(_:shouldHighlightRowAt:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            
-            if paramter?.count ?? 0 >= 2,
-               let data = paramter?.first as? D,
-               let indexPath = paramter?.last as? IndexPath {
-                return action(data, indexPath)
-            }
-            return true
-        })
-        return self
-    }
     
     /// Sets the action that handle the specified row was highlighted.
     /// - Parameter action: The action that handle the specified row was highlighted.
@@ -698,7 +681,7 @@ extension List {
     /// - Parameter action: Result of the ask.
     /// - Returns: Self
     @discardableResult
-    public func shouldIndentWhileEditingRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func cellShouldIndentWhileEditing(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:shouldIndentWhileEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -716,7 +699,7 @@ extension List {
     /// - Parameter action: The action that handle the list is about to go into editing mode.
     /// - Returns: Self
     @discardableResult
-    public func willBeginEditingRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
+    public func cellWillBeginEditing(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:willBeginEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -734,7 +717,7 @@ extension List {
     /// - Parameter action: The action that handle the list has left editing mode.
     /// - Returns: Self
     @discardableResult
-    public func didEndEditingRow(_ action: @escaping (_ data: D?, _ indexPath: IndexPath?) -> Void) -> Self {
+    public func cellDidEndEditing(_ action: @escaping (_ data: D?, _ indexPath: IndexPath?) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didEndEditingRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
@@ -859,7 +842,7 @@ extension List {
     /// - Parameter action: Result of the ask.
     /// - Returns: Self
     @discardableResult
-    public func canFocusRow(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
+    public func cellCanFocus(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:canFocusRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             

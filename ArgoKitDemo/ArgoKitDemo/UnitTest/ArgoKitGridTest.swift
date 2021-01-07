@@ -34,10 +34,10 @@ class ArgoKitGridTestModel {
             $headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for index in 0..<10{
+            for j in 0..<5{
                 let item = ArgoKitGridCellTestModel()
-                item.headerName = "点击图片改变文本内容"
-                item.imagePath = images[index%5]
+                item.headerName = String(index)+"=="+String(j)
+                item.imagePath = images[j%5]
                 subDataSource.append(item)
             }
             $dataSource2.append(contentsOf: subDataSource)
@@ -84,71 +84,71 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-      /*
-        Grid(){
-            Text("dsa")
-                .lineLimit(0)
-                .textAlign(.center)
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
+      
+//        Grid{
+//            Text("dsa")
+//                .lineLimit(0)
+//                .textAlign(.center)
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Text("scsdcsd")
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                        .aspect(ratio: 1)
+//                        .circle()
+//                        .onTapGesture {
+//
+//                        }
+//            Image("icybay.jpg")
+//                            .aspect(ratio: 1)
+//                            .circle()
+//                            .onTapGesture {
+//
+//                            }
+//            Text("scsdcsd")
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                    .aspect(ratio: 1)
+//                    .circle()
+//                    .onTapGesture {
+//
+//                    }
+//            Image("icybay.jpg")
+//                                .aspect(ratio: 1)
+//                                .circle()
+//                                .onTapGesture {
+//
+//                                }
+//
+//        }
+//        .grow(1.0)
+//        .columnCount(3)
+//        .columnSpacing(5)
+//        .sectionHeader { () -> View in
+//            Text("scsdcsd").backgroundColor(.yellow)
+//        }
 
-                    }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                        .aspect(ratio: 1)
-                        .circle()
-                        .onTapGesture {
-
-                        }
-            Image("icybay.jpg")
-                            .aspect(ratio: 1)
-                            .circle()
-                            .onTapGesture {
-
-                            }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                                .aspect(ratio: 1)
-                                .circle()
-                                .onTapGesture {
-
-                                }
-
-        }
-        .grow(1.0)
-        .columnCount(3)
-        .columnSpacing(5)
-        .sectionHeader { () -> View in
-            Text("scsdcsd").backgroundColor(.yellow)
-        }
-
-       */
+      
         Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
@@ -175,8 +175,9 @@ struct ArgoKitGridTest: ArgoKit.View {
         .cellDidDisappear({ (data, indexpath) in
         })
         .cellSelected({ (data, indexpath) in
-            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
-            data.imagePath = "icybay.jpg"
+//            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
+//            data.imagePath = "icybay.jpg"
+            model.$dataSource1.move(at: indexpath, to: IndexPath(row: indexpath.row, section: indexpath.section+1)).apply()
 //            AlertView(title: data.headerName, message: data.headerName, preferredStyle: UIAlertController.Style.alert)
 //            .textField()
 //            .destructive(title: "确认") { text in
