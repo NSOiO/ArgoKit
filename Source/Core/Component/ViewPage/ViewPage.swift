@@ -86,7 +86,7 @@ extension ViewPage {
             tab.scroll(from, to, Float(percent), !scrolling)
         }
         tab.clickedCallback { [weak self] (index, shouldAnim) in
-            self?.scrollToPage(index: index)
+            self?.scrollToPage(index: index, callScrollListener: false)
         }
         return self
     }

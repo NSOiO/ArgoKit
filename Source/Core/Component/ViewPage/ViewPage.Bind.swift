@@ -9,10 +9,10 @@ import Foundation
 
 extension ViewPage {
     @discardableResult
-    public func scrollToPage(index:@escaping @autoclosure () -> Int) -> Self {
-		return self.bindCallback({ [self] in 
-			viewPageNode.scrollToPage(to: index())
-		}, forKey: #function)
+    public func scrollToPage(index:@escaping @autoclosure () -> Int, callScrollListener:Bool = true) -> Self {
+        return self.bindCallback({ [self] in
+            viewPageNode.scrollToPage(to: index(), callScrollListener: callScrollListener)
+        }, forKey: #function)
     }
     
     @discardableResult

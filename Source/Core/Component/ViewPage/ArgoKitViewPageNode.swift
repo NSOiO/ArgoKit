@@ -283,12 +283,14 @@ extension ArgoKitViewPageNode {
         self.pageCount = pageCount
     }
     
-    public func scrollToPage(to: Int) {
+    public func scrollToPage(to: Int, callScrollListener:Bool = true) {
         let from = self.currentIndex
         self.currentIndex = to
         
         if (self.view != nil) {
-            self.pageScrollInfo = ArgoKitViewPageScrollInfo(isScroll: true, from: from, to: to)
+            if callScrollListener {
+                self.pageScrollInfo = ArgoKitViewPageScrollInfo(isScroll: true, from: from, to: to)
+            }
             self.viewPage.scrollToItem(at: NSIndexPath(item: to, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
         }
     }
