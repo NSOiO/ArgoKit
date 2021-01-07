@@ -33,7 +33,8 @@ public class TabSegment: View {
     private var _fromIndex: Int = -1
     private var _toIndex: Int = 0
     private var _displayLink: CADisplayLink?
-    private var _clickCallback: ((Int,Bool)->Void)?
+    private var _innerClickCallback: ((Int,Bool)->Void)?
+    private var _externalClickCallback: ((Int)->Void)?
     
     private let containerNodeObserver = ArgoKitNodeObserver()
     private let itemStackNodeObserver = ArgoKitNodeObserver()
@@ -143,12 +144,19 @@ public class TabSegment: View {
     }
     
     @discardableResult
-    public func clickedCallback(_ callback: @escaping (Int, Bool) -> Void) -> Self {
-        _clickCallback = callback
+    public func clickedCallback(_ callback: @escaping (Int) -> Void) -> Self {
+        _externalClickCallback = callback
         return self
     }
     
+    // MARK: - Internal
+    
+    internal func clickedCallback(_ callback: @escaping (Int, Bool) -> Void) {
+        _innerClickCallback = callback
+    }
+    
     // MARK: - Private
+    
     private func createSubviews(_ datas: Array<Any>, _ content: ((Any) -> View)?) {
         guard let createItem = content else { return }
         guard datas.isEmpty == false else {
@@ -211,8 +219,11 @@ public class TabSegment: View {
             return
         }
         let toIndex = index ?? _toIndex
-        if let callback = _clickCallback {
+        if let callback = _innerClickCallback {
             callback(toIndex, anim)
+        }
+        if let callback = _externalClickCallback {
+            callback(toIndex)
         }
         _fromIndex = _toIndex
         _toIndex = toIndex

@@ -87,9 +87,9 @@ struct ViewPage1 : ArgoKit.View {
         tab!
             .margin(top: 100, right: 0, bottom: 0, left: 0)
             .backgroundColor(.yellow)
-            .clickedCallback { (index, anim) in
-                page?.scrollToPage(index: index)
-            }
+//            .clickedCallback { (index) in
+//                print("click \(index)")
+//            }
         
         ArgoKit.HStack {
             page!
@@ -98,18 +98,15 @@ struct ViewPage1 : ArgoKit.View {
             .backgroundColor(UIColor.orange)
             .reuseEnable(enable: false)
             .scrollToPage(index: 2)
+            .link(tabSegment: tab!)
 //            .scrollEnable(enable: false)
-            .pageScrollingListener { (percent, from, to, isScroll) in
-//                let value = Float(percent) - Float(from)
-//                if Float(percent) >= Float(from) {
-//                    value = 1
-//                }
-                NSLog("percent: %f == from:%d == to:%d == isscroll: %d", percent, from, to, isScroll)
-                tab?.scroll(from, to, Float(percent), !isScroll)
-            }
-            .onChangeSelected { (item, to, from) in
-                NSLog(">>> %d", to)
-            }
+//            .pageScrollingListener { (percent, from, to, isScroll) in
+//                NSLog("percent: %f == from:%d == to:%d == isscroll: %d", percent, from, to, isScroll)
+//            }
+//            .onChangeSelected { (item, to, from) in
+//                NSLog(">>> %d", to)
+//            }
+            
         }
         .backgroundColor(UIColor.red)
         .margin(top: 100, right: 0, bottom: 0, left: 0)
