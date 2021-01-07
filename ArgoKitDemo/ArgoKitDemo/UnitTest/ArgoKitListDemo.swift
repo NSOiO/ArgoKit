@@ -220,7 +220,7 @@ struct ListDemo:ArgoKit.View{
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
-            $items.append(data:item)
+            $items.append(item)
         }
     }
     

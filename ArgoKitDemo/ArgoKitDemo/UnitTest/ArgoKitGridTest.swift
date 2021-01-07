@@ -31,7 +31,7 @@ class ArgoKitGridTestModel {
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
-            $headerSource.append(data: headerModel)
+            $headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
             for index in 0..<10{
