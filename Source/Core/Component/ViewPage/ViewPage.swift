@@ -13,6 +13,9 @@ public class ViewPage<T> : ScrollView {
     var viewPageNode : ArgoKitViewPageNode<T> {
         pNode as! ArgoKitViewPageNode
     }
+
+    private var innerScrollListener: ViewPageTabScrollingListener?
+    private var externalScrollListener: ViewPageTabScrollingListener?
     
     override func createNode() {
         pNode = ArgoKitViewPageNode<T>(viewClass: UICollectionView.self)
@@ -21,6 +24,7 @@ public class ViewPage<T> : ScrollView {
 
     internal required init() {
         super.init()
+        setupTabScrollingListener()
     }
     
     public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where T:ArgoKitNode{
@@ -39,7 +43,16 @@ public class ViewPage<T> : ScrollView {
         }
     }
     
-
+    private func setupTabScrollingListener() {
+        viewPageNode.setTabScrollingListener { [unowned self] (percent, from, to, scrolling) in
+            if let inner = innerScrollListener {
+                inner(percent, from, to, scrolling)
+            }
+            if let external = externalScrollListener {
+                external(percent, from, to, scrolling)
+            }
+        }
+    }
     
 }
 
@@ -61,7 +74,20 @@ extension ViewPage {
     
     @discardableResult
     public func pageScrollingListener(scrollListener:@escaping ViewPageTabScrollingListener) -> Self {
-        viewPageNode.setTabScrollingListener(scrollListener: scrollListener)
+        externalScrollListener = scrollListener
+        return self
+    }
+}
+
+extension ViewPage {
+    @discardableResult
+    public func link(tabSegment tab: TabSegment) -> Self {
+        innerScrollListener = { (percent, from, to, scrolling) in
+            tab.scroll(from, to, Float(percent), !scrolling)
+        }
+        tab.clickedCallback { [weak self] (index, shouldAnim) in
+            self?.scrollToPage(index: index)
+        }
         return self
     }
 }
