@@ -40,19 +40,19 @@ class DataSourceHelper<D> {
             dataSourceList?._rootNode = _rootNode
         }
     }
-    public var nodeSourceList:DataSource<SectionDataList<ArgoKitNode>>?
+    lazy public var nodeSourceList:DataSource<SectionDataList<ArgoKitNode>>? = {
+        let _nodeSourceList = DataSource<SectionDataList<ArgoKitNode>>(wrappedValue: SectionDataList<ArgoKitNode>())
+        return _nodeSourceList
+    }()
     
     public var buildNodeFunc: ((D)->View?)?
     
-    init() {
-        nodeSourceList = DataSource<SectionDataList<ArgoKitNode>>(wrappedValue: SectionDataList<ArgoKitNode>())
-    }
     
-    func dataSource()->Array<Array<D>>? {
-        if let list = sectionDataSourceList?.wrappedValue{
+    func dataSource()->SectionDataList<D>? {
+        if let list = sectionDataSourceList?.dataSource{
             return list
         }
-        if let list = dataSourceList?.wrappedValue {
+        if let list = dataSourceList?.dataSource {
             return [list]
         }
         return [[]]
@@ -62,14 +62,14 @@ class DataSourceHelper<D> {
 extension DataSourceHelper {
     
     open func numberOfSection() -> Int {
-        if let nodelist =  nodeSourceList?.wrappedValue, nodelist.count >= 1{
+        if let nodelist =  nodeSourceList?.dataSource, nodelist.count >= 1{
             return nodelist.count
         }
         return dataSource()?.count ?? 1
     }
     
     open func numberOfRows(section: Int) -> Int {
-        if let nodelist =  nodeSourceList?.wrappedValue, nodelist.count >= 1{
+        if let nodelist =  nodeSourceList?.dataSource, nodelist.count >= 1{
             return nodelist[section].count
         }
         if section < dataSource()?.count ?? 0 {
@@ -93,7 +93,7 @@ extension DataSourceHelper {
     }
     
     open func dataForRow(_ row: Int, at section: Int) -> Any? {
-        if let nodelist =  nodeSourceList?.wrappedValue,
+        if let nodelist =  nodeSourceList?.dataSource,
            nodelist.count > section,
            nodelist[section].count > row{
             
@@ -109,7 +109,7 @@ extension DataSourceHelper {
     }
     
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
-        if let nodelist =  nodeSourceList?.wrappedValue,
+        if let nodelist =  nodeSourceList?.dataSource,
            nodelist.count > section,
            nodelist[section].count > row{
             let node = nodelist[section][row]
@@ -182,119 +182,64 @@ extension DataSourceHelper {
 
 // 数据操作
 extension DataSourceHelper {
-    func deleteRow(_ indexPath: IndexPath,with animation: UITableView.RowAnimation) {
-
-        if indexPath.section >= dataSource()?.count ?? 0
-            || indexPath.row >= dataSource()?[indexPath.section].count ?? 0 {
-            return
+    public func deleteRows(_ indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        for indexPath in indexPaths {
+            if var value = self.sectionDataSourceList?.dataSource{
+                value[indexPath.section].remove(at:indexPath.row)
+                self.sectionDataSourceList?.dataSource = value
+            }
+            if var value = self.dataSourceList?.dataSource{
+                value.remove(at:indexPath.row)
+                self.dataSourceList?.dataSource = value
+            }
         }
-        if let list =  self.sectionDataSourceList {
-            list.deleteRow(at: indexPath, with: animation)
-        }else if let list = self.dataSourceList{
-            list.deleteRow(at: indexPath, with: animation)
+        
+        if let node = self._rootNode{
+            node.deleteRows(at: indexPaths, with: animation)
         }
     }
     
-    func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
-                
+    func deleteRow(_ indexPath: IndexPath, with animation: UITableView.RowAnimation) {
+        self.deleteRows([indexPath], with: animation)
+    }
+
+    public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        
         if indexPath.section >= dataSource()?.count ?? 0
             || indexPath.row >= dataSource()?[indexPath.section].count ?? 0
             || newIndexPath.section >= dataSource()?.count ?? 0 {
             return
         }
         
-        if let list =  self.sectionDataSourceList {
-            list.moveRow(at: indexPath, to: newIndexPath)
-        }else if let list = self.dataSourceList{
-            list.moveRow(at: indexPath, to: newIndexPath)
+        let itemToMove = dataSource()![indexPath.section][indexPath.row]
+        if var value = self.sectionDataSourceList?.dataSource {
+            value[indexPath.section].remove(at:indexPath.row)
+            self.sectionDataSourceList?.dataSource = value
+        }else if var value = self.dataSourceList?.dataSource{
+            value.remove(at:indexPath.row)
+            self.dataSourceList?.dataSource = value
+        }
+        if indexPath.section != newIndexPath.section
+            || newIndexPath.row < indexPath.row {
+            if var value = self.sectionDataSourceList?.dataSource {
+                value[newIndexPath.section].insert(itemToMove,at:newIndexPath.row)
+                self.sectionDataSourceList?.dataSource = value
+            }else if var value = self.dataSourceList?.dataSource{
+                value.insert(itemToMove,at:newIndexPath.row)
+                self.dataSourceList?.dataSource = value
+            }
+        } else {
+            if var value = self.sectionDataSourceList?.dataSource {
+                value[newIndexPath.section].insert(itemToMove,at:newIndexPath.row - 1)
+                self.sectionDataSourceList?.dataSource = value
+            }else if var value = self.dataSourceList?.dataSource{
+                value.insert(itemToMove,at:newIndexPath.row - 1)
+                self.dataSourceList?.dataSource = value
+            }
+        }
+        if let node = self._rootNode{
+            node.moveRow(at: indexPath, to: newIndexPath)
         }
     }
 }
-// MARK:暂时不需要
-extension DataSourceHelper {
-    
-    
-//    func reloadSection(data: [D], section: Int) {
-//        if section >= dataSource()?.count ?? 0 {
-//            return
-//        }
-//        sectionDataSourceList!.wrappedValue[section] = data
-//    }
-//
-//    func reloadRow(rowData: D, row: Int, at section: Int) {
-//        if section >= dataSource()?.count ?? 0
-//            || row >= dataSource()?[section].count ?? 0 {
-//            return
-//        }
-//
-//        sectionDataSourceList!.wrappedValue[section][row] = rowData
-//    }
-//
-//    func appendSections(_ data: [[D]]) {
-//        if dataSource() == nil {
-//            sectionDataSourceList!.wrappedValue = data
-//            return
-//        }
-//
-//        sectionDataSourceList?.wrappedValue.append(contentsOf: data)
-//    }
-//
-//    func appendRows(rowData: [D], at section: Int) {
-//
-//        if dataSource() == nil {
-//            sectionDataSourceList!.wrappedValue = [rowData]
-//            return
-//        }
-//
-//        if section >= dataSource()?.count ?? 0 {
-//            sectionDataSourceList?.wrappedValue.append(contentsOf: [rowData])
-//            return
-//        }
-//
-//        sectionDataSourceList?.wrappedValue[section].append(contentsOf: rowData)
-//    }
-//
-//    func insertSection(data: [D], section: Int) {
-//
-//        if section >= dataSource()?.count ?? 0 {
-//            appendSections([data])
-//            return
-//        }
-//        sectionDataSourceList?.wrappedValue.insert(data, at: section)
-//    }
-//
-//    func insertRow(rowData: D, row: Int, at section: Int) {
-//
-//        if section >= dataSource()?.count ?? 0
-//            || row >= dataSource()?[section].count ?? 0 {
-//            appendRows(rowData: [rowData], at: section)
-//            return
-//        }
-//
-//        sectionDataSourceList?.wrappedValue[section].insert(rowData, at: row)
-//    }
-    
 
-    
-    //注释掉，不需要
-//    func deleteSection(_ section: Int) {
-//        sectionDataSourceList?.wrappedValue.remove(at: section)
-//    }
-//
-//    func moveSection(_ section: Int, toSection newSection: Int) {
-//
-//        if section >= dataSource()?.count ?? 0 {
-//            return
-//        }
-//
-//        let itemToMove = dataSource()![section]
-//        sectionDataSourceList?.wrappedValue.remove(at: section)
-//        if newSection > section {
-//            sectionDataSourceList?.wrappedValue.insert(itemToMove, at: newSection-1)
-//        } else {
-//            sectionDataSourceList?.wrappedValue.insert(itemToMove, at: newSection)
-//        }
-//    }
-    
-
-}

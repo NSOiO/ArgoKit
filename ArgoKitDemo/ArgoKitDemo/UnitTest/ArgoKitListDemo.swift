@@ -16,6 +16,7 @@ extension UIColor{
 struct MSUserInterractionHeaderView: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
+    var item:SessionItem
     var body: ArgoKit.View {
          HStack{
             
@@ -42,7 +43,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                     Text("dsascdscddscsdcsddcsdcsdcdcds")
+                        Text(item.lastMessage)
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
                          .shrink(1.0)
@@ -50,7 +51,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                         Button(action: {
                             
                         }){
-                            Image("icybay.jpg")
+                            Image(item.imagePath as! String)
                                 .margin(edge: .left, value: 4)
                                 .width(15.0)
                                 .height(15.0)
@@ -187,7 +188,7 @@ class SessionRow:ArgoKit.View {
    }
     
    var body: ArgoKit.View{
-        MSUserInterractionHeaderView()
+        MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
         .onTapGesture {[data = self.item] in
             print(data)
@@ -209,16 +210,17 @@ struct ListDemo:ArgoKit.View{
     typealias View = ArgoKit.View
     @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
+        
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<10{
+        for index in 0..<4{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
-            items.append(item)
+            $items.append(data:item)
         }
     }
     
@@ -229,13 +231,19 @@ struct ListDemo:ArgoKit.View{
             SessionRow(item: item)
         }
         .cellSelected {item, indexPath in
-            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
-            .textField()
-            .destructive(title: "确认") { text in
-                print(text ?? "")
-            }
-            .cancel(title: "取消") {}
-            .show()
+//            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
+//            .textField()
+//            .destructive(title: "确认") { text in
+//                print(text ?? "")
+//            }
+//            .cancel(title: "取消") {}
+//            .show()
+            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
+            item.imagePath = "icybay.jpg"
+            item.sessionName = "hahahaha"
+            item.lastMessage = "hahahaha"
+            item.timeLabel = getTimeLabel()
+            $items.replace(data: item, at: indexPath).apply(with: .none)
         }
         .canEditRow({ (item, indx) -> Bool in
             return true
@@ -243,7 +251,23 @@ struct ListDemo:ArgoKit.View{
         .trailingSwipeActions({ (data, indexPath) -> ListSwipeActionsConfiguration? in
             let action = UIContextualAction(style: UIContextualAction.Style.normal, title: "delete") { (action, view, block) in
                 print("data\(data)")
-                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
+    
+//                $items.delete(at: indexPath).apply(with: UITableView.RowAnimation.top)
+//
+//                $items.delete().apply().insert().apply(.Fade) // deleteRow
+                
+//                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
+                let ip = IndexPath(row: 1, section: 0)
+                
+                
+                
+                
+                //1. guai
+                //2. data, IndexPath -
+                
+                //1. insert /insert / reload
+                
+                
             }
             return ListSwipeActionsConfiguration(actions: [action])
         })

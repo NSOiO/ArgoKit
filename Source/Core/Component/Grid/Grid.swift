@@ -73,7 +73,7 @@ public class Grid<D>: ScrollView {
         gridNode?.waterfall(waterfall)
         let container = content()
         if let nodes = container.type.viewNodes() {
-            gridNode?.dataSourceHelper.nodeSourceList?.wrappedValue.append(nodes)
+            gridNode?.dataSourceHelper.nodeSourceList?.append(contentsOf: [nodes])
         }
     }
     
@@ -129,7 +129,7 @@ extension Grid {
     public func sectionHeader(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         if let nodes = container.type.viewNodes() {
-            gridNode?.headerSourceHelper.nodeSourceList?.wrappedValue.append(nodes)
+            gridNode?.headerSourceHelper.nodeSourceList?.append(contentsOf:[nodes])
         }
         return self
     }
@@ -155,7 +155,7 @@ extension Grid {
     public func sectionFooter(@ArgoKitListBuilder footerContent: @escaping () -> View) -> Self {
         let container = footerContent()
         if let nodes = container.type.viewNodes() {
-            gridNode?.footerSourceHelper.nodeSourceList?.wrappedValue.append(nodes)
+            gridNode?.footerSourceHelper.nodeSourceList?.append(contentsOf:[nodes])
         }
         return self
     }

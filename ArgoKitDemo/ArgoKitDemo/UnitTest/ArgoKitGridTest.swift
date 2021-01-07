@@ -26,11 +26,12 @@ class ArgoKitGridTestModel {
     }
    
     func reloadMoreData(){
+        var dataSource = [[ArgoKitGridCellTestModel]]()
         for index in 0..<20 {
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
-            headerSource.append(headerModel)
+            $headerSource.append(data: headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
             for index in 0..<10{
@@ -38,14 +39,16 @@ class ArgoKitGridTestModel {
                 item.headerName = "点击图片改变文本内容"
                 item.imagePath = images[index%5]
                 subDataSource.append(item)
-                dataSource2.append(item)
             }
-            dataSource1.append(subDataSource)
-           
+            $dataSource2.append(contentsOf: subDataSource)
+            dataSource.append(subDataSource)
         }
+       
         page = page + 1
+        $dataSource1.append(contentsOf: dataSource)
+        $dataSource1.apply()
+        $dataSource2.apply()
     }
-    
 
 }
 
@@ -81,7 +84,7 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        /*
+      /*
         Grid(){
             Text("dsa")
                 .lineLimit(0)
@@ -144,8 +147,8 @@ struct ArgoKitGridTest: ArgoKit.View {
         .sectionHeader { () -> View in
             Text("scsdcsd").backgroundColor(.yellow)
         }
- */
-       
+
+       */
         Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
@@ -203,7 +206,6 @@ struct ArgoKitGridTest: ArgoKit.View {
         .refreshFooterView { () -> RefreshFooterView in
             RefreshFooterView {refresh in
                 model.reloadMoreData()
-                model.$dataSource2.reloadData()
                 refresh?.endRefreshing()
                 refresh?.resetNoMoreData()
             } _: { () -> View in
@@ -218,7 +220,9 @@ struct ArgoKitGridTest: ArgoKit.View {
             .alias(variable: $footerView)
             .autoRefreshOffPage(3)
         }
+        
     }
+
  
 }
 

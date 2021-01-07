@@ -27,7 +27,7 @@ public class ViewPage<T> : ScrollView {
         self.init()
         let container = content()
         if let nodes = container.type.viewNodes() {
-            viewPageNode.dataSourceHelper.nodeSourceList?.wrappedValue.append(nodes)
+            viewPageNode.dataSourceHelper.nodeSourceList?.append(data: nodes)
         }
     }
     
