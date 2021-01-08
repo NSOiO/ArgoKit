@@ -1,6 +1,111 @@
 {
   "warnings": [
     {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 11,
+      "symbol": "StartCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 11,
+      "symbol": "StartCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 11,
+      "symbol": "StartCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 12,
+      "symbol": "PauseCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 12,
+      "symbol": "PauseCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 12,
+      "symbol": "PauseCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 13,
+      "symbol": "ResumeCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 13,
+      "symbol": "ResumeCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 13,
+      "symbol": "ResumeCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 14,
+      "symbol": "RepeatCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 14,
+      "symbol": "RepeatCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 14,
+      "symbol": "RepeatCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 15,
+      "symbol": "FinishCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 15,
+      "symbol": "FinishCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/Animation.swift",
+      "line": 15,
+      "symbol": "FinishCallback",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/AnimationKit/AnimationBuilder.swift",
       "line": 10,
       "symbol": "AnimationValue",
@@ -236,20 +341,6 @@
       "line": 75,
       "symbol": "View.ViewNode()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Basic/View.swift",
-      "line": 84,
-      "symbol": "View.alias(variable:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Basic/View.swift",
-      "line": 84,
-      "symbol": "View.alias(variable:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -547,6 +638,580 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/EmptyView.swift",
+      "line": 28,
+      "symbol": "EmptyView.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/EmptyView.swift",
+      "line": 28,
+      "symbol": "EmptyView.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/EmptyView.swift",
+      "line": 32,
+      "symbol": "EmptyView.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/EmptyView.swift",
+      "line": 32,
+      "symbol": "EmptyView.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 121,
+      "symbol": "ForEach.parentNode()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 121,
+      "symbol": "ForEach.parentNode()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 126,
+      "symbol": "ForEach.applyLayout()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 126,
+      "symbol": "ForEach.applyLayout()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 130,
+      "symbol": "ForEach.applyLayout(size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 130,
+      "symbol": "ForEach.applyLayout(size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 134,
+      "symbol": "ForEach.calculateLayout(size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 134,
+      "symbol": "ForEach.calculateLayout(size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 145,
+      "symbol": "ForEach.flexDirection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 145,
+      "symbol": "ForEach.flexDirection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 150,
+      "symbol": "ForEach.justifyContent(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 150,
+      "symbol": "ForEach.justifyContent(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 155,
+      "symbol": "ForEach.alignContent(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 155,
+      "symbol": "ForEach.alignContent(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 160,
+      "symbol": "ForEach.alignItems(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 160,
+      "symbol": "ForEach.alignItems(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 165,
+      "symbol": "ForEach.alignSelf(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 165,
+      "symbol": "ForEach.alignSelf(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 170,
+      "symbol": "ForEach.positionType(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 170,
+      "symbol": "ForEach.positionType(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 175,
+      "symbol": "ForEach.wrap(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 175,
+      "symbol": "ForEach.wrap(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 180,
+      "symbol": "ForEach.displayFlex()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 180,
+      "symbol": "ForEach.displayFlex()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 184,
+      "symbol": "ForEach.displayNone()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 184,
+      "symbol": "ForEach.displayNone()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 189,
+      "symbol": "ForEach.flex(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 189,
+      "symbol": "ForEach.flex(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 194,
+      "symbol": "ForEach.grow(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 194,
+      "symbol": "ForEach.grow(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 199,
+      "symbol": "ForEach.shrink(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 199,
+      "symbol": "ForEach.shrink(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 204,
+      "symbol": "ForEach.basis(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 204,
+      "symbol": "ForEach.basis(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 210,
+      "symbol": "ForEach.position(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 210,
+      "symbol": "ForEach.position(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 218,
+      "symbol": "ForEach.position(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 218,
+      "symbol": "ForEach.position(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 224,
+      "symbol": "ForEach.margin(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 224,
+      "symbol": "ForEach.margin(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 232,
+      "symbol": "ForEach.margin(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 232,
+      "symbol": "ForEach.margin(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 237,
+      "symbol": "ForEach.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 237,
+      "symbol": "ForEach.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 244,
+      "symbol": "ForEach.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 244,
+      "symbol": "ForEach.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 263,
+      "symbol": "ForEach.size(width:height:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 263,
+      "symbol": "ForEach.size(width:height:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 267,
+      "symbol": "ForEach.width(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 267,
+      "symbol": "ForEach.width(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 271,
+      "symbol": "ForEach.height(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 271,
+      "symbol": "ForEach.height(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 275,
+      "symbol": "ForEach.minWidth(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 275,
+      "symbol": "ForEach.minWidth(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 279,
+      "symbol": "ForEach.minHeight(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 279,
+      "symbol": "ForEach.minHeight(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 283,
+      "symbol": "ForEach.maxWidth(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 283,
+      "symbol": "ForEach.maxWidth(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 287,
+      "symbol": "ForEach.maxHeight(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 287,
+      "symbol": "ForEach.maxHeight(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 294,
+      "symbol": "ForEach.width()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 294,
+      "symbol": "ForEach.width()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 298,
+      "symbol": "ForEach.height()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 298,
+      "symbol": "ForEach.height()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 302,
+      "symbol": "ForEach.minWidth()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 302,
+      "symbol": "ForEach.minWidth()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 306,
+      "symbol": "ForEach.minHeight()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 306,
+      "symbol": "ForEach.minHeight()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 310,
+      "symbol": "ForEach.maxWidth()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 310,
+      "symbol": "ForEach.maxWidth()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 314,
+      "symbol": "ForEach.maxHeight()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 314,
+      "symbol": "ForEach.maxHeight()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 319,
+      "symbol": "ForEach.aspect(ratio:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 319,
+      "symbol": "ForEach.aspect(ratio:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 330,
+      "symbol": "ForEach.isUserInteractionEnabled(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 330,
+      "symbol": "ForEach.isUserInteractionEnabled(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 335,
+      "symbol": "ForEach.tag(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 335,
+      "symbol": "ForEach.tag(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
       "line": 339,
       "symbol": "ForEach.tag()",
@@ -604,6 +1269,34 @@
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 365,
+      "symbol": "ForEach.focusGroupIdentifier()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 365,
+      "symbol": "ForEach.focusGroupIdentifier()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 371,
+      "symbol": "ForEach.semanticContentAttribute(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 371,
+      "symbol": "ForEach.semanticContentAttribute(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
       "line": 374,
       "symbol": "ForEach.semanticContentAttribute()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
@@ -632,6 +1325,440 @@
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 383,
+      "symbol": "ForEach.backgroundColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 383,
+      "symbol": "ForEach.backgroundColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 388,
+      "symbol": "ForEach.backgroundColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 388,
+      "symbol": "ForEach.backgroundColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 394,
+      "symbol": "ForEach.backgroundColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 394,
+      "symbol": "ForEach.backgroundColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 400,
+      "symbol": "ForEach.alpha(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 400,
+      "symbol": "ForEach.alpha(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 406,
+      "symbol": "ForEach.opaque(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 406,
+      "symbol": "ForEach.opaque(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 412,
+      "symbol": "ForEach.clearsContextBeforeDrawing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 412,
+      "symbol": "ForEach.clearsContextBeforeDrawing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 418,
+      "symbol": "ForEach.hidden(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 418,
+      "symbol": "ForEach.hidden(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 424,
+      "symbol": "ForEach.display(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 424,
+      "symbol": "ForEach.display(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 429,
+      "symbol": "ForEach.contentMode(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 429,
+      "symbol": "ForEach.contentMode(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 434,
+      "symbol": "ForEach.tintColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 434,
+      "symbol": "ForEach.tintColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 439,
+      "symbol": "ForEach.tintColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 439,
+      "symbol": "ForEach.tintColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 444,
+      "symbol": "ForEach.tintColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 444,
+      "symbol": "ForEach.tintColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 449,
+      "symbol": "ForEach.tintAdjustmentMode(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 449,
+      "symbol": "ForEach.tintAdjustmentMode(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 454,
+      "symbol": "ForEach.clipsToBounds(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 454,
+      "symbol": "ForEach.clipsToBounds(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 459,
+      "symbol": "ForEach.cornerRadius(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 459,
+      "symbol": "ForEach.cornerRadius(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 464,
+      "symbol": "ForEach.cornerRadius(topLeft:topRight:bottomLeft:bottomRight:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 464,
+      "symbol": "ForEach.cornerRadius(topLeft:topRight:bottomLeft:bottomRight:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 469,
+      "symbol": "ForEach.borderWidth(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 469,
+      "symbol": "ForEach.borderWidth(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 474,
+      "symbol": "ForEach.borderColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 474,
+      "symbol": "ForEach.borderColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 479,
+      "symbol": "ForEach.borderColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 479,
+      "symbol": "ForEach.borderColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 484,
+      "symbol": "ForEach.borderColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 484,
+      "symbol": "ForEach.borderColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 489,
+      "symbol": "ForEach.circle()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 489,
+      "symbol": "ForEach.circle()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 494,
+      "symbol": "ForEach.shadowColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 494,
+      "symbol": "ForEach.shadowColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 499,
+      "symbol": "ForEach.shadowColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 499,
+      "symbol": "ForEach.shadowColor(red:green:blue:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 504,
+      "symbol": "ForEach.shadowColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 504,
+      "symbol": "ForEach.shadowColor(hex:alpha:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 509,
+      "symbol": "ForEach.shadow(offset:radius:opacity:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 509,
+      "symbol": "ForEach.shadow(offset:radius:opacity:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 514,
+      "symbol": "ForEach.shadow(color:offset:radius:opacity:corners:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 514,
+      "symbol": "ForEach.shadow(color:offset:radius:opacity:corners:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 519,
+      "symbol": "ForEach.gradientColor(startColor:endColor:direction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 519,
+      "symbol": "ForEach.gradientColor(startColor:endColor:direction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 524,
+      "symbol": "ForEach.cleanGradientLayer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 524,
+      "symbol": "ForEach.cleanGradientLayer()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 529,
+      "symbol": "ForEach.addBlurEffect(style:alpha:color:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 529,
+      "symbol": "ForEach.addBlurEffect(style:alpha:color:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 534,
+      "symbol": "ForEach.removeBlurEffect()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 534,
+      "symbol": "ForEach.removeBlurEffect()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 539,
+      "symbol": "ForEach.alias(variable:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 539,
+      "symbol": "ForEach.alias(variable:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
       "line": 543,
       "symbol": "ForEach.addSubNodes(builder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
@@ -645,15 +1772,127 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 547,
+      "symbol": "ForEach.gesture(gesture:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 547,
+      "symbol": "ForEach.gesture(gesture:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 551,
+      "symbol": "ForEach.removeGesture(gesture:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 551,
+      "symbol": "ForEach.removeGesture(gesture:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 556,
+      "symbol": "ForEach.onTapGesture(numberOfTaps:numberOfTouches:action:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 556,
+      "symbol": "ForEach.onTapGesture(numberOfTaps:numberOfTouches:action:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 560,
+      "symbol": "ForEach.onLongPressGesture(numberOfTaps:numberOfTouches:minimumPressDuration:allowableMovement:action:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 560,
+      "symbol": "ForEach.onLongPressGesture(numberOfTaps:numberOfTouches:minimumPressDuration:allowableMovement:action:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 565,
+      "symbol": "ForEach.endEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 565,
+      "symbol": "ForEach.endEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 570,
+      "symbol": "ForEach.addAnimation(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ForEach.swift",
+      "line": 570,
+      "symbol": "ForEach.addAnimation(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Image.swift",
+      "line": 191,
+      "symbol": "Image.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Image.swift",
+      "line": 191,
+      "symbol": "Image.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Image.swift",
+      "line": 195,
+      "symbol": "Image.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Image.swift",
+      "line": 195,
+      "symbol": "Image.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/List/ListModifier.swift",
-      "line": 816,
+      "line": 574,
       "symbol": "List.cellDeselected(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/List/ListModifier.swift",
-      "line": 816,
+      "line": 574,
       "symbol": "List.cellDeselected(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -669,6 +1908,34 @@
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/List/ListRowAction.swift",
       "line": 91,
       "symbol": "Array.swipeActionsConfiguration()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Picker/DatePicker.swift",
+      "line": 71,
+      "symbol": "DatePicker.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Picker/DatePicker.swift",
+      "line": 71,
+      "symbol": "DatePicker.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Picker/DatePicker.swift",
+      "line": 75,
+      "symbol": "DatePicker.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Picker/DatePicker.swift",
+      "line": 75,
+      "symbol": "DatePicker.padding(edge:value:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -768,6 +2035,34 @@
       "line": 101,
       "symbol": "ProgressViewStyleConfiguration.node",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 109,
+      "symbol": "ProgressView.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 109,
+      "symbol": "ProgressView.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 113,
+      "symbol": "ProgressView.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ProgressView.swift",
+      "line": 113,
+      "symbol": "ProgressView.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -1289,6 +2584,48 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Slider.swift",
+      "line": 29,
+      "symbol": "Slider",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Slider.swift",
+      "line": 29,
+      "symbol": "Slider",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Slider.swift",
+      "line": 31,
+      "symbol": "Slider.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Slider.swift",
+      "line": 31,
+      "symbol": "Slider.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Slider.swift",
+      "line": 35,
+      "symbol": "Slider.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Slider.swift",
+      "line": 35,
+      "symbol": "Slider.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Spacer.swift",
       "line": 26,
       "symbol": "Spacer.init()",
@@ -1299,6 +2636,34 @@
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Spacer.swift",
       "line": 26,
       "symbol": "Spacer.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Spacer.swift",
+      "line": 34,
+      "symbol": "Spacer.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Spacer.swift",
+      "line": 34,
+      "symbol": "Spacer.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Spacer.swift",
+      "line": 38,
+      "symbol": "Spacer.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Spacer.swift",
+      "line": 38,
+      "symbol": "Spacer.padding(edge:value:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -1499,6 +2864,48 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Stepper.swift",
+      "line": 35,
+      "symbol": "Stepper",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Stepper.swift",
+      "line": 35,
+      "symbol": "Stepper",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Stepper.swift",
+      "line": 37,
+      "symbol": "Stepper.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Stepper.swift",
+      "line": 37,
+      "symbol": "Stepper.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Stepper.swift",
+      "line": 41,
+      "symbol": "Stepper.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Stepper.swift",
+      "line": 41,
+      "symbol": "Stepper.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
       "line": 16,
       "symbol": "TabSegment",
@@ -1514,112 +2921,126 @@
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 61,
-      "symbol": "TabSegment.init()",
+      "line": 67,
+      "symbol": "TabSegment.init(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 61,
-      "symbol": "TabSegment.init()",
+      "line": 67,
+      "symbol": "TabSegment.init(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 72,
+      "line": 76,
       "symbol": "TabSegment.init(_:content:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 72,
+      "line": 76,
       "symbol": "TabSegment.init(_:content:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 84,
+      "line": 80,
+      "symbol": "TabSegment.init(_:itemSpace:content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
+      "line": 80,
+      "symbol": "TabSegment.init(_:itemSpace:content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
+      "line": 92,
       "symbol": "TabSegment.animType(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 84,
+      "line": 92,
       "symbol": "TabSegment.animType(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 90,
+      "line": 98,
       "symbol": "TabSegment.animFromValue(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 90,
+      "line": 98,
       "symbol": "TabSegment.animFromValue(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 96,
+      "line": 104,
       "symbol": "TabSegment.animToValue(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 96,
+      "line": 104,
       "symbol": "TabSegment.animToValue(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 102,
+      "line": 110,
       "symbol": "TabSegment.select(index:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 102,
+      "line": 110,
       "symbol": "TabSegment.select(index:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 115,
-      "symbol": "TabSegment.scroll(toIndex:progress:)",
+      "line": 123,
+      "symbol": "TabSegment.scroll(_:_:_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 115,
-      "symbol": "TabSegment.scroll(toIndex:progress:)",
+      "line": 123,
+      "symbol": "TabSegment.scroll(_:_:_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 128,
+      "line": 146,
       "symbol": "TabSegment.clickedCallback(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/TabSegment/TabSegment.swift",
-      "line": 128,
+      "line": 146,
       "symbol": "TabSegment.clickedCallback(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1779,6 +3200,48 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Toggle.swift",
+      "line": 32,
+      "symbol": "Toggle",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Toggle.swift",
+      "line": 32,
+      "symbol": "Toggle",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Toggle.swift",
+      "line": 34,
+      "symbol": "Toggle.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Toggle.swift",
+      "line": 34,
+      "symbol": "Toggle.padding(top:right:bottom:left:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Toggle.swift",
+      "line": 38,
+      "symbol": "Toggle.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/Toggle.swift",
+      "line": 38,
+      "symbol": "Toggle.padding(edge:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/VStack.swift",
       "line": 27,
       "symbol": "VStack.init()",
@@ -1808,20 +3271,6 @@
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 26,
-      "symbol": "ViewPage.init(content:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 26,
-      "symbol": "ViewPage.init(content:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
       "line": 34,
       "symbol": "ViewPage.init(data:rowContent:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
@@ -1836,7 +3285,14 @@
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 48,
+      "line": 45,
+      "symbol": "ViewPage",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 45,
       "symbol": "ViewPage",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -1844,49 +3300,84 @@
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
       "line": 48,
+      "symbol": "ViewPage.reloadData()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 48,
+      "symbol": "ViewPage.reloadData()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 54,
+      "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 54,
+      "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 60,
+      "symbol": "ViewPage.pageScrollingListener(scrollListener:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 60,
+      "symbol": "ViewPage.pageScrollingListener(scrollListener:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 66,
       "symbol": "ViewPage",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 50,
-      "symbol": "ViewPage.reloadData()",
+      "line": 66,
+      "symbol": "ViewPage",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
+      "line": 68,
+      "symbol": "ViewPage.link(tabSegment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 50,
-      "symbol": "ViewPage.reloadData()",
+      "line": 68,
+      "symbol": "ViewPage.link(tabSegment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 55,
-      "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
+      "line": 81,
+      "symbol": "ViewPage.unlink(tabSegment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 55,
-      "symbol": "ViewPage.onChangeSelected(selectedFunc:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 60,
-      "symbol": "ViewPage.setTabScrollingListener(scrollListener:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/Component/ViewPage/ViewPage.swift",
-      "line": 60,
-      "symbol": "ViewPage.setTabScrollingListener(scrollListener:)",
+      "line": 81,
+      "symbol": "ViewPage.unlink(tabSegment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -2060,70 +3551,182 @@
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 70,
+      "symbol": "UIHostingView.useSafeAreaTop",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 70,
+      "symbol": "UIHostingView.useSafeAreaTop",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
       "line": 71,
+      "symbol": "UIHostingView.useSafeAreaLeft",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 71,
+      "symbol": "UIHostingView.useSafeAreaLeft",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 72,
+      "symbol": "UIHostingView.useSafeAreaBottom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 72,
+      "symbol": "UIHostingView.useSafeAreaBottom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 73,
+      "symbol": "UIHostingView.useSafeAreaRight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 73,
+      "symbol": "UIHostingView.useSafeAreaRight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 74,
       "symbol": "UIHostingView.layoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 71,
+      "line": 74,
       "symbol": "UIHostingView.layoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 163,
+      "line": 188,
       "symbol": "UIHostingController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 163,
+      "line": 188,
       "symbol": "UIHostingController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 167,
+      "line": 191,
+      "symbol": "UIHostingController.useSafeAreaTop",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 191,
+      "symbol": "UIHostingController.useSafeAreaTop",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 196,
+      "symbol": "UIHostingController.useSafeAreaLeft",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 196,
+      "symbol": "UIHostingController.useSafeAreaLeft",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 201,
+      "symbol": "UIHostingController.useSafeAreaBottom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 201,
+      "symbol": "UIHostingController.useSafeAreaBottom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 206,
+      "symbol": "UIHostingController.useSafeAreaRight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 206,
+      "symbol": "UIHostingController.useSafeAreaRight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
+      "line": 211,
       "symbol": "UIHostingController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 167,
+      "line": 211,
       "symbol": "UIHostingController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 175,
+      "line": 219,
       "symbol": "UIHostingController.viewDidDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 175,
+      "line": 219,
       "symbol": "UIHostingController.viewDidDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 179,
+      "line": 223,
       "symbol": "UIHostingController.viewDidLayoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/deepak/Development/MoMo/UI/argokit/Source/Core/UIHostingController.swift",
-      "line": 179,
+      "line": 223,
       "symbol": "UIHostingController.viewDidLayoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

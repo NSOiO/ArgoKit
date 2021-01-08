@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           ArgoKit 1.0.6 Docs
         </a>
-         (83% documented)
+         (74% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -69,9 +69,6 @@
                 <a class="nav-group-task-link" href="../Classes/Grid.html">Grid</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/HStack.html">HStack</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/List.html">List</a>
               </li>
               <li class="nav-group-task">
@@ -103,9 +100,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/UIHostingView.html">UIHostingView</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/VStack.html">VStack</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ViewPage.html">ViewPage</a>
@@ -197,6 +191,9 @@
                 <a class="nav-group-task-link" href="../Structs/ArgoKitAnimationBuilder.html">ArgoKitAnimationBuilder</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ArgoKitAnimationsBuilder.html">ArgoKitAnimationsBuilder</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/Button.html">Button</a>
               </li>
               <li class="nav-group-task">
@@ -207,6 +204,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/ForEach.html">ForEach</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/HStack.html">HStack</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/HostView.html">HostView</a>
@@ -262,6 +262,29 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/Toggle.html">Toggle</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VStack.html">VStack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit14FinishCallbacka">FinishCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit13PauseCallbacka">PauseCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit14RepeatCallbacka">RepeatCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit14ResumeCallbacka">ResumeCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit13StartCallbacka">StartCallback</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -305,8 +328,8 @@
          <span class="p">}</span>
 
          <span class="kd">func</span> <span class="nf">appendData</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Model</span><span class="p">)</span> <span class="p">{</span>
-             <span class="n">models</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-             <span class="err">$</span><span class="n">dataSource</span><span class="o">.</span><span class="nf">reloadData</span><span class="p">()</span>
+             <span class="err">$</span><span class="n">dataSource</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+             <span class="err">$</span><span class="n">dataSource</span><span class="o">.</span><span class="nf">apply</span><span class="p">()</span>
          <span class="p">}</span>
      <span class="p">}</span>
 </code></pre>
@@ -919,9 +942,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC11scrollToRow2atAE8animatedACyxGXD10Foundation9IndexPathV_So25UITableViewScrollPositionVSbtF"></a>
-                    <a name="//apple_ref/swift/Method/scrollToRow(at:at:animated:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC11scrollToRow2atAE8animatedACyxGXD10Foundation9IndexPathV_So25UITableViewScrollPositionVSbtF">scrollToRow(at:<wbr>at:<wbr>animated:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC12cellScrollTo2atAE8animatedACyxGXD10Foundation9IndexPathV_So011UITableViewE8PositionVSbtF"></a>
+                    <a name="//apple_ref/swift/Method/cellScrollTo(at:at:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC12cellScrollTo2atAE8animatedACyxGXD10Foundation9IndexPathV_So011UITableViewE8PositionVSbtF">cellScrollTo(at:<wbr>at:<wbr>animated:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -937,7 +960,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">scrollToRow</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">at</span> <span class="nv">scrollPosition</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellScrollTo</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">at</span> <span class="nv">scrollPosition</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -994,9 +1017,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC26scrollToNearestSelectedRow2at8animatedACyxGXDSo25UITableViewScrollPositionV_SbtF"></a>
-                    <a name="//apple_ref/swift/Method/scrollToNearestSelectedRow(at:animated:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC26scrollToNearestSelectedRow2at8animatedACyxGXDSo25UITableViewScrollPositionV_SbtF">scrollToNearestSelectedRow(at:<wbr>animated:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC27cellScrollToNearestSelected2at8animatedACyxGXDSo011UITableViewE8PositionV_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/cellScrollToNearestSelected(at:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC27cellScrollToNearestSelected2at8animatedACyxGXDSo011UITableViewE8PositionV_SbtF">cellScrollToNearestSelected(at:<wbr>animated:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1012,7 +1035,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">scrollToNearestSelectedRow</span><span class="p">(</span><span class="n">at</span> <span class="nv">scrollPosition</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellScrollToNearestSelected</span><span class="p">(</span><span class="n">at</span> <span class="nv">scrollPosition</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -1324,9 +1347,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC9selectRow2at8animated14scrollPositionACyxGXD10Foundation9IndexPathVSg_SbSo017UITableViewScrollI0VtF"></a>
-                    <a name="//apple_ref/swift/Method/selectRow(at:animated:scrollPosition:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC9selectRow2at8animated14scrollPositionACyxGXD10Foundation9IndexPathVSg_SbSo017UITableViewScrollI0VtF">selectRow(at:<wbr>animated:<wbr>scrollPosition:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC19cellSelectIndexPath2at8animated14scrollPositionACyxGXD10Foundation0fG0VSg_SbSo017UITableViewScrollK0VtF"></a>
+                    <a name="//apple_ref/swift/Method/cellSelectIndexPath(at:animated:scrollPosition:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC19cellSelectIndexPath2at8animated14scrollPositionACyxGXD10Foundation0fG0VSg_SbSo017UITableViewScrollK0VtF">cellSelectIndexPath(at:<wbr>animated:<wbr>scrollPosition:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1342,7 +1365,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">selectRow</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">scrollPosition</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellSelectIndexPath</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">scrollPosition</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">ScrollPosition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -1399,9 +1422,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC11deselectRow2at8animatedACyxGXD10Foundation9IndexPathV_SbtF"></a>
-                    <a name="//apple_ref/swift/Method/deselectRow(at:animated:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC11deselectRow2at8animatedACyxGXD10Foundation9IndexPathV_SbtF">deselectRow(at:<wbr>animated:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC21cellDeselectIndexPath2at8animatedACyxGXD10Foundation0fG0V_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/cellDeselectIndexPath(at:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC21cellDeselectIndexPath2at8animatedACyxGXD10Foundation0fG0V_SbtF">cellDeselectIndexPath(at:<wbr>animated:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1417,7 +1440,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">deselectRow</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellDeselectIndexPath</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2080,9 +2103,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC10canEditRowyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/canEditRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC10canEditRowyACyxGXDSbx_10Foundation9IndexPathVtcF">canEditRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC11cellCanEdityACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellCanEdit(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC11cellCanEdityACyxGXDSbx_10Foundation9IndexPathVtcF">cellCanEdit(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2098,7 +2121,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">canEditRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellCanEdit</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2131,9 +2154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC10canMoveRowyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/canMoveRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC10canMoveRowyACyxGXDSbx_10Foundation9IndexPathVtcF">canMoveRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC11cellCanMoveyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellCanMove(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC11cellCanMoveyACyxGXDSbx_10Foundation9IndexPathVtcF">cellCanMove(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2149,7 +2172,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">canMoveRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellCanMove</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2233,9 +2256,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC16commitEditingRowyACyxGXDySo015UITableViewCellE5StyleV_x10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/commitEditingRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC16commitEditingRowyACyxGXDySo015UITableViewCellE5StyleV_x10Foundation9IndexPathVtcF">commitEditingRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC17cellCommitEditingyACyxGXDySo015UITableViewCellF5StyleV_x10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellCommitEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC17cellCommitEditingyACyxGXDySo015UITableViewCellF5StyleV_x10Foundation9IndexPathVtcF">cellCommitEditing(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2251,7 +2274,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">commitEditingRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">editingStyle</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">EditingStyle</span><span class="p">,</span> <span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellCommitEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">editingStyle</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">EditingStyle</span><span class="p">,</span> <span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2284,9 +2307,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC7moveRowyACyxGXDyx_x10Foundation9IndexPathVAHtcF"></a>
-                    <a name="//apple_ref/swift/Method/moveRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC7moveRowyACyxGXDyx_x10Foundation9IndexPathVAHtcF">moveRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC8cellMoveyACyxGXDyx_x10Foundation9IndexPathVAHtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellMove(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC8cellMoveyACyxGXDyx_x10Foundation9IndexPathVAHtcF">cellMove(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2302,7 +2325,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">moveRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">sourceData</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">destinationData</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">sourceIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">_</span> <span class="nv">destinationIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellMove</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">sourceData</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">destinationData</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">sourceIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">_</span> <span class="nv">destinationIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2335,9 +2358,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC12prefetchRowsyACyxGXDySay10Foundation9IndexPathVGcF"></a>
-                    <a name="//apple_ref/swift/Method/prefetchRows(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC12prefetchRowsyACyxGXDySay10Foundation9IndexPathVGcF">prefetchRows(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC13cellsPrefetchyACyxGXDySay10Foundation9IndexPathVGcF"></a>
+                    <a name="//apple_ref/swift/Method/cellsPrefetch(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC13cellsPrefetchyACyxGXDySay10Foundation9IndexPathVGcF">cellsPrefetch(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2353,7 +2376,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefetchRows</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellsPrefetch</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2386,9 +2409,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC21cancelPrefetchingRowsyACyxGXDySay10Foundation9IndexPathVGcF"></a>
-                    <a name="//apple_ref/swift/Method/cancelPrefetchingRows(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC21cancelPrefetchingRowsyACyxGXDySay10Foundation9IndexPathVGcF">cancelPrefetchingRows(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC22cellsCancelPrefetchingyACyxGXDySay10Foundation9IndexPathVGcF"></a>
+                    <a name="//apple_ref/swift/Method/cellsCancelPrefetching(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC22cellsCancelPrefetchingyACyxGXDySay10Foundation9IndexPathVGcF">cellsCancelPrefetching(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2404,7 +2427,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cancelPrefetchingRows</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellsCancelPrefetching</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2727,57 +2750,6 @@
                               <td>
                                 <div>
                                   <p>The action that handle the specified footer view was removed from the table.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC18shouldHighlightRowyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/shouldHighlightRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC18shouldHighlightRowyACyxGXDSbx_10Foundation9IndexPathVtcF">shouldHighlightRow(_:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Asks the delegate if the specified row should be highlighted.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldHighlightRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>action</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Result of the ask.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3335,9 +3307,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC27shouldIndentWhileEditingRowyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/shouldIndentWhileEditingRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC27shouldIndentWhileEditingRowyACyxGXDSbx_10Foundation9IndexPathVtcF">shouldIndentWhileEditingRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC28cellShouldIndentWhileEditingyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellShouldIndentWhileEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC28cellShouldIndentWhileEditingyACyxGXDSbx_10Foundation9IndexPathVtcF">cellShouldIndentWhileEditing(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3353,7 +3325,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">shouldIndentWhileEditingRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellShouldIndentWhileEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -3386,9 +3358,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC19willBeginEditingRowyACyxGXDyx_10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/willBeginEditingRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC19willBeginEditingRowyACyxGXDyx_10Foundation9IndexPathVtcF">willBeginEditingRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC20cellWillBeginEditingyACyxGXDyx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellWillBeginEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC20cellWillBeginEditingyACyxGXDyx_10Foundation9IndexPathVtcF">cellWillBeginEditing(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3404,7 +3376,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">willBeginEditingRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellWillBeginEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -3437,9 +3409,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC16didEndEditingRowyACyxGXDyxSg_10Foundation9IndexPathVSgtcF"></a>
-                    <a name="//apple_ref/swift/Method/didEndEditingRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC16didEndEditingRowyACyxGXDyxSg_10Foundation9IndexPathVSgtcF">didEndEditingRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC17cellDidEndEditingyACyxGXDyxSg_10Foundation9IndexPathVSgtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellDidEndEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC17cellDidEndEditingyACyxGXDyxSg_10Foundation9IndexPathVSgtcF">cellDidEndEditing(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3455,7 +3427,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">didEndEditingRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellDidEndEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -3746,9 +3718,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7ArgoKit4ListC11canFocusRowyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
-                    <a name="//apple_ref/swift/Method/canFocusRow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC11canFocusRowyACyxGXDSbx_10Foundation9IndexPathVtcF">canFocusRow(_:<wbr>)</a>
+                    <a name="/s:7ArgoKit4ListC12cellCanFocusyACyxGXDSbx_10Foundation9IndexPathVtcF"></a>
+                    <a name="//apple_ref/swift/Method/cellCanFocus(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit4ListC12cellCanFocusyACyxGXDSbx_10Foundation9IndexPathVtcF">cellCanFocus(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3764,7 +3736,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">canFocusRow</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">cellCanFocus</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -4467,542 +4439,6 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC10reloadDataACyxGXDyF"></a>
-                    <a name="//apple_ref/swift/Method/reloadData()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC10reloadDataACyxGXDyF">reloadData()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Reloads the rows and sections of the list.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">reloadData</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC14insertSections_4withACyxGXD10Foundation8IndexSetV_So23UITableViewRowAnimationVtF"></a>
-                    <a name="//apple_ref/swift/Method/insertSections(_:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC14insertSections_4withACyxGXD10Foundation8IndexSetV_So23UITableViewRowAnimationVtF">insertSections(_:<wbr>with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Inserts one or more sections in the list, with an option to animate the insertion.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">insertSections</span><span class="p">(</span><span class="n">_</span> <span class="nv">sections</span><span class="p">:</span> <span class="kt">IndexSet</span><span class="p">,</span> <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sections</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An index set that specifies the sections to insert in the list. If a section already exists at the specified index location, it is moved down one index location.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>animation</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A constant that indicates how the insertion is to be animated, for example, fade in or slide in from the left. See UITableView.RowAnimation for descriptions of these constants.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC14deleteSections_4withACyxGXD10Foundation8IndexSetV_So23UITableViewRowAnimationVtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteSections(_:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC14deleteSections_4withACyxGXD10Foundation8IndexSetV_So23UITableViewRowAnimationVtF">deleteSections(_:<wbr>with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Deletes one or more sections in the list, with an option to animate the deletion.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSections</span><span class="p">(</span><span class="n">_</span> <span class="nv">sections</span><span class="p">:</span> <span class="kt">IndexSet</span><span class="p">,</span> <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sections</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An index set that specifies the sections to delete from the list. If a section exists after the specified index location, it is moved up one index location.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>animation</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A constant that either specifies the kind of animation to perform when deleting the section or requests no animation. See UITableView.RowAnimation for descriptions of the constants.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC14reloadSections_4withACyxGXD10Foundation8IndexSetV_So23UITableViewRowAnimationVtF"></a>
-                    <a name="//apple_ref/swift/Method/reloadSections(_:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC14reloadSections_4withACyxGXD10Foundation8IndexSetV_So23UITableViewRowAnimationVtF">reloadSections(_:<wbr>with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Reloads the specified sections using a given animation effect.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">reloadSections</span><span class="p">(</span><span class="n">_</span> <span class="nv">sections</span><span class="p">:</span> <span class="kt">IndexSet</span><span class="p">,</span> <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sections</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An index set identifying the sections to reload.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>animation</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A constant that indicates how the reloading is to be animated, for example, fade out or slide out from the bottom. See UITableView.RowAnimation for descriptions of these constants.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC11moveSection_02toE0ACyxGXDSi_SitF"></a>
-                    <a name="//apple_ref/swift/Method/moveSection(_:toSection:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC11moveSection_02toE0ACyxGXDSi_SitF">moveSection(_:<wbr>toSection:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Moves a section to a new location in the list.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">moveSection</span><span class="p">(</span><span class="n">_</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">toSection</span> <span class="nv">newSection</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>section</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The index of the section to move.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newSection</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The index in the list that is the destination of the move for the section. The existing section at that location slides up or down to an adjoining index position to make room for it.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC10insertRows2at4withACyxGXDSay10Foundation9IndexPathVG_So23UITableViewRowAnimationVtF"></a>
-                    <a name="//apple_ref/swift/Method/insertRows(at:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC10insertRows2at4withACyxGXDSay10Foundation9IndexPathVG_So23UITableViewRowAnimationVtF">insertRows(at:<wbr>with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Inserts rows in the list at the locations identified by an array of index paths, with an option to animate the insertion.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">insertRows</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">],</span> <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>indexPaths</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of index path objects, each representing a row index and section index that together identify a row in the list.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>animation</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A constant that either specifies the kind of animation to perform when inserting the cell or requests no animation. See UITableView.RowAnimation for descriptions of the constants.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC10deleteRows2at4withACyxGXDSay10Foundation9IndexPathVG_So23UITableViewRowAnimationVtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteRows(at:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC10deleteRows2at4withACyxGXDSay10Foundation9IndexPathVG_So23UITableViewRowAnimationVtF">deleteRows(at:<wbr>with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Deletes the rows specified by an array of index paths, with an option to animate the deletion.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteRows</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">],</span> <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>indexPaths</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of IndexPath objects identifying the rows to delete.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>animation</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A constant that indicates how the deletion is to be animated, for example, fade out or slide out from the bottom. See UITableView.RowAnimation for descriptions of these constants.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC10reloadRows2at4withACyxGXDSay10Foundation9IndexPathVG_So23UITableViewRowAnimationVtF"></a>
-                    <a name="//apple_ref/swift/Method/reloadRows(at:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC10reloadRows2at4withACyxGXDSay10Foundation9IndexPathVG_So23UITableViewRowAnimationVtF">reloadRows(at:<wbr>with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Reloads the specified rows using a given animation effect.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">reloadRows</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">IndexPath</span><span class="p">],</span> <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">.</span><span class="kt">RowAnimation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>indexPaths</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of IndexPath objects identifying the rows to reload.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>animation</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A constant that indicates how the reloading is to be animated, for example, fade out or slide out from the bottom. See UITableView.RowAnimation for descriptions of these constants.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7ArgoKit4ListC7moveRow2at2toACyxGXD10Foundation9IndexPathV_AJtF"></a>
-                    <a name="//apple_ref/swift/Method/moveRow(at:to:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ArgoKit4ListC7moveRow2at2toACyxGXD10Foundation9IndexPathV_AJtF">moveRow(at:<wbr>to:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Moves the row at a specified location to a destination location.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">moveRow</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">to</span> <span class="nv">newIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>indexPath</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An index path identifying the row to move.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>newIndexPath</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An index path identifying the row that is the destination of the row at indexPath. The existing row at that location slides up or down to an adjoining index position to make room for it.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -5011,7 +4447,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2021 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2021-01-05)</p>
+      <p>&copy; 2021 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2021-01-08)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
