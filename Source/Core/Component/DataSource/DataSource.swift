@@ -431,6 +431,20 @@ extension DataSource{
 
 // MARK: === data deleted ===
 extension DataSource{
+    /// Removes all elements from the dataSource.
+    @discardableResult
+    public func clear<Element>() -> Self where Value == DataList<Element>{
+        dataSource.removeAll()
+        return self
+    }
+    
+    /// Removes all elements from the dataSource.
+    @discardableResult
+    public func clear<Element>() -> Self where Value == SectionDataList<Element>{
+        dataSource.removeAll()
+        return self
+    }
+    
     /// delete the element at the specified position from dataSource.
     /// dataSource = [Element]
     /// ```
@@ -467,6 +481,7 @@ extension DataSource{
     public func delete<Element>(at indexPath: IndexPath)
     -> Self
     where Value == SectionDataList<Element>{
+       
         return self.delete(at: [indexPath])
     }
     
