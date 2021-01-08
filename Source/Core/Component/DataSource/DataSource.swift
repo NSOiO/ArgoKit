@@ -83,7 +83,6 @@ extension DataSource{
         }else{
             reloadAction = {[weak self,indexPaths] animation in
                 if let node = self?._rootNode {
-                    print("indexPaths:\(indexPaths)")
                     node.deleteRows(at: indexPaths, with: animation)
                 }
             }
@@ -113,10 +112,11 @@ extension DataSource{
             }
         }
     }
-    
+}
+// MARK: === data appended ===
+extension DataSource{
     /// Adds a new element at the end of the dataSource.
-    ///
-    /// Use this method to append a single element to the end of a dataSource. And Element:ArgoKitIdentifiable
+    /// dataSource = [Element]
     ///
     ///```
     ///     @DataSource var dataSource:[Int] = [Int]()
@@ -127,18 +127,16 @@ extension DataSource{
     ///     // Prints "[1, 2, 3]"
     ///```
     /// - Parameter newElement: The element to append to the dataSource.
-    ///
     /// - Returns: Self
     @discardableResult
     public func append<Element>(_ newElement:Element) -> Self
-    where Value == DataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         dataSource.append(newElement)
         return self
     }
     
     /// Adds a new element at the end of the dataSource.
-    ///
-    /// Use this method to append a single element to the end of a dataSource. And Element:ArgoKitIdentifiable.
+    /// dataSource = [[Element]]
     ///
     ///```
     ///     @DataSource var dataSource:[[Int][ = [[Int]]()
@@ -153,18 +151,65 @@ extension DataSource{
     ///     // Prints "numbers1:[4, 5, 6]"
     ///```
     /// - Parameter newElement: The element to append to the dataSource.
-    ///
     /// - Returns: Self
     @discardableResult
     public func append<Element>(_ newElement:DataList<Element>) -> Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         dataSource.append(newElement)
         return self
     }
     
-    /// Adds the elements of a [Element] to the end of the dataSource.And Element:ArgoKitIdentifiable.
+    /// Adds a new element at the end of the specified section of the dataSource
+    /// dataSource = [[Element]]
     ///
-    /// Use this method to append the elements of a [Element] to the end of this dataSource.
+    ///```
+    ///     @DataSource var dataSource:[[Int]] = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
+    ///     var numbers = 10
+    ///     $dataSource.append(numbers,section:1)
+    ///     print("numbers1:\(dataSource)")
+    ///     // Prints "[[1, 2, 3],[4, 5, 6, 10],[7, 8, 9]]"
+    ///```
+    /// - Parameter newElement: The element to append to the dataSource.
+    /// - Parameter section: The specified section of the dataSource
+    /// - Returns: Self
+    @discardableResult
+    public func append<Element>(_ newElement:Element,section:Int) -> Self
+    where Value == SectionDataList<Element>{
+        if section > dataSource.count - 1 ||
+            section < 0{
+            return self
+        }
+        dataSource[section].append(newElement)
+        return self
+    }
+    
+    /// Adds the elements of a [Element] to the end of the specified section of the dataSource.
+    /// dataSource = [[Element]]
+    ///
+    ///```
+    ///     @DataSource var dataSource:[[Int][ = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
+    ///     var numbers = [10, 20, 30]
+    ///     $dataSource.append(numbers,section:1)
+    ///     print("numbers1:\(dataSource)")
+    ///     // Prints "[[1, 2, 3],[4, 5, 6,10, 20, 30],[7, 8, 9]]"
+    ///```
+    /// - Parameter newElements: The element to append to the dataSource.
+    /// - Parameter section: The specified section of the dataSource
+    /// - Returns: Self
+    @discardableResult
+    public func append<Element>(contentsOf newElements:DataList<Element>,section:Int) -> Self
+    where Value == SectionDataList<Element>{
+        if section > dataSource.count - 1 ||
+            section < 0{
+            return self
+        }
+        dataSource[section].append(contentsOf: newElements)
+        return self
+    }
+    
+    
+    /// Adds the elements of a [Element] to the end of the dataSource
+    /// dataSource = [Element]
     ///
     ///```
     ///     @DataSource var dataSource:[Int[ = [Int]()
@@ -177,14 +222,13 @@ extension DataSource{
     /// - Returns: Self
     @discardableResult
     public func append<Element>(contentsOf newElements:DataList<Element>) -> Self
-    where Value == DataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         dataSource.append(contentsOf: newElements)
         return self
     }
     
-    /// Adds the elements of a [[Element]] to the end of the dataSource.And Element:ArgoKitIdentifiable.
-    ///
-    /// Use this method to append the elements of a [Element] to the end of this dataSource.
+    /// Adds the elements of a [[Element]] to the end of the dataSource.
+    /// dataSource = [[Element]]
     ///
     ///```
     ///     @DataSource var dataSource:[[Int]] = [[Int]]]()
@@ -197,14 +241,15 @@ extension DataSource{
     /// - Returns: Self
     @discardableResult
     public func append<Element>(contentsOf newElements:SectionDataList<Element>) -> Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         dataSource.append(contentsOf: newElements)
         return self
     }
-    
-    /// Inserts the elements of a [Element] to the end of the dataSource.And Element:ArgoKitIdentifiable.
-    ///
-    /// The elements of a [Element] is inserted before the element currently at the specified IndexPath of IndexPaths.
+}
+// MARK: === data inserted ===
+extension DataSource{
+    /// Inserts the elements of a [Element] to the end of the dataSource.
+    /// dataSource = [Element]
     ///
     ///```
     ///     @DataSource var dataSource:[Int] = [1, 2, 3, 4, 5]
@@ -221,7 +266,10 @@ extension DataSource{
     /// - Returns: Self`.
     @discardableResult
     public func insert<Element>(datas:[Element],at indexPaths: [IndexPath]) -> Self
-    where Value == DataList<Element>, Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
+        if datas.count <= 0 {
+            return self
+        }
         if datas.count !=  indexPaths.count{
             return self
         }
@@ -237,9 +285,38 @@ extension DataSource{
         return self
     }
     
-    /// Inserts the elements of a [Element] to the end of the dataSource.And Element:ArgoKitIdentifiable.
+    /// Inserts the elements of a sequence into the dataSource at the specified position.
+    /// dataSource = [Element]
     ///
-    /// The elements of a [Element] is inserted before the element currently at the specified IndexPath of IndexPaths.
+    ///```
+    ///     @DataSource var dataSource:[Int] = [1, 2, 3, 4, 5]
+    ///     $dataSource.insert(contentsOf: 100...103, at: 3)
+    ///     print(numbers)
+    ///     // Prints "[1, 2, 3, 100, 101, 102, 103, 4, 5]"
+    ///```
+    /// Calling this method may invalidate any existing indices for use with this dataSource.
+    ///
+    /// - Parameter newElements: The new elements to insert into the dataSource.
+    /// - Parameter position: The position at which to insert the new elements. `index`
+    ///   must be a valid index of the collection.
+    @discardableResult
+    public func insert<Element>(contentsOf datas:[Element],at position:Int) -> Self
+    where Value == DataList<Element>{
+        if datas.count <= 0 {
+            return self
+        }
+        if position > dataSource.count{
+            return self
+        }
+        dataSource.insert(contentsOf:datas, at: position)
+        self.reloadData()
+        return self
+    }
+    
+    
+    /// Inserts the elements of a [Element] to the end of the dataSource
+    ///  dataSource = [[Element]]
+    ///
     ///```
     ///     @DataSource var dataSource:[[Int]] = [[1,2],[3,4],[5,6]]
     ///     var numbers = [10, 20, 30]
@@ -254,7 +331,10 @@ extension DataSource{
     /// - Returns: Self`.
     @discardableResult
     public func insert<Element>(datas:[Element],at indexPaths: [IndexPath]) -> Self
-    where Value == SectionDataList<Element>, Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
+        if datas.count <= 0 {
+            return self
+        }
         if datas.count !=  indexPaths.count{
             return self;
         }
@@ -273,8 +353,43 @@ extension DataSource{
         return self
     }
     
+    /// Inserts the elements of a [Element] to the end of the specified section of the dataSource.
+    ///  dataSource = [[Element]]
+    ///
+    ///```
+    ///     @DataSource var dataSource:[[Int]] = [[1,2],[3,4],[5,6]]
+    ///     var numbers = [10, 20, 30]
+    ///     var indexPaths = [IndexPath(row: 1, section: 0),IndexPath(row: 1, section: 1),IndexPath(row: 0, section: 2)]
+    ///     $dataSource.insert(datas: numbers, at: indexPaths)
+    ///
+    ///     print(dataSource)
+    ///     // Prints "[[1,10,2],[3,20,4],[30,5,6]]"
+    ///```
+    /// - Parameter datas: The new elements to insert into the dataSource.
+    /// - Parameter indexPaths: The positions at which to insert the new element.
+    /// - Parameter section: The specified section of the dataSource.
+    /// - Returns: Self`.
+    @discardableResult
+    public func insert<Element>(contentsOf datas:[Element],at position: Int, section:Int) -> Self
+    where Value == SectionDataList<Element>{
+        if datas.count <= 0 {
+            return self
+        }
+        if section > dataSource.count - 1 ||
+            section < 0{
+            return self
+        }
+        if position > dataSource[section].count{
+            return self
+        }
+        
+        dataSource[section].insert(contentsOf:datas, at: position)
+        self.reloadData()
+        return self
+    }
+    
     /// Inserts a new element at the specified position.
-    /// The new element is inserted before the element currently at the specified index.
+    /// dataSource = [Element]
     ///
     ///```
     ///     @DataSource var dataSource:[Int] = [1, 2, 3, 4, 5]
@@ -289,12 +404,12 @@ extension DataSource{
     /// - Returns: Self`.
     @discardableResult
     public func insert<Element>(data:Element,at indexPath: IndexPath) -> Self
-    where Value == DataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         return insert(datas: [data], at: [indexPath])
     }
     
     /// Inserts a new element at the specified position.
-    /// The new element is inserted before the element currently at the specified index.
+    /// dataSource = [Element]
     ///
     ///```
     ///     @DataSource var dataSource:[[Int]] = [[1,2],[3,4],[5,6]]
@@ -309,12 +424,15 @@ extension DataSource{
     @discardableResult
     public func insert<Element>(data:Element,at indexPath: IndexPath)
     -> Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         return insert(datas: [data], at: [indexPath])
     }
-    
+}
+
+// MARK: === data deleted ===
+extension DataSource{
     /// delete the element at the specified position from dataSource.
-    ///
+    /// dataSource = [Element]
     /// ```
     ///     @DataSource var dataSource:[Int] = [1, 5, 9, 12, 15, 13, 12]
     ///     $dataSource.delete(IndexPath(row: 1, section: 0))
@@ -328,11 +446,12 @@ extension DataSource{
     @discardableResult
     public func delete<Element>(at indexPath: IndexPath)
     -> Self
-    where Value == DataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         return self.delete(at: [indexPath])
     }
     
     /// delete the element at the specified position from dataSource.
+    ///  dataSource = [[Element]]
     ///
     /// ```
     ///     @DataSource var dataSource:[Int] = [[1, 5], [9, 12], [15, 13, 12]]
@@ -347,11 +466,12 @@ extension DataSource{
     @discardableResult
     public func delete<Element>(at indexPath: IndexPath)
     -> Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         return self.delete(at: [indexPath])
     }
     
     /// delete the element at the specified positions from dataSource.
+    /// dataSource = [Element]
     ///
     /// ```
     ///     @DataSource var dataSource:[Int] = [1, 5, 9, 12, 15, 13, 12]
@@ -366,7 +486,7 @@ extension DataSource{
     @discardableResult
     public func delete<Element>(at indexPaths: [IndexPath])
     -> Self
-    where Value == DataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         var indices:[Int] = []
         for indexPath in indexPaths {
             if dataSource.count <= indexPath.row {
@@ -384,6 +504,7 @@ extension DataSource{
     }
     
     /// delete the element at the specified position from dataSource.
+    /// dataSource = [[Element]]
     ///
     /// ```
     ///     @DataSource var dataSource:[[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5], [9, 12], [15, 13, 12,24,1]]
@@ -398,7 +519,7 @@ extension DataSource{
     @discardableResult
     public func delete<Element>(at indexPaths: [IndexPath])
     -> Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         var section:[Int:[Int]] = [:]
         for indexPath in indexPaths {
             if dataSource.count <= indexPath.section {
@@ -424,8 +545,12 @@ extension DataSource{
         self.deleteRows(at: indexPaths)
         return self
     }
-    
+}
+
+// MARK: === data replaced === Data Replace
+extension DataSource{
     /// replace the element of [Element] at the specified positions from dataSource.
+    /// dataSource = [Element]
     ///
     /// ```
     ///     @DataSource var dataSource:[Int] = [1, 5, 9, 12, 15, 13, 12]
@@ -440,7 +565,7 @@ extension DataSource{
     ///
     @discardableResult
     public func replace<Element>(datas:[Element],at replaceIndexPaths: [IndexPath]) -> Self
-    where Value == DataList<Element>, Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         if datas.count !=  replaceIndexPaths.count{
             return self
         }
@@ -458,6 +583,7 @@ extension DataSource{
     }
     
     /// replace the element of [Element] at the specified positions from dataSource.
+    /// dataSource = [Element]
     ///
     /// ```
     ///     @DataSource var dataSource:[[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5], [15, 13, 12,24,1]]
@@ -472,7 +598,7 @@ extension DataSource{
     ///
     @discardableResult
     public func replace<Element>(datas:[Element],at replaceIndexPaths: [IndexPath]) -> Self
-    where Value == SectionDataList<Element>, Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         if datas.count !=  replaceIndexPaths.count{
             return self
         }
@@ -493,6 +619,7 @@ extension DataSource{
     }
     
     /// replace the element  at the specified positions from dataSource.
+    /// dataSource = [Element]
     ///
     /// ```
     ///     @DataSource var dataSource:[Int] = [1, 5, 9, 12, 15, 13, 12]
@@ -513,6 +640,7 @@ extension DataSource{
     }
     
     /// replace the element  at the specified position from dataSource.
+    /// dataSource = [Element]
     ///
     /// ```
     ///     @DataSource var dataSource:[[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5, 7], [15, 13, 12,24,1]]
@@ -528,11 +656,15 @@ extension DataSource{
     @discardableResult
     public func replace<Element>(data:Element,at indexPath: IndexPath)
     -> Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         return replace(datas: [data], at: [indexPath])
     }
-    
+}
+
+// MARK:=== data moved ===
+extension DataSource{
     /// move the element  at the specified position to new position for dataSource.
+    /// dataSource = [Element]
     ///
     /// ```
     ///     @DataSource var dataSource:[Int]] = [1, 5, 9, 12, 15, 13, 12]
@@ -545,9 +677,10 @@ extension DataSource{
     /// - Parameter newIndexPath: The new position that element will move to.
     /// - Returns: Self.
     ///
+    
     @discardableResult
     public func move<Element>(at indexPath: IndexPath, to newIndexPath: IndexPath) ->Self
-    where Value == DataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == DataList<Element>{
         if indexPath.section < 0 ||  newIndexPath.section < 0 {
             return self
         }
@@ -562,7 +695,7 @@ extension DataSource{
     
 
     /// move the element  at the specified position to new position for dataSource.
-    ///
+    /// dataSource = [[Element]]
     /// ```
     ///     @DataSource var dataSource:[[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5, 7], [15, 13, 12,24,1]]
     ///     $dataSource.move(at:IndexPath(row: 1, section: 0), at:IndexPath(row: 2, section: 1))
@@ -577,7 +710,7 @@ extension DataSource{
     @discardableResult
     public func move<Element>(at indexPath: IndexPath, to newIndexPath: IndexPath)
     ->Self
-    where Value == SectionDataList<Element>,Element:ArgoKitIdentifiable{
+    where Value == SectionDataList<Element>{
         let section = dataSource.count
         if newIndexPath.section < 0
             || newIndexPath.row < 0
@@ -635,6 +768,144 @@ extension DataSource{
         datas.remove(at: indexPath.row)
         datas.insert(data, at: newIndexPath.row)
         return true
+    }
+}
+
+// MARK: Get value
+extension DataSource{
+    /// get the element  at the specified indexPath from dataSource.
+    /// dataSource = [Element]
+    ///
+    /// ```
+    ///     @DataSource var dataSource:[Int] = [1, 5, 9, 12, 15, 13, 12]
+    ///     let value:Int = $dataSource.value(indexPath:IndexPath(row: 1, section: 0))
+    ///     print(value)
+    ///     // Prints "5"
+    ///```
+    ///
+    /// - Parameter indexPath: The  specified position
+    /// - Returns: element for position.
+    ///
+    public func value<Element>(at indexPath:IndexPath) -> Element? where Value == DataList<Element>{
+        if indexPath.row > dataSource.count - 1{
+            return nil
+        }
+        return dataSource[indexPath.row]
+    }
+    
+    /// get the element  at the specified indexPath from dataSource.
+    /// dataSource = [[Element]]
+    ///
+    /// ```
+    ///     @DataSource var dataSource:[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5, 7], [15, 13, 12,24,1]]
+    ///     let value:Int = $dataSource.value(at:IndexPath(row: 2, section: 1))
+    ///     print(value)
+    ///     // Prints "7"
+    ///```
+    ///
+    /// - Parameter indexPath: The  specified position
+    /// - Returns: element for position.
+    ///
+    public func value<Element>(at indexPath:IndexPath) -> Element? where Value == SectionDataList<Element>{
+        if indexPath.section > dataSource.count - 1{
+            return nil
+        }
+        if indexPath.row > dataSource[indexPath.section].count - 1{
+            return nil
+        }
+        return dataSource[indexPath.section][indexPath.row]
+    }
+    
+    /// get the element  at the specified section from dataSource.
+    /// dataSource = [[Element]]
+    ///
+    /// ```
+    ///     @DataSource var dataSource:[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5, 7], [15, 13, 12,24,1]]
+    ///     let value:Int = $dataSource.value(at:IndexPath(row: 2, section: 1))
+    ///     print(value)
+    ///     // Prints "7"
+    ///```
+    ///
+    /// - Parameter section: The  specified section
+    /// - Returns: elements for position.
+    ///
+    public func value<Element>(at section:Int) -> [Element]? where Value == SectionDataList<Element>{
+        if section > dataSource.count - 1{
+            return nil
+        }
+        return dataSource[section]
+    }
+    
+    /// The first element of the dataSource.
+    /// dataSource = [Element]
+    ///
+    /// If the dataSource is empty, the value of this property is `nil`.
+    ///
+    ///     @DataSource var dataSource:[Int]] = [10, 20, 30, 40, 50]
+    ///     if let firstNumber:Int = $dataSource.first {
+    ///         print(firstNumber)
+    ///     }
+    ///     // Prints "10"
+    /// - Returns: the first element.
+    public func first<Element>() -> Element? where Value == DataList<Element>{
+        if dataSource.count <= 0 {
+            return nil
+        }
+        return dataSource.first
+    }
+    
+    /// The last element of the dataSource.
+    /// dataSource = [Element]
+    ///
+    /// If the dataSource is empty, the value of this property is `nil`.
+    ///
+    ///     @DataSource var dataSource:[Int]] = [10, 20, 30, 40, 50]
+    ///     if let firstNumber:Int = $dataSource.first() {
+    ///         print(firstNumber)
+    ///     }
+    ///     // Prints "50"
+    /// - Returns: the last element.
+    public func last<Element>() -> Element? where Value == DataList<Element>{
+        if dataSource.count <= 0 {
+            return nil
+        }
+        return dataSource.last
+    }
+    
+    /// The first element of the dataSource.
+    /// dataSource = [[Element]]
+    ///
+    /// If the dataSource is empty, the value of this property is `nil`.
+    ///
+    ///     @DataSource var dataSource:[Int]] = [[10, 20, 30, 40, 50],[10,20],[30,40]]
+    ///     if let firstNumber:[Int] = $dataSource.first() {
+    ///         print(firstNumber)
+    ///     }
+    ///     // Prints "[10, 20, 30, 40, 50]"
+    /// - Returns: the first element.
+    public func first<Element>() -> [Element]? where Value == SectionDataList<Element>{
+        if dataSource.count <= 0 {
+            return nil
+        }
+        return dataSource.first
+    }
+    
+    /// The last element of the dataSource.
+    /// dataSource = [[Element]]
+    ///
+    /// If the dataSource is empty, the value of this property is `nil`.
+    ///
+    ///     @DataSource var dataSource:[Int]] = [[10, 20, 30, 40, 50],[10,20],[30,40]]
+    ///     if let firstNumber:[Int] = $dataSource.last() {
+    ///         print(firstNumber)
+    ///     }
+    ///     // Prints "[10, 20, 30, 40, 50]"
+    /// - Returns: the last element.
+    public func last<Element>() -> [Element]? where Value == SectionDataList<Element>{
+        if dataSource.count <= 0 {
+            return nil
+        }
+        return dataSource.last
     }
     
 }

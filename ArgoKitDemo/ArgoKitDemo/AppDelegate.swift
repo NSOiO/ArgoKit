@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let contentView = ArgoKitMoveAnimationTest(model: ArgoKitMoveAnimationTestModel())
 
-        let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+        let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
 //        let contentView = ListCellTests(model: ListCellTestsModel_Previews())
 //        contentView.padding(edge: .top, value: 100)
         

@@ -87,7 +87,7 @@ class ImageBindTestsPreviewsModel: ImageBindTestModel {
         super.init()
     }
 }
-
+@available(iOS 13.0.0, *)
 fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
     ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
     ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())

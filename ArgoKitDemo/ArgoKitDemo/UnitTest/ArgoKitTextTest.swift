@@ -17,8 +17,19 @@ struct ArgoKitTextTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitTextTestModel
+    @DataSource var dataSource:[[Int]] = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
     init(model: ArgoKitTextTestModel) {
         self.model = model
+        let numbers = [10, 20, 30]
+        print("11\(dataSource)")
+        $dataSource.insert(contentsOf: numbers, at: 0, section: 0)
+        print("22\(dataSource)")
+        $dataSource.insert(contentsOf: numbers, at: 3, section: 1)
+        let numbers1 = [50, 25, 44]
+        $dataSource.append(contentsOf:numbers1,section:2)
+        print("33\(dataSource)")
+        
+        print("44\(String(describing: $dataSource.last()?.last))")
     }
     
     var body: ArgoKit.View {
