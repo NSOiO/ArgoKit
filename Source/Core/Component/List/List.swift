@@ -36,8 +36,8 @@ import Foundation
 ///         }
 ///
 ///         func appendData(data: Model) {
-///             models.append(data)
-///             $dataSource.reloadData()
+///             $dataSource.append(data)
+///             $dataSource.apply()
 ///         }
 ///     }
 ///```

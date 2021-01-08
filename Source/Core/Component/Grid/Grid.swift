@@ -37,7 +37,7 @@ import Foundation
 ///
 ///         func appendData(data: Model) {
 ///             models.append(data)
-///             $dataSource.reloadData()
+///             $dataSource.apply()
 ///         }
 ///     }
 ///```
@@ -53,26 +53,6 @@ public class Grid<D>: ScrollView {
     
     required init() {
         super.init()
-    }
-    
-    /// Initializer
-    /// - Parameters:
-    ///   - content: The content of the grid.
-    ///
-    ///```
-    ///     Grid {
-    ///         Item1()
-    ///         Item2()
-    ///         Item3()
-    ///     }
-    ///```
-    ///
-    public convenience init(@ArgoKitListBuilder content: @escaping () -> View) where D : ArgoKitNode {
-        self.init()
-        let container = content()
-        if let nodes = container.type.viewNodes() {
-            gridNode?.dataSourceHelper.nodeSourceList?.append(contentsOf: [nodes])
-        }
     }
     
     /// Initializer

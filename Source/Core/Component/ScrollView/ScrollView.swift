@@ -22,9 +22,9 @@ public class ScrollView: View {
     
     /// init the ScrollView
     /// - Parameter builder: view builder used for ScrollView ArgoKitListBuilder
-    public convenience init(@ArgoKitListBuilder builder:@escaping () -> View) {
+    public convenience init(@ArgoKitListBuilder content:@escaping () -> View) {
         self.init()
-        addSubViews(builder: builder)
+        addSubViews(builder: content)
     }
     
     func createNode() {

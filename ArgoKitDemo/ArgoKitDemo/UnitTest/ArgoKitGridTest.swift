@@ -84,70 +84,70 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-      
-//        Grid{
-//            Text("dsa")
-//                .lineLimit(0)
-//                .textAlign(.center)
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Text("scsdcsd")
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                        .aspect(ratio: 1)
-//                        .circle()
-//                        .onTapGesture {
-//
-//                        }
-//            Image("icybay.jpg")
-//                            .aspect(ratio: 1)
-//                            .circle()
-//                            .onTapGesture {
-//
-//                            }
-//            Text("scsdcsd")
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                    .aspect(ratio: 1)
-//                    .circle()
-//                    .onTapGesture {
-//
-//                    }
-//            Image("icybay.jpg")
-//                                .aspect(ratio: 1)
-//                                .circle()
-//                                .onTapGesture {
-//
-//                                }
-//
-//        }
-//        .grow(1.0)
-//        .columnCount(3)
-//        .columnSpacing(5)
-//        .sectionHeader { () -> View in
-//            Text("scsdcsd").backgroundColor(.yellow)
-//        }
+      /*
+        Grid{
+            Text("dsa")
+                .lineLimit(0)
+                .textAlign(.center)
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
 
+                    }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                        .aspect(ratio: 1)
+                        .circle()
+                        .onTapGesture {
+
+                        }
+            Image("icybay.jpg")
+                            .aspect(ratio: 1)
+                            .circle()
+                            .onTapGesture {
+
+                            }
+            Text("scsdcsd")
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                    .aspect(ratio: 1)
+                    .circle()
+                    .onTapGesture {
+
+                    }
+            Image("icybay.jpg")
+                                .aspect(ratio: 1)
+                                .circle()
+                                .onTapGesture {
+
+                                }
+
+        }
+        .grow(1.0)
+        .columnCount(3)
+        .columnSpacing(5)
+        .sectionHeader { () -> View in
+            Text("scsdcsd").backgroundColor(.yellow)
+        }
+         q*/
       
         Grid(waterfall: false,data:model.$dataSource1){ data in
 

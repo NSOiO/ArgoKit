@@ -230,8 +230,13 @@ struct ListDemo:ArgoKit.View{
     var hidden:Bool = false
     
     var body: ArgoKit.View{
-        ArgoKit.List(data:$items){ item in
-            SessionRow(item: item)
+//        ArgoKit.List(data:$items){ item in
+//            SessionRow(item: item)
+//        }
+        ArgoKit.List{
+            ForEach(0 ..< 100){ index in
+                Text("List\(String(index))")
+            }
         }
         .cellSelected {item, indexPath in
 //            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
