@@ -20,7 +20,7 @@ podspec = Pod::Spec.new do |spec|
     }
   
     spec.platform = :ios
-    spec.ios.deployment_target = '10.0'
+    spec.ios.deployment_target = '11.0'
     spec.ios.frameworks = 'UIKit'
     spec.ios.weak_frameworks = 'SwiftUI'
 

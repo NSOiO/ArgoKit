@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
   spec.name = 'ArgoKit'
-  spec.version = '1.0.6'
+  spec.version = '1.0.7'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
   spec.documentation_url = 'argokit'
@@ -20,7 +20,7 @@ podspec = Pod::Spec.new do |spec|
   }
 
   spec.platform = :ios
-  spec.ios.deployment_target = '10.0'
+  spec.ios.deployment_target = '11.0'
   spec.ios.frameworks = 'UIKit'
   spec.dependency 'Yoga'
   spec.module_name = 'ArgoKit'
@@ -50,9 +50,4 @@ podspec = Pod::Spec.new do |spec|
 #    ss.private_header_files = 'ArgoKit/Source/*.h'
     ss.public_header_files = 'ArgoKit/Source/*.h'
   end
-  
 end
-
-# See https://github.com/facebook/yoga/pull/366
-#podspec.attributes_hash["readme"] = "argokit/README.md"
-podspec

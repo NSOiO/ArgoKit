@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
     spec.name = 'ArgoKitComponent'
-    spec.version = '1.0.4'
+    spec.version = '1.0.5'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
   
@@ -17,7 +17,7 @@ podspec = Pod::Spec.new do |spec|
       :tag => spec.name + '/' + spec.version.to_s,
     }
     spec.platform = :ios
-    spec.ios.deployment_target = '10.0'
+    spec.ios.deployment_target = '11.0'
     spec.ios.frameworks = 'UIKit'
     spec.module_name = spec.name
 
