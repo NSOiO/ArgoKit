@@ -39,33 +39,3 @@ extension DataSourceReloadNode {
     }
 }
 
-//extension DataSourceReloadNode{
-//        public func reloadData() ->Self{
-//            return self
-//        }
-//        public func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) ->Self{
-//            return self
-//        }
-//        public func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) ->Self{
-//            return self
-//        }
-//        public func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) ->Self{
-//            return self
-//        }
-//        public func moveSection(_ section: Int, toSection newSection: Int) ->Self{
-//            return self
-//        }
-//        public func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) ->Self{
-//            return self
-//        }
-//    
-//        public func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) ->Self{
-//            return self
-//        }
-//        public func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) ->Self{
-//            return self
-//        }
-//        public func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath) ->Self{
-//            return self
-//        }
-//}
