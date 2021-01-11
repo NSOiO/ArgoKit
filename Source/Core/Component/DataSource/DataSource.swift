@@ -788,6 +788,104 @@ extension DataSource{
 
 // MARK: Get value
 extension DataSource{
+    /// The number of elements in the dataSource.
+    /// dataSource = [Element]
+    public func count<Element>()->Int where Value == DataList<Element>{
+        dataSource.count
+    }
+    
+    /// The number of elements in the dataSource.
+    /// dataSource = [[Element]]
+    public func count<Element>()->Int where Value == SectionDataList<Element>{
+        dataSource.count
+    }
+    
+    /// The number of elements  at the specified section from dataSource.
+    /// dataSource = [[Element]]
+    /// - Parameter section: The  specified section
+    public func count<Element>(section:Int)->Int where Value == SectionDataList<Element>{
+        if section > dataSource.count - 1{
+            return 0
+        }
+        return dataSource[section].count
+    }
+    
+    /// Accesses the element at the specified position from dataSource.
+    /// dataSource = [Element]
+    /// The following example uses indexed subscripting to update an array's
+    /// second element. After assigning the new value (`15`) at a specific
+    /// position, that value is immediately available at that same position.
+    ///
+    ///```
+    ///     @DataSource var dataSource:[Int] = [1, 2, 3, 4, 5]
+    ///     streets[1] = 15
+    ///     print(streets[1])
+    ///     // Prints "15"
+    ///```
+    /// - Parameter index: The position of the element to access.
+    public subscript<Element>(row:Int)->Element where Value == DataList<Element>{
+        set {
+            if row <= dataSource.count{
+                dataSource[row] = newValue
+            }
+        }
+        get {
+            return dataSource[row]
+        }
+    }
+    
+    /// Accesses the element at the specified position from dataSource.
+    /// dataSource = [[Element]]
+    /// The following example uses indexed subscripting to update an array's
+    /// second element. After assigning the new value (`[10,11,12]`) at a specific
+    /// position, that value is immediately available at that same position.
+    ///
+    ///```
+    ///     @DataSource var dataSource:[[Int]] = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
+    ///     $dataSource[1] = [10,11,12]
+    ///     print($dataSource[1])
+    ///     // Prints "[10,11,12]"
+    ///```
+    /// - Parameter index: The position of the element to access.
+    public subscript<Element>(row:Int)->[Element] where Value == SectionDataList<Element>{
+        set {
+            if row <= dataSource.count{
+                dataSource[row] = newValue
+            }
+        }
+        get {
+            return dataSource[row]
+        }
+    }
+    
+    /// Accesses the element at the specified position of specified section from dataSource.
+    /// dataSource = [[Element]]
+    /// The following example uses indexed subscripting to update an array's
+    /// second element of first section. After assigning the new value (`15`) at a specific
+    /// position, that value is immediately available at that same position.
+    ///
+    ///```
+    ///     @DataSource var dataSource:[[Int]] = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
+    ///     $dataSource[1,0] = 15
+    ///     print($dataSource[1])
+    ///     // Prints "15"
+    ///```
+    /// - Parameter index: The position of the element to access.
+    public subscript<Element>(row:Int,section:Int)->Element where Value == SectionDataList<Element>{
+        set {
+            if section > dataSource.count - 1 {
+                return
+            }
+            if row <= dataSource[section].count{
+                dataSource[section][row] = newValue
+            }
+        }
+        get {
+            return dataSource[section][row]
+        }
+    }
+
+    
     /// get the element  at the specified indexPath from dataSource.
     /// dataSource = [Element]
     ///
