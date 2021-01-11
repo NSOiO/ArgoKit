@@ -14,7 +14,7 @@ public typealias DataList<T> = [T]
 public class DataSource<Value>  {
     
     weak var _rootNode : DataSourceReloadNode?
-    public var dataSource: Value
+    var dataSource: Value
     
     public var reloadAction:((UITableView.RowAnimation)->Void)?
    
@@ -96,6 +96,18 @@ extension DataSource{
             reloadAction = {[weak self,indexPaths] animation in
                 if let node = self?._rootNode {
                     node.reloadRows(at: indexPaths, with: animation)
+                }
+            }
+        }
+    }
+    
+    private func deleteSections(at sections: IndexSet) {
+        if let _ = reloadAction {
+            self.reloadData()
+        }else{
+            reloadAction = {[weak self,sections] animation in
+                if let node = self?._rootNode {
+                    node.deleteSections(sections, with: animation)
                 }
             }
         }
@@ -503,10 +515,12 @@ extension DataSource{
     -> Self
     where Value == DataList<Element>{
         var indices:[Int] = []
+        var _indexPaths:[IndexPath] = [];
         for indexPath in indexPaths {
             if dataSource.count <= indexPath.row {
                 continue
             }
+            _indexPaths.append(indexPath)
             indices.append(indexPath.row)
         }
         let reversedndices = indices.sorted().reversed()
@@ -514,7 +528,7 @@ extension DataSource{
             guard i < dataSource.count else { return self}
             dataSource.remove(at: i)
         }
-        self.deleteRows(at: indexPaths)
+        self.deleteRows(at: _indexPaths)
         return self
     }
     
@@ -536,13 +550,18 @@ extension DataSource{
     -> Self
     where Value == SectionDataList<Element>{
         var section:[Int:[Int]] = [:]
+        var _indexPaths:[IndexPath] = [];
         for indexPath in indexPaths {
+            if indexPath.count != 2 {
+                continue
+            }
             if dataSource.count <= indexPath.section {
                 continue
             }
             if dataSource[indexPath.section].count <= indexPath.row {
                 continue
             }
+            _indexPaths.append(indexPath)
             if let _ = section[indexPath.section]{
                 section[indexPath.section]?.append(indexPath.row)
             }else{
@@ -557,7 +576,36 @@ extension DataSource{
                 dataSource[key].remove(at: i)
             }
         }
-        self.deleteRows(at: indexPaths)
+        self.deleteRows(at: _indexPaths)
+        return self
+    }
+    
+    /// delete the section at the specified position from dataSource.
+    /// dataSource = [[Element]]
+    ///
+    /// ```
+    ///     @DataSource var dataSource:[[Int]] = [[1, 5, 9, 12, 15, 13, 12],[1, 5], [9, 12], [15, 13, 12,24,1]]
+    ///     $dataSource.deleteSection(at:[1,2])
+    ///     print(dataSource)
+    ///     // Prints "[[1, 5, 9, 12, 15, 13, 12],[15, 13, 12,24,1]]"
+    ///```
+    ///
+    /// - Parameter sections: The positions of the section to delete.
+    /// - Returns: Self.
+    ///
+    @discardableResult
+    public func delete<Element>(sections: IndexSet)
+    -> Self
+    where Value == SectionDataList<Element>{
+        var sections_ = IndexSet()
+        for section in sections {
+            if section > dataSource.count - 1 {
+                return self
+            }
+            sections_.insert(section)
+            dataSource.remove(at: section)
+        }
+        deleteSections(at: sections)
         return self
     }
 }

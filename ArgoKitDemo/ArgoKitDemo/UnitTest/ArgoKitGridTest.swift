@@ -177,7 +177,8 @@ struct ArgoKitGridTest: ArgoKit.View {
         .cellSelected({ (data, indexpath) in
 //            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
 //            data.imagePath = "icybay.jpg"
-            model.$dataSource1.move(at: indexpath, to: IndexPath(row: indexpath.row + 2, section: indexpath.section)).apply()
+//            model.$dataSource1.move(at: indexpath, to: IndexPath(row: indexpath.row + 2, section: indexpath.section)).apply()
+            model.$dataSource1.delete(at: [1,2]).apply()
 //            AlertView(title: data.headerName, message: data.headerName, preferredStyle: UIAlertController.Style.alert)
 //            .textField()
 //            .destructive(title: "确认") { text in
