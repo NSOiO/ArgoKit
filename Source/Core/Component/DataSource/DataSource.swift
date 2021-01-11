@@ -605,7 +605,7 @@ extension DataSource{
             sections_.insert(section)
             dataSource.remove(at: section)
         }
-        deleteSections(at: sections)
+        deleteSections(at: sections_)
         return self
     }
 }
