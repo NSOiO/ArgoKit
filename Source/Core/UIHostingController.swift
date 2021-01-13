@@ -79,23 +79,19 @@ public class UIHostingView: UIView {
                 node.height(point: height)
                 node.frame = frame
                 node.resetOrigin = false
-                
-                if self.useSafeArea == true {
-                    var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                    if #available(iOS 11.0, *){
-                        insets = self.safeAreaInsets
-                        if self.useSafeAreaTop{
-                            node.paddingTop(point: insets.top)
-                        }
-                        if self.useSafeAreaLeft{
-                            node.paddingLeft(point: insets.left)
-                        }
-                        if self.useSafeAreaBottom{
-                            node.paddingBottom(point: insets.bottom)
-                        }
-                        if self.useSafeAreaRight{
-                            node.paddingRight(point: insets.right)
-                        }
+                if #available(iOS 11.0, *){
+                    let insets = self.safeAreaInsets
+                    if self.useSafeAreaTop{
+                        node.paddingTop(point: insets.top)
+                    }
+                    if self.useSafeAreaLeft{
+                        node.paddingLeft(point: insets.left)
+                    }
+                    if self.useSafeAreaBottom{
+                        node.paddingBottom(point: insets.bottom)
+                    }
+                    if self.useSafeAreaRight{
+                        node.paddingRight(point: insets.right)
                     }
                 }
                 node.applyLayout()

@@ -7,19 +7,16 @@
 
 import Foundation
 import UIKit
-
+import ArgoKit
 class ViewPagerController: UIViewController {
     
-    let contentView = ViewPage1()
+    let contentView = ListDemo()
     
     
     override func viewDidLoad() {
-
-        let argoKitControll = UIHostingController(rootView: contentView)
-        argoKitControll.view.frame = self.view.bounds
-        argoKitControll.didMove(toParent: self)
-        self.addChild(argoKitControll)
-        self.view.addSubview(argoKitControll.view)
-        
+        let argoKitControll = UIHostingView(content: contentView, frame: self.view.frame)
+        argoKitControll.useSafeAreaTop = true
+        argoKitControll.backgroundColor = .white
+        self.view.addSubview(argoKitControll)
     }
 }

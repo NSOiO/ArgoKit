@@ -205,10 +205,15 @@ class SessionRow:ArgoKit.View {
     
   
 }
+class ArgoKitNodeDemo: ArgoKitNode {
+    deinit {
+        print("ArgoKitNodeDemo")
+    }
+}
 var headerView:RefreshHeaderView?
 var footerView:RefreshFooterView?
 struct ListDemo:ArgoKit.View{
-    var node: ArgoKitNode? = ArgoKitNode()
+    var node: ArgoKitNode? = ArgoKitNodeDemo()
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
     
@@ -224,6 +229,10 @@ struct ListDemo:ArgoKit.View{
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
             $items.append(item)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+            
         }
     }
     
@@ -246,13 +255,15 @@ struct ListDemo:ArgoKit.View{
 //            }
 //            .cancel(title: "取消") {}
 //            .show()
-            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
-            item.imagePath = "icybay.jpg"
-            item.sessionName = "hahahaha"
-            item.lastMessage = "hahahaha"
-            item.timeLabel = getTimeLabel()
-//            $items.replace(data: item, at: indexPath).apply(with: .none)
-            $items.move(at: indexPath, to: IndexPath(row: indexPath.row + 2, section: indexPath.section)).apply(with: .none)
+            let controller = ViewPagerController()
+            viewController()?.navigationController?.pushViewController(controller, animated: true)
+//            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
+//            item.imagePath = "icybay.jpg"
+//            item.sessionName = "hahahaha"
+//            item.lastMessage = "hahahaha"
+//            item.timeLabel = getTimeLabel()
+////            $items.replace(data: item, at: indexPath).apply(with: .none)
+//            $items.move(at: indexPath, to: IndexPath(row: indexPath.row + 2, section: indexPath.section)).apply(with: .none)
         }
         .cellCanEdit({ (item, indx) -> Bool in
             return true

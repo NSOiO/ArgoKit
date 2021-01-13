@@ -506,7 +506,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     NSString *keyString = [@([obj hash]) stringValue];
     ArgoKitNodeBlock actionBlock = self.actionMap[keyString];
     if(actionBlock){
-        return actionBlock(obj, paramter);
+        id result = actionBlock(obj, paramter);
+        return result;
     }
     return nil;
 }
