@@ -10,7 +10,6 @@ import Foundation
 /// A ArgoKit view that manages a ArgoKit view hierarchy.
 public struct HostView: View {
     private var pNode: ArgoKitNode
-    private var pView: UIView
     
     /// The content and behavior of the view.
     public var body: View {
@@ -28,8 +27,7 @@ public struct HostView: View {
     }
     
     init() {
-        pView = UIView();
-        pNode = ArgoKitNode(view: pView);
+        pNode = ArgoKitNode(view: UIView())
         pNode.column()
         pNode.flexGrow(1.0)
     }
@@ -39,7 +37,6 @@ public struct HostView: View {
     ///   - view: A UIKit view that hosts a ArgoKit view hierarchy.
     ///   - builder: A view builder that creates the content of this HostView.
     public init(_ view: UIView = UIView(), @ArgoKitViewBuilder _ builder: () -> View) {
-        pView = view
         pNode = ArgoKitNode(view: view);
         pNode.width(point: view.frame.size.width)
         pNode.height(point: view.frame.size.height)
