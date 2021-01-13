@@ -15,6 +15,33 @@ public struct Bindable<Value>  {
     }
     public var wrappedValue: Value { _value() }
 }
+
+@propertyWrapper
+public enum Lazy<Value> {
+  case uninitialized(() -> Value)
+  case initialized(Value)
+
+  public init(wrappedValue: @autoclosure @escaping () -> Value) {
+    self = .uninitialized(wrappedValue)
+  }
+
+  public var wrappedValue: Value {
+    mutating get {
+      switch self {
+      case .uninitialized(let initializer):
+        let value = initializer()
+        self = .initialized(value)
+        return value
+      case .initialized(let value):
+        return value
+      }
+    }
+    set {
+      self = .initialized(newValue)
+    }
+  }
+}
+
 /*
 extension Bindable: ExpressibleByUnicodeScalarLiteral, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByStringLiteral where Value == String {
     public init(/unicodeScalarLiteral value: Value) {
