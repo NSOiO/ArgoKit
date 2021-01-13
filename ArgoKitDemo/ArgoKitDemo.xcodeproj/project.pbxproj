@@ -212,6 +212,7 @@
 		FA6802F12591C5C80074B190 /* ArgoKitAnimationSpringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationSpringTest.swift; sourceTree = "<group>"; };
 		FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationTest.swift; sourceTree = "<group>"; };
 		FAB3CE892590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimationBlockTest.swift; sourceTree = "<group>"; };
+		FAD61DCA25AEC62A00B9053F /* ListCellTestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellTestsViewModel.swift; sourceTree = "<group>"; };
 		FAE2A42E25A302A000F8ACA7 /* ImageBindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBindTests.swift; sourceTree = "<group>"; };
 		FAE72A512589E8D00066B2CB /* AspectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectTests.swift; sourceTree = "<group>"; };
 		FAE72A522589E8D10066B2CB /* ListCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCellTests.swift; sourceTree = "<group>"; };
@@ -453,6 +454,7 @@
 			children = (
 				FAE72A512589E8D00066B2CB /* AspectTests.swift */,
 				FAE72A522589E8D10066B2CB /* ListCellTests.swift */,
+				FAD61DCA25AEC62A00B9053F /* ListCellTestsViewModel.swift */,
 				FAE72A532589E8D10066B2CB /* VStackAlignTests.swift */,
 				FAE72A542589E8D10066B2CB /* ForEachTests.swift */,
 				FAE72A552589E8D10066B2CB /* HVStackTests.swift */,
@@ -669,7 +671,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A423580F257900920052E0B0 /* ViewPagerDemo.swift in Sources */,
-				FA9B495C258C4CD1006DB896 /* BuildFile in Sources */,
+				FA9B495C258C4CD1006DB896 /* (null) in Sources */,
+				FAD61DCB25AEC62A00B9053F /* ListCellTestsViewModel.swift in Sources */,
 				00A906DC259048EE0052550C /* ToggleRow.swift in Sources */,
 				FA5709BD25765303004A0EAD /* ViewController.swift in Sources */,
 				FAE72A5C2589E8D10066B2CB /* HVStackTests.swift in Sources */,

@@ -7,41 +7,30 @@
 
 import ArgoKit
 
-
-// view model.
-class ListCellTestsModel: ArgoKitIdentifiable {
-    var reuseIdentifier: String = "cell"
+protocol ListCellTestsProtocol {
+    var title: String { get }
+    var userName: String { get }
+    var userAge: Int { get }
+    var placeHolder: String { get }
+    var iconURL: URL? { get }
+    var photoURLs: [URL] { get }
+    var time: Int { get }
+    var distance: Float { get }
     
-    var title: String = ""
-    var userName = "Emily"
-    var userAge = 25
-    var placeHolder = "turtlerock"
-    var iconURL: URL? = nil
-    var photoURLs: [URL] = []
-    var time: Int = 1
-    var distance: Float = 0.1
+    var likes: Int { get }
+    var isLiked: Bool { get }
+    var comments: Int { get }
+    var conversation: String { get }
     
-    @Property var likes: Int = 0
-    @Property var isLiked: Bool = false
-    var comments: Int = 0
-    var conversation: String = "对话"
-
-    func likeButtonAction() {
-        self.isLiked = !self.isLiked
-        if self.isLiked {
-            self.likes += 1
-        } else {
-            self.likes -= 1
-        }
-    }
+    func likeButtonAction()
 }
 
 // view
 struct ListCellTests: ArgoKit.View {
 //    typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
-    private var model: ListCellTestsModel
-    init(model: ListCellTestsModel) {
+    private var model: ListCellTestsProtocol
+    init(model: ListCellTestsProtocol) {
         self.model = model
     }
     
@@ -144,7 +133,7 @@ import ArgoKitComponent
 import SwiftUI
 
 // mock data.
-class ListCellTestsModel_Previews:  ListCellTestsModel {
+class ListCellTestsViewModel_Previews:  ListCellTestsViewModel {
     override init() {
         super.init()
         self.title = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
@@ -179,7 +168,7 @@ struct ListCellTests_Previews: PreviewProvider {
         // 数组中可以添加其他设备进行多设备预览
         SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
-                ListCellTests(model: ListCellTestsModel_Previews())
+                ListCellTests(model: ListCellTestsViewModel_Previews())
                     .padding(edge: .all, value: 10)
             }
             .previewDevice(item.device)

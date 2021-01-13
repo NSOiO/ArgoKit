@@ -33,8 +33,8 @@ struct LandRow: View {
 class ListTestsModel:  ArgoKitIdentifiable {
     var reuseIdentifier = "idd"
     var name = "name..ss"
-    @DataSource var dataSource:DataList<ListCellTestsModel> = []
-
+//    @DataSource var dataSource:DataList<ListCellTestsViewModel> = []
+    @DataSource var dataSource:Array<ListCellTestsViewModel> = []
 }
 
 // view
@@ -65,11 +65,12 @@ import SwiftUI
 class ListTestsModel_Previews:  ListTestsModel {
     override init() {
         super.init()
-        var datas = [ListCellTestsModel_Previews]()
+        var datas = [ListCellTestsViewModel_Previews]()
         for _ in 0..<10 {
-            datas.append(ListCellTestsModel_Previews())
+            datas.append(ListCellTestsViewModel_Previews())
         }
-        self.dataSource = datas
+//        self.dataSource = datas
+        self.$dataSource.append(contentsOf: datas)
     }
 }
 
