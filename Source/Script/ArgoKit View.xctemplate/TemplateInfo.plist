@@ -44,7 +44,7 @@
 			<key>Identifier</key>
 			<string>SeperateViewModel</string>
 			<key>Name</key>
-			<string>Seperate view model in another file.</string>
+			<string>Use protocol as viewmodel (Do not use protocol if List is included)</string>
 			<key>Description</key>
 			<string>Whether to seperate view model in another file.</string>
 			<key>Type</key>
