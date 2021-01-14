@@ -16,7 +16,7 @@ import Foundation
 ///         }
 ///```
 ///
-public class BlurEffectView: View {
+public struct BlurEffectView: View {
     private var pNode:ArgoKitNode
     
     /// The node behind the visual effect view.
@@ -33,5 +33,16 @@ public class BlurEffectView: View {
         pNode = ArgoKitNode(viewClass: UIVisualEffectView.self)
         addSubViews(builder:builder)
         addAttribute(#selector(setter:UIVisualEffectView.effect), blurEffect)
+    }
+}
+
+extension BlurEffectView{
+   @available(*, deprecated, message: "BlurEffectView does not support padding!")
+    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
+        return self
+    }
+   @available(*, deprecated, message: "BlurEffectView does not support padding!")
+    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
+        return self
     }
 }
