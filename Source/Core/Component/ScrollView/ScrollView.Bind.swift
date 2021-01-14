@@ -302,13 +302,13 @@ extension ScrollView {
 
 
 extension ScrollView{
-    @available(*, deprecated, message: "ScrollView、List、Grid does not support the method!Please use ContentInset")
+    @available(*, deprecated, message: "ScrollView、List、Grid does not support the method!Please use contentInset")
     @discardableResult
     public func padding(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
         return self
     }
     
-    @available(*, deprecated, message: "ScrollView、List、Grid does not support the method!Please use ContentInset")
+    @available(*, deprecated, message: "ScrollView、List、Grid does not support the method!Please use contentInset")
     @discardableResult
     public func padding(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
         return self
