@@ -30,11 +30,11 @@ public class DataSource<Value>  {
         get {
             return dataSource
         }
-        set {
-            #if DEBUG
-                fatalError("Please prefix an instance of a DataSource with $")
-            #endif
-        }
+//        set {
+//            #if DEBUG
+//                fatalError("Please prefix an instance of a DataSource with $")
+//            #endif
+//        }
     }
 }
 

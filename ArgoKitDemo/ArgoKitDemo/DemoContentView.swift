@@ -59,7 +59,7 @@ class DemoContentView: View {
                 item.reuseIdentifier = "200"
             }
             item.identifier = "\(index)"
-            items.append(item)
+            $items.append(item)
         }
     }
     

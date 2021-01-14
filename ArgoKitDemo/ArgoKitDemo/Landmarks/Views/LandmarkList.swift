@@ -23,8 +23,7 @@ struct LandmarkList: ArgoKit.View {
     init(model: UserData) {
         self.model = model
         self.toggleModel = ToggleRowModel()
-        datas = [Landmark]()
-        self.datas.append(contentsOf:model.landmarks)
+        self.$datas.append(contentsOf:model.landmarks)
         self.toggleModel.action = { [self] isOn in
             self.toggleModel.isON = isOn
             _ = model.landmarks.filter { landmark -> Bool in
@@ -45,7 +44,7 @@ struct LandmarkList: ArgoKit.View {
             List(.grouped ,data: $datas) { landmark in
                 LandmarkRow(model: landmark)
                     .onTapGesture {
-                    self.datas.append(contentsOf: model.landmarks)
+                    self.$datas.append(contentsOf: model.landmarks)
                     $datas.apply()
                 }
             }

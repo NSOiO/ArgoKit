@@ -58,7 +58,7 @@ struct ArgoKitListTest: ArgoKit.View {
             let item = ArgoKitListTestModel()
             item.sessionName = String(index)
             item.unreadCount = String(index)
-            models.append(item)
+            $models.append(item)
         }
     }
     
