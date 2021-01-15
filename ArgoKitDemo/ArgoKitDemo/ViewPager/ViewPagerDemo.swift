@@ -43,7 +43,6 @@ struct ViewPageCell: ArgoKit.View {
     var item:ViewPageCellItem
     init(it: ViewPageCellItem) {
         item = it
-        
     }
     var body: ArgoKit.View {
         HStack {

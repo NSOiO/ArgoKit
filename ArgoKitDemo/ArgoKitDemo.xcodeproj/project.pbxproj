@@ -73,7 +73,6 @@
 		FA0BEF11258312E400D483EC /* ArgoKitButtonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF10258312E400D483EC /* ArgoKitButtonTest.swift */; };
 		FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF162583131B00D483EC /* ArgoKitTextTest.swift */; };
 		FA0BEF3A2583476100D483EC /* ArgoKitImageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF392583476100D483EC /* ArgoKitImageTest.swift */; };
-		FA0BEF3E25834AB200D483EC /* ArgoKitImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEF3D25834AB200D483EC /* ArgoKitImageLoader.swift */; };
 		FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFDFC25834ED100D483EC /* ArgoKitTextFieldTest.swift */; };
 		FA0BFE012583615500D483EC /* ArgoKitTextViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFE002583615500D483EC /* ArgoKitTextViewTest.swift */; };
 		FA0BFE0525836B5300D483EC /* ArgoKitListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BFE0425836B5300D483EC /* ArgoKitListTest.swift */; };
@@ -689,7 +688,6 @@
 				00A906DA259048EE0052550C /* LandmarkList.swift in Sources */,
 				FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */,
 				FAE72A5D2589E8D10066B2CB /* SpacerTests.swift in Sources */,
-				FA0BEF3E25834AB200D483EC /* ArgoKitImageLoader.swift in Sources */,
 				FAB3CE8A2590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift in Sources */,
 				FA0BEF3A2583476100D483EC /* ArgoKitImageTest.swift in Sources */,
 				3263370B25419A3C0094676D /* ContentView.swift in Sources */,

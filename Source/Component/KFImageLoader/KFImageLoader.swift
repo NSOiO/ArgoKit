@@ -3,6 +3,7 @@ import UIKit
 import ArgoKit
 import Kingfisher
 
+public typealias ImageLoader = KFImageLoader
 public class KFImageLoader:ArgoKitImageLoader {
     public init () {}
     public func loadImage(url: URL?, successed: ((UIImage) -> ())?, failure: ((Error?) -> ())?) {
