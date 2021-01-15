@@ -6,7 +6,7 @@
 #      if target.name == "ArgoKitPreview"
 #        pod_dir = target.sandbox.pod_dir(target.name)
 #        require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
-#        config_preview_files installer
+#        config_preview_files installer,target
 #      end
 #    end
 #end
@@ -32,7 +32,9 @@ class APGConstant
     end
 end
 
-def config_preview_files(installer, remove_if_exist = false, ap_target_name = "ArgoKitPreview")
+def config_preview_files(installer, ap_target, remove_if_exist = false)
+    config_template_file_if_needed installer, ap_target
+    ap_target_name = ap_target.name
     #    should_check_file_exist = !remove_if_exist
     file_paths = Array.new
     project_map = Hash.new # [project, aggpods]
@@ -62,6 +64,19 @@ def config_preview_files(installer, remove_if_exist = false, ap_target_name = "A
             remove_files_from_project project, file_paths
         end
         add_preview_files project, aggs, file_paths, should_check_file_exist
+    end
+end
+
+def config_template_file_if_needed(installer, target)
+    argokit_prefix = APGConstant.argokit_prefix
+    pod_dir = target.sandbox.pod_dir(target.name)
+    #执行prepare_command中的脚本。因为ArgoKitPreview通过:path引入，脚本不会自动执行。所以在这里执行一次
+    #参考：https://guides.cocoapods.org/syntax/podspec.html#prepare_command
+    installer.development_pod_targets.each do |dev_target|
+      if dev_target.name == target.name
+        `cd #{pod_dir}/Source/Script/ && sh ./config.sh`
+        puts "#{argokit_prefix} config template file".green
+      end
     end
 end
 
