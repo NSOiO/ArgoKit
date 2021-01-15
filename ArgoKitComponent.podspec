@@ -22,21 +22,23 @@ podspec = Pod::Spec.new do |spec|
     spec.module_name = spec.name
 
     spec.dependency 'ArgoKit'
-    # spec.source_files = "Source/Component/**/*.{h,m,mm,swift}"
-    spec.default_subspec = 'SDImageLoader', 'KFImageLoader'
+    spec.default_subspec = 'SDImageLoader', 'KFImageLoader', 'YYText'
     
     spec.subspec "SDImageLoader" do |ss|
       ss.source_files = 'Source/Component/SDImageLoader/**/*.{h,m,mm,swift}'
-      # ss.private_header_files = 'ArgoKit/Source/*.h'
       ss.dependency 'SDWebImage'
     end
     
     spec.subspec "KFImageLoader" do |ss|
       ss.source_files = 'Source/Component/KFImageLoader/**/*.{h,m,mm,swift}'
-      # ss.private_header_files = 'ArgoKit/Source/*.h'
       ss.dependency 'Kingfisher'
     end
 
+    spec.subspec "YYText" do |ss|
+      ss.source_files = 'Source/Component/YYText/**/*.{h,m,mm,swift}'
+      ss.dependency 'YYText'
+    end
+    
   end
 
   
