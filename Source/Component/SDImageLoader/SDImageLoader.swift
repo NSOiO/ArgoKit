@@ -3,7 +3,8 @@ import UIKit
 import ArgoKit
 import SDWebImage
 
-public class ImageLoader:ArgoKitImageLoader {
+public typealias ImageLoader = SDImageLoader
+public class SDImageLoader:ArgoKitImageLoader {
     public init () {}
     
     public func loadImage(url: URL?, successed: ((UIImage) -> ())?, failure: ((Error?) -> ())?) {
