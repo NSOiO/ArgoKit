@@ -7,7 +7,39 @@
 
 import Foundation
 
-extension Text {
+public protocol TextProtocol: View {
+    var textNode: TextNodeProtocol { get }
+    
+    func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self
+    func font(name value: @escaping @autoclosure () -> String?)->Self
+    func font(size value: @escaping @autoclosure () -> CGFloat)->Self
+    func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self
+    func textColor(_ value:@escaping @autoclosure () -> UIColor)->Self
+    func textAlign(_ value:@escaping @autoclosure () -> NSTextAlignment)->Self
+    func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self
+    func lineSpacing(_ value:@escaping @autoclosure () -> CGFloat)->Self
+    func textColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat)->Self
+    func textColor(hex:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float)->Self
+    func textShadowOffset(_ value:@escaping @autoclosure () -> CGSize)->Self
+    func textShadowColor(_ value:@escaping @autoclosure () -> UIColor)->Self
+    func textShadowColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat)->Self
+    func textShadowColor(hex :@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float)->Self
+    func breakMode(_ value:@escaping @autoclosure () -> NSLineBreakMode)->Self
+    func highlightedTextColor(_ value:@escaping @autoclosure () -> UIColor?)->Self
+    func isHighlighted(_ value:@escaping @autoclosure () -> Bool)->Self
+    func userInteractionEnabled(_ value:@escaping @autoclosure () -> Bool)->Self
+    func isEnabled(_ value:@escaping @autoclosure () -> Bool)->Self
+    func lineLimit(_ value:@escaping @autoclosure () -> Int)->Self
+    func adjustsFontSizeToFitWidth(_ value:@escaping @autoclosure () -> Bool)->Self
+    func baselineAdjustment(_ value:@escaping @autoclosure () -> UIBaselineAdjustment)->Self
+    func minimumScaleFactor(_ value:@escaping @autoclosure () -> CGFloat)->Self
+    func allowsDefaultTighteningForTruncation(_ value:@escaping @autoclosure () -> Bool)->Self
+    func lineBreakStrategy(_ value:@escaping @autoclosure () -> NSParagraphStyle.LineBreakStrategy)->Self
+    func preferredMaxLayoutWidth(in value: @escaping @autoclosure () -> CGFloat)->Self
+}
+
+
+extension TextProtocol {
     /// set content of the Text
     /// - Parameter value: a string value
     /// - Returns: self
@@ -15,7 +47,7 @@ extension Text {
     public func text(_ value:@escaping @autoclosure () -> String?)->Self{
         return self.bindCallback({
             addAttribute(#selector(setter:UILabel.text),value())
-            pNode.handleLineSpacing()
+            textNode.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -26,7 +58,7 @@ extension Text {
     public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
         return self.bindCallback({
             addAttribute(#selector(setter:UILabel.font),value())
-            pNode.handleLineSpacing()
+            textNode.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -50,12 +82,12 @@ extension Text {
     public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
         return self.bindCallback({
             let f_name = name(), f_size = size(), f_style = style()
-            pNode.fontName = f_name
-            pNode.fontSize = f_size
-            pNode.fontStyle = f_style
+            textNode.fontName = f_name
+            textNode.fontSize = f_size
+            textNode.fontStyle = f_style
             let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
             addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
+            textNode.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -66,10 +98,10 @@ extension Text {
     public func font(name value: @escaping @autoclosure () -> String?)->Self{
         return self.bindCallback({
             let f_name = value()
-            pNode.fontName = f_name
-            let font = UIFont.font(fontName: f_name, fontStyle: pNode.fontStyle, fontSize: pNode.fontSize)
+            textNode.fontName = f_name
+            let font = UIFont.font(fontName: f_name, fontStyle: textNode.fontStyle, fontSize: textNode.fontSize)
             addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
+            textNode.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -80,10 +112,10 @@ extension Text {
     public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
         return self.bindCallback({
             let f_size = value()
-            pNode.fontSize = f_size
-            let font = UIFont.font(fontName: pNode.fontName, fontStyle:  pNode.fontStyle, fontSize: f_size)
+            textNode.fontSize = f_size
+            let font = UIFont.font(fontName: textNode.fontName, fontStyle:  textNode.fontStyle, fontSize: f_size)
             addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
+            textNode.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -104,10 +136,10 @@ extension Text {
     public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
         return self.bindCallback({
             let f_style = value()
-            pNode.fontStyle = value()
-            let font = UIFont.font(fontName: pNode.fontName, fontStyle: f_style, fontSize: pNode.fontSize)
+            textNode.fontStyle = value()
+            let font = UIFont.font(fontName: textNode.fontName, fontStyle: f_style, fontSize: textNode.fontSize)
             addAttribute(#selector(setter:UILabel.font),font)
-            pNode.handleLineSpacing()
+            textNode.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -150,7 +182,7 @@ extension Text {
     @discardableResult
     public func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self{
 		return self.bindCallback({ [self] in 
-			pNode.attributedText(attri: value())
+			textNode.attributedText(attri: value())
 		}, forKey: #function)
     }
     
@@ -160,7 +192,7 @@ extension Text {
     @discardableResult
     public func lineSpacing(_ value:@escaping @autoclosure () -> CGFloat)->Self{
 		return self.bindCallback({ [self] in 
-			pNode.lineSpacing(value())
+			textNode.lineSpacing(value())
 		}, forKey: #function)
     }
     

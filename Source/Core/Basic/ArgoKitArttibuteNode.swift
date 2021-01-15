@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class ArgoKitArttibuteNode: ArgoKitNode {
+class ArgoKitArttibuteNode: ArgoKitNode, TextAttributeNodeProtocol {
     var fontSize:CGFloat = 17.0
     var fontStyle:AKFontStyle = .default
     var fontName:String?
