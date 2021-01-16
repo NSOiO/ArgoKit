@@ -30,12 +30,20 @@ struct LandRow: View {
     }
 }
 
-class ListTestsModel:  ArgoKitIdentifiable {
-    var reuseIdentifier = "idd"
+class ListTestsModel {
     var name = "name..ss"
 //    @DataSource var dataSource:DataList<ListCellTestsViewModel> = []
-    @DataSource var dataSource:Array<ListCellTestsViewModel> = []
+//    @DataSource var dataSource:Array<ListCellTestsProtocol> = []
+    var dataSource = DataSource([ListCellTestsProtocol]())
 }
+
+//extension ArgoKitIdentifiable {
+//    var reuseIdentifier: String { "Cell" }
+//}
+
+//extension ListCellTestsProtocol where Self: ArgoKitIdentifiable {
+//    var reuseIdentifier: String { "Cell" }
+//}
 
 // view
 struct  ListTests: ArgoKit.View {
@@ -45,9 +53,9 @@ struct  ListTests: ArgoKit.View {
     init(model: ListTestsModel) {
         self.model = model
     }
-        
+    
     var body: ArgoKit.View {
-        List(data: model.$dataSource) { cellModel in
+        List(data: model.dataSource) { cellModel in
             ListCellTests(model: cellModel)
                 .padding(edge: .bottom, value: 10)
         }
@@ -70,7 +78,7 @@ class ListTestsModel_Previews:  ListTestsModel {
             datas.append(ListCellTestsViewModel_Previews())
         }
 //        self.dataSource = datas
-        self.$dataSource.append(contentsOf: datas)
+        self.dataSource.append(contentsOf: datas)
     }
 }
 

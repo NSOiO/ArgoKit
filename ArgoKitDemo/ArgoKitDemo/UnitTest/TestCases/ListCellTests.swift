@@ -7,7 +7,7 @@
 
 import ArgoKit
 
-protocol ListCellTestsProtocol {
+protocol ListCellTestsProtocol: class {
     var title: String { get }
     var userName: String { get }
     var userAge: Int { get }

@@ -18,6 +18,10 @@ public class DataSource<Value>  {
     
     public var reloadAction:((UITableView.RowAnimation)->Void)?
    
+    public init<D>(_ value: Value) where Value == DataList<D>{
+        self.dataSource = value
+    }
+    
     public init<D>(wrappedValue value: Value) where Value == DataList<D>{
         self.dataSource = value
     }

@@ -98,7 +98,7 @@ public class List<D>: ScrollView  {
     ///
     public convenience init(_ style: UITableView.Style? = .plain,
                             data: DataSource<DataList<D>>,
-                            @ArgoKitListBuilder rowContent: @escaping (D) -> View) where D : ArgoKitIdentifiable {
+                            @ArgoKitListBuilder rowContent: @escaping (D) -> View) {
         self.init(style: style)
         
         tableNode.dataSourceHelper.dataSourceList = data
