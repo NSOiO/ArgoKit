@@ -129,9 +129,10 @@ extension DataSourceHelper {
         }
         if let sourceData = self.dataSource()?[section][row]{
             // MARK:数据源中存在重复的数据对象的兼容处理
-            let indexPath = IndexPath(row: row, section: section)
-            if let sourceData_ = sourceData as? ArgoKitIdentifiable,let indexPath_ =  sourceData_.argokit_indexPath {
-                if !indexPath.elementsEqual(indexPath_) {
+            let indexPath = NSIndexPath(row: row, section: section)
+            if let sourceData_ = sourceData as? ArgoKitIdentifiable,
+               let indexPath_ =  sourceData_.argokit_indexPath as IndexPath? {
+                if indexPath.compare(indexPath_) != .orderedSame {
                     sourceData_.argokit_linkNode = nil
                     sourceData_.argokit_indexPath = nil
                 }

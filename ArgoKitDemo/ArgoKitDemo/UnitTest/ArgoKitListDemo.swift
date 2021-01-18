@@ -221,13 +221,14 @@ struct ListDemo:ArgoKit.View{
     init() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<4{
+        for index in 0..<400{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
+            $items.append(item)
             $items.append(item)
         }
         
@@ -239,14 +240,14 @@ struct ListDemo:ArgoKit.View{
     var hidden:Bool = false
     
     var body: ArgoKit.View{
-//        ArgoKit.List(data:$items){ item in
-//            SessionRow(item: item)
-//        }
-        ArgoKit.List{
-            ForEach(0 ..< 100){ index in
-                Text("List\(String(index))")
-            }
+        ArgoKit.List(data:$items){ item in
+            SessionRow(item: item)
         }
+//        ArgoKit.List{
+//            ForEach(0 ..< 100){ index in
+//                Text("List\(String(index))")
+//            }
+//        }
         .cellSelected {item, indexPath in
 //            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
 //            .textField()

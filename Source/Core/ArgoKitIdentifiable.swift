@@ -30,12 +30,12 @@ extension ArgoKitIdentifiable {
         }
     }
     
-    var argokit_indexPath: IndexPath? {
+    var argokit_indexPath: NSIndexPath? {
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return  objc_getAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey) as? IndexPath
+            return  objc_getAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey) as? NSIndexPath
         }
     }
 }
