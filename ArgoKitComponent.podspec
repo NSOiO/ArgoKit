@@ -22,7 +22,7 @@ podspec = Pod::Spec.new do |spec|
     spec.module_name = spec.name
 
     spec.dependency 'ArgoKit'
-    spec.default_subspec = 'SDImageLoader', 'KFImageLoader', 'YYText'
+    spec.default_subspec = 'SDImageLoader', 'KFImageLoader', 'YYText', 'Refresh'
     
     spec.subspec "SDImageLoader" do |ss|
       ss.source_files = 'Source/Component/SDImageLoader/**/*.{h,m,mm,swift}'
@@ -37,6 +37,11 @@ podspec = Pod::Spec.new do |spec|
     spec.subspec "YYText" do |ss|
       ss.source_files = 'Source/Component/YYText/**/*.{h,m,mm,swift}'
       ss.dependency 'YYText'
+    end
+    
+    spec.subspec "Refresh" do |ss|
+      ss.source_files = 'Source/Component/Refresh/**/*.{h,m,mm,swift}'
+      ss.dependency 'MJRefresh'
     end
     
   end

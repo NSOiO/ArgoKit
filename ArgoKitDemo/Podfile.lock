@@ -19,11 +19,15 @@ PODS:
   - ArgoKitComponent (1.0.5):
     - ArgoKit
     - ArgoKitComponent/KFImageLoader (= 1.0.5)
+    - ArgoKitComponent/Refresh (= 1.0.5)
     - ArgoKitComponent/SDImageLoader (= 1.0.5)
     - ArgoKitComponent/YYText (= 1.0.5)
   - ArgoKitComponent/KFImageLoader (1.0.5):
     - ArgoKit
     - Kingfisher
+  - ArgoKitComponent/Refresh (1.0.5):
+    - ArgoKit
+    - MJRefresh
   - ArgoKitComponent/SDImageLoader (1.0.5):
     - ArgoKit
     - SDWebImage
@@ -34,6 +38,7 @@ PODS:
     - ArgoKit
     - ArgoKitComponent
   - Kingfisher (6.0.1)
+  - MJRefresh (3.5.0)
   - SDWebImage (5.10.2):
     - SDWebImage/Core (= 5.10.2)
   - SDWebImage/Core (5.10.2)
@@ -49,6 +54,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - ArgoAnimation
     - Kingfisher
+    - MJRefresh
     - SDWebImage
     - Yoga
     - YYText
@@ -64,9 +70,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
   ArgoKit: 0f1c75e3f94928774fbf15b8a1e51b4d17c98e0e
-  ArgoKitComponent: 2e4d2f62a33ebb78d02b17b1b42a8cd30ca97f91
+  ArgoKitComponent: 2b43ca03c3c4e2fc00910ca243bdca75a6ac5e1d
   ArgoKitPreview: a3cbee55605ec96e964b2e546920e158fceecf31
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
