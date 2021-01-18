@@ -8,7 +8,7 @@ class ___FILEBASENAMEASIDENTIFIER___Model {
 }
 
 // view
-struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.View {
+struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.ViewProtocol {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ___FILEBASENAMEASIDENTIFIER___Model
