@@ -8,8 +8,6 @@
 import Foundation
 
 class ArgoKitCellNode: ArgoKitNode {
-    
-    var cellSourceData: Any?
     var isPreviewing:Bool = false
     var frameObserber: NSKeyValueObservation?
 
@@ -128,6 +126,7 @@ extension DataSourceHelper {
             return nil
         }
         if let sourceData = self.dataSource()?[section][row]{
+            /*
             // MARK:数据源中存在重复的数据对象的兼容处理
             let indexPath = NSIndexPath(row: row, section: section)
             if let sourceData_ = sourceData as? ArgoKitIdentifiable,
@@ -136,10 +135,10 @@ extension DataSourceHelper {
                     sourceData_.argokit_linkNode = nil
                     sourceData_.argokit_indexPath = nil
                 }
-            }
+            }*/
             if let sourceData_ = sourceData as? ArgoKitIdentifiable,
                let node = sourceData_.argokit_linkNode as? ArgoKitCellNode {
-                sourceData_.argokit_indexPath = indexPath
+//                sourceData_.argokit_indexPath = indexPath
                 return node
             }
             if let view = self.buildNodeFunc?(sourceData) {
