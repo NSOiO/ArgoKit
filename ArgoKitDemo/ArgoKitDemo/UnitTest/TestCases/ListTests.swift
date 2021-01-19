@@ -30,7 +30,7 @@ struct LandRow: View {
     }
 }
 
-class ListTestsModel: ViewModel {
+class ListTestsModel: ViewModelProtocol {
     var name = "name..ss"
 //    @DataSource var dataSource:DataList<ListCellTestsViewModel> = []
 //    @DataSource var dataSource:Array<ListCellTestsModelProtocol> = []

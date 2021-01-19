@@ -7,7 +7,7 @@
 
 import ArgoKit
 
-protocol ListCellTestsModelProtocol: ViewModel {
+protocol ListCellTestsModelProtocol: ViewModelProtocol {
     var title: String { get }
     var userName: String { get }
     var userAge: Int { get }

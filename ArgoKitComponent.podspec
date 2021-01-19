@@ -23,16 +23,26 @@ podspec = Pod::Spec.new do |spec|
 
     spec.dependency 'ArgoKit'
 
-    spec.default_subspec = 'SDImageLoader', 'YYText', 'Refresh'
+    #spec.default_subspec = 'SDImageLoader', 'YYText', 'Refresh'
+    spec.default_subspec = 'Core'
+    
+    spec.subspec "Core" do |ss|
+      ss.source_files = 'Source/Component/Core/**/*.{h,m,mm,swift}'
+#      ss.dependency 'ArgoKitComponent/SDImageLoader'
+    end
     
     spec.subspec "SDImageLoader" do |ss|
       ss.source_files = 'Source/Component/SDImageLoader/**/*.{h,m,mm,swift}'
       ss.dependency 'SDWebImage'
+      ss.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'SDIMAGELOADER=1' }
+      ss.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-D SDIMAGELOADER' }
     end
     
     spec.subspec "KFImageLoader" do |ss|
       ss.source_files = 'Source/Component/KFImageLoader/**/*.{h,m,mm,swift}'
       ss.dependency 'Kingfisher'
+      ss.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'KFIMAGELOADER=1' }
+      ss.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-D KFIMAGELOADER' }
     end
 
     spec.subspec "YYText" do |ss|
