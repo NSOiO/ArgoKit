@@ -14,6 +14,14 @@ public protocol ArgoKitIdentifiable: class {
     var reuseIdentifier: String {get} // 复用标识，用于同样式的UI复用
 }
 
+public extension ArgoKitIdentifiable {
+    var reuseIdentifier: String { String(describing: Self.self) }
+}
+
+public protocol ViewModelProtocol: ArgoKitIdentifiable {
+    func makeView() -> View
+}
+
 private struct AssociatedNodeKey {
       
     static var nodeVaulekey:Void?

@@ -3,8 +3,10 @@
 import ArgoKit
 
 // view model.
-class ___FILEBASENAMEASIDENTIFIER___Model {
-
+class ___FILEBASENAMEASIDENTIFIER___Model: ViewModelProtocol {
+    func makeView() -> View {
+        ___FILEBASENAMEASIDENTIFIER___(model: self)
+    }
 }
 
 // view

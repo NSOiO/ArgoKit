@@ -3,7 +3,7 @@
 import ArgoKit
 
 // view model.
-protocol ___FILEBASENAMEASIDENTIFIER___ModelProtocol: class {
+protocol ___FILEBASENAMEASIDENTIFIER___ModelProtocol: ViewModelProtocol {
 
 }
 
