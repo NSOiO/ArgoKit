@@ -89,7 +89,7 @@ public class Grid<D>: ScrollView {
     ///     }
     ///```
     ///
-    public convenience init(waterfall: Bool = false, data: DataSource<DataList<D>>, @ArgoKitListBuilder itemContent: @escaping (D) -> View) where D : ArgoKitIdentifiable {
+    public convenience init(waterfall: Bool = false, data: DataSource<DataList<D>>, @ArgoKitListBuilder itemContent: @escaping (D) -> View){
         self.init()
         gridNode?.waterfall(waterfall)
         gridNode?.dataSourceHelper.dataSourceList = data
@@ -110,7 +110,7 @@ public class Grid<D>: ScrollView {
     ///     }
     ///```
     ///
-    public convenience init(waterfall:Bool = false, data: DataSource<SectionDataList<D>>, @ArgoKitListBuilder itemContent: @escaping (D) -> View) where D : ArgoKitIdentifiable {
+    public convenience init(waterfall:Bool = false, data: DataSource<SectionDataList<D>>, @ArgoKitListBuilder itemContent: @escaping (D) -> View){
         self.init()
         gridNode?.waterfall(waterfall)
         gridNode?.dataSourceHelper.sectionDataSourceList = data
@@ -140,7 +140,7 @@ extension Grid {
     ///   - headerContent: A view builder that creates the view for section header.
     /// - Returns: Self
     @discardableResult
-    public func sectionHeader(data:DataSource<DataList<D>>, @ArgoKitListBuilder headerContent: @escaping (D) -> View) -> Self where D : ArgoKitIdentifiable {
+    public func sectionHeader(data:DataSource<DataList<D>>, @ArgoKitListBuilder headerContent: @escaping (D) -> View) -> Self{
         gridNode?.headerSourceHelper.dataSourceList = data
         gridNode?.headerSourceHelper.buildNodeFunc = { item in
             return headerContent(item)
@@ -166,7 +166,7 @@ extension Grid {
     ///   - footerContent: A view builder that creates the view for section footer.
     /// - Returns: Self
     @discardableResult
-    public func sectionFooter(data:DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self where D: ArgoKitIdentifiable {
+    public func sectionFooter(data:DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self{
         gridNode?.footerSourceHelper.dataSourceList = data
         gridNode?.footerSourceHelper.buildNodeFunc = { item in
             return footerContent(item)

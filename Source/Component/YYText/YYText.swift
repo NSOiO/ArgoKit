@@ -2,7 +2,9 @@
 import UIKit
 import ArgoKit
 import YYText
-
+struct YYTextCalculation {
+    static let yycalculationLable:YYLabel = YYLabel()
+}
 class YYTextNode: ArgoKitNode, TextNodeProtocol {
     var lineSpacing: CGFloat = 0
     
@@ -15,11 +17,18 @@ class YYTextNode: ArgoKitNode, TextNodeProtocol {
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let label = YYLabel()
         label.frame = frame
+        
         return label
     }
-    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return self.argo_sizeThatFits(size)
+        let lable = YYTextCalculation.yycalculationLable
+        let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
+        lable.font = font
+        lable.text = nil
+        lable.attributedText = nil
+        lable.numberOfLines = 1
+        ArgoKitNodeViewModifier.performViewAttribute(lable, attributes: self.nodeAllAttributeValue())
+        return lable.sizeThatFits(size)
     }
 }
 
@@ -38,5 +47,4 @@ public struct YYText: TextProtocol {
         self.init()
         self.text(text())
     }
-    
 }

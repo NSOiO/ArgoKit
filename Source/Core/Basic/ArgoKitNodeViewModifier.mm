@@ -138,6 +138,23 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     }
 }
 
++ (void)performViewAttribute:(nullable UIView *)view attributes:(nullable NSArray<ViewAttribute *> *)attributes{
+    if (!view) {
+        return;
+    }
+    for (ViewAttribute *attribute in attributes) {
+        if(attribute.isCALayer){
+            if(view &&  [view.layer respondsToSelector:attribute.selector]){
+                performSelector(view.layer,attribute.selector,attribute.paramter);
+            }
+        }else{
+            if (view && [view respondsToSelector:attribute.selector]) {
+                performSelector(view,attribute.selector,attribute.paramter);
+            }
+        }
+    }
+}
+
 + (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes resetFrame:(BOOL)only{
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {

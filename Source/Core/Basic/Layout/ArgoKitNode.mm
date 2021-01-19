@@ -680,7 +680,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         }
     }
 }
-- (nullable NSArray *)nodeAllAttributeValue{
+- (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue{
     return [self.viewAttributes argokit_allValues];
 }
 - (nullable NSString *)text{

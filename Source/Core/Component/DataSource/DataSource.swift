@@ -17,12 +17,19 @@ public class DataSource<Value>  {
     var dataSource: Value
     
     public var reloadAction:((UITableView.RowAnimation)->Void)?
-   
+    
     public init<D>(_ value: Value) where Value == DataList<D>{
+        self.dataSource = value
+    }
+    public init<D>(_ value: Value) where Value == SectionDataList<D>{
         self.dataSource = value
     }
     
     public init<D>(wrappedValue value: Value) where Value == DataList<D>{
+        self.dataSource = value
+    }
+    
+    public init<D>(wrappedValue value: Value) where Value == SectionDataList<D>{
         self.dataSource = value
     }
     
@@ -41,6 +48,7 @@ public class DataSource<Value>  {
 //        }
     }
 }
+
 
 extension DataSource{
     public func getDataSource<D>()->SectionDataList<D> where Value == SectionDataList<D>{

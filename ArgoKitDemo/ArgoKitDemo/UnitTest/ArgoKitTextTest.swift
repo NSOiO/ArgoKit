@@ -46,50 +46,50 @@ struct ArgoKitTextTest: ArgoKit.View {
         }
             .alignSelf(.center)
 
-        Text("单行文本粗体")
+        Text("单行文本粗体cd")
             .font(size: 25)
             .font(style: .bold)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
             .alignSelf(.stretch)
 
-        Text("单行文本斜体单行文本斜体单行文本斜体111111111")
+        Text("单行文本斜体单行文sssssssssssssssssssssssssssssssss")
             .font(size: 20)
             .font(style: .default)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
             .alignSelf(.start)
+        
+        
 
-
-
-        Text("单行文本粗体斜体")
-            .font(size: 25)
-            .font(style: .bolditalic)
+        Text("单行文本粗体23xcccccdsdsass")
+//            .font(size: 20)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
             .textAlign(.center)
+        
 
-        Text("多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-            .font(size: 25)
+        Text("多行文本 多行文本 ")
+//            .font(size: 25)
             .lineLimit(0)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
 
-        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-            .font(size: 25)
-            .lineLimit(0)
-            .lineSpacing(10)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-
-        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-            .font(size: 25)
-            .textColor(.white)
-            .lineLimit(0)
-            .lineSpacing(10)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.center)
+//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+//            .font(size: 25)
+//            .lineLimit(0)
+//            .lineSpacing(10)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//
+//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+//            .font(size: 25)
+//            .textColor(.white)
+//            .lineLimit(0)
+//            .lineSpacing(10)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .alignSelf(.center)
         
     }
 }

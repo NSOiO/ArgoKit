@@ -67,52 +67,25 @@ public extension TextNodeProtocol where Self: ArgoKitNode{
     
     func argo_sizeThatFits(_ size: CGSize) -> CGSize {
         let lable:UILabel = TextCalculation.calculationLable
-//        TextCalculation.AddLableCache(lable)
-        if let text =  self.text(){
-            if text.count > 0 {
-                lable.text = text
-            }
-        }
-        if let attribut =  self.attributedText(){
-            if attribut.length > 0 {
-                lable.attributedText = attribut
-            }
-        }
-        if let font = self.font() {
-            lable.font = font
-        }else{
-            let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
-            lable.font = font
-        }
-        lable.numberOfLines = self.numberOfLines()
-        lable.lineBreakMode = self.lineBreakMode()
+        let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
+        lable.font = font
+        lable.text = nil
+        lable.attributedText = nil
+        lable.numberOfLines = 1
+        ArgoKitNodeViewModifier.performViewAttribute(lable, attributes: self.nodeAllAttributeValue())
         var result = lable.sizeThatFits(size)
         let width = ceil(result.width);
         let height = ceil(result.height);
         result = CGSize(width: width, height: height)
-//        let result = ArgoKitUtils.sizeThatFits(size, numberOfLines: self.numberOfLines(), attributedString: self.attributesForSize())
         return result
     }
 }
 
 struct TextCalculation {
     static let calculationLable:UILabel = UILabel()
-    private static var calculationLableCache = Array<UILabel>()
-    static func removeAllLableCache() -> Void {
-        if calculationLableCache.count > 0 {
-            calculationLableCache.removeAll()
-        }
-    }
-    static func AddLableCache(_ value:UILabel) -> Void {
-        calculationLableCache.append(value)
-    }
 }
 
 class ArgoKitTextNode: ArgoKitArttibuteNode,TextNodeProtocol {
-//    override func createNodeViewIfNeed(_ frame: CGRect) {
-//        super.createNodeViewIfNeed(frame)
-//        TextCalculation.removeAllLableCache()
-//    }
     var lineSpacing:CGFloat = 0
     
     public func lineSpacing(_ value:CGFloat){
