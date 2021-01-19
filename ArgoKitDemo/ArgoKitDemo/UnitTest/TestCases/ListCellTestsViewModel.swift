@@ -13,9 +13,8 @@ protocol EventBus {
 }
 
 // view model.
-class ListCellTestsViewModel: ArgoKitIdentifiable, ListCellTestsProtocol {
-    var reuseIdentifier: String = "cell"
-    
+class ListCellTestsViewModel: ListCellTestsModelProtocol {
+//    var reuseIdentifier: String = "cell"
     var title: String = ""
     var userName = "Emily"
     var userAge = 20
@@ -27,16 +26,29 @@ class ListCellTestsViewModel: ArgoKitIdentifiable, ListCellTestsProtocol {
     
     @Property var likes: Int = 0
     @Property var isLiked: Bool = false
+    
     var comments: Int = 0
     var conversation: String = "对话"
     
-    func likeButtonAction() {
-        self.isLiked = !self.isLiked
-        if self.isLiked {
-            self.likes += 1
+    lazy var watchIsLiked = self.$isLiked.watch { [weak self] new in
+        if new {
+            self?.likes += 1
         } else {
-            self.likes -= 1
+            self?.likes -= 1
         }
+    }
+    
+    func isLikedChange(newValue: Bool) {
+        
+    }
+
+    func likeButtonAction() {
+        self.isLiked.toggle()
+        self.comments += 1
+    }
+    
+    func makeView() -> View {
+        ListCellTests(model: self)
     }
 }
 

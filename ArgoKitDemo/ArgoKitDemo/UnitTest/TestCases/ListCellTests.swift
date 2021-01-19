@@ -7,7 +7,7 @@
 
 import ArgoKit
 
-protocol ListCellTestsProtocol: class {
+protocol ListCellTestsModelProtocol: ViewModel {
     var title: String { get }
     var userName: String { get }
     var userAge: Int { get }
@@ -25,12 +25,13 @@ protocol ListCellTestsProtocol: class {
     func likeButtonAction()
 }
 
+
 // view
-struct ListCellTests: ArgoKit.View {
+struct ListCellTests: ArgoKit.ViewProtocol {
 //    typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
-    private var model: ListCellTestsProtocol
-    init(model: ListCellTestsProtocol) {
+    private var model: ListCellTestsModelProtocol
+    init(model: ListCellTestsModelProtocol) {
         self.model = model
     }
     

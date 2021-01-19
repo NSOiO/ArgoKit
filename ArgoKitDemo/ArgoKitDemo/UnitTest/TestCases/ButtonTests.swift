@@ -20,7 +20,7 @@ class ButtonTestsModel {
 }
 
 // view
-struct ButtonTests: ArgoKit.View {
+struct ButtonTests: ArgoKit.ViewProtocol {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ButtonTestsModel

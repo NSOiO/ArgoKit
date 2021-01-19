@@ -30,18 +30,22 @@ struct LandRow: View {
     }
 }
 
-class ListTestsModel {
+class ListTestsModel: ViewModel {
     var name = "name..ss"
 //    @DataSource var dataSource:DataList<ListCellTestsViewModel> = []
-//    @DataSource var dataSource:Array<ListCellTestsProtocol> = []
-    var dataSource = DataSource([ListCellTestsProtocol]())
+//    @DataSource var dataSource:Array<ListCellTestsModelProtocol> = []
+    var dataSource = DataSource([ListCellTestsModelProtocol]())
+    
+    func makeView() -> View {
+        ListTests(model: self)
+    }
 }
 
 //extension ArgoKitIdentifiable {
 //    var reuseIdentifier: String { "Cell" }
 //}
 
-//extension ListCellTestsProtocol where Self: ArgoKitIdentifiable {
+//extension ListCellTestsModelProtocol where Self: ArgoKitIdentifiable {
 //    var reuseIdentifier: String { "Cell" }
 //}
 
