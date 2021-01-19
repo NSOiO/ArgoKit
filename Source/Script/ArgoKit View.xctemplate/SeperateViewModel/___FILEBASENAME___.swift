@@ -8,7 +8,7 @@ protocol ___FILEBASENAMEASIDENTIFIER___ModelProtocol: ViewModelProtocol {
 }
 
 // view
-struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.ViewProtocol {
+struct ___FILEBASENAMEASIDENTIFIER___: ViewProtocol {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ___FILEBASENAMEASIDENTIFIER___ModelProtocol
@@ -21,6 +21,11 @@ struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.ViewProtocol {
     }
 }
 
+extension ___FILEBASENAMEASIDENTIFIER___ModelProtocol {
+    func makeView() -> View {
+        ___FILEBASENAMEASIDENTIFIER___(model: self)
+    }
+}
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 // mock data.

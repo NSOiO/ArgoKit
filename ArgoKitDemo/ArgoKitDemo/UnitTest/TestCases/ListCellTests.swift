@@ -28,7 +28,6 @@ protocol ListCellTestsModelProtocol: ViewModelProtocol {
 
 // view
 struct ListCellTests: ArgoKit.ViewProtocol {
-//    typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ListCellTestsModelProtocol
     init(model: ListCellTestsModelProtocol) {
