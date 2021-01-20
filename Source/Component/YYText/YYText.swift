@@ -22,6 +22,7 @@ class YYTextNode: ArgoKitNode, TextNodeProtocol {
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let lable = YYTextCalculation.yycalculationLable
+        lable.textLayout = nil
         let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
         lable.font = font
         lable.text = nil
@@ -42,7 +43,6 @@ public struct YYText: TextProtocol {
     public init() {
         pNode = YYTextNode(viewClass: YYLabel.self)
     }
-    
     public init(_ text:@escaping @autoclosure () -> String?) {
         self.init()
         self.text(text())

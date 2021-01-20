@@ -30,9 +30,14 @@ struct YYTextTests: ArgoKit.View {
             .margin(edge: .top, value: 10)
             .alignSelf(.stretch)
         
-        Text("Text 单行文本粗体.")
+        Text("Text 单行文本粗体.dcsdcdcdcdcdcdcdcd")
             .font(size: 15)
             .font(style: .bold)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.stretch)
+        
+        Text("Text 单行文本粗体.dcd")
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
             .alignSelf(.stretch)
