@@ -88,21 +88,21 @@
 		FA9B495C258C4CD1006DB896 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FAB3CE7925909DEB00EEE851 /* ArgoKitAnimationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3CE7825909DEB00EEE851 /* ArgoKitAnimationTest.swift */; };
 		FAB3CE8A2590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3CE892590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift */; };
-		FAC41C46258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C47258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C48258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C49258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4A258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4B258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4C258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4D258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4E258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C4F258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C50258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C51258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C52258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C53258B36490006AE78 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		FAC41C61258B37920006AE78 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		FAC41C46258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C47258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C48258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C49258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4A258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4B258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4C258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4D258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4E258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C4F258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C50258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C51258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C52258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C53258B36490006AE78 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		FAC41C61258B37920006AE78 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		FAE010E725B9926B00A1699C /* ListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010E425B9926B00A1699C /* ListCellTests.swift */; };
 		FAE010E825B9926B00A1699C /* ListCellTestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010E525B9926B00A1699C /* ListCellTestsModel.swift */; };
 		FAE010E925B9926B00A1699C /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010E625B9926B00A1699C /* ListTests.swift */; };
@@ -733,9 +733,9 @@
 				0093EA9F2590A4520051238B /* ArgoKitAnimationTest.swift in Sources */,
 				00A906B3259048DC0052550C /* Landmark.swift in Sources */,
 				00A906DB259048EE0052550C /* LandmarkRow.swift in Sources */,
-				0B64C3EA4DD965F755E26D16 /* (null) in Sources */,
-				2A6C83604D98391FFDD563F3 /* (null) in Sources */,
-				25ECB5946E5ABD13C37C736D /* (null) in Sources */,
+				0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */,
+				2A6C83604D98391FFDD563F3 /* BuildFile in Sources */,
+				25ECB5946E5ABD13C37C736D /* BuildFile in Sources */,
 				00A906B4259048DC0052550C /* HikeData.swift in Sources */,
 				000BB1C225A3FE48004BA38A /* ButtonTests.swift in Sources */,
 				009319192599C5CB0051238B /* TextBindTests.swift in Sources */,
