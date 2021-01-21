@@ -126,6 +126,11 @@ struct ListCellTests: ArgoKit.ViewProtocol {
     }
 }
 
+extension ListCellTestsModelProtocol {
+    func makeView() -> View {
+        ListCellTests(model: self)
+    }
+}
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 import ArgoKitPreview
@@ -133,7 +138,7 @@ import ArgoKitComponent
 import SwiftUI
 
 // mock data.
-class ListCellTestsViewModel_Previews:  ListCellTestsViewModel {
+class ListCellTestsModel_Previews:  ListCellTestsModel {
     override init() {
         super.init()
         self.title = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
@@ -168,7 +173,7 @@ struct ListCellTests_Previews: PreviewProvider {
         // 数组中可以添加其他设备进行多设备预览
         SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
-                ListCellTests(model: ListCellTestsViewModel_Previews())
+                ListCellTests(model: ListCellTestsModel_Previews())
                     .padding(edge: .all, value: 10)
             }
             .previewDevice(item.device)

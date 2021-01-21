@@ -7,54 +7,18 @@
 
 import ArgoKit
 
-struct LandRow: View {
-    var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
-    var landmark: Landmark
-    init(landmark: Landmark) {
-        self.landmark = landmark
-    }
-    
-    var body: ArgoKit.View {
-        Text("我是样式0").size(width: 100%, height: 44).alignContent(.center)
-        HStack {
-            self.landmark.image
-                .resizable()
-                .size(width: 50, height: 50).cornerRadius(10).clipsToBounds(true)
-            Spacer()
-            HStack{
-                Text(self.landmark.name).alignSelf(.center)
-            }.backgroundColor(.yellow)
-            Spacer()
-            Text(self.landmark.name)
-        }
-    }
+
+protocol ListTestsModelProtocol: ViewModelProtocol {
+    var name: String { get }
+    var dataSource: DataSource<[ListCellTestsModelProtocol]> { get }
 }
-
-class ListTestsModel: ViewModelProtocol {
-    var name = "name..ss"
-//    @DataSource var dataSource:DataList<ListCellTestsViewModel> = []
-//    @DataSource var dataSource:Array<ListCellTestsModelProtocol> = []
-    var dataSource = DataSource([ListCellTestsModelProtocol]())
-    
-    func makeView() -> View {
-        ListTests(model: self)
-    }
-}
-
-//extension ArgoKitIdentifiable {
-//    var reuseIdentifier: String { "Cell" }
-//}
-
-//extension ListCellTestsModelProtocol where Self: ArgoKitIdentifiable {
-//    var reuseIdentifier: String { "Cell" }
-//}
 
 // view
 struct  ListTests: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
-    private var model: ListTestsModel
-    init(model: ListTestsModel) {
+    private var model: ListTestsModelProtocol
+    init(model: ListTestsModelProtocol) {
         self.model = model
     }
     
@@ -77,12 +41,18 @@ import SwiftUI
 class ListTestsModel_Previews:  ListTestsModel {
     override init() {
         super.init()
-        var datas = [ListCellTestsViewModel_Previews]()
+        var datas = [ListCellTestsModel_Previews]()
         for _ in 0..<10 {
-            datas.append(ListCellTestsViewModel_Previews())
+            datas.append(ListCellTestsModel_Previews())
         }
 //        self.dataSource = datas
         self.dataSource.append(contentsOf: datas)
+    }
+}
+
+extension ListTestsModelProtocol {
+    func makeView() -> View {
+        ListTests(model: self)
     }
 }
 
