@@ -1,22 +1,99 @@
-# Introduction
+# ArgoKit
 
-This is a template for getting started with iOS development using GitLab and [fastlane](https://fastlane.tools/).
+ArgoKit is a SwiftUI replacement Framework based on UIKit, that is compatible with iOS 11+. 
 
-# Reference links
+## Introduction
 
-- [GitLab CI Documentation](https://docs.gitlab.com/ee/ci/)
-- [Blog post: Android publishing with iOS and fastlane](https://about.gitlab.com/2019/03/06/ios-publishing-with-gitlab-and-fastlane/)
+- **Declarative** ArgoKit uses almost the same `DSL` as SwiftUI(e.g., `Text` `Button` `List` ).You simply describe the UI elements and Animation, and the framework takes care of the rest.
 
-# Getting started
+- **React** The created view automatically listens directly to streams and updates the DOM accordingly.
 
-You'll need a working MacOS development environment with XCode 10 to use this
-template. You can find instructions to get up and running on the Apple [XCode website](https://developer.apple.com/xcode/).
+-  **Flexbox Layout** ArgoKit uses [Yoga](https://facebook.github.io/yoga/) as layout engine.
 
-If you want to use GitLab CI with your own MacOS runners (a requirement since we
-do not currently yet offer shared MacOS runners - follow [infrastructure#5294](https://gitlab.com/gitlab-com/gl-infra/infrastructure/issues/5294) for
-updates on that front) please read through the blog post above which will walk 
-you through everything you need to get up and running.
 
-## What's contained in this project
+- **Preview and templating** ArgoKit uses the same preview approach as SwiftUI, and you can be easily developed through the template files.
 
-This template contains a simple Food Tracker App based off of the [Start Developing iOS Apps (Swift) Lessons](https://developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html). Where necessary the template has been upgraded to use Swift 4. The app displays a list of meals consisting of a name, rating, and photo. Users are able to add or edit a meal by navigating to a detail screen. The app also includes a lightweight solution for basic data persistence.
+## API Documentation
+
+[API Documentation](https://momotech.github.io/argokit/)
+
+## Usage
+
+### Installation
+
+```
+pod 'ArgoKit'
+pod 'ArgoKitPreview', :configuration => 'Debug'
+```
+
+#### Declarative
+
+```swift
+        HStack {
+            Text("11")
+                .textColor(.red)
+            Text("22")
+                .textColor(.blue)
+            Text("33")
+                .backgroundColor(.orange)
+        }
+        .justifyContent(.between)
+        .padding(edge: .horizontal, value: 10)
+        .backgroundColor(.lightGray)
+```
+![dsl](Resources/dsl.png)
+
+#### Animation
+
+```swift
+        Text("Hello, ArgoKit!")
+            .addAnimation {
+                Animation(type: .rotation)
+                    .duration(3.0)
+                    .to(360)
+                    .repeatForever(true)
+                    .repeatCallback { (animation, count) in
+                        print("[Animation] repeat count:\(count)")
+                    }
+                    .startCallback { animation in
+                        print("[Animation] start")
+                    }
+                    .resumeCallback { animation in
+                        print("[Animation] resume")
+                    }
+                    .pauseCallback { animation in
+                        print("[Animation] pause")
+                    }
+                    .finishCallback { (animation, finished) in
+                        print("[Animation] finish \(finished)")
+                    }
+        }
+```
+
+
+####  React 
+
+- Auto Data Bind
+
+```swift
+class FeedCellModel {
+   @Property var title: String = "is title"
+   func getTitle() {
+      self.title + " \(self.age)"
+   }
+
+   func titleAction() {
+	model.title = "change title"
+	model.age = 20
+   }
+}
+
+Text(model.getTitle())
+   .onTapGesture(model.titleAction)
+```
+
+#### Preview
+![preview](Resources/preview.png)
+
+#### Tempalte 
+![template](Resources/template.png)
