@@ -9,7 +9,7 @@ import ArgoKit
 
 // view model.
 class ArgoKitTextTestModel {
-
+@Property var name = "zhangsan"
 }
 
 // view
@@ -53,12 +53,15 @@ struct ArgoKitTextTest: ArgoKit.View {
             .margin(edge: .top, value: 10)
             .alignSelf(.stretch)
 
-        Text("单行文本斜体单行文sssssssssssssssssssssssssssssssss")
-            .font(size: 20)
+        Text(model.name)
+            .font(size: 50)
             .font(style: .default)
             .backgroundColor(.orange)
             .margin(edge: .top, value: 10)
             .alignSelf(.start)
+            .onTapGesture {
+                model.name = "李四" + "\(Int.random(in: 0 ..< 1000))"
+            }
         
         
 

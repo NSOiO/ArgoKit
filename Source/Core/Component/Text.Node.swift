@@ -69,9 +69,11 @@ public extension TextNodeProtocol where Self: ArgoKitNode{
         let lable:UILabel = TextCalculation.calculationLable
         let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
         lable.font = font
-        lable.text = nil
-        lable.attributedText = nil
-        lable.numberOfLines = 1
+        lable.text = self.text()
+        lable.attributedText = self.attributedText()
+        lable.numberOfLines = self.numberOfLines()
+        lable.lineBreakMode = self.lineBreakMode()
+        lable.textAlignment = self.textAlignment()
         ArgoKitNodeViewModifier.performViewAttribute(lable, attributes: self.nodeAllAttributeValue())
         var result = lable.sizeThatFits(size)
         let width = ceil(result.width);

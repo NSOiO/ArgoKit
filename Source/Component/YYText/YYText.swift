@@ -25,9 +25,11 @@ class YYTextNode: ArgoKitNode, TextNodeProtocol {
         lable.textLayout = nil
         let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
         lable.font = font
-        lable.text = nil
-        lable.attributedText = nil
-        lable.numberOfLines = 1
+        lable.text = self.text()
+        lable.attributedText = self.attributedText()
+        lable.numberOfLines = UInt(self.numberOfLines())
+        lable.lineBreakMode = self.lineBreakMode()
+        lable.textAlignment = self.textAlignment()
         ArgoKitNodeViewModifier.performViewAttribute(lable, attributes: self.nodeAllAttributeValue())
         return lable.sizeThatFits(size)
     }
