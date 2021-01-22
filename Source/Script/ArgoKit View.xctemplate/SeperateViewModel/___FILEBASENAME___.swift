@@ -8,7 +8,7 @@ protocol ___FILEBASENAMEASIDENTIFIER___ModelProtocol: ViewModelProtocol {
 }
 
 // view
-struct ___FILEBASENAMEASIDENTIFIER___: ViewProtocol {
+struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.ViewProtocol {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ___FILEBASENAMEASIDENTIFIER___ModelProtocol
@@ -22,7 +22,7 @@ struct ___FILEBASENAMEASIDENTIFIER___: ViewProtocol {
 }
 
 extension ___FILEBASENAMEASIDENTIFIER___ModelProtocol {
-    func makeView() -> View {
+    func makeView() -> ArgoKit.View {
         ___FILEBASENAMEASIDENTIFIER___(model: self)
     }
 }

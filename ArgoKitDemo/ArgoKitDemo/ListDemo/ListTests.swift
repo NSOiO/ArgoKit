@@ -51,7 +51,7 @@ class ListTestsModel_Previews:  ListTestsModel {
 }
 
 extension ListTestsModelProtocol {
-    func makeView() -> View {
+    func makeView() -> ArgoKit.View {
         ListTests(model: self)
     }
 }

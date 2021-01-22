@@ -4,13 +4,13 @@ import ArgoKit
 
 // view model.
 class ___FILEBASENAMEASIDENTIFIER___Model: ViewModelProtocol {
-    func makeView() -> View {
+    func makeView() -> ArgoKit.View {
         ___FILEBASENAMEASIDENTIFIER___(model: self)
     }
 }
 
 // view
-struct ___FILEBASENAMEASIDENTIFIER___: ViewProtocol {
+struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.ViewProtocol {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ___FILEBASENAMEASIDENTIFIER___Model
@@ -22,7 +22,6 @@ struct ___FILEBASENAMEASIDENTIFIER___: ViewProtocol {
         Text("Hello, ArgoKit!")
     }
 }
-
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 // mock data.

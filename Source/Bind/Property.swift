@@ -67,19 +67,19 @@ public class Property<Value> : DynamicProperty {
         self.subscribersMap.removeValue(forKey: id)
     }
     
-    public func watch(_ f: @escaping (Value) -> Void) -> Cancellable {
+    public func watch(_ f: @escaping (Value) -> Void) -> Disposable {
         let id = self.subscribe(f)
-        let cancel = ClosureCancelable { [weak self] in
+        let cancel = ClosureDisposable { [weak self] in
             self?.removesubscriber(id)
         }
         return cancel
     }
     
-    public func watch(_ f:@escaping () -> Void) -> Cancellable {
+    public func watch(_ f:@escaping () -> Void) -> Disposable {
         let id = self.subscribe { _ in
             f()
         }
-        let cancel = ClosureCancelable { [weak self] in
+        let cancel = ClosureDisposable { [weak self] in
             self?.removesubscriber(id)
         }
         return cancel

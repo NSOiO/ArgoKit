@@ -23,12 +23,12 @@ podspec = Pod::Spec.new do |spec|
 
     spec.dependency 'ArgoKit'
 
-    #spec.default_subspec = 'SDImageLoader', 'YYText', 'Refresh'
+#    spec.default_subspec = 'SDImageLoader'
     spec.default_subspec = 'Core'
     
     spec.subspec "Core" do |ss|
       ss.source_files = 'Source/Component/Core/**/*.{h,m,mm,swift}'
-#      ss.dependency 'ArgoKitComponent/SDImageLoader'
+      ss.dependency 'ArgoKitComponent/SDImageLoader'
     end
     
     spec.subspec "SDImageLoader" do |ss|

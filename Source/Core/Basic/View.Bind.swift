@@ -13,7 +13,7 @@ extension View {
     }
     
     private func p_watch<R: View,V>(properties: [Property<V>], function:@escaping (V) -> R, key: String) {
-        var cancels:[Cancellable] = []
+        var cancels:[Disposable] = []
         for property in properties {
             let cancel = property.watch { (new) in
                 _ = function(new)
@@ -65,7 +65,7 @@ extension View {
         return self
     }
     
-    private func setCancellables(_ cancellables: [Cancellable], forKey key: String) {
+    private func setCancellables(_ cancellables: [Disposable], forKey key: String) {
         if let node = self.node {
             node.bindProperties.setObject(cancellables, forKey: key as NSString)
         } else {

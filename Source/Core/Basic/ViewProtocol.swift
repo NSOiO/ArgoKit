@@ -7,8 +7,10 @@
 
 import Foundation
 
-public protocol ViewProtocol: View {
+public protocol ViewProtocol2: View {
     associatedtype ModelType
     init(model: ModelType)
 }
+
+public typealias ViewProtocol = ViewProtocol2 & View
 
