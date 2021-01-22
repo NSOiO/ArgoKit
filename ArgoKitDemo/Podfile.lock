@@ -53,7 +53,7 @@ DEPENDENCIES:
   - ArgoKitPreview (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - ArgoAnimation
     - Kingfisher
     - MJRefresh
@@ -82,4 +82,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d08bb752b10f84855bc4ef03e70b23789675fb0b
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.0

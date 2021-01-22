@@ -9,7 +9,11 @@ import ArgoKit
 
 // view model.
 class ArgoKitTextTestModel {
-
+   @Property var age:Int = 1
+   @Property var fontSize:CGFloat = 30
+   @Property var name:String = "张三"
+   @Property var color:UIColor = .red
+   @Alias var text:Text?
 }
 
 // view
@@ -18,6 +22,7 @@ struct ArgoKitTextTest: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitTextTestModel
     @DataSource var dataSource:[[Int]] = [[1, 2, 3,4],[4, 5, 6],[7, 8, 9]]
+   
     init(model: ArgoKitTextTestModel) {
         self.model = model
 //        let numbers = [10, 20, 30]
@@ -37,43 +42,59 @@ struct ArgoKitTextTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        HStack{
-            Text("单行文本")
-                .font(size: 25)
-                .backgroundColor(.orange)
-                .margin(edge: .top, value: 100)
-                .height(100)
+//        HStack{
+//            Text("单行文本")
+//                .font(size: 25)
+//                .backgroundColor(.orange)
+//                .margin(edge: .top, value: 100)
+//                .height(100)
+//        }
+//            .alignSelf(.center)
+//
+//        Text("单行文本粗体cd")
+//            .font(size: 25)
+//            .font(style: .bold)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .alignSelf(.stretch)
+        Button(text: model.name) {
+            model.age += 1
+            model.name = model.name + "\(model.age)"
+            model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
         }
-            .alignSelf(.center)
-
-        Text("单行文本粗体cd")
-            .font(size: 25)
-            .font(style: .bold)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.stretch)
-
-        Text("单行文本斜体单行文sssssssssssssssssssssssssssssssss")
-            .font(size: 20)
+        .font(style: .default, size: 50)
+        .backgroundColor(model.color)
+        
+        Text()
+            .text(model.name)
+            .font(size: model.fontSize)
             .font(style: .default)
-            .backgroundColor(.orange)
+            .backgroundColor(model.color)
             .margin(edge: .top, value: 10)
             .alignSelf(.start)
+            .onTapGesture {
+                model.age *= 2
+                model.fontSize += 1
+                model.name = model.name + "\(model.age)"
+//                model.text?.text(model.name)
+                print("hahahah\(model.age)")
+                model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
+            }.alias(variable: model.$text)
         
         
 
-        Text("单行文本粗体23xcccccdsdsass")
-//            .font(size: 20)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .textAlign(.center)
-        
+//        Text("单行文本粗体23xcccccdsdsass")
+////            .font(size: 20)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .textAlign(.center)
+//
 
-        Text("多行文本 多行文本 ")
-//            .font(size: 25)
-            .lineLimit(0)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
+//        Text("多行文本 多行文本 ")
+////            .font(size: 25)
+//            .lineLimit(0)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
 
 //        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
 //            .font(size: 25)

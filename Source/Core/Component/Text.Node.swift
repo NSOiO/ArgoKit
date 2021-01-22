@@ -6,21 +6,7 @@
 //
 
 import Foundation
-public protocol TextAttributeNodeProtocol: class {
-    var fontSize:CGFloat { get set}
-    var fontStyle:AKFontStyle { get set }
-    var fontName:String? { get set }
-}
-
-public protocol TextNodeProtocol: TextAttributeNodeProtocol{
-    var lineSpacing:CGFloat { get set }
-    func handleLineSpacing()
-    func attributedText(attri:NSAttributedString?) ->NSAttributedString?
-    func lineSpacing(_ value:CGFloat)
-    func argo_sizeThatFits(_ size: CGSize) -> CGSize
-}
-
-public extension TextNodeProtocol where Self: ArgoKitNode{
+class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
     func handleLineSpacing() {
         if self.lineSpacing == 0 {
             return
@@ -40,7 +26,7 @@ public extension TextNodeProtocol where Self: ArgoKitNode{
         }
         _ = attributedText(attri: attributedString)
     }
-    
+    @discardableResult
     func attributedText(attri:NSAttributedString?) ->NSAttributedString?{
         if let attriText = attri {
             let attributedString = NSMutableAttributedString(attributedString: attriText)
@@ -64,7 +50,7 @@ public extension TextNodeProtocol where Self: ArgoKitNode{
         self.lineSpacing = value
         self.handleLineSpacing()
     }
-    
+    @discardableResult
     func argo_sizeThatFits(_ size: CGSize) -> CGSize {
         let lable:UILabel = TextCalculation.calculationLable
         let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
@@ -85,10 +71,8 @@ struct TextCalculation {
     static let calculationLable:UILabel = UILabel()
 }
 
-class ArgoKitTextNode: ArgoKitArttibuteNode,TextNodeProtocol {
-    var lineSpacing:CGFloat = 0
-    
-    public func lineSpacing(_ value:CGFloat){
+class ArgoKitTextNode: ArgoKitTextBaseNode {
+    public override func lineSpacing(_ value:CGFloat){
         self.lineSpacing = value
         self.handleLineSpacing()
     }

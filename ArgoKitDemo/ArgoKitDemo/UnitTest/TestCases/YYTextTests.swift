@@ -23,12 +23,13 @@ struct YYTextTests: ArgoKit.View {
     
     var body: ArgoKit.View {
         YYText("YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.")
-            .lineLimit(3)
-            .font(size: 20)
-            .font(style: .bold)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.stretch)
+//            .lineLimit(3)
+//            .lineSpacing(10)
+//            .font(size: 20)
+//            .font(style: .bold)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .alignSelf(.stretch)
         
         Text("Text 单行文本粗体.dcsdcdcdcdcdcdcdcd")
             .font(size: 15)

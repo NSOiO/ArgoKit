@@ -119,7 +119,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         return;
     }
     UIView *view = node.view;
-    
+    NSLog(@"%@",view);
     for (ViewAttribute *attribute in attributes) {
        
         if(attribute.isCALayer){

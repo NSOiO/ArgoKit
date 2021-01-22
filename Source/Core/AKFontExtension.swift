@@ -13,12 +13,12 @@ public enum AKFontStyle{
     case bolditalic
 }
 extension UIFont{
-    public class func font(fontName:String?,fontStyle:AKFontStyle,fontSize:CGFloat)->UIFont{
+    public class func font(fontName:String?,fontStyle:AKFontStyle? = .default,fontSize:CGFloat? = 17.0)->UIFont{
         var retFont:UIFont = UIFont.preferredFont(forTextStyle: TextStyle.body)
         var fontDescriptor:UIFontDescriptor = retFont.fontDescriptor
         if let name = fontName {
             if isFontRegistered(fontName: name) {
-                fontDescriptor = UIFontDescriptor(name: name, size: fontSize)
+                fontDescriptor = UIFontDescriptor(name: name, size: fontSize ?? 17.0)
             }
         }
         switch fontStyle {
@@ -41,7 +41,7 @@ extension UIFont{
         default:
             break
         }
-        retFont = UIFont(descriptor: fontDescriptor, size: fontSize)
+        retFont = UIFont(descriptor: fontDescriptor, size: fontSize ?? 17.0)
         return retFont
     }
     

@@ -21,7 +21,6 @@ public struct Text:TextProtocol {
     let pNode: ArgoKitTextNode
     /// the node behind of Text
     public var node: ArgoKitNode?{ pNode }
-    public var textNode: TextNodeProtocol { pNode }
     
     /// initialize the Text with emptry
     public init() {

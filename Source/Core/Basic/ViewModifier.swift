@@ -84,7 +84,7 @@ extension View {
     
     /// Adds attribute to the UIKit View
     /// - Parameters:
-    ///   - isCALayer: trueif is calayer.
+    ///   - isCALayer: true if is calayer.
     ///   - isDirty: true if the attribute may change the view layout
     ///   - selector: The selector of the attribute.
     ///   - patamter: patamter.

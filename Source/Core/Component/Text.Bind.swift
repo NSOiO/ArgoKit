@@ -8,8 +8,6 @@
 import Foundation
 
 public protocol TextProtocol: View {
-    var textNode: TextNodeProtocol { get }
-    
     func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self
     func font(name value: @escaping @autoclosure () -> String?)->Self
     func font(size value: @escaping @autoclosure () -> CGFloat)->Self
@@ -38,16 +36,15 @@ public protocol TextProtocol: View {
     func preferredMaxLayoutWidth(in value: @escaping @autoclosure () -> CGFloat)->Self
 }
 
-
 extension TextProtocol {
     /// set content of the Text
     /// - Parameter value: a string value
     /// - Returns: self
     @discardableResult
     public func text(_ value:@escaping @autoclosure () -> String?)->Self{
-        return self.bindCallback({
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode,self] in
             addAttribute(#selector(setter:UILabel.text),value())
-            textNode.handleLineSpacing()
+            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -56,9 +53,9 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
-        return self.bindCallback({
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             addAttribute(#selector(setter:UILabel.font),value())
-            textNode.handleLineSpacing()
+            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -80,14 +77,14 @@ extension TextProtocol {
     /// ```
     @discardableResult
     public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
-        return self.bindCallback({
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_name = name(), f_size = size(), f_style = style()
-            textNode.fontName = f_name
-            textNode.fontSize = f_size
-            textNode.fontStyle = f_style
+            textNode?.fontName = f_name
+            textNode?.fontSize = f_size
+            textNode?.fontStyle = f_style
             let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
             addAttribute(#selector(setter:UILabel.font),font)
-            textNode.handleLineSpacing()
+            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -96,12 +93,12 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func font(name value: @escaping @autoclosure () -> String?)->Self{
-        return self.bindCallback({
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_name = value()
-            textNode.fontName = f_name
-            let font = UIFont.font(fontName: f_name, fontStyle: textNode.fontStyle, fontSize: textNode.fontSize)
+            textNode?.fontName = f_name
+            let font = UIFont.font(fontName: f_name, fontStyle: textNode?.fontStyle, fontSize: textNode?.fontSize)
             addAttribute(#selector(setter:UILabel.font),font)
-            textNode.handleLineSpacing()
+            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -110,12 +107,12 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
-        return self.bindCallback({
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_size = value()
-            textNode.fontSize = f_size
-            let font = UIFont.font(fontName: textNode.fontName, fontStyle:  textNode.fontStyle, fontSize: f_size)
+            textNode?.fontSize = f_size
+            let font = UIFont.font(fontName: textNode?.fontName, fontStyle:  textNode?.fontStyle, fontSize: f_size)
             addAttribute(#selector(setter:UILabel.font),font)
-            textNode.handleLineSpacing()
+            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -134,12 +131,12 @@ extension TextProtocol {
     /// ```
     @discardableResult
     public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
-        return self.bindCallback({
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_style = value()
-            textNode.fontStyle = value()
-            let font = UIFont.font(fontName: textNode.fontName, fontStyle: f_style, fontSize: textNode.fontSize)
+            textNode?.fontStyle = value()
+            let font = UIFont.font(fontName: textNode?.fontName, fontStyle: f_style, fontSize: textNode?.fontSize)
             addAttribute(#selector(setter:UILabel.font),font)
-            textNode.handleLineSpacing()
+            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -181,8 +178,8 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self{
-		return self.bindCallback({ [self] in 
-			textNode.attributedText(attri: value())
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+			textNode?.attributedText(attri: value())
 		}, forKey: #function)
     }
     
@@ -191,8 +188,8 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func lineSpacing(_ value:@escaping @autoclosure () -> CGFloat)->Self{
-		return self.bindCallback({ [self] in 
-			textNode.lineSpacing(value())
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+			textNode?.lineSpacing(value())
 		}, forKey: #function)
     }
     
