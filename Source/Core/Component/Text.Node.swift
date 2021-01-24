@@ -6,8 +6,8 @@
 //
 
 import Foundation
-class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
-    func handleLineSpacing() {
+open class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
+    open func handleLineSpacing() {
         if self.lineSpacing == 0 {
             return
         }
@@ -27,7 +27,7 @@ class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
         _ = attributedText(attri: attributedString)
     }
     @discardableResult
-    func attributedText(attri:NSAttributedString?) ->NSAttributedString?{
+    open func attributedText(attri:NSAttributedString?) ->NSAttributedString?{
         if let attriText = attri {
             let attributedString = NSMutableAttributedString(attributedString: attriText)
             let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
@@ -46,18 +46,20 @@ class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
         return nil
     }
     
-    func lineSpacing(_ value:CGFloat){
+    open func lineSpacing(_ value:CGFloat){
         self.lineSpacing = value
         self.handleLineSpacing()
     }
     @discardableResult
-    func argo_sizeThatFits(_ size: CGSize) -> CGSize {
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
         let lable:UILabel = TextCalculation.calculationLable
         let font = UIFont.font(fontName: self.fontName, fontStyle: self.fontStyle, fontSize: self.fontSize)
         lable.font = font
-        lable.text = nil
-        lable.attributedText = nil
-        lable.numberOfLines = 1
+        lable.text = self.text()
+        lable.attributedText = self.attributedText()
+        lable.numberOfLines = self.numberOfLines()
+        lable.lineBreakMode = self.lineBreakMode()
+        lable.textAlignment = self.textAlignment()
         ArgoKitNodeViewModifier.performViewAttribute(lable, attributes: self.nodeAllAttributeValue())
         var result = lable.sizeThatFits(size)
         let width = ceil(result.width);
@@ -87,9 +89,5 @@ class ArgoKitTextNode: ArgoKitTextBaseNode {
             attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attriText.length))
             ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedString)
         }
-    }
-    
-    public override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return self.argo_sizeThatFits(size)
     }
 }

@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
     spec.name = 'ArgoKitComponent'
-    spec.version = '1.0.5'
+    spec.version = '1.0.6'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
   
@@ -23,12 +23,12 @@ podspec = Pod::Spec.new do |spec|
 
     spec.dependency 'ArgoKit'
 
-    #spec.default_subspec = 'SDImageLoader', 'YYText', 'Refresh'
+#    spec.default_subspec = 'SDImageLoader'
     spec.default_subspec = 'Core'
     
     spec.subspec "Core" do |ss|
       ss.source_files = 'Source/Component/Core/**/*.{h,m,mm,swift}'
-#      ss.dependency 'ArgoKitComponent/SDImageLoader'
+      ss.dependency 'ArgoKitComponent/SDImageLoader'
     end
     
     spec.subspec "SDImageLoader" do |ss|

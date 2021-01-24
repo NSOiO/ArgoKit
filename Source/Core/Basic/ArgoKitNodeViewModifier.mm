@@ -143,6 +143,13 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         return;
     }
     for (ViewAttribute *attribute in attributes) {
+        NSString *selector_name;
+        if (attribute.selector) {
+            selector_name = @(sel_getName(attribute.selector));
+        }
+        if (![selector_name hasPrefix:@"set"]) {//不是set方法则排除在外
+            continue;
+        }
         if(attribute.isCALayer){
             if(view &&  [view.layer respondsToSelector:attribute.selector]){
                 performSelector(view.layer,attribute.selector,attribute.paramter);

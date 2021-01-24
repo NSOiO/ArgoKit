@@ -127,7 +127,7 @@ struct ListCellTests: ArgoKit.ViewProtocol {
 }
 
 extension ListCellTestsModelProtocol {
-    func makeView() -> View {
+    func makeView() -> ArgoKit.View {
         ListCellTests(model: self)
     }
 }

@@ -53,7 +53,7 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
-        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode,self] in
             addAttribute(#selector(setter:UILabel.font),value())
             textNode?.handleLineSpacing()
         }, forKey: #function)
@@ -77,7 +77,7 @@ extension TextProtocol {
     /// ```
     @discardableResult
     public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
-        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode,self] in
             let f_name = name(), f_size = size(), f_style = style()
             textNode?.fontName = f_name
             textNode?.fontSize = f_size
@@ -93,7 +93,7 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func font(name value: @escaping @autoclosure () -> String?)->Self{
-        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode,self] in
             let f_name = value()
             textNode?.fontName = f_name
             let font = UIFont.font(fontName: f_name, fontStyle: textNode?.fontStyle, fontSize: textNode?.fontSize)
@@ -107,7 +107,7 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
-        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode,self] in
             let f_size = value()
             textNode?.fontSize = f_size
             let font = UIFont.font(fontName: textNode?.fontName, fontStyle:  textNode?.fontStyle, fontSize: f_size)
@@ -131,7 +131,7 @@ extension TextProtocol {
     /// ```
     @discardableResult
     public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
-        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode,self] in
             let f_style = value()
             textNode?.fontStyle = value()
             let font = UIFont.font(fontName: textNode?.fontName, fontStyle: f_style, fontSize: textNode?.fontSize)

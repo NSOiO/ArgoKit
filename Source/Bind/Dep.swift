@@ -10,7 +10,7 @@ import Foundation
 public final class Dep {
     private static var shared: Dep = Dep()
     private var subscriber:(() -> Void)?
-    private var cancellables:[Cancellable] = []
+    private var cancellables:[Disposable] = []
     
     public init(){ }
     public static func registerDep(_ dep: Dep) {
@@ -30,11 +30,11 @@ public final class Dep {
     }
     
     /// Cancellable
-    static func pushCancellable(_ cancel: Cancellable) {
+    static func pushCancellable(_ cancel: Disposable) {
         self.shared.cancellables.append(cancel)
     }
     
-    static func popAllCancellables() -> [Cancellable]{
+    static func popAllCancellables() -> [Disposable]{
         let r = self.shared.cancellables
         self.shared.cancellables.removeAll()
         return r

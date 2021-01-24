@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        contentView.padding(edge: .top, value: 100)
 //        let contentView = YYTextTests(model: YYTextTestsModel())
 //        let contentView = ListTestsModel_Previews().makeView().padding(edge: .horizontal, value: 10)
-        let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
+        let contentView = YYTextTests(model: YYTextTestsModel())
 //        let contentView = ViewPage1()
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()

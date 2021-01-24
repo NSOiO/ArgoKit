@@ -1,19 +1,16 @@
 //
-//  Cancelable.swift
-//  SwiftBinding
+//  Disposable.swift
+//  ArgoKit
 //
-//  Created by Dai on 2020-10-28.
+//  Created by Dai on 2021-01-22.
 //
 
 import Foundation
-
-#if false
-// use Disposable instead.
-public protocol Cancellable {
-    func cancel()
+public protocol Disposable {
+    func dispose()
 }
 
-public class ClosureCancelable: Cancellable {
+public class ClosureDisposable: Disposable {
     var callback: (() -> Void)?
     public init(callback: @escaping () -> Void) {
         self.callback = callback
@@ -23,13 +20,12 @@ public class ClosureCancelable: Cancellable {
             block()
         }
     }
-    public func cancel() {
+    public func dispose() {
         guard let block = self.callback else {
-            print("had alread been cancelled")
+            print("had alread been disposed")
             return
         }
         block()
         self.callback = nil
     }
 }
-#endif

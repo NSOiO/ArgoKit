@@ -62,24 +62,24 @@ struct ArgoKitTextTest: ArgoKit.View {
             model.name = model.name + "\(model.age)"
             model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
         }
-        .font(style: .default, size: 50)
-        .backgroundColor(model.color)
-        
-        Text()
-            .text(model.name)
-            .font(size: model.fontSize)
+            .alignSelf(.center)
+
+        Text("单行文本粗体cd")
+            .font(size: 25)
+            .font(style: .bold)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.stretch)
+
+        Text(model.name)
+            .font(size: 50)
             .font(style: .default)
             .backgroundColor(model.color)
             .margin(edge: .top, value: 10)
             .alignSelf(.start)
             .onTapGesture {
-                model.age *= 2
-                model.fontSize += 1
-                model.name = model.name + "\(model.age)"
-//                model.text?.text(model.name)
-                print("hahahah\(model.age)")
-                model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
-            }.alias(variable: model.$text)
+                model.name = "李四" + "\(Int.random(in: 0 ..< 1000))"
+            }
         
         
 

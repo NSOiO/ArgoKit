@@ -25,19 +25,21 @@ class ListCellTestsModel: ListCellTestsModelProtocol {
     
     var comments: Int = 0
     var conversation: String = "对话"
+    let bag = DisposeBag()
     
-    //点击button，likes数字自动修改
-    lazy var watchIsLiked = self.$isLiked.watch { [weak self] new in
-        if new {
-            self?.likes += 1
-        } else {
-            self?.likes -= 1
+    init() {
+        self.$isLiked.watch { [weak self] new in
+            if new {
+                self?.likes += 1
+            } else {
+                self?.likes -= 1
+            }
         }
+        .disposed(by: self.bag)
     }
 
     func likeButtonAction() {
         self.isLiked.toggle()
-        self.comments += 1
     }
 }
 
