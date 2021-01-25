@@ -148,11 +148,13 @@ def remove_files_from_project(project, file_paths)
     argokit_prefix = APGConstant.argokit_prefix
     
     group = project.main_group.find_subpath(File.join(APGConstant.ap_group), false)
-    group.children.each do |child|
-        if file_paths.select {|path| File.basename(path) == child.name }
-            child.remove_from_project()
-            #project.root_object.name
-            puts "#{argokit_prefix} file #{child.name} exist, remove from #{File.basename(project.path)}".green
+    if group && group.children'
+        group.children.each do |child|
+            if file_paths.select {|path| File.basename(path) == child.name }
+                child.remove_from_project()
+                #project.root_object.name
+                puts "#{argokit_prefix} file #{child.name} exist, remove from #{File.basename(project.path)}".green
+            end
         end
     end
 end
