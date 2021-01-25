@@ -8,10 +8,17 @@ podspec = Pod::Spec.new do |spec|
   spec.version = '1.0.11'
   spec.license =  { :type => 'MIT', :file => "LICENSE" }
   spec.homepage = 'https://git.wemomo.com/module/argokit'
-  spec.documentation_url = 'argokit'
+  spec.documentation_url = 'https://momotech.github.io/argokit/'
 
-  spec.summary = 'argokit'
-  spec.description = 'argokit'
+  spec.summary = 'A Declarative and Reactive Framework.'
+  spec.description = <<-DESC
+  ArgoKit is a declarative and reactive Framework and based on UIKit, inspired by SwiftUI, compatible with iOS 11+.
+  
+  - **Declarative** ArgoKit uses almost the same `DSL` as SwiftUI(e.g., `Text` `Button` `List` ).You simply describe the UI elements and Animation, and the framework takes care of the rest.
+  - **React** The created view automatically listens directly to streams and updates the DOM accordingly.
+  - **Flexbox Layout** ArgoKit uses [Yoga](https://facebook.github.io/yoga/) as layout engine.
+  - **Preview and templating** ArgoKit uses the same preview approach as SwiftUI, and you can be easily developed through the template files.
+  DESC
 
   spec.authors = 'MoMo'
   spec.source = {
