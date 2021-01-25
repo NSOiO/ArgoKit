@@ -88,7 +88,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
             [invocation setArgument:&objVaule atIndex:i + 2];
         }else if ([argumentTypeString isEqualToString:@":"]) { // unsigned long long
             [invocation setArgument:&obj atIndex:i + 2];
-        } else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(CGRect)]]) { // CGRect {CGRect={CGPoint=dd}{CGSize=dd}}
+        } else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(CGRect)]]) { // CGRect {CGRect={CGPoint=dd}}
             CGRect objVaule = [obj CGRectValue];
             [invocation setArgument:&objVaule atIndex:i + 2];
         } else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(UIEdgeInsets)]]) { // UIEdgeInsets {UIEdgeInsets=dddd}
@@ -119,7 +119,6 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         return;
     }
     UIView *view = node.view;
-    NSLog(@"%@",view);
     for (ViewAttribute *attribute in attributes) {
        
         if(attribute.isCALayer){

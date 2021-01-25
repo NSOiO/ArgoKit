@@ -6,10 +6,19 @@
 //
 
 import ArgoKit
-
+import YYText
+import YYText.NSAttributedString_YYText
 // view model.
 class YYTextTestsModel {
     @Property var color:UIColor = .red
+    var arribut:NSMutableAttributedString
+    init() {
+        arribut = NSMutableAttributedString(string: "单行文本粗体单行.单行文本粗体单行.单行文")
+        arribut.yy_obliqueness = -2.0
+        arribut.yy_color = .gray
+        arribut.yy_setTextStrikethrough(YYTextDecoration(style: .single,width: 1,color: .red), range: NSRange(location: 0, length: arribut.length))
+    }
+    
 }
 
 // view
@@ -22,48 +31,53 @@ struct YYTextTests: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-//        YYText("YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.YYText 单行文本粗体.")
-//            .lineLimit(3)
-//            .lineSpacing(10)
+        YYText()
+            .attributedText(model.arribut)
+            .lineLimit(3)
+            .lineSpacing(10)
 //            .textColor(.red)
-//            .font(size: 20)
-//            .font(style: .bold)
-//            .backgroundColor(.yellow)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.stretch)
-//
-        YYText("Text 单行文本粗体.dcsdcdcdcdcdcdcdcd\"")
             .font(size: 20)
-//            .font(style: .bold)
+            .font(style: .bold)
+            .backgroundColor(.yellow)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.stretch)
+
+        YYText("Text单行文本粗体.单行文本粗体单行.单行文本粗体单行.单行文本粗体单行")
+            .font(size: 15)
+            .font(style: .bold)
             .backgroundColor(.green)
             .margin(edge: .top, value: 10)
             .alignSelf(.stretch)
-            .lineLimit(2)
-            .obliqueness(-1)
-            .expansion(5)
-            .textColor(.gray)
+            .lineLimit(1)
+            .textBorder(style: .single, width: 2, color: .yellow,cornerRadius: 5,range: NSRange(location: 5, length: 4))
+//            .baseWritingDirection(.rightToLeft)
+//            .textColor(.gray,range:model.range1)
+//            .textColor(.gray,range:)
             .baselineOffset(2.0)
+            .underline(style:[.single],width: 1.0, color: .red)
+            .strikethrough(style:[.single],width: 1.0, color: .red)
 //            .textShadowColor(.purple)
 //            .textShadowOffset(CGSize(width: 5, height: 5))
 //            .textShadowBlurRadius(0.6)
-            .strokeColor(.red)
-            .setLink("www.baidu.com")
-            .kern(5)
+            .setLink(range: NSRange(location: 5, length: 5), color: .blue, backgroundColor: .yellow, tapAction: { link in
+                print("setLink:\(link)")
+            })
+//            .kern(5)
             .firstLineHeadIndent(20)
-            .attachmentStringWithImage("icybay.jpg", fontSize: 20, location: 20)
-            .textHighlightRange(NSRange(location: 10, length: 5), color: .red, backgroundColor: model.color, tapAction: { (view, attribute, range, frame) in
-                model.color = UIColor(red: CGFloat.random(in: 0 ..< 255)/255, green: CGFloat.random(in: 0 ..< 255)/255, blue: CGFloat.random(in: 0 ..< 255)/255, alpha: 1)
+            .attachmentStringWithImage("icybay.jpg", fontSize: 15, location: 15)
+            .textHighlightRange(NSRange(location: 10, length: 5), color: .red, backgroundColor: model.color, tapAction: { (attribute, range) in
+                print("textHighlightRange:\(attribute),range:\(attribute.attributedSubstring(from: range))")
             }, longPressAction: nil)
             .onTapGesture {
-//                model.color = .purple
+                print("onTapGesture")
             }
-            
-        
-        
-//        Text("Text 单行文本粗体.dcd")
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.stretch)
+            .truncationToken("----")
+            .tabStops({ () -> [NSTextTab] in
+                let tab1:NSTextTab = NSTextTab(textAlignment: .natural, location: 10)
+                let tab2:NSTextTab = NSTextTab(textAlignment: .right, location: 20)
+                return [tab1,tab2]
+            })
+            .defaultTabInterval(3)
     }
 }
 

@@ -396,24 +396,25 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (_isReused) {
         return;
     }
-    __weak typeof(self)wealSelf = self;
-    [ArgoKitUtils runMainThreadAsyncBlock:^{
-        if (!wealSelf.view) {
-            UIView *view = [wealSelf createNodeViewWithFrame:frame];
-            [wealSelf linkView:view];
-            NSArray *nodeObservers = [wealSelf.nodeObservers copy];
-            for (ArgoKitNodeObserver *observer in nodeObservers) {
-                if (observer.createViewBlock) {
-                    observer.createViewBlock(wealSelf.view);
-                }
-            }
-        }else if (!CGRectEqualToRect(frame, wealSelf.view.akLayoutFrame)) {
-            wealSelf.view.akLayoutFrame = frame;
-            if (!wealSelf.view.superview) {
-                [wealSelf insertViewToParentNodeView];
+//    __weak typeof(self)wealSelf = self;
+//    [ArgoKitUtils runMainThreadAsyncBlock:^{
+//
+//    }];
+    if (!self.view) {
+        UIView *view = [self createNodeViewWithFrame:frame];
+        [self linkView:view];
+        NSArray *nodeObservers = [self.nodeObservers copy];
+        for (ArgoKitNodeObserver *observer in nodeObservers) {
+            if (observer.createViewBlock) {
+                observer.createViewBlock(self.view);
             }
         }
-    }];
+    }else if (!CGRectEqualToRect(frame, self.view.akLayoutFrame)) {
+        self.view.akLayoutFrame = frame;
+        if (!self.view.superview) {
+            [self insertViewToParentNodeView];
+        }
+    }
 }
 
 - (void)commitAttributes {

@@ -15,7 +15,6 @@ extension View {
     @discardableResult
     public func gesture(gesture:Gesture) -> Self {
         gesture.gesture.isEnabled = true
-        print("gesture:\(String(describing: gesture.gesture))")
         addAttribute(#selector(setter: UIView.isUserInteractionEnabled),true)
         addAttribute(#selector(UIView.addGestureRecognizer(_:)),gesture.gesture)
         self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (obj, paramter) in

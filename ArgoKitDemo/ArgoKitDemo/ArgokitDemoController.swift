@@ -38,7 +38,7 @@ class ArgokitDemoController:UIViewController{
         hostView.backgroundColor = .red
         self.view.addSubview(hostView)
     
-        
+    
         DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 5) {
             hostView.frame = CGRect(x: 0, y: 200, width: 300, height: self.view.bounds.size.height - 400)
         }
