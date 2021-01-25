@@ -34,7 +34,7 @@ PODS:
   - ArgoKitComponent/YYText (1.0.6):
     - ArgoKit
     - YYText
-  - ArgoKitPreview (1.0.10):
+  - ArgoKitPreview (1.0.11):
     - ArgoKit
     - ArgoKitComponent
   - Kingfisher (6.0.1)
@@ -74,7 +74,7 @@ SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
   ArgoKit: 2e9ecfe5b426b98cc67758e47b172196f004b741
   ArgoKitComponent: 64d947a74e7829a8692b4c5ff55a1ba9f69149ea
-  ArgoKitPreview: ad6dd0ea52477ea43a04fc28d9abc59c8bec80d1
+  ArgoKitPreview: 3f6b33f82f1745b5e31f040a1faabfb901329ab8
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
