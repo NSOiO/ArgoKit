@@ -58,6 +58,10 @@ extension DataSource{
     public func getDataSource<D>()->DataList<D> where Value == DataList<D>{
         return dataSource
     }
+    
+    
+    /// apply the changes of data source on the List, use the specified animation.
+    /// - Parameter animation: The type of animation to use when the List changes.
     public func apply(with animation: UITableView.RowAnimation = .none){
         if let action = reloadAction{
             action(animation)
