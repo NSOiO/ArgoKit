@@ -3,7 +3,10 @@ import UIKit
 import ArgoKit
 import SDWebImage
 
+#if !KFIMAGELOADER
 public typealias ImageLoader = SDImageLoader
+#endif
+
 public class SDImageLoader:ArgoKitImageLoader {
     public init () {}
     

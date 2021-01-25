@@ -8,7 +8,7 @@
 import ArgoKit
 
 protocol ListCellTestsModelProtocol: ViewModelProtocol {
-    var title: String { get }
+    var content: String { get }
     var userName: String { get }
     var userAge: Int { get }
     var placeHolder: String { get }
@@ -36,62 +36,38 @@ struct ListCellTests: ArgoKit.ViewProtocol {
     
     var body: ArgoKit.View {
         VStack {
-            // icon
-            HStack {
+            HStack { //header
                 Image(url: model.iconURL, placeholder: model.placeHolder)
-                    .width(40)
-                    .height(40)
-                    .circle()
+                    .size(width: 40, height: 40).circle()
                     .margin(edge: .right, value: 10)
-                
                 VStack {
-                    Text(model.userName)
-                        .font(size: 16)
-                    
-                    Text("\(model.userAge)")
-                        .font(size: 14)
+                    Text(model.userName).font(size: 16)
+                    Text("\(model.userAge)").font(size: 14).textAlign(.center).circle()
                         .backgroundColor(red: 239, green: 66, blue: 66)
-                        .textAlign(.center)
-                        .circle()
                         .padding(top: 0, right: 10, bottom: 0, left: 10)
-                    
                 }
             }
             .margin(edge: .bottom, value: 5)
-            
-            // Title
-            Text(model.title)
-                .lineLimit(0)
-                .font(size: 14)
+            // content
+            Text(model.content).font(size: 14).lineLimit(0)
                 .margin(edge: .bottom, value: 5)
-            
-            HStack {
+            HStack {//photos
                 ForEach(model.photoURLs) { item in
                     Image(url: item, placeholder: model.placeHolder)
-                        .width(30%)
-                        .aspect(ratio: 1)
+                        .aspect(ratio: 1).width(30%).cornerRadius(5)
                         .margin(edge: .bottom, value: 10)
-                        .cornerRadius(5)
-//                        .grow(1)
                 }
             }
-            .wrap(.wrap)
-            .justifyContent(.around)
-            .margin(edge: .bottom, value: 5)
-            
+            .wrap(.wrap).justifyContent(.around).margin(edge: .bottom, value: 5)
             
             Text("\(model.time)小时前发布 · \(model.distance)km")
-                .font(size: 10)
-                .textColor(.init(60, 60, 60))
+                .font(size: 10).textColor(.init(60, 60, 60))
+                .margin(edge: .bottom, value: 5)
+            EmptyView()//spite line
+                .size(width: 100%, height: 0.5).backgroundColor(.lightGray)
                 .margin(edge: .bottom, value: 5)
                 
-            EmptyView()
-                .width(100%)
-                .height(0.5)
-                .backgroundColor(.lightGray)
-                .margin(edge: .bottom, value: 5)
-            
-            HStack {
+            HStack {// bottom buttons
                 bottomButton(action: model.likeButtonAction, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
                 bottomButton(action: {
                     
@@ -102,10 +78,8 @@ struct ListCellTests: ArgoKit.ViewProtocol {
                 }, imageName: "conversation", title: "\(model.conversation)")
                 
             }
-            .width(100%)
-            .justifyContent(.between)
-            .padding(edge: .left, value: 30)
-            .padding(edge: .right, value: 30)
+            .width(100%).justifyContent(.between)
+            .padding(edge: .horizontal, value: 30)
         }
     }
     
@@ -141,7 +115,7 @@ import SwiftUI
 class ListCellTestsModel_Previews:  ListCellTestsModel {
     override init() {
         super.init()
-        self.title = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
+        self.content = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
         self.iconURL = URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp")
         let array = [
             URL(string: "http://img.momocdn.com/feedimage/A1/24/A124B7A3-AF51-43B2-9DB0-D56E32D1809520201211_400x400.webp")!,

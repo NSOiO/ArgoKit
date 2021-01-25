@@ -24,6 +24,17 @@ ArgoKit is a SwiftUI replacement Framework based on UIKit, that is compatible wi
 ```
 pod 'ArgoKit'
 pod 'ArgoKitPreview', :configuration => 'Debug'
+
+
+post_integrate do |installer|
+    installer.generated_pod_targets.each do |target|
+      if target.name == "ArgoKitPreview"
+        pod_dir = target.sandbox.pod_dir(target.name)
+        require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
+        config_preview_files installer,target
+      end
+    end
+end
 ```
 
 #### Declarative
@@ -88,6 +99,7 @@ class FeedCellModel {
    }
 }
 
+// View
 Text(model.getTitle())
    .onTapGesture(model.titleAction)
 ```
