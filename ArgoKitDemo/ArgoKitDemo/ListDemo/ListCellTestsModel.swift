@@ -11,7 +11,7 @@ import ArgoKit
 // view model.
 class ListCellTestsModel: ListCellTestsModelProtocol {
 //    var reuseIdentifier: String = "cell"
-    var title: String = ""
+    var content: String = ""
     var userName = "Emily"
     var userAge = 20
     var placeHolder = "turtlerock"
