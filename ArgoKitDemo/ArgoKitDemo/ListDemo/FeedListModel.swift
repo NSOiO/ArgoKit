@@ -10,6 +10,6 @@ import ArgoKit
 // view model.
 class FeedListModel: FeedListModelProtocol {
     var name = ""
-    var dataSource = DataSource([FeedCellModelProtocol]())
+    var dataSource = DataSource([FeedBaseProtocol]())
 }
 

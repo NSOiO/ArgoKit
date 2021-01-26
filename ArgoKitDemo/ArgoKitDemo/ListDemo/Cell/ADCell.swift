@@ -1,5 +1,5 @@
 //
-//  FeedList.swift
+//  ADCell.swift
 //  ArgoKitDemo
 //
 //  Created by Dai on 2021-01-26.
@@ -8,49 +8,48 @@
 import ArgoKit
 
 // view model.
-protocol FeedListModelProtocol: ViewModelProtocol {
-    var name: String { get }
-    var dataSource: DataSource<[FeedBaseProtocol]> { get }
+protocol ADCellModelProtocol: ViewModelProtocol {
+    var title: String { get }
+    var icon: String { get }
+    var isFavorite: Bool { get }
 }
 
 // view
-struct FeedList: ArgoKit.ViewProtocol {
+struct ADCell: ArgoKit.ViewProtocol {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
-    private var model: FeedListModelProtocol
-    init(model: FeedListModelProtocol) {
+    private var model: ADCellModelProtocol
+    init(model: ADCellModelProtocol) {
         self.model = model
     }
     
     var body: ArgoKit.View {
-        List(data: model.dataSource) { cellModel in
-            cellModel.makeView()
-                .padding(edge: .bottom, value: 10)
+        HStack {
+            Image(model.icon).size(width: 50, height: 50).circle()
+                .margin(edge: .right, value: 5)
+            Text(model.title)
+            Spacer()
+            Image("star.fill").size(width: 20, height: 20)
+                .hidden(!model.isFavorite)
         }
-        .height(100%)
+        .alignItems(.center)
+        .padding(edge: .vertical, value: 20)
     }
 }
 
-extension FeedListModelProtocol {
+extension ADCellModelProtocol {
     func makeView() -> ArgoKit.View {
-        FeedList(model: self)
+        ADCell(model: self)
     }
 }
 
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 // mock data.
-class FeedListModel_Previews:  FeedListModel {
+class ADCellModel_Previews:  ADCellModel {
     override init() {
         super.init()
-        var datas = [FeedBaseProtocol]()
-        for idx in 0..<10 {
-            datas.append(FeedCellModel_Previews())
-            
-            let ad = ADCellModel_Previews()
-            ad.isFavorite = idx % 2 == 1
-            datas.append(ad)
-        }
-        self.dataSource.append(contentsOf: datas)
+        self.title = "这是个ADCell"
+        self.icon = "turtlerock"
     }
 }
 
@@ -66,13 +65,12 @@ fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKi
 }
 
 @available(iOS 13.0.0, *)
-struct FeedList_Previews: PreviewProvider {
+struct ADCell_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
         // 数组中可以添加其他设备进行多设备预览
         SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
-                FeedList(model: FeedListModel_Previews())
-                    .padding(edge: .horizontal, value: 5)
+                ADCell(model: ADCellModel_Previews())
             }
             .previewDevice(item.device)
             .previewDisplayName(item.name)
