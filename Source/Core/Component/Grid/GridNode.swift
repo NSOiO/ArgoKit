@@ -12,7 +12,6 @@ fileprivate let kGridHeaderReuseIdentifier = "kGridHeaderReuseIdentifier"
 fileprivate let kGridFooterReuseIdentifier = "kGridFooterReuseIdentifier"
 
 class ArgoKitGridView: UICollectionView {
-    
     private var oldFrame = CGRect.zero
     
     public override func layoutSubviews() {
@@ -42,7 +41,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return _dataSourceHelper
     }()
     
-//    lazy var dataSourceHelper = DataSourceHelper<D>()
     lazy var headerSourceHelper =  DataSourceHelper<D>()
     lazy var footerSourceHelper = DataSourceHelper<D>()
     
@@ -721,6 +719,17 @@ extension GridNode{
     
     public func itemRenderDirection(_ value :GridFlowLayout.ItemRenderDirection){
         flowLayout.itemRenderDirection = value
+    }
+    
+    func removeNode(_ node:Any){
+        dataSourceHelper.removeNode(node)
+        headerSourceHelper.removeNode(node)
+        footerSourceHelper.removeNode(node)
+    }
+    func removeAll(){
+        dataSourceHelper.removeAll()
+        dataSourceHelper.removeAll()
+        headerSourceHelper.removeAll()
     }
     
 }

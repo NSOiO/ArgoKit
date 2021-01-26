@@ -118,9 +118,9 @@ class ListCellTestsModel_Previews:  ListCellTestsModel {
         self.content = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
         self.iconURL = URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp")
         let array = [
-            URL(string: "http://img.momocdn.com/feedimage/A1/24/A124B7A3-AF51-43B2-9DB0-D56E32D1809520201211_400x400.webp")!,
-            URL(string: "http://img.momocdn.com/feedimage/D6/A4/D6A45519-EC44-47B8-8032-658F40F5F26120201211_400x400.webp")!,
-            URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!
+            URL(string: "http://img.alicdn.com/imgextra/i2/3853013656/O1CN01ke73HW1csUaBo2zkK_!!0-item_pic.jpg")!,
+            URL(string: "http://img.alicdn.com/imgextra/i2/3853013656/O1CN01ke73HW1csUaBo2zkK_!!0-item_pic.jpg")!,
+            URL(string: "http://img.alicdn.com/imgextra/i2/3853013656/O1CN01ke73HW1csUaBo2zkK_!!0-item_pic.jpg")!
         ]
         for _ in 0...2 {
             self.photoURLs.append(contentsOf: array)

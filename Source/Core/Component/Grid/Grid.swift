@@ -89,7 +89,9 @@ public class Grid<D>: ScrollView {
     ///     }
     ///```
     ///
-    public convenience init(waterfall: Bool = false, data: DataSource<DataList<D>>, @ArgoKitListBuilder itemContent: @escaping (D) -> View){
+    public convenience init(waterfall: Bool =  false,
+                            data: DataSource<DataList<D>>,
+                            @ArgoKitListBuilder itemContent: @escaping (D) -> View){
         self.init()
         gridNode?.waterfall(waterfall)
         gridNode?.dataSourceHelper.dataSourceList = data
@@ -110,7 +112,9 @@ public class Grid<D>: ScrollView {
     ///     }
     ///```
     ///
-    public convenience init(waterfall:Bool = false, data: DataSource<SectionDataList<D>>, @ArgoKitListBuilder itemContent: @escaping (D) -> View){
+    public convenience init(waterfall:Bool = false,
+                            data: DataSource<SectionDataList<D>>,
+                            @ArgoKitListBuilder itemContent: @escaping (D) -> View){
         self.init()
         gridNode?.waterfall(waterfall)
         gridNode?.dataSourceHelper.sectionDataSourceList = data

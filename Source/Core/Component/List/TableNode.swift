@@ -10,8 +10,12 @@ import Foundation
 fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
 fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
-
-public class TableView:UITableView{
+var count = 0
+var cellount = 0
+class TableView:UITableView{
+    deinit {
+        print("TableView")
+    }
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
@@ -27,36 +31,31 @@ class TableNode<D>: ArgoKitScrollViewNode,
                     UITableViewDataSource,
                     UITableViewDataSourcePrefetching,
                     DataSourceReloadNode {
-    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
     
-    lazy var dataSourceHelper: DataSourceHelper<D> = {
+    lazy var dataSourceHelper: DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
         return _dataSourceHelper
     }()
+    
     lazy var sectionHeaderSourceHelper =  DataSourceHelper<D>()
     lazy var sectionFooterSourceHelper = DataSourceHelper<D>()
     
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none
     
-    public var tableView: UITableView? {
-        
-        if let tableView = self.view as? UITableView {
-            return tableView
-        }
-        return nil
-    }
-    
+    public weak var tableView: UITableView?
+   
     public var tableHeaderNode: ArgoKitNode?
     public var tableFooterNode: ArgoKitNode?
     public var sectionIndexTitles: [String]?
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
+        self.tableView = tableView
         tableView.delegate = self
         tableView.dataSource = self
         if #available(iOS 10.0, *) {
@@ -101,7 +100,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
+            print("cellForRowAt cellount111\(cellount)")
         }
+        cellount = cellount + 1
+        print("cellForRowAt cellount\(cellount)")
         return cell
     }
 
@@ -241,6 +243,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        count = count + 1
+        print("heightForRowAt count:\(count) === \(indexPath)")
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
 
@@ -630,5 +634,16 @@ extension TableNode {
     public func reloadRowsHeight() {
         tableView?.beginUpdates()
         tableView?.endUpdates()
+    }
+    
+    func removeNode(_ node:Any){
+        dataSourceHelper.removeNode(node)
+        sectionHeaderSourceHelper.removeNode(node)
+        sectionFooterSourceHelper.removeNode(node)
+    }
+    func removeAll(){
+        dataSourceHelper.removeAll()
+        sectionHeaderSourceHelper.removeAll()
+        sectionFooterSourceHelper.removeAll()
     }
 }

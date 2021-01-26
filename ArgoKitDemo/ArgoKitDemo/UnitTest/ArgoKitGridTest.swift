@@ -149,7 +149,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         }
          */
       
-        Grid(waterfall: false,data:model.$dataSource1){ data in
+        Grid(waterfall: false,data:model.$dataSource2){ data in
 
             Text(data.headerName)
                 .lineLimit(0)
@@ -159,11 +159,9 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-                   
+//                    data.headerName = "ssssssss"
                 }
-
         }
-        
         .grow(1.0)
         .columnCount(3)
         .columnSpacing(10)
@@ -178,7 +176,7 @@ struct ArgoKitGridTest: ArgoKit.View {
 //            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
 //            data.imagePath = "icybay.jpg"
 //            model.$dataSource1.move(at: indexpath, to: IndexPath(row: indexpath.row + 2, section: indexpath.section)).apply()
-            model.$dataSource1.delete(at: [1,2]).apply()
+//            model.$dataSource1.delete(at: indexpath).apply()
 //            AlertView(title: data.headerName, message: data.headerName, preferredStyle: UIAlertController.Style.alert)
 //            .textField()
 //            .destructive(title: "确认") { text in
@@ -205,23 +203,23 @@ struct ArgoKitGridTest: ArgoKit.View {
         .footerDidDisappear({ (data, indexpath) in
             print("footerDidDisappear==indexpath:\(indexpath)")
         })
-        .refreshFooterView { () -> RefreshFooterView in
-            RefreshFooterView {refresh in
-                model.reloadMoreData()
-                refresh?.endRefreshing()
-                refresh?.resetNoMoreData()
-            } _: { () -> View in
-                Text("refresh_footer").backgroundColor(.red)
-                Image("chilkoottrail.jpg")
-                    .width(30)
-                    .aspect(ratio: 1)
-                    .circle()
-            }
-            .backgroundColor(.orange)
-            .alignItems(.center)
-            .alias(variable: $footerView)
-            .autoRefreshOffPage(3)
-        }
+//        .refreshFooterView { () -> RefreshFooterView in
+//            RefreshFooterView {[model1 = model] refresh in
+//                model1.reloadMoreData()
+//                refresh?.endRefreshing()
+//                refresh?.resetNoMoreData()
+//            } _: { () -> View in
+//                Text("refresh_footer").backgroundColor(.red)
+//                Image("chilkoottrail.jpg")
+//                    .width(30)
+//                    .aspect(ratio: 1)
+//                    .circle()
+//            }
+//            .backgroundColor(.orange)
+//            .alignItems(.center)
+//            .alias(variable: $footerView)
+//            .autoRefreshOffPage(3)
+//        }
         
     }
 

@@ -10,9 +10,9 @@ import UIKit
 import ArgoKit
 class ViewPagerController: UIViewController {
     
+//    let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+//    let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
     let contentView = ListDemo()
-    
-    
     override func viewDidLoad() {
         let argoKitControll = UIHostingView(content: contentView, frame: self.view.frame)
         argoKitControll.useSafeAreaTop = true

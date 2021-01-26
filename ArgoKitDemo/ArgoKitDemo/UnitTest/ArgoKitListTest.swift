@@ -54,7 +54,7 @@ struct ArgoKitListTest: ArgoKit.View {
     @DataSource var models:[ArgoKitListTestModel] = [ArgoKitListTestModel]()
     init(model: ArgoKitListTestModel) {
         self.model = model
-        for index in 1..<1000{
+        for index in 1..<100{
             let item = ArgoKitListTestModel()
             item.sessionName = String(index)
             item.unreadCount = String(index)
@@ -64,22 +64,21 @@ struct ArgoKitListTest: ArgoKit.View {
     
     var body: ArgoKit.View {
         
-        List(data:$models){ data in
+        List{
             
-            Text(data.sessionName)
+            Text("")
                 .lineLimit(2)
                 .width(150)
-                .alias(variable: data.$textCom)
-            
+//                .alias(variable: data.$textCom)
             Image("icybay.jpg")
                 .aspect(ratio: 1)
-                .onTapGesture {
-                    data.textCom?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
-                }
+//                .onTapGesture {
+//                    data.textCom?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
+//                }
         }.grow(1.0)
-        .cellSelected { (mode, index) in
-            print("\(mode)")
-        }
+//        .cellSelected { (mode, index) in
+//            print("\(mode)")
+//        }
     }
 }
 

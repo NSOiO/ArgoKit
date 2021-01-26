@@ -8,21 +8,19 @@
 import Foundation
 
 class RefreshHeaderNode:ArgoKitNode{
-
+    override func clearStrongRefrence() {
+        super.clearStrongRefrence()
+        refreshingBlock = nil
+    }
     var refreshingBlock: ((RefreshHeader?) -> ())?
     
     var pullingDownBlock: ((_ contentOffset:CGPoint?) -> ())?
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-//        let refreshHeaderView:RefreshHeader = RefreshHeader.headerWithRefreshingBlock { [weak self] in
-//            if let startRefresh = self?.refreshingBlock{
-//                startRefresh()
-//            }
-//        }
         let refreshHeaderView:RefreshHeader = RefreshHeader()
-        refreshHeaderView.setrefreshingBlock {[weak self] in
-            if let startRefresh = self?.refreshingBlock{
-                startRefresh(refreshHeaderView)
+        refreshHeaderView.setrefreshingBlock {[weak self] view in
+            if let startRefresh = self?.refreshingBlock, let view = view as? RefreshHeader{
+                startRefresh(view)
             }
         }
         let width = self.width()

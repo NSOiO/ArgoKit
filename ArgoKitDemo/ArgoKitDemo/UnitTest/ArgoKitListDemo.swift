@@ -210,12 +210,22 @@ class ArgoKitNodeDemo: ArgoKitNode {
         print("ArgoKitNodeDemo")
     }
 }
+class ListDemoView:UIView{
+    deinit {
+        print("ListDemoView")
+    }
+}
 var headerView:RefreshHeaderView?
 var footerView:RefreshFooterView?
-struct ListDemo:ArgoKit.View{
-    var node: ArgoKitNode? = ArgoKitNodeDemo()
+class ListDemo:ArgoKit.View{
+    deinit {
+        print("ListDemo")
+    }
+    var node: ArgoKitNode? = ArgoKitNodeDemo(viewClass: ListDemoView.self)
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
+    
+   
     
     @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
@@ -229,12 +239,16 @@ struct ListDemo:ArgoKit.View{
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
             $items.append(item)
-            $items.append(item)
         }
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
             
         }
+        
+        let callback:()->() = {[self] in
+            self.node?.identifiable = ""
+        }
+        callback()
     }
     
     var hidden:Bool = false
@@ -257,7 +271,7 @@ struct ListDemo:ArgoKit.View{
 //            .cancel(title: "取消") {}
 //            .show()
             let controller = ViewPagerController()
-            viewController()?.navigationController?.pushViewController(controller, animated: true)
+            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
 //            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
 //            item.imagePath = "icybay.jpg"
 //            item.sessionName = "hahahaha"

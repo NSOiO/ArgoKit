@@ -10,9 +10,43 @@ import Foundation
 public typealias SectionDataList<T> = [[T]]
 public typealias DataList<T> = [T]
 
+/// Wrapper datasource of List or Grid
+/// dataSource = [Element] or dataSource = [[Element]]
+///
+/// Example:
+///
+///```
+///     struct ListView: View {
+///
+///         @DataSource var dataSource: [Model] = [Model]()
+///         @DataSource var headerDataSource: [Model] = [Model]()
+///         @DataSource var footerDataSource: [Model] = [Model]()
+///
+///         var body: View {
+///
+///             List(data:$dataSource){ data in
+///                 Row(data)
+///             }
+///             .sectionHeader($headerDataSource) { data in
+///                 Header(data)
+///             }
+///             .sectionFooter($footerDataSource) { data in
+///                 Footer(data)
+///             }
+///             .didSelectRow { (data, index) in
+///                 // Did Select row action
+///             }
+///         }
+///
+///         func appendData(data: Model) {
+///             $dataSource.append(data)
+///             $dataSource.apply()
+///         }
+///     }
+///```
+///
 @propertyWrapper
 public class DataSource<Value>  {
-    
     weak var _rootNode : DataSourceReloadNode?
     var dataSource: Value
     
@@ -51,13 +85,16 @@ public class DataSource<Value>  {
 
 
 extension DataSource{
-    public func getDataSource<D>()->SectionDataList<D> where Value == SectionDataList<D>{
-        return dataSource
-    }
+//    public func getDataSource<D>()->SectionDataList<D> where Value == SectionDataList<D>{
+//        return dataSource
+//    }
+//
+//    public func getDataSource<D>()->DataList<D> where Value == DataList<D>{
+//        return dataSource
+//    }
     
-    public func getDataSource<D>()->DataList<D> where Value == DataList<D>{
-        return dataSource
-    }
+    /// call this method  after the data has been manipulated
+    /// And calling of method must be on the main thread
     public func apply(with animation: UITableView.RowAnimation = .none){
         if let action = reloadAction{
             action(animation)
@@ -68,6 +105,8 @@ extension DataSource{
         }
         reloadAction = nil
     }
+    
+
     
     private func reloadData(){
         reloadAction = {[weak self] animation in
@@ -139,6 +178,7 @@ extension DataSource{
 }
 // MARK: === data appended ===
 extension DataSource{
+
     /// Adds a new element at the end of the dataSource.
     /// dataSource = [Element]
     ///
@@ -459,6 +499,9 @@ extension DataSource{
     @discardableResult
     public func clear<Element>() -> Self where Value == DataList<Element>{
         dataSource.removeAll()
+        if let node = self._rootNode {
+            node.removeAll()
+        }
         return self
     }
     
@@ -466,6 +509,9 @@ extension DataSource{
     @discardableResult
     public func clear<Element>() -> Self where Value == SectionDataList<Element>{
         dataSource.removeAll()
+        if let node = self._rootNode {
+            node.removeAll()
+        }
         return self
     }
     
@@ -538,6 +584,11 @@ extension DataSource{
         let reversedndices = indices.sorted().reversed()
         for i in reversedndices {
             guard i < dataSource.count else { return self}
+    
+            if let node = self._rootNode {
+                let cellNode:Any = dataSource[i]
+                node.removeNode(cellNode)
+            }
             dataSource.remove(at: i)
         }
         self.deleteRows(at: _indexPaths)
@@ -585,6 +636,10 @@ extension DataSource{
             let reversedIndices = value.sorted().reversed()
             for i in reversedIndices {
                 guard i < dataSource[key].count else { return self}
+                if let node = self._rootNode {
+                    let cellNode:Any = dataSource[key][i]
+                    node.removeNode(cellNode)
+                }
                 dataSource[key].remove(at: i)
             }
         }
@@ -615,6 +670,12 @@ extension DataSource{
                 return self
             }
             sections_.insert(section)
+            if let node = self._rootNode {
+                let cellNodes:[Any] = dataSource[section]
+                for cellNode in cellNodes {
+                    node.removeNode(cellNode)
+                }
+            }
             dataSource.remove(at: section)
         }
         deleteSections(at: sections_)

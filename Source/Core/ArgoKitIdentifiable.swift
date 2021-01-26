@@ -28,22 +28,22 @@ private struct AssociatedNodeKey {
     static var nodeIndePathKey:Void?
 }
 
-extension ArgoKitIdentifiable {
-    var argokit_linkNode: ArgoKitNode? {
-        set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedNodeKey.nodeVaulekey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-        get {
-            return  objc_getAssociatedObject(self, &AssociatedNodeKey.nodeVaulekey) as? ArgoKitNode
-        }
+class WeakNodeContainer {
+    weak var linkNode: ArgoKitNode?
+    init(_ node:ArgoKitNode?) {
+        linkNode = node
     }
-    
-    var argokit_indexPath: NSIndexPath? {
+}
+
+extension ArgoKitIdentifiable {
+    weak var argokit_linkNode: ArgoKitNode? {
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            let weakContainer:WeakNodeContainer = WeakNodeContainer(newValue)
+            objc_setAssociatedObject(self, &AssociatedNodeKey.nodeVaulekey, weakContainer, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return  objc_getAssociatedObject(self, &AssociatedNodeKey.nodeIndePathKey) as? NSIndexPath
+            let weakContainer:WeakNodeContainer? = objc_getAssociatedObject(self, &AssociatedNodeKey.nodeVaulekey) as? WeakNodeContainer
+            return  weakContainer?.linkNode
         }
     }
 }

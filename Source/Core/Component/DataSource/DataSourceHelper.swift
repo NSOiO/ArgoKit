@@ -27,7 +27,7 @@ class ArgoKitCellNode: ArgoKitNode {
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     lazy var registedReuseIdSet = Set<String>()
-
+    lazy var cellNodeCache:NSMutableArray = NSMutableArray()
     public var sectionDataSourceList:DataSource<SectionDataList<D>>?{
         didSet{
             sectionDataSourceList?._rootNode = _rootNode
@@ -117,6 +117,7 @@ extension DataSourceHelper {
             let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
             cellNode.addChildNode(node)
             node.argokit_linkNode = cellNode
+            cellNodeCache.add(cellNode)
             return cellNode
         }
         
@@ -139,6 +140,7 @@ extension DataSourceHelper {
                     }else{
                         cellNode.isPreviewing = true
                     }
+                    cellNodeCache.add(cellNode)
                     return cellNode
                 }
             }
@@ -200,3 +202,11 @@ extension DataSourceHelper {
     }
 }
 
+extension DataSourceHelper{
+    public func removeNode(_ node:Any){
+        cellNodeCache.remove(node)
+    }
+    public func removeAll(){
+        cellNodeCache.removeAllObjects()
+    }
+}

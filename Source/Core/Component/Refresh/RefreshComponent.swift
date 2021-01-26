@@ -16,17 +16,17 @@ public enum ArgoKitRefreshState: Int {
 }
 
 open class RefreshComponent: UIView {
-    public typealias Block = (() -> ())?
+    public typealias Block = ((RefreshComponent?) -> ())?
    
     var pullingDownBlock: ((_ contentOffset:CGPoint?) -> ())?
     
-    var refreshingBlock: (() -> ())?
+    var refreshingBlock: ((RefreshComponent?) -> ())?
     var refreshingTarget: Any?
     var refreshingAction: Selector?
     
-    var beginRefreshingCompletionBlock: (() -> ())?
+    var beginRefreshingCompletionBlock: ((RefreshComponent?) -> ())?
     
-    var endRefreshingCompletionBlock: (() -> ())?
+    var endRefreshingCompletionBlock: ((RefreshComponent?) -> ())?
     
     public var refreshing: Bool {
         return self.state == .Refreshing || self.state == .WillRefresh
@@ -46,7 +46,7 @@ open class RefreshComponent: UIView {
 
     var scrollViewOriginalInset: UIEdgeInsets?
 
-    private(set) var scrollView: UIScrollView?
+    private(set) weak var scrollView: UIScrollView?
     
     open var pullingPercent: CGFloat? {
         didSet {
@@ -216,8 +216,8 @@ extension RefreshComponent {
     }
     func executeRefreshingCallback() {
         DispatchQueue.main.async { [weak self] in
-            self?.refreshingBlock?()
-            self?.beginRefreshingCompletionBlock?()
+            self?.refreshingBlock?(self)
+            self?.beginRefreshingCompletionBlock?(self)
         }
     }
 }

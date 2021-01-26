@@ -62,6 +62,7 @@ public struct HostView: View {
 ///
 public class UIHostingView: UIView {
     private var rootView: HostView?
+    private var contentView: View?
     private var useSafeArea: Bool? = false
     private var oldFrame = CGRect.zero
     public var useSafeAreaTop = false
@@ -115,17 +116,11 @@ public class UIHostingView: UIView {
             useSafeAreaRight = true
             
         }
+        contentView = content
         rootView = HostView(self) {
             content.grow(1.0)
         }
     }
-    
-//    @available(iOS 11.0, *)
-//    public override func safeAreaInsetsDidChange() {
-//        let insets = self.safeAreaInsets
-//        print("insets11:\(insets)")
-//        super.safeAreaInsetsDidChange()
-//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

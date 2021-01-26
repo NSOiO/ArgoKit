@@ -9,11 +9,11 @@ import ArgoKit
 
 // view model.
 class ArgoKitTextTestModel {
-   @Property var age:Int = 1
-   @Property var fontSize:CGFloat = 30
+//   @Property var age:Int = 1
+//   @Property var fontSize:CGFloat = 30
    @Property var name:String = "张三"
-   @Property var color:UIColor = .red
-   @Alias var text:Text?
+//   @Property var color:UIColor = .red
+//   @Alias var text:Text?
 }
 
 // view
@@ -57,28 +57,30 @@ struct ArgoKitTextTest: ArgoKit.View {
 //            .backgroundColor(.orange)
 //            .margin(edge: .top, value: 10)
 //            .alignSelf(.stretch)
-        Button(text: model.name) {
-            model.age += 1
-            model.name = model.name + "\(model.age)"
-            model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
-        }
-            .alignSelf(.center)
-
-        Text("单行文本粗体cd")
-            .font(size: 25)
-            .font(style: .bold)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.stretch)
+//        Button(text: model.name) {
+//            model.age += 1
+//            model.name = model.name + "\(model.age)"
+//            model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
+//        }
+//            .alignSelf(.center)
+//
+//        Text("单行文本粗体cd")
+//            .font(size: 25)
+//            .font(style: .bold)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .alignSelf(.stretch)
 
         Text(model.name)
             .font(size: 50)
             .font(style: .default)
-            .backgroundColor(model.color)
+//            .backgroundColor(model.color)
             .margin(edge: .top, value: 10)
             .alignSelf(.start)
             .onTapGesture {
-                model.name = "李四" + "\(Int.random(in: 0 ..< 1000))"
+                let controller = ViewPagerController()
+                viewController()?.navigationController?.pushViewController(controller, animated: true)
+//                model.name = "李四" + "\(Int.random(in: 0 ..< 1000))"
             }
         
         

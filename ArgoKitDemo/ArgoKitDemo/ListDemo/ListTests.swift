@@ -43,7 +43,9 @@ class ListTestsModel_Previews:  ListTestsModel {
         super.init()
         var datas = [ListCellTestsModel_Previews]()
         for _ in 0..<10 {
+          
             datas.append(ListCellTestsModel_Previews())
+            
         }
 //        self.dataSource = datas
         self.dataSource.append(contentsOf: datas)

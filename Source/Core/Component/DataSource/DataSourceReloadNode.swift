@@ -30,6 +30,9 @@ public protocol DataSourceReloadNode: class {
     func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath)
     
     func reloadComponent(_ component: Int)
+    
+    func removeNode(_ node:Any)
+    func removeAll()
 }
 
 extension DataSourceReloadNode {

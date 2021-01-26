@@ -66,6 +66,8 @@
 
 
 @property(nonatomic,strong)NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
+
+@property(nonatomic,assign)BOOL isRoot;
 @end
 
 
@@ -326,7 +328,22 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-//    NSLog(@"dealloc");
+//    NSLog(@"dealloc:%@",self);
+    if (self.isRoot) {
+        [self iterationRemoveActionMap:self.childs];
+    }
+}
+
+- (void)iterationRemoveActionMap:(nullable NSArray<ArgoKitNode*> *)nodes{
+    NSInteger nodeCount = nodes.count;
+    for (int i = 0; i < nodeCount; i++) {
+        ArgoKitNode *node = nodes[i];
+        [node clearStrongRefrence];
+        if (node.childs.count > 0) {
+            [self iterationRemoveActionMap:node.childs];
+        }
+        node = nil;
+    }
 }
 
 - (instancetype)init {
@@ -393,13 +410,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)createNodeViewIfNeed:(CGRect)frame {
+    self.isRoot = self.parentNode == nil;
     if (_isReused) {
         return;
     }
-//    __weak typeof(self)wealSelf = self;
-//    [ArgoKitUtils runMainThreadAsyncBlock:^{
-//
-//    }];
     if (!self.view) {
         UIView *view = [self createNodeViewWithFrame:frame];
         [self linkView:view];
@@ -443,6 +457,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 #pragma mark --- property setter/getter ---
+- (void)clearStrongRefrence{
+    for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
+        [self.view removeGestureRecognizer:gesture];
+    }
+    [self.actionMap removeAllObjects];
+    [self.nodeActions removeAllObjects];
+    [self.bindProperties removeAllObjects];
+}
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     _size = frame.size;

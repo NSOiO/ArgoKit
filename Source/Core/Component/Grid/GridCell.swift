@@ -8,7 +8,6 @@
 import Foundation
 
 class GridCell: UICollectionViewCell {
-  
     var contentNode: ArgoKitCellNode?
     
     required init?(coder: NSCoder) {

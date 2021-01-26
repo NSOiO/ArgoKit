@@ -47,7 +47,7 @@ open class RefreshHeader: RefreshComponent {
                     }
                 }) { (finished) in
                     self.pullingPercent = 0.0
-                    self.endRefreshingCompletionBlock?()
+                    self.endRefreshingCompletionBlock?(self)
                 }
             } else if newState == .Refreshing {
                 DispatchQueue.main.async { [weak self] in

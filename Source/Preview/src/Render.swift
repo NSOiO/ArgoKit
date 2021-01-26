@@ -12,7 +12,8 @@ import SwiftUI
 import ArgoKit
 //var host: UIHostingController?
 var hostView: HostView?
-var current_tables = [UITableView: (UITableViewDataSource & UITableViewDelegate)]()
+//var current_tables = [UITableView: (UITableViewDataSource & UITableViewDelegate)]()
+var current_tables:NSMapTable<UITableView, (UITableViewDataSource & UITableViewDelegate)> = NSMapTable.weakToWeakObjects()
 
 @available(iOS 13.0, *)
 public struct ArgoRender: UIViewRepresentable {
@@ -51,9 +52,11 @@ public struct ArgoRender: UIViewRepresentable {
     }
     
     public func makeUIView(context: Context) -> UIView {
-        for(table, coor) in current_tables {
-            table.dataSource = coor
-            table.delegate = coor
+        for value in current_tables.keyEnumerator().allObjects {
+            if let table = value as? UITableView {
+                table.dataSource = current_tables.object(forKey: table)
+                table.delegate = current_tables.object(forKey: table)
+            }
         }
         return self.view
     }
@@ -63,9 +66,11 @@ public struct ArgoRender: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIView, context: Context) {
-        for(table, coor) in current_tables {
-            table.dataSource = coor
-            table.delegate = coor
+        for value in current_tables.keyEnumerator().allObjects {
+            if let table = value as? UITableView {
+                table.dataSource = current_tables.object(forKey: table)
+                table.delegate = current_tables.object(forKey: table)
+            }
         }
         print(uiView)
     }
@@ -73,7 +78,7 @@ public struct ArgoRender: UIViewRepresentable {
 
 class preview_coordinator: NSObject, UITableViewDataSource & UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let coor = current_tables[tableView] {
+        if let coor = current_tables.object(forKey: tableView) {
             let c = coor.tableView(tableView, numberOfRowsInSection: section)
             return c
         }
@@ -81,14 +86,14 @@ class preview_coordinator: NSObject, UITableViewDataSource & UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let coor = current_tables[tableView] {
+        if let coor = current_tables.object(forKey: tableView) {
             return coor.tableView(tableView, cellForRowAt: indexPath)
         }
         return UITableViewCell.init(style: .subtitle, reuseIdentifier: "dd")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let coor = current_tables[tableView] {
+        if let coor = current_tables.object(forKey: tableView) {
             return coor.tableView?(tableView, heightForRowAt: indexPath) ?? 20
         }
         return 20
@@ -101,7 +106,8 @@ public class listPreviewService: ArgoKitListPreviewService {
     public func register(table: UITableView, coordinator: UITableViewDataSource & UITableViewDelegate) {
 //        current_preview_list = table
 //        current_preview_list_coordinator = coordinator
-        current_tables[table] = coordinator
+//        current_tables[table] = coordinator
+        current_tables.setObject(coordinator, forKey: table)
     }
     public init() {}
 }

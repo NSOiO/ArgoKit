@@ -8,9 +8,7 @@
 import Foundation
 
 class ListCell: UITableViewCell {
-  
     var contentNode: ArgoKitCellNode?
-    var tempNode: ArgoKitCellNode?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
@@ -34,7 +32,7 @@ class ListCell: UITableViewCell {
             ArgoKitReusedLayoutHelper.addLayoutNode(node)
             return
         }
-
+        
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculation(withView:false)

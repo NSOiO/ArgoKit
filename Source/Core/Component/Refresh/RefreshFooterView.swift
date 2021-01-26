@@ -7,15 +7,18 @@
 
 import Foundation
 class RefreshFooterNode:ArgoKitNode{
-
+    override func clearStrongRefrence() {
+        super.clearStrongRefrence()
+        refreshingBlock = nil
+    }
     var refreshingBlock: ((RefreshFooter?) -> ())?
     var offPage:CGFloat?
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let refreshFooterView:RefreshFooter = ArgoKitRefreshAutoFooter()
-        refreshFooterView.setrefreshingBlock { [weak self] in
-            if let startRefresh = self?.refreshingBlock{
-                startRefresh(refreshFooterView)
+        refreshFooterView.setrefreshingBlock { [weak self] view in
+            if let startRefresh = self?.refreshingBlock, let view = view as? RefreshFooter{
+                startRefresh(view)
             }
         }
         let width = frame.size.width
@@ -50,7 +53,7 @@ class RefreshFooterNode:ArgoKitNode{
     
 }
 
-public class RefreshFooterView: View {
+public struct RefreshFooterView: View {
     private var pNode:RefreshFooterNode?
     public var node: ArgoKitNode?{
         pNode

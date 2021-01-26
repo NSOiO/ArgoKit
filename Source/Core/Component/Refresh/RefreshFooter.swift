@@ -52,7 +52,6 @@ extension RefreshFooter {
 
 
 open class ArgoKitRefreshAutoFooter: RefreshFooter {
-    
     public var triggerAutomaticallyRefreshPercent: CGFloat = 1.0
     
     public var onlyRefreshPerDrag: Bool = false
@@ -70,7 +69,7 @@ open class ArgoKitRefreshAutoFooter: RefreshFooter {
                 executeRefreshingCallback()
             } else if newState == .NoMoreData || state == .Idle {
                 if oldState == .Refreshing {
-                    endRefreshingCompletionBlock?()
+                    endRefreshingCompletionBlock?(self)
                 }
             }
         }
