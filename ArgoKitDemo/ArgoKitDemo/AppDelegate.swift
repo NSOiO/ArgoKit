@@ -15,7 +15,8 @@ var argokit_dep = ArgoKit.Dep()
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var listModel: FeedListModelProtocol?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         #if DEBUG
@@ -38,7 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        contentView.padding(edge: .top, value: 100)
 //        let contentView = YYTextTests(model: YYTextTestsModel())
 //        let contentView = ListTestsModel_Previews().makeView().padding(edge: .horizontal, value: 10)
-        let contentView = FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 10)
+//        let model = FeedListModel_Previews()
+//        let contentView = model.makeView().padding(edge: .horizontal, value: 10)
+        
+        
+        
+        let model = FeedListModel_Previews()
+        let contentView = FeedList(model: model)
+        self.listModel = model
 //        let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
 //        let contentView = ViewPage1()
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())

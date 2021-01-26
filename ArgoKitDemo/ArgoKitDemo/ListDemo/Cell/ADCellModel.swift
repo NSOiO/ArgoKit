@@ -9,7 +9,10 @@ import ArgoKit
 
 // view model.
 class ADCellModel: ADCellModelProtocol {
-    var isFavorite: Bool = false
+    
+    @Property var action: Action = None()
+    @Property var isFavorite: Bool = false
+    
     var title: String = ""
     var icon: String = ""
     

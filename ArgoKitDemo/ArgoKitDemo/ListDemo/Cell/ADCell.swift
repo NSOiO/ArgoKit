@@ -6,12 +6,18 @@
 //
 
 import ArgoKit
+enum ADCellAction: Action {
+    case tapIcon(ADCellModelProtocol)
+    case longPressIcon(ADCellModelProtocol)
+}
 
 // view model.
 protocol ADCellModelProtocol: ViewModelProtocol {
     var title: String { get }
     var icon: String { get }
-    var isFavorite: Bool { get }
+    var isFavorite: Bool { get set }
+    
+    var action: Action { get set }
 }
 
 // view
@@ -27,6 +33,13 @@ struct ADCell: ArgoKit.ViewProtocol {
         HStack {
             Image(model.icon).size(width: 50, height: 50).circle()
                 .margin(edge: .right, value: 5)
+                .onTapGesture {
+                    model.action = ADCellAction.tapIcon(model)
+                }
+                .onLongPressGesture {
+                    model.action = ADCellAction.longPressIcon(model)
+                }
+            
             Text(model.title)
             Spacer()
             Image("star.fill").size(width: 20, height: 20)
