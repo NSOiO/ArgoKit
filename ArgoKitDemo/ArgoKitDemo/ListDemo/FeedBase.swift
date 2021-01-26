@@ -11,3 +11,6 @@ import ArgoKit
 protocol FeedBaseProtocol: ViewModelProtocol {
     
 }
+
+extension ADCellModel: FeedBaseProtocol{}
+extension FeedCellModel: FeedBaseProtocol{}

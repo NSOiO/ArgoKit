@@ -8,7 +8,7 @@
 import ArgoKit
 
 // view model.
-class FeedCellModel: FeedCellModelProtocol,FeedBaseProtocol {
+class FeedCellModel: FeedCellModelProtocol {
     var content: String = ""
     var userName = "Emily"
     var userAge = 20

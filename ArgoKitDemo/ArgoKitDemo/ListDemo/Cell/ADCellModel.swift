@@ -8,7 +8,7 @@
 import ArgoKit
 
 // view model.
-class ADCellModel: ADCellModelProtocol, FeedBaseProtocol {
+class ADCellModel: ADCellModelProtocol {
     var isFavorite: Bool = false
     var title: String = ""
     var icon: String = ""
