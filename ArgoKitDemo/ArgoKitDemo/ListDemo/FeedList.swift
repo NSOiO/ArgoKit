@@ -72,7 +72,7 @@ struct FeedList_Previews: PreviewProvider {
         SwiftUI.ForEach([.iPhone11]) { item in
             ArgoKitRender {
                 FeedList(model: FeedListModel_Previews())
-                    .padding(edge: .horizontal, value: 5)
+                    .padding(edge: .horizontal, value: 10)
             }
             .previewDevice(item.device)
             .previewDisplayName(item.name)
