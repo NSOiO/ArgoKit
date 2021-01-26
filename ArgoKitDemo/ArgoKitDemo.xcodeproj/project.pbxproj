@@ -107,10 +107,6 @@
 		FACDE68D25BFF27F004736FE /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACDE68B25BFF27F004736FE /* FeedCell.swift */; };
 		FACDE69425BFF303004736FE /* FeedListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACDE69225BFF303004736FE /* FeedListModel.swift */; };
 		FACDE69525BFF303004736FE /* FeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACDE69325BFF303004736FE /* FeedList.swift */; };
-		FAE010E725B9926B00A1699C /* ListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010E425B9926B00A1699C /* ListCellTests.swift */; };
-		FAE010E825B9926B00A1699C /* ListCellTestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010E525B9926B00A1699C /* ListCellTestsModel.swift */; };
-		FAE010E925B9926B00A1699C /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010E625B9926B00A1699C /* ListTests.swift */; };
-		FAE010F925B9948D00A1699C /* ListTestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE010F825B9948D00A1699C /* ListTestsModel.swift */; };
 		FAE2A42F25A302A000F8ACA7 /* ImageBindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2A42E25A302A000F8ACA7 /* ImageBindTests.swift */; };
 		FAE72A582589E8D10066B2CB /* AspectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A512589E8D00066B2CB /* AspectTests.swift */; };
 		FAE72A5A2589E8D10066B2CB /* VStackAlignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE72A532589E8D10066B2CB /* VStackAlignTests.swift */; };
@@ -223,10 +219,6 @@
 		FACDE68B25BFF27F004736FE /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		FACDE69225BFF303004736FE /* FeedListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListModel.swift; sourceTree = "<group>"; };
 		FACDE69325BFF303004736FE /* FeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedList.swift; sourceTree = "<group>"; };
-		FAE010E425B9926B00A1699C /* ListCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCellTests.swift; sourceTree = "<group>"; };
-		FAE010E525B9926B00A1699C /* ListCellTestsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCellTestsModel.swift; sourceTree = "<group>"; };
-		FAE010E625B9926B00A1699C /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
-		FAE010F825B9948D00A1699C /* ListTestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTestsModel.swift; sourceTree = "<group>"; };
 		FAE2A42E25A302A000F8ACA7 /* ImageBindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBindTests.swift; sourceTree = "<group>"; };
 		FAE72A512589E8D00066B2CB /* AspectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectTests.swift; sourceTree = "<group>"; };
 		FAE72A532589E8D10066B2CB /* VStackAlignTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackAlignTests.swift; sourceTree = "<group>"; };
@@ -465,10 +457,6 @@
 		FAE010E325B9926B00A1699C /* ListDemo */ = {
 			isa = PBXGroup;
 			children = (
-				FAE010E425B9926B00A1699C /* ListCellTests.swift */,
-				FAE010E525B9926B00A1699C /* ListCellTestsModel.swift */,
-				FAE010E625B9926B00A1699C /* ListTests.swift */,
-				FAE010F825B9948D00A1699C /* ListTestsModel.swift */,
 				FACDE68A25BFF27F004736FE /* FeedCellModel.swift */,
 				FACDE68B25BFF27F004736FE /* FeedCell.swift */,
 				FACDE69225BFF303004736FE /* FeedListModel.swift */,
@@ -712,16 +700,12 @@
 				FAEB0B61256F53530037B68F /* ArgoKitListDemo.swift in Sources */,
 				FAE72A5D2589E8D10066B2CB /* SpacerTests.swift in Sources */,
 				FAB3CE8A2590AEA700EEE851 /* ArgoKitAnimationBlockTest.swift in Sources */,
-				FAE010E825B9926B00A1699C /* ListCellTestsModel.swift in Sources */,
-				FAE010F925B9948D00A1699C /* ListTestsModel.swift in Sources */,
 				FA0BEF3A2583476100D483EC /* ArgoKitImageTest.swift in Sources */,
 				FACDE69525BFF303004736FE /* FeedList.swift in Sources */,
 				3263370B25419A3C0094676D /* ContentView.swift in Sources */,
 				FA04056C2588BB47006E997F /* ArgoKitDatePickerTest.swift in Sources */,
 				FAE72A5B2589E8D10066B2CB /* ForEachTests.swift in Sources */,
 				FA0BFE1B258376D600D483EC /* ArgoKitOtherViewTest.swift in Sources */,
-				FAE010E725B9926B00A1699C /* ListCellTests.swift in Sources */,
-				FAE010E925B9926B00A1699C /* ListTests.swift in Sources */,
 				FA0BEF172583131B00D483EC /* ArgoKitTextTest.swift in Sources */,
 				FA0BFDFD25834ED100D483EC /* ArgoKitTextFieldTest.swift in Sources */,
 				FAEB0B77256FB3330037B68F /* ArgokitDemoController.swift in Sources */,
