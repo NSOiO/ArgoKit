@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol Action {}
-public struct None: Action { public init(){} }
+public struct Empty: Action { public init(){} }
 //public struct Tap: Action { public init(){} }
 //public struct LongPress: Action { public init(){} }

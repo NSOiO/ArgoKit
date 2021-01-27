@@ -17,7 +17,7 @@ class MainCellModel: ViewModelProtocol {
 // view model.
 class MainViewModel: MainViewModelProtocol {
     var datas = DataSource([MainCellModel]())
-    @Property var action: Action = None()
+    @Property var action: Action = Empty()
     var bag = DisposeBag()
     init() {
         self.$action.watch { new in
