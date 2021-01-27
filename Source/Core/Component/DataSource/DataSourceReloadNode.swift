@@ -31,7 +31,7 @@ public protocol DataSourceReloadNode: class {
     
     func reloadComponent(_ component: Int)
     
-    func removeNode(_ node:Any)
+    func removeNode(_ node:Any?)
     func removeAll()
 }
 

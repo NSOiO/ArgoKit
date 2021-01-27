@@ -13,9 +13,6 @@ fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 var count = 0
 var cellount = 0
 class TableView:UITableView{
-    deinit {
-        print("TableView")
-    }
     private var oldFrame = CGRect.zero
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
@@ -633,7 +630,7 @@ extension TableNode {
         tableView?.endUpdates()
     }
     
-    func removeNode(_ node:Any){
+    func removeNode(_ node:Any?){
         dataSourceHelper.removeNode(node)
         sectionHeaderSourceHelper.removeNode(node)
         sectionFooterSourceHelper.removeNode(node)

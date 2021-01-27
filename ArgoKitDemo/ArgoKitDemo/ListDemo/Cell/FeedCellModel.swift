@@ -9,7 +9,7 @@ import ArgoKit
 
 // view model.
 class FeedCellModel: FeedCellModelProtocol {
-    var content: String = ""
+    @Property var content: String = "军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
     var userName = "Emily"
     var userAge = 20
     var placeHolder = "turtlerock"

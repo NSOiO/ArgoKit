@@ -58,6 +58,8 @@ class ArgoKitPickerRowView: UIView {
 class PickerNode<D>: ArgoKitNode, UIPickerViewDataSource, UIPickerViewDelegate, DataSourceReloadNode {
 
     
+
+    
     
     lazy var dataSourceHelper:DataSourceHelper<D> = {
         let _dataSourceHelper = DataSourceHelper<D>()
@@ -173,7 +175,7 @@ class PickerNode<D>: ArgoKitNode, UIPickerViewDataSource, UIPickerViewDelegate, 
         self.pickerView?.reloadAllComponents()
     }
     
-    func removeNode(_ node: Any) {
+    func removeNode(_ node: Any?) {
         dataSourceHelper.removeNode(node)
     }
     

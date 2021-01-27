@@ -16,9 +16,8 @@ class ArgoKitImageNode: ArgoKitNode {
     public func image(url: URL?, placeholder: String?) {
         let image = placeholder != nil ? UIImage(named: placeholder!) : nil
         ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-        print("placeholder image")
+        
         ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
-            print("KFImageLoader image")
             ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
         } failure: { _ in
             // 图像加载失败

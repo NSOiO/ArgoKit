@@ -19,7 +19,7 @@ class ArgoKitViewReaderHelper{
     var operations:NSHashTable = NSHashTable<AnyObject>.weakObjects()
     func startRunloop() -> Void {
         let runloop:CFRunLoop = CFRunLoopGetMain()
-        observe = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, CFRunLoopActivity.beforeTimers.rawValue | CFRunLoopActivity.exit.rawValue , true, 1, {[weak self] (observer, activity) in
+        observe = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, CFRunLoopActivity.beforeWaiting.rawValue | CFRunLoopActivity.exit.rawValue , true, 1, {[weak self] (observer, activity) in
             self?.runOperation()
         })
         if let _ =  observe {

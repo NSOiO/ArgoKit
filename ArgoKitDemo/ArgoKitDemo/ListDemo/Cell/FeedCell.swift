@@ -57,6 +57,10 @@ struct FeedCell: ArgoKit.ViewProtocol {
                     Image(url: item, placeholder: model.placeHolder)
                         .aspect(ratio: 1).width(30%).cornerRadius(5)
                         .margin(edge: .bottom, value: 10)
+                        .onTapGesture{
+                            let controller = ViewPagerController()
+                            viewController()?.navigationController?.pushViewController(controller, animated: true)
+                        }
                 }
             }
             .wrap(.wrap).justifyContent(.around).margin(edge: .bottom, value: 5)
@@ -112,7 +116,7 @@ extension FeedCellModelProtocol {
 class FeedCellModel_Previews:  FeedCellModel {
     override init() {
         super.init()
-        self.content = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
+//        self.content = "    军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
         self.iconURL = URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp")
         let array = [
             URL(string: "http://img.momocdn.com/feedimage/A1/24/A124B7A3-AF51-43B2-9DB0-D56E32D1809520201211_400x400.webp")!,

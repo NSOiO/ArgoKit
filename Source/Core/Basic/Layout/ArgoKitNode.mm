@@ -70,11 +70,25 @@
 @property(nonatomic,assign)BOOL isRoot;
 @end
 
+@interface NodeWrapper:NSObject
+@property (nonatomic,weak)ArgoKitNode *node;
+@end
+@implementation NodeWrapper
+- (instancetype)initWithNode:(ArgoKitNode *)node
+{
+    self = [super init];
+    if (self) {
+        self.node = node;
+    }
+    return self;
+}
+@end
 
 static YGConfigRef globalConfig;
 @interface ArgoKitLayout: NSObject
 @property (nonatomic, assign, readonly) YGNodeRef ygnode;
 @property (nonatomic, weak, readonly) ArgoKitNode *argoNode;
+@property (nonatomic, strong, readonly) NodeWrapper *nodeWarpper;
 - (instancetype)initWithNode:(ArgoKitNode *)node;
 @end
 @implementation ArgoKitLayout
@@ -91,9 +105,10 @@ static YGConfigRef globalConfig;
 {
     self = [super init];
     if (self) {
+        _nodeWarpper = [[NodeWrapper alloc] initWithNode:node];
         _argoNode = node;
         _ygnode= YGNodeNewWithConfig(globalConfig);
-        YGNodeSetContext(_ygnode, (__bridge void *)node);
+        YGNodeSetContext(_ygnode, (__bridge void *)_nodeWarpper);
     }
     return self;
 }
@@ -116,7 +131,7 @@ static YGConfigRef globalConfig;
     self.argoNode.isReused = !withView;
     YGApplyLayoutToNodeHierarchy(self.argoNode);
 }
-// 视图是否为叶子
+
 - (BOOL)isLeaf{
     if (self.argoNode.childs.count == 0) {
         return YES;
@@ -249,7 +264,8 @@ static YGSize YGMeasureView(
 {
   const CGFloat constrainedWidth = (widthMode == YGMeasureModeUndefined) ? CGFLOAT_MAX : width;
   const CGFloat constrainedHeight = (heightMode == YGMeasureModeUndefined) ? CGFLOAT_MAX: height;
-  ArgoKitNode *argoNode = (__bridge ArgoKitNode*) YGNodeGetContext(node);
+  NodeWrapper *nodeWapper = (__bridge NodeWrapper*) YGNodeGetContext(node);
+  ArgoKitNode *argoNode = nodeWapper.node;
   CGSize sizeThatFits = CGSizeZero;
   if (!argoNode.isUIView || [argoNode.childs count] > 0) {
     sizeThatFits = [argoNode sizeThatFits:(CGSize){
@@ -324,6 +340,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 @end
+
 
 
 @implementation ArgoKitNode

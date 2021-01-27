@@ -203,8 +203,11 @@ extension DataSourceHelper {
 }
 
 extension DataSourceHelper{
-    public func removeNode(_ node:Any){
-        cellNodeCache.remove(node)
+    public func removeNode(_ node:Any?){
+        if let node_ = node,cellNodeCache.contains(node_) {
+            cellNodeCache.remove(node_)
+        }
+       
     }
     public func removeAll(){
         cellNodeCache.removeAllObjects()

@@ -8,7 +8,10 @@
 import ArgoKit
 
 // view model.
-class ArgoKitGridTestModel {
+class ArgoKitGridTestModel :ArgoKitIdentifiable{
+    deinit {
+        print("ArgoKitGridTestModel")
+    }
     let titiles = ["chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlakechincoteague.jpgchincoteague.jpgchincoteague.jpg.jpg"]
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
@@ -53,12 +56,15 @@ class ArgoKitGridTestModel {
 }
 
 class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
+    deinit {
+        print("ArgoKitGridCellTestModel")
+    }
     var _reuseIdentifier: String = "ArgoKitGridCellTestModel"
     var reuseIdentifier: String{
         _reuseIdentifier
     }
-    @Property var headerName = "title"
-    @Property var imagePath = "icybay.jpg"
+    var headerName = "title"
+    var imagePath = "icybay.jpg"
     
     var text:Text?
    
@@ -77,8 +83,6 @@ struct ArgoKitGridTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitGridTestModel
-    @Alias var grid:Grid<ArgoKitGridCellTestModel>?
-    @Alias var footerView:RefreshFooterView?
     init(model: ArgoKitGridTestModel) {
         self.model = model
     }
@@ -149,7 +153,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         }
          */
       
-        Grid(waterfall: false,data:model.$dataSource2){ data in
+        Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
                 .lineLimit(0)
@@ -176,7 +180,7 @@ struct ArgoKitGridTest: ArgoKit.View {
 //            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
 //            data.imagePath = "icybay.jpg"
 //            model.$dataSource1.move(at: indexpath, to: IndexPath(row: indexpath.row + 2, section: indexpath.section)).apply()
-//            model.$dataSource1.delete(at: indexpath).apply()
+            model.$dataSource1.delete(at: indexpath).apply()
 //            AlertView(title: data.headerName, message: data.headerName, preferredStyle: UIAlertController.Style.alert)
 //            .textField()
 //            .destructive(title: "确认") { text in
@@ -203,23 +207,22 @@ struct ArgoKitGridTest: ArgoKit.View {
         .footerDidDisappear({ (data, indexpath) in
             print("footerDidDisappear==indexpath:\(indexpath)")
         })
-//        .refreshFooterView { () -> RefreshFooterView in
-//            RefreshFooterView {[model1 = model] refresh in
-//                model1.reloadMoreData()
-//                refresh?.endRefreshing()
-//                refresh?.resetNoMoreData()
-//            } _: { () -> View in
-//                Text("refresh_footer").backgroundColor(.red)
-//                Image("chilkoottrail.jpg")
-//                    .width(30)
-//                    .aspect(ratio: 1)
-//                    .circle()
-//            }
-//            .backgroundColor(.orange)
-//            .alignItems(.center)
-//            .alias(variable: $footerView)
-//            .autoRefreshOffPage(3)
-//        }
+        .refreshFooterView { () -> RefreshFooterView in
+            RefreshFooterView {[model1 = model] refresh in
+                model1.reloadMoreData()
+                refresh?.endRefreshing()
+                refresh?.resetNoMoreData()
+            } _: { () -> View in
+                Text("refresh_footer").backgroundColor(.red)
+                Image("chilkoottrail.jpg")
+                    .width(30)
+                    .aspect(ratio: 1)
+                    .circle()
+            }
+            .backgroundColor(.orange)
+            .alignItems(.center)
+            .autoRefreshOffPage(3)
+        }
         
     }
 

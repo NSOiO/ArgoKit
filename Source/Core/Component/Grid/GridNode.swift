@@ -721,7 +721,7 @@ extension GridNode{
         flowLayout.itemRenderDirection = value
     }
     
-    func removeNode(_ node:Any){
+    func removeNode(_ node:Any?){
         dataSourceHelper.removeNode(node)
         headerSourceHelper.removeNode(node)
         footerSourceHelper.removeNode(node)

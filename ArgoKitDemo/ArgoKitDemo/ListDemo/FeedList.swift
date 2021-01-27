@@ -27,6 +27,11 @@ struct FeedList: ArgoKit.ViewProtocol {
             cellModel.makeView()
                 .padding(edge: .bottom, value: 10)
         }
+        .cellSelected({ (modle, index) in
+            if let model = modle as? FeedCellModel{
+                model.content = "asdsdscdscsdcssdssdcs"
+            }
+        })
         .height(100%)
     }
 }

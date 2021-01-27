@@ -593,8 +593,9 @@ extension DataSource{
             guard i < dataSource.count else { return self}
     
             if let node = self._rootNode {
-                let cellNode:Any = dataSource[i]
-                node.removeNode(cellNode)
+                if let cellNode = dataSource[i] as? ArgoKitIdentifiable{
+                    node.removeNode(cellNode.argokit_linkNode)
+                }
             }
             dataSource.remove(at: i)
         }
@@ -644,8 +645,9 @@ extension DataSource{
             for i in reversedIndices {
                 guard i < dataSource[key].count else { return self}
                 if let node = self._rootNode {
-                    let cellNode:Any = dataSource[key][i]
-                    node.removeNode(cellNode)
+                    if let cellNode = dataSource[key][i] as? ArgoKitIdentifiable{
+                        node.removeNode(cellNode.argokit_linkNode)
+                    }
                 }
                 dataSource[key].remove(at: i)
             }
@@ -680,7 +682,10 @@ extension DataSource{
             if let node = self._rootNode {
                 let cellNodes:[Any] = dataSource[section]
                 for cellNode in cellNodes {
-                    node.removeNode(cellNode)
+                    if let cellNode = cellNode as? ArgoKitIdentifiable{
+                        node.removeNode(cellNode.argokit_linkNode)
+                    }
+                   
                 }
             }
             dataSource.remove(at: section)
