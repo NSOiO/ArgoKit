@@ -485,7 +485,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     _size = frame.size;
-    
     [self sendFrameChanged:frame];
 }
 

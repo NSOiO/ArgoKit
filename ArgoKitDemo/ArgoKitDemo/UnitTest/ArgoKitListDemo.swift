@@ -100,18 +100,20 @@ class MSUserInterractionContentView: ArgoKit.View {
              .height(46.0)
              .cornerRadius(4)
             
-            Text("姓名sasd姓名sasd")
-                .lineLimit(2)
+            Text("姓名sasd姓名sasdDCSDCSDCSDCSDCSD")
+                .lineLimit(1)
                 .textColor(UIColor(50,51,51))
                 .font(size: 16.0)
                 .margin(edge: .left, value: 5)
-                .alignSelf(.center)
                 .textShadowColor(UIColor.red)
                 .textShadowOffset(CGSize(width: 0, height: 2))
+                .backgroundColor(.yellow)
+                .shrink(1)
             
          }.margin(edge: .left, value: 10)
          .margin(edge: .top, value: 10)
-
+         .backgroundColor(.red)
+        
         Spacer()
             .height(0.5)
             .backgroundColor(UIColor(235,235,235))

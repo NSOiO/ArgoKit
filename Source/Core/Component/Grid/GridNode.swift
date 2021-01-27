@@ -13,10 +13,13 @@ fileprivate let kGridFooterReuseIdentifier = "kGridFooterReuseIdentifier"
 
 class ArgoKitGridView: UICollectionView {
     private var oldFrame = CGRect.zero
-    
+    var reLayoutAction:((CGRect)->())?
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
-            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
+            if let action = reLayoutAction {
+                action(self.bounds)
+            }
+//            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
             oldFrame = self.frame
         }
         super.layoutSubviews()
@@ -61,8 +64,22 @@ class GridNode<D>: ArgoKitScrollViewNode,
     private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
-        flowLayout.frame = frame
         gridView.frame = frame
+        gridView.reLayoutAction = { [weak self] frame in
+            if let `self` = self {
+                var cellNodes:[Any] = []
+                cellNodes.append(contentsOf: self.dataSourceHelper.cellNodeCache)
+                ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: CGRect(x: 0, y: 0, width: self.flowLayout.itemWidth(inSection: 0), height: frame.height))
+                
+                var headerNodes:[Any] = []
+                headerNodes.append(contentsOf: self.headerSourceHelper.cellNodeCache)
+                ArgoKitReusedLayoutHelper.reLayoutNode(headerNodes, frame: frame)
+                
+                var footerNodes:[Any] = []
+                footerNodes.append(contentsOf: self.footerSourceHelper.cellNodeCache)
+                ArgoKitReusedLayoutHelper.reLayoutNode(footerNodes, frame:frame)
+            }
+        }
         gridView.backgroundColor = .white
        
         pGridView = gridView

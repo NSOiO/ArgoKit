@@ -16,9 +16,12 @@ public typealias ViewPageTabScrollingListener = (_ percent:CGFloat, _ fromIndex:
 
 class ArgoKitViewPage: UICollectionView {
     private var oldFrame = CGRect.zero
+    var reLayoutAction:((CGRect)->())?
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
-            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
+            if let action = reLayoutAction {
+                action(self.bounds)
+            }
             oldFrame = self.frame
         }
         super.layoutSubviews()
@@ -67,6 +70,13 @@ class ArgoKitViewPageNode<D>: ArgoKitScrollViewNode, UICollectionViewDelegateFlo
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let collectionView = ArgoKitViewPage(frame: frame, collectionViewLayout: viewPageLayout)
+        collectionView.reLayoutAction = { [weak self] frame in
+            if let `self` = self {
+                var cellNodes:[Any] = []
+                cellNodes.append(contentsOf: self.dataSourceHelper.cellNodeCache)
+                ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: frame)
+            }
+        }
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true

@@ -54,11 +54,11 @@ public class GridFlowLayout:UICollectionViewFlowLayout{
         }
     }
     
-    var contentWidth: CGFloat = 0
-    var frame:CGRect! = CGRect.zero{
-        didSet{
-            contentWidth = contentWidth_
-        }
+    var contentWidth: CGFloat{
+        return collectionView?.bounds.width ?? 0
+    }
+    var frame:CGRect!{
+        return collectionView?.frame ?? CGRect.zero
     }
     
     private var contentWidth_: CGFloat {

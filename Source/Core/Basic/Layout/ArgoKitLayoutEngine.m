@@ -79,4 +79,13 @@
         }
     }
 }
+
+- (void)reLayoutNode:(nullable NSArray *)cellNodes frame:(CGRect)frame{
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    for (id node in cellNodes) {
+        if ([node isKindOfClass:[ArgoKitNode class]] && [nodes containsObject:node] ) {
+            [node applyLayout:CGSizeMake(frame.size.width,NAN)];
+        }
+    }
+}
 @end

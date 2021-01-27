@@ -14,9 +14,13 @@ var count = 0
 var cellount = 0
 class TableView:UITableView{
     private var oldFrame = CGRect.zero
+    var reLayoutAction:((CGRect)->())?
     public override func layoutSubviews() {
         if !oldFrame.equalTo(self.frame) {
-            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
+            if let action = reLayoutAction {
+                action(self.bounds)
+            }
+//            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
             oldFrame = self.frame
         }
         super.layoutSubviews()
@@ -53,6 +57,15 @@ class TableNode<D>: ArgoKitScrollViewNode,
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
         self.tableView = tableView
+        tableView.reLayoutAction = { [weak self] frame in
+            if let `self` = self {
+                var cellNodes:[Any] = []
+                cellNodes.append(contentsOf: self.dataSourceHelper.cellNodeCache)
+                cellNodes.append(contentsOf: self.sectionHeaderSourceHelper.cellNodeCache)
+                cellNodes.append(contentsOf: self.sectionFooterSourceHelper.cellNodeCache)
+                ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: frame)
+            }
+        }
         tableView.delegate = self
         tableView.dataSource = self
         if #available(iOS 10.0, *) {

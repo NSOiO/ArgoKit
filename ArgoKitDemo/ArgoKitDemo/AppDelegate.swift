@@ -15,7 +15,8 @@ var argokit_dep = ArgoKit.Dep()
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var listModel: FeedListModelProtocol?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         #if DEBUG
@@ -38,14 +39,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        contentView.padding(edge: .top, value: 100)
 //        let contentView = YYTextTests(model: YYTextTestsModel())
 //        let contentView = ListTestsModel_Previews().makeView().padding(edge: .horizontal, value: 10)
-        let contentView = FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 20)
+//        let model = FeedListModel_Previews()
+//        let contentView = model.makeView().padding(edge: .horizontal, value: 10)
+        
+        
+        
+//        let model = FeedListModel_Previews()
+//        let contentView = FeedList(model: model).padding(edge: .horizontal, value: 10)
+//        self.listModel = model
 //        let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
 //        let contentView = ViewPage1()
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
 //        let vc = ArgokitDemoController()
 //        let contentView = ListDemo()//TextBindTests(model: TextBindTestsModel()).padding(edge: .top, value: 200)
-        let vc = UIHostingController(rootView: contentView,useSafeArea: true)
+//        let vc = UIHostingController(rootView: contentView,useSafeArea: true)
 //        let vc = ViewPagerController()
+        let vc = ViewController()
         nav = UINavigationController(rootViewController: vc)
         
         let window = UIWindow.init(frame: UIScreen.main.bounds)

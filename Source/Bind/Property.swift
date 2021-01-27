@@ -26,6 +26,7 @@ public class Property<Value> : DynamicProperty {
     }
     
     deinit {
+        subscribersMap.removeAll()
     }
     
     public var projectedValue: Property<Value> {

@@ -30,7 +30,7 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
    
     func reloadMoreData(){
         var dataSource = [[ArgoKitGridCellTestModel]]()
-        for index in 0..<20 {
+        for index in 0..<20{
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
@@ -63,8 +63,8 @@ class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
     var reuseIdentifier: String{
         _reuseIdentifier
     }
-    var headerName = "title"
-    var imagePath = "icybay.jpg"
+    @Property var headerName = "title"
+    @Property var imagePath = "icybay.jpg"
     
     var text:Text?
    
