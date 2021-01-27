@@ -44,9 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        let model = FeedListModel_Previews()
-        let contentView = FeedList(model: model)
-        self.listModel = model
+//        let model = FeedListModel_Previews()
+//        let contentView = FeedList(model: model).padding(edge: .horizontal, value: 10)
+//        self.listModel = model
 //        let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
 //        let contentView = ViewPage1()
 //        let contentView = ArgoKitImageTest(model: ArgoKitImageTestModel())
