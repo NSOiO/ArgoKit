@@ -10,9 +10,9 @@ import UIKit
 import ArgoKit
 class ViewPagerController: UIViewController {
     
-    let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
+//    let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
 //    let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
-//    let contentView = ListDemo()
+    let contentView = ListDemo()
 //    let contentView = FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 10)
     override func viewDidLoad() {
         let argoKitControll = UIHostingView(content: contentView, frame: self.view.frame)

@@ -10,8 +10,6 @@ import Foundation
 fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
 fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
-var count = 0
-var cellount = 0
 class TableView:UITableView{
     private var oldFrame = CGRect.zero
     var reLayoutAction:((CGRect)->())?
@@ -20,7 +18,6 @@ class TableView:UITableView{
             if let action = reLayoutAction {
                 action(self.bounds)
             }
-//            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
             oldFrame = self.frame
         }
         super.layoutSubviews()
@@ -53,6 +50,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public var tableHeaderNode: ArgoKitNode?
     public var tableFooterNode: ArgoKitNode?
     public var sectionIndexTitles: [String]?
+    
+    public var estimatedHeight:CGFloat = 100.0
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
@@ -111,7 +110,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
-        cellount = cellount + 1
         return cell
     }
 
@@ -251,8 +249,11 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        count = count + 1
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return estimatedHeight;
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

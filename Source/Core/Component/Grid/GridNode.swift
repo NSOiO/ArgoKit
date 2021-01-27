@@ -19,7 +19,6 @@ class ArgoKitGridView: UICollectionView {
             if let action = reLayoutAction {
                 action(self.bounds)
             }
-//            ArgoKitReusedLayoutHelper.forLayoutNode(ArgoKitCellNode.self,frame: self.bounds)
             oldFrame = self.frame
         }
         super.layoutSubviews()
@@ -64,6 +63,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
+        flowLayout.estimatedItemSize = CGSize(width: 60, height: 60)
         gridView.frame = frame
         gridView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
