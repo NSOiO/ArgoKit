@@ -8,11 +8,11 @@
 import Foundation
 
 extension View {
-    private func p_watch<R: View,V>(properties: Property<V>..., function:@escaping (V) -> R, key: String) {
+    private func p_watch<R: View,V>(properties: Observable<V>..., function:@escaping (V) -> R, key: String) {
         self.p_watch(properties: properties, function: function, key: key)
     }
     
-    private func p_watch<R: View,V>(properties: [Property<V>], function:@escaping (V) -> R, key: String) {
+    private func p_watch<R: View,V>(properties: [Observable<V>], function:@escaping (V) -> R, key: String) {
         var cancels:[Disposable] = []
         for property in properties {
             let cancel = property.watch { (new) in
@@ -38,7 +38,7 @@ extension View {
     }
     */
     
-    func watch<R: View, V>(property: Property<V?>?, function: @escaping (V?) -> R, key: String, triggerImmediately: Bool = true) -> Self{
+    func watch<R: View, V>(property: Observable<V?>?, function: @escaping (V?) -> R, key: String, triggerImmediately: Bool = true) -> Self{
         if let pro = property {
             if triggerImmediately {
                 _ = function(pro.wrappedValue)
@@ -53,7 +53,7 @@ extension View {
         return self
     }
     
-    func watch<R: View, V>(property: Property<V>?, function: @escaping (V) -> R, key: String, triggerImmediately: Bool = true) -> Self{
+    func watch<R: View, V>(property: Observable<V>?, function: @escaping (V) -> R, key: String, triggerImmediately: Bool = true) -> Self{
         if let pro = property {
             if triggerImmediately {
                 _ = function(pro.wrappedValue)
