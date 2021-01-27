@@ -18,5 +18,15 @@ class MainCellModel: ViewModelProtocol {
 class MainViewModel: MainViewModelProtocol {
     var datas = DataSource([MainCellModel]())
     @Property var action: Action = None()
+    var bag = DisposeBag()
+    init() {
+        self.$action.watch { new in
+            if let action = new as? MainViewAction {
+                if case let MainViewAction.cellSelected(_, indexPath) = action {
+                    print("click on ",indexPath.row)
+                }
+            }
+        }.disposed(by: self.bag)
+    }
 }
 
