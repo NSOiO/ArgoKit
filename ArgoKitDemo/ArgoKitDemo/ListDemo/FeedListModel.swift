@@ -9,6 +9,9 @@ import ArgoKit
 
 // view model.
 class FeedListModel: FeedListModelProtocol {
+    @Observable var action: Action = EmptyAction()
+    var bag = DisposeBag()
+
     var name = ""
     var dataSource = DataSource([FeedBaseProtocol]())
 }

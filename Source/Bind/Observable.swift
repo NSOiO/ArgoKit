@@ -76,13 +76,9 @@ public class Observable<Value> : DynamicProperty {
     }
     
     public func watch(_ f:@escaping () -> Void) -> Disposable {
-        let id = self.subscribe { _ in
+        self.watch { _ in
             f()
         }
-        let cancel = ClosureDisposable { [weak self] in
-            self?.removesubscriber(id)
-        }
-        return cancel
     }
 }
 

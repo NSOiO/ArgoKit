@@ -17,14 +17,12 @@ class MainCellModel: ViewModelProtocol {
 // view model.
 class MainViewModel: MainViewModelProtocol {
     var datas = DataSource([MainCellModel]())
-    @Observable var action: Action = Empty()
+    @Observable var action: Action = EmptyAction()
     var bag = DisposeBag()
     init() {
-        self.$action.watch { new in
-            if let action = new as? MainViewAction {
-                if case let MainViewAction.cellSelected(_, indexPath) = action {
-                    print("click on ",indexPath.row)
-                }
+        self.$action.watchAction(type: MainViewAction.self) { action in
+            if case let MainViewAction.cellSelected(_, indexPath) = action {
+                print("click on ",indexPath.row)
             }
         }.disposed(by: self.bag)
     }
