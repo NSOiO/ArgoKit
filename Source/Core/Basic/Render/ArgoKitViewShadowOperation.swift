@@ -42,8 +42,8 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:strongSelf)
-                strongSelf.needRemake = true
                 view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
             }
         }
@@ -66,7 +66,6 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     
     func updateCornersRadius(_ multiRadius:ArgoKitCornerRadius)->Void{
         self.multiRadius = multiRadius
-        
         self.needRemake = true
     }
     

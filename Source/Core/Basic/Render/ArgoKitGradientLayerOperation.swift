@@ -40,10 +40,10 @@ class ArgoKitGradientLayerOperation:NSObject, ArgoKitViewReaderOperation {
         self.viewNode = viewNode
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
-            if let `self` = self{
+            if let strongSelf = self{
+                strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
-                self.needRemake = true
-                view.addObserver(self, forKeyPath: "frame", options:  [.new,.old], context: nil)
+                view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)

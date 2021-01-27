@@ -53,8 +53,8 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
-                strongSelf.needRemake = true
                 view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
             }
         }

@@ -9,21 +9,18 @@ public class KFImageLoader:ArgoKitImageLoader {
     public func loadImage(url: URL?, successed: ((UIImage) -> ())?, failure: ((Error?) -> ())?) {
         if let url = url {
             KingfisherManager.shared.retrieveImage(with: url) { r in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-                    switch r {
-                    case .success(let value):
-                        if let successed = successed  {
-                            successed(value.image)
-                        }
-                        break
-                    case .failure(let error):
-                        if let failure = failure {
-                            failure(error)
-                        }
-                        break
+                switch r {
+                case .success(let value):
+                    if let successed = successed  {
+                        successed(value.image)
                     }
+                    break
+                case .failure(let error):
+                    if let failure = failure {
+                        failure(error)
+                    }
+                    break
                 }
-                
             }
         }
     }

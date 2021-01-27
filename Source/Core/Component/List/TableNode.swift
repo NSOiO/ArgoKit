@@ -100,10 +100,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
-            print("cellForRowAt cellount111\(cellount)")
         }
         cellount = cellount + 1
-        print("cellForRowAt cellount\(cellount)")
         return cell
     }
 
@@ -244,7 +242,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         count = count + 1
-        print("heightForRowAt count:\(count) === \(indexPath)")
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
 
