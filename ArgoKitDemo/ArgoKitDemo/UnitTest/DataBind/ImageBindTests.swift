@@ -8,22 +8,22 @@
 import ArgoKit
 
 class ImageBindTestModel {
-    @Property var image_image = "https://pic1.zhimg.com/v2-4bba972a094eb1bdc8cbbc55e2bd4ddf_1440w.jpg"
-    @Property var image_bgColor = UIColor.orange
-    @Property var image_top = 20
-    @Property var image_left = 20
-    @Property var image_width: Float = 150
-    @Property var image_height: Float = 100
+    @Observable var image_image = "https://pic1.zhimg.com/v2-4bba972a094eb1bdc8cbbc55e2bd4ddf_1440w.jpg"
+    @Observable var image_bgColor = UIColor.orange
+    @Observable var image_top = 20
+    @Observable var image_left = 20
+    @Observable var image_width: Float = 150
+    @Observable var image_height: Float = 100
     
-    @Property var tf_text = ""
-    @Property var tf_placeholder = "浪人闲话"
-    @Property var tf_textColor = UIColor.yellow
-    @Property var tf_top: Float = 20
-    @Property var tf_width: Float = 100
-    @Property var tf_height: Float = 50
-    @Property var tf_bgColor = (255, 0, 0)
-    @Property var tf_textAlign = NSTextAlignment.left
-    @Property var tf_leftView: Text = {
+    @Observable var tf_text = ""
+    @Observable var tf_placeholder = "浪人闲话"
+    @Observable var tf_textColor = UIColor.yellow
+    @Observable var tf_top: Float = 20
+    @Observable var tf_width: Float = 100
+    @Observable var tf_height: Float = 50
+    @Observable var tf_bgColor = (255, 0, 0)
+    @Observable var tf_textAlign = NSTextAlignment.left
+    @Observable var tf_leftView: Text = {
         Text("leftView:").textAlign(.center).backgroundColor(.blue)
     }()
 }

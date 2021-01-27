@@ -10,7 +10,7 @@ import YYText
 import YYText.NSAttributedString_YYText
 // view model.
 class YYTextTestsModel {
-    @Property var color:UIColor = .red
+    @Observable var color:UIColor = .red
     var arribut:NSMutableAttributedString
     init() {
         arribut = NSMutableAttributedString(string: "单行文本粗体单行.单行文本粗体单行.单行文")

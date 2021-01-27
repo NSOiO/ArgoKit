@@ -6,10 +6,6 @@
 //
 
 import ArgoKit
-enum ADCellAction: Action {
-    case tapIcon(ADCellModelProtocol)
-    case longPressIcon(ADCellModelProtocol)
-}
 
 // view model.
 protocol ADCellModelProtocol: ViewModelProtocol {
@@ -17,7 +13,8 @@ protocol ADCellModelProtocol: ViewModelProtocol {
     var icon: String { get }
     var isFavorite: Bool { get set }
     
-    var action: Action { get set }
+    func tapIcon()
+    func longPressIcon()
 }
 
 // view
@@ -33,12 +30,8 @@ struct ADCell: ArgoKit.ViewProtocol {
         HStack {
             Image(model.icon).size(width: 50, height: 50).circle()
                 .margin(edge: .right, value: 5)
-                .onTapGesture {
-                    model.action = ADCellAction.tapIcon(model)
-                }
-                .onLongPressGesture {
-                    model.action = ADCellAction.longPressIcon(model)
-                }
+                .onTapGesture(action: model.tapIcon)
+                .onLongPressGesture(action: model.longPressIcon)
             
             Text(model.title)
             Spacer()
@@ -61,6 +54,13 @@ extension ADCellModelProtocol {
 class ADCellModel_Previews:  ADCellModel {
     override init() {
         super.init()
+        self.mockData()
+    }
+    override init(action: Observable<Action>) {
+        super.init(action: action)
+        self.mockData()
+    }
+    func mockData() {
         self.title = "这是个ADCell"
         self.icon = "turtlerock"
     }

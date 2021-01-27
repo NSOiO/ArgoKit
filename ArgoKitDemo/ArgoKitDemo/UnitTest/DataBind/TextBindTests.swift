@@ -9,16 +9,16 @@ import ArgoKit
 
 // view model.
 class TextBindTestsModel {
-    @Property var fontSize: CGFloat = 12
-    @Property var fontStyle: AKFontStyle = AKFontStyle.default
+    @Observable var fontSize: CGFloat = 12
+    @Observable var fontStyle: AKFontStyle = AKFontStyle.default
     
-    @Property var myTitle: String = "text"
-    @Property var myTitleA: String = "textA"
+    @Observable var myTitle: String = "text"
+    @Observable var myTitleA: String = "textA"
     @Alias var titleText: Text?
     
     var count: Int = 0
     
-    @Property var icon = "star.fill"
+    @Observable var icon = "star.fill"
 }
 
 // view

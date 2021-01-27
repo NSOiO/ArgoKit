@@ -28,13 +28,13 @@ extension ArgoKitNodeViewModifier{
             isDirty_ = true
         }
         
-        if selector == #selector(setter:UIImageView.image) {
-            isDirty_ = true
-        }
-        
-        if selector == #selector(setter:UIImageView.highlightedImage) {
-            isDirty_ = true
-        }
+//        if selector == #selector(setter:UIImageView.image) {
+//            isDirty_ = true
+//        }
+//
+//        if selector == #selector(setter:UIImageView.highlightedImage) {
+//            isDirty_ = true
+//        }
         
         return isDirty_;
     }
@@ -72,7 +72,7 @@ extension ArgoKitNodeViewModifier{
         if let linkNode = node?.link {
              self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
          }else{
-             self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
+             self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: false)
          }
         if attribute.isDirty == true {
             node?.markDirty()

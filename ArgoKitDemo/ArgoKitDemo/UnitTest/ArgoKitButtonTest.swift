@@ -10,8 +10,8 @@ import ArgoKit
 // view model.
 class ArgoKitButtonTestModel {
     var btn:Button?
-    @Property var text:String = "titlevfdvvdfvdcdcdjkjjjsvfdvdf"
-    @Property var hidKeyBoard:Bool = false
+    @Observable var text:String = "titlevfdvvdfvdcdcdjkjjjsvfdvdf"
+    @Observable var hidKeyBoard:Bool = false
     var action:(()->Void)?
     init() {
         action = {[self] in

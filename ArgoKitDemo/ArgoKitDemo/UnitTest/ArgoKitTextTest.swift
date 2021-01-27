@@ -9,10 +9,10 @@ import ArgoKit
 
 // view model.
 class ArgoKitTextTestModel {
-//   @Property var age:Int = 1
-//   @Property var fontSize:CGFloat = 30
-   @Property var name:String = "张三"
-//   @Property var color:UIColor = .red
+//   @Observable var age:Int = 1
+//   @Observable var fontSize:CGFloat = 30
+   @Observable var name:String = "张三"
+//   @Observable var color:UIColor = .red
 //   @Alias var text:Text?
 }
 

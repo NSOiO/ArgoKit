@@ -9,7 +9,9 @@ import ArgoKit
 
 // view model.
 class FeedCellModel: FeedCellModelProtocol {
-    @Property var content: String = "军用枪射击技能培训～～第一次拿枪，教练超吃惊，完全不相信我第一次打枪～～(o^^o)开森，射击技能点有加成～～"
+    @Observable var action: Action = EmptyAction()
+    
+    var content: String = ""
     var userName = "Emily"
     var userAge = 20
     var placeHolder = "turtlerock"
@@ -18,14 +20,23 @@ class FeedCellModel: FeedCellModelProtocol {
     var time: Int = 1
     var distance: Float = 0.1
     
-    @Property var likes: Int = 0
-    @Property var isLiked: Bool = false
+    @Observable var likes: Int = 0
+    @Observable var isLiked: Bool = false
     
     var comments: Int = 0
     var conversation: String = "对话"
     let bag = DisposeBag()
     
     init() {
+        self.addListener()
+    }
+    
+    init(action: Observable<Action>) {
+        self._action = action
+        self.addListener()
+    }
+    
+    private func addListener() {
         self.$isLiked.watch { [weak self] new in
             if new {
                 self?.likes += 1
@@ -34,10 +45,13 @@ class FeedCellModel: FeedCellModelProtocol {
             }
         }
         .disposed(by: self.bag)
-    }
 
-    func likeButtonAction() {
-        self.isLiked.toggle()
+        self.$action.watchAction(type: FeedCellAction.self) {[weak self] action in
+            if case FeedCellAction.likeButtonClick = action {
+                self?.isLiked.toggle()
+            }
+        }.disposed(by: self.bag)
     }
 }
+
 

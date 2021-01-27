@@ -14,7 +14,7 @@ class ButtonTestsModel {
     @Alias var conversationButton: Button? = nil
     
     var likes: Int = 0
-    @Property var isLiked: Bool = false
+    @Observable var isLiked: Bool = false
     var comments: Int = 0
     var conversation: String = "对话"
 }

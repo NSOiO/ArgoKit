@@ -63,8 +63,8 @@ class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
     var reuseIdentifier: String{
         _reuseIdentifier
     }
-    @Property var headerName = "title"
-    @Property var imagePath = "icybay.jpg"
+    @Observable var headerName = "title"
+    @Observable var imagePath = "icybay.jpg"
     
     var text:Text?
    

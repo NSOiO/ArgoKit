@@ -45,34 +45,31 @@ extension FeedListModelProtocol {
 #if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 // mock data.
 class FeedListModel_Previews:  FeedListModel {
-    var bag = DisposeBag()
-    
     override init() {
         super.init()
         var datas = [FeedBaseProtocol]()
         for idx in 0..<10 {
             datas.append(FeedCellModel_Previews())
-            
-            let ad = ADCellModel_Previews()
+            let ad = ADCellModel_Previews(action: self.$action)
             ad.isFavorite = idx % 2 == 1
-            
-            ad.$action.watch { new in
-                if let action = new as? ADCellAction {
-                    switch action {
-                    case .tapIcon(let model):
-                        print("tap ",model.icon)
-                        model.isFavorite.toggle()
-                        break
-                    case .longPressIcon(let model):
-                        print("long press ",model.icon)
-                        break
-                    }
-                }
-            }.disposed(by: self.bag)
-            
             datas.append(ad)
         }
         self.dataSource.append(contentsOf: datas)
+        self.addListener()
+    }
+    
+    func addListener() {
+        self.$action.watchAction(type: CellBaseAction.self) { action in
+            switch action {
+            case .tapIcon(let model):
+                print("tap ",model.icon)
+                model.isFavorite.toggle()
+                break
+            case .longPressIcon(let model):
+                print("long press ",model.icon)
+                break
+            }
+        }.disposed(by: self.bag)
     }
 }
 

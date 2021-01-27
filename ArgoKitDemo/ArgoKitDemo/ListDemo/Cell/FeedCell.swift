@@ -7,6 +7,10 @@
 
 import ArgoKit
 
+enum FeedCellAction: Action {
+    case likeButtonClick
+}
+
 // view model.
 protocol FeedCellModelProtocol: ViewModelProtocol {
     var content: String { get }
@@ -23,7 +27,7 @@ protocol FeedCellModelProtocol: ViewModelProtocol {
     var comments: Int { get }
     var conversation: String { get }
     
-    func likeButtonAction()
+    var action: Action { get set }
 }
 
 // view
@@ -73,7 +77,9 @@ struct FeedCell: ArgoKit.ViewProtocol {
                 .margin(edge: .bottom, value: 5)
                 
             HStack {// bottom buttons
-                bottomButton(action: model.likeButtonAction, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
+                bottomButton(action: {
+                    model.action = FeedCellAction.likeButtonClick
+                }, imageName: model.isLiked ? "like.press" : "like", title: "\(model.likes)")
                 bottomButton(action: {
                     
                 }, imageName: "conversation", title: "\(model.comments)")

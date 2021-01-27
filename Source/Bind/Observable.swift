@@ -14,7 +14,7 @@ internal protocol DynamicProperty { }
 
 @propertyWrapper
 //@dynamicMemberLookup
-public class Property<Value> : DynamicProperty {
+public class Observable<Value> : DynamicProperty {
     private var _value: Value
     private var subscribers = [(Value) -> Void]()
     private var subscribersMap = [Int: ((Value) -> Void)]()
@@ -29,7 +29,7 @@ public class Property<Value> : DynamicProperty {
         subscribersMap.removeAll()
     }
     
-    public var projectedValue: Property<Value> {
+    public var projectedValue: Observable<Value> {
         return self
     }
 
@@ -77,13 +77,9 @@ public class Property<Value> : DynamicProperty {
     }
     
     public func watch(_ f:@escaping () -> Void) -> Disposable {
-        let id = self.subscribe { _ in
+        self.watch { _ in
             f()
         }
-        let cancel = ClosureDisposable { [weak self] in
-            self?.removesubscriber(id)
-        }
-        return cancel
     }
 }
 
