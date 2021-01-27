@@ -1,6 +1,6 @@
 # ArgoKit
 
-ArgoKit is a SwiftUI replacement Framework based on UIKit, that is compatible with iOS 11+. 
+ArgoKit is a declarative and reactive Framework and based on UIKit, inspired by SwiftUI, compatible with iOS 11+.
 
 ## Introduction
 

@@ -61,6 +61,7 @@ include:
   - ../Source/Core/Component/ScrollView.Bind.swift
   - ../Source/Core/Component/ViewPage.Bind.swift
   - ../Source/AnimationKit/*
+  - ../Source/Core/Component/DataSource/DataSource.swift
 exclude:
   - ../Source/AnimationKit/ViewAnimation.swift
 

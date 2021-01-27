@@ -1,16 +1,14 @@
 //
-//  ListCellTestsModel.swift
+//  FeedCellModel.swift
 //  ArgoKitDemo
 //
-//  Created by Dai on 2021-01-13.
+//  Created by Dai on 2021-01-26.
 //
 
-import Foundation
 import ArgoKit
 
 // view model.
-class ListCellTestsModel: ListCellTestsModelProtocol {
-//    var reuseIdentifier: String = "cell"
+class FeedCellModel: FeedCellModelProtocol {
     var content: String = ""
     var userName = "Emily"
     var userAge = 20
@@ -42,5 +40,4 @@ class ListCellTestsModel: ListCellTestsModelProtocol {
         self.isLiked.toggle()
     }
 }
-
 
