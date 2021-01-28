@@ -56,7 +56,7 @@ class FeedListModel_Previews:  FeedListModel {
     }
     
     func addListener() {
-        self.$action.watchAction(type: CellBaseAction.self) { action in
+        self.$action.watch(type: CellBaseAction.self) { action in
             switch action {
             case .tapIcon(let model):
                 print("tap ",model.icon)

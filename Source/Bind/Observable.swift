@@ -80,6 +80,15 @@ public class Observable<Value> : DynamicProperty {
         self.watch { _ in
             f()
         }
+        
+    }
+    
+    public func watch<T>(type:(T.Type), _ handler: @escaping (T) -> Void) -> Disposable {
+        self.watch { new in
+            if let action = new as? T {
+                handler(action)
+            }
+        }
     }
 }
 
