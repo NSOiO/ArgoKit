@@ -46,11 +46,12 @@ class FeedCellModel: FeedCellModelProtocol {
         }
         .disposed(by: self.bag)
 
-        self.$action.watchAction(type: FeedCellAction.self) {[weak self] action in
+        self.$action.watch(type: FeedCellAction.self) {[weak self] action in
             if case FeedCellAction.likeButtonClick = action {
                 self?.isLiked.toggle()
             }
         }.disposed(by: self.bag)
+        
     }
 }
 

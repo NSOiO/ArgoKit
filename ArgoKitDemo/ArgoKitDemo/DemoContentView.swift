@@ -43,8 +43,8 @@ class row: View{
 //                .alias(variable: &self.item.textCom)
         }.width(100%)
     }
-    
 }
+
 class DemoContentView: View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
     @DataSource var items:[ArgoKitItem] = [ArgoKitItem]()
