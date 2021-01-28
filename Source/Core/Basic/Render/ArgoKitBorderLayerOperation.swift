@@ -129,7 +129,7 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     
     func cleanBorderLayerIfNeed (){
-        self.needRemake = true
+        self.needRemake = false
         if let borderLayer = self.borderLayer {
             borderLayer.removeFromSuperlayer()
             self.borderLayer = nil
