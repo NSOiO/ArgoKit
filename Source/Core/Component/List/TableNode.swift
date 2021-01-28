@@ -13,15 +13,15 @@ fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 class TableView:UITableView{
     private var oldFrame = CGRect.zero
     var reLayoutAction:((CGRect)->())?
-//    public override func layoutSubviews() {
-//        if !oldFrame.equalTo(self.frame) {
-//            if let action = reLayoutAction {
-//                action(self.bounds)
-//            }
-//            oldFrame = self.frame
-//        }
-//        super.layoutSubviews()
-//    }
+    public override func layoutSubviews() {
+        if !oldFrame.equalTo(self.frame) {
+            if let action = reLayoutAction {
+                action(self.bounds)
+            }
+            oldFrame = self.frame
+        }
+        super.layoutSubviews()
+    }
 }
 
 class TableNode<D>: ArgoKitScrollViewNode,
@@ -112,7 +112,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
-        print("prefetchRowsAt cell\(indexPath)")
         return cell
     }
 
@@ -170,7 +169,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print("prefetchRowsAt\(indexPaths.last)")
         let prefetchModel:DataSourcePrefetchModel<D> = DataSourcePrefetchModel<D>(self.dataSourceHelper,indexPaths:indexPaths)
         dataSourcePrefetchHelper.addPrefetchModel(prefetchModel)
         let sel = #selector(self.tableView(_:prefetchRowsAt:))

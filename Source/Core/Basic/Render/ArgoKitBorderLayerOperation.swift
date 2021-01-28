@@ -102,17 +102,16 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     
     private func remark(){
-        self.needRemake = false
-        let borderLayer = CAShapeLayer()
-        borderLayer.strokeColor = self.borderColor.cgColor
-        borderLayer.fillColor = nil
         if let view = self.viewNode?.view {
+            let borderLayer = CAShapeLayer()
             let bounds = view.bounds
             let maxBorderWidth = CGFloat.minimum(bounds.size.width, bounds.size.height)
             let borderWidth = (self.borderWidth < maxBorderWidth) ? self.borderWidth:maxBorderWidth
             if pcircle {
                 self.multiRadius = ArgoKitCornerRadius(topLeft: maxBorderWidth/2.0, topRight: maxBorderWidth/2.0, bottomLeft: maxBorderWidth/2.0, bottomRight: maxBorderWidth/2.0)
             }
+            borderLayer.strokeColor = self.borderColor.cgColor
+            borderLayer.fillColor = nil
             borderLayer.path = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius, lineWidth: borderWidth).cgPath
             borderLayer.frame = bounds
             borderLayer.lineWidth = borderWidth

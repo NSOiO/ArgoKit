@@ -64,7 +64,6 @@ class DataSourcePrefetchHelper<D>{
             let innerOperation = prefetchMode as! DataSourcePrefetchModel<D>
             if let dataSourceHelper = innerOperation.dataSourceHelper,let indexPaths = innerOperation.indexPaths {
                 for indexPath in indexPaths {
-                    print("prefetchModels At:\(indexPath)")
                     _ = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
                 }
             }

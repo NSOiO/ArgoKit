@@ -100,13 +100,14 @@ class MSUserInterractionContentView: ArgoKit.View {
              .height(46.0)
              .cornerRadius(4)
             
-            Text("姓名sasd姓名sasdDCSDCSDCSDCSDCSD")
-                .lineLimit(1)
+            Text("姓名"+"\(Int.random(in: 0 ..< 10000))")
+                .lineLimit(2)
                 .textColor(UIColor(50,51,51))
                 .font(size: 16.0)
                 .margin(edge: .left, value: 5)
                 .textShadowColor(UIColor.red)
-                .textShadowOffset(CGSize(width: 0, height: 2))
+                .textShadowOffset(CGSize(width: 5, height: 5))
+//                .cornerRadius(3)
                 .backgroundColor(.yellow)
                 .shrink(1)
             
@@ -234,7 +235,7 @@ struct ListDemo:ArgoKit.View{
     func loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<20{
+        for index in 0..<50{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"

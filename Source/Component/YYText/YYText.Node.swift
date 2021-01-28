@@ -32,26 +32,26 @@ class YYTextNode: ArgoKitTextBaseNode{
         lable.font = font
         lable.text = self.text()
         lable.attributedText = self.attibuteText
-        lable.numberOfLines = UInt(self.numberOfLines())
-        lable.lineBreakMode = self.lineBreakMode()
-        lable.textAlignment = self.textAlignment()
+        lable.numberOfLines = UInt(self.numberOfLines)
+        lable.lineBreakMode = self.lineBreakMode
+        lable.textAlignment = self.textAlignment
         ArgoKitNodeViewModifier.performViewAttribute(lable, attributes: self.nodeAllAttributeValue())
         return lable.sizeThatFits(size)
     }
-    func setText(_ value:String?){
+    override func setText(_ value:String?){
         if let text = value {
             attibuteText = NSMutableAttributedString(string: text)
             ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attibuteText)
         }
     }
-    func setAttributedText(_ value:NSAttributedString?){
-        if let attributText = value {
+    override func setAttributedText(attri:NSAttributedString?){
+        if let attributText = attri {
             attibuteText = NSMutableAttributedString(attributedString: attributText)
             ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attibuteText)
         }
     }
     
-    func font(_ value:UIFont, range: NSRange? = nil){
+    override func font(_ value:UIFont, range: NSRange? = nil){
         self.font = value
         if let range = range {
             attibuteText?.yy_setFont(value, range: range)
@@ -76,7 +76,7 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attibuteText)
     }
     
-    func textAlignment(_ value:NSTextAlignment, range: NSRange? = nil){
+    override func textAlignment(_ value:NSTextAlignment, range: NSRange? = nil){
         if let range = range {
             attibuteText?.yy_setAlignment(value, range: range)
         }else{
@@ -85,7 +85,7 @@ class YYTextNode: ArgoKitTextBaseNode{
         
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attibuteText)
     }
-    func lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
+    override func lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
         if let range = range {
             attibuteText?.yy_setLineBreakMode(value, range: range)
         }else{
@@ -150,30 +150,6 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attibuteText)
     }
     
-//    /**
-//     The text border.
-//
-//     @discussion Default value is nil (no border).
-//     @discussion Set this property applies to the entire text string.
-//                 Get this property returns the first character's attribute.
-//     @since YYText:6.0
-//     */
-//    @property (nullable, nonatomic, strong, readwrite) YYTextBorder *yy_textBorder;
-//    - (void)yy_setTextBorder:(nullable YYTextBorder *)textBorder range:(NSRange)range;
-//
-//    /**
-//     The text background border.
-//
-//     @discussion Default value is nil (no background border).
-//     @discussion Set this property applies to the entire text string.
-//                 Get this property returns the first character's attribute.
-//     @since YYText:6.0
-//     */
-//    @property (nullable, nonatomic, strong, readwrite) YYTextBorder *yy_textBackgroundBorder;
-//    - (void)yy_setTextBackgroundBorder:(nullable YYTextBorder *)textBackgroundBorder range:(NSRange)range;
-    
-//    + (instancetype)borderWithLineStyle:(YYTextLineStyle)lineStyle lineWidth:(CGFloat)width strokeColor:(nullable UIColor *)color;
-//    + (instancetype)borderWithFillColor:(nullable UIColor *)color cornerRadius:(CGFloat)cornerRadius;
     func textBorder(_ value:YYTextBorder,range: NSRange? = nil){
         if let range = range {
             attibuteText?.yy_setTextBorder(value, range: range)

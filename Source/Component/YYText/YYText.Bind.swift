@@ -24,7 +24,7 @@ extension YYText{
     @discardableResult
     public func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self{
         return self.bindCallback({ [textNode = self.node as? YYTextNode] in
-            textNode?.setAttributedText(value())
+            textNode?.setAttributedText(attri: value())
         }, forKey: #function)
     }
     
