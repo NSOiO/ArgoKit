@@ -49,7 +49,7 @@ extension ADCellModelProtocol {
     }
 }
 
-#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
+
 // mock data.
 class ADCellModel_Previews:  ADCellModel {
     override init() {
@@ -65,7 +65,7 @@ class ADCellModel_Previews:  ADCellModel {
         self.icon = "turtlerock"
     }
 }
-
+#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 import ArgoKitPreview
 import ArgoKitComponent
 import SwiftUI

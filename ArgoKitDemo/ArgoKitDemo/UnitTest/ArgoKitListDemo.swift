@@ -138,7 +138,7 @@ class MSUserInterractionContentView: ArgoKit.View {
                 .font(size: 12.0)
                 .margin(edge: .top, value: 5)
                 .lineLimit(0)
-        }.margin(top:  10.5, right: 0, bottom: 13, left: 11)
+        }
 
     }
 }
@@ -219,10 +219,7 @@ class ListDemoView:UIView{
 }
 var headerView:RefreshHeaderView?
 var footerView:RefreshFooterView?
-class ListDemo:ArgoKit.View{
-    deinit {
-        print("ListDemo")
-    }
+struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNodeDemo(viewClass: ListDemoView.self)
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
@@ -231,9 +228,13 @@ class ListDemo:ArgoKit.View{
     
     @DataSource var items:[SessionItem] = [SessionItem]()
     init() {
+       loadMoreData()
+    }
+    
+    func loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<400{
+        for index in 0..<20{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -242,16 +243,9 @@ class ListDemo:ArgoKit.View{
             item.unreadCount = String(index)
             $items.append(item)
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-            
-        }
-        
-        let callback:()->() = {[self] in
-            self.node?.identifiable = ""
-        }
-        callback()
+        $items.apply()
     }
+    
     
     var hidden:Bool = false
     
@@ -259,11 +253,6 @@ class ListDemo:ArgoKit.View{
         ArgoKit.List(data:$items){ item in
             SessionRow(item: item)
         }
-//        ArgoKit.List{
-//            ForEach(0 ..< 100){ index in
-//                Text("List\(String(index))")
-//            }
-//        }
         .cellSelected {item, indexPath in
 //            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
 //            .textField()
@@ -325,7 +314,10 @@ class ListDemo:ArgoKit.View{
             .height(100.0)
         }
         .refreshFooterView{
-            RefreshFooterView(startRefreshing: {_ in 
+            RefreshFooterView(startRefreshing: {refresh in
+                self.loadMoreData()
+                refresh?.endRefreshing()
+                refresh?.resetNoMoreData()
                 print("footerhead")
             })
             {

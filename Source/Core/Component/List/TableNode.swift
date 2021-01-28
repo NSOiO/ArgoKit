@@ -13,15 +13,15 @@ fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 class TableView:UITableView{
     private var oldFrame = CGRect.zero
     var reLayoutAction:((CGRect)->())?
-    public override func layoutSubviews() {
-        if !oldFrame.equalTo(self.frame) {
-            if let action = reLayoutAction {
-                action(self.bounds)
-            }
-            oldFrame = self.frame
-        }
-        super.layoutSubviews()
-    }
+//    public override func layoutSubviews() {
+//        if !oldFrame.equalTo(self.frame) {
+//            if let action = reLayoutAction {
+//                action(self.bounds)
+//            }
+//            oldFrame = self.frame
+//        }
+//        super.layoutSubviews()
+//    }
 }
 
 class TableNode<D>: ArgoKitScrollViewNode,
@@ -32,6 +32,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
+    
+    lazy var dataSourcePrefetchHelper:DataSourcePrefetchHelper<D> = DataSourcePrefetchHelper<D>()
     
     lazy var dataSourceHelper: DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
@@ -110,6 +112,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
+        print("prefetchRowsAt cell\(indexPath)")
         return cell
     }
 
@@ -167,6 +170,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print("prefetchRowsAt\(indexPaths.last)")
+        let prefetchModel:DataSourcePrefetchModel<D> = DataSourcePrefetchModel<D>(self.dataSourceHelper,indexPaths:indexPaths)
+        dataSourcePrefetchHelper.addPrefetchModel(prefetchModel)
         let sel = #selector(self.tableView(_:prefetchRowsAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPaths])
     }
@@ -255,6 +261,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return estimatedHeight;
     }
+    
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return self.sectionHeaderSourceHelper.rowHeight(section, at: 0, maxWidth: tableView.frame.width)
@@ -291,6 +298,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
         return footer
     }
+    
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {

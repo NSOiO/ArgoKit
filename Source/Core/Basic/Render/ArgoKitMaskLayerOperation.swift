@@ -7,6 +7,7 @@
 
 import Foundation
 class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
+    var bezierPathCache:[String:UIBezierPath] = [:]
     private var _needRemake:Bool = false
     var needRemake: Bool{
         get{
@@ -79,7 +80,14 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
                 let cornerRadius = CGFloat.minimum(bounds.size.width, bounds.size.height)/2.0
                 self.multiRadius = ArgoKitCornerRadius(topLeft: cornerRadius, topRight: cornerRadius, bottomLeft: cornerRadius, bottomRight: cornerRadius)
             }
-            let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius)
+            let key = "\(bounds.width)"+"\(bounds.height)"+"\(self.multiRadius)"
+            var maskPath:UIBezierPath
+            if let path = bezierPathCache[key]{
+                maskPath = path
+            }else{
+                maskPath = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius)
+                bezierPathCache[key] = maskPath
+            }
             var maskLayer:CAShapeLayer? = nil
             if let mask = view.layer.mask {
                 maskLayer = mask as? CAShapeLayer

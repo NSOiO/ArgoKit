@@ -7,6 +7,12 @@
 
 import Foundation
 class ArgoKitImageNode: ArgoKitNode {
+    override func prepareForUse() {
+        if let imageView = self.view as? UIImageView{
+            imageView.image = nil
+            imageView.highlightedImage = nil
+        }
+    }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let image = self.image()
         let temp_size:CGSize = image?.size ?? CGSize.zero
@@ -20,13 +26,6 @@ class ArgoKitImageNode: ArgoKitNode {
             ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
         } failure: { _ in
             // 图像加载失败
-        }
-    }
-    
-    
-    override func prepareForUse() {
-        if let imageView = self.view as? UIImageView {
-            imageView.image = nil
         }
     }
     

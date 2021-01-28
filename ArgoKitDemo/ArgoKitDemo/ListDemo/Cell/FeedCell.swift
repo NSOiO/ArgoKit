@@ -117,7 +117,7 @@ extension FeedCellModelProtocol {
     }
 }
 
-#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
+//#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 // mock data.
 class FeedCellModel_Previews:  FeedCellModel {
     override init() {
@@ -139,7 +139,7 @@ class FeedCellModel_Previews:  FeedCellModel {
         self.comments = 9
     }
 }
-
+#if canImport(SwiftUI) && canImport(ArgoKitPreview) && DEBUG
 import ArgoKitPreview
 import ArgoKitComponent
 import SwiftUI

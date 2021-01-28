@@ -74,6 +74,12 @@ struct TextCalculation {
 }
 
 class ArgoKitTextNode: ArgoKitTextBaseNode {
+    override func prepareForUse() {
+        if let lable = self.view as? UILabel{
+            lable.text = nil
+            lable.attributedText = nil
+        }
+    }
     public override func lineSpacing(_ value:CGFloat){
         self.lineSpacing = value
         self.handleLineSpacing()

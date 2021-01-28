@@ -7,6 +7,7 @@
 
 import Foundation
 class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
+    var borderLayerCache:[String:CAShapeLayer] = [:]
     weak var viewNode:ArgoKitNode?
     private var borderLayer:CAShapeLayer?
     private var _needRemake:Bool = false
@@ -101,7 +102,7 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     
     private func remark(){
-       
+        self.needRemake = false
         let borderLayer = CAShapeLayer()
         borderLayer.strokeColor = self.borderColor.cgColor
         borderLayer.fillColor = nil
