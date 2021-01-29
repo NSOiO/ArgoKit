@@ -22,6 +22,7 @@ public protocol TextProtocol: View {
     func textShadowColor(_ value:@escaping @autoclosure () -> UIColor)->Self
     func textShadowColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat)->Self
     func textShadowColor(hex :@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float)->Self
+    func textShadowBlurRadius(_ value:@escaping @autoclosure () -> CGFloat)->Self
     func breakMode(_ value:@escaping @autoclosure () -> NSLineBreakMode)->Self
     func highlightedTextColor(_ value:@escaping @autoclosure () -> UIColor?)->Self
     func isHighlighted(_ value:@escaping @autoclosure () -> Bool)->Self
@@ -44,7 +45,6 @@ extension TextProtocol {
     public func text(_ value:@escaping @autoclosure () -> String?)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             textNode?.setText(value())
-            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -55,7 +55,6 @@ extension TextProtocol {
     public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             textNode?.font(value())
-            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -84,7 +83,6 @@ extension TextProtocol {
             textNode?.fontStyle = f_style
             let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
             textNode?.font(font)
-            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -98,7 +96,6 @@ extension TextProtocol {
             textNode?.fontName = f_name
             let font = UIFont.font(fontName: f_name, fontStyle: textNode?.fontStyle, fontSize: textNode?.fontSize)
             textNode?.font(font)
-            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -112,7 +109,6 @@ extension TextProtocol {
             textNode?.fontSize = f_size
             let font = UIFont.font(fontName: textNode?.fontName, fontStyle:  textNode?.fontStyle, fontSize: f_size)
             textNode?.font(font)
-            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -136,7 +132,6 @@ extension TextProtocol {
             textNode?.fontStyle = value()
             let font = UIFont.font(fontName: textNode?.fontName, fontStyle: f_style, fontSize: textNode?.fontSize)
             textNode?.font(font)
-            textNode?.handleLineSpacing()
         }, forKey: #function)
     }
     
@@ -227,8 +222,8 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func textShadowOffset(_ value:@escaping @autoclosure () -> CGSize)->Self{
-		return self.bindCallback({ [self] in 
-			addAttribute(#selector(setter:UILabel.shadowOffset),value())
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.shadowOffset(value())
 		}, forKey: #function)
     }
     
@@ -237,8 +232,8 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func textShadowColor(_ value:@escaping @autoclosure () -> UIColor)->Self{
-		return self.bindCallback({ [self] in 
-			addAttribute(#selector(setter:UILabel.shadowColor),value())
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.shadowColor(value())
 		}, forKey: #function)
     }
     
@@ -251,9 +246,9 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func textShadowColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat = 1)->Self{
-		return self.bindCallback({ [self] in 
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
 			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
-			addAttribute(#selector(setter:UILabel.shadowColor),value);
+            textNode?.shadowColor(value)
 		}, forKey: #function)
     }
     
@@ -264,10 +259,21 @@ extension TextProtocol {
     /// - Returns: self
     @discardableResult
     public func textShadowColor(hex :@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float = 1)->Self{
-		return self.bindCallback({ [self] in 
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
 			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
-			addAttribute(#selector(setter:UILabel.shadowColor),value);
+            textNode?.shadowColor(value)
 		}, forKey: #function)
+    }
+    
+    /// set the shadow offset, in points, for the text
+    /// - Parameter value: new offset value
+    /// - Parameter range: new range value
+    /// - Returns: self
+    @discardableResult
+    public func textShadowBlurRadius(_ value:@escaping @autoclosure () -> CGFloat)->Self{
+        return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.shadowBlurRadius(value())
+        }, forKey: #function)
     }
     
     /// The technique for wrapping and truncating the label’s text. Call lineBreakMode of the UILabel directly.

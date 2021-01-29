@@ -6,7 +6,7 @@
 //
 
 import ArgoKit
-
+import ArgoKitComponent
 extension UIColor{
     public convenience init(_ r:CGFloat,_ g :CGFloat,_ b:CGFloat,_ a:CGFloat = 1){
         self.init(red: CGFloat(r/255), green: CGFloat(g/255), blue: CGFloat(b/255), alpha: a)
@@ -103,17 +103,18 @@ class MSUserInterractionContentView: ArgoKit.View {
             Text("姓名"+"\(Int.random(in: 0 ..< 10000))")
                 .lineLimit(2)
                 .textColor(UIColor(50,51,51))
-                .font(size: 16.0)
+                .font(size: 26.0)
                 .margin(edge: .left, value: 5)
+//                .shadow(color: .red, offset: CGSize(width: 4, height: 4), radius: 0.3, opacity: 0.3)
                 .textShadowColor(UIColor.red)
-                .textShadowOffset(CGSize(width: 5, height: 5))
+                .textShadowOffset(CGSize(width: 2, height: 2))
 //                .cornerRadius(3)
-                .backgroundColor(.yellow)
+                .backgroundColor(.gray)
+//                .underline(style: .single, width: 1, color: .red)
                 .shrink(1)
             
          }.margin(edge: .left, value: 10)
          .margin(edge: .top, value: 10)
-         .backgroundColor(.red)
         
         Spacer()
             .height(0.5)

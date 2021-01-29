@@ -6,12 +6,26 @@
 //
 
 import Foundation
-open class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
-    public var text:String? = nil
-    public var attributedText:NSAttributedString? = nil
-    public var numberOfLines:Int = 1
-    public var lineBreakMode:NSLineBreakMode = .byWordWrapping
-    public var textAlignment:NSTextAlignment = .left
+extension NSMutableAttributedString{
+    public func setParagraphStyle(paragraphStyle:@escaping (NSMutableParagraphStyle?)->()){
+        self.enumerateAttribute(NSAttributedString.Key.paragraphStyle, in: NSRange(location: 0, length: self.length ), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { [weak self]  (value, subRange, stop) in
+            var style:NSMutableParagraphStyle? = nil
+            if let value_ = value as? NSMutableParagraphStyle{
+                style = value_
+            }else if let value_ = value as? NSParagraphStyle,let style_ = value_.mutableCopy() as? NSMutableParagraphStyle{
+                style = style_
+            }else{
+                let style_:NSParagraphStyle = NSParagraphStyle.default
+                if let value_ = style_.mutableCopy() as? NSMutableParagraphStyle{
+                    style = value_
+                }
+            }
+            paragraphStyle(style)
+            self?.addAttribute(NSAttributedString.Key.paragraphStyle, value: style!, range: subRange)
+        })
+    }
+}
+open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     open override func prepareForUse() {
         super.prepareForUse()
         if let lable = self.view as? UILabel {
@@ -19,82 +33,91 @@ open class ArgoKitTextBaseNode:ArgoKitArttibuteNode{
             lable.attributedText = nil
         }
     }
-    open func handleLineSpacing() {
-        if self.lineSpacing == 0 {
-            return
-        }
-        let lableText:String = self.text ?? ""
-        if lableText.count == 0 {
-            return
-        }
-        
-        let range:NSRange = NSRange(location: 0, length: lableText.count)
-        let attributedString = NSMutableAttributedString(string: lableText)
-        attributedString.addAttribute(NSAttributedString.Key.font, value: self.font, range: range)
-        if let textColor:UIColor = self.textColor() {
-            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: textColor, range: range)
-        }
-        setAttributedText(attri: attributedString)
-    }
-
+    
     open func setAttributedText(attri:NSAttributedString?){
         if let attriText = attri {
             let attributedString = NSMutableAttributedString(attributedString: attriText)
-            let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
-            if self.lineSpacing == 0 {
-                paragraphStyle.lineSpacing = 2
-            }else{
-                paragraphStyle.lineSpacing = self.lineSpacing
-            }
-            paragraphStyle.lineBreakMode = self.lineBreakMode
-            paragraphStyle.alignment = self.textAlignment
-            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attriText.length))
-            
-            ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedString)
             attributedText = attributedString
+            ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
         }
     }
     
     open func setText(_ value:String?){
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.text),value)
-        self.text = value
+        if let text = value {
+            setAttributedText(attri: NSAttributedString(string: text))
+        }
     }
+    
     open func font(_ value:UIFont, range: NSRange? = nil){
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.font),value)
+        attributedText?.addAttribute(NSAttributedString.Key.font, value: value, range: NSRange(location: 0, length: attributedText?.length ?? 0))
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
         self.font = value
     }
     
     open func textAlignment(_ value:NSTextAlignment, range: NSRange? = nil){
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.textAlignment),value.rawValue)
         self.textAlignment = value
+        attributedText?.setParagraphStyle(paragraphStyle: { paragraphStyle in
+            paragraphStyle?.alignment = value
+        })
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+    }
+    
+    open func lineSpacing(_ value:CGFloat){
+        self.lineSpacing = value
+        attributedText?.setParagraphStyle(paragraphStyle: { paragraphStyle in
+            paragraphStyle?.lineSpacing = value
+        })
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+    }
+    
+    open func lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
+        self.lineBreakMode = value
+        attributedText?.setParagraphStyle(paragraphStyle: { paragraphStyle in
+            paragraphStyle?.lineBreakMode = value
+        })
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
     open func numberOfLines(_ value:Int, range: NSRange? = nil){
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.numberOfLines),value)
         self.numberOfLines = value
     }
     
-    open func lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.lineBreakMode),value.rawValue)
-        self.lineBreakMode = value
+    private func setShadow(_ value:NSShadow){
+        attributedText?.addAttribute(NSAttributedString.Key.shadow, value: value, range: NSRange(location: 0, length: attributedText?.length ?? 0))
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+    }
+    open func shadow(_ value:NSShadow,range: NSRange? = nil){
+        shadow = value
+        setShadow(shadow)
+    }
+    open func shadow(color:UIColor,offset:CGSize,blurRadius:CGFloat,range: NSRange? = nil){
+        shadow.shadowColor = color
+        shadow.shadowOffset = offset
+        shadow.shadowBlurRadius = blurRadius
+        setShadow(shadow)
     }
     
-    open func lineSpacing(_ value:CGFloat){
-        self.lineSpacing = value
-        self.handleLineSpacing()
+    open func shadowColor(_ value:UIColor,range: NSRange? = nil){
+        shadow.shadowColor = value
+        setShadow(shadow)
     }
+    open func shadowOffset(_ value:CGSize,range: NSRange? = nil){
+        shadow.shadowOffset = value
+        setShadow(shadow)
+    }
+    open func shadowBlurRadius(_ value:CGFloat,range: NSRange? = nil){
+        shadow.shadowBlurRadius = value
+        setShadow(shadow)
+    }
+    
     @discardableResult
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         let lable:UILabel = TextCalculation.calculationLable
-        if let text =  self.text{
-            lable.text = text
-        }
         if let attribut = self.attributedText{
             lable.attributedText = attribut
         }
         lable.font = font
         lable.numberOfLines = self.numberOfLines
-        lable.lineBreakMode = self.lineBreakMode
-        lable.textAlignment = self.textAlignment
         var result = lable.sizeThatFits(size)
         let width = ceil(result.width);
         let height = ceil(result.height);
@@ -113,10 +136,6 @@ class ArgoKitTextNode: ArgoKitTextBaseNode {
             lable.text = nil
             lable.attributedText = nil
         }
-    }
-    public override func lineSpacing(_ value:CGFloat){
-        self.lineSpacing = value
-        self.handleLineSpacing()
     }
     
     func cleanLineSpacing() {

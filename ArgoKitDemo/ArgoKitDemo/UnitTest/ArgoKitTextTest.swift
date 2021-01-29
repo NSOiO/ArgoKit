@@ -6,7 +6,7 @@
 //
 
 import ArgoKit
-
+import ArgoKitComponent
 // view model.
 class ArgoKitTextTestModel {
 //   @Observable var age:Int = 1
@@ -42,34 +42,32 @@ struct ArgoKitTextTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-//        HStack{
-//            Text("单行文本")
-//                .font(size: 25)
-//                .backgroundColor(.orange)
-//                .margin(edge: .top, value: 100)
-//                .height(100)
-//        }
-//            .alignSelf(.center)
-//
-//        Text("单行文本粗体cd")
-//            .font(size: 25)
-//            .font(style: .bold)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.stretch)
-//        Button(text: model.name) {
-//            model.age += 1
-//            model.name = model.name + "\(model.age)"
-//            model.color = UIColor(red: 133/255, green: 124/255, blue: CGFloat(model.age/255), alpha: 1)
-//        }
-//            .alignSelf(.center)
-//
-//        Text("单行文本粗体cd")
-//            .font(size: 25)
-//            .font(style: .bold)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.stretch)
+        HStack{
+            Text("单行文本")
+                .font(size: 25)
+                .backgroundColor(.orange)
+                .margin(edge: .top, value: 100)
+                .height(100)
+        }
+            .alignSelf(.center)
+
+        Text("单行文本粗体cd")
+            .font(size: 25)
+            .font(style: .bold)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.stretch)
+            .textAlign(.center)
+        Button(text: model.name) {
+        }
+            .alignSelf(.center)
+
+        Text("单行文本粗体cd")
+            .font(size: 25)
+            .font(style: .bold)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
+            .alignSelf(.stretch)
 
         Text(model.name)
             .font(size: 50)
@@ -84,35 +82,20 @@ struct ArgoKitTextTest: ArgoKit.View {
             }
         
         
+        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+            .font(size: 25)
+            .lineLimit(0)
+            .lineSpacing(10)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
 
-//        Text("单行文本粗体23xcccccdsdsass")
-////            .font(size: 20)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .textAlign(.center)
-//
-
-//        Text("多行文本 多行文本 ")
-////            .font(size: 25)
-//            .lineLimit(0)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-
-//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-//            .font(size: 25)
-//            .lineLimit(0)
-//            .lineSpacing(10)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//
-//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-//            .font(size: 25)
-//            .textColor(.white)
-//            .lineLimit(0)
-//            .lineSpacing(10)
-//            .backgroundColor(.orange)
-//            .margin(edge: .top, value: 10)
-//            .alignSelf(.center)
+        YYText("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本多行文本 多行文本 多行文本")
+            .font(size: 25)
+            .textColor(.white)
+            .lineLimit(3)
+            .lineSpacing(10)
+            .backgroundColor(.orange)
+            .margin(edge: .top, value: 10)
         
     }
 }

@@ -7,12 +7,17 @@
 
 import Foundation
 open class ArgoKitArttibuteNode: ArgoKitNode {
-    open var lineSpacing:CGFloat = 0
-    open var fontSize:CGFloat = 17.0
-    open var fontStyle:AKFontStyle = .default
-    open var fontName:String?
-    open var font:UIFont = UIFont.font(fontName: nil, fontStyle: .default, fontSize: 17.0)
-    
+    public var lineSpacing:CGFloat = 0
+    public var fontSize:CGFloat = 17.0
+    public var fontStyle:AKFontStyle = .default
+    public var fontName:String?
+    public var font:UIFont = UIFont.font(fontName: nil, fontStyle: .default, fontSize: 17.0)
+    public var text:String? = nil
+    public var attributedText:NSMutableAttributedString? = nil
+    public var numberOfLines:Int = 1
+    public var lineBreakMode:NSLineBreakMode = .byWordWrapping
+    public var textAlignment:NSTextAlignment = .left
+    public var shadow:NSShadow = NSShadow()
     
     /*
     func setValue(_ selector:Selector,_ value:Any?) -> Void{
