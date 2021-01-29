@@ -112,7 +112,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
-        print("cellForRowAt:\(indexPath)")
         return cell
     }
 
