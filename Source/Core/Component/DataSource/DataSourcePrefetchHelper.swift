@@ -9,6 +9,7 @@ import Foundation
 class DataSourcePrefetchModel<D>{
     var dataSourceHelper: DataSourceHelper<D>?
     var indexPaths:[IndexPath]?
+    var width:CGFloat = UIScreen.main.bounds.width
     init(_ dataSourceHelper:DataSourceHelper<D>?,indexPaths:[IndexPath]?) {
         self.dataSourceHelper = dataSourceHelper
         self.indexPaths = indexPaths
@@ -25,7 +26,7 @@ class DataSourcePrefetchHelper<D>{
     func startRunloop() -> Void {
         if observe == nil {
             let runloop:CFRunLoop = CFRunLoopGetMain()
-            observe = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, CFRunLoopActivity.afterWaiting.rawValue | CFRunLoopActivity.exit.rawValue , true, 1, {[weak self] (observer, activity) in
+            observe = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, CFRunLoopActivity.beforeWaiting.rawValue, true, 1, {[weak self] (observer, activity) in
                 self?.runOperation()
             })
             if let _ =  observe {
@@ -64,7 +65,8 @@ class DataSourcePrefetchHelper<D>{
             let innerOperation = prefetchMode as! DataSourcePrefetchModel<D>
             if let dataSourceHelper = innerOperation.dataSourceHelper,let indexPaths = innerOperation.indexPaths {
                 for indexPath in indexPaths {
-                    _ = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
+//                    _ = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
+                    _ = dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: innerOperation.width)
                 }
             }
         })

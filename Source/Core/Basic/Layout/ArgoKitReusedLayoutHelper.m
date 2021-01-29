@@ -54,7 +54,7 @@ static ArgoKitReusedLayoutHelper* _instance;
 #pragma mark --- private methods ---
 - (void)startLayoutEngine {
     __weak typeof(self)wealSelf = self;
-    [self.layoutEngine startRunloop:kCFRunLoopBeforeWaiting | kCFRunLoopExit repeats:true order:0 block:^(ArgoKitNode * _Nonnull node) {
+    [self.layoutEngine startRunloop:kCFRunLoopBeforeWaiting repeats:true order:0 block:^(ArgoKitNode * _Nonnull node) {
         [wealSelf layout:node];
     }];
 }

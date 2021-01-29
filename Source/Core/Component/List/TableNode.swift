@@ -53,7 +53,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public var tableFooterNode: ArgoKitNode?
     public var sectionIndexTitles: [String]?
     
-    public var estimatedHeight:CGFloat = 100.0
+    public var estimatedHeight:CGFloat = -1.0
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
@@ -112,6 +112,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
+        print("cellForRowAt:\(indexPath)")
         return cell
     }
 
@@ -170,6 +171,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let prefetchModel:DataSourcePrefetchModel<D> = DataSourcePrefetchModel<D>(self.dataSourceHelper,indexPaths:indexPaths)
+        prefetchModel.width = tableView.bounds.width
         dataSourcePrefetchHelper.addPrefetchModel(prefetchModel)
         let sel = #selector(self.tableView(_:prefetchRowsAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPaths])
@@ -257,7 +259,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return estimatedHeight;
+        if estimatedHeight <= 0 {
+            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+        }
+        return estimatedHeight
     }
     
 
