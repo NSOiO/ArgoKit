@@ -149,7 +149,7 @@ static YGConfigRef globalConfig;
 
 - (CGSize)calculateLayoutWithSize:(CGSize)size
 {
-  NSAssert([NSThread isMainThread], @"Yoga calculation must be done on main.");
+//  NSAssert([NSThread isMainThread], @"Yoga calculation must be done on main.");
   NSAssert(self.argoNode.isEnabled, @"Yoga is not enabled for this view.");
 
   YGAttachNodesFromNodeHierachy(self.argoNode);

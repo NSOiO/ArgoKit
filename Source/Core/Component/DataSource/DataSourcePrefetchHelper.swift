@@ -67,6 +67,9 @@ class DataSourcePrefetchHelper<D>{
                 for indexPath in indexPaths {
 //                    _ = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
                     _ = dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: innerOperation.width)
+//                    dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: innerOperation.width) { height in
+//                        
+//                    }
                 }
             }
         })

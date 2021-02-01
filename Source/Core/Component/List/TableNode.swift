@@ -686,3 +686,13 @@ extension TableNode {
         sectionFooterSourceHelper.removeAll()
     }
 }
+
+extension TableNode{
+    func createNodeFromData(_ data: Any) {
+        let node = dataSourceHelper.nodeForData(data)
+        if let tableView = self.tableView {
+            dataSourceHelper.rowHeight(node, maxWidth: tableView.frame.width)
+        }
+       
+    }
+}

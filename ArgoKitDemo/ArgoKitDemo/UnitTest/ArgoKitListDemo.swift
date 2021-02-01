@@ -223,21 +223,36 @@ struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNodeDemo(viewClass: ListDemoView.self)
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
-    
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node1111")
    
     
     @DataSource var items:[SessionItem] = [SessionItem]()
     @DataSource var headerItems:[SessionItem] = [SessionItem]()
     @DataSource var footerItems:[SessionItem] = [SessionItem]()
     init() {
-       loadMoreData()
+       loadMoreData1()
         self.backgroundColor(.yellow)
     }
-    
-    func loadMoreData() {
+    func loadMoreData1(){
+        nodeQueue.async {
+            self._loadMoreData()
+            DispatchQueue.main.async {
+                $items.apply()
+            }
+        }
+    }
+    func loadMoreData(){
+        nodeQueue.async {
+            self._loadMoreData()
+            DispatchQueue.main.async {
+                $items.apply()
+            }
+        }
+    }
+    func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<1{
+        for index in 0..<20{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -264,7 +279,7 @@ struct ListDemo:ArgoKit.View{
             item.unreadCount = String(index)
             $footerItems.append(item)
         }
-        $items.apply()
+       
     }
     
     
