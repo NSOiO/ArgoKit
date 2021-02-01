@@ -34,6 +34,13 @@ public struct Text:TextProtocol {
         self.init()
         self.text(text())
     }
+    
+    /// initialize the Text with a string
+    /// - Parameter text: a string value
+    public init(attributedText:@escaping @autoclosure () -> NSAttributedString?) {
+        self.init()
+        self.attributedText(attributedText())
+    }
 }
 
 extension Text{
