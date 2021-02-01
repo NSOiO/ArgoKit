@@ -7,7 +7,7 @@
 
 import Foundation
 extension NSMutableAttributedString{
-    public func setParagraphStyle(paragraphStyle:@escaping (NSMutableParagraphStyle?)->()){
+    public func setParagraphStyle(range: NSRange,paragraphStyle:@escaping (NSMutableParagraphStyle?)->()){
         self.enumerateAttribute(NSAttributedString.Key.paragraphStyle, in: NSRange(location: 0, length: self.length ), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { [weak self]  (value, subRange, stop) in
             var style:NSMutableParagraphStyle? = nil
             if let value_ = value as? NSMutableParagraphStyle{
@@ -49,65 +49,184 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     }
     
     open func font(_ value:UIFont, range: NSRange? = nil){
-        attributedText?.addAttribute(NSAttributedString.Key.font, value: value, range: NSRange(location: 0, length: attributedText?.length ?? 0))
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
         self.font = value
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.addAttribute(NSAttributedString.Key.font, value: value, range: innerRange)
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+
+    }
+    open func textColor(_ value:UIColor, range: NSRange? = nil) {
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.addAttribute(NSAttributedString.Key.foregroundColor, value: value, range: innerRange)
+        attributedText?.addAttribute(kCTForegroundColorAttributeName as NSAttributedString.Key, value: value, range: innerRange)
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
     
     open func textAlignment(_ value:NSTextAlignment, range: NSRange? = nil){
         self.textAlignment = value
-        attributedText?.setParagraphStyle(paragraphStyle: { paragraphStyle in
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
             paragraphStyle?.alignment = value
-        })
+        }
+
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
     
-    open func lineSpacing(_ value:CGFloat){
+    open func lineSpacing(_ value:CGFloat,range: NSRange? = nil){
         self.lineSpacing = value
-        attributedText?.setParagraphStyle(paragraphStyle: { paragraphStyle in
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
             paragraphStyle?.lineSpacing = value
-        })
+        }
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
     
     open func lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
         self.lineBreakMode = value
-        attributedText?.setParagraphStyle(paragraphStyle: { paragraphStyle in
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
             paragraphStyle?.lineBreakMode = value
-        })
+        }
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
-    open func numberOfLines(_ value:Int, range: NSRange? = nil){
+    open func numberOfLines(_ value:Int){
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.numberOfLines),value)
         self.numberOfLines = value
     }
     
-    private func setShadow(_ value:NSShadow){
-        attributedText?.addAttribute(NSAttributedString.Key.shadow, value: value, range: NSRange(location: 0, length: attributedText?.length ?? 0))
+    open func setShadow(_ value:NSShadow,range: NSRange? = nil){
+        shadow = value
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.addAttribute(NSAttributedString.Key.shadow, value: value, range: innerRange)
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
-    open func shadow(_ value:NSShadow,range: NSRange? = nil){
-        shadow = value
-        setShadow(shadow)
-    }
-    open func shadow(color:UIColor,offset:CGSize,blurRadius:CGFloat,range: NSRange? = nil){
+    open func setShadow(color:UIColor,offset:CGSize,blurRadius:CGFloat,range: NSRange? = nil){
         shadow.shadowColor = color
         shadow.shadowOffset = offset
         shadow.shadowBlurRadius = blurRadius
-        setShadow(shadow)
+        setShadow(shadow,range: range)
     }
     
     open func shadowColor(_ value:UIColor,range: NSRange? = nil){
         shadow.shadowColor = value
-        setShadow(shadow)
+        setShadow(shadow,range: range)
     }
     open func shadowOffset(_ value:CGSize,range: NSRange? = nil){
         shadow.shadowOffset = value
-        setShadow(shadow)
+        setShadow(shadow,range: range)
     }
     open func shadowBlurRadius(_ value:CGFloat,range: NSRange? = nil){
         shadow.shadowBlurRadius = value
-        setShadow(shadow)
+        setShadow(shadow,range: range)
+    }
+    
+    open func kern(_ value:NSNumber?, range: NSRange? = nil) {
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.addAttribute(NSAttributedString.Key.kern, value: value as Any, range: innerRange)
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+    open func paragraphSpacing(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.paragraphSpacing = value
+        }
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+
+    
+    open func paragraphSpacingBefore(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.paragraphSpacingBefore = value
+        }
+       
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+
+    
+    open func firstLineHeadIndent(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.firstLineHeadIndent = value
+        }
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+
+
+    open func headIndent(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.headIndent = value
+        }
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+
+    
+    open func tailIndent(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.tailIndent = value
+        }
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+
+    
+    open func minimumLineHeight(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.minimumLineHeight = value
+        }
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
+    }
+
+    open func maximumLineHeight(_ value: CGFloat, range: NSRange? = nil){
+        var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
+        if let range = range{
+            innerRange = range
+        }
+        attributedText?.setParagraphStyle(range: innerRange){ paragraphStyle in
+            paragraphStyle?.maximumLineHeight = value
+        }
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),self.attributedText)
     }
     
     @discardableResult
@@ -116,7 +235,11 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         if let attribut = self.attributedText{
             lable.attributedText = attribut
         }
-        lable.font = font
+        if let font = self.font() {
+            lable.font = font
+        }else{
+            lable.font = font
+        }
         lable.numberOfLines = self.numberOfLines
         var result = lable.sizeThatFits(size)
         let width = ceil(result.width);

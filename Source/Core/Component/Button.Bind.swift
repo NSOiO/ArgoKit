@@ -36,13 +36,13 @@ extension Button {
     ///   - size: The size (in points) to which the font is scaled. This value must be greater than 0.0.
     /// - Returns: self
     @discardableResult
-    public func font(name: @escaping @autoclosure () -> String? = nil, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat) -> Self {
-		return self.bindCallback({ [self] in 
-        pNode.fontName = name()
-        pNode.fontSize = size()
-        pNode.fontStyle = style()
-			let f = UIFont.font(fontName:name(), fontStyle:style(), fontSize:size())
-			font(f)
+    public func font(name: @escaping @autoclosure () -> String? = nil, style: @escaping @autoclosure () -> AKFontStyle = .default, size: @escaping @autoclosure () -> CGFloat) -> Self {
+		return self.bindCallback({ [self] in
+            pNode.fontName = name()
+            pNode.fontSize = size()
+            pNode.fontStyle = style()
+            let f = UIFont.font(fontName:name(), fontStyle:style(), fontSize:size())
+            font(f)
 		}, forKey: #function)
     }
     

@@ -8,33 +8,83 @@
 import Foundation
 
 public protocol TextProtocol: View {
-    func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self
-    func font(name value: @escaping @autoclosure () -> String?)->Self
-    func font(size value: @escaping @autoclosure () -> CGFloat)->Self
-    func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self
-    func textColor(_ value:@escaping @autoclosure () -> UIColor)->Self
-    func textAlign(_ value:@escaping @autoclosure () -> NSTextAlignment)->Self
+    func text(_ value:@escaping @autoclosure () -> String?)->Self
     func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self
+    
+    func font(name: @escaping @autoclosure () -> String?,
+              style: @escaping @autoclosure () -> AKFontStyle,
+              size: @escaping @autoclosure () -> CGFloat,
+              range: @escaping @autoclosure () -> NSRange?)->Self
+    func font(name value: @escaping @autoclosure () -> String?,
+              range: @escaping @autoclosure () -> NSRange?)->Self
+    func font(size value: @escaping @autoclosure () -> CGFloat,
+              range: @escaping @autoclosure () -> NSRange?)->Self
+    func font(style value: @escaping @autoclosure () -> AKFontStyle,
+              range: @escaping @autoclosure () -> NSRange?)->Self
+    func textColor(_ value:@escaping @autoclosure () -> UIColor,
+                   range: @escaping @autoclosure () -> NSRange?)->Self
+    func textColor(red r:@escaping @autoclosure () -> Int,
+                   green g :@escaping @autoclosure () -> Int,
+                   blue b:@escaping @autoclosure () -> Int,
+                   alpha a:@escaping @autoclosure () -> CGFloat,
+                   range: @escaping @autoclosure () -> NSRange?)->Self
+    func textColor(hex:@escaping @autoclosure () -> Int,
+                   alpha a:@escaping @autoclosure () -> Float,
+                   range: @escaping @autoclosure () -> NSRange?)->Self
+    
+    func lineLimit(_ value:@escaping @autoclosure () -> Int)->Self
+    func textAlign(_ value:@escaping @autoclosure () -> NSTextAlignment,range: @escaping @autoclosure () -> NSRange?)->Self
     func lineSpacing(_ value:@escaping @autoclosure () -> CGFloat)->Self
-    func textColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat)->Self
-    func textColor(hex:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float)->Self
-    func textShadowOffset(_ value:@escaping @autoclosure () -> CGSize)->Self
-    func textShadowColor(_ value:@escaping @autoclosure () -> UIColor)->Self
-    func textShadowColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat)->Self
-    func textShadowColor(hex :@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float)->Self
-    func textShadowBlurRadius(_ value:@escaping @autoclosure () -> CGFloat)->Self
-    func breakMode(_ value:@escaping @autoclosure () -> NSLineBreakMode)->Self
+    func breakMode(_ value:@escaping @autoclosure () -> NSLineBreakMode,range: @escaping @autoclosure () -> NSRange?)->Self
+    
+    func textShadow(_ value:@escaping @autoclosure () -> NSShadow,
+                    range: @escaping @autoclosure () -> NSRange?)->Self
+    func textShadow(color:@escaping @autoclosure () ->UIColor,
+                    offset:@escaping @autoclosure () ->CGSize,
+                    blurRadius:@escaping @autoclosure () ->CGFloat,
+                    range: @escaping @autoclosure () ->NSRange?)->Self
+    func textShadowOffset(_ value:@escaping @autoclosure () -> CGSize,
+                          range: @escaping @autoclosure () -> NSRange?)->Self
+    func textShadowColor(_ value:@escaping @autoclosure () -> UIColor,
+                         range: @escaping @autoclosure () -> NSRange?)->Self
+    func textShadowColor(red r:@escaping @autoclosure () -> Int,
+                         green g :@escaping @autoclosure () -> Int,
+                         blue b:@escaping @autoclosure () -> Int,
+                         alpha a:@escaping @autoclosure () -> CGFloat,
+                         range: @escaping @autoclosure () -> NSRange?)->Self
+    func textShadowColor(hex :@escaping @autoclosure () -> Int,
+                         alpha a:@escaping @autoclosure () -> Float,
+                         range: @escaping @autoclosure () -> NSRange?)->Self
+    func textShadowBlurRadius(_ value:@escaping @autoclosure () -> CGFloat,
+                              range: @escaping @autoclosure () -> NSRange?)->Self
+
     func highlightedTextColor(_ value:@escaping @autoclosure () -> UIColor?)->Self
     func isHighlighted(_ value:@escaping @autoclosure () -> Bool)->Self
     func userInteractionEnabled(_ value:@escaping @autoclosure () -> Bool)->Self
     func isEnabled(_ value:@escaping @autoclosure () -> Bool)->Self
-    func lineLimit(_ value:@escaping @autoclosure () -> Int)->Self
     func adjustsFontSizeToFitWidth(_ value:@escaping @autoclosure () -> Bool)->Self
     func baselineAdjustment(_ value:@escaping @autoclosure () -> UIBaselineAdjustment)->Self
     func minimumScaleFactor(_ value:@escaping @autoclosure () -> CGFloat)->Self
     func allowsDefaultTighteningForTruncation(_ value:@escaping @autoclosure () -> Bool)->Self
     func lineBreakStrategy(_ value:@escaping @autoclosure () -> NSParagraphStyle.LineBreakStrategy)->Self
     func preferredMaxLayoutWidth(in value: @escaping @autoclosure () -> CGFloat)->Self
+    
+    func kern(_ value:@escaping @autoclosure () -> Float,
+                     range: @escaping @autoclosure () -> NSRange?) -> Self 
+    func paragraphSpacing(_ value: @escaping @autoclosure () -> CGFloat,
+                                 range: @escaping @autoclosure () -> NSRange?) -> Self
+    func paragraphSpacingBefore(_ value:@escaping @autoclosure () -> CGFloat,
+                                       range: @escaping @autoclosure () -> NSRange?) -> Self
+    func firstLineHeadIndent(_ value: @escaping @autoclosure () -> CGFloat,
+                             range: @escaping @autoclosure () -> NSRange?) -> Self
+    func headIndent(_ value: @escaping @autoclosure () -> CGFloat,
+                           range: @escaping @autoclosure () -> NSRange?) -> Self
+    func tailIndent(_ value: @escaping @autoclosure () -> CGFloat,
+                           range: @escaping @autoclosure () -> NSRange?) -> Self
+    func minimumLineHeight(_ value: @escaping @autoclosure () -> CGFloat,
+                                  range: @escaping @autoclosure () -> NSRange?) -> Self
+    func maximumLineHeight(_ value: @escaping @autoclosure () -> CGFloat,
+                                  range: @escaping @autoclosure () -> NSRange?) -> Self
 }
 
 extension TextProtocol {
@@ -47,14 +97,23 @@ extension TextProtocol {
             textNode?.setText(value())
         }, forKey: #function)
     }
+    /// set the styled text that the label displays.
+    /// - Parameter value: new styled text
+    /// - Returns: self
+    @discardableResult
+    public func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.setAttributedText(attri: value())
+        }, forKey: #function)
+    }
     
     /// set the font of the receiver's text.
     /// - Parameter value: a UIFont value
     /// - Returns: self
     @discardableResult
-    public func font(_ value: @escaping @autoclosure () -> UIFont)->Self{
+    public func font(_ value: @escaping @autoclosure () -> UIFont,range: @escaping @autoclosure () -> NSRange? = nil)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
-            textNode?.font(value())
+            textNode?.font(value(),range: range())
         }, forKey: #function)
     }
     
@@ -75,14 +134,14 @@ extension TextProtocol {
     /// }
     /// ```
     @discardableResult
-    public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat)->Self{
+    public func font(name: @escaping @autoclosure () -> String?, style: @escaping @autoclosure () -> AKFontStyle, size: @escaping @autoclosure () -> CGFloat,range: @escaping @autoclosure () -> NSRange? = nil)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_name = name(), f_size = size(), f_style = style()
             textNode?.fontName = f_name
             textNode?.fontSize = f_size
             textNode?.fontStyle = f_style
             let font = UIFont.font(fontName: f_name, fontStyle: f_style, fontSize: f_size)
-            textNode?.font(font)
+            textNode?.font(font,range: range())
         }, forKey: #function)
     }
     
@@ -90,12 +149,12 @@ extension TextProtocol {
     /// - Parameter value: font name
     /// - Returns: self
     @discardableResult
-    public func font(name value: @escaping @autoclosure () -> String?)->Self{
+    public func font(name value: @escaping @autoclosure () -> String?,range: @escaping @autoclosure () -> NSRange? = nil)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_name = value()
             textNode?.fontName = f_name
             let font = UIFont.font(fontName: f_name, fontStyle: textNode?.fontStyle, fontSize: textNode?.fontSize)
-            textNode?.font(font)
+            textNode?.font(font,range: range())
         }, forKey: #function)
     }
     
@@ -103,12 +162,12 @@ extension TextProtocol {
     /// - Parameter value: font size
     /// - Returns: self
     @discardableResult
-    public  func font(size value: @escaping @autoclosure () -> CGFloat)->Self{
+    public  func font(size value: @escaping @autoclosure () -> CGFloat,range: @escaping @autoclosure () -> NSRange? = nil)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_size = value()
             textNode?.fontSize = f_size
             let font = UIFont.font(fontName: textNode?.fontName, fontStyle:  textNode?.fontStyle, fontSize: f_size)
-            textNode?.font(font)
+            textNode?.font(font,range: range())
         }, forKey: #function)
     }
     
@@ -126,12 +185,12 @@ extension TextProtocol {
     /// }
     /// ```
     @discardableResult
-    public func font(style value: @escaping @autoclosure () -> AKFontStyle)->Self{
+    public func font(style value: @escaping @autoclosure () -> AKFontStyle,range: @escaping @autoclosure () -> NSRange? = nil)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
             let f_style = value()
             textNode?.fontStyle = value()
             let font = UIFont.font(fontName: textNode?.fontName, fontStyle: f_style, fontSize: textNode?.fontSize)
-            textNode?.font(font)
+            textNode?.font(font,range: range())
         }, forKey: #function)
     }
     
@@ -139,9 +198,43 @@ extension TextProtocol {
     /// - Parameter value: the new color
     /// - Returns: self
     @discardableResult
-    public func textColor(_ value:@escaping @autoclosure () -> UIColor)->Self{
-		return self.bindCallback({ [self] in 
-			addAttribute(#selector(setter:UILabel.textColor),value())
+    public func textColor(_ value:@escaping @autoclosure () -> UIColor,range: @escaping @autoclosure () -> NSRange? = nil)->Self{
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode]  in
+            textNode?.textColor(value(),range: range())
+		}, forKey: #function)
+    }
+    
+    /// change the rgba-color of the text.
+    /// - Parameters:
+    ///   - r: the red value of the color object, data range from 0 to 255.
+    ///   - g: the green value of the color object, data range from 0 to 255.
+    ///   - b: the blue value of the color object, data range from 0 to 255.
+    ///   - a: the opacity value of the color object, data range from 0 to 1.
+    /// - Returns: self
+    @discardableResult
+    public func textColor(red r:@escaping @autoclosure () -> Int,
+                          green g :@escaping @autoclosure () -> Int,
+                          blue b:@escaping @autoclosure () -> Int,
+                          alpha a:@escaping @autoclosure () -> CGFloat = 1,
+                          range: @escaping @autoclosure () -> NSRange? = nil)->Self{
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode]  in
+            let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
+            textNode?.textColor(value,range: range())
+		}, forKey: #function)
+    }
+    
+    /// change the rgba-color of the text
+    /// - Parameters:
+    ///   - hex: rgb color, ex: 0xaabbcc representing the red value is 0xaa, the green value is 0xbb and the blue value is 0xcc.
+    ///   - a: the opacity value of the color object, data range from 0 to 1.
+    /// - Returns: self
+    @discardableResult
+    public func textColor(hex:@escaping @autoclosure () -> Int,
+                          alpha a:@escaping @autoclosure () -> Float = 1,
+                          range: @escaping @autoclosure () -> NSRange? = nil)->Self{
+		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode]  in
+			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
+            textNode?.textColor(value,range: range())
 		}, forKey: #function)
     }
     
@@ -162,68 +255,61 @@ extension TextProtocol {
     ///}
     ///```
     @discardableResult
-    public func textAlign(_ value:@escaping @autoclosure () -> NSTextAlignment)->Self{
-		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode]  in
-            let textAlignment = value()
-            textNode?.textAlignment(textAlignment)
-		}, forKey: #function)
+    public func textAlign(_ value:@escaping @autoclosure () -> NSTextAlignment,
+                          range: @escaping @autoclosure () -> NSRange? = nil)->Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode]  in
+            textNode?.textAlignment(value(),range: range())
+        }, forKey: #function)
     }
     
-    /// set the styled text that the label displays.
-    /// - Parameter value: new styled text
-    /// - Returns: self
-    @discardableResult
-    public func attributedText(_ value:@escaping @autoclosure () -> NSAttributedString?)->Self{
-		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
-			textNode?.setAttributedText(attri: value())
-		}, forKey: #function)
-    }
+
     
     ///  The distance in points between the bottom of one line fragment and the top of the next.
     /// - Parameter value: new points value
     /// - Returns: self
     @discardableResult
     public func lineSpacing(_ value:@escaping @autoclosure () -> CGFloat)->Self{
-		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
-			textNode?.lineSpacing(value())
-		}, forKey: #function)
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.lineSpacing(value())
+        }, forKey: #function)
     }
     
-    /// change the rgba-color of the text.
-    /// - Parameters:
-    ///   - r: the red value of the color object, data range from 0 to 255.
-    ///   - g: the green value of the color object, data range from 0 to 255.
-    ///   - b: the blue value of the color object, data range from 0 to 255.
-    ///   - a: the opacity value of the color object, data range from 0 to 1.
+    /// set the shadow, in points, for the text
+    /// - Parameter value: new NSShadow value
+    /// - Parameter range: new range value
     /// - Returns: self
     @discardableResult
-    public func textColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat = 1)->Self{
-		return self.bindCallback({ [self] in 
-			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
-			addAttribute(#selector(setter:UILabel.textColor),value);
-		}, forKey: #function)
+    public func textShadow(_ value:@escaping @autoclosure () -> NSShadow,
+                           range: @escaping @autoclosure () -> NSRange? = nil)->Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.setShadow(value(),range: range())
+        }, forKey: #function)
     }
     
-    /// change the rgba-color of the text
-    /// - Parameters:
-    ///   - hex: rgb color, ex: 0xaabbcc representing the red value is 0xaa, the green value is 0xbb and the blue value is 0xcc.
-    ///   - a: the opacity value of the color object, data range from 0 to 1.
+    /// set the shadow, in points, for the text
+    /// - Parameter color: new color value
+    /// - Parameter offset: new offset value
+    /// - Parameter blurRadius: new blurRadius value
+    /// - Parameter range: new range value
     /// - Returns: self
     @discardableResult
-    public func textColor(hex:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float = 1)->Self{
-		return self.bindCallback({ [self] in 
-			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
-			addAttribute(#selector(setter:UILabel.textColor),value);
-		}, forKey: #function)
+    public func textShadow(color:@escaping @autoclosure () ->UIColor,
+                    offset:@escaping @autoclosure () ->CGSize,
+                    blurRadius:@escaping @autoclosure () ->CGFloat,
+                    range: @escaping @autoclosure () ->NSRange? = nil)->Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.setShadow(color: color(), offset: offset(), blurRadius: blurRadius(),range: range())
+        }, forKey: #function)
     }
     
     /// set the shadow offset, in points, for the text
     /// - Parameter value: new offset value
     /// - Returns: self
     @discardableResult
-    public func textShadowOffset(_ value:@escaping @autoclosure () -> CGSize)->Self{
+    public func textShadowOffset(_ value:@escaping @autoclosure () -> CGSize,
+                                 range: @escaping @autoclosure () -> NSRange? = nil)->Self{
 		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
-            textNode?.shadowOffset(value())
+            textNode?.shadowOffset(value(),range: range())
 		}, forKey: #function)
     }
     
@@ -231,9 +317,10 @@ extension TextProtocol {
     /// - Parameter value: a new color
     /// - Returns: self
     @discardableResult
-    public func textShadowColor(_ value:@escaping @autoclosure () -> UIColor)->Self{
+    public func textShadowColor(_ value:@escaping @autoclosure () -> UIColor,
+                                range: @escaping @autoclosure () -> NSRange? = nil)->Self{
 		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
-            textNode?.shadowColor(value())
+            textNode?.shadowColor(value(),range: range())
 		}, forKey: #function)
     }
     
@@ -245,10 +332,14 @@ extension TextProtocol {
     ///   - a: opacity value of the color object, data range form 0 to 255
     /// - Returns: self
     @discardableResult
-    public func textShadowColor(red r:@escaping @autoclosure () -> Int,green g :@escaping @autoclosure () -> Int,blue b:@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> CGFloat = 1)->Self{
+    public func textShadowColor(red r:@escaping @autoclosure () -> Int,
+                                green g :@escaping @autoclosure () -> Int,
+                                blue b:@escaping @autoclosure () -> Int,
+                                alpha a:@escaping @autoclosure () -> CGFloat = 1,
+                                range: @escaping @autoclosure () -> NSRange? = nil)->Self{
 		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
 			let value = UIColor(red: CGFloat(Double(r())/255.0), green: CGFloat(Double(g())/255.0), blue: CGFloat(Double(b())/255.0), alpha: a())
-            textNode?.shadowColor(value)
+            textNode?.shadowColor(value,range: range())
 		}, forKey: #function)
     }
     
@@ -258,10 +349,12 @@ extension TextProtocol {
     ///   - a: opaity value of the color object, data range from 0 to 1.
     /// - Returns: self
     @discardableResult
-    public func textShadowColor(hex :@escaping @autoclosure () -> Int,alpha a:@escaping @autoclosure () -> Float = 1)->Self{
+    public func textShadowColor(hex :@escaping @autoclosure () -> Int,
+                                alpha a:@escaping @autoclosure () -> Float = 1,
+                                range: @escaping @autoclosure () -> NSRange? = nil)->Self{
 		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
 			let value = ArgoKitUtils.color(withHex: hex(),alpha:a())
-            textNode?.shadowColor(value)
+            textNode?.shadowColor(value,range: range())
 		}, forKey: #function)
     }
     
@@ -270,9 +363,10 @@ extension TextProtocol {
     /// - Parameter range: new range value
     /// - Returns: self
     @discardableResult
-    public func textShadowBlurRadius(_ value:@escaping @autoclosure () -> CGFloat)->Self{
+    public func textShadowBlurRadius(_ value:@escaping @autoclosure () -> CGFloat,
+                                     range: @escaping @autoclosure () -> NSRange? = nil)->Self{
         return self.bindCallback({[textNode = self.node as? ArgoKitTextBaseNode] in
-            textNode?.shadowBlurRadius(value())
+            textNode?.shadowBlurRadius(value(),range: range())
         }, forKey: #function)
     }
     
@@ -297,9 +391,10 @@ extension TextProtocol {
     ///}
     ///```
     @discardableResult
-    public func breakMode(_ value:@escaping @autoclosure () -> NSLineBreakMode)->Self{
+    public func breakMode(_ value:@escaping @autoclosure () -> NSLineBreakMode,
+                          range: @escaping @autoclosure () -> NSRange? = nil)->Self{
 		return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode]  in
-            textNode?.lineBreakMode(value())
+            textNode?.lineBreakMode(value(),range: range())
 		}, forKey: #function)
     }
     
@@ -431,5 +526,131 @@ extension TextProtocol {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UILabel.preferredMaxLayoutWidth),value())
 		}, forKey: #function)
+    }
+    
+    
+    /// A kerning adjustment.
+     
+    /// @discussion Default is standard kerning. The kerning attribute indicate how many
+    /// points the following character should be shifted from its default offset as
+    /// defined by the current character's font in points; a positive kern indicates a
+    /// shift farther along and a negative kern indicates a shift closer to the current
+    /// character. If this attribute is not present, standard kerning will be used.
+    /// If this attribute is set to 0.0, no kerning will be done at all.
+    /// @discussion Set this property applies to the entire text string.
+    /// Get this property returns the first character's attribute.
+
+    /// - Parameter value: a new kern
+    /// - Parameter range: new range value
+    /// - Returns: self
+    @discardableResult
+    public func kern(_ value:@escaping @autoclosure () -> Float,
+                     range: @escaping @autoclosure () -> NSRange? = nil) -> Self {
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.kern(NSNumber(value:value()))
+        }, forKey: #function)
+    }
+    
+    /// The space after the end of the paragraph (A wrapper for NSParagraphStyle).
+     
+    /// - Parameter value: This property contains the space (measured in points) added at the
+    /// - end of the paragraph to separate it from the following paragraph. This value must
+    /// - be nonnegative. The space between paragraphs is determined by adding the previous
+    /// - paragraph's paragraphSpacing and the current paragraph's paragraphSpacingBefore.
+    /// - Default is 0.
+    /// - Set this property applies to the entire text string.
+    @discardableResult
+    public func paragraphSpacing(_ value: @escaping @autoclosure () -> CGFloat,
+                                 range: @escaping @autoclosure () -> NSRange? = nil) -> Self {
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.paragraphSpacing(value(),range: range())
+        }, forKey: #function)
+    }
+
+    /// The distance between the paragraph's top and the beginning of its text content.
+    /// (A wrapper for NSParagraphStyle). (read-only)
+     
+    /// - Parameter value: This property contains the space (measured in points) between the
+    /// -paragraph's top and the beginning of its text content.
+    /// - Default is 0.
+    /// - Get this property returns the first character's attribute.
+    @discardableResult
+    public func paragraphSpacingBefore(_ value:@escaping @autoclosure () -> CGFloat,
+                                       range: @escaping @autoclosure () -> NSRange? = nil) -> Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.paragraphSpacingBefore(value(),range: range())
+        }, forKey: #function)
+    }
+
+    /// The indentation of the first line (A wrapper for NSParagraphStyle). (read-only)
+     
+    /// - Parameter value: This property contains the distance (in points) from the leading margin
+    /// -of a text container to the beginning of the paragraph's first line. This value
+    /// -is always nonnegative.
+    /// - Default is 0.
+    public func firstLineHeadIndent(_ value: @escaping @autoclosure () -> CGFloat,
+                             range: @escaping @autoclosure () -> NSRange? = nil) -> Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.firstLineHeadIndent(value(),range: range())
+        }, forKey: #function)
+    }
+
+
+    /// The indentation of the receiver's lines other than the first. (A wrapper for NSParagraphStyle). (read-only)
+     
+    /// - Parameter value: This property contains the distance (in points) from the leading margin
+    /// - of a text container to the beginning of lines other than the first. This value is
+    /// - always nonnegative.
+    /// -  Default is 0.
+    @discardableResult
+    public func headIndent(_ value: @escaping @autoclosure () -> CGFloat,
+                           range: @escaping @autoclosure () -> NSRange? = nil) -> Self {
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.headIndent(value(),range: range())
+        }, forKey: #function)
+    }
+
+    /// The trailing indentation (A wrapper for NSParagraphStyle). (read-only)
+     
+    /// - Parameter value: If positive, this value is the distance from the leading margin
+    /// -(for example, the left margin in left-to-right text). If 0 or negative, it's the
+    /// -distance from the trailing margin.
+    /// - Default is 0.
+    @discardableResult
+    public func tailIndent(_ value: @escaping @autoclosure () -> CGFloat,
+                           range: @escaping @autoclosure () -> NSRange? = nil) -> Self {
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.tailIndent(value(),range: range())
+        }, forKey: #function)
+    }
+
+    /// The receiver's minimum height (A wrapper for NSParagraphStyle). (read-only)
+     
+    /// - Parameter value: This property contains the minimum height in points that any line in
+    /// - the receiver will occupy, regardless of the font size or size of any attached graphic.
+    /// - This value must be nonnegative.
+    /// -  Default is 0.
+    @discardableResult
+    public func minimumLineHeight(_ value: @escaping @autoclosure () -> CGFloat,
+                                  range: @escaping @autoclosure () -> NSRange? = nil) -> Self {
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.minimumLineHeight(value(),range: range())
+        }, forKey: #function)
+    }
+    
+    /// The receiver's maximum line height (A wrapper for NSParagraphStyle). (read-only)
+     
+    /// - Parameter value: This property contains the maximum height in points that any line in
+    /// - the receiver will occupy, regardless of the font size or size of any attached graphic.
+    /// - This value is always nonnegative. Glyphs and graphics exceeding this height will
+    /// - overlap neighboring lines; however, a maximum height of 0 implies no line height limit.
+    /// - Although this limit applies to the line itself, line spacing adds extra space between adjacent lines.
+    /// - Default is 0 (no limit).
+    @discardableResult
+    public func maximumLineHeight(_ value: @escaping @autoclosure () -> CGFloat,
+                                  range: @escaping @autoclosure () -> NSRange? = nil) -> Self{
+        return self.bindCallback({ [textNode = self.node as? ArgoKitTextBaseNode] in
+            textNode?.maximumLineHeight(value(),range: range())
+        }, forKey: #function)
     }
 }

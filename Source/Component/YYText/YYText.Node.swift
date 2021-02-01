@@ -18,6 +18,10 @@ class YYTextNode: ArgoKitTextBaseNode{
         textTapAction = nil
         textLongAction = nil
     }
+    
+    func displaysAsynchronously(asyn:Bool){
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.displaysAsynchronously),asyn)
+    }
     override func createNodeViewIfNeed(_ frame: CGRect) {
         super.createNodeViewIfNeed(frame)
         if let view = self.link?.view as? YYLabel {
@@ -30,9 +34,12 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
     override  func sizeThatFits(_ size: CGSize) -> CGSize {
         let lable = YYTextCalculation.yycalculationLable
-        lable.textLayout = nil
-        lable.font = font
         lable.attributedText = self.attributedText
+        if let font = self.font() {
+            lable.font = font
+        }else{
+            lable.font = font
+        }
         lable.numberOfLines = UInt(self.numberOfLines)
         return lable.sizeThatFits(size)
     }
@@ -58,13 +65,17 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attributedText)
     }
     
-    override func lineSpacing(_ value: CGFloat) {
+    override func lineSpacing(_ value: CGFloat,range: NSRange? = nil) {
         self.lineSpacing = value
-        attributedText?.yy_lineSpacing = value
+        if let range = range {
+            attributedText?.yy_setLineSpacing(value, range: range)
+        }else{
+            attributedText?.yy_lineSpacing = value
+        }
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attributedText)
     }
     
-    func kern(_ value:NSNumber?, range: NSRange? = nil) {
+    override func kern(_ value:NSNumber?, range: NSRange? = nil) {
         if let range = range {
             attributedText?.yy_setKern(value, range: range)
         }else{
@@ -91,7 +102,7 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attributedText)
     }
     
-    func textColor(_ value:UIColor?, range: NSRange? = nil) {
+    override func textColor(_ value:UIColor?, range: NSRange? = nil) {
         if let range = range {
             attributedText?.yy_setColor(value, range: range)
         }else{
@@ -189,7 +200,7 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
     
     
-    override func shadow(_ value:NSShadow,range: NSRange? = nil){
+    override func setShadow(_ value:NSShadow,range: NSRange? = nil){
         shadow = value
         if let range = range {
             attributedText?.yy_setShadow(shadow, range: range)
@@ -198,7 +209,7 @@ class YYTextNode: ArgoKitTextBaseNode{
         }
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),attributedText)
     }
-    override func shadow(color:UIColor,offset:CGSize,blurRadius:CGFloat,range: NSRange? = nil){
+    override func setShadow(color:UIColor,offset:CGSize,blurRadius:CGFloat,range: NSRange? = nil){
         shadow.shadowColor = color
         shadow.shadowOffset = offset
         shadow.shadowBlurRadius = blurRadius
@@ -308,7 +319,7 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
     
 
-    func paragraphSpacing(_ value: CGFloat, range: NSRange? = nil){
+    override func paragraphSpacing(_ value: CGFloat, range: NSRange? = nil){
         if let range = range {
             attributedText?.yy_setParagraphSpacing(value, range: range)
         }else{
@@ -318,13 +329,18 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
 
     
-    func paragraphSpacingBefore(_ value: CGFloat, range: NSRange? = nil){
-        attributedText?.yy_paragraphSpacingBefore = value
+    override func paragraphSpacingBefore(_ value: CGFloat, range: NSRange? = nil){
+        if let range = range {
+            attributedText?.yy_setParagraphSpacing(before: value, range: range)
+        }else{
+            attributedText?.yy_paragraphSpacingBefore = value
+        }
+       
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),self.attributedText)
     }
 
     
-    func firstLineHeadIndent(_ value: CGFloat, range: NSRange? = nil){
+    override func firstLineHeadIndent(_ value: CGFloat, range: NSRange? = nil){
         if let range = range {
             attributedText?.yy_setFirstLineHeadIndent(value, range: range)
         }else{
@@ -334,7 +350,7 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
 
 
-    func headIndent(_ value: CGFloat, range: NSRange? = nil){
+    override func headIndent(_ value: CGFloat, range: NSRange? = nil){
         if let range = range {
             attributedText?.yy_setHeadIndent(value, range: range)
         }else{
@@ -344,7 +360,7 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
 
     
-    func tailIndent(_ value: CGFloat, range: NSRange? = nil){
+    override func tailIndent(_ value: CGFloat, range: NSRange? = nil){
         if let range = range {
             attributedText?.yy_setTailIndent(value, range: range)
         }else{
@@ -354,7 +370,7 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
 
     
-    func minimumLineHeight(_ value: CGFloat, range: NSRange? = nil){
+    override func minimumLineHeight(_ value: CGFloat, range: NSRange? = nil){
         if let range = range {
             attributedText?.yy_setMinimumLineHeight(value, range: range)
         }else{
@@ -363,7 +379,7 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),self.attributedText)
     }
 
-    func maximumLineHeight(_ value: CGFloat, range: NSRange? = nil){
+    override func maximumLineHeight(_ value: CGFloat, range: NSRange? = nil){
         if let range = range {
             attributedText?.yy_setMaximumLineHeight(value, range: range)
         }else{

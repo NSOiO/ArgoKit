@@ -11,7 +11,7 @@ import ArgoKitComponent
 class ArgoKitTextTestModel {
 //   @Observable var age:Int = 1
 //   @Observable var fontSize:CGFloat = 30
-   @Observable var name:String = "张三"
+   @Observable var name:String = "张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三"
 //   @Observable var color:UIColor = .red
 //   @Alias var text:Text?
 }
@@ -42,60 +42,89 @@ struct ArgoKitTextTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        HStack{
-            Text("单行文本")
-                .font(size: 25)
-                .backgroundColor(.orange)
-                .margin(edge: .top, value: 100)
-                .height(100)
-        }
-            .alignSelf(.center)
-
-        Text("单行文本粗体cd")
-            .font(size: 25)
-            .font(style: .bold)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.stretch)
-            .textAlign(.center)
+//        HStack{
+//            Text("单行文本sxssasasdassasa")
+//                .font(size: 25)
+//                .backgroundColor(.orange)
+//                .margin(edge: .top, value: 100)
+//
+//                .height(100)
+//        }
+//            .alignSelf(.center)
+//
+//
+//        Text("单行文本粗体cdxasxas····")
+//            .font(size: 25)
+//            .font(style: .bold)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .alignSelf(.stretch)
+//            .textAlign(.right)
+//            .margin(edge: .bottom, value: 100)
         Button(text: model.name) {
+            
         }
-            .alignSelf(.center)
-
-        Text("单行文本粗体cd")
-            .font(size: 25)
-            .font(style: .bold)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.stretch)
-
-        Text(model.name)
-            .font(size: 50)
-            .font(style: .default)
-//            .backgroundColor(model.color)
-            .margin(edge: .top, value: 10)
-            .alignSelf(.start)
-            .onTapGesture {
-                let controller = ViewPagerController()
-                viewController()?.navigationController?.pushViewController(controller, animated: true)
-//                model.name = "李四" + "\(Int.random(in: 0 ..< 1000))"
-            }
+        .font(size:40)
+        .backgroundColor(.red)
+        .margin(edge: .bottom, value: 10)
+//        .alignSelf(.center)
+        
+        Button {
+            
+        } builder: { () -> View in
+            Text( model.name).backgroundColor(.purple)
+//                .firstLineHeadIndent(10)
+                .lineLimit(0)
+                .headIndent(10).kern(10)
+        } .backgroundColor(.red)
+        .font(size:20)
+        .textColor(.yellow)
         
         
-        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
-            .font(size: 25)
-            .lineLimit(0)
-            .lineSpacing(10)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
 
-        YYText("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本多行文本 多行文本 多行文本")
-            .font(size: 25)
-            .textColor(.white)
-            .lineLimit(3)
-            .lineSpacing(10)
-            .backgroundColor(.orange)
-            .margin(edge: .top, value: 10)
+        
+
+//        Text("单行文本粗体cd")
+//            .font(size: 25)
+//            .font(style: .bold)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 50)
+//            .alignSelf(.stretch)
+//
+//        Text(model.name)
+//            .font(size: 50)
+//            .font(style: .default)
+////            .backgroundColor(model.color)
+//            .margin(edge: .top, value: 10)
+//            .alignSelf(.start)
+//            .onTapGesture {
+//                let controller = ViewPagerController()
+//                viewController()?.navigationController?.pushViewController(controller, animated: true)
+////                model.name = "李四" + "\(Int.random(in: 0 ..< 1000))"
+//            }
+//        
+//        
+//        Text("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 ")
+//            .font(size: 25)
+//            .lineLimit(0)
+//            .lineSpacing(10)
+//            .backgroundColor(.orange)
+//            .margin(edge: .top, value: 10)
+//            .textShadow(color: .red, offset: CGSize(width: 2, height: 2), blurRadius: 0.5,range: NSRange(location: 1, length: 2))
+//
+//        YYText("多行文本行间距 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本 多行文本多行文本 多行文本 多行文本")
+//            .font(size: 20)
+//            .font(style: .bolditalic)
+//            .textColor(.white)
+//            .textColor(.yellow,range: NSRange(location: 10, length: 6))
+//            .lineLimit(3)
+//            .lineSpacing(10)
+//            .underline(style: .single, width: 1, color: .red)
+//            .backgroundColor(.gray)
+//            .margin(edge: .top, value: 10)
+//            .textShadow(color: .red, offset: CGSize(width: 2, height: 2), blurRadius: 0.5,range: NSRange(location: 3, length: 2))
+            
+        
         
     }
 }

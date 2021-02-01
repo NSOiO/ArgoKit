@@ -52,37 +52,31 @@ public struct Button: View {
         self.addAction(action: action)
         
         label = Text(text()).alignSelf(.center).textAlign(.center).grow(1)
-        if let node = label?.node {
-            pNode.addChildNode(node)
-        }
         self.bindCallback({ [self] in
             setValue(pNode, #selector(setter: UILabel.text), text())
         }, forKey: #function)
+        if let node = label?.node {
+            pNode.addChildNode(node)
+        }
+
     }
     private func addAction(action: @escaping () -> Void){
         self.onTapGesture(action: action)
-//        pNode.addAction({ (obj, paramter) -> Any? in
-//            action();
-//        }, for: UIControl.Event.touchUpInside)
     }
 }
 
 extension Button {
-    
     func setValue(_ node: ArgoKitNode, _ selector: Selector, _ value: Any?) -> Void {
         if let nodes = node.childs{
             for subNode in nodes {
-                if let lableNode = label?.node {
-                    if subNode as! NSObject == lableNode {
-                        ArgoKitNodeViewModifier.addAttribute(lableNode as? ArgoKitTextNode, selector, value)
-                        continue
-                    }
+                if let lableNode = label?.node,let node = subNode as? NSObject,node == lableNode  {
+                    ArgoKitNodeViewModifier.addAttribute(isDirty:true,lableNode as? ArgoKitTextBaseNode, selector, value)
+                    continue
                 }
-                
-                if subNode is ArgoKitTextNode {
-                    if let _ =  (subNode as! ArgoKitTextNode).value(with: selector){
+                if subNode is ArgoKitTextBaseNode {
+                    if let _ =  (subNode as! ArgoKitTextBaseNode).value(with: selector){
                     }else{
-                        ArgoKitNodeViewModifier.addAttribute(subNode as? ArgoKitTextNode, selector, value)
+                        ArgoKitNodeViewModifier.addAttribute(subNode as? ArgoKitTextBaseNode, selector, value)
                     }
                 }else{
                     setValue(subNode as! ArgoKitNode, selector, value)
