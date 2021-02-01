@@ -28,7 +28,7 @@ class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:NSMutableArray = NSMutableArray()
-    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node"])
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node")
     public var sectionDataSourceList:DataSource<SectionDataList<D>>?{
         didSet{
             sectionDataSourceList?._rootNode = _rootNode
