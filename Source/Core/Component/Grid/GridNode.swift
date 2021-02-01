@@ -33,6 +33,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
                        DataSourceReloadNode
 {
 
+    deinit {
+        self.pGridView?.removeObserver(self, forKeyPath: "contentSize")
+    }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
@@ -65,6 +68,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
         flowLayout.estimatedItemSize = CGSize(width: 60, height: 60)
         gridView.frame = frame
+        gridView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
         gridView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
                 var cellNodes:[Any] = []
@@ -103,6 +107,17 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return gridView
     }
 
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            if let new = change?[NSKeyValueChangeKey.newKey] as? CGSize,
+               let old = change?[NSKeyValueChangeKey.oldKey] as? CGSize{
+                if !new.equalTo(old) {
+                    setContentSizeViewHeight(new.height)
+                }
+            }
+           
+        }
+    }
     
     @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         

@@ -1,6 +1,6 @@
 //
 //  ArgoKitTableNode.swift
-//  ArgoKit
+//  ArgoKitfont
 //
 //  Created by MOMO on 2020/10/28.
 //
@@ -29,6 +29,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
                     UITableViewDataSource,
                     UITableViewDataSourcePrefetching,
                     DataSourceReloadNode {
+    
+    deinit {
+        self.tableView?.removeObserver(self, forKeyPath: "contentSize")
+    }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize.zero
     }
@@ -58,6 +62,11 @@ class TableNode<D>: ArgoKitScrollViewNode,
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
         self.tableView = tableView
+        if defaultViewHeight == 0 {
+            defaultViewHeight = frame.height
+            defaultFlexGrow = self.flexGrow()
+        }
+        tableView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
         tableView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
                 var cellNodes:[Any] = []
@@ -88,6 +97,18 @@ class TableNode<D>: ArgoKitScrollViewNode,
             preview.register(table: tableView, coordinator: self)
         }
         return tableView
+    }
+    
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            if let new = change?[NSKeyValueChangeKey.newKey] as? CGSize,
+               let old = change?[NSKeyValueChangeKey.oldKey] as? CGSize{
+                if !new.equalTo(old) {
+                    setContentSizeViewHeight(new.height)
+                }
+            }
+           
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -28,6 +28,7 @@ class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:NSMutableArray = NSMutableArray()
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node"])
     public var sectionDataSourceList:DataSource<SectionDataList<D>>?{
         didSet{
             sectionDataSourceList?._rootNode = _rootNode
@@ -105,7 +106,14 @@ extension DataSourceHelper {
 
         return dataSource()![section][row]
     }
-    
+    open func nodeForRow(_ row: Int, at section: Int,result:@escaping(ArgoKitCellNode?)->()){
+        nodeQueue.async {[weak self] in
+            let node = self?.nodeForRow(row, at: section)
+            DispatchQueue.main.async {
+                result(node)
+            }
+        }
+    }
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
         if let nodelist =  nodeSourceList,
            nodelist.count() > section,
@@ -149,7 +157,6 @@ extension DataSourceHelper {
     }
     
     open func nodeForRowNoCache(_ row: Int, at section: Int) -> ArgoKitNode? {
-                
         if let data = dataForRow(row, at: section), let view = self.buildNodeFunc?(data as! D) {
             if let nodes = view.type.viewNodes() {
                 let contentNode = ArgoKitCellNode(viewClass: UIView.self)
@@ -159,8 +166,17 @@ extension DataSourceHelper {
         }
         return nil
     }
+    open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat,result:@escaping (CGFloat)->()){
+        nodeQueue.async {[weak self] in
+            let rowHeight = self?.rowHeight(row, at: section,maxWidth: maxWidth) ?? 0
+            DispatchQueue.main.async {
+                result(rowHeight)
+            }
+        }
+    }
     
     open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
+        
         if let node = self.nodeForRow(row, at: section) {
             if node.size.width != maxWidth || node.size.height == 0 {
                 node.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))

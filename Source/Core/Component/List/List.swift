@@ -51,6 +51,7 @@ public class List<D>: ScrollView  {
     
     override func createNode() {
         pNode = TableNode<D>(viewClass: TableView.self)
+        self.height(.auto)
         pNode?.flexGrow(1.0)
     }
     

@@ -151,6 +151,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)flexGrow:(CGFloat)value;
 - (void)flexShrink:(CGFloat)value;
 
+- (CGFloat)flex;
+- (CGFloat)flexGrow;
+- (CGFloat)flexShrink;
 
 - (void)flexBasisAuto;
 /// Percentage of parent classes

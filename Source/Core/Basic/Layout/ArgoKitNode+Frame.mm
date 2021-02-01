@@ -235,8 +235,19 @@
 - (void)flexShrink:(CGFloat)value{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetFlexShrink(node, value);
-    
-     
+}
+
+- (CGFloat)flex{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetFlex(node);
+}
+- (CGFloat)flexGrow{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetFlexGrow(node);
+}
+- (CGFloat)flexShrink{
+    YGNodeRef node = self.layout.ygnode;
+    return YGNodeStyleGetFlexShrink(node);
 }
 
 - (void)flexBasis:(YGValue)value{

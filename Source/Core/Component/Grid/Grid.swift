@@ -49,6 +49,8 @@ public class Grid<D>: ScrollView {
     override func createNode() {
         gridNode = GridNode(viewClass: ArgoKitGridView.self)
         pNode = gridNode
+        self.height(.auto)
+        pNode?.flexGrow(1.0)
     }
     
     required init() {

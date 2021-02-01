@@ -219,8 +219,6 @@ class ListDemoView:UIView{
         print("ListDemoView")
     }
 }
-var headerView:RefreshHeaderView?
-var footerView:RefreshFooterView?
 struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNodeDemo(viewClass: ListDemoView.self)
     typealias View = ArgoKit.View
@@ -229,14 +227,17 @@ struct ListDemo:ArgoKit.View{
    
     
     @DataSource var items:[SessionItem] = [SessionItem]()
+    @DataSource var headerItems:[SessionItem] = [SessionItem]()
+    @DataSource var footerItems:[SessionItem] = [SessionItem]()
     init() {
        loadMoreData()
+        self.backgroundColor(.yellow)
     }
     
     func loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<50{
+        for index in 0..<1{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -244,6 +245,24 @@ struct ListDemo:ArgoKit.View{
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
             $items.append(item)
+        }
+        for index in 0..<1{
+            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
+            item.timeLabel = getTimeLabel()
+            item.unreadCount = String(index)
+            $headerItems.append(item)
+        }
+        for index in 0..<1{
+            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
+            item.timeLabel = getTimeLabel()
+            item.unreadCount = String(index)
+            $footerItems.append(item)
         }
         $items.apply()
     }
@@ -287,32 +306,27 @@ struct ListDemo:ArgoKit.View{
                 
 //                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
                 let ip = IndexPath(row: 1, section: 0)
-                
-                
-                
-                
                 //1. guai
                 //2. data, IndexPath -
                 
                 //1. insert /insert / reload
-                
-                
             }
             return ListSwipeActionsConfiguration(actions: [action])
         })
         
         .refreshHeaderView {
-            RefreshHeaderView(startRefreshing: {_ in 
+            RefreshHeaderView(startRefreshing: {headerView in
                 headerView?.endRefreshing()
             })
             {
                 Text("refreshheader")
                     .alignSelf(.center)
-                    .lineLimit(0).font(size: 20)
-                  
+                    .lineLimit(0).font(size: 20).backgroundColor(.red)
+
             }.pullingDown{ point in
                 print("pullingDown\(String(describing: point))")
             }
+            .backgroundColor(.cyan)
             .height(100.0)
         }
         .refreshFooterView{
@@ -323,13 +337,28 @@ struct ListDemo:ArgoKit.View{
                 print("footerhead")
             })
             {
-                Text("refreshfooter").alignSelf(.center).lineLimit(0).font(size: 20)
+                Text("refreshfooter").alignSelf(.center).lineLimit(0).font(size: 20).backgroundColor(.red)
             }
-            .height(100.0)
+            .height(.auto)
             .autoRefreshOffPage(1)
             .backgroundColor(.red)
-            
+
         }
+        .sectionHeader($headerItems, headerContent: { (item) -> View in
+            Text("sectionHeader").height(50).backgroundColor(.gray)
+        })
+//        .sectionFooter($footerItems, footerContent: { (item) -> View in
+//            Text("sectionFooter").height(50).backgroundColor(.orange)
+//        })
+        .backgroundColor(.purple)
+        .grow(0)
+        .height(.auto)
+        
+//        .height(200)
+        
+        Text("hahahha").height(100).backgroundColor(.orange)
+        
+        Text("hahahha").height(100).backgroundColor(.blue)
     }
     
     
@@ -346,9 +375,7 @@ class ArgoKitViewDemo:ArgoKit.View  {
    var node: ArgoKitNode? = ArgoKitNode()
    typealias View = ArgoKit.View
    var body:ArgoKit.View{
-    ListDemo()
-    .grow(1)
-        .backgroundColor(.red)
+    ListDemo().grow(1)
    }
 }
 

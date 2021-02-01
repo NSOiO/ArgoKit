@@ -30,14 +30,14 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
    
     func reloadMoreData(){
         var dataSource = [[ArgoKitGridCellTestModel]]()
-        for index in 0..<20{
+        for index in 0..<1{
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
             $headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for j in 0..<20{
+            for j in 0..<3{
                 let item = ArgoKitGridCellTestModel()
                 item.headerName = String(index)+"=="+String(j)
                 item.imagePath = images[j%5]
@@ -166,7 +166,7 @@ struct ArgoKitGridTest: ArgoKit.View {
 //                    data.headerName = "ssssssss"
                 }
         }
-        .grow(1.0)
+//        .grow(0.0)
         .columnCount(3)
         .columnSpacing(10)
         .lineSpacing(10)

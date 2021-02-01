@@ -298,6 +298,125 @@ extension ScrollView {
 			addAttribute(#selector(setter:UIScrollView.scrollsToTop),value())
 		}, forKey: #function)
     }
+    
+
+}
+
+extension ScrollView{
+    @discardableResult
+    public func adjustsHeightToFitSubView(_ value: @escaping @autoclosure () -> Bool) -> Self {
+        return self.bindCallback({ [self] in
+            if let node = self.node as? ArgoKitScrollViewNode{
+                node.adjustsHeightToFitSubView = value()
+            }
+        }, forKey: #function)
+    }
+    /// Sets the height of this view.
+    /// - Parameter value: The height of this view.
+    /// - Returns: self
+    @discardableResult
+    public func height(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            if let node = self.node as? ArgoKitScrollViewNode{
+                node.adjustsHeightToFitSubView = false
+                if !node.setFlexGrow {
+                    node.flexGrow(0)
+                }
+            }
+            switch value(){
+            case .point(let value):
+                self.node?.height(point: value)
+                break
+            case .percent(let value):
+                self.node?.height(percent: value)
+                break
+            case .auto:
+                if let node = self.node as? ArgoKitScrollViewNode{
+                    node.adjustsHeightToFitSubView = true
+                    node.flexGrow(1)
+                }
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
+    }
+    
+    /// Sets how a flex item will grow or shrink to fit the space available in its flex container.
+    /// - Parameter value: The value of flex.
+    /// - Returns: self
+    @discardableResult
+    public func flex(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            if let node = self.node as? ArgoKitScrollViewNode{
+                node.adjustsHeightToFitSubView = false
+                if !node.setFlexGrow {
+                    node.flexGrow(0)
+                }
+
+            }
+            self.node?.flex(value())
+        }, forKey: #function)
+    }
+    
+    /// Sets the flex grow factor of a flex item's main size.
+    /// This property specifies how much of the remaining space in the flex container should be assigned to the item (the flex grow factor).
+    /// - Parameter value: The value of grow.
+    /// - Returns: self
+    @discardableResult
+    public func grow(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            if let node = self.node as? ArgoKitScrollViewNode{
+                node.setFlexGrow = true
+                node.adjustsHeightToFitSubView = false
+            }
+            self.node?.flexGrow(value())
+        }, forKey: #function)
+    }
+    
+    /// Sets the flex shrink factor of a flex item. If the size of all flex items is larger than the flex container, items shrink to fit according to flex-shrink.
+    /// - Parameter value: The value of shrink.
+    /// - Returns: self
+    @discardableResult
+    public func shrink(_ value: @escaping @autoclosure () -> CGFloat) -> Self {
+        return self.bindCallback({ [self] in
+            if let node = self.node as? ArgoKitScrollViewNode{
+                node.adjustsHeightToFitSubView = false
+                if !node.setFlexGrow {
+                    node.flexGrow(0)
+                }
+            }
+            self.node?.flexShrink(value())
+        }, forKey: #function)
+    }
+    
+    /// Sets the initial main size of a flex item.
+    /// - Parameter value: The type of basis.
+    /// - Returns: self
+    @discardableResult
+    public func basis(_ value: @escaping @autoclosure () -> ArgoValue) -> Self {
+        return self.bindCallback({ [self] in
+            if let node = self.node as? ArgoKitScrollViewNode{
+                node.adjustsHeightToFitSubView = false
+                if !node.setFlexGrow {
+                    node.flexGrow(0)
+                }
+            }
+            switch value(){
+            case .auto:
+                self.node?.flexBasisAuto()
+                break
+            case .point(let value):
+                self.node?.flexBasis(point: value)
+                break
+            case .percent(let value):
+                self.node?.flexBasis(percent: value)
+                break
+            default:
+                break
+            }
+        }, forKey: #function)
+    }
 }
 
 
