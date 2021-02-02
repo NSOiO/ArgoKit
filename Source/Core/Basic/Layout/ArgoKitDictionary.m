@@ -8,10 +8,10 @@
 #import "ArgoKitDictionary.h"
 #import <objc/runtime.h>
 @interface NSMutableDictionary(ArgoKit)
-@property(strong,nonatomic)NSMutableArray *keys;
+@property(strong,nonatomic)NSMutableArray *argokit_keys;
 @end
 @implementation NSMutableDictionary(ArgoKit)
-- (NSMutableArray *)keys{
+- (NSMutableArray *)argokit_keys{
     id keys = objc_getAssociatedObject(self,_cmd);
     if (keys) {
         return keys;
@@ -21,12 +21,12 @@
         return keys;
     }
 }
-- (void)setKeys:(NSMutableArray *)keys{
-    objc_setAssociatedObject(self, @selector(setKeys:), keys, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setArgokit_keys:(NSMutableArray *)keys{
+    objc_setAssociatedObject(self, @selector(setArgokit_keys:), keys, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 -(NSArray *)argokit_allKeys{
-    return self.keys;
+    return self.argokit_keys;
 }
 
 - (NSArray *)argokit_allValues{
@@ -42,8 +42,8 @@
     if (!key) {
         return;
     }
-    if (![self.keys containsObject:key]) {
-        [self.keys addObject:key];
+    if (![self.argokit_keys containsObject:key]) {
+        [self.argokit_keys addObject:key];
     }
 }
 
@@ -51,7 +51,7 @@
     if (!key) {
         return;
     }
-    [self.keys removeObject:key];
+    [self.argokit_keys removeObject:key];
 }
 
 - (void)argokit_setObject:(id)anObject forKey:(id<NSCopying>)aKey{
@@ -65,20 +65,19 @@
 }
 
 // 移除
-
 - (void)argokit_removeObjectForKey:(id)aKey{
     [self removeInnnerKey:aKey];
     [self removeObjectForKey:aKey];
 }
 
 - (void)argokit_removeAllObjects{
-    [self.keys removeAllObjects];
+    [self.argokit_keys removeAllObjects];
     
     [self removeAllObjects];
 }
 
 - (void)argokit_removeObjectsForKeys:(NSArray *)keyArray{
-    [self.keys removeObjectsInArray:keyArray];
+    [self.argokit_keys removeObjectsInArray:keyArray];
     [self removeObjectsForKeys:keyArray];
 }
 @end
