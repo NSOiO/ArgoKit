@@ -52,6 +52,7 @@ class FeedListModel_Previews:  FeedListModel {
             datas.append(ad)
         }
         self.dataSource.append(contentsOf: datas)
+        self.dataSource.apply()
         self.addListener()
     }
     
