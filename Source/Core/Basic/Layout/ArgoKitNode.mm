@@ -6,6 +6,7 @@
 //
 
 #import "ArgoKitNode.h"
+#import <pthread.h>
 #import <objc/runtime.h>
 #import "yoga/Yoga.h"
 #import "ArgoKitLayoutHelper.h"
@@ -266,12 +267,26 @@ static YGSize YGMeasureView(
   const CGFloat constrainedHeight = (heightMode == YGMeasureModeUndefined) ? CGFLOAT_MAX: height;
   NodeWrapper *nodeWapper = (__bridge NodeWrapper*) YGNodeGetContext(node);
   ArgoKitNode *argoNode = nodeWapper.node;
-  CGSize sizeThatFits = CGSizeZero;
+  __block CGSize sizeThatFits = CGSizeZero;
   if (!argoNode.isUIView || [argoNode.childs count] > 0) {
-    sizeThatFits = [argoNode sizeThatFits:(CGSize){
-                                          .width = constrainedWidth,
-                                          .height = constrainedHeight,
-                                      }];
+//      if(pthread_main_np()){
+//          sizeThatFits = [argoNode sizeThatFits:(CGSize){
+//                                                .width = constrainedWidth,
+//                                                .height = constrainedHeight,
+//                                            }];
+//      }else{
+//          dispatch_sync(dispatch_get_main_queue(), ^{
+//              sizeThatFits = [argoNode sizeThatFits:(CGSize){
+//                                                    .width = constrainedWidth,
+//                                                    .height = constrainedHeight,
+//                                                }];
+//          });
+//      }
+      sizeThatFits = [argoNode sizeThatFits:(CGSize){
+                                            .width = constrainedWidth,
+                                            .height = constrainedHeight,
+                                        }];
+   
   }
   return (YGSize) {
       .width = static_cast<float>(YGSanitizeMeasurement(constrainedWidth, sizeThatFits.width, widthMode)),
@@ -347,6 +362,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 -(void)dealloc{
 //    NSLog(@"dealloc:%@",self);
     if (self.isRoot) {
+        [self clearStrongRefrence];
         [self iterationRemoveActionMap:self.childs];
     }
 }
@@ -359,7 +375,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         if (node.childs.count > 0) {
             [self iterationRemoveActionMap:node.childs];
         }
-        node = nil;
     }
 }
 
@@ -478,9 +493,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
         [self.view removeGestureRecognizer:gesture];
     }
-    [self.actionMap removeAllObjects];
+    [self.bindProperties argokit_removeAllObjects];
+    [self.actionMap argokit_removeAllObjects];
     [self.nodeActions removeAllObjects];
-    [self.bindProperties removeAllObjects];
+    
 }
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
@@ -707,7 +723,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (attribute.selector) {
         selector_name = @(sel_getName(attribute.selector));
     }
-    ViewAttribute *oldattribute = self.viewAttributes[selector_name];
+    ViewAttribute *oldattribute = [self.viewAttributes argokit_getObjectForKey:selector_name];
     if (![selector_name hasPrefix:@"set"]) {//不是set方法则排除在外
         selector_name = [NSString stringWithFormat:@"%@:%@",selector_name,@([attribute.paramter.firstObject hash])];
         [self.viewAttributes argokit_setObject:attribute forKey:selector_name];
@@ -762,7 +778,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (nullable id)valueWithSelector:(SEL)selector{
     NSString *selector_name =  @(sel_getName(selector));
-    ViewAttribute *attribute = self.viewAttributes[selector_name];
+    ViewAttribute *attribute = [self.viewAttributes argokit_getObjectForKey:selector_name];
     if (attribute) {
         return attribute.paramter.firstObject;
     }

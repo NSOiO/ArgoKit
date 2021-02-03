@@ -20,6 +20,7 @@ struct FeedList: ArgoKit.ViewProtocol {
     private var model: FeedListModelProtocol
     init(model: FeedListModelProtocol) {
         self.model = model
+       
     }
     
     var body: ArgoKit.View {

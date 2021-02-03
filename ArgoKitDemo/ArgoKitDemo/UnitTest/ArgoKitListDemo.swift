@@ -252,7 +252,7 @@ struct ListDemo:ArgoKit.View{
     func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<1{
+        for index in 0..<50{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"

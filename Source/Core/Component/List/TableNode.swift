@@ -34,7 +34,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         self.tableView?.removeObserver(self, forKeyPath: "contentSize")
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize.zero
+        return size
     }
     
     lazy var dataSourcePrefetchHelper:DataSourcePrefetchHelper<D> = DataSourcePrefetchHelper<D>()
@@ -42,11 +42,22 @@ class TableNode<D>: ArgoKitScrollViewNode,
     lazy var dataSourceHelper: DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .body
         return _dataSourceHelper
     }()
     
-    lazy var sectionHeaderSourceHelper =  DataSourceHelper<D>()
-    lazy var sectionFooterSourceHelper = DataSourceHelper<D>()
+    lazy var sectionHeaderSourceHelper:DataSourceHelper<D> = {[weak self] in
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .header
+        return _dataSourceHelper
+    }()
+    lazy var sectionFooterSourceHelper :DataSourceHelper<D> = {[weak self] in
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .footer
+        return _dataSourceHelper
+    }()
     
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none
@@ -58,9 +69,12 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public var sectionIndexTitles: [String]?
     
     public var estimatedHeight:CGFloat = -1.0
+    
+    public var maxWith:CGFloat = UIScreen.main.bounds.width
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
+        maxWith = frame.width
         self.tableView = tableView
         if defaultViewHeight == 0 {
             defaultViewHeight = frame.height
@@ -109,6 +123,16 @@ class TableNode<D>: ArgoKitScrollViewNode,
             }
            
         }
+    }
+    
+    func apply() {
+//        DispatchQueue.once(token: "argokit_reload_\(self.hashValue)") {[weak self] in
+//            self?.tableView?.delegate = self
+//            self?.tableView?.dataSource = self
+//            if #available(iOS 10.0, *) {
+//                self?.tableView?.prefetchDataSource = self
+//            }
+//        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -278,12 +302,12 @@ class TableNode<D>: ArgoKitScrollViewNode,
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if estimatedHeight <= 0 {
-            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
-        }
-        return estimatedHeight
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if estimatedHeight <= 0 {
+//            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+//        }
+//        return 44
+//    }
     
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -688,11 +712,42 @@ extension TableNode {
 }
 
 extension TableNode{
-    func createNodeFromData(_ data: Any) {
-        let node = dataSourceHelper.nodeForData(data)
-        if let tableView = self.tableView {
-            dataSourceHelper.rowHeight(node, maxWidth: tableView.frame.width)
+    func createNodeFromData(_ data: Any,helper:Any) {
+        if let datasource = helper as? DataSource<DataList<D>> {
+
+            if datasource.type == .body {
+                let node = dataSourceHelper.nodeForData(data)
+                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+            
+            if datasource.type == .footer {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+            }
         }
-       
+        
+        if let datasource = helper as? DataSource<SectionDataList<D>> {
+
+            if datasource.type == .body {
+                let node = dataSourceHelper.nodeForData(data)
+                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+            
+            if datasource.type == .footer {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+            }
+        }
+//        dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+//        sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+//        sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
     }
 }

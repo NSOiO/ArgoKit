@@ -24,6 +24,10 @@ struct MainView: ArgoKit.ViewProtocol {
     private var model: MainViewModelProtocol
     init(model: MainViewModelProtocol) {
         self.model = model
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+            model.datas.apply()
+        }
+       
     }
     
     var body: ArgoKit.View {

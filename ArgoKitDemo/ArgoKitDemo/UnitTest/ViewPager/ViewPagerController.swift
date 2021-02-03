@@ -16,9 +16,9 @@ class ViewPagerController: UIViewController {
     let contentView = ListDemo()
 //    let contentView = FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 10)
     override func viewDidLoad() {
-        let argoKitControll = UIHostingView(content: contentView, frame: self.view.frame)
+        let argoKitControll = UIHostingView(content: contentView,frame: self.view.frame)
         argoKitControll.useSafeAreaTop = true
-        argoKitControll.backgroundColor = .white
+        argoKitControll.backgroundColor = .yellow
         self.view.addSubview(argoKitControll)
         self.view.backgroundColor = .red
     }

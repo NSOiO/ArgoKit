@@ -330,10 +330,10 @@ extension View {
     @discardableResult
     public func position(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
         return self.bindCallback({ [self] in
-            position(edge: .top, value: top())
-                .position(edge: .left, value: left())
-                .position(edge: .bottom, value: bottom())
-                .position(edge: .right, value:right())
+            _position_(edge: .top, value: top())
+                ._position_(edge: .left, value: left())
+                ._position_(edge: .bottom, value: bottom())
+                ._position_(edge: .right, value:right())
         }, forKey: #function)
     }
     
@@ -345,103 +345,109 @@ extension View {
     @discardableResult
     public func position(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
         return self.bindCallback({ [self] in
-            switch edge(){
-            case .left:
-                switch value(){
-                case .point(let value):
-                    self.node?.left(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.left(percent: value)
-                    break
-                default:
-                    break
-                }
+            _position_(edge: edge(), value: value())
+        }, forKey: #function)
+    }
+    
+    @discardableResult
+    private func _position_(edge:ArgoEdge, value:ArgoValue) -> Self {
+        switch edge{
+        case .left:
+            switch value{
+            case .point(let value):
+                self.node?.left(point: value)
                 break
-            case .top:
-                switch value(){
-                case .point(let value):
-                    self.node?.top(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.top(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .right:
-                switch value(){
-                case .point(let value):
-                    self.node?.right(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.right(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .bottom:
-                switch value(){
-                case .point(let value):
-                    self.node?.bottom(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.bottom(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .start:
-                switch value(){
-                case .point(let value):
-                    self.node?.start(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.start(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .end:
-                switch value(){
-                case .point(let value):
-                    self.node?.end(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.end(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .all:
-                switch value(){
-                case .point(let value):
-                    self.node?.top(point: value)
-                    self.node?.left(point: value)
-                    self.node?.bottom(point: value)
-                    self.node?.right(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.top(percent: value)
-                    self.node?.left(percent: value)
-                    self.node?.bottom(percent: value)
-                    self.node?.right(percent: value)
-                    break
-                default:
-                    break
-                }
+            case .percent(let value):
+                self.node?.left(percent: value)
                 break
             default:
                 break
-                
             }
-        }, forKey: #function)
-    }
+            break
+        case .top:
+            switch value{
+            case .point(let value):
+                self.node?.top(point: value)
+                break
+            case .percent(let value):
+                self.node?.top(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .right:
+            switch value{
+            case .point(let value):
+                self.node?.right(point: value)
+                break
+            case .percent(let value):
+                self.node?.right(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .bottom:
+            switch value{
+            case .point(let value):
+                self.node?.bottom(point: value)
+                break
+            case .percent(let value):
+                self.node?.bottom(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .start:
+            switch value{
+            case .point(let value):
+                self.node?.start(point: value)
+                break
+            case .percent(let value):
+                self.node?.start(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .end:
+            switch value{
+            case .point(let value):
+                self.node?.end(point: value)
+                break
+            case .percent(let value):
+                self.node?.end(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .all:
+            switch value{
+            case .point(let value):
+                self.node?.top(point: value)
+                self.node?.left(point: value)
+                self.node?.bottom(point: value)
+                self.node?.right(point: value)
+                break
+            case .percent(let value):
+                self.node?.top(percent: value)
+                self.node?.left(percent: value)
+                self.node?.bottom(percent: value)
+                self.node?.right(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        default:
+            break
+            
+        }
+        return self
+}
     
     /// Sets the margin area on all four sides of this view.
     /// - Parameters:
@@ -453,10 +459,10 @@ extension View {
     @discardableResult
     public func margin(top: @escaping @autoclosure () -> ArgoValue, right: @escaping @autoclosure () -> ArgoValue, bottom: @escaping @autoclosure () -> ArgoValue, left: @escaping @autoclosure () -> ArgoValue) -> Self {
         return self.bindCallback({ [self] in
-            margin(edge: .top, value: top())
-                .margin(edge: .left, value: left())
-                .margin(edge: .bottom, value: bottom())
-                .margin(edge: .right, value:right())
+            _margin_(edge: .top, value: top())
+                ._margin_(edge: .left, value: left())
+                ._margin_(edge: .bottom, value: bottom())
+                ._margin_(edge: .right, value:right())
         }, forKey: #function)
     }
     
@@ -468,117 +474,123 @@ extension View {
     @discardableResult
     public func margin(edge: @escaping @autoclosure () -> ArgoEdge, value: @escaping @autoclosure () -> ArgoValue) -> Self {
         return self.bindCallback({ [self] in
-            switch edge(){
-            case .left:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginLeft(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginLeft(percent: value)
-                    break
-                default:
-                    break
-                }
+            self._margin_(edge: edge(), value: value())
+        }, forKey: #function)
+    }
+    
+    @discardableResult
+    private func _margin_(edge:ArgoEdge, value:ArgoValue) -> Self {
+        switch edge{
+        case .left:
+            switch value{
+            case .point(let value):
+                self.node?.marginLeft(point: value)
                 break
-            case .top:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginTop(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginTop(percent: value)
-                    break
-                default:
-                    break
-                }
+            case .percent(let value):
+                self.node?.marginLeft(percent: value)
                 break
-            case .right:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginRight(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginRight(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .bottom:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginBottom(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginBottom(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .start:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginStart(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginStart(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .end:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginEnd(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginEnd(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .horizontal:
-                switch value(){
-                case .point (let value):
-                    self.node?.marginH(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginH(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .vertical:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginV(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginV(percent: value)
-                    break
-                default:
-                    break
-                }
-                break
-            case .all:
-                switch value(){
-                case .point(let value):
-                    self.node?.marginAll(point: value)
-                    break
-                case .percent(let value):
-                    self.node?.marginAll(percent: value)
-                    break
-                default:
-                    break
-                }
+            default:
                 break
             }
-        }, forKey: #function)
+            break
+        case .top:
+            switch value{
+            case .point(let value):
+                self.node?.marginTop(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginTop(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .right:
+            switch value{
+            case .point(let value):
+                self.node?.marginRight(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginRight(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .bottom:
+            switch value{
+            case .point(let value):
+                self.node?.marginBottom(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginBottom(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .start:
+            switch value{
+            case .point(let value):
+                self.node?.marginStart(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginStart(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .end:
+            switch value{
+            case .point(let value):
+                self.node?.marginEnd(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginEnd(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .horizontal:
+            switch value{
+            case .point (let value):
+                self.node?.marginH(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginH(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .vertical:
+            switch value{
+            case .point(let value):
+                self.node?.marginV(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginV(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        case .all:
+            switch value{
+            case .point(let value):
+                self.node?.marginAll(point: value)
+                break
+            case .percent(let value):
+                self.node?.marginAll(percent: value)
+                break
+            default:
+                break
+            }
+            break
+        }
+        return self
     }
     
     /// Sets the padding area on all four sides of this view at once.

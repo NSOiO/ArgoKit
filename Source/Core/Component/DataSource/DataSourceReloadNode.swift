@@ -35,7 +35,9 @@ public protocol DataSourceReloadNode: class {
     
     func removeAll()
     
-    func createNodeFromData(_ data:Any)
+    func apply()
+    
+    func createNodeFromData(_ data:Any,helper:Any)
 }
 
 extension DataSourceReloadNode {
@@ -44,7 +46,11 @@ extension DataSourceReloadNode {
         
     }
     
-    func createNodeFromData(_ data:Any){
+    func createNodeFromData(_ data:Any,helper:Any){
+        
+    }
+    
+    func apply(){
         
     }
     

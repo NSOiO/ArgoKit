@@ -11,6 +11,7 @@ class RefreshHeaderNode:ArgoKitNode{
     override func clearStrongRefrence() {
         super.clearStrongRefrence()
         refreshingBlock = nil
+        pullingDownBlock = nil
     }
     var refreshingBlock: ((RefreshHeader?) -> ())?
     

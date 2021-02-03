@@ -213,7 +213,7 @@ extension View {
     /// Gets the height of this view.
     /// - Returns: The height of this view.
     public func height() -> CGFloat {
-        return self.node?.height() ?? 0
+        return self.node?.size.height ?? 0
     }
     
     /// Gets the minimum width of this view.

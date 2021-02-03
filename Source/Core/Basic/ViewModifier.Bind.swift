@@ -102,7 +102,7 @@ extension View {
     /// - Returns: Self
     @discardableResult
     public func gone(_ value: @escaping @autoclosure () -> Bool) -> Self {
-        return self.bindCallback({
+        return self.bindCallback({[self] in
             let _value = value()
             addAttribute(#selector(setter:UIView.isHidden), _value)
             if let enable = self.node?.isEnabled {

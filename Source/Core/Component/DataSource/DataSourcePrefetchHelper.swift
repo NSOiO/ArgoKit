@@ -18,7 +18,7 @@ class DataSourcePrefetchModel<D>{
 
 class DataSourcePrefetchHelper<D>{
     public init() {
-        startRunloop()
+//        startRunloop()
     }
     
     var observe:CFRunLoopObserver? = nil
@@ -45,11 +45,11 @@ class DataSourcePrefetchHelper<D>{
     }
     
     func addPrefetchModel(_ prefetchModel:DataSourcePrefetchModel<D>?) -> Void{
-        if let op = prefetchModel {
-            if !prefetchModels.contains(op) {
-                prefetchModels.add(op)
-            }
-        }
+//        if let op = prefetchModel {
+//            if !prefetchModels.contains(op) {
+//                prefetchModels.add(op)
+//            }
+//        }
     }
     
     func removeAllOperation() -> Void {

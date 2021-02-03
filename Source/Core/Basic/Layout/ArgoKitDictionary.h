@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSArray *)argokit_allKeys;
 - (NSArray *)argokit_allValues;
 - (void)argokit_setObject:(id)anObject forKey:(id<NSCopying>)aKey;
+- (id)argokit_getObjectForKey:(id<NSCopying>)aKey;
 - (void)argokit_setValue:(id)value forKey:(NSString *)key;
 - (void)argokit_removeObjectForKey:(id)aKey;
 - (void)argokit_removeAllObjects;
