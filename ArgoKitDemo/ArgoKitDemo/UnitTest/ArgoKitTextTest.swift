@@ -11,7 +11,7 @@ import ArgoKitComponent
 class ArgoKitTextTestModel {
 //   @Observable var age:Int = 1
 //   @Observable var fontSize:CGFloat = 30
-   @Observable var name:String = "张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三"
+   @Observable var name:String = "张三张三张三张三张三张三张三张三张三张三张三张三张三张三张"
 //   @Observable var color:UIColor = .red
 //   @Alias var text:Text?
 }
@@ -76,7 +76,7 @@ struct ArgoKitTextTest: ArgoKit.View {
 //                .firstLineHeadIndent(10)
                 .lineLimit(0)
                 .headIndent(10).kern(10)
-        } .backgroundColor(.red)
+        }
         .font(size:20)
         .textColor(.yellow)
         

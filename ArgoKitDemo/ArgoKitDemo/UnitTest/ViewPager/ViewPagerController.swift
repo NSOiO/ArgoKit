@@ -11,15 +11,15 @@ import ArgoKit
 class ViewPagerController: UIViewController {
     
 //    let contentView = ArgoKitGridTest(model: ArgoKitGridTestModel())
-//    let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
+    let contentView = ArgoKitTextTest(model: ArgoKitTextTestModel())
 //      let contentView = YYTextTests(model: YYTextTestsModel())
-    let contentView = ListDemo()
+//    let contentView = ListDemo()
 //    let contentView = FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 10)
     override func viewDidLoad() {
-        let argoKitControll = UIHostingView(content: contentView, frame: self.view.frame)
-        argoKitControll.useSafeAreaTop = true
-        argoKitControll.backgroundColor = .white
+        let argoKitControll = UIHostingView(content: contentView, origin: CGPoint(x: 0, y: 84))
+//        argoKitControll.useSafeAreaTop = true
+        argoKitControll.backgroundColor = .cyan
         self.view.addSubview(argoKitControll)
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
     }
 }
