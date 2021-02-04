@@ -160,7 +160,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     }
 }
 
-+ (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes resetFrame:(BOOL)only{
++ (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes onlyResetFrame:(BOOL)onlyResetFrame{
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {
         return;
@@ -173,7 +173,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         if (!node.view && resueNode.isEnabled) {
             [node createNodeViewIfNeed:node.frame];
         }  
-        if (!only) {
+        if (!onlyResetFrame) {
             // 处理UIView属性点击事件
             [self _nodeViewAttributeWithNode:node attributes:[resueNode nodeAllAttributeValue] markDirty:NO];
             // 处理UIControl点击事件
@@ -190,19 +190,19 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         }
     
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
-            [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs resetFrame:only];
+            [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs onlyResetFrame:onlyResetFrame];
         }
     }
 }
 
 + (void)reuseNodeViewAttribute:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
     reuseNode.linkNode = node;
-    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs resetFrame:NO];
+    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:NO];
 }
 
 + (void)resetNodeViewFrame:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
     reuseNode.linkNode = node;
-    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs resetFrame:YES];
+    [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:YES];
 }
 
 

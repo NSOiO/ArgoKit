@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ListCell: UITableViewCell {
+class ListCell: UITableViewCell,ArgoKitCellProtocol {
     var contentNode: ArgoKitCellNode?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,7 +24,7 @@ class ListCell: UITableViewCell {
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
     }
     
-    public func linkCellNode(_ node: ArgoKitCellNode) {
+    func linkCellNode(_ node: ArgoKitCellNode) {
         if node.isPreviewing {
             node.bindView(self.contentView)
             self.contentNode = node
