@@ -321,14 +321,13 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
   ArgoKitLayout * layout = argoNode.layout;
   NSLock *lock = argoNode.yogaLock;
   const YGNodeRef node = layout.ygnode;
-  
+    [lock lock];
   if (layout.isLeaf) {
-      [lock unlock];
     YGRemoveAllChildren(node);
+    [lock unlock];
     YGNodeSetMeasureFunc(node, YGMeasureView);
   } else {
     YGNodeSetMeasureFunc(node, NULL);
-    [lock lock];
     NSMutableArray<ArgoKitNode *> *childsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
     for (ArgoKitNode *node in argoNode.childs) {
       if (node.isEnabled) {
