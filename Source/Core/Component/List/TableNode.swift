@@ -711,8 +711,8 @@ extension TableNode {
     }
 }
 
-extension TableNode{
-    func createNodeFromData(_ data: Any,helper:Any) {
+//extension TableNode{
+//    func createNodeFromData(_ data: Any,helper:Any) {
 //        if let datasource = helper as? DataSource<DataList<D>> {
 //
 //            if datasource.type == .body {
@@ -746,5 +746,5 @@ extension TableNode{
 //                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
 //            }
 //        }
-    }
-}
+//    }
+//}
