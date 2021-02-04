@@ -302,12 +302,12 @@ class TableNode<D>: ArgoKitScrollViewNode,
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
     
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if estimatedHeight <= 0 {
-//            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
-//        }
-//        return 44
-//    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if estimatedHeight <= 0 {
+            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+        }
+        return estimatedHeight
+    }
     
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -713,41 +713,38 @@ extension TableNode {
 
 extension TableNode{
     func createNodeFromData(_ data: Any,helper:Any) {
-        if let datasource = helper as? DataSource<DataList<D>> {
-
-            if datasource.type == .body {
-                let node = dataSourceHelper.nodeForData(data)
-                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
-            }
-            if datasource.type == .header {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
-            }
-            
-            if datasource.type == .footer {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
-            }
-        }
-        
-        if let datasource = helper as? DataSource<SectionDataList<D>> {
-
-            if datasource.type == .body {
-                let node = dataSourceHelper.nodeForData(data)
-                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
-            }
-            if datasource.type == .header {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
-            }
-            
-            if datasource.type == .footer {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
-            }
-        }
-//        dataSourceHelper.rowHeight(node, maxWidth: maxWith)
-//        sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
-//        sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+//        if let datasource = helper as? DataSource<DataList<D>> {
+//
+//            if datasource.type == .body {
+//                let node = dataSourceHelper.nodeForData(data)
+//                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+//            }
+//            if datasource.type == .header {
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+//                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+//            }
+//
+//            if datasource.type == .footer {
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+//                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+//            }
+//        }
+//
+//        if let datasource = helper as? DataSource<SectionDataList<D>> {
+//
+//            if datasource.type == .body {
+//                let node = dataSourceHelper.nodeForData(data)
+//                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+//            }
+//            if datasource.type == .header {
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+//                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+//            }
+//
+//            if datasource.type == .footer {
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+//                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+//            }
+//        }
     }
 }

@@ -18,9 +18,9 @@ class DataSourcePrefetchModel<D>{
 
 class DataSourcePrefetchHelper<D>{
     public init() {
-//        startRunloop()
+        startRunloop()
     }
-    
+    var nodeHeightQueue:DispatchQueue = DispatchQueue(label: "com.argokit.precaculate.nodeheight")
     var observe:CFRunLoopObserver? = nil
     var prefetchModels:NSMutableArray = NSMutableArray()
     func startRunloop() -> Void {
@@ -45,11 +45,11 @@ class DataSourcePrefetchHelper<D>{
     }
     
     func addPrefetchModel(_ prefetchModel:DataSourcePrefetchModel<D>?) -> Void{
-//        if let op = prefetchModel {
-//            if !prefetchModels.contains(op) {
-//                prefetchModels.add(op)
-//            }
-//        }
+        if let op = prefetchModel {
+            if !prefetchModels.contains(op) {
+                prefetchModels.add(op)
+            }
+        }
     }
     
     func removeAllOperation() -> Void {
@@ -65,11 +65,10 @@ class DataSourcePrefetchHelper<D>{
             let innerOperation = prefetchMode as! DataSourcePrefetchModel<D>
             if let dataSourceHelper = innerOperation.dataSourceHelper,let indexPaths = innerOperation.indexPaths {
                 for indexPath in indexPaths {
-//                    _ = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
-                    _ = dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: innerOperation.width)
-//                    dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: innerOperation.width) { height in
-//                        
-//                    }
+                    let node = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
+                    nodeHeightQueue.async {
+                        dataSourceHelper.rowHeight(node, maxWidth: innerOperation.width)
+                    }
                 }
             }
         })
