@@ -29,7 +29,6 @@ public struct HostView: View {
     init() {
         pNode = ArgoKitNode(view: UIView())
         pNode.column()
-        pNode.flexGrow(1.0)
     }
     
     /// Initializer
@@ -38,10 +37,7 @@ public struct HostView: View {
     ///   - builder: A view builder that creates the content of this HostView.
     public init(_ view: UIView = UIView(), @ArgoKitViewBuilder _ builder: () -> View) {
         pNode = ArgoKitNode(view: view);
-        pNode.width(point: view.frame.size.width)
-        pNode.height(point: view.frame.size.height)
         pNode.column()
-        pNode.flexGrow(1.0)
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
@@ -63,6 +59,7 @@ public struct HostView: View {
 public class UIHostingView: UIView {
     private var rootView: HostView?
     private var contentView: View?
+    private var resetFrame: Bool = false
     private var useSafeArea: Bool? = false
     private var oldFrame = CGRect.zero
     public var useSafeAreaTop = false
@@ -70,7 +67,8 @@ public class UIHostingView: UIView {
     public var useSafeAreaBottom = false
     public var useSafeAreaRight = false
     public override func layoutSubviews() {
-        if !oldFrame.equalTo(self.frame) {
+   
+        if !oldFrame.equalTo(self.frame) && !resetFrame{
             oldFrame = self.frame
             if let node = rootView?.node {
              
@@ -96,6 +94,7 @@ public class UIHostingView: UIView {
                     }
                 }
                 node.applyLayout()
+                print("\(node.size)")
             }
         }
         super.layoutSubviews()
@@ -120,6 +119,26 @@ public class UIHostingView: UIView {
         rootView = HostView(self) {
             content.grow(1.0)
         }
+    }
+    
+    /// Initializer
+    /// size of the host view automatically matches the size of the child view
+    /// - Parameters:
+    ///   - content: The root view of the ArgoKit view hierarchy that you want to manage using this hosting controller.
+    ///   - origin: The position for the new view object.
+    ///   - width: the specified width of the host view，default is UIScreen.main.bounds.width.
+    ///   - height:the specified height of the host view，default is CGFloat.nan.
+    ///   - CGFloat.nan represent the value of width(height) from the calculation results of the layout system
+    public init(content: View, origin: CGPoint,width:CGFloat = UIScreen.main.bounds.width,height:CGFloat = CGFloat.nan){
+        super.init(frame: CGRect.zero)
+        contentView = content
+        rootView = HostView(self) {
+            content.grow(1.0)
+        }
+        let size = rootView?.applyLayout(size: CGSize(width: width, height: height))
+        resetFrame = true
+        self.frame.origin = origin
+        self.frame.size = size ?? CGSize.zero
     }
     
     required init?(coder: NSCoder) {
@@ -198,8 +217,6 @@ open class UIHostingController: UIViewController {
     }
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white;
-//        self.edgesForExtendedLayout = UIRectEdge.init()
         self.view.addSubview(hostView)
         hostView.frame = self.view.bounds
     }
@@ -209,11 +226,6 @@ open class UIHostingController: UIViewController {
     }
     
     open override func viewDidLayoutSubviews() {
-//        let frame = self.view.frame
-//        if !frame.equalTo(self.frame) {
-//            self.frame = frame
-//            hostView.frame = self.view.bounds
-//        }
         hostView.frame = self.view.bounds
         super.viewDidLayoutSubviews()
     }

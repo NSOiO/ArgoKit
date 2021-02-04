@@ -232,35 +232,8 @@ struct ListDemo:ArgoKit.View{
     init() {
        loadMoreData1()
         self.backgroundColor(.yellow)
-    }
-    func loadMoreData1(){
-        nodeQueue.async {
-            self._loadMoreData()
-            DispatchQueue.main.async {
-                $items.apply()
-            }
-        }
-    }
-    func loadMoreData(){
-        nodeQueue.async {
-            self._loadMoreData()
-            DispatchQueue.main.async {
-                $items.apply()
-            }
-        }
-    }
-    func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<50{
-            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
-            item.imagePath = images[index%5]
-            item.sessionName = images[index%5] + "+\(String(index))"
-            item.lastMessage = messages[index%5] + "+\(String(index))"
-            item.timeLabel = getTimeLabel()
-            item.unreadCount = String(index)
-            $items.append(item)
-        }
         for index in 0..<1{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
@@ -279,6 +252,39 @@ struct ListDemo:ArgoKit.View{
             item.unreadCount = String(index)
             $footerItems.append(item)
         }
+    }
+    func loadMoreData1(){
+        nodeQueue.async {
+            self._loadMoreData()
+            DispatchQueue.main.async {
+                $items.apply()
+            }
+        }
+    }
+    func loadMoreData(_ callback:(()->())? = nil){
+        nodeQueue.async {
+            self._loadMoreData()
+            DispatchQueue.main.async {
+                $items.apply()
+                if let callBack1 = callback{
+                    callBack1()
+                }
+            }
+        }
+    }
+    func _loadMoreData() {
+        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+        let messages = ["11","22","33","44","55"]
+        for index in 0..<20{
+            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
+            item.timeLabel = getTimeLabel()
+            item.unreadCount = String(index)
+            $items.append(item)
+        }
+
        
     }
     
@@ -346,16 +352,17 @@ struct ListDemo:ArgoKit.View{
         }
         .refreshFooterView{
             RefreshFooterView(startRefreshing: {refresh in
-                self.loadMoreData()
-                refresh?.endRefreshing()
-                refresh?.resetNoMoreData()
+                self.loadMoreData(){
+                    refresh?.endRefreshing()
+                    refresh?.resetNoMoreData()
+                }
                 print("footerhead")
             })
             {
                 Text("refreshfooter").alignSelf(.center).lineLimit(0).font(size: 20).backgroundColor(.red)
             }
             .height(.auto)
-            .autoRefreshOffPage(1)
+            .autoRefreshOffPage(2)
             .backgroundColor(.red)
 
         }

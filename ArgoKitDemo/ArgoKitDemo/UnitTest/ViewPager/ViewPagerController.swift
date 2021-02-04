@@ -20,6 +20,6 @@ class ViewPagerController: UIViewController {
         argoKitControll.useSafeAreaTop = true
         argoKitControll.backgroundColor = .yellow
         self.view.addSubview(argoKitControll)
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
     }
 }

@@ -59,7 +59,8 @@ struct FeedCell: ArgoKit.ViewProtocol {
             HStack {//photos
                 ForEach(model.photoURLs) { item in
                     Image(url: item, placeholder: model.placeHolder)
-                        .aspect(ratio: 1).width(30%).cornerRadius(5)
+                        .aspect(ratio: 1)
+                        .width(30%).cornerRadius(5)
                         .margin(edge: .bottom, value: 10)
                         .onTapGesture{
                             let controller = ViewPagerController()
