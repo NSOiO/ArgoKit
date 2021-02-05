@@ -80,6 +80,18 @@ struct ArgoKitTextTest: ArgoKit.View {
         .font(size:20)
         .textColor(.yellow)
         
+        AvatarBreathView(url: nil, placeholder: "chincoteague.jpg")
+            .startAnimation(true)
+            .width(150)
+            .height(150)
+            .headerMargin(0)
+            .strokeColor("255,201,100")
+            .margin(edge: .top, value: 10)
+            .tagText("哈哈哈")
+            .backgroundColor(.orange)
+            .imageCircle(true)
+            .fillColor("100,255,201")
+            .circle()
         
 
         

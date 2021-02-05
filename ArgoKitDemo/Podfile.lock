@@ -19,6 +19,9 @@ PODS:
   - ArgoKitComponent (1.0.7):
     - ArgoKit
     - ArgoKitComponent/Core (= 1.0.7)
+  - ArgoKitComponent/AvatarBreathView (1.0.7):
+    - ArgoKit
+    - MDAvatarBreathAnimationView
   - ArgoKitComponent/Core (1.0.7):
     - ArgoKit
     - ArgoKitComponent/SDImageLoader
@@ -37,23 +40,112 @@ PODS:
   - ArgoKitPreview (1.0.12):
     - ArgoKit
     - ArgoKitComponent
-  - Kingfisher (6.0.1)
+  - Kingfisher (6.1.0)
+  - MDAvatarBreathAnimationView (0.1.0):
+    - MMBaseFoundation
+    - MMFrameManager
+    - MMUIBaseFoundation
+    - pop
   - MJRefresh (3.5.0)
-  - SDWebImage (5.10.2):
-    - SDWebImage/Core (= 5.10.2)
-  - SDWebImage/Core (5.10.2)
+  - MMBaseFoundation (0.0.41):
+    - MMBaseFoundation/Header (= 0.0.41)
+    - MMBaseFoundation/JSON (= 0.0.41)
+    - MMBaseFoundation/NSArray (= 0.0.41)
+    - MMBaseFoundation/NSData (= 0.0.41)
+    - MMBaseFoundation/NSDate (= 0.0.41)
+    - MMBaseFoundation/NSDictionary (= 0.0.41)
+    - MMBaseFoundation/NSFileManager (= 0.0.41)
+    - MMBaseFoundation/NSObject (= 0.0.41)
+    - MMBaseFoundation/NSSet (= 0.0.41)
+    - MMBaseFoundation/NSString (= 0.0.41)
+  - MMBaseFoundation/Header (0.0.41)
+  - MMBaseFoundation/JSON (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSArray (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSData (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSDate (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSDictionary (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSFileManager (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSObject (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSSet (0.0.41):
+    - MMBaseFoundation/Header
+  - MMBaseFoundation/NSString (0.0.41):
+    - MMBaseFoundation/Header
+    - MMBaseFoundation/NSDictionary
+  - MMBaseUtility/Header (0.0.24)
+  - MMBaseUtility/UIDevice (0.0.24):
+    - MMBaseUtility/Header
+  - MMFrameManager (0.1.5.a.debug.26):
+    - MMBaseUtility/UIDevice
+  - MMUIBaseFoundation (0.0.20):
+    - MMUIBaseFoundation/Header (= 0.0.20)
+    - MMUIBaseFoundation/UIAlertView (= 0.0.20)
+    - MMUIBaseFoundation/UIButton (= 0.0.20)
+    - MMUIBaseFoundation/UIColor (= 0.0.20)
+    - MMUIBaseFoundation/UIControl (= 0.0.20)
+    - MMUIBaseFoundation/UIGestureRecognizer (= 0.0.20)
+    - MMUIBaseFoundation/UIImage (= 0.0.20)
+    - MMUIBaseFoundation/UILabel (= 0.0.20)
+    - MMUIBaseFoundation/UINavigationController (= 0.0.20)
+    - MMUIBaseFoundation/UIResponder (= 0.0.20)
+    - MMUIBaseFoundation/UIView (= 0.0.20)
+    - MMUIBaseFoundation/UIViewController (= 0.0.20)
+  - MMUIBaseFoundation/Header (0.0.20)
+  - MMUIBaseFoundation/UIAlertView (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIButton (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIColor (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIControl (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIGestureRecognizer (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIImage (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UILabel (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UINavigationController (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIResponder (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIView (0.0.20):
+    - MMUIBaseFoundation/Header
+  - MMUIBaseFoundation/UIViewController (0.0.20):
+    - MMUIBaseFoundation/Header
+  - pop (1.0.12.a.debug.25)
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
   - Yoga (1.14.0)
   - YYText (1.0.7)
 
 DEPENDENCIES:
   - ArgoKit (from `../`)
+  - ArgoKitComponent/AvatarBreathView (from `../`)
   - ArgoKitComponent/KFImageLoader (from `../`)
   - ArgoKitComponent/Refresh (from `../`)
   - ArgoKitComponent/SDImageLoader (from `../`)
   - ArgoKitComponent/YYText (from `../`)
   - ArgoKitPreview (from `../`)
+  - MDAvatarBreathAnimationView (from `../../MDAvatarBreathAnimationView`)
+  - MMFrameManager (= 0.1.5.a.debug.26)
+  - pop (= 1.0.12.a.debug.25)
 
 SPEC REPOS:
+  https://git.wemomo.com/ios/BinarySpec.git:
+    - MMFrameManager
+    - pop
+  https://git.wemomo.com/ios/Specs.git:
+    - MMBaseFoundation
+    - MMBaseUtility
+    - MMUIBaseFoundation
   https://github.com/cocoapods/specs.git:
     - ArgoAnimation
     - Kingfisher
@@ -69,18 +161,26 @@ EXTERNAL SOURCES:
     :path: "../"
   ArgoKitPreview:
     :path: "../"
+  MDAvatarBreathAnimationView:
+    :path: "../../MDAvatarBreathAnimationView"
 
 SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
   ArgoKit: 2eb2d1cf7a5cbdb77d9e870ff9f15af764fe6115
-  ArgoKitComponent: 99c490f373e7f4a81aaf8f7bd1274bde47064790
+  ArgoKitComponent: 7e5cb05afc3781f851dc7f6aae85d59685e12f23
   ArgoKitPreview: 18ddf22247124df8ed75cca897d7866bc17e0338
-  Kingfisher: adde87a4f74f6a3845395769354efff593581740
+  Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
+  MDAvatarBreathAnimationView: 5d7efe8fc5c98c29a7d438541617d24952c07117
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
+  MMBaseFoundation: 605f9875a98a257001e642ba33954163a1271ae8
+  MMBaseUtility: d783a4fee49121b0a9fe6fc0bbd38913eee0efef
+  MMFrameManager: dbba083cc50787e0aecc43db3e8aeb227c03b4c8
+  MMUIBaseFoundation: ead5a96ce866180bbd166dd2efcdf781942432e9
+  pop: e5e195e85b22b0722f15b5e1bf49274f633bfed7
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 11d546e4841b1b1ac12cd3f8682c6cbcb4985255
+PODFILE CHECKSUM: 61f3b65cad7369de5507d256c3b4757356836e9e
 
 COCOAPODS: 1.10.0

@@ -48,6 +48,7 @@
 		4CF2204CE9F6AD5526B48F09 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		5C9C0E6111CFB46305184E8C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		7A69FB72F090435913742F7C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8056F4AE0B7E6C97B55582BC /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB644F41451D2513296A5EE /* Pods_ArgoKitDemo.framework */; };
 		811B7EC1CCF266AA964665A5 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8218ECFC112AAB889ECF246C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8555DB1D79939EE4C04F1E7D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
@@ -62,7 +63,6 @@
 		A94EAEEF5212D6033C4BC936 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		AD5D1FFFF39878DB9AB2D5C7 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		B16B24E4F76CDACCA358A1B0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		B24576515409429925EC2BC6 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */; };
 		B6082F26B2D874C94D2B40A0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CC277FB02338E844863A2EE9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF183E8A768603E46E9A567C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
@@ -180,6 +180,7 @@
 		00A90730259073510052550C /* GestureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureTests.swift; sourceTree = "<group>"; };
 		23F6A042F9C3EC54D2309CE9 /* ArgoKitPreviewTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewTypes.swift; path = ../Source/Preview/ArgoKitPreviewTypes.swift; sourceTree = "<group>"; };
 		276CD33100DA267D8FF00D90 /* Pods-ArgoTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoTest.debug.xcconfig"; path = "Target Support Files/Pods-ArgoTest/Pods-ArgoTest.debug.xcconfig"; sourceTree = "<group>"; };
+		2DB644F41451D2513296A5EE /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		326335CA254133D20094676D /* ArgoKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgoKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		326335CD254133D20094676D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		326335D1254133D20094676D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -200,7 +201,6 @@
 		A423580E257900920052E0B0 /* ViewPagerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerDemo.swift; sourceTree = "<group>"; };
 		A4F5E668257B8770003D3591 /* ViewPageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPageTest.swift; sourceTree = "<group>"; };
 		A4F5E66D257BAD05003D3591 /* ViewPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
-		A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C368D52D56FE7ECADE543F28 /* Pods_ArgoTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7B52D5218286F34AB964B6 /* Pods-ArgoViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoViewDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoViewDemo/Pods-ArgoViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA04056B2588BB47006E997F /* ArgoKitDatePickerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoKitDatePickerTest.swift; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B24576515409429925EC2BC6 /* Pods_ArgoKitDemo.framework in Frameworks */,
+				8056F4AE0B7E6C97B55582BC /* Pods_ArgoKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,8 +359,8 @@
 			isa = PBXGroup;
 			children = (
 				FE4B08FDA911CD08FE457945 /* Pods_ArgoViewDemo.framework */,
-				A904046C19A381EBA108DED9 /* Pods_ArgoKitDemo.framework */,
 				C368D52D56FE7ECADE543F28 /* Pods_ArgoTest.framework */,
+				2DB644F41451D2513296A5EE /* Pods_ArgoKitDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -513,7 +513,7 @@
 				326335C7254133D20094676D /* Frameworks */,
 				326335C8254133D20094676D /* Resources */,
 				FA72311C257E633800C6492B /* Embed Frameworks */,
-				A65E72BBDE80B6A6AB3AA6CF /* [CP] Copy Pods Resources */,
+				0B30BCB0124BAB3663ACE922 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -658,7 +658,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A65E72BBDE80B6A6AB3AA6CF /* [CP] Copy Pods Resources */ = {
+		0B30BCB0124BAB3663ACE922 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -964,6 +964,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4BXE593ED8;
+				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = ArgoKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1001,6 +1002,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4BXE593ED8;
+				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INPUT_FILETYPE = automatic;

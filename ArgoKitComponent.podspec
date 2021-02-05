@@ -55,6 +55,11 @@ podspec = Pod::Spec.new do |spec|
       ss.dependency 'MJRefresh'
     end
     
+    spec.subspec "AvatarBreathView" do |ss|
+      ss.source_files = 'Source/Component/AvatarBreathView/**/*.{h,m,mm,swift}'
+      ss.dependency 'MDAvatarBreathAnimationView'
+    end
+    
   end
 
   
