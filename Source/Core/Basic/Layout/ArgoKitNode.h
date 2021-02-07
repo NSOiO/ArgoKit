@@ -82,7 +82,8 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 - (instancetype)initWithView:(UIView *)view NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithViewClass:(Class)viewClass NS_DESIGNATED_INITIALIZER;
 
-
+- (void)reusedAttributesFromNode:(ArgoKitNode *)node;
+- (nullable UIView *)nodeView;
 - (void)bindView:(UIView *)view;
 
 

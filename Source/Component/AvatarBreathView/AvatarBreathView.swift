@@ -5,9 +5,9 @@ import MDAvatarBreathAnimationView
 class AvatarBreathNode: ArgoKitNode {
     public func image(url: URL?, placeholder: String?) {
         let image = placeholder != nil ? UIImage(named: placeholder!) : nil
-        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:MDAvatarBreathAnimationView.headerImage), image)
+//        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:MDAvatarBreathAnimationView.headerImage), image)
         ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
-            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:MDAvatarBreathAnimationView.headerImage), image)
+//            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:MDAvatarBreathAnimationView.headerImage), image)
         } failure: { _ in
             // 图像加载失败
         }
@@ -38,49 +38,49 @@ public struct AvatarBreathView:View {
 }
 
 extension AvatarBreathView{
-    public func image(_ value:@escaping @autoclosure () -> UIImage?) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.headerImage),value())
-        }, forKey: #function)
-    }
-    public func imageCornerRadius(_ value:@escaping @autoclosure () -> CGFloat) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.imageCornerRadius), value())
-        }, forKey: #function)
-    }
-    public func imageCircle(_ value:@escaping @autoclosure () -> Bool) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.imageCircle), value())
-        }, forKey: #function)
-    }
-    
-    public func headerMargin(_ value:@escaping @autoclosure () -> CGFloat) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.headerMargin), value())
-        }, forKey: #function)
-    }
-    
-    public func strokeColor(_ value:@escaping @autoclosure () -> NSString?) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.fillColor), value())
-        }, forKey: #function)
-    }
-    
-    public func fillColor(_ value:@escaping @autoclosure () -> NSString?) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.contentColor), value())
-        }, forKey: #function)
-    }
-    
-    public func tagText(_ value:@escaping @autoclosure () -> String?) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(setter:MDAvatarBreathAnimationView.tagText), value())
-        }, forKey: #function)
-    }
-    
-    public func startAnimation(_ value:@escaping @autoclosure () -> Bool?) -> Self{
-        self.bindCallback({ [self] in
-            addAttribute(#selector(MDAvatarBreathAnimationView.startAnimation(_:)), value())
-        }, forKey: #function)
-    }
+//    public func image(_ value:@escaping @autoclosure () -> UIImage?) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.headerImage),value())
+//        }, forKey: #function)
+//    }
+//    public func imageCornerRadius(_ value:@escaping @autoclosure () -> CGFloat) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.imageCornerRadius), value())
+//        }, forKey: #function)
+//    }
+//    public func imageCircle(_ value:@escaping @autoclosure () -> Bool) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.imageCircle), value())
+//        }, forKey: #function)
+//    }
+//    
+//    public func headerMargin(_ value:@escaping @autoclosure () -> CGFloat) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.headerMargin), value())
+//        }, forKey: #function)
+//    }
+//    
+//    public func strokeColor(_ value:@escaping @autoclosure () -> NSString?) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.fillColor), value())
+//        }, forKey: #function)
+//    }
+//    
+//    public func fillColor(_ value:@escaping @autoclosure () -> NSString?) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.contentColor), value())
+//        }, forKey: #function)
+//    }
+//    
+//    public func tagText(_ value:@escaping @autoclosure () -> String?) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(setter:MDAvatarBreathAnimationView.tagText), value())
+//        }, forKey: #function)
+//    }
+//    
+//    public func startAnimation(_ value:@escaping @autoclosure () -> Bool?) -> Self{
+//        self.bindCallback({ [self] in
+//            addAttribute(#selector(MDAvatarBreathAnimationView.startAnimation(_:)), value())
+//        }, forKey: #function)
+//    }
 }

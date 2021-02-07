@@ -429,6 +429,15 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _bindProperties = [NSMutableDictionary new];
 }
 
+- (void)reusedAttributesFromNode:(ArgoKitNode *)node{
+    
+}
+- (nullable UIView *)nodeView{
+    if (self.linkNode.view) {
+        return self.linkNode.view;
+    }
+    return self.view;
+}
 - (void)bindView:(UIView *)view {
     if (![view isKindOfClass:_viewClass]) {
         return;

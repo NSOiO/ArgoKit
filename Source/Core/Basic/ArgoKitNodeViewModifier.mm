@@ -183,6 +183,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
                     [node addTarget:node.view forControlEvents:action.controlEvents action:action.actionBlock];
                 }
             }
+            [node reusedAttributesFromNode:resueNode];
         }
         
         if (!CGRectEqualToRect(node.view.frame, resueNode.frame)) {

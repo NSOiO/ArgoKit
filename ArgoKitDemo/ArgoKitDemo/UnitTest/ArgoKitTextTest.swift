@@ -79,19 +79,31 @@ struct ArgoKitTextTest: ArgoKit.View {
         }
         .font(size:20)
         .textColor(.yellow)
+//        
+//        AvatarBreathView(url: nil, placeholder: "chincoteague.jpg")
+//            .startAnimation(true)
+//            .width(150)
+//            .height(150)
+//            .headerMargin(0)
+//            .strokeColor("255,201,100")
+//            .margin(edge: .top, value: 10)
+//            .tagText("哈哈哈")
+//            .backgroundColor(.orange)
+//            .imageCircle(true)
+//            .fillColor("100,255,201")
+//            .circle()
         
-        AvatarBreathView(url: nil, placeholder: "chincoteague.jpg")
-            .startAnimation(true)
-            .width(150)
-            .height(150)
-            .headerMargin(0)
-            .strokeColor("255,201,100")
-            .margin(edge: .top, value: 10)
-            .tagText("哈哈哈")
-            .backgroundColor(.orange)
-            .imageCircle(true)
-            .fillColor("100,255,201")
-            .circle()
+//        LikeView(likeSvga: "", normalUrl: "http://img.momocdn.com/feedimage/A1/24/A124B7A3-AF51-43B2-9DB0-D56E32D1809520201211_400x400.webp", highlightUrl: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp") { (result) -> Bool in
+//            print("result:\(result)")
+//            return true
+//        } onClicked: { (result1, result2) in
+//            print("result1:\(result1) == result2:\(result2)")
+//        }
+//        .width(30)
+//        .height(30)
+//        .margin(edge: .top, value: 10)
+//        .margin(edge: .left, value: 100)
+
         
 
         
