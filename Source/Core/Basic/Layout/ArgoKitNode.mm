@@ -507,7 +507,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if ([self.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
         [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
     }else{
-        [self.parentNode.view insertSubview:self.view atIndex:index];
+//        [self.parentNode.view insertSubview:self.view atIndex:index];
+        [self.parentNode.view addSubview:self.view];
     }
 }
 

@@ -254,23 +254,24 @@ struct ListDemo:ArgoKit.View{
         }
     }
     func loadMoreData1(){
-        nodeQueue.async {
-            self._loadMoreData()
-            DispatchQueue.main.async {
-                $items.apply()
-            }
-        }
+        self._loadMoreData()
+//        nodeQueue.async {
+//            self._loadMoreData()
+//            DispatchQueue.main.async {
+//                $items.apply()
+//            }
+//        }
     }
     func loadMoreData(_ callback:(()->())? = nil){
-        nodeQueue.async {
+//        nodeQueue.async {
             self._loadMoreData()
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 $items.apply()
-                if let callBack1 = callback{
-                    callBack1()
-                }
-            }
-        }
+//                if let callBack1 = callback{
+//                    callBack1()
+//                }
+//            }
+//        }
     }
     func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
@@ -373,11 +374,6 @@ struct ListDemo:ArgoKit.View{
 //            Text("sectionFooter").height(50).backgroundColor(.orange)
 //        })
         .backgroundColor(.purple)
-        .grow(0)
-        .height(.auto)
-        
-//        .height(200)
-        
         Text("hahahha").height(100).backgroundColor(.orange)
         
         Text("hahahha").height(100).backgroundColor(.blue)

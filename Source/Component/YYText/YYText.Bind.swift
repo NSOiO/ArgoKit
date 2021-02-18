@@ -12,6 +12,8 @@ extension YYText{
     ///asynchronously on background threads.
      
     ///The default value is `NO`.
+    @discardableResult
+    public 
     func displaysAsynchronously(_ value:Bool) -> Self{
         if let textNode = self.node as? YYTextNode{
             textNode.displaysAsynchronously(asyn: value)

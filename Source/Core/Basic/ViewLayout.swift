@@ -63,21 +63,7 @@ public enum ArgoDirection {
 
 extension View {
     
-    @discardableResult
-    fileprivate func direction(_ value: ArgoDirection) -> Self {
-        switch value {
-        case .Inherit:
-            self.node?.directionInherit()
-            break
-        case .LTR:
-            self.node?.directionLTR()
-            break
-        case .RTL:
-            self.node?.directionRTL()
-            break
-        }
-        return self
-    }
+
 }
 
 public enum ArgoFlexDirection {

@@ -172,7 +172,10 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         resueNode.linkNode = node;
         if (!node.view && resueNode.isEnabled) {
             [node createNodeViewIfNeed:node.frame];
-        }  
+        }
+        if (!node.view) {
+            NSLog(@"node.view is nil %@ == %@",@(resueNode.isEnabled),@(node.isEnabled));
+        }
         if (!onlyResetFrame) {
             // 处理UIView属性点击事件
             [self _nodeViewAttributeWithNode:node attributes:[resueNode nodeAllAttributeValue] markDirty:NO];

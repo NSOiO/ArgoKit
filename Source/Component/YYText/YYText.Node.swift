@@ -22,12 +22,10 @@ class YYTextNode: ArgoKitTextBaseNode{
     func displaysAsynchronously(asyn:Bool){
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.displaysAsynchronously),asyn)
     }
-    override func createNodeViewIfNeed(_ frame: CGRect) {
-        super.createNodeViewIfNeed(frame)
-        if let view = self.link?.view as? YYLabel {
-            view.textTapAction = textTapAction
-            view.textLongPressAction = textLongAction
-        }else if let view = self.view as? YYLabel{
+    
+    override func reusedAttributes(from node: ArgoKitNode) {
+        super.reusedAttributes(from: node)
+        if let view = self.nodeView() as? YYLabel {
             view.textTapAction = textTapAction
             view.textLongPressAction = textLongAction
         }
@@ -468,3 +466,5 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.attributedText),self.attributedText)
     }
 }
+
+

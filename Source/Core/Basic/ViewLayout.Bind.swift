@@ -64,6 +64,24 @@ extension View {
 }
 
 extension View {
+    /// Layout direction specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also effects what edge start and end refer to. By default Yoga lays out with LTR layout direction. In this mode start refers to left and end refers to right. When localizing your apps for markets with RTL languages you should customize this by either by passing a direction to the CalculateLayout call or by setting the direction on the root node.
+    /// - Parameter value: The type of flex direction.
+    /// - Returns: self
+    @discardableResult
+    public func direction(_ value: ArgoDirection) -> Self {
+        switch value {
+        case .Inherit:
+            self.node?.directionInherit()
+            break
+        case .LTR:
+            self.node?.directionLTR()
+            break
+        case .RTL:
+            self.node?.directionRTL()
+            break
+        }
+        return self
+    }
     
     /// Flex direction controls the direction in which children of a node are laid out. This is also referred to as the main axis. The main axis is the direction in which children are laid out. The cross axis the the axis perpendicular to the main axis, or the axis which wrapping lines are laid out in.
     /// - Parameter value: The type of flex direction.

@@ -12,11 +12,11 @@ target 'ArgoKitDemo' do
   pod 'ArgoKitComponent/Refresh', :path =>'../'
   pod 'ArgoKitComponent/KFImageLoader', :path => '../'
 #  pod 'ArgoKitComponent/AvatarBreathView', :path => '../'
-  pod 'ArgoKitComponent/LikeView', :path => '../'
+#  pod 'ArgoKitComponent/LikeView', :path => '../'
 #  pod 'MDAvatarBreathAnimationView', :path => '../../MDAvatarBreathAnimationView'
-  pod 'pop', '1.0.12.a.debug.25', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
-  pod 'MMFrameManager', '0.1.5.a.debug.26', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
-  pod 'MDLikeView', '0.1.7.a.debug.26', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
+#  pod 'pop', '1.0.12.a.debug.25', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
+#  pod 'MMFrameManager', '0.1.5.a.debug.26', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
+#  pod 'MDLikeView', '0.1.7.a.debug.26', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
 end
 
 # from argokit_preview_config.rb

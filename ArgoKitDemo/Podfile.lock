@@ -25,9 +25,6 @@ PODS:
   - ArgoKitComponent/KFImageLoader (1.0.7):
     - ArgoKit
     - Kingfisher
-  - ArgoKitComponent/LikeView (1.0.7):
-    - ArgoKit
-    - MDLikeView
   - ArgoKitComponent/Refresh (1.0.7):
     - ArgoKit
     - MJRefresh
@@ -41,139 +38,27 @@ PODS:
     - ArgoKit
     - ArgoKitComponent
   - Kingfisher (6.1.0)
-  - MDLikeView (0.1.7.a.debug.26):
-    - MMBaseFoundation
-    - MMUIBaseFoundation
-    - pop
-    - ReactiveCocoa (~> 2.0)
-    - SVGAPlayer
   - MJRefresh (3.5.0)
-  - MMBaseFoundation (0.0.41):
-    - MMBaseFoundation/Header (= 0.0.41)
-    - MMBaseFoundation/JSON (= 0.0.41)
-    - MMBaseFoundation/NSArray (= 0.0.41)
-    - MMBaseFoundation/NSData (= 0.0.41)
-    - MMBaseFoundation/NSDate (= 0.0.41)
-    - MMBaseFoundation/NSDictionary (= 0.0.41)
-    - MMBaseFoundation/NSFileManager (= 0.0.41)
-    - MMBaseFoundation/NSObject (= 0.0.41)
-    - MMBaseFoundation/NSSet (= 0.0.41)
-    - MMBaseFoundation/NSString (= 0.0.41)
-  - MMBaseFoundation/Header (0.0.41)
-  - MMBaseFoundation/JSON (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSArray (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSData (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSDate (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSDictionary (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSFileManager (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSObject (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSSet (0.0.41):
-    - MMBaseFoundation/Header
-  - MMBaseFoundation/NSString (0.0.41):
-    - MMBaseFoundation/Header
-    - MMBaseFoundation/NSDictionary
-  - MMBaseUtility/Header (0.0.24)
-  - MMBaseUtility/UIDevice (0.0.24):
-    - MMBaseUtility/Header
-  - MMFrameManager (0.1.5.a.debug.26):
-    - MMBaseUtility/UIDevice
-  - MMUIBaseFoundation (0.0.20):
-    - MMUIBaseFoundation/Header (= 0.0.20)
-    - MMUIBaseFoundation/UIAlertView (= 0.0.20)
-    - MMUIBaseFoundation/UIButton (= 0.0.20)
-    - MMUIBaseFoundation/UIColor (= 0.0.20)
-    - MMUIBaseFoundation/UIControl (= 0.0.20)
-    - MMUIBaseFoundation/UIGestureRecognizer (= 0.0.20)
-    - MMUIBaseFoundation/UIImage (= 0.0.20)
-    - MMUIBaseFoundation/UILabel (= 0.0.20)
-    - MMUIBaseFoundation/UINavigationController (= 0.0.20)
-    - MMUIBaseFoundation/UIResponder (= 0.0.20)
-    - MMUIBaseFoundation/UIView (= 0.0.20)
-    - MMUIBaseFoundation/UIViewController (= 0.0.20)
-  - MMUIBaseFoundation/Header (0.0.20)
-  - MMUIBaseFoundation/UIAlertView (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIButton (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIColor (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIControl (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIGestureRecognizer (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIImage (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UILabel (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UINavigationController (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIResponder (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIView (0.0.20):
-    - MMUIBaseFoundation/Header
-  - MMUIBaseFoundation/UIViewController (0.0.20):
-    - MMUIBaseFoundation/Header
-  - pop (1.0.12.a.debug.25)
-  - Protobuf (3.14.0)
-  - ReactiveCocoa (2.5):
-    - ReactiveCocoa/UI (= 2.5)
-  - ReactiveCocoa/Core (2.5):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.5)
-  - ReactiveCocoa/UI (2.5):
-    - ReactiveCocoa/Core
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
-  - SSZipArchive (2.2.3)
-  - SVGAPlayer (2.5.6):
-    - SVGAPlayer/Core (= 2.5.6)
-    - SVGAPlayer/ProtoFiles (= 2.5.6)
-  - SVGAPlayer/Core (2.5.6):
-    - SSZipArchive (>= 1.8.1)
-    - SVGAPlayer/ProtoFiles
-  - SVGAPlayer/ProtoFiles (2.5.6):
-    - Protobuf (~> 3.4)
   - Yoga (1.14.0)
   - YYText (1.0.7)
 
 DEPENDENCIES:
   - ArgoKit (from `../`)
   - ArgoKitComponent/KFImageLoader (from `../`)
-  - ArgoKitComponent/LikeView (from `../`)
   - ArgoKitComponent/Refresh (from `../`)
   - ArgoKitComponent/SDImageLoader (from `../`)
   - ArgoKitComponent/YYText (from `../`)
   - ArgoKitPreview (from `../`)
-  - MDLikeView (= 0.1.7.a.debug.26)
-  - MMFrameManager (= 0.1.5.a.debug.26)
-  - pop (= 1.0.12.a.debug.25)
 
 SPEC REPOS:
-  https://git.wemomo.com/ios/BinarySpec.git:
-    - MDLikeView
-    - MMFrameManager
-    - pop
-  https://git.wemomo.com/ios/Specs.git:
-    - MMBaseFoundation
-    - MMBaseUtility
-    - MMUIBaseFoundation
   https://github.com/cocoapods/specs.git:
     - ArgoAnimation
     - Kingfisher
     - MJRefresh
-    - Protobuf
-    - ReactiveCocoa
     - SDWebImage
-    - SSZipArchive
-    - SVGAPlayer
     - Yoga
     - YYText
 
@@ -188,24 +73,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
   ArgoKit: 2eb2d1cf7a5cbdb77d9e870ff9f15af764fe6115
-  ArgoKitComponent: cc7cfaed6e04ecbc59487cb24b2963454c96a44e
+  ArgoKitComponent: 87fa05e339b6a708aa667666a540e32055dcd883
   ArgoKitPreview: 18ddf22247124df8ed75cca897d7866bc17e0338
   Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
-  MDLikeView: ca81266de4eaafdcdf7db00bb67aa80d1552c6d3
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  MMBaseFoundation: 605f9875a98a257001e642ba33954163a1271ae8
-  MMBaseUtility: d783a4fee49121b0a9fe6fc0bbd38913eee0efef
-  MMFrameManager: dbba083cc50787e0aecc43db3e8aeb227c03b4c8
-  MMUIBaseFoundation: ead5a96ce866180bbd166dd2efcdf781942432e9
-  pop: e5e195e85b22b0722f15b5e1bf49274f633bfed7
-  Protobuf: 0cde852566359049847168e51bd1c690e0f70056
-  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
-  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
-  SVGAPlayer: f3b3792ae66f7cb3f944ae373a40864db9a04331
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 9c3c6f3510e2e2988f1b37a75253115a295af12f
+PODFILE CHECKSUM: 5a9b67fa2d20f6f38f7685fff8044d17fadf61d3
 
 COCOAPODS: 1.10.0

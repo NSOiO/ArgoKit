@@ -51,4 +51,9 @@ public struct YYText: TextProtocol {
         self.init()
         self.text(text())
     }
+    
+    public init(_ attributText:@escaping @autoclosure () -> NSAttributedString?) {
+        self.init()
+        self.attributedText(attributText())
+    }
 }
