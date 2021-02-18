@@ -41,7 +41,16 @@ extension ArgoKitNodeViewModifier{
     public class func addAttribute(isCALayer:Bool = false,isDirty:Bool = false,_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
         ArgoKitNodeViewModifier._addAttribute_(isCALayer:isCALayer,outNode, selector, patamter)
     }
-    public class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+    class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+        if let node = outNode{
+            let attribute = _preformAttribute_(isCALayer: isCALayer, isDirty: isDirty, outNode, selector, patamter)
+            node.nodeAddView(attribute:attribute)
+            
+        }
+    }
+    
+    @discardableResult
+    class func _preformAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) -> ViewAttribute? {
         if let node = outNode{
             // 获取参数
             var paraList:Array<Any> = Array()
@@ -51,7 +60,7 @@ extension ArgoKitNodeViewModifier{
                 }
             }
             if patamter.count !=  paraList.count{
-                return
+                return nil
             }
             
             let attribute = ViewAttribute(selector:selector,paramter:paraList)
@@ -63,9 +72,9 @@ extension ArgoKitNodeViewModifier{
             
             self.setNodeAttribute(node, attribute)
             
-            node.nodeAddView(attribute:attribute)
-            
+            return attribute
         }
+        return nil
     }
     
     class func setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
@@ -90,6 +99,16 @@ extension View {
     ///   - patamter: patamter.
     public func addAttribute(isCALayer: Bool = false, isDirty: Bool = false, _ selector: Selector, _ patamter: Any? ...) {
         ArgoKitNodeViewModifier._addAttribute_(isCALayer: isCALayer, isDirty: isDirty, self.node, selector, patamter)
+    }
+    
+    /// Preform attribute to the UIKit View
+    /// - Parameters:
+    ///   - isCALayer: true if is calayer.
+    ///   - isDirty: true if the attribute may change the view layout
+    ///   - selector: The selector of the attribute.
+    ///   - patamter: patamter.
+    public func preformAttribute(isCALayer: Bool = false, isDirty: Bool = false, _ selector: Selector, _ patamter: Any? ...) {
+        ArgoKitNodeViewModifier._preformAttribute_(isCALayer: isCALayer, isDirty: isDirty, self.node, selector, patamter)
     }
 }
 

@@ -48,7 +48,13 @@ class LikeImageNode: ArgoKitNode {
         }
         return view ?? MDLikeControl()
     }
-    
+    override func prepareForUse() {
+        super.prepareForUse()
+        if let view = self.nodeView() as? MDLikeControl {
+            view.willClicked = willClicked
+            view.onClicked = onClicked
+        }
+    }
     override func clearStrongRefrence() {
         super.clearStrongRefrence()
         willClicked = nil
@@ -60,7 +66,7 @@ public struct LikeView:View{
     public var node: ArgoKitNode?{
         pNode
     }
-    init() {
+    public init() {
         pNode = LikeImageNode(viewClass: MDLikeControl.self)
     }
     public init(likeSvga:String? = "",
@@ -74,6 +80,9 @@ public struct LikeView:View{
         pNode.highlightUrl = highlightUrl
         pNode.willClicked = willClicked
         pNode.onClicked = onClicked
+        self.onTapGesture {[self] in
+            likeControlAnimation()
+        }
     }
     
 }

@@ -55,20 +55,20 @@ podspec = Pod::Spec.new do |spec|
       ss.dependency 'MJRefresh'
     end
     
-    spec.subspec "AvatarBreathView" do |ss|
-      ss.source_files = 'Source/Component/AvatarBreathView/**/*.{h,m,mm,swift}'
-      ss.dependency 'MDAvatarBreathAnimationView'
-    end
-    
-    spec.subspec "LikeView" do |ss|
-      ss.source_files = 'Source/Component/LikeView/**/*.{h,m,mm,swift}'
-      ss.dependency 'MDLikeView'
-    end
-    
-    spec.subspec "RealAuthView" do |ss|
-      ss.source_files = 'Source/Component/RealAuthView/**/*.{h,m,mm,swift}'
-      ss.dependency 'MDRealAuthIconView'
-    end
+#    spec.subspec "AvatarBreathView" do |ss|
+#      ss.source_files = 'Source/Component/AvatarBreathView/**/*.{h,m,mm,swift}'
+#      ss.dependency 'MDAvatarBreathAnimationView'
+#    end
+#    
+#    spec.subspec "LikeView" do |ss|
+#      ss.source_files = 'Source/Component/LikeView/**/*.{h,m,mm,swift}'
+#      ss.dependency 'MDLikeView'
+#    end
+#    
+#    spec.subspec "RealAuthView" do |ss|
+#      ss.source_files = 'Source/Component/RealAuthView/**/*.{h,m,mm,swift}'
+#      ss.dependency 'MDRealAuthIconView'
+#    end
     
   end
 

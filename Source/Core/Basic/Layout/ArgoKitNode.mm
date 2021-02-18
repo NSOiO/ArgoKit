@@ -751,6 +751,16 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         }
     }
 }
+- (void)NodeRemoveViewAttribute:(SEL)selector{
+    NSString *selector_name;
+    if (selector) {
+        selector_name = @(sel_getName(selector));
+    }
+    if (selector_name.length > 0) {
+        [self.viewAttributes argokit_removeObjectForKey:selector_name];
+    }
+}
+
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue{
     return [self.viewAttributes argokit_allValues];
 }

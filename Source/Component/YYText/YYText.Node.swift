@@ -43,7 +43,14 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
     override func setText(_ value:String?){
         if let text = value {
-            setAttributedText(attri: NSAttributedString(string: text))
+            if let attributedText_ = attributedText {
+                attributedText_.replaceCharacters(in: NSRange(location: 0, length: attributedText_.length), with: text)
+                attributedText = attributedText_
+                ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+            }else{
+                setAttributedText(attri: NSAttributedString(string: text))
+            }
+           
         }
     }
     override func setAttributedText(attri:NSAttributedString?){
