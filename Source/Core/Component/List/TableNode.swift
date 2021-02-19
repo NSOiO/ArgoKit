@@ -92,6 +92,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
         tableView.delegate = self
         tableView.dataSource = self
+        
         if #available(iOS 10.0, *) {
             tableView.prefetchDataSource = self
         }
@@ -125,16 +126,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
     }
     
-    func apply() {
-//        DispatchQueue.once(token: "argokit_reload_\(self.hashValue)") {[weak self] in
-//            self?.tableView?.delegate = self
-//            self?.tableView?.dataSource = self
-//            if #available(iOS 10.0, *) {
-//                self?.tableView?.prefetchDataSource = self
-//            }
-//        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return self.dataSourceHelper.numberOfSection()
@@ -146,7 +137,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let identifier = self.dataSourceHelper.reuseIdForRow(indexPath.row, at: indexPath.section) ?? kCellReuseIdentifier
         if !self.dataSourceHelper.registedReuseIdSet.contains(identifier) {
             tableView.register(ListCell.self, forCellReuseIdentifier: identifier)
@@ -305,6 +295,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if estimatedHeight <= 0 {
             estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+        }
+        if estimatedHeight <= 100 {
+            return 100
         }
         return estimatedHeight
     }

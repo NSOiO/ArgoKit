@@ -20,7 +20,6 @@ class DataSourcePrefetchHelper<D>{
     public init() {
         startRunloop()
     }
-    var nodeHeightQueue:DispatchQueue = DispatchQueue(label: "com.argokit.precaculate.nodeheight")
     var observe:CFRunLoopObserver? = nil
     var prefetchModels:NSMutableArray = NSMutableArray()
     func startRunloop() -> Void {
@@ -66,7 +65,7 @@ class DataSourcePrefetchHelper<D>{
             if let dataSourceHelper = innerOperation.dataSourceHelper,let indexPaths = innerOperation.indexPaths {
                 for indexPath in indexPaths {
                     let node = dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section)
-                    nodeHeightQueue.async {
+                    ArgoKitUtils.asynCaculationBlock {
                         dataSourceHelper.rowHeight(node, maxWidth: innerOperation.width)
                     }
                 }

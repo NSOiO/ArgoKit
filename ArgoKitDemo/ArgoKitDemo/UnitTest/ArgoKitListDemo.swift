@@ -131,6 +131,7 @@ class MSUserInterractionContentView: ArgoKit.View {
                 .font(size: 12.0)
                 .margin(edge: .left, value: 5)
                 .alignSelf(.center)
+                
         }
         .margin(edge: .top, value: 12)
         .margin(edge: .left, value: 10)
@@ -224,7 +225,7 @@ struct ListDemo:ArgoKit.View{
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node1111")
-   
+    var view:UIView = UIView()
     
     @DataSource var items:[SessionItem] = [SessionItem]()
     @DataSource var headerItems:[SessionItem] = [SessionItem]()
@@ -285,6 +286,8 @@ struct ListDemo:ArgoKit.View{
             item.unreadCount = String(index)
             $items.append(item)
         }
+        
+    
 
        
     }
@@ -294,8 +297,11 @@ struct ListDemo:ArgoKit.View{
     
     var body: ArgoKit.View{
         ArgoKit.List(data:$items){ item in
-            SessionRow(item: item)
+//            SessionRow(item: item)
         }
+        .tableHeaderView(headerContent: { () -> View in
+            CustomView(view: view).grow(1)
+        })
         .cellSelected {item, indexPath in
 //            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
 //            .textField()

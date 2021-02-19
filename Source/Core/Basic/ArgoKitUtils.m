@@ -9,6 +9,13 @@
 #import <CoreText/CoreText.h>
 #include <pthread/pthread.h>
 @implementation ArgoKitUtils
+static dispatch_queue_t argokit_caculate_queue  = nil;
++ (void)asynCaculationBlock:(dispatch_block_t)block{
+    if (!argokit_caculate_queue) {
+        argokit_caculate_queue = dispatch_queue_create("com.argokit.precaculate.nodecaculationQueue", DISPATCH_QUEUE_SERIAL);
+    }
+    dispatch_async(argokit_caculate_queue, block);
+}
 + (void)runMainThreadAsyncBlock:(dispatch_block_t)block{
     if (pthread_main_np()) {
         block();

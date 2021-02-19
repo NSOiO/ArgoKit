@@ -73,7 +73,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
   ArgoKit: 2eb2d1cf7a5cbdb77d9e870ff9f15af764fe6115
-  ArgoKitComponent: 87fa05e339b6a708aa667666a540e32055dcd883
+  ArgoKitComponent: 99c490f373e7f4a81aaf8f7bd1274bde47064790
   ArgoKitPreview: 18ddf22247124df8ed75cca897d7866bc17e0338
   Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16

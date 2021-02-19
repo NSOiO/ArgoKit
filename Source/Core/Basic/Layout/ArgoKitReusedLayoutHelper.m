@@ -9,6 +9,7 @@
 #import "ArgoKitNode.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitLayoutEngine.h"
+#import "ArgoKitUtils.h"
 #import <os/lock.h>
 
 @interface ArgoKitReusedLayoutHelper(){
@@ -74,12 +75,16 @@ static ArgoKitReusedLayoutHelper* _instance;
     }
 }
 - (void)_layout:(ArgoKitNode *)node{
-    [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
-    [node applyLayoutAferCalculationWithView:NO];
-    if (node.linkNode) {
-        [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
-    }else{
-        [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
-    }
+    [ArgoKitUtils asynCaculationBlock:^{
+        [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
+        [ArgoKitUtils runMainThreadAsyncBlock:^{
+            [node applyLayoutAferCalculationWithView:NO];
+            if (node.linkNode) {
+                [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
+            }else{
+                [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
+            }
+        }];
+    }];
 }
 @end

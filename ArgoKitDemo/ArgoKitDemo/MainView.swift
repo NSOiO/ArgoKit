@@ -36,7 +36,6 @@ struct MainView: ArgoKit.ViewProtocol {
         }
         .height(100%)
         .cellSelected { (cellModel, indexPath) in
-            model.action()
             model.action = MainViewAction.cellSelected(cellModel, indexPath)
         }
         

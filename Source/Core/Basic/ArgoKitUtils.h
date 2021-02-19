@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (CGSize)sizeThatFits:(CGSize)size
          numberOfLines:(NSInteger)numberOfLines
       attributedString:(nullable NSAttributedString *)attributedString;
+
++ (void)asynCaculationBlock:(dispatch_block_t)block;
 @end
 
 NS_ASSUME_NONNULL_END

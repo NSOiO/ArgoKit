@@ -12,6 +12,12 @@ class ArgoKitTextTestModel {
 //   @Observable var age:Int = 1
 //   @Observable var fontSize:CGFloat = 30
    @Observable var name:String = "张三张三张三张三张三张三张三张三张三张三张三张三张三张三张"
+    let lable:UIView = UIView()
+    
+    init() {
+        lable.backgroundColor = .orange
+        lable.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
+    }
 //   @Observable var color:UIColor = .red
 //   @Alias var text:Text?
 }
@@ -42,15 +48,22 @@ struct ArgoKitTextTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-//        HStack{
-//            Text("单行文本sxssasasdassasa")
-//                .font(size: 25)
-//                .backgroundColor(.orange)
-//                .margin(edge: .top, value: 100)
-//
-//                .height(100)
-//        }
-//            .alignSelf(.center)
+        HStack{
+            Text("单行文本sxssasasdassasa")
+                .font(size: 25)
+                .backgroundColor(.orange)
+                .margin(edge: .top, value: 0)
+                .height(100)
+                .onTapGesture {
+                    model.lable.frame.size = CGSize(width: 50, height: 50)
+                }
+            CustomView(view: model.lable)
+                .size(width: 100, height: 20)
+                .backgroundColor(.yellow)
+                .margin(edge: .top, value: 100)
+        }
+            .alignSelf(.center)
+        .backgroundColor(.cyan)
 //
 //
 //        Text("单行文本粗体cdxasxas····")

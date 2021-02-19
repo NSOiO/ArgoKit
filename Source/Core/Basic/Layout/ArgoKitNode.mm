@@ -88,12 +88,14 @@
 @end
 
 static YGConfigRef globalConfig;
+
 @interface ArgoKitLayout: NSObject
 @property (nonatomic, assign, readonly) YGNodeRef ygnode;
 @property (nonatomic, weak, readonly) ArgoKitNode *argoNode;
 @property (nonatomic, strong, readonly) NodeWrapper *nodeWarpper;
 - (instancetype)initWithNode:(ArgoKitNode *)node;
 @end
+
 @implementation ArgoKitLayout
 + (void)initialize
 {
@@ -158,12 +160,16 @@ static YGConfigRef globalConfig;
   YGAttachNodesFromNodeHierachy(self.argoNode);
 
   const YGNodeRef node = self.ygnode;
+  NSLock *lock = self.argoNode.yogaLock;
+  [lock lock];
+    
   YGNodeCalculateLayout(
     node,
     size.width,
     size.height,
     YGNodeStyleGetDirection(node));
-
+    
+  [lock unlock];
   return (CGSize) {
     .width = YGNodeLayoutGetWidth(node),
     .height = YGNodeLayoutGetHeight(node),
@@ -271,23 +277,23 @@ static YGSize YGMeasureView(
   ArgoKitNode *argoNode = nodeWapper.node;
   __block CGSize sizeThatFits = CGSizeZero;
   if (!argoNode.isUIView || [argoNode.childs count] > 0) {
-      if(pthread_main_np()){
-          sizeThatFits = [argoNode sizeThatFits:(CGSize){
-                                                .width = constrainedWidth,
-                                                .height = constrainedHeight,
-                                            }];
-      }else{
-          dispatch_sync(dispatch_get_main_queue(), ^{
-              sizeThatFits = [argoNode sizeThatFits:(CGSize){
-                                                    .width = constrainedWidth,
-                                                    .height = constrainedHeight,
-                                                }];
-          });
-      }
-//      sizeThatFits = [argoNode sizeThatFits:(CGSize){
-//                                            .width = constrainedWidth,
-//                                            .height = constrainedHeight,
-//                                        }];
+//      if(pthread_main_np()){
+//          sizeThatFits = [argoNode sizeThatFits:(CGSize){
+//                                                .width = constrainedWidth,
+//                                                .height = constrainedHeight,
+//                                            }];
+//      }else{
+//          dispatch_sync(dispatch_get_main_queue(), ^{
+//              sizeThatFits = [argoNode sizeThatFits:(CGSize){
+//                                                    .width = constrainedWidth,
+//                                                    .height = constrainedHeight,
+//                                                }];
+//          });
+//      }
+      sizeThatFits = [argoNode sizeThatFits:(CGSize){
+                                            .width = constrainedWidth,
+                                            .height = constrainedHeight,
+                                        }];
    
   }
   return (YGSize) {
@@ -319,9 +325,10 @@ static BOOL YGNodeHasExactSameChildren(const YGNodeRef node, NSArray<ArgoKitNode
 static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
 {
   ArgoKitLayout * layout = argoNode.layout;
-  NSLock *lock = argoNode.yogaLock;
   const YGNodeRef node = layout.ygnode;
-    [lock lock];
+    
+  NSLock *lock = argoNode.yogaLock;
+  [lock lock];
   if (layout.isLeaf) {
     YGRemoveAllChildren(node);
     [lock unlock];

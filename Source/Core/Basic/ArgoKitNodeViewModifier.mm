@@ -171,7 +171,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         
         resueNode.linkNode = node;
         if (!node.view && resueNode.isEnabled) {
-            [node createNodeViewIfNeed:node.frame];
+            [node createNodeViewIfNeed:resueNode.frame];
         }
         if (!onlyResetFrame) {
             // 处理UIView属性点击事件
