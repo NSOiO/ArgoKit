@@ -156,20 +156,20 @@ static YGConfigRef globalConfig;
 {
 //  NSAssert([NSThread isMainThread], @"Yoga calculation must be done on main.");
   NSAssert(self.argoNode.isEnabled, @"Yoga is not enabled for this view.");
-
+    
+  NSLock *lock = self.argoNode.yogaLock;
+//  [lock lock];
   YGAttachNodesFromNodeHierachy(self.argoNode);
 
   const YGNodeRef node = self.ygnode;
-  NSLock *lock = self.argoNode.yogaLock;
-  [lock lock];
     
+
   YGNodeCalculateLayout(
     node,
     size.width,
     size.height,
     YGNodeStyleGetDirection(node));
-    
-  [lock unlock];
+//  [lock unlock];
   return (CGSize) {
     .width = YGNodeLayoutGetWidth(node),
     .height = YGNodeLayoutGetHeight(node),
@@ -327,11 +327,8 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
   ArgoKitLayout * layout = argoNode.layout;
   const YGNodeRef node = layout.ygnode;
     
-  NSLock *lock = argoNode.yogaLock;
-  [lock lock];
   if (layout.isLeaf) {
     YGRemoveAllChildren(node);
-    [lock unlock];
     YGNodeSetMeasureFunc(node, YGMeasureView);
   } else {
     YGNodeSetMeasureFunc(node, NULL);
@@ -348,7 +345,6 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
         YGNodeInsertChild(node, childsToInclude[i].layout.ygnode, i);
       }
     }
-    [lock unlock];
     for (ArgoKitNode *const childNode in childsToInclude) {
         YGAttachNodesFromNodeHierachy(childNode);
     }

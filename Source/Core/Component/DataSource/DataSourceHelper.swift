@@ -27,6 +27,8 @@ class ArgoKitCellNode: ArgoKitNode {
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     var dataSourceType : DataSourceType  = .none
+    lazy var nodeHeightLock:NSLock  = NSLock()
+    lazy var nodeLock:NSLock  = NSLock()
     private var defaultHeight:CGFloat = -1.0
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:NSMutableArray = NSMutableArray()
@@ -113,9 +115,11 @@ extension DataSourceHelper {
     }
     
     open func rowHeight(_ node:ArgoKitCellNode?,maxWidth: CGFloat){
+        nodeHeightLock.lock()
         if node?.size.width != maxWidth || node?.size.height == 0 {
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
         }
+        nodeHeightLock.unlock()
     }
     open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
         if let node = self.nodeForRow(row, at: section) {
@@ -146,12 +150,16 @@ extension DataSourceHelper {
             return nil
         }
         if let sourceData = self.dataSource()?[section][row]{
-            return _nodeForData_(sourceData)
+            return nodeForData(sourceData)
         }
         return nil
     }
     open func nodeForData(_ data: Any) -> ArgoKitCellNode?{
-        return _nodeForData_(data)
+        nodeLock.lock()
+        let cellNode = _nodeForData_(data)
+        nodeLock.unlock()
+        return cellNode
+//        return _nodeForData_(data)
     }
     private func _nodeForData_(_ data: Any) -> ArgoKitCellNode? {
         if let sourceData_ = data as? ArgoKitIdentifiable,

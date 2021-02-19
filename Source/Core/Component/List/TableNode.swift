@@ -204,9 +204,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        let prefetchModel:DataSourcePrefetchModel<D> = DataSourcePrefetchModel<D>(self.dataSourceHelper,indexPaths:indexPaths)
-        prefetchModel.width = tableView.bounds.width
-        dataSourcePrefetchHelper.addPrefetchModel(prefetchModel)
+//        let prefetchModel:DataSourcePrefetchModel<D> = DataSourcePrefetchModel<D>(self.dataSourceHelper,indexPaths:indexPaths)
+//        prefetchModel.width = tableView.bounds.width
+//        dataSourcePrefetchHelper.addPrefetchModel(prefetchModel)
         let sel = #selector(self.tableView(_:prefetchRowsAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPaths])
     }
@@ -292,15 +292,15 @@ class TableNode<D>: ArgoKitScrollViewNode,
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if estimatedHeight <= 0 {
-            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
-        }
-        if estimatedHeight <= 100 {
-            return 100
-        }
-        return estimatedHeight
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if estimatedHeight <= 0 {
+//            estimatedHeight = self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+//        }
+//        if estimatedHeight <= 100 {
+//            return 100
+//        }
+//        return estimatedHeight
+//    }
     
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -704,40 +704,40 @@ extension TableNode {
     }
 }
 
-//extension TableNode{
-//    func createNodeFromData(_ data: Any,helper:Any) {
-//        if let datasource = helper as? DataSource<DataList<D>> {
-//
-//            if datasource.type == .body {
-//                let node = dataSourceHelper.nodeForData(data)
-//                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
-//            }
-//            if datasource.type == .header {
-//                let node = sectionHeaderSourceHelper.nodeForData(data)
-//                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
-//            }
-//
-//            if datasource.type == .footer {
-//                let node = sectionHeaderSourceHelper.nodeForData(data)
-//                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
-//            }
-//        }
-//
-//        if let datasource = helper as? DataSource<SectionDataList<D>> {
-//
-//            if datasource.type == .body {
-//                let node = dataSourceHelper.nodeForData(data)
-//                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
-//            }
-//            if datasource.type == .header {
-//                let node = sectionHeaderSourceHelper.nodeForData(data)
-//                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
-//            }
-//
-//            if datasource.type == .footer {
-//                let node = sectionHeaderSourceHelper.nodeForData(data)
-//                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
-//            }
-//        }
-//    }
-//}
+extension TableNode{
+    func createNodeFromData(_ data: Any,helper:Any) {
+        if let datasource = helper as? DataSource<DataList<D>> {
+
+            if datasource.type == .body {
+                let node = dataSourceHelper.nodeForData(data)
+                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+
+            if datasource.type == .footer {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+            }
+        }
+
+        if let datasource = helper as? DataSource<SectionDataList<D>> {
+
+            if datasource.type == .body {
+                let node = dataSourceHelper.nodeForData(data)
+                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+            }
+
+            if datasource.type == .footer {
+                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+            }
+        }
+    }
+}
