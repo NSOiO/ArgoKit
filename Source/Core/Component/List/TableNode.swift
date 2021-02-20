@@ -64,8 +64,32 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     public weak var tableView: UITableView?
    
-    public var tableHeaderNode: ArgoKitNode?
-    public var tableFooterNode: ArgoKitNode?
+    public var tableHeaderNode: ArgoKitNode?{
+        didSet{
+            if let tableView = self.tableView {
+                if let tableHeaderNode_ = tableHeaderNode {
+                    tableHeaderNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
+                    tableView.tableHeaderView = tableHeaderNode_.view
+                }else{
+                    tableView.tableHeaderView = nil
+                }
+                tableView.reloadData()
+            }
+        }
+    }
+    public var tableFooterNode: ArgoKitNode?{
+        didSet{
+            if let tableView = self.tableView {
+                if let tableFooterNode_ = tableFooterNode {
+                    tableFooterNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
+                    tableView.tableHeaderView = tableFooterNode_.view
+                }else{
+                    tableView.tableFooterView = nil
+                }
+                tableView.reloadData()
+            }
+        }
+    }
     public var sectionIndexTitles: [String]?
     
     public var estimatedHeight:CGFloat = -1.0
@@ -99,13 +123,13 @@ class TableNode<D>: ArgoKitScrollViewNode,
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
-        if tableHeaderNode != nil {
-            tableHeaderNode?.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
-            tableView.tableHeaderView = tableHeaderNode?.view
+        if let tableHeaderNode_ = tableHeaderNode {
+            tableHeaderNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
+            tableView.tableHeaderView = tableHeaderNode_.view
         }
-        if tableFooterNode != nil {
-            tableFooterNode?.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
-            tableView.tableFooterView = tableFooterNode?.view
+        if let tableFooterNode_ = tableFooterNode {
+            tableFooterNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
+            tableView.tableFooterView = tableFooterNode_.view
         }
         tableView.separatorStyle = .none;
         if let preview = ArgoKitInstance.listPreviewService() {
@@ -622,6 +646,23 @@ class TableNode<D>: ArgoKitScrollViewNode,
         } else {
             self.sendAction(withObj: String(_sel: sel), paramter: [configuration])
         }
+    }
+    
+    
+    override func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
+        let cells = self.tableView?.visibleCells
+        var models:[(D,UITableViewCell)] = []
+        if let cells_ = cells,let tableView = self.tableView {
+            for cell in cells_ {
+                if let cell_ = cell as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append((model,cell_))
+                    }
+                }
+            }
+        }
+        let sel = #selector(self.scrollViewDidEndScroll(_:))
+        self.sendAction(withObj: String(_sel: sel), paramter: [models,scrollView])
     }
 }
 

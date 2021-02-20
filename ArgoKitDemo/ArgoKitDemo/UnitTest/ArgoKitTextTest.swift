@@ -58,7 +58,7 @@ struct ArgoKitTextTest: ArgoKit.View {
                     model.lable.frame.size = CGSize(width: 50, height: 50)
                 }
             CustomView(view: model.lable)
-                .size(width: 100, height: 20)
+//                .size(width: 100, height: 20)
                 .backgroundColor(.yellow)
                 .margin(edge: .top, value: 100)
         }

@@ -200,12 +200,17 @@ extension ArgoKitScrollViewNode {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let sel = #selector(self.scrollViewDidEndDecelerating(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [scrollView])
+        self.scrollViewDidEndScroll(scrollView)
     }
 
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let sel = #selector(self.scrollViewDidEndScrollingAnimation(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [scrollView])
+        self.scrollViewDidEndScroll(scrollView)
+    }
+    
+    @objc func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
     }
 
     

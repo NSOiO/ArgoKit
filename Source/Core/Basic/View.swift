@@ -109,6 +109,12 @@ extension View {
 
 extension View {
     
+    /// Get view that belong to node.
+    /// - Parameter view: hat belong to node.
+    public func nodeView() -> UIView?{
+        return self.node?.nodeView()
+    }
+    
     /// Adds sub views to this view hierarchy.
     /// - Parameter builder: A view builder that creates the sub views of this view.
     public func addSubViews(@ArgoKitViewBuilder builder:@escaping ()->View){

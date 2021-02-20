@@ -51,8 +51,6 @@ public class List<D>: ScrollView  {
     
     override func createNode() {
         pNode = TableNode<D>(viewClass: TableView.self)
-//        self.height(.auto)
-//        pNode?.flexGrow(1.0)
     }
     
     required init(style: UITableView.Style?) {
@@ -137,9 +135,9 @@ extension List{
     /// - Parameter headerContent: A view builder that creates the view for header.
     /// - Returns: Self
     @discardableResult
-    public func tableHeaderView(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
+    public func tableHeaderView(headerContent: @escaping () -> View?) -> Self {
         let container = headerContent()
-        tableNode.tableHeaderNode = container.type.viewNode()
+        tableNode.tableHeaderNode = container?.node
         return self
     }
     
@@ -147,9 +145,9 @@ extension List{
     /// - Parameter footerContent: A view builder that creates the view for footer.
     /// - Returns: Self
     @discardableResult
-    public func tableFooterView(@ArgoKitListBuilder footerContent: @escaping () -> View) -> Self {
-        let container = footerContent()
-        tableNode.tableFooterNode = container.type.viewNode()
+    public func tableFooterView(headerContent: @escaping () -> View?) -> Self {
+        let container = headerContent()
+        tableNode.tableFooterNode = container?.node
         return self
     }
     

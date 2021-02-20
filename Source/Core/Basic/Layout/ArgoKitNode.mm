@@ -372,6 +372,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
+    NSLog(@"isRoot:dealloc:%@",self);
     if (self.isRoot) {
 //        NSLog(@"isRoot:dealloc:%@",self);
         [self clearStrongRefrence];
