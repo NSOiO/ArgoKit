@@ -71,13 +71,6 @@ public extension View {
 }
 
 extension View {
-    
-    public static func ViewNode () -> ArgoKitNode {
-        return ArgoKitNode(viewClass: UIView.self)
-    }
-}
-
-extension View {
     /*
     @discardableResult
     @available(*, deprecated, message: "alias(variable ptr:inout) had been deprecated")

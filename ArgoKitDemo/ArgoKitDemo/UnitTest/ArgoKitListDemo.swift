@@ -304,14 +304,12 @@ struct ListDemo:ArgoKit.View{
         }
         .alias(variable: $list)
         .tableHeaderView(headerContent: { () -> View? in
-//            CustomView(view: view)
-//                .backgroundColor(.yellow)
-//
-            CustomView(view: view1)
-                .backgroundColor(.yellow)
-
-//            CustomView(view: view)
-//                .backgroundColor(.purple)
+            HStack{
+                CustomView(view: view1)
+                    .backgroundColor(.yellow)
+                CustomView(view: view)
+                    .backgroundColor(.purple)
+            }
         })
         .didEndScroll({ (items, view) in
             print("items:\(items),scrollView:\(view)")

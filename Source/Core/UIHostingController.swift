@@ -7,9 +7,20 @@
 
 import Foundation
 
+class HostViewNode: ArgoKitNode {
+    weak var weakView:UIView?
+    override var view: UIView?{
+        weakView
+    }
+    init(weakView view: UIView) {
+        self.weakView = view
+        super.init(viewClass: type(of: view))
+        self.size = view.frame.size
+    }
+}
 /// A ArgoKit view that manages a ArgoKit view hierarchy.
 public struct HostView: View {
-    private var pNode: ArgoKitNode
+    private var pNode: HostViewNode
     
     /// The content and behavior of the view.
     public var body: View {
@@ -20,23 +31,20 @@ public struct HostView: View {
     public var node: ArgoKitNode? {
         pNode
     }
-    
     /// The type of the node.
     public var type: ArgoKitNodeType {
         .single(pNode)
     }
-    
     init() {
-        pNode = ArgoKitNode(view: UIView())
+        pNode = HostViewNode(weakView: UIView())
         pNode.column()
     }
-    
     /// Initializer
     /// - Parameters:
     ///   - view: A UIKit view that hosts a ArgoKit view hierarchy.
     ///   - builder: A view builder that creates the content of this HostView.
     public init(_ view: UIView = UIView(), @ArgoKitViewBuilder _ builder: () -> View) {
-        pNode = ArgoKitNode(view: view);
+        pNode = HostViewNode(weakView: view);
         pNode.column()
         let container = builder()
         if let nodes = container.type.viewNodes() {
@@ -143,6 +151,8 @@ public class UIHostingView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    deinit {
     }
 }
 
