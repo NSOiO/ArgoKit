@@ -226,11 +226,14 @@ struct ListDemo:ArgoKit.View{
     var dataspource1:NSArray = NSArray()
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node1111")
     var view:UIView = UIView()
-    
+    var view1:UIView = UIView()
+    @Alias var list:List<SessionItem>?
     @DataSource var items:[SessionItem] = [SessionItem]()
     @DataSource var headerItems:[SessionItem] = [SessionItem]()
     @DataSource var footerItems:[SessionItem] = [SessionItem]()
     init() {
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        view1.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
        loadMoreData1()
         self.backgroundColor(.yellow)
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
@@ -297,28 +300,30 @@ struct ListDemo:ArgoKit.View{
     
     var body: ArgoKit.View{
         ArgoKit.List(data:$items){ item in
-//            SessionRow(item: item)
+           SessionRow(item: item)
         }
-        .tableHeaderView(headerContent: { () -> View in
-            CustomView(view: view).grow(1)
+        .alias(variable: $list)
+        .tableHeaderView(headerContent: { () -> View? in
+            HStack{
+                CustomView(view: view1)
+                    .backgroundColor(.yellow)
+                CustomView(view: view)
+                    .backgroundColor(.purple)
+            }
+        })
+        .didEndScroll({ (items, view) in
+            print("items:\(items),scrollView:\(view)")
         })
         .cellSelected {item, indexPath in
-//            AlertView(title: item.imagePath, message: item.lastMessage, preferredStyle: UIAlertController.Style.alert)
-//            .textField()
-//            .destructive(title: "确认") { text in
-//                print(text ?? "")
-//            }
-//            .cancel(title: "取消") {}
-//            .show()
-            let controller = ViewPagerController()
-            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
-//            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
-//            item.imagePath = "icybay.jpg"
-//            item.sessionName = "hahahaha"
-//            item.lastMessage = "hahahaha"
-//            item.timeLabel = getTimeLabel()
-////            $items.replace(data: item, at: indexPath).apply(with: .none)
-//            $items.move(at: indexPath, to: IndexPath(row: indexPath.row + 2, section: indexPath.section)).apply(with: .none)
+//            view.frame.size = CGSize(width: 100, height: 10)
+            list?.tableHeaderView(headerContent: { () -> View? in
+//                CustomView(view: view)
+//                    .backgroundColor(.purple)
+                nil
+            })
+//            $items.apply()
+//            let controller = ViewPagerController()
+//            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
         }
         .cellCanEdit({ (item, indx) -> Bool in
             return true
@@ -334,13 +339,10 @@ struct ListDemo:ArgoKit.View{
                 
 //                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
                 let ip = IndexPath(row: 1, section: 0)
-                //1. guai
-                //2. data, IndexPath -
-                
-                //1. insert /insert / reload
             }
             return ListSwipeActionsConfiguration(actions: [action])
         })
+        
         
         .refreshHeaderView {
             RefreshHeaderView(startRefreshing: {headerView in
@@ -380,6 +382,7 @@ struct ListDemo:ArgoKit.View{
 //            Text("sectionFooter").height(50).backgroundColor(.orange)
 //        })
         .backgroundColor(.purple)
+        .grow(1)
         Text("hahahha").height(100).backgroundColor(.orange)
         
         Text("hahahha").height(100).backgroundColor(.blue)

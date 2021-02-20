@@ -48,22 +48,22 @@ struct ArgoKitTextTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-        HStack{
-            Text("单行文本sxssasasdassasa")
-                .font(size: 25)
-                .backgroundColor(.orange)
-                .margin(edge: .top, value: 0)
-                .height(100)
-                .onTapGesture {
-                    model.lable.frame.size = CGSize(width: 50, height: 50)
-                }
-            CustomView(view: model.lable)
-                .size(width: 100, height: 20)
-                .backgroundColor(.yellow)
-                .margin(edge: .top, value: 100)
-        }
-            .alignSelf(.center)
-        .backgroundColor(.cyan)
+//        HStack{
+//            Text("单行文本sxssasasdassasa")
+//                .font(size: 25)
+//                .backgroundColor(.orange)
+//                .margin(edge: .top, value: 0)
+//                .height(100)
+//                .onTapGesture {
+//                    model.lable.frame.size = CGSize(width: 50, height: 50)
+//                }
+//            CustomView(view: model.lable)
+////                .size(width: 100, height: 20)
+//                .backgroundColor(.yellow)
+//                .margin(edge: .top, value: 100)
+//        }
+//            .alignSelf(.center)
+//        .backgroundColor(.cyan)
 //
 //
 //        Text("单行文本粗体cdxasxas····")
@@ -74,12 +74,12 @@ struct ArgoKitTextTest: ArgoKit.View {
 //            .alignSelf(.stretch)
 //            .textAlign(.right)
 //            .margin(edge: .bottom, value: 100)
-        Button(text: model.name) {
-            
-        }
-        .font(size:40)
-        .backgroundColor(.red)
-        .margin(edge: .bottom, value: 10)
+//        Button(text: model.name) {
+//            
+//        }
+//        .font(size:40)
+//        .backgroundColor(.red)
+//        .margin(edge: .bottom, value: 10)
 //        .alignSelf(.center)
         
         Button {

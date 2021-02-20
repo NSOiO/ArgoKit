@@ -110,7 +110,7 @@ extension ScrollView {
     
     /// Set the ContentOffset of the UIScrollView behind the wrapper.
     ///
-    /// Sets the offset from the content view’s origin that corresponds to the receiver’s origin.
+    /// Sets th@objc e offset from the content view’s origin that corresponds to the receiver’s origin.
     /// - Parameters:
     ///   - contentOffset: A point (expressed in points) that is offset from the content view’s origin.
     ///   - animated: true to animate the transition at a constant velocity to the new offset, false to make the transition immediate.
@@ -271,6 +271,7 @@ extension ScrollView {
     /// - Parameter action: callback
     /// - Returns: self
     @discardableResult
+    @objc 
     public func didEndScrollingAnimation(_ action: @escaping () -> Void) -> Self {
         let sel = #selector(ArgoKitScrollViewNode.scrollViewDidEndScrollingAnimation(_:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in

@@ -1095,4 +1095,21 @@ extension List {
         })
         return self
     }
+    
+    
+    /// Set the callback called when a scrolling animation in the scroll view concludes.
+    /// - Parameter action: callback
+    /// - Returns: self
+    public func didEndScroll(_ action: @escaping ([(D, UITableViewCell)],UIScrollView) -> Void) -> Self {
+        let sel = #selector(TableNode<D>.scrollViewDidEndScroll(_:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+            if paramter?.count ?? 0 >= 2,
+               let models = paramter?[0] as? [(D, UITableViewCell)],
+               let view =  paramter?[1] as? UIScrollView{
+                action(models, view)
+            }
+            return nil
+        })
+        return self
+    }
 }

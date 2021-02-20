@@ -48,7 +48,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 
 /* 节点持有的视图 */
-@property (nonatomic, weak, readonly, nullable) UIView *view;
+@property (nonatomic, strong, readonly, nullable) UIView *view;
 /* 节点持有的视图 */
 @property (nonatomic, assign, readonly)Class viewClass;
 
@@ -78,7 +78,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 /*If the origin is reset, the root view's layout results will applied from {0,0} when Perform a layout calculation and update the frames of the views in the hierarchy with the results*/
 @property (nonatomic, readwrite, assign) BOOL resetOrigin;
-
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithView:(UIView *)view NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithViewClass:(Class)viewClass NS_DESIGNATED_INITIALIZER;
 

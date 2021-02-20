@@ -71,13 +71,6 @@ public extension View {
 }
 
 extension View {
-    
-    public static func ViewNode () -> ArgoKitNode {
-        return ArgoKitNode(viewClass: UIView.self)
-    }
-}
-
-extension View {
     /*
     @discardableResult
     @available(*, deprecated, message: "alias(variable ptr:inout) had been deprecated")
@@ -108,6 +101,12 @@ extension View {
 }
 
 extension View {
+    
+    /// Get view that belong to node.
+    /// - Parameter view: hat belong to node.
+    public func nodeView() -> UIView?{
+        return self.node?.nodeView()
+    }
     
     /// Adds sub views to this view hierarchy.
     /// - Parameter builder: A view builder that creates the sub views of this view.

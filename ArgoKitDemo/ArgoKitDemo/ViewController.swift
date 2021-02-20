@@ -19,7 +19,7 @@ class ViewController: UIViewController {
             if let action = new as? MainViewAction {
                 if case let MainViewAction.cellSelected(cellModel, _) = action {
                     if cellModel.title == "ListDemo" {
-                        let content = ArgoKitTextTest(model: ArgoKitTextTestModel())//FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 10)
+                        let content = ListDemo()//ArgoKitTextTest(model: ArgoKitTextTestModel())//FeedListModel_Previews().makeView().padding(edge: .horizontal, value: 10)
                         let vc = UIHostingController(rootView: content, useSafeArea: true)
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }

@@ -49,7 +49,7 @@
 @class ArgoKitLayout;
 @interface ArgoKitNode()
 
-@property(nonatomic,weak,nullable)UIView *view;
+@property(nonatomic,strong,nullable)UIView *view;
 // 布局layout
 @property (nonatomic, strong) ArgoKitLayout *layout;
 // 布局layout
@@ -368,6 +368,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
+    NSLog(@"isRoot:dealloc:%@",self);
     if (self.isRoot) {
 //        NSLog(@"isRoot:dealloc:%@",self);
         [self clearStrongRefrence];
@@ -396,7 +397,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (instancetype)init {
-    return [self initWithViewClass:[UIView class]];
+    self = [super init];
+    if (self) {
+        [self setUpNode:[UIView class]];
+    }
+    return self;
 }
 
 - (instancetype)initWithView:(UIView *)view {
@@ -442,7 +447,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return self.view;
 }
 - (void)bindView:(UIView *)view {
-    if (![view isKindOfClass:_viewClass]) {
+    if (![view isKindOfClass:self.viewClass]) {
         return;
     }
     [self linkView:view];
@@ -490,7 +495,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)commitAttributes {
-    if (_viewAttributes.count) {
+    if (self.viewAttributes.count) {
         [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:[self nodeAllAttributeValue] markDirty:NO];
     }
     if (_nodeActions.count && [self.view isKindOfClass:[UIControl class]] && [self.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
