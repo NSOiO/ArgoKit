@@ -23,13 +23,14 @@ class YYTextNode: ArgoKitTextBaseNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:YYLabel.displaysAsynchronously),asyn)
     }
     
-    override func reusedAttributes(from node: ArgoKitNode) {
-        super.reusedAttributes(from: node)
-        if let view = self.nodeView() as? YYLabel {
-            view.textTapAction = textTapAction
-            view.textLongPressAction = textLongAction
+    override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
+        super.reuseNodeToView(node: node, view: view)
+        if let view = view as? YYLabel, let node_ = node as? YYTextNode{
+            view.textTapAction = node_.textTapAction
+            view.textLongPressAction = node_.textLongAction
         }
     }
+ 
     override  func sizeThatFits(_ size: CGSize) -> CGSize {
         let lable = YYTextCalculation.yycalculationLable
         lable.attributedText = self.attributedText
