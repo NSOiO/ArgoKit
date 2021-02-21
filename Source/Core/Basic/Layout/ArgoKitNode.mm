@@ -156,9 +156,7 @@ static YGConfigRef globalConfig;
 {
 //  NSAssert([NSThread isMainThread], @"Yoga calculation must be done on main.");
   NSAssert(self.argoNode.isEnabled, @"Yoga is not enabled for this view.");
-    
-  NSLock *lock = self.argoNode.yogaLock;
-//  [lock lock];
+
   YGAttachNodesFromNodeHierachy(self.argoNode);
 
   const YGNodeRef node = self.ygnode;
@@ -169,7 +167,6 @@ static YGConfigRef globalConfig;
     size.width,
     size.height,
     YGNodeStyleGetDirection(node));
-//  [lock unlock];
   return (CGSize) {
     .width = YGNodeLayoutGetWidth(node),
     .height = YGNodeLayoutGetHeight(node),
@@ -757,15 +754,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         }else{
             [self.viewAttributes argokit_setObject:attribute forKey:selector_name];
         }
-    }
-}
-- (void)NodeRemoveViewAttribute:(SEL)selector{
-    NSString *selector_name;
-    if (selector) {
-        selector_name = @(sel_getName(selector));
-    }
-    if (selector_name.length > 0) {
-        [self.viewAttributes argokit_removeObjectForKey:selector_name];
     }
 }
 

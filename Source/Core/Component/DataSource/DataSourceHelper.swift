@@ -143,12 +143,12 @@ extension DataSourceHelper {
             addCellNode(cellNode)
             return cellNode
         }
-        
-        
+
         if section >= dataSource()?.count ?? 0
             || row >= dataSource()?[section].count ?? 0 {
             return nil
         }
+        
         if let sourceData = self.dataSource()?[section][row]{
             return nodeForData(sourceData)
         }
@@ -159,7 +159,6 @@ extension DataSourceHelper {
         let cellNode = _nodeForData_(data)
         nodeLock.unlock()
         return cellNode
-//        return _nodeForData_(data)
     }
     private func _nodeForData_(_ data: Any) -> ArgoKitCellNode? {
         if let sourceData_ = data as? ArgoKitIdentifiable,

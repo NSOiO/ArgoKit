@@ -258,24 +258,24 @@ struct ListDemo:ArgoKit.View{
         }
     }
     func loadMoreData1(){
-        self._loadMoreData()
-//        nodeQueue.async {
-//            self._loadMoreData()
-//            DispatchQueue.main.async {
-//                $items.apply()
-//            }
-//        }
+//        self._loadMoreData()
+        nodeQueue.async {
+            self._loadMoreData()
+            DispatchQueue.main.async {
+                $items.apply()
+            }
+        }
     }
     func loadMoreData(_ callback:(()->())? = nil){
-//        nodeQueue.async {
+        nodeQueue.async {
             self._loadMoreData()
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 $items.apply()
-//                if let callBack1 = callback{
-//                    callBack1()
-//                }
-//            }
-//        }
+                if let callBack1 = callback{
+                    callBack1()
+                }
+            }
+        }
     }
     func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
@@ -304,12 +304,15 @@ struct ListDemo:ArgoKit.View{
         }
         .alias(variable: $list)
         .tableHeaderView(headerContent: { () -> View? in
-            HStack{
-                CustomView(view: view1)
-                    .backgroundColor(.yellow)
-                CustomView(view: view)
-                    .backgroundColor(.purple)
-            }
+                            CustomView(view: view)
+                                .backgroundColor(.yellow)
+                                .height(100)
+//            EmptyView().size(width: <#T##ArgoValue#>, height: <#T##ArgoValue#>)
+////            HStack{
+//
+////                CustomView(view: view)
+////                    .backgroundColor(.purple)
+////            }
         })
         .didEndScroll({ (items, view) in
             print("items:\(items),scrollView:\(view)")

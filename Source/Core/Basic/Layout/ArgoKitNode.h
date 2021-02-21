@@ -155,7 +155,6 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 
 - (void)prepareForUse;
 - (void)nodeAddViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(nodeAddView(attribute:));
-- (void)NodeRemoveViewAttribute:(SEL)selector NS_SWIFT_NAME(RemoveViewAttribute(selector:));
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue;
 // 获取对应属性值
 - (nullable NSString *)text;
