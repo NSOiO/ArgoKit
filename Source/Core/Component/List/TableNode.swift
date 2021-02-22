@@ -82,7 +82,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
             if let tableView = self.tableView {
                 if let tableFooterNode_ = tableFooterNode {
                     tableFooterNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
-                    tableView.tableHeaderView = tableFooterNode_.view
+                    tableView.tableFooterView = tableFooterNode_.view
                 }else{
                     tableView.tableFooterView = nil
                 }

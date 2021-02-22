@@ -238,30 +238,37 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     
     @discardableResult
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let lable:UILabel = TextCalculation.calculationLable
-        var result3 = size
+        var result = size
+        var maxHeight = size.height
         if let attribut = self.attributedText{
-            lable.attributedText = attribut
-            result3 = attribut.boundingRect(with: size, options: .usesLineFragmentOrigin, context: nil).size
+            var totolLineHeight:CGFloat = 0
+            if numberOfLines > 0 {
+                let lineHeight:CGFloat = ceil(font.lineHeight)
+                totolLineHeight = lineSpacing * CGFloat((numberOfLines - 1)) + lineHeight * CGFloat(numberOfLines)
+                maxHeight = CGFloat.minimum(size.height, totolLineHeight)
+            }
+            let result_size = attribut.boundingRect(with: CGSize(width: size.width, height: maxHeight), options: [.usesLineFragmentOrigin], context: nil).size
+            let width = ceil(result_size.width);
+            let height = ceil(result_size.height);
+            result = CGSize(width:width, height:height)
+            return result
         }
-        
-        var font_ = font
-        if let font = self.font() {
-            font_ = font
-        }
-        
-        lable.font = font_
-        lable.numberOfLines = self.numberOfLines
-        var result = lable.sizeThatFits(size)
-        let width = ceil(result.width);
-        let height = ceil(result.height);
-        result = CGSize(width: width, height: height)
-        
-        let result1 = ArgoKitUtils.sizeThatFits(size, font: font, lineBreakMode: self.lineBreakMode, lineSpacing: self.lineSpacing, paragraphSpacing: self.paragraphSpacing, textAlignment: self.textAlignment, numberOfLines: self.numberOfLines, attributedString: self.attributedText)
-        
-//        let result3 = self.
-        print("result:\(result) == result1:\(result1) === result3\(result3)")
-        return result1
+        return result
+//        let lable:UILabel = TextCalculation.calculationLable
+//        if let attribut = self.attributedText{
+//            lable.attributedText = attribut
+//        }
+//        if let font = self.font() {
+//            lable.font = font
+//        }else{
+//            lable.font = font
+//        }
+//        lable.numberOfLines = self.numberOfLines
+//        var result = lable.sizeThatFits(size)
+//        let width = ceil(result.width);
+//        let height = ceil(result.height);
+//        result = CGSize(width: width, height: height)
+//        return result
     }
 }
 

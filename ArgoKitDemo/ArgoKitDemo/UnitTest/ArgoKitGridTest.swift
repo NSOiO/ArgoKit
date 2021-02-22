@@ -159,15 +159,15 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .lineLimit(10)
                 .textAlign(.center)
                 .backgroundColor(.red)
-                .font(size:data.fontSize)
+                .font(size:16.0)
 //                .lineSpacing(10)
 
             Image(data.imagePath)
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-                    data.fontSize = data.fontSize + 1
-                    data.headerName = data.headerName + "你好吗？你好吗？"
+//                    data.fontSize = data.fontSize + 1
+                    data.headerName = data.headerName + "csdcsdc？"
                 }
         }
 //        .grow(0.0)
