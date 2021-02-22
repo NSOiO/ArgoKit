@@ -8,9 +8,6 @@
 import Foundation
 import Foundation
 class CustomReuseViewNode<D>: ArgoKitNode {
-    deinit {
-        print("CustomReuseViewNode")
-    }
     var data:D? = nil
     var createView:((D)->UIView)? = nil
     var reuseView:((UIView,D)->())? = nil
