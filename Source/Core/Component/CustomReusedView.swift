@@ -8,38 +8,44 @@
 import Foundation
 import Foundation
 class CustomReuseViewNode<D>: ArgoKitNode {
-//    deinit {
-//        if let view = self.view {
-//            view.removeObserver(self, forKeyPath: "frame")
-//        }
-//    }
-    var data:D? = nil
-    var contentView:((D)->UIView)? = nil
-    var reuseView:((UIView,D)->())? = nil
-
-    init(data:D,view:@escaping (D)->UIView,reuseView:@escaping (UIView,D)->()) {
-        super.init(viewClass: UIView.self)
-        self.data = data
-        self.contentView = view
-        self.reuseView = reuseView
+    deinit {
+        print("CustomReuseViewNode")
     }
+    var data:D? = nil
+    var createView:((D)->UIView)? = nil
+    var reuseView:((UIView,D)->())? = nil
+    var preForUse:((UIView)->())? = nil
     
+    override func clearStrongRefrence() {
+        super.clearStrongRefrence()
+        createView = nil
+        reuseView = nil
+        preForUse = nil
+    }
+
     init(data:D) {
         super.init(viewClass: UIView.self)
         self.data = data
     }
 
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        if let contentView =  self.contentView, let data_ = data{
+        if let contentView =  self.createView, let data_ = data{
             let view = contentView(data_)
             view.frame = frame
             if let reuseView =  self.reuseView{
                 reuseView(view,data_)
             }
-//            view.addObserver(self, forKeyPath: "frame", options: [.new, .old], context: nil)
             return view
         }
         return UIView()
+    }
+    
+    override func prepareForUse() {
+        super.prepareForUse()
+        if let view = self.view,
+           let preForUse = self.preForUse {
+            preForUse(view)
+        }
     }
 
     override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
@@ -56,16 +62,6 @@ class CustomReuseViewNode<D>: ArgoKitNode {
         }
         return CGSize.zero
     }
-//    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        if keyPath == "frame" {
-//            if let new = change?[NSKeyValueChangeKey.newKey] as? CGRect,
-//               let old = change?[NSKeyValueChangeKey.oldKey] as? CGRect{
-//                if !new.size.equalTo(old.size) {
-//                    self.markDirty()
-//                }
-//            }
-//        }
-//    }
 }
 
 /// Wrapper of custom view for UIKit
@@ -82,25 +78,30 @@ public struct CustomReusedView<D>:View{
     public var node: ArgoKitNode?{
         return pNode
     }
-    /// Initializer
-    /// - Parameter view: stom view for UIKit.
-    public init(data:D,createdView:@escaping (D)->UIView,reuseView:@escaping (UIView,D)->()) {
-        pNode = CustomReuseViewNode(data: data, view: createdView, reuseView: reuseView)
-    }
     
     /// Initializer
     /// - Parameter view: stom view for UIKit.
     public init(data:D) {
         pNode = CustomReuseViewNode(data: data)
     }
-    
+    /// create UIKit Custom View
+    /// - Parameter Self.
     public func createView(_ value:@escaping (D)->UIView) -> Self{
-        pNode.contentView = value
+        pNode.createView = value
         return self
     }
     
+    /// reuse UIKit Custom View in List
+    /// - Parameter Self.
     public func reuseView(_ value:@escaping (UIView,D)->()) -> Self{
         pNode.reuseView = value
+        return self
+    }
+    
+    /// prepare  use UIKit Custom View in List
+    /// - Parameter Self.
+    public func prepareForUse(_ value:@escaping (UIView)->()) -> Self{
+        pNode.preForUse = value
         return self
     }
 }
