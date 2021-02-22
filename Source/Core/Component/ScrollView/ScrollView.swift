@@ -371,3 +371,32 @@ extension ScrollView {
         return self
     }
 }
+
+extension ScrollView{
+    
+    /// returns YES if user has touched. may not yet have started dragging
+    public func isTracking() ->Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.isTracking
+        }
+        return false
+    }
+
+    /// returns YES if user has started scrolling. this may require some time and or distance to move to initiate dragging
+    public func isDragging() ->Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.isDragging
+        }
+        return false
+    }
+    
+    /// returns YES if user isn't dragging (touch up) but scroll view is still moving
+    public func isDecelerating() ->Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.isDecelerating
+        }
+        return false
+    }
+
+
+}
