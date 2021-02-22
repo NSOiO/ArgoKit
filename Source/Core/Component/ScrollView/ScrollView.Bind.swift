@@ -18,6 +18,14 @@ extension ScrollView {
 		}, forKey: #function)
     }
     
+    /// Get the cotent offset of the UIScrollView.
+    public func contentOffset() -> CGPoint {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.contentOffset
+        }
+        return CGPoint.zero
+    }
+    
     /// Set the content size
     /// - Parameter value: the new size
     /// - Returns: self
@@ -26,6 +34,14 @@ extension ScrollView {
 		return self.bindCallback({ [self] in 
 			pNode?.contentSize(value())
 		}, forKey: #function)
+    }
+    
+    /// Get the cotent size of the UIScrollView.
+    public func contentSize() -> CGSize {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.contentSize
+        }
+        return CGSize.zero
     }
     
     /// Set the content width
@@ -56,6 +72,14 @@ extension ScrollView {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIScrollView.contentInset),value())
 		}, forKey: #function)
+    }
+    
+    /// Get the cotent inset of the UIScrollView.
+    public func contentInset() -> UIEdgeInsets {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.contentInset
+        }
+        return UIEdgeInsets.zero
     }
     
     /// Set the contentInsetAdjustmentBehavior of the UIScrollview behind the wrapper.
@@ -104,6 +128,14 @@ extension ScrollView {
 		}, forKey: #function)
     }
     
+    /// Get the bounces of the UIScrollView.
+    public func bounces() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.bounces
+        }
+        return true
+    }
+    
     /// Set the alwaysBounceVertical of the UIScrollView behind the wrapper.
     ///
     /// A Boolean value that determines whether bouncing always occurs when vertical scrolling reaches the end of the content.
@@ -114,6 +146,14 @@ extension ScrollView {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIScrollView.alwaysBounceVertical),value())
 		}, forKey: #function)
+    }
+    
+    /// Get the alwaysBounceVertical of the UIScrollView.
+    public func alwaysBounceVertical() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.alwaysBounceVertical
+        }
+        return false
     }
     
     /// Set the alwaysBounceHorizontal of the UIScrollView behind the wrapper.
@@ -128,6 +168,14 @@ extension ScrollView {
 		}, forKey: #function)
     }
     
+    /// Get the alwaysBounceHorizontal of the UIScrollView.
+    public func alwaysBounceHorizontal() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.alwaysBounceHorizontal
+        }
+        return false
+    }
+    
     ///Set the isPagingEnabled of the UIScrollView behind the wrapper.
     ///
     ///A Boolean value that determines whether paging is enabled for the scroll view.
@@ -138,6 +186,14 @@ extension ScrollView {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIScrollView.isPagingEnabled),value())
 		}, forKey: #function)
+    }
+    
+    /// Get the isPagingEnabled of the UIScrollView.
+    public func isPagingEnabled() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.isPagingEnabled
+        }
+        return false
     }
     
     /// Set the isScrollEnabled of the UIScrollView behind the wrapper.
@@ -152,6 +208,14 @@ extension ScrollView {
 		}, forKey: #function)
     }
     
+    /// Get the isScrollEnabled of the UIScrollView.
+    public func isScrollEnabled() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.isScrollEnabled
+        }
+        return true
+    }
+    
     /// Set the showsVerticalScrollIndicator of the UIScrollView behind the wrapper.
     ///
     ///A Boolean value that controls whether the vertical scroll indicator is visible.
@@ -164,6 +228,14 @@ extension ScrollView {
 		}, forKey: #function)
     }
     
+    /// Get the showsVerticalScrollIndicator of the UIScrollView.
+    public func showsVerticalScrollIndicator() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.showsVerticalScrollIndicator
+        }
+        return true
+    }
+    
     ///Set the showsHorizontalScrollIndicator of the UIScrollView behind the wrapper.
     ///
     ///A Boolean value that controls whether the horizontal scroll indicator is visible.
@@ -174,6 +246,14 @@ extension ScrollView {
 		return self.bindCallback({ [self] in 
 			addAttribute(#selector(setter:UIScrollView.showsHorizontalScrollIndicator),value())
 		}, forKey: #function)
+    }
+    
+    /// Get the showsHorizontalScrollIndicator of the UIScrollView.
+    public func showsHorizontalScrollIndicator() -> Bool {
+        if let view =  self.node?.nodeView() as? UIScrollView {
+            return view.showsHorizontalScrollIndicator
+        }
+        return true
     }
     
     /// Set both showsVerticalScrollIndicator and showsHorizontalScrollIndicator at the same time.

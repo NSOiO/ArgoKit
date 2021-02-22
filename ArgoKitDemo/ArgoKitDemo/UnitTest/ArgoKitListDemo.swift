@@ -195,6 +195,22 @@ class SessionRow:ArgoKit.View {
  
     
    var body: ArgoKit.View{
+    
+        CustomReusedView(data: item)
+            .createView { (item) -> UIView in
+                return UILabel()
+            }
+            .reuseView { (view, item) in
+                if let lable = view as? UILabel{
+                    lable.text = item.imagePath
+                }
+            }
+            .grow(1)
+            .height(100)
+            .backgroundColor(.red)
+            .margin(edge: .bottom, value: 10)
+
+
         MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
         .onTapGesture {[data = self.item] in
