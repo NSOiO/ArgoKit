@@ -39,7 +39,7 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
             var subDataSource = [ArgoKitGridCellTestModel]()
             for j in 0..<20{
                 let item = ArgoKitGridCellTestModel()
-                item.headerName = String(index)+"=="+String(j) + "scsdcs"
+                item.headerName = "scsdcs"
                 item.imagePath = images[j%5]
                 subDataSource.append(item)
             }
@@ -65,7 +65,7 @@ class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
     }
     @Observable var headerName = "titletitletitle"
     @Observable var imagePath = "icybay.jpg"
-    @Observable var fontSize:CGFloat = 17.0
+    @Observable var fontSize:CGFloat = 14.0
     var text:Text?
    
 }
@@ -156,17 +156,18 @@ struct ArgoKitGridTest: ArgoKit.View {
         Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
-                .lineLimit(0)
+                .lineLimit(10)
                 .textAlign(.center)
                 .backgroundColor(.red)
-                .font(size:20)
+                .font(size:data.fontSize)
+//                .lineSpacing(10)
 
             Image(data.imagePath)
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-//                    data.fontSize = data.fontSize + 1
-                    data.headerName = data.headerName + "你好吗？"
+                    data.fontSize = data.fontSize + 1
+                    data.headerName = data.headerName + "你好吗？你好吗？"
                 }
         }
 //        .grow(0.0)
