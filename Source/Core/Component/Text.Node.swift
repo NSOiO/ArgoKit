@@ -238,21 +238,39 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     
     @discardableResult
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let lable:UILabel = TextCalculation.calculationLable
+        var result = size
+        var maxHeight = size.height
         if let attribut = self.attributedText{
-            lable.attributedText = attribut
+            var totolLineHeight:CGFloat = 0
+            if numberOfLines > 0 {
+                let lineHeight:CGFloat = ceil(font.lineHeight)
+                totolLineHeight = lineSpacing * CGFloat((numberOfLines - 1)) + lineHeight * CGFloat(numberOfLines)
+                maxHeight = CGFloat.minimum(size.height, totolLineHeight)
+            }
+            let result_size = attribut.boundingRect(with: CGSize(width: size.width, height: maxHeight), options: [.usesLineFragmentOrigin], context: nil).size
+            let width = ceil(result_size.width);
+            let height = ceil(result_size.height);
+//            let lineHeight = ceil(font.lineHeight)
+//            print("\(height) ===\(lineHeight)")
+            result = CGSize(width:width, height:height)
+            return result
         }
-        if let font = self.font() {
-            lable.font = font
-        }else{
-            lable.font = font
-        }
-        lable.numberOfLines = self.numberOfLines
-        var result = lable.sizeThatFits(size)
-        let width = ceil(result.width);
-        let height = ceil(result.height);
-        result = CGSize(width: width, height: height)
         return result
+//        let lable:UILabel = TextCalculation.calculationLable
+//        if let attribut = self.attributedText{
+//            lable.attributedText = attribut
+//        }
+//        if let font = self.font() {
+//            lable.font = font
+//        }else{
+//            lable.font = font
+//        }
+//        lable.numberOfLines = self.numberOfLines
+//        var result = lable.sizeThatFits(size)
+//        let width = ceil(result.width);
+//        let height = ceil(result.height);
+//        result = CGSize(width: width, height: height)
+//        return result
     }
 }
 

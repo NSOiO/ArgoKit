@@ -43,9 +43,10 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                        Text(item.lastMessage)
+                        Text("fsdfdsfcsddsvcvxcvcxvcxcccxvcxvxcvdsa")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
+                            .lineLimit(2)
                          .shrink(1.0)
                         
                         Button(action: {
