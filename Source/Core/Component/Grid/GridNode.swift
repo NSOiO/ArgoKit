@@ -66,7 +66,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
-        flowLayout.estimatedItemSize = CGSize(width: 60, height: 60)
+//        flowLayout.estimatedItemSize = CGSize(width: 60, height: 60)
         gridView.frame = frame
         gridView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
         gridView.reLayoutAction = { [weak self] frame in

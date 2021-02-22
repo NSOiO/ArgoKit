@@ -239,20 +239,29 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     @discardableResult
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         let lable:UILabel = TextCalculation.calculationLable
+        var result3 = size
         if let attribut = self.attributedText{
             lable.attributedText = attribut
+            result3 = attribut.boundingRect(with: size, options: .usesLineFragmentOrigin, context: nil).size
         }
+        
+        var font_ = font
         if let font = self.font() {
-            lable.font = font
-        }else{
-            lable.font = font
+            font_ = font
         }
+        
+        lable.font = font_
         lable.numberOfLines = self.numberOfLines
         var result = lable.sizeThatFits(size)
         let width = ceil(result.width);
         let height = ceil(result.height);
         result = CGSize(width: width, height: height)
-        return result
+        
+        let result1 = ArgoKitUtils.sizeThatFits(size, font: font, lineBreakMode: self.lineBreakMode, lineSpacing: self.lineSpacing, paragraphSpacing: self.paragraphSpacing, textAlignment: self.textAlignment, numberOfLines: self.numberOfLines, attributedString: self.attributedText)
+        
+//        let result3 = self.
+        print("result:\(result) == result1:\(result1) === result3\(result3)")
+        return result1
     }
 }
 

@@ -750,34 +750,34 @@ extension TableNode{
         if let datasource = helper as? DataSource<DataList<D>> {
 
             if datasource.type == .body {
-                let node = dataSourceHelper.nodeForData(data)
-                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+//                let node = dataSourceHelper.nodeForData(data)
+                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
             if datasource.type == .header {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
 
             if datasource.type == .footer {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
             }
         }
 
         if let datasource = helper as? DataSource<SectionDataList<D>> {
 
             if datasource.type == .body {
-                let node = dataSourceHelper.nodeForData(data)
-                dataSourceHelper.rowHeight(node, maxWidth: maxWith)
+//                let node = dataSourceHelper.nodeForData(data)
+                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
             if datasource.type == .header {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionHeaderSourceHelper.rowHeight(node, maxWidth: maxWith)
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
 
             if datasource.type == .footer {
-                let node = sectionHeaderSourceHelper.nodeForData(data)
-                sectionFooterSourceHelper.rowHeight(node, maxWidth:maxWith)
+//                let node = sectionHeaderSourceHelper.nodeForData(data)
+                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
             }
         }
     }

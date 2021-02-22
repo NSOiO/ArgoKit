@@ -87,18 +87,26 @@ static dispatch_queue_t argokit_caculate_queue  = nil;
 }
 
 + (CGSize)sizeThatFits:(CGSize)size
+                  font:(UIFont *)font
+         lineBreakMode:(NSLineBreakMode)breakMode
+           lineSpacing:(CGFloat)lineSpacing
+      paragraphSpacing:(CGFloat)paragraphSpacing
+         textAlignment:(NSTextAlignment)textAlign
          numberOfLines:(NSInteger)numberOfLines
       attributedString:(nullable NSAttributedString *)attributedString{
-    if (attributedString == nil) {
+    NSAttributedString *drawString = [self attributedStringForDraw:size font:font lineBreakMode:breakMode lineSpacing:lineSpacing paragraphSpacing:paragraphSpacing textAlignment:textAlign numberOfLines:numberOfLines attributedString:attributedString];
+    if (!attributedString) {
         return CGSizeZero;
     }
-    CFAttributedStringRef attributedStringRef = (__bridge CFAttributedStringRef)attributedString;
+    CFAttributedStringRef attributedStringRef = (__bridge CFAttributedStringRef)drawString;
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attributedStringRef);
+    if (!framesetter) {
+        // 字符串处理失败
+        return size;
+    }
+    
     CFRange range = CFRangeMake(0, 0);
     if (numberOfLines > 0 && framesetter) {
-        if (numberOfLines == 1) {
-            size.width = CGFLOAT_MAX;
-        }
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
@@ -106,7 +114,7 @@ static dispatch_queue_t argokit_caculate_queue  = nil;
         
         if (nil != lines && CFArrayGetCount(lines) > 0) {
             NSInteger lastVisibleLineIndex = MIN(numberOfLines, CFArrayGetCount(lines)) - 1;
-            CTLineRef lastVisibleLine = (CTLineRef)CFArrayGetValueAtIndex(lines, lastVisibleLineIndex);
+            CTLineRef lastVisibleLine = CFArrayGetValueAtIndex(lines, lastVisibleLineIndex);
             
             CFRange rangeToLayout = CTLineGetStringRange(lastVisibleLine);
             range = CFRangeMake(0, rangeToLayout.location + rangeToLayout.length);
@@ -114,14 +122,116 @@ static dispatch_queue_t argokit_caculate_queue  = nil;
         CFRelease(frame);
         CFRelease(path);
     }
-    
     CFRange fitCFRange = CFRangeMake(0, 0);
-    CGSize newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, NULL, size, &fitCFRange);
+    CGSize newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, NULL, CGSizeMake(size.width, MAXFLOAT), &fitCFRange);
     if (framesetter) {
         CFRelease(framesetter);
     }
-    CGFloat width = ceil(newSize.width);
-    CGFloat height = ceil(newSize.height);
-    return CGSizeMake(width, height);
+    if (newSize.height < font.lineHeight * 2) {
+        return CGSizeMake(ceilf(newSize.width), ceilf(newSize.height));
+    } else {
+        return CGSizeMake(size.width, ceilf(newSize.height));
+    }
+}
+
++ (NSAttributedString *)attributedStringForDraw:(CGSize)size
+                                                       font:(UIFont *)font
+                                  lineBreakMode:(CGFloat)breakMode
+                                    lineSpacing:(CGFloat)lineSpacing
+                               paragraphSpacing:(CGFloat)paragraphSpacing
+                                  textAlignment:(NSTextAlignment)textAlign
+                                    numberOfLines:(NSInteger)numberOfLines
+                                    attributedString:(nullable NSAttributedString *)attributedString
+{
+    NSAttributedString *strongString = attributedString;
+    if (strongString.length) {
+        // 添加排版格式
+        NSMutableAttributedString *drawString = [strongString mutableCopy];
+        
+//        // 添加默认字体、颜色
+//        [drawString enumerateAttributesInRange:NSMakeRange(0, drawString.length) options:0 usingBlock:^(NSDictionary<NSString *, id> *attrs, NSRange range, BOOL *stop) {
+//            if (!attrs[(__bridge NSString *)kCTFontAttributeName] && !attrs[NSFontAttributeName]) {
+//                if (font) {
+//                    [drawString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:range];
+//                    
+//                    CTFontRef fontRef = (__bridge CTFontRef)font;
+//                    if (nil != fontRef) {
+//                        [drawString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)fontRef range:range];
+//                    }
+//                }
+//            }
+//        }];
+        
+        // 如果LineBreakMode为TranncateTail,那么默认排版模式改成kCTLineBreakByCharWrapping,使得尽可能地显示所有文字
+        CTLineBreakMode lineBreakMode = [self setupLineBreakMode:breakMode];
+        if (lineBreakMode == kCTLineBreakByTruncatingTail) {
+            lineBreakMode = kCTLineBreakByCharWrapping;
+        }
+        CTTextAlignment textAlignment = [self setupTextAlignment:textAlign];
+        CGFloat lineSpacing = lineSpacing;
+        CGFloat paragraphSpacing = paragraphSpacing;
+        CGFloat fontLineMinHeight = font.lineHeight; //使用全局fontHeight作为最小lineHeight
+        CTParagraphStyleSetting settings[] =
+        {
+            {kCTParagraphStyleSpecifierAlignment, sizeof(textAlignment), &textAlignment},
+            {kCTParagraphStyleSpecifierLineBreakMode, sizeof(lineBreakMode), &lineBreakMode},
+            {kCTParagraphStyleSpecifierMaximumLineSpacing, sizeof(lineSpacing), &lineSpacing},
+            {kCTParagraphStyleSpecifierMinimumLineSpacing, sizeof(lineSpacing), &lineSpacing},
+            {kCTParagraphStyleSpecifierParagraphSpacing, sizeof(paragraphSpacing), &paragraphSpacing},
+            {kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(fontLineMinHeight), &fontLineMinHeight},
+        };
+        CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(settings[0]));
+        [drawString addAttribute:(__bridge NSString *)kCTParagraphStyleAttributeName value:(__bridge_transfer NSParagraphStyle *)paragraphStyle range:NSMakeRange(0, [drawString length])];
+        return drawString;
+    } else {
+        return nil;
+    }
+}
+
++ (CTTextAlignment)setupTextAlignment:(NSTextAlignment)textAlign
+{
+    CTTextAlignment textAlignment = kCTTextAlignmentLeft;
+    switch (textAlign) {
+        case NSTextAlignmentLeft:
+            textAlignment = kCTTextAlignmentLeft;
+            break;
+        case NSTextAlignmentRight:
+            textAlignment = kCTTextAlignmentRight;
+            break;
+        case NSTextAlignmentCenter:
+            textAlignment = kCTTextAlignmentCenter;
+            break;
+            
+        default:
+            break;
+    }
+    return textAlignment;
+}
++ (CTLineBreakMode)setupLineBreakMode:(NSLineBreakMode)breakMode
+{
+    CTLineBreakMode lineBreakMode = kCTLineBreakByCharWrapping;
+    switch (breakMode) {
+        case NSLineBreakByCharWrapping:
+            lineBreakMode = kCTLineBreakByCharWrapping;
+            break;
+        case NSLineBreakByClipping:
+            lineBreakMode = kCTLineBreakByClipping;
+            break;
+        case NSLineBreakByTruncatingHead:
+            lineBreakMode = kCTLineBreakByTruncatingHead;
+            break;
+        case NSLineBreakByTruncatingMiddle:
+            lineBreakMode = kCTLineBreakByTruncatingMiddle;
+            break;
+        case NSLineBreakByTruncatingTail:
+            lineBreakMode = kCTLineBreakByTruncatingTail;
+            break;
+        case NSLineBreakByWordWrapping:
+            lineBreakMode = kCTLineBreakByWordWrapping;
+            break;
+        default:
+            break;
+    }
+    return lineBreakMode;
 }
 @end

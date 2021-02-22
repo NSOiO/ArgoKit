@@ -15,6 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor*)colorWithHex:(long)hexColor;
 + (UIColor *)colorWithHex:(long)hexColor alpha:(float)opacity;
 + (CGSize)sizeThatFits:(CGSize)size
+          font:(UIFont *)font
+         numberOfLines:(NSInteger)numberOfLines
+      attributedString:(nullable NSAttributedString *)attributedString;
+
++ (CGSize)sizeThatFits:(CGSize)size
+                  font:(UIFont *)font
+         lineBreakMode:(NSLineBreakMode)breakMode
+           lineSpacing:(CGFloat)lineSpacing
+      paragraphSpacing:(CGFloat)paragraphSpacing
+         textAlignment:(NSTextAlignment)textAlign
          numberOfLines:(NSInteger)numberOfLines
       attributedString:(nullable NSAttributedString *)attributedString;
 

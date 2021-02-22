@@ -30,16 +30,16 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
    
     func reloadMoreData(){
         var dataSource = [[ArgoKitGridCellTestModel]]()
-        for index in 0..<1{
+        for index in 0..<4{
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
             $headerSource.append(headerModel)
            
             var subDataSource = [ArgoKitGridCellTestModel]()
-            for j in 0..<3{
+            for j in 0..<20{
                 let item = ArgoKitGridCellTestModel()
-                item.headerName = String(index)+"=="+String(j)
+                item.headerName = String(index)+"=="+String(j) + "scsdcs"
                 item.imagePath = images[j%5]
                 subDataSource.append(item)
             }
@@ -63,9 +63,9 @@ class ArgoKitGridCellTestModel :ArgoKitIdentifiable{
     var reuseIdentifier: String{
         _reuseIdentifier
     }
-    @Observable var headerName = "title"
+    @Observable var headerName = "titletitletitle"
     @Observable var imagePath = "icybay.jpg"
-    
+    @Observable var fontSize:CGFloat = 17.0
     var text:Text?
    
 }
@@ -158,12 +158,15 @@ struct ArgoKitGridTest: ArgoKit.View {
             Text(data.headerName)
                 .lineLimit(0)
                 .textAlign(.center)
+                .backgroundColor(.red)
+                .font(size:20)
 
             Image(data.imagePath)
                 .aspect(ratio: 1)
                 .circle()
                 .onTapGesture {
-//                    data.headerName = "ssssssss"
+//                    data.fontSize = data.fontSize + 1
+                    data.headerName = data.headerName + "你好吗？"
                 }
         }
 //        .grow(0.0)
@@ -177,17 +180,6 @@ struct ArgoKitGridTest: ArgoKit.View {
         .cellDidDisappear({ (data, indexpath) in
         })
         .cellSelected({ (data, indexpath) in
-//            data.headerName = "chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg"
-//            data.imagePath = "icybay.jpg"
-//            model.$dataSource1.move(at: indexpath, to: IndexPath(row: indexpath.row + 2, section: indexpath.section)).apply()
-            model.$dataSource1.delete(at: indexpath).apply()
-//            AlertView(title: data.headerName, message: data.headerName, preferredStyle: UIAlertController.Style.alert)
-//            .textField()
-//            .destructive(title: "确认") { text in
-//                print(text ?? "")
-//            }
-//            .cancel(title: "取消") {}
-//            .show()
         })
         .cellDeselected({ (data, indexpath) in
         })

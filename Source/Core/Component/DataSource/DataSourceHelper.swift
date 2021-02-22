@@ -27,8 +27,8 @@ class ArgoKitCellNode: ArgoKitNode {
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     var dataSourceType : DataSourceType  = .none
-    lazy var nodeHeightLock:NSLock  = NSLock()
     lazy var nodeLock:NSLock  = NSLock()
+    lazy var nodeHeightLock:NSLock  = NSLock()
     private var defaultHeight:CGFloat = -1.0
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:NSMutableArray = NSMutableArray()
@@ -62,9 +62,6 @@ class DataSourceHelper<D> {
         }
         return [[]]
     }
-//    deinit {
-//        removeAll()
-//    }
 }
 
 extension DataSourceHelper {
@@ -114,20 +111,37 @@ extension DataSourceHelper {
         return dataSource()![section][row]
     }
     
-    open func rowHeight(_ node:ArgoKitCellNode?,maxWidth: CGFloat){
-        nodeHeightLock.lock()
+    
+    
+    private func rowHeight(_ node:ArgoKitCellNode?,maxWidth: CGFloat){
         if node?.size.width != maxWidth || node?.size.height == 0 {
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
         }
-        nodeHeightLock.unlock()
     }
-    open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
-        if let node = self.nodeForRow(row, at: section) {
+    
+    @discardableResult
+    open func rowHeight(_ data:Any?,maxWidth: CGFloat) -> CGFloat {
+        nodeHeightLock.lock()
+        if let sourceData_ = data,
+           let node = self.nodeForData(sourceData_) {
             rowHeight(node,maxWidth: maxWidth)
+            nodeHeightLock.unlock()
             return node.size.height
         }
+        nodeHeightLock.unlock()
         return 0.0
     }
+    open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
+        nodeHeightLock.lock()
+        if let node = self.nodeForRow(row, at: section) {
+            rowHeight(node,maxWidth: maxWidth)
+            nodeHeightLock.unlock()
+            return node.size.height
+        }
+        nodeHeightLock.unlock()
+        return 0.0
+    }
+    
     
     open func nodeForRow(_ row: Int, at section: Int) -> ArgoKitCellNode? {
         if let nodelist =  nodeSourceList,
@@ -143,7 +157,6 @@ extension DataSourceHelper {
             addCellNode(cellNode)
             return cellNode
         }
-
         if section >= dataSource()?.count ?? 0
             || row >= dataSource()?[section].count ?? 0 {
             return nil
@@ -154,10 +167,10 @@ extension DataSourceHelper {
         }
         return nil
     }
-    open func nodeForData(_ data: Any) -> ArgoKitCellNode?{
-        nodeLock.lock()
+    open func nodeForData(_ data: Any) -> ArgoKitCellNode? {
+//        nodeLock.lock()
         let cellNode = _nodeForData_(data)
-        nodeLock.unlock()
+//        nodeLock.unlock()
         return cellNode
     }
     private func _nodeForData_(_ data: Any) -> ArgoKitCellNode? {
