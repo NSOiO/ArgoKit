@@ -243,7 +243,7 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         if let attribut = self.attributedText{
             var totolLineHeight:CGFloat = 0
             if numberOfLines > 0 {
-                let lineHeight:CGFloat = ceil(font.lineHeight)
+                let lineHeight:CGFloat = ceil(font.lineHeight + font.leading)
                 totolLineHeight = lineSpacing * CGFloat((numberOfLines - 1)) + lineHeight * CGFloat(numberOfLines)
                 maxHeight = CGFloat.minimum(size.height, totolLineHeight)
             }
