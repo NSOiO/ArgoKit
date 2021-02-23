@@ -243,15 +243,13 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         if let attribut = self.attributedText{
             var totolLineHeight:CGFloat = 0
             if numberOfLines > 0 {
-                let lineHeight:CGFloat = ceil(font.lineHeight)
+                let lineHeight:CGFloat = ceil(font.lineHeight + font.leading)
                 totolLineHeight = lineSpacing * CGFloat((numberOfLines - 1)) + lineHeight * CGFloat(numberOfLines)
                 maxHeight = CGFloat.minimum(size.height, totolLineHeight)
             }
             let result_size = attribut.boundingRect(with: CGSize(width: size.width, height: maxHeight), options: [.usesLineFragmentOrigin], context: nil).size
             let width = ceil(result_size.width);
             let height = ceil(result_size.height);
-//            let lineHeight = ceil(font.lineHeight)
-//            print("\(height) ===\(lineHeight)")
             result = CGSize(width:width, height:height)
             return result
         }
