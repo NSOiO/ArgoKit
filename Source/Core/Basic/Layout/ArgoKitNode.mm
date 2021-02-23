@@ -8,6 +8,7 @@
 #import "ArgoKitNode.h"
 #import <pthread.h>
 #import <objc/runtime.h>
+#import "ArgoKitLock.h"
 #import "yoga/Yoga.h"
 #import "ArgoKitLayoutHelper.h"
 #import "ArgoKitUtils.h"
@@ -15,6 +16,7 @@
 #import "ArgoKitNode+Frame.h"
 #import "ArgoKitNode+Observer.h"
 #import "ArgoKitDictionary.h"
+#import "ArgoKitSafeMutableArray.h"
 #if __has_include(<ArgoAnimation/UIView+AKFrame.h>)
 #import <ArgoAnimation/UIView+AKFrame.h>
 #else
@@ -48,14 +50,11 @@
 
 @class ArgoKitLayout;
 @interface ArgoKitNode()
-
 @property(nonatomic,strong,nullable)UIView *view;
 // 布局layout
 @property (nonatomic, strong) ArgoKitLayout *layout;
-// 布局layout
-@property (nonatomic, strong) NSLock *yogaLock;
 // 子node
-@property (nonatomic, strong,nullable)  NSMutableArray<ArgoKitNode *> *childs;
+@property (nonatomic, strong,nullable) ArgoKitSafeMutableArray *childs;
 @property (nonatomic,copy) ArgoKitNodeBlock actionBlock;
 
 @property (nonatomic,assign)BOOL isUIView;
@@ -71,6 +70,8 @@
 @property(nonatomic,strong)NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
 
 @property(nonatomic,assign)BOOL isRoot;
+
+@property(nonatomic, strong)ArgoKitLock *nodeLock;
 @end
 
 @interface NodeWrapper:NSObject
@@ -142,7 +143,8 @@ static YGConfigRef globalConfig;
         return YES;
     }
     if (self.argoNode.isEnabled) {
-      for (ArgoKitNode *childNode in self.argoNode.childs) {
+      NSArray *childs = [self.argoNode.childs copy];
+      for (ArgoKitNode *childNode in childs) {
         ArgoKitLayout *const layout = childNode.layout;
         if (layout.argoNode.isEnabled) {
           return NO;
@@ -236,9 +238,9 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
     }
     if (![layout isLeaf]) {
         for (NSUInteger i=0; i<node.childs.count; i++) {
-            ArgoKitNode *chiledNode = node.childs[i];
+            ArgoKitNode *chiledNode = [node.childs objectAtIndex:i];
             chiledNode.isReused = node.isReused;
-            YGApplyLayoutToNodeHierarchy(node.childs[i]);
+            YGApplyLayoutToNodeHierarchy([node.childs objectAtIndex:i]);
             chiledNode.isReused = NO;
         }
     }
@@ -274,19 +276,6 @@ static YGSize YGMeasureView(
   ArgoKitNode *argoNode = nodeWapper.node;
   __block CGSize sizeThatFits = CGSizeZero;
   if (!argoNode.isUIView || [argoNode.childs count] > 0) {
-//      if(pthread_main_np()){
-//          sizeThatFits = [argoNode sizeThatFits:(CGSize){
-//                                                .width = constrainedWidth,
-//                                                .height = constrainedHeight,
-//                                            }];
-//      }else{
-//          dispatch_sync(dispatch_get_main_queue(), ^{
-//              sizeThatFits = [argoNode sizeThatFits:(CGSize){
-//                                                    .width = constrainedWidth,
-//                                                    .height = constrainedHeight,
-//                                                }];
-//          });
-//      }
       sizeThatFits = [argoNode sizeThatFits:(CGSize){
                                             .width = constrainedWidth,
                                             .height = constrainedHeight,
@@ -330,7 +319,8 @@ static void YGAttachNodesFromNodeHierachy(ArgoKitNode *const argoNode)
   } else {
     YGNodeSetMeasureFunc(node, NULL);
     NSMutableArray<ArgoKitNode *> *childsToInclude = [[NSMutableArray alloc] initWithCapacity:argoNode.childs.count];
-    for (ArgoKitNode *node in argoNode.childs) {
+    NSArray *childs = argoNode.childs;
+    for (ArgoKitNode *node in childs) {
       if (node.isEnabled) {
           [childsToInclude addObject:node];
       }
@@ -393,10 +383,17 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     
 }
 
+- (void)initContent{
+    _viewAttributes = [[NSMutableDictionary alloc] init];
+    _actionMap = [NSMutableDictionary new];
+    _childs = [[ArgoKitSafeMutableArray alloc] init];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         [self setUpNode:[UIView class]];
+        [self initContent];
     }
     return self;
 }
@@ -407,6 +404,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self setUpNode:[view class]];
         _view = view;
         _size = view.bounds.size;
+        [self initContent];
     }
     return self;
 }
@@ -415,6 +413,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     self = [super init];
     if (self) {
         [self setUpNode:viewClass];
+        [self initContent];
     }
     return self;
 }
@@ -449,8 +448,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         return;
     }
     [self linkView:view];
-    if (_childs.count) {
-        for (ArgoKitNode *child in _childs) {
+    if (self.childs.count) {
+        NSMutableArray *childs = [self.childs copy];
+        for (ArgoKitNode *child in childs) {
             if (child.view) {
                 [view addSubview:child.view];
             }
@@ -526,37 +526,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self sendFrameChanged:frame];
 }
 
-- (NSMutableArray<ArgoKitNode *> *)childs{
-    if (!_childs) {
-        _childs = [[NSMutableArray<ArgoKitNode *> alloc] init];
-    }
-    return _childs;
-}
-
-- (NSMutableDictionary<NSString *,ArgoKitNodeBlock> *)actionMap{
-    if (!_actionMap) {
-        _actionMap = [NSMutableDictionary new];
-    }
-    return _actionMap;
-}
-- (NSMutableDictionary<NSString *,ViewAttribute *> *)viewAttributes{
-    if (!_viewAttributes) {
-        _viewAttributes = [[NSMutableDictionary alloc] init];
-    }
-    return _viewAttributes;
-}
-
 -(ArgoKitLayout *)layout{
     if (!_layout) {
         _layout = [[ArgoKitLayout alloc] initWithNode:self];
     }
     return _layout;
-}
--(NSLock *)yogaLock{
-    if (!_yogaLock) {
-        _yogaLock = [[NSLock alloc] init];
-    }
-    return _yogaLock;
 }
 
 - (NSMutableArray<NodeAction *> *)nodeActions{
@@ -613,7 +587,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @end
 
 @implementation ArgoKitNode(LayoutNode)
-
 - (BOOL)isRootNode{
     return self.parentNode == nil;
 }
@@ -666,13 +639,23 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @end
 
 @implementation ArgoKitNode(Hierarchy)
+- (ArgoKitLock *)nodeLock{
+    if (_nodeLock == nil) {
+        _nodeLock = [[ArgoKitLock alloc] init];
+    }
+    return _nodeLock;
+}
 - (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes {
     for (ArgoKitNode *node in nodes) {
         [self addChildNode:node];
     }
 }
-
 - (void)addChildNode:(ArgoKitNode *)node{
+    [self.nodeLock lock];
+    [self _addChildNode:node];
+    [self.nodeLock unlock];
+}
+- (void)_addChildNode:(ArgoKitNode *)node{
     if (!node) {
         return;
     }
@@ -681,12 +664,22 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     node.parentNode = self;
     [self.childs addObject:node];
-    if (node.view && self.view) {
-        [self.view addSubview:node.view];
-    }
+    
+    __weak typeof(self)weakSelf = self;
+    [ArgoKitUtils runMainThreadAsyncBlock:^{
+        if (node.view && weakSelf.view) {
+            [weakSelf.view addSubview:node.view];
+        }
+    }];
+
 }
 
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
+    [self.nodeLock lock];
+    [self _insertChildNode:node atIndex:index];
+    [self.nodeLock unlock];
+}
+- (void)_insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (!node) {
         return;
     }
@@ -698,26 +691,48 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     node.parentNode = self;
     [self.childs insertObject:node atIndex:index];
-    if (node.view) {
-        [self.view insertSubview:node.view atIndex:index];
-    }
-}
 
+    __weak typeof(self)weakSelf = self;
+    [ArgoKitUtils runMainThreadAsyncBlock:^{
+        if (node.view) {
+            [weakSelf.view insertSubview:node.view atIndex:index];
+        }
+    }];
+}
 
 - (void)removeFromSuperNode{
+    [self.nodeLock lock];
+    [self _removeFromSuperNode];
+    [self.nodeLock unlock];
+}
+- (void)_removeFromSuperNode{
     if(self.parentNode){
-        [self.view removeFromSuperview];
         [self.parentNode.childs removeObject:self];
         self.parentNode = nil;
+        
+        __weak typeof(self)weakSelf = self;
+        [ArgoKitUtils runMainThreadAsyncBlock:^{
+            [weakSelf.view removeFromSuperview];
+        }];
     }
 }
-- (void)removeAllChildNodes {
-    if (_childs.count) {
-        for (ArgoKitNode *child in _childs) {
-            [child.view removeFromSuperview];
+
+
+- (void)removeAllChildNodes{
+    [self.nodeLock lock];
+    [self _removeAllChildNodes];
+    [self.nodeLock unlock];
+}
+- (void)_removeAllChildNodes {
+    if (self.childs.count) {
+        NSArray *childs = [self.childs copy];
+        for (ArgoKitNode *child in childs) {
+            [ArgoKitUtils runMainThreadAsyncBlock:^{
+                [child.view removeFromSuperview];
+            }];
             child.parentNode = nil;
         }
-        [_childs removeAllObjects];
+        [self.childs removeAllObjects];
     }
 }
 
@@ -737,7 +752,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)prepareForUse{
 }
 
-- (void)nodeAddViewAttribute:(ViewAttribute *)attribute{
+- (void)addNodeViewAttribute:(ViewAttribute *)attribute{
     if (!attribute) {
         return;
     }

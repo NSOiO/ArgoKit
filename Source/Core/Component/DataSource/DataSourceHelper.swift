@@ -27,11 +27,11 @@ class ArgoKitCellNode: ArgoKitNode {
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     var dataSourceType : DataSourceType  = .none
-    lazy var nodeLock:NSLock  = NSLock()
-    lazy var nodeHeightLock:NSLock  = NSLock()
+    lazy var nodeLock:ArgoKitLock  = ArgoKitLock()
+    lazy var nodeHeightLock:ArgoKitLock  = ArgoKitLock()
     private var defaultHeight:CGFloat = -1.0
     lazy var registedReuseIdSet = Set<String>()
-    lazy var cellNodeCache:NSMutableArray = NSMutableArray()
+    lazy var cellNodeCache:ArgoKitSafeMutableArray = ArgoKitSafeMutableArray()
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node")
     public var sectionDataSourceList:DataSource<SectionDataList<D>>?{
         didSet{
@@ -241,28 +241,29 @@ extension DataSourceHelper {
 
 extension DataSourceHelper{
     public func removeNode(_ node:Any?){
-        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
-            if let strongSelf = self,
-               let node_ = node{
-                strongSelf.cellNodeCache.remove(node_)
-            }
+//        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
+//            if let strongSelf = self,
+//               let node_ = node{
+//                strongSelf.cellNodeCache.remove(node_)
+//            }
+//        }
+        if let node_ = node{
+            self.cellNodeCache.remove(node_)
         }
     }
     
     public func removeAll(){
-        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
-            if let strongSelf = self{
-                strongSelf.cellNodeCache.removeAllObjects()
-            }
-        }
+//        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
+//            if let strongSelf = self{
+//                strongSelf.cellNodeCache.removeAllObjects()
+//            }
+//        }
+        self.cellNodeCache.removeAllObjects()
     }
     
     public func addCellNode(_ node:Any?){
-        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
-            if let strongSelf = self,
-               let node_ = node,strongSelf.cellNodeCache.contains(node_) == false{
-                strongSelf.cellNodeCache.add(node_)
-            }
+        if let node_ = node,self.cellNodeCache.contains(node_) == false{
+            self.cellNodeCache.add(node_)
         }
     }
 }

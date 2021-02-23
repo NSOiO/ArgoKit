@@ -153,7 +153,7 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 @interface ArgoKitNode(AttributeValue)
 
 - (void)prepareForUse;
-- (void)nodeAddViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(nodeAddView(attribute:));
+- (void)addNodeViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(addNodeddView(attribute:));
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue;
 // 获取对应属性值
 - (nullable NSString *)text;

@@ -44,7 +44,7 @@ extension ArgoKitNodeViewModifier{
     class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
         if let node = outNode{
             let attribute = _preformAttribute_(isCALayer: isCALayer, isDirty: isDirty, outNode, selector, patamter)
-            node.nodeAddView(attribute:attribute)
+            node.addNodeddView(attribute:attribute)
         }
     }
     
