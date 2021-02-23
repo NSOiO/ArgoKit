@@ -214,7 +214,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     for (UIGestureRecognizer *recognizer in node.view.gestureRecognizers) {
         [node.view removeGestureRecognizer:recognizer];
     }
-    [node prepareForUse];
+    [node prepareForUse:node.view];
     for(ArgoKitNode *subNode in node.childs){
         [self prepareForReuseNode:subNode];
     }

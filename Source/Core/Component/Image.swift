@@ -7,9 +7,9 @@
 
 import Foundation
 class ArgoKitImageNode: ArgoKitNode {
-    override func prepareForUse() {
-        super.prepareForUse()
-        if let imageView = self.view as? UIImageView{
+    override func prepareForUse(view: UIView?) {
+        super.prepareForUse(view: view)
+        if let imageView = view as? UIImageView{
             imageView.image = nil
             imageView.highlightedImage = nil
         }

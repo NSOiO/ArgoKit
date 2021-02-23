@@ -749,7 +749,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode(AttributeValue)
 
-- (void)prepareForUse{
+- (void)prepareForUse:(UIView *)view{
 }
 - (void)addNodeViewAttribute:(ViewAttribute *)attribute{
     [self.nodeLock lock];

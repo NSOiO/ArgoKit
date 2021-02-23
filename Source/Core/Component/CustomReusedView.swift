@@ -36,12 +36,11 @@ class CustomReuseViewNode<D>: ArgoKitNode {
         }
         return UIView()
     }
-    
-    override func prepareForUse() {
-        super.prepareForUse()
-        if let view = self.view,
+    override func prepareForUse(view: UIView?) {
+        super.prepareForUse(view: view)
+        if let view_ = view,
            let preForUse = self.preForUse {
-            preForUse(view)
+            preForUse(view_)
         }
     }
 

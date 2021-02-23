@@ -84,7 +84,6 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 
 - (nullable UIView *)nodeView;
 - (void)bindView:(UIView *)view;
-- (void)reuseNodeToView:(ArgoKitNode *)node view:(nullable UIView *)view NS_SWIFT_NAME(reuseNodeToView(node:view:));
 
 @property (nonatomic,strong,readonly)NSMutableArray<NodeAction *> *nodeActions;
 
@@ -151,8 +150,8 @@ NS_SWIFT_NAME(applyLayoutAferCalculation(withView:));
 
 
 @interface ArgoKitNode(AttributeValue)
-
-- (void)prepareForUse;
+- (void)reuseNodeToView:(ArgoKitNode *)node view:(nullable UIView *)view NS_SWIFT_NAME(reuseNodeToView(node:view:));
+- (void)prepareForUse:(nullable UIView *)view NS_SWIFT_NAME(prepareForUse(view:));
 - (void)addNodeViewAttribute:(nullable ViewAttribute *)attribute NS_SWIFT_NAME(addNodeddView(attribute:));
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue;
 // 获取对应属性值

@@ -26,9 +26,9 @@ extension NSMutableAttributedString{
     }
 }
 open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
-    open override func prepareForUse() {
-        super.prepareForUse()
-        if let lable = self.view as? UILabel {
+    open override func prepareForUse(view: UIView?) {
+        super.prepareForUse(view: view)
+        if let lable = view as? UILabel {
             lable.text = nil
             lable.attributedText = nil
         }
@@ -277,8 +277,9 @@ struct TextCalculation {
 }
 
 class ArgoKitTextNode: ArgoKitTextBaseNode {
-    override func prepareForUse() {
-        if let lable = self.view as? UILabel{
+    override func prepareForUse(view: UIView?) {
+        super.prepareForUse(view: view)
+        if let lable = view as? UILabel{
             lable.text = nil
             lable.attributedText = nil
         }

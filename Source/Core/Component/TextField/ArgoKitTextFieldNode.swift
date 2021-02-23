@@ -32,9 +32,9 @@ class ArgoKitTextFieldNode: ArgoKitArttibuteNode, UITextFieldDelegate {
         return textView
     }
     
-    override func prepareForUse() {
-        super.prepareForUse()
-        if let view = self.view as? ArgoKitTextField {
+    override func prepareForUse(view: UIView?){
+        super.prepareForUse(view: view)
+        if let view = view as? ArgoKitTextField {
             view.rightViewMode = .never
             view.rightView = nil
         }
