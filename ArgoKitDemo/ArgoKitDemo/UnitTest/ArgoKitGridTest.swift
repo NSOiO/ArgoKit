@@ -156,10 +156,12 @@ struct ArgoKitGridTest: ArgoKit.View {
         Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
-                .lineLimit(10)
+                .lineLimit(0)
                 .textAlign(.center)
                 .backgroundColor(.red)
                 .font(size:16.0)
+//                .shadow(color: .green, offset: CGSize(width: 4, height: 4), radius: 3, opacity: 0.4, corners: .allCorners)
+            
 //                .lineSpacing(10)
 
             Image(data.imagePath)

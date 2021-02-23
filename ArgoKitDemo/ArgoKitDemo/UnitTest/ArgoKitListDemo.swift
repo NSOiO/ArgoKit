@@ -37,6 +37,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                 .circle()
                 .gone(true)
                 .backgroundColor(.red)
+                    .shadow(color: .red, offset: CGSize(width: 1, height: 1), radius: 0.5, opacity: 0.4, corners: .allCorners)
             }
 
              

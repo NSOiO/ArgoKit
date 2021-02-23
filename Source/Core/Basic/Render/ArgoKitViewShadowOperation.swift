@@ -8,6 +8,7 @@
 import Foundation
 class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
     private var _needRemake:Bool = false
+    var bezierPathCache:[String:UIBezierPath] = [:]
     var needRemake: Bool{
         get{
             _needRemake
@@ -101,8 +102,17 @@ class ArgoKitViewShadowOperation: NSObject, ArgoKitViewReaderOperation {
             var frame:CGRect = node.frame
             if let view = node.view{
                 frame = view.frame
+                if frame.equalTo(CGRect.zero) {
+                    return
+                }
             }
-            shadowPath = ArgoKitCornerManagerTool.bezierPath(frame:frame, multiRadius: self.multiRadius)
+            let key = "\(frame.width)"+"\(frame.height)"+"\(self.multiRadius)"
+            if let bezierPath = bezierPathCache[key]{
+                shadowPath = bezierPath
+            }else{
+                shadowPath = ArgoKitCornerManagerTool.bezierPath(frame: frame, multiRadius: self.multiRadius)
+                bezierPathCache[key] = shadowPath
+            }
             if let view = node.view {
                 view.layer.shadowColor = shadowColor.cgColor
                 view.layer.shadowOffset = shadowOffset

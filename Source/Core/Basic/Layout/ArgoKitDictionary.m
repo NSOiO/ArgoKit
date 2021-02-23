@@ -7,9 +7,10 @@
 
 #import "ArgoKitDictionary.h"
 #import <objc/runtime.h>
+#import "ArgoKitLock.h"
 @interface NSMutableDictionary(ArgoKit)
 @property(strong,nonatomic)NSMutableArray *argokit_keys;
-@property(strong,nonatomic)NSLock *argokit_lock;
+@property(strong,atomic)NSLock *argokit_lock;
 @end
 @implementation NSMutableDictionary(ArgoKit)
 - (NSMutableArray *)argokit_keys{
@@ -28,8 +29,8 @@
     if (lock) {
         return lock;
     }else{
-        lock = [NSLock new];
-        objc_setAssociatedObject(self, _cmd, lock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        lock = [[NSLock alloc] init];
+        objc_setAssociatedObject(self, _cmd, lock, OBJC_ASSOCIATION_RETAIN);
         return lock;
     }
 }
@@ -49,7 +50,7 @@
     return values;
 }
 
-- (void)addInnnerKey:(id)key{
+- (void)addInnnerKey:(NSString *)key{
     if (!key) {
         return;
     }
@@ -65,28 +66,34 @@
     [self.argokit_keys removeObject:key];
 }
 
-- (void)argokit_setObject:(id)anObject forKey:(id<NSCopying>)aKey{
+- (void)argokit_setObject:(id)object forKey:(NSString *)key{
+    if(!object){
+        return;
+    }
     [self.argokit_lock lock];
-    [self addInnnerKey:aKey];
-    [self setObject:anObject forKey:aKey];
+    [self addInnnerKey:key];
+    [self setObject:object forKey:key];
     [self.argokit_lock unlock];
 }
-- (id)argokit_getObjectForKey:(id<NSCopying>)aKey{
+- (id)argokit_getObjectForKey:(NSString *)key{
     id object = nil;
     [self.argokit_lock lock];
-    object = [self objectForKey:aKey];
+    object = [self objectForKey:key];
     [self.argokit_lock unlock];
     return object;
 }
 
-- (void)argokit_setValue:(id)value forKey:(NSString *)key{
+- (void)argokit_setValue:(id)object forKey:(NSString *)key{
+    if(!object){
+        return;
+    }
     [self.argokit_lock lock];
     [self addInnnerKey:key];
-    [self setValue:value forKey:key];
+    [self setValue:object forKey:key];
     [self.argokit_lock unlock];
 }
 
-- (void)argokit_removeObjectForKey:(id)aKey{
+- (void)argokit_removeObjectForKey:(NSString *)aKey{
     [self.argokit_lock lock];
     [self removeInnnerKey:aKey];
     [self removeObjectForKey:aKey];

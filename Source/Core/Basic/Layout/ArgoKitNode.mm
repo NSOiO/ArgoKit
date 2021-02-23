@@ -71,7 +71,7 @@
 
 @property(nonatomic,assign)BOOL isRoot;
 
-@property(nonatomic, strong)ArgoKitLock *nodeLock;
+@property(atomic, strong)ArgoKitLock *nodeLock;
 @end
 
 @interface NodeWrapper:NSObject
@@ -751,8 +751,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (void)prepareForUse{
 }
-
 - (void)addNodeViewAttribute:(ViewAttribute *)attribute{
+    [self.nodeLock lock];
+    [self _addNodeViewAttribute:attribute];
+    [self.nodeLock unlock];
+}
+- (void)_addNodeViewAttribute:(ViewAttribute *)attribute{
     if (!attribute) {
         return;
     }

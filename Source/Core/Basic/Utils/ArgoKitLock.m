@@ -10,7 +10,6 @@
 @interface ArgoKitLock(){
     os_unfair_lock unfair_lock;
 }
-
 @end
 @implementation ArgoKitLock
 - (instancetype)init
