@@ -44,7 +44,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
              VStack{
                  HStack{
                     HStack{
-                        Text("fsdfdsfcsddsvcvxcvcxvcxcccxvcxvxcvdsa")
+                        Text(item.sessionName)
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
                             .lineLimit(2)
@@ -298,7 +298,7 @@ struct ListDemo:ArgoKit.View{
     func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<20{
+        for index in 0..<40{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -307,10 +307,6 @@ struct ListDemo:ArgoKit.View{
             item.unreadCount = String(index)
             $items.append(item)
         }
-        
-    
-
-       
     }
     
     
@@ -359,7 +355,6 @@ struct ListDemo:ArgoKit.View{
 //                $items.delete().apply().insert().apply(.Fade) // deleteRow
                 
 //                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
-                let ip = IndexPath(row: 1, section: 0)
             }
             return ListSwipeActionsConfiguration(actions: [action])
         })
@@ -375,7 +370,7 @@ struct ListDemo:ArgoKit.View{
                     .lineLimit(0).font(size: 20).backgroundColor(.red)
 
             }.pullingDown{ point in
-                print("pullingDown\(String(describing: point))")
+//                print("pullingDown\(String(describing: point))")
             }
             .backgroundColor(.cyan)
             .height(100.0)
@@ -399,14 +394,11 @@ struct ListDemo:ArgoKit.View{
         .sectionHeader($headerItems, headerContent: { (item) -> View in
             Text("sectionHeader").height(50).backgroundColor(.gray)
         })
-//        .sectionFooter($footerItems, footerContent: { (item) -> View in
-//            Text("sectionFooter").height(50).backgroundColor(.orange)
-//        })
         .backgroundColor(.purple)
         .grow(1)
-        Text("hahahha").height(100).backgroundColor(.orange)
-        
-        Text("hahahha").height(100).backgroundColor(.blue)
+//        Text("hahahha").height(100).backgroundColor(.orange)
+//
+//        Text("hahahha").height(100).backgroundColor(.blue)
     }
     
     
