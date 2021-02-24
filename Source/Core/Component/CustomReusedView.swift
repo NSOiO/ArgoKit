@@ -30,9 +30,10 @@ class CustomReuseViewNode<D>: ArgoKitNode {
             let view = contentView(data_)
             self.gestures = view.gestureRecognizers
             view.frame = frame
-            if let reuseView =  self.reuseView{
-                reuseView(view,data_)
-            }
+//            if let reuseView =  self.reuseView{
+//                reuseView(view,data_)
+//            }
+            self.reuseNodeToView(node: self, view: view)
             return view
         }
         return UIView()
@@ -51,8 +52,8 @@ class CustomReuseViewNode<D>: ArgoKitNode {
     }
 
     override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
-        if let reuseView =  self.reuseView,
-           let node_ = node as? CustomReuseViewNode,
+        if let node_ = node as? CustomReuseViewNode,
+           let reuseView =  node_.reuseView,
            let view_ =  view,
            let data = node_.data{
                 reuseView(view_,data)
