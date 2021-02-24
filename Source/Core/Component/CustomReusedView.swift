@@ -12,7 +12,7 @@ class CustomReuseViewNode<D>: ArgoKitNode {
     var createView:((D)->UIView)? = nil
     var reuseView:((UIView,D)->())? = nil
     var preForUse:((UIView)->())? = nil
-    
+    private var gestures:[UIGestureRecognizer]?
     override func clearStrongRefrence() {
         super.clearStrongRefrence()
         createView = nil
@@ -28,6 +28,7 @@ class CustomReuseViewNode<D>: ArgoKitNode {
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         if let contentView =  self.createView, let data_ = data{
             let view = contentView(data_)
+            self.gestures = view.gestureRecognizers
             view.frame = frame
             if let reuseView =  self.reuseView{
                 reuseView(view,data_)
@@ -38,6 +39,11 @@ class CustomReuseViewNode<D>: ArgoKitNode {
     }
     override func prepareForUse(view: UIView?) {
         super.prepareForUse(view: view)
+        if let view = view,let gestures = self.gestures{
+            for gesture in gestures {
+                view.addGestureRecognizer(gesture)
+            }
+        }
         if let view_ = view,
            let preForUse = self.preForUse {
             preForUse(view_)
