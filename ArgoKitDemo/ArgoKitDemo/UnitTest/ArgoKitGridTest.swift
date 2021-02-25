@@ -101,7 +101,7 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .lineLimit(0)
                 .textAlign(.center)
                 .backgroundColor(.red)
-                .font(size:12.0)
+//                .font(style:.bold)
             Image(data.imagePath)
                 .aspect(ratio: 1)
                 .circle()
