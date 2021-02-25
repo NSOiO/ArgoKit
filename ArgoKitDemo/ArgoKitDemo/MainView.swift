@@ -32,7 +32,7 @@ struct MainView: ArgoKit.ViewProtocol {
     
     var body: ArgoKit.View {
         List(data: model.datas) { cellModel in
-            cellModel.makeView()
+            cellModel.makeView().height(50)
         }
         .height(100%)
         .cellSelected { (cellModel, indexPath) in

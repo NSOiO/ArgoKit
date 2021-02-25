@@ -242,7 +242,7 @@ struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNodeDemo(viewClass: ListDemoView.self)
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
-    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node1111")
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     var view:UIView = UIView()
     var view1:UIView = UIView()
     @Alias var list:List<SessionItem>?

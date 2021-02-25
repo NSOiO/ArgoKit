@@ -51,7 +51,7 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
             }else{
                 setAttributedText(attri: NSAttributedString(string: text))
             }
-           
+            self.font(font)
         }
     }
     

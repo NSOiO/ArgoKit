@@ -37,22 +37,31 @@ class GridNode<D>: ArgoKitScrollViewNode,
         self.pGridView?.removeObserver(self, forKeyPath: "contentSize")
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize.zero
+        return size
     }
     
-    lazy var dataSourceHelper: DataSourceHelper<D> = {
+    lazy var dataSourceHelper: DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
         return _dataSourceHelper
     }()
     
-    lazy var headerSourceHelper =  DataSourceHelper<D>()
-    lazy var footerSourceHelper = DataSourceHelper<D>()
+    lazy var sectionHeaderSourceHelper:DataSourceHelper<D> = {[weak self] in
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        return _dataSourceHelper
+    }()
+    
+    lazy var sectionFooterSourceHelper:DataSourceHelper<D> = {[weak self] in
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        return _dataSourceHelper
+    }()
     
     // 支持移动重排
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
     fileprivate var moveItem = false
-    
+    public var maxWith:CGFloat = UIScreen.main.bounds.width
     var actionTitle:String?
     var flowLayout = GridFlowLayout()
     var supportWaterfall:Bool = false{
@@ -66,8 +75,8 @@ class GridNode<D>: ArgoKitScrollViewNode,
     private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
-//        flowLayout.estimatedItemSize = CGSize(width: 60, height: 60)
         gridView.frame = frame
+        maxWith = frame.size.width
         gridView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
         gridView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
@@ -76,11 +85,11 @@ class GridNode<D>: ArgoKitScrollViewNode,
                 ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: CGRect(x: 0, y: 0, width: self.flowLayout.itemWidth(inSection: 0), height: frame.height))
                 
                 var headerNodes:[Any] = []
-                headerNodes.append(contentsOf: self.headerSourceHelper.cellNodeCache)
+                headerNodes.append(contentsOf: self.sectionHeaderSourceHelper.cellNodeCache)
                 ArgoKitReusedLayoutHelper.reLayoutNode(headerNodes, frame: frame)
                 
                 var footerNodes:[Any] = []
-                footerNodes.append(contentsOf: self.footerSourceHelper.cellNodeCache)
+                footerNodes.append(contentsOf: self.sectionFooterSourceHelper.cellNodeCache)
                 ArgoKitReusedLayoutHelper.reLayoutNode(footerNodes, frame:frame)
             }
         }
@@ -177,10 +186,10 @@ class GridNode<D>: ArgoKitScrollViewNode,
         var dataSourceHelper:DataSourceHelper<D>? = nil
         var reuseIdentifier:String = kGridHeaderReuseIdentifier
         if kind ==  UICollectionView.elementKindSectionHeader{
-            dataSourceHelper = self.headerSourceHelper
+            dataSourceHelper = self.sectionHeaderSourceHelper
             reuseIdentifier = kGridHeaderReuseIdentifier
         }else if kind ==  UICollectionView.elementKindSectionFooter{
-            dataSourceHelper = self.footerSourceHelper
+            dataSourceHelper = self.sectionFooterSourceHelper
             reuseIdentifier = kGridFooterReuseIdentifier
         }
         if let dataSourceHelper = dataSourceHelper {
@@ -200,7 +209,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
-        var height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        var height = self.sectionHeaderSourceHelper.rowHeight(section, at:0, maxWidth:width)
         if let layout = collectionViewLayout as? GridFlowLayout{
             if layout.headerHeight > 0 {
                 height = layout.headerHeight
@@ -212,7 +221,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
-        var height = self.footerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        var height = self.sectionFooterSourceHelper.rowHeight(section, at:0, maxWidth:width)
         if collectionViewLayout is GridFlowLayout {
             let layout = collectionViewLayout as! GridFlowLayout
             if layout.footerHeight > 0 {
@@ -222,11 +231,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return CGSize(width:width, height: height)
     }
     
-    
-    
-    
-    
-
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool{
         return moveItem
     }
@@ -238,7 +242,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
         if let items = items{
             self.dataSourceHelper.sectionDataSourceList?[sourceIndexPath.section] = items
         }
-
     }
 
     func indexTitles(for collectionView: UICollectionView) -> [String]?{
@@ -348,9 +351,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
         var dataSourceHelper:DataSourceHelper<D>? = nil
         if elementKind ==  UICollectionView.elementKindSectionHeader{
-            dataSourceHelper = self.headerSourceHelper
+            dataSourceHelper = self.sectionHeaderSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
-            dataSourceHelper = self.footerSourceHelper
+            dataSourceHelper = self.sectionFooterSourceHelper
         }
         if let node = dataSourceHelper?.nodeForRow(indexPath.section, at: 0) {
             node.observeFrameChanged {[weak self] (_, _) in
@@ -385,9 +388,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath){
         var dataSourceHelper:DataSourceHelper<D>? = nil
         if elementKind ==  UICollectionView.elementKindSectionHeader{
-            dataSourceHelper = self.headerSourceHelper
+            dataSourceHelper = self.sectionHeaderSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
-            dataSourceHelper = self.footerSourceHelper
+            dataSourceHelper = self.sectionFooterSourceHelper
         }
         if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
             node.removeObservingFrameChanged()
@@ -755,14 +758,45 @@ extension GridNode{
     
     func removeNode(_ node:Any?){
         dataSourceHelper.removeNode(node)
-        headerSourceHelper.removeNode(node)
-        footerSourceHelper.removeNode(node)
+        sectionHeaderSourceHelper.removeNode(node)
+        sectionFooterSourceHelper.removeNode(node)
     }
     func removeAll(){
         dataSourceHelper.removeAll()
         dataSourceHelper.removeAll()
-        headerSourceHelper.removeAll()
+        sectionHeaderSourceHelper.removeAll()
     }
     
 }
 
+extension GridNode{
+    func createNodeFromData(_ data: Any, helper: Any) {
+        if let datasource = helper as? DataSource<DataList<D>> {
+
+            if datasource.type == .body {
+                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+
+            if datasource.type == .footer {
+                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+            }
+        }
+
+        if let datasource = helper as? DataSource<SectionDataList<D>> {
+
+            if datasource.type == .body {
+                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+
+            if datasource.type == .footer {
+                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+            }
+        }
+    }
+}
