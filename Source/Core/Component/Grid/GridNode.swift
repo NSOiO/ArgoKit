@@ -34,7 +34,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
 {
 
     deinit {
-        self.pGridView?.removeObserver(self, forKeyPath: "contentSize")
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return size
@@ -71,13 +70,12 @@ class GridNode<D>: ArgoKitScrollViewNode,
             }
         }
     }
-    
+    var observation:NSKeyValueObservation?
     private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
         gridView.frame = frame
         maxWith = frame.size.width
-        gridView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
         gridView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
                 var cellNodes:[Any] = []
@@ -113,20 +111,18 @@ class GridNode<D>: ArgoKitScrollViewNode,
             gridView.addGestureRecognizer(longPressGesture)
             
         }
+        observation = gridView.observe(\ArgoKitGridView.contentSize, options: [.new, .old], changeHandler: {[weak self] (gridView, change) in
+            if let `self` = self,
+               let old = change.oldValue,
+               let new = change.newValue{
+                if !new.equalTo(old) {
+                    self.setContentSizeViewHeight(new.height)
+               }
+            }
+        })
         return gridView
     }
 
-    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize" {
-            if let new = change?[NSKeyValueChangeKey.newKey] as? CGSize,
-               let old = change?[NSKeyValueChangeKey.oldKey] as? CGSize{
-                if !new.equalTo(old) {
-                    setContentSizeViewHeight(new.height)
-                }
-            }
-           
-        }
-    }
     
     @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         

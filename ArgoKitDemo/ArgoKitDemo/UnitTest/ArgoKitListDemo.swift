@@ -47,7 +47,6 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                         Text("fsdfdsfcsddsvcvxcvcxvcxcccxvcxvxcvdsa")
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                            .lineLimit(2)
                          .shrink(1.0)
                         
                         Button(action: {
@@ -298,7 +297,7 @@ struct ListDemo:ArgoKit.View{
     func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<20{
+        for index in 0..<1{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             item.sessionName = images[index%5] + "+\(String(index))"
@@ -324,7 +323,7 @@ struct ListDemo:ArgoKit.View{
         .tableHeaderView(headerContent: { () -> View? in
                             CustomView(view: view)
                                 .backgroundColor(.yellow)
-                                .height(100)
+                                .height(1)
 //            EmptyView().size(width: <#T##ArgoValue#>, height: <#T##ArgoValue#>)
 ////            HStack{
 //

@@ -448,7 +448,7 @@ extension ScrollView{
         return self.bindCallback({ [self] in
             if let node = self.node as? ArgoKitScrollViewNode{
                 node.setFlexGrow = true
-                node.adjustsHeightToFitSubView = false
+                node.adjustsHeightToFitSubView = true
             }
             self.node?.flexGrow(value())
         }, forKey: #function)

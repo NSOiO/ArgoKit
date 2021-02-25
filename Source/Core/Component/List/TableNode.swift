@@ -31,7 +31,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
                     DataSourceReloadNode {
     
     deinit {
-        self.tableView?.removeObserver(self, forKeyPath: "contentSize")
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return size
@@ -61,9 +60,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none
-    
     public weak var tableView: UITableView?
-   
     public var tableHeaderNode: ArgoKitNode?{
         didSet{
             if let tableView = self.tableView {
@@ -95,6 +92,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public var estimatedHeight:CGFloat = -1.0
     
     public var maxWith:CGFloat = UIScreen.main.bounds.width
+    
+    var observation:NSKeyValueObservation?
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
@@ -104,7 +103,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
             defaultViewHeight = frame.height
             defaultFlexGrow = self.flexGrow()
         }
-        tableView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
+       
         tableView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
                 var cellNodes:[Any] = []
@@ -135,19 +134,18 @@ class TableNode<D>: ArgoKitScrollViewNode,
         if let preview = ArgoKitInstance.listPreviewService() {
             preview.register(table: tableView, coordinator: self)
         }
-        return tableView
-    }
-    
-    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize" {
-            if let new = change?[NSKeyValueChangeKey.newKey] as? CGSize,
-               let old = change?[NSKeyValueChangeKey.oldKey] as? CGSize{
+        
+        observation = tableView.observe(\TableView.contentSize, options: [.new, .old], changeHandler: {[weak self] (tableview, change) in
+            if let `self` = self,
+               let old = change.oldValue,
+               let new = change.newValue{
                 if !new.equalTo(old) {
-                    setContentSizeViewHeight(new.height)
-                }
+                    self.setContentSizeViewHeight(new.height)
+               }
             }
-           
-        }
+        })
+
+        return tableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
