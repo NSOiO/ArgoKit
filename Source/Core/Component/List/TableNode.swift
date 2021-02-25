@@ -650,17 +650,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     
     override func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
-        let cells = self.tableView?.visibleCells
-        var models:[(D,UITableViewCell)] = []
-        if let cells_ = cells,let tableView = self.tableView {
-            for cell in cells_ {
-                if let indexPath = tableView.indexPath(for: cell){
-                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
-                        models.append((model,cell))
-                    }
-                }
-            }
-        }
+        let models:[(D,UITableViewCell)] = self.visibleModelCells()
         let sel = #selector(self.scrollViewDidEndScroll(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [models,scrollView])
     }
