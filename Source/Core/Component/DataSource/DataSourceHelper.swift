@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 class ArgoKitCellNode: ArgoKitNode {
     var isPreviewing:Bool = false
     var frameObserber: NSKeyValueObservation?
@@ -27,7 +26,7 @@ class ArgoKitCellNode: ArgoKitNode {
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     var dataSourceType : DataSourceType  = .none
-    lazy var nodeLock:NSRecursiveLock  = NSRecursiveLock()
+    let nodeLock:NSRecursiveLock  = NSRecursiveLock()
     private var defaultHeight:CGFloat = -1.0
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:ArgoKitSafeMutableArray = ArgoKitSafeMutableArray()

@@ -147,7 +147,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     }
 
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.dataSourceHelper.numberOfSection()
     }
@@ -272,7 +272,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return false
     }
  */
-    // MARK: UICollectionViewDelegate Select
+    // MARK: - UICollectionViewDelegate Select
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
@@ -291,7 +291,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
 
     
     
-    // MARK: UICollectionViewDelegate Highlight
+    // MARK: - UICollectionViewDelegate Highlight
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool{
         return true
     }
@@ -318,7 +318,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         }
     }
     
-    // MARK: UICollectionViewDelegate Display
+    // MARK: - UICollectionViewDelegate Display
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -346,7 +346,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     }
 
     
-    // MARK: HEADER OR FOOTER
+    // MARK: - HEADER OR FOOTER
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
         var dataSourceHelper:DataSourceHelper<D>? = nil
@@ -417,7 +417,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
 
-    // MARK: UICollectionViewDelegate Menu
+    // MARK: - UICollectionViewDelegate Menu
     func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return false
@@ -554,7 +554,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         
     }
 
-    // MARK: UICollectionViewDelegateFlowLayout
+    // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                          layout collectionViewLayout: UICollectionViewLayout,
                          insetForSectionAt section: Int) -> UIEdgeInsets{
@@ -613,9 +613,39 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     
 }
+extension GridNode{
+    public func visibleModelCells() -> [(D,UICollectionViewCell)] {
+        var models:[(D,UICollectionViewCell)] = []
+        if let pGridView = self.pGridView{
+            let cells = pGridView.visibleCells
+            for cell in cells {
+                if let indexPath = pGridView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append((model,cell))
+                    }
+                }
+            }
+        }
+        return models
+    }
+    
+    public func visibleModels() -> [D] {
+        var models:[D] = []
+        if let pGridView = self.pGridView{
+            let cells = pGridView.visibleCells
+            for cell in cells {
+                if let indexPath = pGridView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append(model)
+                    }
+                }
+            }
+        }
+        return models
+    }
+}
 
-
-// MARK: reload data
+// MARK: - reload data
 extension GridNode {
     
     public func reloadData(){
@@ -699,7 +729,7 @@ extension GridNode {
     }
 }
 
-//MARK: 设置配置参数
+//MARK: - 设置配置参数
 extension GridNode{
     public func waterfall(_ value:Bool){
         self.supportWaterfall = value

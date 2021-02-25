@@ -654,15 +654,47 @@ class TableNode<D>: ArgoKitScrollViewNode,
         var models:[(D,UITableViewCell)] = []
         if let cells_ = cells,let tableView = self.tableView {
             for cell in cells_ {
-                if let cell_ = cell as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
+                if let indexPath = tableView.indexPath(for: cell){
                     if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
-                        models.append((model,cell_))
+                        models.append((model,cell))
                     }
                 }
             }
         }
         let sel = #selector(self.scrollViewDidEndScroll(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [models,scrollView])
+    }
+}
+
+extension TableNode{
+    public func visibleModelCells() -> [(D,UITableViewCell)] {
+        var models:[(D,UITableViewCell)] = []
+        if let tableView = self.tableView{
+            let cells = tableView.visibleCells
+            for cell in cells {
+                if let indexPath = tableView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append((model,cell))
+                    }
+                }
+            }
+        }
+        return models
+    }
+    
+    public func visibleModels() -> [D] {
+        var models:[D] = []
+        if let tableView = self.tableView{
+            let cells = tableView.visibleCells
+            for cell in cells {
+                if let indexPath = tableView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append(model)
+                    }
+                }
+            }
+        }
+        return models
     }
 }
 

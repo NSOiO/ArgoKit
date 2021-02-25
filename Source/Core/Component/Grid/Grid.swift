@@ -180,3 +180,16 @@ extension Grid {
         return self
     }
 }
+
+extension Grid{
+    /// The grid tuples that contain models and cells that are visible in the grid.
+    /// The return value of this function is an array containing tuples that contain viewmodes and cells, each representing a visible viewmode in the grid.
+    public func visibleModelCells() -> [(D,UICollectionViewCell)] {
+        return self.gridNode?.visibleModelCells() ?? []
+    }
+    /// The grid models that are visible in the grid.
+    /// The return value of this function is an array containing viewmodel objects, each representing a visible viewmode in the grid.
+    public func visibleModels() -> [D] {
+        return self.gridNode?.visibleModels() ?? []
+    }
+}

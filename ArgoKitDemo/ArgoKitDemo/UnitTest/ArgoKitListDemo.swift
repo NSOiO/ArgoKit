@@ -337,11 +337,16 @@ struct ListDemo:ArgoKit.View{
         })
         .cellSelected {item, indexPath in
 //            view.frame.size = CGSize(width: 100, height: 10)
-            list?.tableHeaderView(headerContent: { () -> View? in
-//                CustomView(view: view)
-//                    .backgroundColor(.purple)
-                nil
-            })
+//            list?.tableHeaderView(headerContent: { () -> View? in
+////                CustomView(view: view)
+////                    .backgroundColor(.purple)
+//                nil
+//            })
+            if let items = list?.visibleModels(){
+                for item in items{
+                    print("visibleModels:\(String(describing: item))")
+                }
+            }
 //            $items.apply()
 //            let controller = ViewPagerController()
 //            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
