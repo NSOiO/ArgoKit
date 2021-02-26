@@ -300,6 +300,7 @@ struct ListDemo:ArgoKit.View{
         for index in 0..<1{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
+            
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
@@ -341,6 +342,7 @@ struct ListDemo:ArgoKit.View{
 ////                    .backgroundColor(.purple)
 //                nil
 //            })
+            print("freshId1:\(String(describing: item.freshId.next()))")
             if let items = list?.visibleModels(){
                 for item in items{
                     print("visibleModels:\(String(describing: item))")

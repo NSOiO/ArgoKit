@@ -42,18 +42,21 @@ class GridNode<D>: ArgoKitScrollViewNode,
     lazy var dataSourceHelper: DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .body
         return _dataSourceHelper
     }()
     
     lazy var sectionHeaderSourceHelper:DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .header
         return _dataSourceHelper
     }()
     
     lazy var sectionFooterSourceHelper:DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .footer
         return _dataSourceHelper
     }()
     

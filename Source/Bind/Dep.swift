@@ -11,7 +11,7 @@ public final class Dep {
     private static var shared: Dep = Dep()
     private var subscriber:(() -> Void)?
     private var cancellables:[Disposable] = []
-    private var lock:NSLock
+    private let lock:NSLock
     
     public init(){
         lock = NSLock()
@@ -22,35 +22,45 @@ public final class Dep {
     
     static func setSub(_ sub: @escaping (()->Void)) {
         Dep.shared.lock.lock()
+        defer {
+            Dep.shared.lock.unlock()
+        }
         self.shared.subscriber = sub
-        Dep.shared.lock.unlock()
     }
     
     static func removeSub() {
         Dep.shared.lock.lock()
+        defer {
+            Dep.shared.lock.unlock()
+        }
         self.shared.subscriber = nil
-        Dep.shared.lock.unlock()
     }
     
     static func getSub() -> (() -> Void)? {
         Dep.shared.lock.lock()
+        defer {
+            Dep.shared.lock.unlock()
+        }
         let subscriber_ = self.shared.subscriber
-        Dep.shared.lock.unlock()
         return subscriber_
     }
     
     /// Cancellable
     static func pushCancellable(_ cancel: Disposable) {
         Dep.shared.lock.lock()
+        defer {
+            Dep.shared.lock.unlock()
+        }
         self.shared.cancellables.append(cancel)
-        Dep.shared.lock.unlock()
     }
     
     static func popAllCancellables() -> [Disposable]{
         Dep.shared.lock.lock()
+        defer {
+            Dep.shared.lock.unlock()
+        }
         let r = self.shared.cancellables
         self.shared.cancellables.removeAll()
-        Dep.shared.lock.unlock()
         return r
     }
 }
