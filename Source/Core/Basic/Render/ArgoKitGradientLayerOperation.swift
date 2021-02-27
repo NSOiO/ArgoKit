@@ -22,7 +22,7 @@ class ArgoKitGradientLayerOperation:NSObject, ArgoKitViewReaderOperation {
     public var startColor:UIColor?
     public var endColor:UIColor?
     public var direction:ArgoKitGradientType?
-    
+    private var observation:NSKeyValueObservation?
     public func updateGradientLayer(startColor: UIColor?,endColor:UIColor?,direction:ArgoKitGradientType?) {
         self.startColor = startColor
         self.endColor = endColor
@@ -43,16 +43,19 @@ class ArgoKitGradientLayerOperation:NSObject, ArgoKitViewReaderOperation {
             if let strongSelf = self{
                 strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
-                view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
+                strongSelf.observation = view.observe(\UIView.frame, options: [.new,.old], changeHandler: { (view, change) in
+                    strongSelf.observeValue(change, of: view)
+                })
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
-        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
-        if newrect.equalTo(oldrect) {
+    
+    private func observeValue(_ change:NSKeyValueObservedChange<CGRect>,of object: Any?){
+        let newrect:CGRect = change.newValue ?? CGRect.zero
+        let oldrect:CGRect = change.oldValue ?? CGRect.zero
+        if (newrect.equalTo(oldrect)) {
             return
         }
         remakeIfNeed()
@@ -135,9 +138,6 @@ class ArgoKitGradientLayerOperation:NSObject, ArgoKitViewReaderOperation {
     }
     
     deinit {
-        if let view = self.viewNode?.view{
-            view.removeObserver(self, forKeyPath: "frame")
-        }
     }
     
 }
