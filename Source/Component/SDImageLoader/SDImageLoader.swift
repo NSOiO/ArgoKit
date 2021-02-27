@@ -11,7 +11,7 @@ public class SDImageLoader:ArgoKitImageLoader {
     public init () {}
     
     public func loadImage(url: URL?, successed: ((UIImage) -> ())?, failure: ((Error?) -> ())?) {
-        if let url_ = url {
+        if let url_ = url,url_.absoluteString.isEmpty == false {
             let imageManager:SDWebImageManager = SDWebImageManager.shared;
             imageManager.loadImage(with: url_, options: SDWebImageOptions.retryFailed, progress: nil) { (image, data, error, type, result, url) in
                 if result, let image = image {

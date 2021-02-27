@@ -110,13 +110,15 @@ extension View {
     
     /// Adds sub views to this view hierarchy.
     /// - Parameter builder: A view builder that creates the sub views of this view.
-    public func addSubViews(@ArgoKitViewBuilder builder:@escaping ()->View){
+    @discardableResult
+    public func addSubViews(@ArgoKitViewBuilder builder:@escaping ()->View) -> Self{
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
                 self.node!.addChildNode(node)
             }
         }
+        return self
     }
 }
 

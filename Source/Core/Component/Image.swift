@@ -21,8 +21,10 @@ class ArgoKitImageNode: ArgoKitNode {
     }
     
     public func image(url: URL?, placeholder: String?) {
-        let image = placeholder != nil ? UIImage(named: placeholder!) : nil
-        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+        if let placeholder = placeholder,placeholder.isEmpty == false {
+            let image = UIImage(named: placeholder)
+            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+        }
         ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
             ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
         } failure: { _ in
@@ -182,16 +184,5 @@ extension Image {
     /// - Returns: The size of  the image displayed in the image view.
     public func imageSize() -> CGSize {
         return pNode.image()?.size ?? .zero
-    }
-}
-
-extension Image{
-   @available(*, deprecated, message: "Image does not support padding!")
-    public func padding(top:ArgoValue,right:ArgoValue,bottom:ArgoValue,left:ArgoValue)->Self{
-        return self
-    }
-   @available(*, deprecated, message: "Image does not support padding!")
-    public func padding(edge:ArgoEdge,value:ArgoValue)->Self{
-        return self
     }
 }
