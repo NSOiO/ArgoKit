@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 class ArgoKitCellNode: ArgoKitNode {
     var isPreviewing:Bool = false
     var frameObserber: NSKeyValueObservation?
@@ -27,7 +26,7 @@ class ArgoKitCellNode: ArgoKitNode {
 class DataSourceHelper<D> {
     weak var _rootNode : DataSourceReloadNode?
     var dataSourceType : DataSourceType  = .none
-    lazy var nodeLock:NSRecursiveLock  = NSRecursiveLock()
+    let nodeLock:NSRecursiveLock  = NSRecursiveLock()
     private var defaultHeight:CGFloat = -1.0
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:ArgoKitSafeMutableArray = ArgoKitSafeMutableArray()
@@ -121,23 +120,25 @@ extension DataSourceHelper {
     @discardableResult
     open func rowHeight(_ data:Any?,maxWidth: CGFloat) -> CGFloat {
         nodeLock.lock()
+        defer {
+            nodeLock.unlock()
+        }
         if let sourceData_ = data,
            let node = self.nodeForData(sourceData_) {
             rowHeight(node,maxWidth: maxWidth)
-            nodeLock.unlock()
             return node.size.height
         }
-        nodeLock.unlock()
         return 0.0
     }
     open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
         nodeLock.lock()
+        defer {
+            nodeLock.unlock()
+        }
         if let node = self.nodeForRow(row, at: section) {
             rowHeight(node,maxWidth: maxWidth)
-            nodeLock.unlock()
             return node.size.height
         }
-        nodeLock.unlock()
         return 0.0
     }
     
@@ -168,8 +169,10 @@ extension DataSourceHelper {
     }
     open func nodeForData(_ data: Any) -> ArgoKitCellNode? {
         nodeLock.lock()
+        defer {
+            nodeLock.unlock()
+        }
         let cellNode = _nodeForData_(data)
-        nodeLock.unlock()
         return cellNode
     }
     private func _nodeForData_(_ data: Any) -> ArgoKitCellNode? {

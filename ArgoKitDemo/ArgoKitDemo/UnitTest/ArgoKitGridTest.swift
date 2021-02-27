@@ -15,7 +15,7 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
     let titiles = ["chincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpgchincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlakechincoteague.jpgchincoteague.jpgchincoteague.jpg.jpg"]
     let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
     let messages = ["11","22","33","44","55"]
-    
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     @DataSource var dataSource1:[[ArgoKitGridCellTestModel]] = [[ArgoKitGridCellTestModel]]()
     
     @DataSource var dataSource2:[ArgoKitGridCellTestModel] = [ArgoKitGridCellTestModel]()
@@ -27,10 +27,18 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
     init() {
         reloadMoreData()
     }
-   
+    
     func reloadMoreData(){
+        nodeQueue.async {[weak self] in
+            self?._reloadMoreData()
+            DispatchQueue.main.async {[weak self] in
+                self?.$dataSource1.apply()
+            }
+        }
+    }
+    func _reloadMoreData(){
         var dataSource = [[ArgoKitGridCellTestModel]]()
-        for index in 0..<4{
+        for index in 0..<1{
             let idetifier = "session:\(page + index)"
             let headerModel = ArgoKitGridCellTestModel()
             headerModel.headerName = idetifier
@@ -39,7 +47,7 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
             var subDataSource = [ArgoKitGridCellTestModel]()
             for j in 0..<20{
                 let item = ArgoKitGridCellTestModel()
-                item.headerName = "scsdcs"
+                item.headerName = "Hello, ArgoKit!"
                 item.imagePath = images[j%5]
                 subDataSource.append(item)
             }
@@ -49,8 +57,6 @@ class ArgoKitGridTestModel :ArgoKitIdentifiable{
        
         page = page + 1
         $dataSource1.append(contentsOf: dataSource)
-        $dataSource1.apply()
-        $dataSource2.apply()
     }
 
 }
@@ -88,70 +94,6 @@ struct ArgoKitGridTest: ArgoKit.View {
     }
     
     var body: ArgoKit.View {
-      /*
-        Grid{
-            Text("dsa")
-                .lineLimit(0)
-                .textAlign(.center)
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                        .aspect(ratio: 1)
-                        .circle()
-                        .onTapGesture {
-
-                        }
-            Image("icybay.jpg")
-                            .aspect(ratio: 1)
-                            .circle()
-                            .onTapGesture {
-
-                            }
-            Text("scsdcsd")
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                    .aspect(ratio: 1)
-                    .circle()
-                    .onTapGesture {
-
-                    }
-            Image("icybay.jpg")
-                                .aspect(ratio: 1)
-                                .circle()
-                                .onTapGesture {
-
-                                }
-
-        }
-        .grow(1.0)
-        .columnCount(3)
-        .columnSpacing(5)
-        .sectionHeader { () -> View in
-            Text("scsdcsd").backgroundColor(.yellow)
-        }
-         */
       
         Grid(waterfall: false,data:model.$dataSource1){ data in
 
@@ -159,11 +101,7 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .lineLimit(0)
                 .textAlign(.center)
                 .backgroundColor(.red)
-                .font(size:16.0)
-//                .shadow(color: .green, offset: CGSize(width: 4, height: 4), radius: 3, opacity: 0.4, corners: .allCorners)
-            
-//                .lineSpacing(10)
-
+//                .font(style:.bold)
             Image(data.imagePath)
                 .aspect(ratio: 1)
                 .circle()
@@ -194,6 +132,7 @@ struct ArgoKitGridTest: ArgoKit.View {
                 .textAlign(.center)
                 .backgroundColor(.gray)
                 .lineLimit(0)
+                .font(size:20)
 
         }
         .footerWillAppear({ (data, indexpath) in

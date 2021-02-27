@@ -38,7 +38,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
                     DataSourceReloadNode {
     
     deinit {
-        self.tableView?.removeObserver(self, forKeyPath: "contentSize")
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return size
@@ -71,9 +70,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none
-    
     public weak var tableView: UITableView?
-   
     public var tableHeaderNode: ArgoKitNode?{
         didSet{
             if let tableView = self.tableView {
@@ -105,6 +102,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public var estimatedHeight:CGFloat = -1.0
     
     public var maxWith:CGFloat = UIScreen.main.bounds.width
+    
+    var observation:NSKeyValueObservation?
         
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let tableView = TableView(frame: frame, style: style)
@@ -114,7 +113,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
             defaultViewHeight = frame.height
             defaultFlexGrow = self.flexGrow()
         }
-        tableView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
+       
         tableView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
                 var cellNodes:[Any] = []
@@ -148,19 +147,18 @@ class TableNode<D>: ArgoKitScrollViewNode,
         if let preview = ArgoKitInstance.listPreviewService() {
             preview.register(table: tableView, coordinator: self)
         }
-        return tableView
-    }
-    
-    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize" {
-            if let new = change?[NSKeyValueChangeKey.newKey] as? CGSize,
-               let old = change?[NSKeyValueChangeKey.oldKey] as? CGSize{
+        
+        observation = tableView.observe(\TableView.contentSize, options: [.new, .old], changeHandler: {[weak self] (tableview, change) in
+            if let `self` = self,
+               let old = change.oldValue,
+               let new = change.newValue{
                 if !new.equalTo(old) {
-                    setContentSizeViewHeight(new.height)
-                }
+                    self.setContentSizeViewHeight(new.height)
+               }
             }
-           
-        }
+        })
+
+        return tableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -669,17 +667,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     
     override func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
-        let cells = self.tableView?.visibleCells
-        var models:[(D,UITableViewCell)] = []
-        if let cells_ = cells,let tableView = self.tableView {
-            for cell in cells_ {
-                if let indexPath = tableView.indexPath(for: cell){
-                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
-                        models.append((model,cell))
-                    }
-                }
-            }
-        }
+        let models:[(D,UITableViewCell)] = self.visibleModelCells()
         let sel = #selector(self.scrollViewDidEndScroll(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [models,scrollView])
         self._scrollViewDidEndScroll(scrollView)
@@ -694,17 +682,53 @@ class TableNode<D>: ArgoKitScrollViewNode,
         super.scrollViewDidScrollToTop(scrollView)
         self._scrollViewDidScrollToTop(scrollView)
     }
+    
     override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         super.scrollViewWillBeginDecelerating(scrollView)
         self._scrollViewDidEndScroll(scrollView)
     }
+    
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         super.scrollViewWillBeginDragging(scrollView)
         self._scrollViewWillBeginDragging(scrollView)
     }
+    
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         super.scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
         self._scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+}
+
+extension TableNode{
+    public func visibleModelCells() -> [(D,UITableViewCell)] {
+        var models:[(D,UITableViewCell)] = []
+        if let tableView = self.tableView{
+            let cells = tableView.visibleCells
+            for cell in cells {
+                if let indexPath = tableView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append((model,cell))
+                    }
+                }
+            }
+        }
+
+        return models
+    }
+    
+    public func visibleModels() -> [D] {
+        var models:[D] = []
+        if let tableView = self.tableView{
+            let cells = tableView.visibleCells
+            for cell in cells {
+                if let indexPath = tableView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append(model)
+                    }
+                }
+            }
+        }
+        return models
     }
 }
 

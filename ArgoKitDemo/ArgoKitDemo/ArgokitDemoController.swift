@@ -20,6 +20,7 @@ public class SessionItem:ArgoKitIdentifiable{
     var lastMessage:String?
     var timeLabel:String?
     var unreadCount:String?
+    var freshId = (Int.min...).makeIterator()
 
     var textCom:Text?
     var hidden:Bool = false

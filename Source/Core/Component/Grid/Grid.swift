@@ -135,7 +135,7 @@ extension Grid {
     public func sectionHeader(@ArgoKitListBuilder headerContent: @escaping () -> View) -> Self {
         let container = headerContent()
         if let nodes = container.type.viewNodes() {
-            gridNode?.headerSourceHelper.nodeSourceList?.append(contentsOf:[nodes])
+            gridNode?.sectionHeaderSourceHelper.nodeSourceList?.append(contentsOf:[nodes])
         }
         return self
     }
@@ -147,8 +147,8 @@ extension Grid {
     /// - Returns: Self
     @discardableResult
     public func sectionHeader(data:DataSource<DataList<D>>, @ArgoKitListBuilder headerContent: @escaping (D) -> View) -> Self{
-        gridNode?.headerSourceHelper.dataSourceList = data
-        gridNode?.headerSourceHelper.buildNodeFunc = { item in
+        gridNode?.sectionHeaderSourceHelper.dataSourceList = data
+        gridNode?.sectionHeaderSourceHelper.buildNodeFunc = { item in
             return headerContent(item)
         }
         return self
@@ -161,7 +161,7 @@ extension Grid {
     public func sectionFooter(@ArgoKitListBuilder footerContent: @escaping () -> View) -> Self {
         let container = footerContent()
         if let nodes = container.type.viewNodes() {
-            gridNode?.footerSourceHelper.nodeSourceList?.append(contentsOf:[nodes])
+            gridNode?.sectionFooterSourceHelper.nodeSourceList?.append(contentsOf:[nodes])
         }
         return self
     }
@@ -173,10 +173,23 @@ extension Grid {
     /// - Returns: Self
     @discardableResult
     public func sectionFooter(data:DataSource<DataList<D>>, @ArgoKitListBuilder footerContent: @escaping (D) -> View) -> Self{
-        gridNode?.footerSourceHelper.dataSourceList = data
-        gridNode?.footerSourceHelper.buildNodeFunc = { item in
+        gridNode?.sectionFooterSourceHelper.dataSourceList = data
+        gridNode?.sectionFooterSourceHelper.buildNodeFunc = { item in
             return footerContent(item)
         }
         return self
+    }
+}
+
+extension Grid{
+    /// The grid tuples that contain models and cells that are visible in the grid.
+    /// The return value of this function is an array containing tuples that contain viewmodes and cells, each representing a visible viewmode in the grid.
+    public func visibleModelCells() -> [(D,UICollectionViewCell)] {
+        return self.gridNode?.visibleModelCells() ?? []
+    }
+    /// The grid models that are visible in the grid.
+    /// The return value of this function is an array containing viewmodel objects, each representing a visible viewmode in the grid.
+    public func visibleModels() -> [D] {
+        return self.gridNode?.visibleModels() ?? []
     }
 }

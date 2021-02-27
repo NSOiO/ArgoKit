@@ -47,7 +47,6 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                         Text(item.sessionName)
                          .textColor(UIColor(50,51,51))
                          .font(size: 16.0)
-                            .lineLimit(2)
                          .shrink(1.0)
                         
                         Button(action: {
@@ -107,11 +106,12 @@ class MSUserInterractionContentView: ArgoKit.View {
                 .textColor(UIColor(50,51,51))
                 .font(size: 26.0)
                 .margin(edge: .left, value: 5)
-//                .shadow(color: .red, offset: CGSize(width: 4, height: 4), radius: 0.3, opacity: 0.3)
-                .textShadowColor(UIColor.red)
-                .textShadowOffset(CGSize(width: 2, height: 2))
 //                .cornerRadius(3)
-                .backgroundColor(.gray)
+                .shadow(color: .cyan, offset: CGSize(width: 0, height: 0), radius: 3, opacity: 1)
+//                .textShadowColor(UIColor.red)
+//                .textShadowOffset(CGSize(width: 2, height: 2))
+//                .cornerRadius(3)
+//                .backgroundColor(.gray)
 //                .underline(style: .single, width: 1, color: .red)
                 .shrink(1)
             
@@ -242,7 +242,7 @@ struct ListDemo:ArgoKit.View{
     var node: ArgoKitNode? = ArgoKitNodeDemo(viewClass: ListDemoView.self)
     typealias View = ArgoKit.View
     var dataspource1:NSArray = NSArray()
-    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node1111")
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     var view:UIView = UIView()
     var view1:UIView = UIView()
     @Alias var list:List<SessionItem>?
@@ -298,9 +298,10 @@ struct ListDemo:ArgoKit.View{
     func _loadMoreData() {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<40{
+        for index in 0..<1{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
+            
             item.sessionName = images[index%5] + "+\(String(index))"
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
@@ -320,7 +321,7 @@ struct ListDemo:ArgoKit.View{
         .tableHeaderView(headerContent: { () -> View? in
                             CustomView(view: view)
                                 .backgroundColor(.yellow)
-                                .height(100)
+                                .height(1)
 //            EmptyView().size(width: <#T##ArgoValue#>, height: <#T##ArgoValue#>)
 ////            HStack{
 //
@@ -333,11 +334,17 @@ struct ListDemo:ArgoKit.View{
         })
         .cellSelected {item, indexPath in
 //            view.frame.size = CGSize(width: 100, height: 10)
-            list?.tableHeaderView(headerContent: { () -> View? in
-//                CustomView(view: view)
-//                    .backgroundColor(.purple)
-                nil
-            })
+//            list?.tableHeaderView(headerContent: { () -> View? in
+////                CustomView(view: view)
+////                    .backgroundColor(.purple)
+//                nil
+//            })
+            print("freshId1:\(String(describing: item.freshId.next()))")
+            if let items = list?.visibleModels(){
+                for item in items{
+                    print("visibleModels:\(String(describing: item))")
+                }
+            }
 //            $items.apply()
 //            let controller = ViewPagerController()
 //            self.viewController()?.navigationController?.pushViewController(controller, animated: true)

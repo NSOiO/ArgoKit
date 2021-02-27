@@ -32,7 +32,6 @@
 		00A906DB259048EE0052550C /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906D8259048EE0052550C /* LandmarkRow.swift */; };
 		00A906DC259048EE0052550C /* ToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A906D9259048EE0052550C /* ToggleRow.swift */; };
 		0B64C3EA4DD965F755E26D16 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		0BCF751642F08ECDE18B8838 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250657F4897BD8A1D8E1BE10 /* Pods_ArgoKitDemo.framework */; };
 		1C17BF04B7426CA0BDEBEDE6 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		1E71DAE2E4D765322FC62CC4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		25ECB5946E5ABD13C37C736D /* BuildFile in Sources */ = {isa = PBXBuildFile; };
@@ -48,6 +47,7 @@
 		460B278FFEB6B669AF0B5D12 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		4CF2204CE9F6AD5526B48F09 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		5C9C0E6111CFB46305184E8C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		6B21D80B68DA31D05E185A09 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250657F4897BD8A1D8E1BE10 /* Pods_ArgoKitDemo.framework */; };
 		7A69FB72F090435913742F7C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		811B7EC1CCF266AA964665A5 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8218ECFC112AAB889ECF246C /* BuildFile in Sources */ = {isa = PBXBuildFile; };
@@ -245,7 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BCF751642F08ECDE18B8838 /* Pods_ArgoKitDemo.framework in Frameworks */,
+				6B21D80B68DA31D05E185A09 /* Pods_ArgoKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

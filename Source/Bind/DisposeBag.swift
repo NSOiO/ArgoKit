@@ -14,8 +14,13 @@ extension Disposable {
 }
 
 public class DisposeBag: Disposable {
+    private var lock = NSLock()
     private var disposables = [Disposable]()
     private func _dispose() -> [Disposable] {
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
         let disposables = self.disposables
         self.disposables.removeAll(keepingCapacity: false)
         return disposables
@@ -25,6 +30,10 @@ public class DisposeBag: Disposable {
     public init() {}
     
     public func insert(_ disposable: Disposable) {
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
         self.disposables.append(disposable)
     }
     

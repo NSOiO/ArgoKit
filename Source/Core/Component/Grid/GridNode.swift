@@ -34,25 +34,36 @@ class GridNode<D>: ArgoKitScrollViewNode,
 {
 
     deinit {
-        self.pGridView?.removeObserver(self, forKeyPath: "contentSize")
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize.zero
+        return size
     }
     
-    lazy var dataSourceHelper: DataSourceHelper<D> = {
+    lazy var dataSourceHelper: DataSourceHelper<D> = {[weak self] in
         let _dataSourceHelper = DataSourceHelper<D>()
         _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .body
         return _dataSourceHelper
     }()
     
-    lazy var headerSourceHelper =  DataSourceHelper<D>()
-    lazy var footerSourceHelper = DataSourceHelper<D>()
+    lazy var sectionHeaderSourceHelper:DataSourceHelper<D> = {[weak self] in
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .header
+        return _dataSourceHelper
+    }()
+    
+    lazy var sectionFooterSourceHelper:DataSourceHelper<D> = {[weak self] in
+        let _dataSourceHelper = DataSourceHelper<D>()
+        _dataSourceHelper._rootNode = self
+        _dataSourceHelper.dataSourceType = .footer
+        return _dataSourceHelper
+    }()
     
     // 支持移动重排
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
     fileprivate var moveItem = false
-    
+    public var maxWith:CGFloat = UIScreen.main.bounds.width
     var actionTitle:String?
     var flowLayout = GridFlowLayout()
     var supportWaterfall:Bool = false{
@@ -62,13 +73,12 @@ class GridNode<D>: ArgoKitScrollViewNode,
             }
         }
     }
-    
+    var observation:NSKeyValueObservation?
     private var pGridView: ArgoKitGridView?
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let gridView = ArgoKitGridView(frame: frame, collectionViewLayout: flowLayout)
-//        flowLayout.estimatedItemSize = CGSize(width: 60, height: 60)
         gridView.frame = frame
-        gridView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
+        maxWith = frame.size.width
         gridView.reLayoutAction = { [weak self] frame in
             if let `self` = self {
                 var cellNodes:[Any] = []
@@ -76,11 +86,11 @@ class GridNode<D>: ArgoKitScrollViewNode,
                 ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: CGRect(x: 0, y: 0, width: self.flowLayout.itemWidth(inSection: 0), height: frame.height))
                 
                 var headerNodes:[Any] = []
-                headerNodes.append(contentsOf: self.headerSourceHelper.cellNodeCache)
+                headerNodes.append(contentsOf: self.sectionHeaderSourceHelper.cellNodeCache)
                 ArgoKitReusedLayoutHelper.reLayoutNode(headerNodes, frame: frame)
                 
                 var footerNodes:[Any] = []
-                footerNodes.append(contentsOf: self.footerSourceHelper.cellNodeCache)
+                footerNodes.append(contentsOf: self.sectionFooterSourceHelper.cellNodeCache)
                 ArgoKitReusedLayoutHelper.reLayoutNode(footerNodes, frame:frame)
             }
         }
@@ -104,20 +114,18 @@ class GridNode<D>: ArgoKitScrollViewNode,
             gridView.addGestureRecognizer(longPressGesture)
             
         }
+        observation = gridView.observe(\ArgoKitGridView.contentSize, options: [.new, .old], changeHandler: {[weak self] (gridView, change) in
+            if let `self` = self,
+               let old = change.oldValue,
+               let new = change.newValue{
+                if !new.equalTo(old) {
+                    self.setContentSizeViewHeight(new.height)
+               }
+            }
+        })
         return gridView
     }
 
-    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize" {
-            if let new = change?[NSKeyValueChangeKey.newKey] as? CGSize,
-               let old = change?[NSKeyValueChangeKey.oldKey] as? CGSize{
-                if !new.equalTo(old) {
-                    setContentSizeViewHeight(new.height)
-                }
-            }
-           
-        }
-    }
     
     @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         
@@ -138,7 +146,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     }
 
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.dataSourceHelper.numberOfSection()
     }
@@ -177,10 +185,10 @@ class GridNode<D>: ArgoKitScrollViewNode,
         var dataSourceHelper:DataSourceHelper<D>? = nil
         var reuseIdentifier:String = kGridHeaderReuseIdentifier
         if kind ==  UICollectionView.elementKindSectionHeader{
-            dataSourceHelper = self.headerSourceHelper
+            dataSourceHelper = self.sectionHeaderSourceHelper
             reuseIdentifier = kGridHeaderReuseIdentifier
         }else if kind ==  UICollectionView.elementKindSectionFooter{
-            dataSourceHelper = self.footerSourceHelper
+            dataSourceHelper = self.sectionFooterSourceHelper
             reuseIdentifier = kGridFooterReuseIdentifier
         }
         if let dataSourceHelper = dataSourceHelper {
@@ -200,7 +208,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
-        var height = self.headerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        var height = self.sectionHeaderSourceHelper.rowHeight(section, at:0, maxWidth:width)
         if let layout = collectionViewLayout as? GridFlowLayout{
             if layout.headerHeight > 0 {
                 height = layout.headerHeight
@@ -212,7 +220,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
         let width = collectionView.frame.size.width
-        var height = self.footerSourceHelper.rowHeight(section, at:0, maxWidth:width)
+        var height = self.sectionFooterSourceHelper.rowHeight(section, at:0, maxWidth:width)
         if collectionViewLayout is GridFlowLayout {
             let layout = collectionViewLayout as! GridFlowLayout
             if layout.footerHeight > 0 {
@@ -222,11 +230,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return CGSize(width:width, height: height)
     }
     
-    
-    
-    
-    
-
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool{
         return moveItem
     }
@@ -238,7 +241,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
         if let items = items{
             self.dataSourceHelper.sectionDataSourceList?[sourceIndexPath.section] = items
         }
-
     }
 
     func indexTitles(for collectionView: UICollectionView) -> [String]?{
@@ -269,7 +271,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         return false
     }
  */
-    // MARK: UICollectionViewDelegate Select
+    // MARK: - UICollectionViewDelegate Select
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
@@ -288,7 +290,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
 
     
     
-    // MARK: UICollectionViewDelegate Highlight
+    // MARK: - UICollectionViewDelegate Highlight
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool{
         return true
     }
@@ -315,7 +317,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         }
     }
     
-    // MARK: UICollectionViewDelegate Display
+    // MARK: - UICollectionViewDelegate Display
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -343,14 +345,14 @@ class GridNode<D>: ArgoKitScrollViewNode,
     }
 
     
-    // MARK: HEADER OR FOOTER
+    // MARK: - HEADER OR FOOTER
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath){
         var dataSourceHelper:DataSourceHelper<D>? = nil
         if elementKind ==  UICollectionView.elementKindSectionHeader{
-            dataSourceHelper = self.headerSourceHelper
+            dataSourceHelper = self.sectionHeaderSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
-            dataSourceHelper = self.footerSourceHelper
+            dataSourceHelper = self.sectionFooterSourceHelper
         }
         if let node = dataSourceHelper?.nodeForRow(indexPath.section, at: 0) {
             node.observeFrameChanged {[weak self] (_, _) in
@@ -385,9 +387,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath){
         var dataSourceHelper:DataSourceHelper<D>? = nil
         if elementKind ==  UICollectionView.elementKindSectionHeader{
-            dataSourceHelper = self.headerSourceHelper
+            dataSourceHelper = self.sectionHeaderSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
-            dataSourceHelper = self.footerSourceHelper
+            dataSourceHelper = self.sectionFooterSourceHelper
         }
         if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
             node.removeObservingFrameChanged()
@@ -414,7 +416,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
 
-    // MARK: UICollectionViewDelegate Menu
+    // MARK: - UICollectionViewDelegate Menu
     func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return false
@@ -551,7 +553,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
         
     }
 
-    // MARK: UICollectionViewDelegateFlowLayout
+    // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                          layout collectionViewLayout: UICollectionViewLayout,
                          insetForSectionAt section: Int) -> UIEdgeInsets{
@@ -610,9 +612,39 @@ class GridNode<D>: ArgoKitScrollViewNode,
     
     
 }
+extension GridNode{
+    public func visibleModelCells() -> [(D,UICollectionViewCell)] {
+        var models:[(D,UICollectionViewCell)] = []
+        if let pGridView = self.pGridView{
+            let cells = pGridView.visibleCells
+            for cell in cells {
+                if let indexPath = pGridView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append((model,cell))
+                    }
+                }
+            }
+        }
+        return models
+    }
+    
+    public func visibleModels() -> [D] {
+        var models:[D] = []
+        if let pGridView = self.pGridView{
+            let cells = pGridView.visibleCells
+            for cell in cells {
+                if let indexPath = pGridView.indexPath(for: cell){
+                    if let model = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
+                        models.append(model)
+                    }
+                }
+            }
+        }
+        return models
+    }
+}
 
-
-// MARK: reload data
+// MARK: - reload data
 extension GridNode {
     
     public func reloadData(){
@@ -696,7 +728,7 @@ extension GridNode {
     }
 }
 
-//MARK: 设置配置参数
+//MARK: - 设置配置参数
 extension GridNode{
     public func waterfall(_ value:Bool){
         self.supportWaterfall = value
@@ -755,14 +787,45 @@ extension GridNode{
     
     func removeNode(_ node:Any?){
         dataSourceHelper.removeNode(node)
-        headerSourceHelper.removeNode(node)
-        footerSourceHelper.removeNode(node)
+        sectionHeaderSourceHelper.removeNode(node)
+        sectionFooterSourceHelper.removeNode(node)
     }
     func removeAll(){
         dataSourceHelper.removeAll()
         dataSourceHelper.removeAll()
-        headerSourceHelper.removeAll()
+        sectionHeaderSourceHelper.removeAll()
     }
     
 }
 
+extension GridNode{
+    func createNodeFromData(_ data: Any, helper: Any) {
+        if let datasource = helper as? DataSource<DataList<D>> {
+
+            if datasource.type == .body {
+                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+
+            if datasource.type == .footer {
+                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+            }
+        }
+
+        if let datasource = helper as? DataSource<SectionDataList<D>> {
+
+            if datasource.type == .body {
+                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+            if datasource.type == .header {
+                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+            }
+
+            if datasource.type == .footer {
+                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+            }
+        }
+    }
+}

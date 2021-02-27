@@ -6,12 +6,15 @@
 //
 
 import Foundation
+
+// MARK: - UIFont
 public enum AKFontStyle{
     case `default`
     case bold
     case italic
     case bolditalic
 }
+
 extension UIFont{
     public class func font(fontName:String?,fontStyle:AKFontStyle? = .default,fontSize:CGFloat? = 17.0)->UIFont{
         var retFont:UIFont = UIFont.preferredFont(forTextStyle: TextStyle.body)
@@ -51,5 +54,43 @@ extension UIFont{
             isRegistered = (aFont.fontName.compare(fontName) == .orderedSame) || (aFont.familyName.compare(fontName) == .orderedSame)
         }
         return isRegistered
+    }
+}
+
+// MARK: - DispatchQueue
+public extension DispatchQueue {
+
+    private static var _onceTracker = [String]()
+    /**
+     Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+     only execute the code once even in the presence of multithreaded calls.
+
+     - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+     - parameter block: Block to execute once
+     */
+    class func once(token: String, block:()->Void) {
+        objc_sync_enter(self); defer { objc_sync_exit(self) }
+
+        if _onceTracker.contains(token) {
+            return
+        }
+
+        _onceTracker.append(token)
+        block()
+    }
+}
+
+
+protocol Lock {
+    func lock()
+    func unlock()
+}
+
+extension NSRecursiveLock : Lock {
+    @inline(__always)
+    final func performLocked<T>(_ action: () -> T) -> T {
+        self.lock();
+        defer { self.unlock() }
+        return action()
     }
 }

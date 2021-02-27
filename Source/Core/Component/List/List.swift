@@ -180,3 +180,17 @@ extension List{
     }
 }
 
+
+extension List{
+    /// The list tuples that contain models and cells that are visible in the list.
+    /// The return value of this function is an array containing tuples that contain viewmodes and cells, each representing a visible viewmode in the list.
+    public func visibleModelCells() -> [(D,UITableViewCell)] {
+        return self.tableNode.visibleModelCells()
+    }
+    
+    /// The list models that are visible in the list.
+    /// The return value of this function is an array containing viewmodel objects, each representing a visible viewmode in the list.
+    public func visibleModels() -> [D] {
+        return self.tableNode.visibleModels()
+    }
+}
