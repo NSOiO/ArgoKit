@@ -199,12 +199,12 @@ class SessionRow:ArgoKit.View {
    var body: ArgoKit.View{
     
         CustomReusedView(data: item)
-            .createView { (item) -> UIView in
+            .createUIView { (item) -> UIView in
                 return UILabel()
             }
-            .reuseView { (view, item) in
+            .updateUIView { (view, item) in
                 if let lable = view as? UILabel{
-                    lable.text = item.imagePath
+                    lable.text = item?.imagePath
                 }
             }
             .grow(1)

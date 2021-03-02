@@ -9,8 +9,8 @@ import Foundation
 import Foundation
 class CustomReuseViewNode<D>: ArgoKitNode {
     var data:D? = nil
-    var createView:((D)->UIView)? = nil
-    var reuseView:((UIView,D)->())? = nil
+    var createView:((D?)->UIView)? = nil
+    var reuseView:((UIView,D?)->())? = nil
     var preForUse:((UIView)->())? = nil
     private var gestures:[UIGestureRecognizer]?
     override func clearStrongRefrence() {
@@ -20,7 +20,7 @@ class CustomReuseViewNode<D>: ArgoKitNode {
         preForUse = nil
     }
 
-    init(data:D) {
+    init(data:D?) {
         super.init(viewClass: UIView.self)
         self.data = data
     }
@@ -51,10 +51,10 @@ class CustomReuseViewNode<D>: ArgoKitNode {
         super.reuseNodeToView(node:node,view:view)
         if let node_ = node as? CustomReuseViewNode,
            let reuseView =  node_.reuseView,
-           let view_ =  view,
-           let data = node_.data{
-                reuseView(view_,data)
-           }
+           let view_ =  view{
+            reuseView(view_,node_.data)
+        }
+  
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         if let view = self.nodeView() {
@@ -81,19 +81,19 @@ public struct CustomReusedView<D>:View{
     
     /// Initializer
     /// - Parameter view: stom view for UIKit.
-    public init(data:D) {
+    public init(data:D? = nil) {
         pNode = CustomReuseViewNode(data: data)
     }
     /// create UIKit Custom View
     /// - Parameter Self.
-    public func createUIView(_ value:@escaping (D)->UIView) -> Self{
+    public func createUIView(_ value:@escaping (D?)->UIView) -> Self{
         pNode.createView = value
         return self
     }
     
     /// update data to the View
     /// - Parameter Self.
-    public func updateUIView(_ value:@escaping (UIView,D)->()) -> Self{
+    public func updateUIView(_ value:@escaping (UIView,D?)->()) -> Self{
         pNode.reuseView = value
         return self
     }
