@@ -54,7 +54,10 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         }
     }
     
-    open func font(_ value:UIFont, range: NSRange? = nil){
+    open func font(_ value:UIFont?, range: NSRange? = nil){
+        guard let value = value else {
+            return
+        }
         self.font = value
         var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
         if let range = range{
@@ -64,7 +67,10 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
 
     }
-    open func textColor(_ value:UIColor, range: NSRange? = nil) {
+    open func textColor(_ value:UIColor?, range: NSRange? = nil) {
+        guard let value = value else {
+            return
+        }
         var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
         if let range = range{
             innerRange = range
@@ -115,7 +121,10 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         self.numberOfLines = value
     }
     
-    open func setShadow(_ value:NSShadow,range: NSRange? = nil){
+    open func setShadow(_ value:NSShadow?,range: NSRange? = nil){
+        guard let value = value else {
+            return
+        }
         shadow = value
         var innerRange = NSRange(location: 0, length: attributedText?.length ?? 0)
         if let range = range{

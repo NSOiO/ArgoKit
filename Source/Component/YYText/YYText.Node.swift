@@ -61,7 +61,10 @@ class YYTextNode: ArgoKitTextBaseNode{
         }
     }
     
-    override func font(_ value:UIFont, range: NSRange? = nil){
+    override func font(_ value:UIFont?, range: NSRange? = nil){
+        guard let value = value else {
+            return
+        }
         self.font = value
         if let range = range {
             attributedText?.yy_setFont(value, range: range)
@@ -109,6 +112,9 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
     
     override func textColor(_ value:UIColor?, range: NSRange? = nil) {
+        guard let value = value else {
+            return
+        }
         if let range = range {
             attributedText?.yy_setColor(value, range: range)
         }else{
@@ -206,7 +212,10 @@ class YYTextNode: ArgoKitTextBaseNode{
     }
     
     
-    override func setShadow(_ value:NSShadow,range: NSRange? = nil){
+    override func setShadow(_ value:NSShadow?,range: NSRange? = nil){
+        guard let value = value else {
+            return
+        }
         shadow = value
         if let range = range {
             attributedText?.yy_setShadow(shadow, range: range)
