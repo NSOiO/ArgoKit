@@ -7,6 +7,8 @@
 
 import Foundation
 class ArgoKitImageNode: ArgoKitNode {
+    var url: URL?
+    var placeholderImage: UIImage?
     override func prepareForUse() {
         super.prepareForUse()
         if let imageView = self.view as? UIImageView{
@@ -14,6 +16,19 @@ class ArgoKitImageNode: ArgoKitNode {
             imageView.highlightedImage = nil
         }
     }
+    
+    override func createNodeView(withFrame frame: CGRect) -> UIView {
+        let imageView = UIImageView(frame: frame)
+        self.reuseNodeToView(node: self, view: imageView)
+        return imageView
+    }
+    
+    override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
+        if let imageView = view as? UIImageView,let node = node as? ArgoKitImageNode {
+            ArgoKitInstance.imageLoader()?.setImageForView(view: imageView, url: node.url, placeholder: node.placeholderImage, successed: nil, failure: nil)
+        }
+    }
+    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let image = self.image()
         let temp_size:CGSize = image?.size ?? CGSize.zero
@@ -21,14 +36,18 @@ class ArgoKitImageNode: ArgoKitNode {
     }
     
     public func image(url: URL?, placeholder: String?) {
+        self.url = url
         let image = placeholder != nil ? UIImage(named: placeholder!) : nil
-        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-        ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
-            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-        } failure: { _ in
-            // 图像加载失败
-        }
+        self.placeholderImage = image
+//        
+//        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+//        ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
+//            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+//        } failure: { _ in
+//            // 图像加载失败
+//        }
     }
+    
     
 }
 

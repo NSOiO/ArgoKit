@@ -26,4 +26,21 @@ public class SDImageLoader:ArgoKitImageLoader {
             }
         }
     }
+    
+    public func setImageForView(view:UIImageView,url: URL?,
+                                                        placeholder: UIImage?,
+                                                        successed: ((UIImage?) -> ())?,
+                                                        failure: ((Error?) -> ())?){
+        view.sd_setImage(with: url, placeholderImage: placeholder, options: [.retryFailed]) { (image, error, type, url) in
+            if let image = image {
+                if let successed = successed {
+                    successed(image)
+                }
+            } else {
+                if let failure = failure {
+                    failure(error)
+                }
+            }
+        }
+    }
 }
