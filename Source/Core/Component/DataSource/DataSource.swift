@@ -269,9 +269,9 @@ extension DataSource{
             return self
         }
         dataSource[section].append(newElement)
-//        if let node = self._rootNode {
-//            node.createNodeFromData(newElement,helper: self)
-//        }
+        if let node = self._rootNode {
+            node.createNodeFromData(newElement,helper: self)
+        }
         return self
     }
     
