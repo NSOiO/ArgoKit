@@ -218,7 +218,7 @@ class SessionRow:ArgoKit.View {
 
         MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
-            .onTapGesture(isEnabled:self.item.isEnable) {[data = self.item] in
+            .onTapGesture(enabled:self.item.isEnable) {[data = self.item] in
                 data.isEnable  = false
         }
     
