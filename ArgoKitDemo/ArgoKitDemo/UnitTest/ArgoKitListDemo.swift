@@ -22,7 +22,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
             
             VStack{
                 // 头像
-                Image("icybay.jpg").width(50.0)
+                Image(url:URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp"),placeholder: nil).width(50.0)
                 .height(50.0)
                 .margin(edge: .left, value: 15.0)
                 .cornerRadius(10)
@@ -30,7 +30,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                     .borderWidth(1)
                     .borderColor(.cyan)
                 
-                Image("")
+                Image(url: URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp"), placeholder: "")
                 .height(12.0)
                 .width(18.0)
                 .margin(top: -5, right: 0, bottom: 0, left: 33)
@@ -52,7 +52,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                         Button(action: {
                             
                         }){
-                            Image(item.imagePath as! String)
+                            Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!, placeholder: "")
                                 .margin(edge: .left, value: 4)
                                 .width(15.0)
                                 .height(15.0)
@@ -211,12 +211,15 @@ class SessionRow:ArgoKit.View {
             .height(100)
             .backgroundColor(.red)
             .margin(edge: .bottom, value: 10)
+            .onTapGesture {[data = self.item] in
+                data.isEnable  = true
+            }
 
 
         MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
-        .onTapGesture {[data = self.item] in
-            print(data)
+            .onTapGesture(isEnabled:self.item.isEnable) {[data = self.item] in
+                data.isEnable  = false
         }
     
         MSUserInterractionContentView()
@@ -339,7 +342,6 @@ struct ListDemo:ArgoKit.View{
 ////                    .backgroundColor(.purple)
 //                nil
 //            })
-            print("freshId1:\(String(describing: item.freshId.next()))")
             if let items = list?.visibleModels(){
                 for item in items{
                     print("visibleModels:\(String(describing: item))")

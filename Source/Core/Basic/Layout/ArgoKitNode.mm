@@ -355,7 +355,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-    NSLog(@"isRoot:dealloc:%@",self);
+//    NSLog(@"isRoot:dealloc:%@",self);
     if (self.isRoot) {
 //        NSLog(@"isRoot:dealloc:%@",self);
         [self clearStrongRefrence];
@@ -496,6 +496,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (self.viewAttributes.count) {
         [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:[self nodeAllAttributeValue] markDirty:NO];
     }
+    [self reuseNodeToView:self view:self.view];
     if (_nodeActions.count && [self.view isKindOfClass:[UIControl class]] && [self.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
         NSArray<NodeAction *> *copyActions = [self.nodeActions mutableCopy];
         for(NodeAction *action in copyActions){

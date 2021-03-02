@@ -24,4 +24,23 @@ public class KFImageLoader:ArgoKitImageLoader {
             }
         }
     }
+    
+    public func setImageForView(_ view: UIImageView, url: URL?, placeholder: UIImage?, successed: ((UIImage?) -> ())?, failure: ((Error?) -> ())?) {
+        view.kf.setImage(with: url, placeholder: placeholder, options: nil, progressBlock: nil) { result in
+            switch(result){
+            case .success(let value):
+                if let successed = successed  {
+                    successed(value.image)
+                }
+                break
+            case .failure(let error):
+                if let failure = failure {
+                    failure(error)
+                }
+                break
+            }
+        }
+    }
+    
+
 }

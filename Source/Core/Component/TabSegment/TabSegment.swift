@@ -69,7 +69,6 @@ public class TabSegment: View {
         _node = ArgoKitTabSegmentNode(viewClass: UIScrollView.self)
         _node.row();
         _node.maxWidth(percent: 100)
-        _node.alignItemsFlexStart()
         _node.addChildNode(_container.node!)
     }
     

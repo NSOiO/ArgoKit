@@ -29,7 +29,6 @@ public struct HStack: View {
     public init() {
         pNode = ArgoKitNode(viewClass:UIView.self)
         pNode.row()
-        pNode.alignItemsFlexStart()
     }
 
     /// Initializer

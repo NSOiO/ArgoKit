@@ -54,7 +54,7 @@ struct ArgoKitImageTest: ArgoKit.View {
             .aspect(ratio: 1)
             .margin(edge: .top, value: 40)
             .circle()
-            .gesture(gesture: gesture)
+            .gesture(gesture)
 
         Image("icybay.jpg")
             .width(100)

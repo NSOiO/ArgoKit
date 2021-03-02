@@ -7,13 +7,28 @@
 
 import Foundation
 class ArgoKitImageNode: ArgoKitNode {
-    override func prepareForUse(view: UIView?) {
+    var url: URL?
+    var placeholderImage: UIImage?
+    override func prepareForUse(view:UIView?) {
         super.prepareForUse(view: view)
         if let imageView = view as? UIImageView{
             imageView.image = nil
             imageView.highlightedImage = nil
         }
     }
+    
+    override func createNodeView(withFrame frame: CGRect) -> UIView {
+        let imageView = UIImageView(frame: frame)
+        return imageView
+    }
+    
+    override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
+        super.reuseNodeToView(node: node, view: view)
+        if let imageView = view as? UIImageView,let node = node as? ArgoKitImageNode {
+            ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: node.url, placeholder: node.placeholderImage, successed: nil, failure: nil)
+        }
+    }
+    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let image = self.image()
         let temp_size:CGSize = image?.size ?? CGSize.zero
@@ -21,15 +36,19 @@ class ArgoKitImageNode: ArgoKitNode {
     }
     
     public func image(url: URL?, placeholder: String?) {
-        if let placeholder = placeholder,placeholder.isEmpty == false {
-            let image = UIImage(named: placeholder)
-            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+        self.url = url
+        let image = placeholder != nil ? UIImage(named: placeholder!) : nil
+        self.placeholderImage = image
+        if let imageView = self.link?.view as? UIImageView{
+            ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: image, successed: nil, failure: nil)
         }
-        ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
-            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-        } failure: { _ in
-            // 图像加载失败
-        }
+//        
+//        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+//        ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
+//            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
+//        } failure: { _ in
+//            // 图像加载失败
+//        }
     }
     
 }

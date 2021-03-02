@@ -149,6 +149,11 @@ public class UIHostingView: UIView {
         self.frame.size = size ?? CGSize.zero
     }
     
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let size = rootView?.calculateLayout(size:size)
+        return size ?? CGSize.zero
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -246,7 +246,6 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
                         self.font(self.font,range: range)
                     }
                 }
-    
             }
             var totolLineHeight:CGFloat = 0
             if numberOfLines > 0 {

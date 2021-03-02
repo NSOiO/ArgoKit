@@ -27,7 +27,6 @@ public struct VStack:View {
     public init(){
         pNode = ArgoKitNode(viewClass: UIView.self)
         pNode.column()
-        pNode.alignItemsFlexStart()
     }
     
     /// initalize the VStack with view builder.
