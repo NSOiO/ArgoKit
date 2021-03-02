@@ -15,13 +15,13 @@ class TableView:UITableView{
     var reLayoutAction:((CGRect)->())?
     var hitTestAction:(()->())?
     public override func layoutSubviews() {
+        super.layoutSubviews()
         if !oldFrame.equalTo(self.frame) {
             if let action = reLayoutAction {
                 action(self.bounds)
             }
             oldFrame = self.frame
         }
-        super.layoutSubviews()
     }
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let hitTestAction = hitTestAction {
@@ -178,12 +178,12 @@ class TableNode<D>: ArgoKitScrollViewNode,
             self.dataSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
-        if needLoadNodes.count > 0 && needLoadNodes.index(of: indexPath) == NSNotFound {
-            return cell
-        }
-        if scrollToToping {
-            return cell
-        }
+//        if needLoadNodes.count > 0 && needLoadNodes.index(of: indexPath) == NSNotFound {
+//            return cell
+//        }
+//        if scrollToToping {
+//            return cell
+//        }
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
@@ -673,30 +673,30 @@ class TableNode<D>: ArgoKitScrollViewNode,
         self._scrollViewDidEndScroll(scrollView)
     }
     
-    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        self._scrollViewShouldScrollToTop(scrollView)
-        return super.scrollViewShouldScrollToTop(scrollView)
-    }
-    
-    override func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        super.scrollViewDidScrollToTop(scrollView)
-        self._scrollViewDidScrollToTop(scrollView)
-    }
-    
-    override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        super.scrollViewWillBeginDecelerating(scrollView)
-        self._scrollViewDidEndScroll(scrollView)
-    }
-    
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        super.scrollViewWillBeginDragging(scrollView)
-        self._scrollViewWillBeginDragging(scrollView)
-    }
-    
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        super.scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
-        self._scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
-    }
+//    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+//        self._scrollViewShouldScrollToTop(scrollView)
+//        return super.scrollViewShouldScrollToTop(scrollView)
+//    }
+//
+//    override func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+//        super.scrollViewDidScrollToTop(scrollView)
+//        self._scrollViewDidScrollToTop(scrollView)
+//    }
+//
+//    override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+//        super.scrollViewWillBeginDecelerating(scrollView)
+//        self._scrollViewDidEndScroll(scrollView)
+//    }
+//
+//    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        super.scrollViewWillBeginDragging(scrollView)
+//        self._scrollViewWillBeginDragging(scrollView)
+//    }
+//
+//    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        super.scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+//        self._scrollViewWillEndDragging(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+//    }
 }
 
 extension TableNode{
