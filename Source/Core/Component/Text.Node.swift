@@ -241,6 +241,14 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         var result = size
         var maxHeight = size.height
         if let attribut = self.attributedText{
+            attribut.enumerateAttributes(in: NSRange(location: 0, length: attribut.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) {[weak self] (attrs, range, stop) in
+                            if attrs[NSAttributedString.Key.font] == nil{
+                                if let `self` = self{
+                                    self.font(self.font,range: range)
+                                }
+                            }
+                
+                        }
             var totolLineHeight:CGFloat = 0
             if numberOfLines > 0 {
                 let lineHeight:CGFloat = ceil(font.lineHeight + font.leading)
