@@ -27,7 +27,13 @@ class ArgoKitImageNode: ArgoKitNode {
         if let imageView = view as? UIImageView,
            let node = node as? ArgoKitImageNode,
            let url = node.url{
-            ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: node.placeholderImage, successed: nil, failure: nil)
+            if let url = node.url{
+                ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: node.placeholderImage, successed: nil, failure: nil)
+            }
+            if let image = self.placeholderImage {
+                ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: image, successed: nil, failure: nil)
+            }
+
         }
     }
     
@@ -44,13 +50,6 @@ class ArgoKitImageNode: ArgoKitNode {
         if let imageView = self.link?.view as? UIImageView{
             ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: image, successed: nil, failure: nil)
         }
-//        
-//        ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-//        ArgoKitInstance.imageLoader()?.loadImage(url: url) { image in
-//            ArgoKitNodeViewModifier.addAttribute(self, #selector(setter:UIImageView.image), image)
-//        } failure: { _ in
-//            // 图像加载失败
-//        }
     }
     
 }
