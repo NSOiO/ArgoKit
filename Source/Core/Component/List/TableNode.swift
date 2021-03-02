@@ -813,6 +813,9 @@ extension TableNode {
 
 extension TableNode{
     func createNodeFromData(_ data: Any,helper:Any) {
+        if pthread_main_np() != 0{
+            return
+        }
         if let datasource = helper as? DataSource<DataList<D>> {
 
             if datasource.type == .body {

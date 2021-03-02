@@ -86,14 +86,14 @@ public struct CustomReusedView<D>:View{
     }
     /// create UIKit Custom View
     /// - Parameter Self.
-    public func createView(_ value:@escaping (D)->UIView) -> Self{
+    public func createUIView(_ value:@escaping (D)->UIView) -> Self{
         pNode.createView = value
         return self
     }
     
-    /// reuse UIKit Custom View in List
+    /// update data to the View
     /// - Parameter Self.
-    public func reuseView(_ value:@escaping (UIView,D)->()) -> Self{
+    public func updateUIView(_ value:@escaping (UIView,D)->()) -> Self{
         pNode.reuseView = value
         return self
     }
