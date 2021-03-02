@@ -34,7 +34,7 @@ struct ADCell: ArgoKit.ViewProtocol {
                 .onLongPressGesture(action: model.longPressIcon)
             
             Text(model.title)
-            Spacer()
+//            Spacer()
             Image("star.fill").size(width: 20, height: 20)
                 .hidden(!model.isFavorite)
         }

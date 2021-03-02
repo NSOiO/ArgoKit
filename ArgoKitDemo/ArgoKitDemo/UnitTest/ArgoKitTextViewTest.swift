@@ -47,7 +47,7 @@ struct ArgoKitTextViewTest: ArgoKit.View {
             }
             .didChangeText { text in
                 print("\(String(describing: text))")
-            }.gesture(gesture: getstur)
+            }.gesture(getstur)
             .onTapGesture {
                 
             }.onLongPressGesture(numberOfTaps: 1, numberOfTouches: 3) {

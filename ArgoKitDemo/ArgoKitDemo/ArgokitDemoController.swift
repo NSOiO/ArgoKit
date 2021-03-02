@@ -18,6 +18,7 @@ public class SessionItem:ArgoKitIdentifiable{
     var imagePath:String?
     var sessionName:String?
     var lastMessage:String?
+    @Observable var  isEnable:Bool = true
     var timeLabel:String?
     var unreadCount:String?
 

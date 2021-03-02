@@ -211,12 +211,15 @@ class SessionRow:ArgoKit.View {
             .height(100)
             .backgroundColor(.red)
             .margin(edge: .bottom, value: 10)
+            .onTapGesture {[data = self.item] in
+                data.isEnable  = true
+            }
 
 
         MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
-        .onTapGesture {[data = self.item] in
-            print(data)
+            .onTapGesture(isEnabled:self.item.isEnable) {[data = self.item] in
+                data.isEnable  = false
         }
     
         MSUserInterractionContentView()
