@@ -7,7 +7,7 @@
 
 import Foundation
 import Foundation
-class CustomReuseViewNode<D>: ArgoKitNode {
+class UIViewRepresentationNode<D>: ArgoKitNode {
     var data:D? = nil
     var createView:((D?)->UIView)? = nil
     var reuseView:((UIView,D?)->())? = nil
@@ -49,7 +49,7 @@ class CustomReuseViewNode<D>: ArgoKitNode {
 
     override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
         super.reuseNodeToView(node:node,view:view)
-        if let node_ = node as? CustomReuseViewNode,
+        if let node_ = node as? UIViewRepresentationNode,
            let reuseView =  node_.reuseView,
            let view_ =  view{
             reuseView(view_,node_.data)
@@ -74,7 +74,7 @@ class CustomReuseViewNode<D>: ArgoKitNode {
 ///```
 ///
 public struct UIViewRepresentation<D>:View{
-    private var pNode: CustomReuseViewNode<D>
+    private var pNode: UIViewRepresentationNode<D>
     public var node: ArgoKitNode?{
         return pNode
     }
@@ -82,7 +82,7 @@ public struct UIViewRepresentation<D>:View{
     /// Initializer
     /// - Parameter view: stom view for UIKit.
     public init(data:D? = nil) {
-        pNode = CustomReuseViewNode(data: data)
+        pNode = UIViewRepresentationNode(data: data)
     }
     /// create UIKit Custom View
     /// - Parameter Self.

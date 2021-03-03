@@ -321,17 +321,17 @@ struct ListDemo:ArgoKit.View{
            SessionRow(item: item)
         }
         .alias(variable: $list)
-        .tableHeaderView(headerContent: { () -> View? in
-                            CustomView(view: view)
-                                .backgroundColor(.yellow)
-                                .height(1)
-//            EmptyView().size(width: <#T##ArgoValue#>, height: <#T##ArgoValue#>)
-////            HStack{
-//
-////                CustomView(view: view)
-////                    .backgroundColor(.purple)
-////            }
-        })
+//        .tableHeaderView(headerContent: { () -> View? in
+//                            CustomView(view: view)
+//                                .backgroundColor(.yellow)
+//                                .height(1)
+////            EmptyView().size(width: <#T##ArgoValue#>, height: <#T##ArgoValue#>)
+//////            HStack{
+////
+//////                CustomView(view: view)
+//////                    .backgroundColor(.purple)
+//////            }
+//        })
         .didEndScroll({ (items, view) in
             print("items:\(items),scrollView:\(view)")
         })
