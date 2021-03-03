@@ -153,6 +153,11 @@ public class UIHostingView: UIView {
         let size = rootView?.calculateLayout(size:size)
         return size ?? CGSize.zero
     }
+    public override var frame: CGRect{
+        didSet{
+            resetFrame = false
+        }
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -232,6 +237,7 @@ open class UIHostingController: UIViewController {
     }
     open override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
         self.view.addSubview(hostView)
         hostView.frame = self.view.bounds
     }

@@ -26,6 +26,11 @@ class ViewController: UIViewController {
                         let vc = UIHostingController(rootView: content, useSafeArea: true)
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
+                    if cellModel.title == "TextDemo" {
+                        let content = ArgoKitTextTest(model: ArgoKitTextTestModel())
+                        let vc = UIHostingController(rootView: content, useSafeArea: true)
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
             }
         }
@@ -38,6 +43,10 @@ class ViewController: UIViewController {
         let cellModel2 = MainCellModel()
         cellModel2.title = "GrideDemo"
         model.datas.append(cellModel2)
+        
+        let cellModel3 = MainCellModel()
+        cellModel3.title = "TextDemo"
+        model.datas.append(cellModel3)
         
         let view = UIHostingView(content: model.makeView(), frame: self.view.bounds, useSafeArea: true)
         self.view.addSubview(view)

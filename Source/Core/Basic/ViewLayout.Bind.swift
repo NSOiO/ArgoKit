@@ -507,6 +507,9 @@ extension View {
             case .percent(let value):
                 self.node?.marginLeft(percent: value)
                 break
+            case .auto:
+                self.node?.marginLeftWithAuto()
+                break
             default:
                 break
             }
@@ -518,6 +521,9 @@ extension View {
                 break
             case .percent(let value):
                 self.node?.marginTop(percent: value)
+                break
+            case .auto:
+                self.node?.marginTopWithAuto()
                 break
             default:
                 break
@@ -531,6 +537,9 @@ extension View {
             case .percent(let value):
                 self.node?.marginRight(percent: value)
                 break
+            case .auto:
+                self.node?.marginRightWithAuto()
+                break
             default:
                 break
             }
@@ -542,6 +551,9 @@ extension View {
                 break
             case .percent(let value):
                 self.node?.marginBottom(percent: value)
+                break
+            case .auto:
+                self.node?.marginBottomWithAuto()
                 break
             default:
                 break
@@ -555,6 +567,9 @@ extension View {
             case .percent(let value):
                 self.node?.marginStart(percent: value)
                 break
+            case .auto:
+                self.node?.marginStartWithAuto()
+                break
             default:
                 break
             }
@@ -566,6 +581,9 @@ extension View {
                 break
             case .percent(let value):
                 self.node?.marginEnd(percent: value)
+                break
+            case .auto:
+                self.node?.marginEndWithAuto()
                 break
             default:
                 break
@@ -579,6 +597,9 @@ extension View {
             case .percent(let value):
                 self.node?.marginH(percent: value)
                 break
+            case .auto:
+                self.node?.marginHWithAuto()
+                break
             default:
                 break
             }
@@ -591,6 +612,9 @@ extension View {
             case .percent(let value):
                 self.node?.marginV(percent: value)
                 break
+            case .auto:
+                self.node?.marginVWithAuto()
+                break
             default:
                 break
             }
@@ -602,6 +626,9 @@ extension View {
                 break
             case .percent(let value):
                 self.node?.marginAll(percent: value)
+                break
+            case .auto:
+                self.node?.marginAllWithAuto()
                 break
             default:
                 break

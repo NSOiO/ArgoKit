@@ -183,31 +183,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)marginLeftWithPercent:(CGFloat)value NS_SWIFT_NAME(marginLeft(percent:));
 - (void)marginLeftWithPoint:(CGFloat)value NS_SWIFT_NAME(marginLeft(point:));
+- (void)marginLeftWithAuto;
 
 - (void)marginTopWithPercent:(CGFloat)value NS_SWIFT_NAME(marginTop(percent:));
 - (void)marginTopWithPoint:(CGFloat)value NS_SWIFT_NAME(marginTop(point:));
+- (void)marginTopWithAuto;
 
 - (void)marginRightWithPercent:(CGFloat)value NS_SWIFT_NAME(marginRight(percent:));
 - (void)marginRightWithPoint:(CGFloat)value NS_SWIFT_NAME(marginRight(point:));
+- (void)marginRightWithAuto;
 
 - (void)marginBottomWithPercent:(CGFloat)value NS_SWIFT_NAME(marginBottom(percent:));
 - (void)marginBottomWithPoint:(CGFloat)value NS_SWIFT_NAME(marginBottom(point:));
+- (void)marginBottomWithAuto;
 
 - (void)marginStartWithPercent:(CGFloat)value NS_SWIFT_NAME(marginStart(percent:));
 - (void)marginStartWithPoint:(CGFloat)value NS_SWIFT_NAME(marginStart(point:));
+- (void)marginStartWithAuto;
 
 - (void)marginEndWithPercent:(CGFloat)value NS_SWIFT_NAME(marginEnd(percent:));
 - (void)marginEndWithPoint:(CGFloat)value NS_SWIFT_NAME(marginEnd(point:));
+- (void)marginEndWithAuto;
 
 - (void)marginHWithPercent:(CGFloat)value NS_SWIFT_NAME(marginH(percent:));
 - (void)marginHWithPoint:(CGFloat)value NS_SWIFT_NAME(marginH(point:));
+- (void)marginHWithAuto;
 
 - (void)marginVWithPercent:(CGFloat)value NS_SWIFT_NAME(marginV(percent:));
 - (void)marginVWithPoint:(CGFloat)value NS_SWIFT_NAME(marginV(point:));
+- (void)marginVWithAuto;
 
 - (void)marginAllWithPercent:(CGFloat)value NS_SWIFT_NAME(marginAll(percent:));
 - (void)marginAllWithPoint:(CGFloat)value NS_SWIFT_NAME(marginAll(point:));
-
+- (void)marginAllWithAuto;
 
 - (void)paddingLeftWithPercent:(CGFloat)value NS_SWIFT_NAME(paddingLeft(percent:));
 - (void)paddingLeftWithPoint:(CGFloat)value NS_SWIFT_NAME(paddingLeft(point:));

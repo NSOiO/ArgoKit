@@ -198,7 +198,7 @@ class SessionRow:ArgoKit.View {
     
    var body: ArgoKit.View{
     
-        CustomReusedView(data: item)
+        UIViewRepresentation(data: item)
             .createUIView { (item) -> UIView in
                 return UILabel()
             }

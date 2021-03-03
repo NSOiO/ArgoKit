@@ -31,20 +31,7 @@ struct ArgoKitTextTest: ArgoKit.View {
    
     init(model: ArgoKitTextTestModel) {
         self.model = model
-//        let numbers = [10, 20, 30]
-//        print("11\(dataSource)")
-//        $dataSource.insert(contentsOf: numbers, at: 0, section: 0)
-         print("22 \($dataSource.count(section: 0))")
-//        $dataSource.insert(contentsOf: numbers, at: 3, section: 1)
-//        let numbers1 = [50, 25, 44]
-//        $dataSource.append(contentsOf:numbers1,section:2)
-        print("33 \($dataSource.count())")
-//
-//        $dataSource[4,2] = 15
-        print("44 \($dataSource[1,0])")
-        $dataSource[1,0] = 15
-        print("44 \($dataSource[1,0])")
-//        print("44\(String(describing: $dataSource.last()?.last))")
+        self.grow(1.0)
     }
     
     var body: ArgoKit.View {
@@ -65,8 +52,23 @@ struct ArgoKitTextTest: ArgoKit.View {
 //            .alignSelf(.center)
 //        .backgroundColor(.cyan)
 //
-//
-//        Text("单行文本粗体cdxasxas····")
+        Text("单行文本粗体cdxasxas····")
+//            .margin(edge: .bottom, value: .auto)
+        .backgroundColor(.yellow)
+        
+        
+        Text("单行文本粗体cdxasxas····").font(size:30).backgroundColor(.yellow)
+            .margin(edge: .top, value: .auto)
+        
+        HStack{
+            Text("单行文本粗体").backgroundColor(.yellow)
+            Text("单行文本粗体").backgroundColor(.yellow).margin(edge: .left, value: .auto)
+            Text("单行文本粗体").backgroundColor(.yellow).margin(edge: .left, value: .auto)
+        }
+        .margin(edge: .top, value: .auto)
+        
+        Text("单行文本粗体cdxasxas····").backgroundColor(.yellow)
+            .margin(edge: .top, value: .auto)
 //            .font(size: 25)
 //            .font(style: .bold)
 //            .backgroundColor(.orange)
@@ -82,16 +84,16 @@ struct ArgoKitTextTest: ArgoKit.View {
 //        .margin(edge: .bottom, value: 10)
 //        .alignSelf(.center)
         
-        Button {
-            
-        } builder: { () -> View in
-            Text( model.name).backgroundColor(.purple)
-//                .firstLineHeadIndent(10)
-                .lineLimit(0)
-                .headIndent(10).kern(10)
-        }
-        .font(size:20)
-        .textColor(.yellow)
+//        Button {
+//            
+//        } builder: { () -> View in
+//            Text( model.name).backgroundColor(.purple)
+////                .firstLineHeadIndent(10)
+//                .lineLimit(0)
+//                .headIndent(10).kern(10)
+//        }
+//        .font(size:20)
+//        .textColor(.yellow)
 //        
 //        AvatarBreathView(url: nil, placeholder: "chincoteague.jpg")
 //            .startAnimation(true)

@@ -250,23 +250,7 @@
     return YGNodeStyleGetFlexShrink(node);
 }
 
-- (void)flexBasis:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitAuto:
-            YGNodeStyleSetFlexBasisAuto(node);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetFlexBasisPercent(node, value.value);
-            break;
-        case YGUnitPoint:
-            YGNodeStyleSetFlexBasis(node, value.value);
-            break;
-        default:
-            break;
-    }
-     
-}
+
 - (void)flexBasisAuto{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetFlexBasisAuto(node);
@@ -286,21 +270,7 @@
      
 }
 
-- (void)left:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeLeft, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeLeft, value.value);
-            break;
-        default:
-            break;
-    }
-     
-}
+
 - (void)positionWithPercent:(CGFloat)value edge:(YGEdge)edge{
     YGNodeRef node = self.layout.ygnode;
     YGNodeStyleSetPositionPercent(node, edge, (float)value);
@@ -325,103 +295,27 @@
     return [self positionWithPoint:value edge:YGEdgeTop];
 }
 
-- (void)top:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeTop, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeTop, value.value);
-            break;
-        default:
-            break;
-    }
-     
-}
-
-- (void)right:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeRight, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeRight, value.value);
-            break;
-        default:
-            break;
-    }
-     
-}
 - (void)rightWithPercent:(CGFloat)value{
     return [self positionWithPercent:value edge:YGEdgeRight];
 }
 - (void)rightWithPoint:(CGFloat)value{
     return [self positionWithPoint:value edge:YGEdgeRight];
 }
-- (void)bottom:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeBottom, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeBottom, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
+
 - (void)bottomWithPercent:(CGFloat)value{
     return [self positionWithPercent:value edge:YGEdgeBottom];
 }
 - (void)bottomWithPoint:(CGFloat)value{
     return [self positionWithPoint:value edge:YGEdgeBottom];
 }
-- (void)start:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeStart, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeStart, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
+
 - (void)startWithPercent:(CGFloat)value{
     return [self positionWithPercent:value edge:YGEdgeStart];
 }
 - (void)startWithPoint:(CGFloat)value{
     return [self positionWithPoint:value edge:YGEdgeStart];
 }
-- (void)end:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetPosition(node, YGEdgeEnd, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetPositionPercent(node, YGEdgeEnd, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
-}
+
 - (void)endWithPercent:(CGFloat)value{
     return [self positionWithPercent:value edge:YGEdgeEnd];
 }
@@ -441,201 +335,93 @@
      
 }
 
-
-- (void)marginLeft:(YGValue)value{
+- (void)marginWithAuto:(YGEdge)edge{
     YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeLeft, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeLeft, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+    YGNodeStyleSetMarginAuto(node, edge);
 }
+
+
 - (void)marginLeftWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeLeft];
 }
 - (void)marginLeftWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeLeft];
 }
-
-- (void)marginTop:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeTop, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeTop, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+- (void)marginLeftWithAuto{
+    return [self marginWithAuto:YGEdgeLeft];
 }
+
+
 - (void)marginTopWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeTop];
 }
 - (void)marginTopWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeTop];
 }
-- (void)marginRight:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeRight, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeRight, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+- (void)marginTopWithAuto{
+    return [self marginWithAuto:YGEdgeTop];
 }
+
 - (void)marginRightWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeRight];
 }
 - (void)marginRightWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeRight];
 }
-- (void)marginBottom:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeBottom, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeBottom, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+- (void)marginRightWithAuto{
+    return [self marginWithAuto:YGEdgeRight];
 }
+
 - (void)marginBottomWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeBottom];
 }
 - (void)marginBottomWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeBottom];
 }
-- (void)marginStart:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeStart, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeStart, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+- (void)marginBottomWithAuto{
+    return [self marginWithAuto:YGEdgeBottom];
 }
+
 - (void)marginStartWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeStart];
 }
 - (void)marginStartWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeStart];
 }
-
-- (void)marginEnd:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeEnd, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeEnd, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+- (void)marginStartWithAuto{
+    return [self marginWithAuto:YGEdgeStart];
 }
+
+
 - (void)marginEndWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeEnd];
 }
 - (void)marginEndWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeEnd];
 }
-
-- (void)marginHorizontal:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeHorizontal, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeHorizontal, value.value);
-            break;
-        default:
-            break;
-    }
-     
+- (void)marginEndWithAuto{
+    return [self marginWithAuto:YGEdgeEnd];
 }
+
 - (void)marginHWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeHorizontal];
 }
 - (void)marginHWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeHorizontal];
 }
-
-- (void)marginVertical:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeVertical, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeVertical, value.value);
-            break;
-        default:
-            break;
-    }
-    
-     
+- (void)marginHWithAuto{
+    return [self marginWithAuto:YGEdgeHorizontal];
 }
+
+
 - (void)marginVWithPoint:(CGFloat)value{
     return [self marginWithPoint:value edge:YGEdgeVertical];
 }
 - (void)marginVWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeVertical];
 }
-
-- (void)margin:(YGValue)value{
-    YGNodeRef node = self.layout.ygnode;
-    switch (value.unit) {
-        case YGUnitUndefined:
-        case YGUnitPoint:
-            YGNodeStyleSetMargin(node, YGEdgeAll, value.value);
-            break;
-        case YGUnitPercent:
-            YGNodeStyleSetMarginPercent(node, YGEdgeAll, value.value);
-            break;
-        default:
-            break;
-    }
-     
+- (void)marginVWithAuto{
+    return [self marginWithAuto:YGEdgeVertical];
 }
 
 - (void)marginAllWithPoint:(CGFloat)value{
@@ -644,7 +430,9 @@
 - (void)marginAllWithPercent:(CGFloat)value{
     return [self marginWithPercent:value edge:YGEdgeAll];
 }
-
+- (void)marginAllWithAuto{
+    return [self marginWithAuto:YGEdgeAll];
+}
 
 - (void)paddingWithPercent:(CGFloat)value edge:(YGEdge)edge{
     YGNodeRef node = self.layout.ygnode;
