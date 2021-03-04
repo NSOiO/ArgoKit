@@ -52,6 +52,10 @@ class DataSourceHelper<D> {
     
     
     func dataSource()->SectionDataList<D>? {
+        nodeLock.lock()
+        defer {
+            nodeLock.unlock()
+        }
         if let list = sectionDataSourceList?.dataSource{
             return list
         }
@@ -111,7 +115,11 @@ extension DataSourceHelper {
     
     
     
-    private func rowHeight(_ node:ArgoKitCellNode?,maxWidth: CGFloat){
+    private func rowHeight_(_ node:ArgoKitCellNode?,maxWidth: CGFloat){
+        nodeLock.lock()
+        defer {
+            nodeLock.unlock()
+        }
         if node?.size.width != maxWidth || node?.size.height == 0 {
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
         }
@@ -119,24 +127,16 @@ extension DataSourceHelper {
     
     @discardableResult
     open func rowHeight(_ data:Any?,maxWidth: CGFloat) -> CGFloat {
-        nodeLock.lock()
-        defer {
-            nodeLock.unlock()
-        }
         if let sourceData_ = data,
            let node = self.nodeForData(sourceData_) {
-            rowHeight(node,maxWidth: maxWidth)
+            rowHeight_(node,maxWidth: maxWidth)
             return node.size.height
         }
         return 0.0
     }
     open func rowHeight(_ row: Int, at section: Int, maxWidth: CGFloat) -> CGFloat {
-        nodeLock.lock()
-        defer {
-            nodeLock.unlock()
-        }
         if let node = self.nodeForRow(row, at: section) {
-            rowHeight(node,maxWidth: maxWidth)
+            rowHeight_(node,maxWidth: maxWidth)
             return node.size.height
         }
         return 0.0
@@ -168,10 +168,6 @@ extension DataSourceHelper {
         return nil
     }
     open func nodeForData(_ data: Any) -> ArgoKitCellNode? {
-        nodeLock.lock()
-        defer {
-            nodeLock.unlock()
-        }
         let cellNode = _nodeForData_(data)
         return cellNode
     }
@@ -179,6 +175,14 @@ extension DataSourceHelper {
         if let sourceData_ = data as? ArgoKitIdentifiable,
            let node = sourceData_.argokit_linkNode as? ArgoKitCellNode {
             return node
+        }
+        
+        if pthread_main_np() != 0 {
+            print("main pthread==_nodeForData_")
+        }
+        nodeLock.lock()
+        defer {
+            nodeLock.unlock()
         }
         if let sourceData_ = data as? D,let view = self.buildNodeFunc?(sourceData_) {
             if let nodes = view.type.viewNodes() {

@@ -16,7 +16,7 @@ internal protocol DynamicProperty { }
 //@dynamicMemberLookup
 public class Observable<Value> : DynamicProperty {
     private var _value: Value
-    private var subscribers = [(Value) -> Void]()
+//    private var subscribers = [(Value) -> Void]()
     private var subscribersMap = [Int: ((Value) -> Void)]()
     private func makeID() -> Int { internalID += 1; return internalID }
     private let lock:NSLock = NSLock()

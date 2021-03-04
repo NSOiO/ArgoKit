@@ -61,10 +61,16 @@ struct ArgoKitTextTest: ArgoKit.View {
             .margin(edge: .top, value: .auto)
         
         HStack{
+            Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
+                .margin(edge: .right, value: 30)
+                .shrink(1)
             Text("单行文本粗体").backgroundColor(.yellow)
-            Text("单行文本粗体").backgroundColor(.yellow).margin(edge: .left, value: .auto)
-            Text("单行文本粗体").backgroundColor(.yellow).margin(edge: .left, value: .auto)
+                .margin(edge: .left, value: .auto)
+            
+            
+//            Text("单行文本粗体").backgroundColor(.yellow).margin(edge: .left, value: .auto)
         }
+        .width(400)
         .margin(edge: .top, value: .auto)
         
         Text("单行文本粗体cdxasxas····").backgroundColor(.yellow)

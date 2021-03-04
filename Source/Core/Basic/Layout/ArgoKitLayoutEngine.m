@@ -63,25 +63,16 @@
     }
 }
 - (void)layout:(void(^)(ArgoKitNode *node))block{
-    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
-    for(ArgoKitNode *node in nodes){
+    for(ArgoKitNode *node in self.layoutNodesPool){
         if (block) {
             block(node);
         }
     }
 }
 
-- (void)forLayoutNode:(nullable Class)anyClass frame:(CGRect)frame{
-    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
-    for(ArgoKitNode *node in nodes){
-        if ([node isKindOfClass:anyClass]) {
-            [node applyLayout:CGSizeMake(frame.size.width,NAN)];
-        }
-    }
-}
 
 - (void)reLayoutNode:(nullable NSArray *)cellNodes frame:(CGRect)frame{
-    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool allObjects];
     for (id node in cellNodes) {
         if ([node isKindOfClass:[ArgoKitNode class]] && [nodes containsObject:node] ) {
             [node applyLayout:CGSizeMake(frame.size.width,NAN)];

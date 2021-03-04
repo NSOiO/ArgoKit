@@ -46,9 +46,6 @@ static ArgoKitReusedLayoutHelper* _instance;
     [[ArgoKitReusedLayoutHelper sharedInstance] _layout:node];
 }
 
-+ (void)forLayoutNode:(nullable Class)anyClass frame:(CGRect)frame{
-    [[ArgoKitReusedLayoutHelper sharedInstance].layoutEngine forLayoutNode:anyClass frame:frame];
-}
 + (void)reLayoutNode:(nullable NSArray *)cellNodes frame:(CGRect)frame{
     [[ArgoKitReusedLayoutHelper sharedInstance].layoutEngine reLayoutNode:cellNodes frame:frame];
 }

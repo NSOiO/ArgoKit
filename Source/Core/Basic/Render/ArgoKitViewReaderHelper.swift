@@ -52,10 +52,9 @@ class ArgoKitViewReaderHelper{
         if self.operations.count == 0 {
             return
         }
-        let operations = self.operations.copy() as! NSHashTable<AnyObject>
-        for operation in operations.allObjects {
-            let innerOperation = operation as! ArgoKitViewReaderOperation
-            if innerOperation.needRemake {
+        for operation in self.operations.allObjects {
+            if let innerOperation = operation as? ArgoKitViewReaderOperation,
+               innerOperation.needRemake {
                 innerOperation.remakeIfNeed()
             }
         }

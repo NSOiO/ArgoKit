@@ -170,7 +170,10 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         ArgoKitNode *resueNode = reuseNodes[i];
         
         resueNode.linkNode = node;
-        if (!node.view && resueNode.isEnabled) {
+        if (!node.view &&
+            resueNode.isEnabled &&
+            // FIX: 修复父空间gone和子视图的gone不一致导致的复用问题
+            !CGRectEqualToRect(resueNode.frame, CGRectZero)) {
             [node createNodeViewIfNeed:resueNode.frame];
         }
         if (!onlyResetFrame) {
