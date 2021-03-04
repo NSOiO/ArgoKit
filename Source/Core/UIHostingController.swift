@@ -102,7 +102,6 @@ public class UIHostingView: UIView {
                     }
                 }
                 node.applyLayout()
-                print("\(node.size)")
             }
         }
         super.layoutSubviews()

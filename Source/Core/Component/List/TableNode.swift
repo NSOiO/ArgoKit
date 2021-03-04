@@ -892,7 +892,6 @@ extension TableNode{
         needLoadNodes.removeAllObjects()
     }
     func _scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
-        print("_scrollViewWillEndDragging")
         if let tableView = scrollView as? UITableView,let dataSource = self.dataSourceHelper.dataSourceList?.dataSource {
             let indexPathInPoint = tableView.indexPathForRow(at: CGPoint(x: 0, y: targetContentOffset.pointee.y))
             let cellInPoint = tableView.indexPathsForVisibleRows?.first

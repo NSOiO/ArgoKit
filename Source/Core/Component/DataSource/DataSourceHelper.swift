@@ -52,10 +52,10 @@ class DataSourceHelper<D> {
     
     
     func dataSource()->SectionDataList<D>? {
-        nodeLock.lock()
-        defer {
-            nodeLock.unlock()
-        }
+//        nodeLock.lock()
+//        defer {
+//            nodeLock.unlock()
+//        }
         if let list = sectionDataSourceList?.dataSource{
             return list
         }
@@ -177,9 +177,9 @@ extension DataSourceHelper {
             return node
         }
         
-        if pthread_main_np() != 0 {
-            print("main pthread==_nodeForData_")
-        }
+//        if pthread_main_np() != 0 {
+//            print("main pthread==_nodeForData_")
+//        }
         nodeLock.lock()
         defer {
             nodeLock.unlock()
