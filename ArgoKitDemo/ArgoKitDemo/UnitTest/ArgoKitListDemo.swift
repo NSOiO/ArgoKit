@@ -335,6 +335,9 @@ struct ListDemo:ArgoKit.View{
         .didEndScroll({ (items, view) in
             print("items:\(items),scrollView:\(view)")
         })
+        .didEndDragging({ des in
+            print("items:\(des)")
+        })
         .cellSelected {item, indexPath in
 //            view.frame.size = CGSize(width: 100, height: 10)
 //            list?.tableHeaderView(headerContent: { () -> View? in
