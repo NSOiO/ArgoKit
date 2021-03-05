@@ -176,10 +176,6 @@ extension DataSourceHelper {
            let node = sourceData_.argokit_linkNode as? ArgoKitCellNode {
             return node
         }
-        
-//        if pthread_main_np() != 0 {
-//            print("main pthread==_nodeForData_")
-//        }
         nodeLock.lock()
         defer {
             nodeLock.unlock()

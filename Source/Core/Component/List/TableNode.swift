@@ -123,9 +123,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
                 ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: frame)
             }
         }
-//        tableView.hitTestAction = {[weak self] in
-//            self?._hitTest()
-//        }
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -161,6 +158,17 @@ class TableNode<D>: ArgoKitScrollViewNode,
         return tableView
     }
     
+    override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
+        super.reuseNodeToView(node: node, view: view)
+        if let tableNode =  node as? TableNode,
+           let tableView = view as? TableView {
+            self.dataSourceHelper = tableNode.dataSourceHelper
+            self.sectionHeaderSourceHelper = tableNode.sectionHeaderSourceHelper
+            self.sectionFooterSourceHelper = tableNode.sectionFooterSourceHelper
+            tableView.reloadData()
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return self.dataSourceHelper.numberOfSection()
@@ -178,12 +186,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
             self.dataSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
-//        if needLoadNodes.count > 0 && needLoadNodes.index(of: indexPath) == NSNotFound {
-//            return cell
-//        }
-//        if scrollToToping {
-//            return cell
-//        }
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
@@ -245,9 +247,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        let prefetchModel:DataSourcePrefetchModel<D> = DataSourcePrefetchModel<D>(self.dataSourceHelper,indexPaths:indexPaths)
-//        prefetchModel.width = tableView.bounds.width
-//        dataSourcePrefetchHelper.addPrefetchModel(prefetchModel)
         let sel = #selector(self.tableView(_:prefetchRowsAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [indexPaths])
     }
@@ -330,6 +329,14 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return 0.0
+        }
+        let sel = #selector(self.tableView(_:heightForRowAt:))
+        if let height = self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? CGFloat,
+           height > 0{
+            return height
+        }
         return self.dataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
     

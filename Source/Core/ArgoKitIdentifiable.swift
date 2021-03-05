@@ -15,7 +15,8 @@ public protocol ArgoKitIdentifiable: class {
 }
 
 public extension ArgoKitIdentifiable {
-    var reuseIdentifier: String { String(describing: Self.self) }
+    var reuseIdentifier: String {
+        String(describing: Self.self) }
 }
 
 public protocol ViewModelProtocol: ArgoKitIdentifiable {

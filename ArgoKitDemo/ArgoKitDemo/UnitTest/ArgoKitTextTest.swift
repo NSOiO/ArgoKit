@@ -52,30 +52,45 @@ struct ArgoKitTextTest: ArgoKit.View {
 //            .alignSelf(.center)
 //        .backgroundColor(.cyan)
 //
-        Text("单行文本粗体cdxasxas····")
-//            .margin(edge: .bottom, value: .auto)
-        .backgroundColor(.yellow)
+//        Text("单行文本粗体cdxasxas····")
+////            .margin(edge: .bottom, value: .auto)
+//        .backgroundColor(.yellow)
+//
+//
+//        Text("单行文本粗体cdxasxas····").font(size:30).backgroundColor(.yellow)
+//            .margin(edge: .top, value: .auto)
+//            .alignSelf(.center)
+//
+        VStack{
+            Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
+                .basis(.auto)
+            Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
+                .basis(.auto)
+        }.margin(edge: .top, value: 30)
+//        .alignItems(.center)
+//        .width(50%)
+//        .height(50%)
+        .backgroundColor(.cyan)
         
         
-        Text("单行文本粗体cdxasxas····").font(size:30).backgroundColor(.yellow)
-            .margin(edge: .top, value: .auto)
         
         HStack{
             Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
                 .margin(edge: .right, value: 30)
-                .shrink(1)
             Text("单行文本粗体").backgroundColor(.yellow)
                 .margin(edge: .left, value: .auto)
-            
-            
-//            Text("单行文本粗体").backgroundColor(.yellow).margin(edge: .left, value: .auto)
         }
         .width(400)
         .margin(edge: .top, value: .auto)
+        .backgroundColor(.black)
         
-        Text("单行文本粗体cdxasxas····").backgroundColor(.yellow)
-            .margin(edge: .top, value: .auto)
-//            .font(size: 25)
+        
+        
+        
+        
+//        Text("单行文本粗体cdxasxas····").backgroundColor(.yellow)
+//            .margin(edge: .top, value: .auto)
+////            .font(size: 25)
 //            .font(style: .bold)
 //            .backgroundColor(.orange)
 //            .margin(edge: .top, value: 10)

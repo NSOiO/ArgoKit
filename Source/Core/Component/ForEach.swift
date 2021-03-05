@@ -68,7 +68,7 @@ public struct ForEach<T>: View {
     /// - Parameters:
     ///   - data: The data that the ForEach instance uses to create views dynamically.
     ///   - builder: The view builder that creates views dynamically.
-    public init(_ data: Array<T>?, @ArgoKitViewBuilder _ builder: @escaping (T?) -> View) {
+    public init(_ data: Array<T>?, @ArgoKitViewBuilder _ builder: @escaping (T) -> View) {
         if let datas = data {
             for item in datas {
                 let container = builder(item)

@@ -570,11 +570,31 @@ extension List {
         return self
     }
     
+    /// Sets the action that handle a row is Deselected.
+    /// - Parameter action: The action that handle a row is Deselected.
+    /// - Returns: Self
     @discardableResult
     public func cellDeselected(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Void) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:didDeselectRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             
+            if paramter?.count ?? 0 >= 2 ,
+               let data = paramter?.first as? D,
+               let indexPath = paramter?.last as? IndexPath{
+                return action(data, indexPath)
+            }
+            return nil
+        })
+        return self
+    }
+    
+    /// Gets the cell height.
+    /// - Parameter action: The height of cell.
+    /// - Returns: Self
+    @discardableResult
+    public func cellHeight(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> CGFloat) -> Self {
+        let sel = #selector(TableNode<D>.tableView(_:heightForRowAt:))
+        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
             if paramter?.count ?? 0 >= 2 ,
                let data = paramter?.first as? D,
                let indexPath = paramter?.last as? IndexPath{
