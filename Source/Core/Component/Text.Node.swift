@@ -55,6 +55,11 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     }
     
     open func font(_ value:UIFont?, range: NSRange? = nil){
+        self.font_(value,range:range)
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+    }
+    
+    open func font_(_ value:UIFont?, range: NSRange? = nil){
         guard let value = value else {
             return
         }
@@ -64,9 +69,9 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
             innerRange = range
         }
         attributedText?.addAttribute(NSAttributedString.Key.font, value: value, range: innerRange)
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
-
     }
+    
+    
     open func textColor(_ value:UIColor?, range: NSRange? = nil) {
         guard let value = value else {
             return
@@ -252,7 +257,7 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
             attribut.enumerateAttributes(in: NSRange(location: 0, length: attribut.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) {[weak self] (attrs, range, stop) in
                 if attrs[NSAttributedString.Key.font] == nil{
                     if let `self` = self{
-                        self.font(self.font,range: range)
+                        self.font_(self.font,range: range)
                     }
                 }
             }
