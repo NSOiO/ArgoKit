@@ -8,6 +8,7 @@
 #import "ArgoKitNodeViewModifier.h"
 #import <objc/runtime.h>
 #import "ArgoKitReusedLayoutHelper.h"
+#import "ArgoKitNodePrivateHeader.h"
 static void performSelector(id object, SEL selector, NSArray<id> *values)
 {
     if (object == nil) {
@@ -161,6 +162,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 + (void)reuseNodeViewAttribute:(nullable NSArray<ArgoKitNode*> *)nodes reuseNodes:(nullable NSArray<ArgoKitNode*> *)reuseNodes onlyResetFrame:(BOOL)onlyResetFrame{
+    BOOL resetFrame = onlyResetFrame;
     NSInteger nodeCount = nodes.count;
     if (nodeCount != reuseNodes.count) {
         return;
@@ -174,9 +176,12 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
             resueNode.isEnabled &&
             // FIX: 修复父空间gone和子视图的gone不一致导致的复用问题
             !CGRectEqualToRect(resueNode.frame, CGRectZero)) {
-            [node createNodeViewIfNeed:resueNode.frame];
+            if ([node respondsToSelector:@selector(createNodeViewIfNeedWithoutAttributes:)]) {
+                [node createNodeViewIfNeedWithoutAttributes:resueNode.frame];
+            }
+            resetFrame = false;
         }
-        if (!onlyResetFrame) {
+        if (!resetFrame) {
             // 处理UIView属性点击事件
             [self _nodeViewAttributeWithNode:node attributes:[resueNode nodeAllAttributeValue] markDirty:NO];
             // 处理UIControl点击事件

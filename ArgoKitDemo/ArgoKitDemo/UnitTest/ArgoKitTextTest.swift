@@ -75,13 +75,55 @@ struct ArgoKitTextTest: ArgoKit.View {
         
         
         HStack{
-            Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
-                .margin(edge: .right, value: 30)
-            Text("单行文本粗体").backgroundColor(.yellow)
-                .margin(edge: .left, value: .auto)
+            
+            Button {
+               
+            } builder: { () -> View in
+                Image().size(width: 20, height: 20)
+                Text("单行文本粗体1")
+                    .margin(edge: .left, value: 4)
+            }
+            .justifyContent(.center)
+            .alignItems(.center)
+//            .size(width: 100%, height: 100%)
+            .backgroundColor(.yellow)
+            .grow(1)
+            .shrink(1)
+            .basis(1)
+            
+            Button {
+               
+            } builder: { () -> View in
+                Image().size(width: 20, height: 20)
+                Text("fgffgfgsdsdsdsdcxsasssaa")
+                    .margin(edge: .left, value: 4)
+            }
+            .justifyContent(.center)
+            .alignItems(.center)
+//            .size(width: 100%, height: 100%)
+            .backgroundColor(.red)
+            .grow(1)
+            .shrink(1)
+            .basis(1)
+            
+            Button {
+               
+            } builder: { () -> View in
+                Image().size(width: 20, height: 20)
+                Text("单行文本粗体rdfssds")
+                    .margin(edge: .left, value: 4)
+            }
+            .justifyContent(.center)
+            .alignItems(.center)
+//            .size(width: 100%, height: 100%)
+            .backgroundColor(.purple)
+            .grow(1)
+            .shrink(1)
+            .basis(1)
         }
-        .width(400)
-        .margin(edge: .top, value: .auto)
+        .height(100)
+        .alignItems(.center)
+//        .justifyContent(.evenly)
         .backgroundColor(.black)
         
         

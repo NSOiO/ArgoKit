@@ -459,9 +459,15 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)linkView:(UIView *)view {
+    [self linkView:view addAttributes:YES];
+}
+- (void)linkView:(UIView *)view addAttributes:(BOOL)add{
     _view = view;
     _size = view.bounds.size;
-    [self commitAttributes];
+    if (add) {
+        [self commitAttributes];
+    }
+    [self insertViewToParentNodeView];
 }
 
 - (UIView *)createNodeViewWithFrame:(CGRect)frame {
@@ -471,13 +477,20 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)createNodeViewIfNeed:(CGRect)frame {
+    [self _createNodeViewIfNeed:frame addAttributes:YES];
+}
+- (void)createNodeViewIfNeedWithoutAttributes:(CGRect)frame{
+    [self _createNodeViewIfNeed:frame addAttributes:NO];
+}
+
+- (void)_createNodeViewIfNeed:(CGRect)frame addAttributes:(BOOL)add{
     self.isRoot = self.parentNode == nil;
     if (_isReused) {
         return;
     }
     if (!self.view) {
         UIView *view = [self createNodeViewWithFrame:frame];
-        [self linkView:view];
+        [self linkView:view addAttributes:add];
         NSArray *nodeObservers = [self.nodeObservers copy];
         for (ArgoKitNodeObserver *observer in nodeObservers) {
             if (observer.createViewBlock) {
@@ -503,7 +516,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self addTarget:self.view forControlEvents:action.controlEvents action:action.actionBlock];
         }
     }
-    [self insertViewToParentNodeView];
+//    [self insertViewToParentNodeView];
 }
 
 - (void)insertViewToParentNodeView {

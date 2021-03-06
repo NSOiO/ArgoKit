@@ -110,7 +110,8 @@ extension View {
                     if let node =  self.node?.root {
                         self.node?.isEnabled = !_value
                         ArgoKitReusedLayoutHelper.appLayout(node)
-                    }else{
+                    }
+                    else{
                         self.node?.isEnabled = !_value
                     }
                 }else{
