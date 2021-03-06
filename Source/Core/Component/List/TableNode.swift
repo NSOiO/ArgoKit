@@ -717,7 +717,11 @@ extension TableNode{
     public func visibleModelCells() -> [(D,UITableViewCell)] {
         var models:[(D,UITableViewCell)] = []
         if let tableView = self.tableView{
-            let cells = tableView.visibleCells
+            var cells:[UITableViewCell] = []
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            cells = tableView.visibleCells
+            CATransaction.commit()
             for cell in cells {
                 if let indexPath = tableView.indexPath(for: cell){
                     if let model = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
@@ -733,7 +737,11 @@ extension TableNode{
     public func visibleModels() -> [D] {
         var models:[D] = []
         if let tableView = self.tableView{
-            let cells = tableView.visibleCells
+            var cells:[UITableViewCell] = []
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            cells = tableView.visibleCells
+            CATransaction.commit()
             for cell in cells {
                 if let indexPath = tableView.indexPath(for: cell){
                     if let model = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) as? D{
