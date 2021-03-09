@@ -23,7 +23,7 @@
 #import "UIView+AKFrame.h"
 #endif
 
-
+#import "ArgoKitNodePrivateHeader.h"
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
     if (self = [super init]) {
@@ -72,6 +72,10 @@
 @property(nonatomic,assign)BOOL isRoot;
 
 @property(atomic, strong)ArgoKitLock *nodeLock;
+
+@property(nonatomic,assign) bool viewOnFront;
+@property(nonatomic,assign) bool viewOnBack;
+@property(nonatomic,assign) NSInteger viewOnIndex;
 @end
 
 @interface NodeWrapper:NSObject
@@ -387,6 +391,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _viewAttributes = [[NSMutableDictionary alloc] init];
     _actionMap = [NSMutableDictionary new];
     _childs = [[ArgoKitSafeMutableArray alloc] init];
+    self.viewOnFront = NO;
+    self.viewOnBack = NO;
+    self.viewOnIndex = -1;
 }
 
 - (instancetype)init {
@@ -433,9 +440,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _bindProperties = [NSMutableDictionary new];
 }
 
-- (void)reuseNodeToView:(ArgoKitNode *)node view:(nullable UIView *)view{
-    
-}
 
 - (nullable UIView *)nodeView{
     if (self.linkNode.view) {
@@ -516,7 +520,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self addTarget:self.view forControlEvents:action.controlEvents action:action.actionBlock];
         }
     }
-//    [self insertViewToParentNodeView];
 }
 
 - (void)insertViewToParentNodeView {
@@ -525,10 +528,27 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
     NSInteger index = [self.parentNode.childs indexOfObject:self];
     if ([self.parentNode.view isMemberOfClass:[UIVisualEffectView class]]) {
-        [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
+        if (self.viewOnFront) {
+            [((UIVisualEffectView *)self.parentNode.view).contentView addSubview:self.view];
+        }else{
+            [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
+        }
+        
+        if (self.viewOnFront) {
+            [((UIVisualEffectView *)self.parentNode.view).contentView addSubview:self.view];
+        }else if (self.viewOnIndex > 0 && self.parentNode.view.subviews.count >= self.viewOnIndex) {
+            [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:self.viewOnIndex];
+        }else{
+            [((UIVisualEffectView *)self.parentNode.view).contentView insertSubview:self.view atIndex:index];
+        }
     }else{
-        [self.parentNode.view insertSubview:self.view atIndex:index];
-//        [self.parentNode.view addSubview:self.view];
+        if (self.viewOnFront) {
+            [self.parentNode.view addSubview:self.view];
+        }else if (self.viewOnIndex > 0) {
+            [self.parentNode.view insertSubview:self.view atIndex:self.viewOnIndex];
+        }else{
+            [self.parentNode.view insertSubview:self.view atIndex:index];
+        }
     }
 }
 
@@ -750,6 +770,22 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
+- (void)positonToFront{
+    self.viewOnFront = YES;
+    self.viewOnBack = NO;
+    self.viewOnIndex = -1;
+}
+- (void)positonToBack{
+    self.viewOnFront = NO;
+    self.viewOnBack = YES;
+    self.viewOnIndex = 0;
+}
+- (void)positonToIndex:(NSInteger)index{
+    self.viewOnFront = NO;
+    self.viewOnBack = NO;
+    self.viewOnIndex = index;
+}
+
 - (ArgoKitNode *)rootNode{
     ArgoKitNode *node = self;
     while (node.parentNode) {
@@ -761,8 +797,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @end
 
 
-@implementation ArgoKitNode(AttributeValue)
 
+
+@implementation ArgoKitNode(AttributeValue)
+- (void)reuseNodeToView:(ArgoKitNode *)node view:(nullable UIView *)view{
+    
+}
 - (void)prepareForUse:(UIView *)view{
 }
 - (void)addNodeViewAttribute:(ViewAttribute *)attribute{

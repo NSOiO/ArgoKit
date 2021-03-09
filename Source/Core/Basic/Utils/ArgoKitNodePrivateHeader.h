@@ -9,6 +9,7 @@
 #define ArgoKitNodePrivateHeader_h
 @interface ArgoKitNode()
 - (void)createNodeViewIfNeedWithoutAttributes:(CGRect)frame;
+
 @end
 
 #endif /* ArgoKitNodePrivateHeader_h */

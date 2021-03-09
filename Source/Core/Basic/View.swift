@@ -100,6 +100,13 @@ extension View {
     }
 }
 
+
+public enum ViewPosition {
+    case `default`
+    case front
+    case back
+    case index(Int)
+}
 extension View {
     
     /// Get view that belong to node.
@@ -111,11 +118,24 @@ extension View {
     /// Adds sub views to this view hierarchy.
     /// - Parameter builder: A view builder that creates the sub views of this view.
     @discardableResult
-    public func addSubViews(@ArgoKitViewBuilder builder:@escaping ()->View) -> Self{
+    public func addSubViews(position:ViewPosition = .default,@ArgoKitViewBuilder builder:@escaping ()->View) -> Self{
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
                 self.node!.addChildNode(node)
+                switch position {
+                case .front:
+                    node.positonToFront()
+                    break
+                case .back:
+                    node.positonToBack()
+                    break
+                case .index(let index):
+                    node.positon(to: index)
+                break
+                default:
+                    break
+                }
             }
         }
         return self

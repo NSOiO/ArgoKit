@@ -25,12 +25,10 @@ class ArgoKitImageNode: ArgoKitNode {
     override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
         super.reuseNodeToView(node: node, view: view)
         if let imageView = view as? UIImageView,
-           let node = node as? ArgoKitImageNode,
-           let url = node.url{
+           let node = node as? ArgoKitImageNode{
             if let url = node.url{
                 ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: node.placeholderImage, successed: nil, failure: nil)
-            }
-            if let image = self.placeholderImage {
+            }else if let image = self.placeholderImage {
                 ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: image, successed: nil, failure: nil)
             }
 
@@ -47,7 +45,7 @@ class ArgoKitImageNode: ArgoKitNode {
         self.url = url
         let image = placeholder != nil ? UIImage(named: placeholder!) : nil
         self.placeholderImage = image
-        if let imageView = self.link?.view as? UIImageView{
+        if let imageView = self.nodeView() as? UIImageView{
             ArgoKitInstance.imageLoader()?.setImageForView(imageView, url: url, placeholder: image, successed: nil, failure: nil)
         }
     }

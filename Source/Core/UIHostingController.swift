@@ -136,7 +136,7 @@ public class UIHostingView: UIView {
     ///   - width: the specified width of the host view，default is UIScreen.main.bounds.width.
     ///   - height:the specified height of the host view，default is CGFloat.nan.
     ///   - CGFloat.nan represent the value of width(height) from the calculation results of the layout system
-    public init(content: View, origin: CGPoint,width:CGFloat = UIScreen.main.bounds.width,height:CGFloat = CGFloat.nan){
+    public init(content: View, origin: CGPoint,width:CGFloat = CGFloat.nan,height:CGFloat = CGFloat.nan){
         super.init(frame: CGRect.zero)
         contentView = content
         rootView = HostView(self) {

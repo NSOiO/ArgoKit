@@ -181,6 +181,11 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
             }
             resetFrame = false;
         }
+        
+        if (!CGRectEqualToRect(node.view.frame, resueNode.frame)) {
+            node.view.frame = resueNode.frame;
+        }
+        
         if (!resetFrame) {
             // 处理UIView属性点击事件
             [self _nodeViewAttributeWithNode:node attributes:[resueNode nodeAllAttributeValue] markDirty:NO];
@@ -194,10 +199,6 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
             [node reuseNodeToView:resueNode view:node.view];
         }
         
-        if (!CGRectEqualToRect(node.view.frame, resueNode.frame)) {
-            node.view.frame = resueNode.frame;
-        }
-    
         if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
             [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs onlyResetFrame:onlyResetFrame];
         }

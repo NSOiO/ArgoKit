@@ -25,10 +25,11 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                 Image(url:URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp"),placeholder: nil).width(50.0)
                 .height(50.0)
                 .margin(edge: .left, value: 15.0)
-                .cornerRadius(10)
+//                .cornerRadius(10)
+                    .circle()
                 .backgroundColor(.red)
-                    .borderWidth(1)
-                    .borderColor(.cyan)
+//                    .borderWidth(1)
+//                    .borderColor(.cyan)
                 
                 Image(url: URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp"), placeholder: "")
                 .height(12.0)
@@ -99,7 +100,8 @@ class MSUserInterractionContentView: ArgoKit.View {
              Image("icybay.jpg")
              .width(46.0)
              .height(46.0)
-             .cornerRadius(4)
+//             .cornerRadius(4)
+                .circle()
             
             Text("姓名"+"\(Int.random(in: 0 ..< 10000000000))")
                 .lineLimit(2)
@@ -279,18 +281,19 @@ struct ListDemo:ArgoKit.View{
         }
     }
     func loadMoreData1(){
-//        self._loadMoreData()
-        nodeQueue.async {
-            self._loadMoreData()
-            DispatchQueue.main.async {
+//        nodeQueue.async {
+            let items_ = self._loadMoreData()
+//            DispatchQueue.main.async {
+                $items.append(contentsOf: items_)
                 $items.apply()
-            }
-        }
+//            }
+//        }
     }
     func loadMoreData(_ callback:(()->())? = nil){
         nodeQueue.async {
-            self._loadMoreData()
+            let items_ = self._loadMoreData()
             DispatchQueue.main.async {
+                $items.append(contentsOf: items_)
                 $items.apply()
                 if let callBack1 = callback{
                     callBack1()
@@ -298,10 +301,11 @@ struct ListDemo:ArgoKit.View{
             }
         }
     }
-    func _loadMoreData() {
+    func _loadMoreData()->[SessionItem] {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
-        for index in 0..<500{
+        var items_:[SessionItem] = []
+        for index in 0..<20{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             
@@ -309,8 +313,10 @@ struct ListDemo:ArgoKit.View{
             item.lastMessage = messages[index%5] + "+\(String(index))"
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
-            $items.append(item)
+            items_.append(item)
+            $items.prepareNode(from: item)
         }
+        return items_
     }
     
     

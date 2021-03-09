@@ -197,7 +197,7 @@ extension View{
     /// - Returns: Self
     @discardableResult
     public func circle()->Self{
-        _ = self.clipsToBounds(true)
+//        _ = self.clipsToBounds(true)
         self.node?.maskLayerOperation?.circle()
         self.node?.borderLayerOperation?.circle()
         return self;
