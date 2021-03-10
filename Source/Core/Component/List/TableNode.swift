@@ -684,7 +684,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
         let models:[(D,UITableViewCell)] = self.visibleModelCells()
         let sel = #selector(self.scrollViewDidEndScroll(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [models,scrollView])
-//        self._scrollViewDidEndScroll(scrollView)
     }
     
 //    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
@@ -869,79 +868,79 @@ extension TableNode{
 }
 
 
-extension TableNode{
-    func loadCellContent(){
-        if scrollToToping {
-            return
-        }
-        if let tableView = self.view as? UITableView,
-           let rows = tableView.indexPathsForVisibleRows,
-           rows.count > 0{
-            if tableView.visibleCells.count > 0{
-                for cell in tableView.visibleCells {
-                    if let cell_ = cell as? ListCell,let indexPath = tableView.indexPath(for: cell_) {
-                        if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-                            cell_.linkCellNode(node)
-                        }
-                    }
-                }
-            }
-            
-        }
-    }
-    
-    func _hitTest(){
-        if !scrollToToping {
-            needLoadNodes .removeAllObjects()
-            self.loadCellContent()
-        }
-    }
-    func _scrollViewShouldScrollToTop(_ scrollView: UIScrollView) {
-        scrollToToping = true
-    }
-    
-    func _scrollViewDidEndScroll(_ scrollView: UIScrollView) {
-        scrollToToping = false
-        self.loadCellContent()
-    }
-    
-    func _scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        scrollToToping = false
-        self.loadCellContent()
-    }
-    
-    func _scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        needLoadNodes.removeAllObjects()
-    }
-    func _scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
-        if let tableView = scrollView as? UITableView,let dataSource = self.pDataSourceHelper.dataSourceList?.dataSource {
-            let indexPathInPoint = tableView.indexPathForRow(at: CGPoint(x: 0, y: targetContentOffset.pointee.y))
-            let cellInPoint = tableView.indexPathsForVisibleRows?.first
-            let skipCount = 8
-            if let cip = cellInPoint,
-               let ip = indexPathInPoint,
-               labs(cip.row - ip.row) > skipCount{
-                if let temp = tableView.indexPathsForRows(in: CGRect(x: 0, y: targetContentOffset.pointee.y, width: tableView.frame.width, height: tableView.frame.height)){
-                    var arr:[IndexPath] = []
-                    arr.append(contentsOf: temp)
-                    if velocity.y < 0,let indexPath = temp.last {
-                        if indexPath.row + 3 < dataSource.count {
-                            arr.append(IndexPath(row: indexPath.row + 1, section: indexPath.section))
-                            arr.append(IndexPath(row: indexPath.row + 2, section: indexPath.section))
-                            arr.append(IndexPath(row: indexPath.row + 3, section: indexPath.section))
-                        }
-                       
-                    }else if velocity.y >= 0,let indexPath = temp.first{
-                        if indexPath.row > 3 {
-                            arr.append(IndexPath(row: indexPath.row - 3, section: indexPath.section))
-                            arr.append(IndexPath(row: indexPath.row - 2, section: indexPath.section))
-                            arr.append(IndexPath(row: indexPath.row - 1, section: indexPath.section))
-                        }
-                    }
-                    needLoadNodes.addObjects(from: arr)
-                }
-            }
-        }
-        
-    }
-}
+//extension TableNode{
+//    func loadCellContent(){
+//        if scrollToToping {
+//            return
+//        }
+//        if let tgit cableView = self.view as? UITableView,
+//           let rows = tableView.indexPathsForVisibleRows,
+//           rows.count > 0{
+//            if tableView.visibleCells.count > 0{
+//                for cell in tableView.visibleCells {
+//                    if let cell_ = cell as? ListCell,let indexPath = tableView.indexPath(for: cell_) {
+//                        if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+//                            cell_.linkCellNode(node)
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
+//
+//    func _hitTest(){
+//        if !scrollToToping {
+//            needLoadNodes .removeAllObjects()
+//            self.loadCellContent()
+//        }
+//    }
+//    func _scrollViewShouldScrollToTop(_ scrollView: UIScrollView) {
+//        scrollToToping = true
+//    }
+//
+//    func _scrollViewDidEndScroll(_ scrollView: UIScrollView) {
+//        scrollToToping = false
+//        self.loadCellContent()
+//    }
+//
+//    func _scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+//        scrollToToping = false
+//        self.loadCellContent()
+//    }
+//
+//    func _scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        needLoadNodes.removeAllObjects()
+//    }
+//    func _scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>){
+//        if let tableView = scrollView as? UITableView,let dataSource = self.pDataSourceHelper.dataSourceList?.dataSource {
+//            let indexPathInPoint = tableView.indexPathForRow(at: CGPoint(x: 0, y: targetContentOffset.pointee.y))
+//            let cellInPoint = tableView.indexPathsForVisibleRows?.first
+//            let skipCount = 8
+//            if let cip = cellInPoint,
+//               let ip = indexPathInPoint,
+//               labs(cip.row - ip.row) > skipCount{
+//                if let temp = tableView.indexPathsForRows(in: CGRect(x: 0, y: targetContentOffset.pointee.y, width: tableView.frame.width, height: tableView.frame.height)){
+//                    var arr:[IndexPath] = []
+//                    arr.append(contentsOf: temp)
+//                    if velocity.y < 0,let indexPath = temp.last {
+//                        if indexPath.row + 3 < dataSource.count {
+//                            arr.append(IndexPath(row: indexPath.row + 1, section: indexPath.section))
+//                            arr.append(IndexPath(row: indexPath.row + 2, section: indexPath.section))
+//                            arr.append(IndexPath(row: indexPath.row + 3, section: indexPath.section))
+//                        }
+//
+//                    }else if velocity.y >= 0,let indexPath = temp.first{
+//                        if indexPath.row > 3 {
+//                            arr.append(IndexPath(row: indexPath.row - 3, section: indexPath.section))
+//                            arr.append(IndexPath(row: indexPath.row - 2, section: indexPath.section))
+//                            arr.append(IndexPath(row: indexPath.row - 1, section: indexPath.section))
+//                        }
+//                    }
+//                    needLoadNodes.addObjects(from: arr)
+//                }
+//            }
+//        }
+//
+//    }
+//}
