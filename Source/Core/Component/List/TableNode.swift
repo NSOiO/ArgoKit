@@ -684,7 +684,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         let models:[(D,UITableViewCell)] = self.visibleModelCells()
         let sel = #selector(self.scrollViewDidEndScroll(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [models,scrollView])
-        self._scrollViewDidEndScroll(scrollView)
+//        self._scrollViewDidEndScroll(scrollView)
     }
     
 //    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
