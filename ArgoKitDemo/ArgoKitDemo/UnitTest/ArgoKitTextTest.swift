@@ -62,8 +62,12 @@ struct ArgoKitTextTest: ArgoKit.View {
 //            .alignSelf(.center)
 //
         VStack{
-            Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
+            Text("单行文本粗体")
+                .backgroundColor(.yellow)
                 .basis(.auto)
+                .padding(edge: .left, value: 10)
+                .textAlign(.right)
+                .alignSelf(.start)
             Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
                 .basis(.auto)
         }.margin(edge: .top, value: 30)
