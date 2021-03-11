@@ -52,18 +52,21 @@
 }
 
 - (void)addLayoutNode:(nullable ArgoKitNode *)node{
-    if (node.isRootNode && ![self.layoutNodesPool containsObject:node]) {
+    NSArray *nodes = self.layoutNodesPool.allObjects;
+    if (node.isRootNode && ![nodes containsObject:node]) {
         [self.layoutNodesPool addObject:node];
     }
 }
 
 - (void)removeLayoutNode:(nullable ArgoKitNode *)node{
-    if (node.isRootNode && [self.layoutNodesPool containsObject:node]) {
+    NSArray *nodes = self.layoutNodesPool.allObjects;
+    if (node.isRootNode && [nodes containsObject:node]) {
         [self.layoutNodesPool removeObject:node];
     }
 }
 - (void)layout:(void(^)(ArgoKitNode *node))block{
-    for(ArgoKitNode *node in self.layoutNodesPool){
+    NSArray *nodes = self.layoutNodesPool.allObjects;
+    for(ArgoKitNode *node in nodes){
         if (block) {
             block(node);
         }
