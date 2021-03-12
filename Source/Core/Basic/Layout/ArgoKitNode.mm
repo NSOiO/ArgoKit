@@ -787,11 +787,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (ArgoKitNode *)rootNode{
-    ArgoKitNode *node = self;
-    while (node.parentNode) {
-        node = node.parentNode;
+    if (!_rootNode) {
+        ArgoKitNode *node = self;
+        while (node.parentNode) {
+            node = node.parentNode;
+        }
+        _rootNode = node;
     }
-    return node;
+    return _rootNode;
 }
 
 @end

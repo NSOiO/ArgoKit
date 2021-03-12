@@ -201,10 +201,12 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
         print("哈哈哈哈1111\(indexPath)")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
+        
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
+        
         print("哈哈哈哈2222\(indexPath)")
         return cell
     }

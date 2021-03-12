@@ -52,7 +52,15 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
         if let node_ = node as? UIViewRepresentationNode,
            let reuseView =  node_.reuseView,
            let view_ =  view{
+            let startSize = view_.frame.size
             reuseView(view_,node_.data)
+            let endSize = view_.frame.size
+            if  startSize.width != endSize.width{
+                node.width(point: endSize.width)
+            }
+            if  startSize.height != endSize.height{
+                node.height(point: endSize.height)
+            }
         }
   
     }

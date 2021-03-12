@@ -120,7 +120,8 @@ extension DataSourceHelper {
         defer {
             nodeLock.unlock()
         }
-        if node?.size.width != maxWidth || node?.size.height == 0 {
+        let isDirty = node?.isDirty ?? false
+        if node?.size.width != maxWidth || node?.size.height == 0 || isDirty {
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
         }
     }
