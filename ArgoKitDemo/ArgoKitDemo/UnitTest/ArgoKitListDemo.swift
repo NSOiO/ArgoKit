@@ -18,8 +18,16 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
     typealias View = ArgoKit.View
     var item:SessionItem
     var body: ArgoKit.View {
+        let gesture = TapGesture{ tapGesture in
+            let view:UIView? = tapGesture.view
+        }
+        Text(item.sessionName)
+         .textColor(UIColor(50,51,51))
+         .font(size: 16.0)
+         .shrink(1.0)
+        .gesture(gesture)
+        
          HStack{
-            
             VStack{
                 // 头像
                 Image(url:URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp"),placeholder: nil).width(50.0)
@@ -305,7 +313,7 @@ struct ListDemo:ArgoKit.View{
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         var items_:[SessionItem] = []
-        for index in 0..<20{
+        for index in 0..<500{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             

@@ -103,9 +103,15 @@ class TableNode<D>: ArgoKitScrollViewNode,
             }
         }
     }
+    public var estimatedRowHeight:CGFloat = UITableView.automaticDimension{
+        didSet{
+            if let tableView = self.tableView {
+                tableView.estimatedRowHeight = estimatedRowHeight
+            }
+        }
+    }
     public var sectionIndexTitles: [String]?
     
-    public var estimatedHeight:CGFloat = -1.0
     
     public var maxWith:CGFloat = UIScreen.main.bounds.width
     
@@ -129,6 +135,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
                 ArgoKitReusedLayoutHelper.reLayoutNode(cellNodes, frame: frame)
             }
         }
+        tableView.estimatedRowHeight = estimatedRowHeight
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -192,11 +199,13 @@ class TableNode<D>: ArgoKitScrollViewNode,
             tableView.register(ListCell.self, forCellReuseIdentifier: identifier)
             self.pDataSourceHelper.registedReuseIdSet.insert(identifier)
         }
+        print("哈哈哈哈1111\(indexPath)")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
         }
+        print("哈哈哈哈2222\(indexPath)")
         return cell
     }
 
@@ -336,6 +345,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        print("哈哈哈哈333\(indexPath)")
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return 0.0
         }
@@ -344,18 +354,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
            height > 0{
             return height
         }
+        
         return self.pDataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
-    
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if estimatedHeight <= 0 {
-//            estimatedHeight = self.pDataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
-//        }
-//        if estimatedHeight <= 100 {
-//            return 100
-//        }
-//        return estimatedHeight
-//    }
     
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

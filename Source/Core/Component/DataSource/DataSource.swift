@@ -206,7 +206,7 @@ extension DataSource{
     /// - Returns: Self
     @discardableResult
     public func prepareNode<Element>(from element:Element) -> Self{
-        if let node = self._rootNode {
+        if let node = self._rootNode, !(Thread.isMainThread){
             node.createNodeFromData(element,helper: self)
         }
         return self
@@ -222,6 +222,10 @@ extension DataSource{
     /// - Returns: Self
     @discardableResult
     public func prepareNode<Element>(from elements:DataList<Element>) -> Self{
+        if Thread.isMainThread{
+            return self
+        }
+        
         for data in elements{
             if let node = self._rootNode {
                 node.createNodeFromData(data,helper: self)

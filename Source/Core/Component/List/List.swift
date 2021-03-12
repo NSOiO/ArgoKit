@@ -193,4 +193,12 @@ extension List{
     public func visibleModels() -> [D] {
         return self.tableNode.visibleModels()
     }
+    
+    
+    
+    public func estimatedRowHeight( value: @escaping @autoclosure () ->CGFloat) -> Self{
+        return self.bindCallback({ [tableNode = self.tableNode] in
+            tableNode.estimatedRowHeight = value()
+        }, forKey: #function)
+    }
 }
