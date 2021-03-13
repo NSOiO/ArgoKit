@@ -63,13 +63,15 @@ struct ArgoKitTextTest: ArgoKit.View {
 //            .alignSelf(.center)
 //
         VStack{
-            Text("单行文本粗体")
+            Text("单行文本粗体DSFDSCXCXZSDVSD CX C CVXCVXCVXVXCVXCVXCVCVCVCVC")
                 .backgroundColor(.yellow)
                 .basis(.auto)
                 .padding(edge: .left, value: 10)
                 .textAlign(.right)
                 .alignSelf(.start)
-            Text("单行文本粗体asdasdsassdscscsddcsdcsdcsd").backgroundColor(.yellow)
+            
+            
+            Text("单行文本粗体").backgroundColor(.yellow)
                 .basis(.auto)
         }.margin(edge: .top, value: 30)
 //        .alignItems(.center)
@@ -85,13 +87,13 @@ struct ArgoKitTextTest: ArgoKit.View {
                
             } builder: { () -> View in
                 Image().size(width: 20, height: 20)
-                Text("单行文本粗体1")
+                Text("单行文本粗体本粗体")
                     .margin(edge: .left, value: 4)
             }
             .justifyContent(.center)
             .alignItems(.center)
+            .backgroundColor(.red)
 //            .size(width: 100%, height: 100%)
-            .backgroundColor(.yellow)
             .grow(1)
             .shrink(1)
             .basis(1)

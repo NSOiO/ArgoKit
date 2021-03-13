@@ -72,16 +72,29 @@ static ArgoKitReusedLayoutHelper* _instance;
     }
 }
 - (void)_layout:(ArgoKitNode *)node{
-    [ArgoKitUtils asynCaculationBlock:^{
-        [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
-        [ArgoKitUtils runMainThreadAsyncBlock:^{
-            [node applyLayoutAferCalculationWithView:NO];
-            if (node.linkNode) {
-                [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
-            }else{
-                [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
-            }
-        }];
-    }];
+    [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
+    [node applyLayoutAferCalculationWithView:NO];
+    if (node.linkNode) {
+        [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
+    }else{
+        [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
+    }
+//    [ArgoKitUtils asynCaculationBlock:^{
+//      
+//        [ArgoKitUtils runMainThreadAsyncBlock:^{
+//            
+//        }];
+//    }];
+//    [ArgoKitUtils asynCaculationBlock:^{
+//        [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
+//        [ArgoKitUtils runMainThreadAsyncBlock:^{
+//            [node applyLayoutAferCalculationWithView:NO];
+//            if (node.linkNode) {
+//                [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
+//            }else{
+//                [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
+//            }
+//        }];
+//    }];
 }
 @end
