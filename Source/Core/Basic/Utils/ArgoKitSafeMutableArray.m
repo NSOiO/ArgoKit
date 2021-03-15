@@ -115,7 +115,24 @@
     CFArrayAppendValue(_array, (__bridge const void *)anObject);
     [_safeLock unlock];
 }
-
+- (void)removeObject:(id)anObject{
+    if (!anObject)
+        return;
+    
+    [_safeLock lock];
+    NSMutableArray<NSNumber *> *indexs = [NSMutableArray new];
+    NSUInteger count = CFArrayGetCount(_array);
+    for (NSUInteger i = 0; i < count; i ++){
+        id result = CFArrayGetValueAtIndex(_array, i);
+        if ([result isEqual:anObject]) {
+            [indexs addObject:@(i)];
+        }
+    }
+    for (NSNumber *index in indexs){
+        CFArrayRemoveValueAtIndex(_array, [index intValue]);
+    }
+    [_safeLock unlock];
+}
 - (void)removeLastObject
 {
     [_safeLock lock];

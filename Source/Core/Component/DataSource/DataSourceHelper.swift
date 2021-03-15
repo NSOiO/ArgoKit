@@ -10,9 +10,28 @@ class ArgoKitCellNode: ArgoKitNode {
     var isPreviewing:Bool = false
     var frameObserber: NSKeyValueObservation?
 
+    private var _nodeObserver:ArgoKitNodeObserver?
+    
+    public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode?) -> Void) {
+        if _nodeObserver == nil {
+            _nodeObserver = ArgoKitNodeObserver()
+            _nodeObserver?.setFrameChange { [weak self] frame in
+                if let `self` = self{
+                    changeHandler(self)
+                }
+            }
+            
+            if let nodeObserver = _nodeObserver {
+                self.addNode(observer: nodeObserver)
+            }
+        }
+
+    }
+    
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
-        removeObservingFrameChanged()
-        frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
+        if frameObserber == nil{
+            frameObserber = observe(\.frame, options: .new, changeHandler: changeHandler)
+        }
     }
     
     public func removeObservingFrameChanged() {
@@ -20,6 +39,14 @@ class ArgoKitCellNode: ArgoKitNode {
             frameObserber?.invalidate()
             frameObserber = nil
         }
+    }
+    deinit {
+        if #available(iOS 11.0, *) {
+            } else {
+                if let observation = self.frameObserber {
+                    self.removeObserver(observation, forKeyPath: "frame")
+                }
+            }
     }
 }
 

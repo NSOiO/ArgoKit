@@ -334,9 +334,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
 
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
-        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-            node.removeObservingFrameChanged()
-        }
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
@@ -390,9 +387,6 @@ class GridNode<D>: ArgoKitScrollViewNode,
             dataSourceHelper = self.sectionHeaderSourceHelper
         }else if elementKind ==  UICollectionView.elementKindSectionFooter{
             dataSourceHelper = self.sectionFooterSourceHelper
-        }
-        if let node = dataSourceHelper?.nodeForRow(indexPath.row, at: indexPath.section) {
-            node.removeObservingFrameChanged()
         }
         guard let data = dataSourceHelper?.dataForRow(indexPath.section, at: 0) else {
             return

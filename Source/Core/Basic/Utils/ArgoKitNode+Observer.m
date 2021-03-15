@@ -6,6 +6,7 @@
 //
 
 #import "ArgoKitNode+Observer.h"
+#import "ArgoKitUtils.h"
 @interface ArgoKitNodeObserver()
 @property(nonatomic, copy)ArgoKitNodeCreateViewBlock  createViewBlock;
 @property(nonatomic, copy)ArgoKitNodeFrameChangeBlock  frameChangeBlock;
@@ -25,12 +26,14 @@
 @end
 @implementation ArgoKitNode(Observer)
 - (void)addNodeObserver:(ArgoKitNodeObserver *)observer{
-    if (observer && ![self.nodeObservers containsObject:observer] ) {
+    NSArray *nodeObservers = [self.nodeObservers allObjects];
+    if (observer && ![nodeObservers containsObject:observer] ) {
         [self.nodeObservers addObject:observer];
     }
 }
 - (void)removeNodeObserver:(ArgoKitNodeObserver *)observer{
-    if (observer && [self.nodeObservers containsObject:observer] ) {
+    NSArray *nodeObservers = [self.nodeObservers allObjects];
+    if (observer && [nodeObservers containsObject:observer] ) {
         [self.nodeObservers removeObject:observer];
     }
 }
@@ -39,12 +42,20 @@
 }
 
 - (void)sendFrameChanged:(CGRect)frame {
-    NSHashTable *nodeObservers = [self.nodeObservers copy];
+    __weak typeof(self)weakSelf = self;
+    [ArgoKitUtils runMainThreadAsyncBlock:^{
+        [weakSelf _sendFrameChanged:frame];
+    }];
+}
+
+- (void)_sendFrameChanged:(CGRect)frame {
+    NSArray *nodeObservers = [self.nodeObservers allObjects];
     for (ArgoKitNodeObserver *observer in nodeObservers) {
         if (observer.frameChangeBlock) {
             observer.frameChangeBlock(frame);
         }
     }
 }
+
 
 @end

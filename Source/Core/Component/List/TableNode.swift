@@ -315,9 +315,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
-            node.removeObservingFrameChanged()
-        }
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
@@ -326,9 +323,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        if let node = self.pSectionHeaderSourceHelper.nodeForRow(section, at: 0) {
-            node.removeObservingFrameChanged()
-        }
         guard let data = self.pSectionHeaderSourceHelper.dataForRow(section, at: 0) else {
             return
         }
@@ -337,9 +331,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        if let node = self.pSectionFooterSourceHelper.nodeForRow(section, at: 0) {
-            node.removeObservingFrameChanged()
-        }
         guard let data = self.pSectionFooterSourceHelper.dataForRow(section, at: 0)  else {
             return
         }

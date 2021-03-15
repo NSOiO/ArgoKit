@@ -684,12 +684,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self addChildNode:node];
     }
 }
+//- (void)addChildNode:(ArgoKitNode *)node{
+//    [self.nodeLock lock];
+//    [self _addChildNode:node];
+//    [self.nodeLock unlock];
+//}
 - (void)addChildNode:(ArgoKitNode *)node{
-    [self.nodeLock lock];
-    [self _addChildNode:node];
-    [self.nodeLock unlock];
-}
-- (void)_addChildNode:(ArgoKitNode *)node{
     if (!node) {
         return;
     }
@@ -708,12 +708,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 }
 
+//- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
+//    [self.nodeLock lock];
+//    [self _insertChildNode:node atIndex:index];
+//    [self.nodeLock unlock];
+//}
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
-    [self.nodeLock lock];
-    [self _insertChildNode:node atIndex:index];
-    [self.nodeLock unlock];
-}
-- (void)_insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (!node) {
         return;
     }
@@ -734,12 +734,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }];
 }
 
+//- (void)removeFromSuperNode{
+//    [self.nodeLock lock];
+//    [self _removeFromSuperNode];
+//    [self.nodeLock unlock];
+//}
 - (void)removeFromSuperNode{
-    [self.nodeLock lock];
-    [self _removeFromSuperNode];
-    [self.nodeLock unlock];
-}
-- (void)_removeFromSuperNode{
     if(self.parentNode){
         [self.parentNode.childs removeObject:self];
         self.parentNode = nil;
@@ -751,13 +751,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
+//
+//- (void)removeAllChildNodes{
+//    [self.nodeLock lock];
+//    [self _removeAllChildNodes];
+//    [self.nodeLock unlock];
+//}
 
-- (void)removeAllChildNodes{
-    [self.nodeLock lock];
-    [self _removeAllChildNodes];
-    [self.nodeLock unlock];
-}
-- (void)_removeAllChildNodes {
+- (void)removeAllChildNodes {
     if (self.childs.count) {
         NSArray *childs = [self.childs copy];
         for (ArgoKitNode *child in childs) {
