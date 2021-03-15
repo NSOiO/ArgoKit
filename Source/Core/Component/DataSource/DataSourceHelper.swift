@@ -57,7 +57,6 @@ class DataSourceHelper<D> {
     private var defaultHeight:CGFloat = -1.0
     lazy var registedReuseIdSet = Set<String>()
     lazy var cellNodeCache:ArgoKitSafeMutableArray = ArgoKitSafeMutableArray()
-    var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.node")
     public var sectionDataSourceList:DataSource<SectionDataList<D>>?{
         didSet{
             sectionDataSourceList?._rootNode = _rootNode
@@ -79,10 +78,6 @@ class DataSourceHelper<D> {
     
     
     func dataSource()->SectionDataList<D>? {
-//        nodeLock.lock()
-//        defer {
-//            nodeLock.unlock()
-//        }
         if let list = sectionDataSourceList?.dataSource{
             return list
         }
@@ -150,8 +145,7 @@ extension DataSourceHelper {
         let isDirty = node?.isDirty ?? false
         if node?.size.width != maxWidth || node?.size.height == 0 || isDirty {
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
-            if let _ = node?.nodeView(),
-               isDirty {
+            if let _ = node?.nodeView(),isDirty {
                 node?.applyLayoutAferCalculation(withView: false)
                 ArgoKitNodeViewModifier.resetNodeViewFrame(node)
             }

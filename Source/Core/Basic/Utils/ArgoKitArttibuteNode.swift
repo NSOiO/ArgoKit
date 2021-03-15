@@ -16,7 +16,7 @@ open class ArgoKitArttibuteNode: ArgoKitNode {
     public var text:String? = nil
     public var attributedText:NSMutableAttributedString? = nil
     public var numberOfLines:Int = 1
-    public var lineBreakMode:NSLineBreakMode = .byCharWrapping
+    public var lineBreakMode:NSLineBreakMode = .byTruncatingTail
     public var textAlignment:NSTextAlignment = .left
     public var shadow:NSShadow = NSShadow()
     
