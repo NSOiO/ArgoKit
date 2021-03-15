@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)reuseNodeViewAttribute:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode;
 
-+ (void)resetNodeViewFrame:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode;
+
++ (void)resetNodeViewFrame:(nullable ArgoKitNode *)node;
 
 + (void)prepareForReuseNode:(nullable ArgoKitNode*)node;
 

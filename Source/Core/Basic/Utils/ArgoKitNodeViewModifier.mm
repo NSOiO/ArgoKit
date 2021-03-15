@@ -215,6 +215,14 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:YES];
 }
 
++ (void)resetNodeViewFrame:(nullable ArgoKitNode *)node{
+    if (node.linkNode) {
+        [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
+    }else{
+        [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
+    }
+}
+
 
 + (void)prepareForReuseNode:(nullable ArgoKitNode*)node{
     if (!node || !node.view) {
