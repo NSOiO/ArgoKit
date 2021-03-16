@@ -73,7 +73,11 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
             }
             
             if let rootNode = node.root,let _ = rootNode.nodeView(),rootNode.isDirty {
-                rootNode.calculateLayout(size: CGSize(width: rootNode.size.width, height: CGFloat.nan))
+                var maxWidth = rootNode.size.width
+                if maxWidth == 0 {
+                    maxWidth = UIScreen.main.bounds.size.width
+                }
+                rootNode.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
                 rootNode.applyLayoutAferCalculation(withView: false)
                 ArgoKitNodeViewModifier.resetNodeViewFrame(rootNode)
             }
