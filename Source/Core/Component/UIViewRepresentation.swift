@@ -71,6 +71,14 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
             if  startSize.height != endSize.height{
                 node.height(point: endSize.height)
             }
+            
+           if let rootNode = node.root,rootNode.isDirty {
+            rootNode.calculateLayout(size: CGSize(width: rootNode.size.width, height: CGFloat.nan))
+               if let _ = rootNode.nodeView(),isDirty {
+                   rootNode.applyLayoutAferCalculation(withView: false)
+                   ArgoKitNodeViewModifier.resetNodeViewFrame(rootNode)
+               }
+           }
         }
   
     }

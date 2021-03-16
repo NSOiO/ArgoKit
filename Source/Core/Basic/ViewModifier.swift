@@ -83,7 +83,8 @@ extension ArgoKitNodeViewModifier{
          }else{
              self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: false)
          }
-        if attribute.isDirty == true {
+        
+        if let _ = node?.nodeView(),attribute.isDirty == true {
             node?.markDirty()
         }
     }

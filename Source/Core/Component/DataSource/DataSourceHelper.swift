@@ -142,13 +142,8 @@ extension DataSourceHelper {
         defer {
             nodeLock.unlock()
         }
-        let isDirty = node?.isDirty ?? false
-        if node?.size.width != maxWidth || node?.size.height == 0 || isDirty {
+        if node?.size.width != maxWidth || node?.size.height == 0 {
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
-            if let _ = node?.nodeView(),isDirty {
-                node?.applyLayoutAferCalculation(withView: false)
-                ArgoKitNodeViewModifier.resetNodeViewFrame(node)
-            }
         }
     }
     
