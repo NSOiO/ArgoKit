@@ -742,12 +742,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)removeFromSuperNode{
     if(self.parentNode){
         [self.parentNode.childs removeObject:self];
-        self.parentNode = nil;
-        
         __weak typeof(self)weakSelf = self;
         [ArgoKitUtils runMainThreadAsyncBlock:^{
             [weakSelf.view removeFromSuperview];
+            weakSelf.view = nil;
         }];
+        [self.parentNode markDirty];
     }
 }
 

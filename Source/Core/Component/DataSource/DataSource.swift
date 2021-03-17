@@ -109,8 +109,8 @@ extension DataSource{
     
     /// apply the changes of data source on the List, use the specified animation.
     /// - Parameter animation: The type of animation to use when the List changes.
-    public func apply(with animation: UITableView.RowAnimation = .none){
-        if let action = reloadAction{
+    public func apply(with animation: UITableView.RowAnimation = UITableView.RowAnimation(rawValue: -1) ?? .none){
+        if let action = reloadAction,animation.rawValue != -1{
             action(animation)
         }else{
             if let node = self._rootNode {
@@ -118,9 +118,6 @@ extension DataSource{
             }
         }
         reloadAction = nil
-        if let node = self._rootNode {
-            node.apply()
-        }
     }
     
 

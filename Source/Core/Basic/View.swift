@@ -114,28 +114,6 @@ extension View {
     public func nodeView() -> UIView?{
         return self.node?.nodeView()
     }
-
-    /// set size of root node .
-    public func rootNodeSize(_ size:@escaping @autoclosure () ->CGSize) -> Self{
-        guard let rootNode = self.node?.root else {
-            return self
-        }
-        return bindCallback({
-            rootNode.size = size()
-        }, forKey: #function)
-    }
-    
-    /// set height of root node .
-    public func rootNodeHeight(_ height:@escaping @autoclosure () ->CGFloat) -> Self{
-        guard let rootNode = self.node?.root else {
-            return self
-        }
-        return bindCallback({
-            let size = rootNode.size
-            self.node?.root?.size = CGSize(width: size.width, height: height())
-        }, forKey: #function)
-    }
-    
     /// Adds sub views to this view hierarchy.
     /// - Parameter builder: A view builder that creates the sub views of this view.
     @discardableResult
@@ -159,6 +137,16 @@ extension View {
                 }
             }
         }
+        return self
+    }
+    
+   /// Unlinks the view from its superview and its hostview, and removes it from the responder chain.
+    @discardableResult
+    public func removeFromSuperView() -> Self{
+        guard let node = self.node else {
+            return self
+        }
+        node.removeFromSuperNode()
         return self
     }
 }

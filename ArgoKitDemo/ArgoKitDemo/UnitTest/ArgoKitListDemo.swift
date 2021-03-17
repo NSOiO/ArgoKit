@@ -376,8 +376,8 @@ struct ListDemo:ArgoKit.View{
                 print("data\(data)")
                
     
-//                $items.delete(at: indexPath).apply(with: UITableView.RowAnimation.top)
-//
+                $items.delete(at: indexPath).apply(with: UITableView.RowAnimation.none)
+////
 //                $items.delete().apply().insert().apply(.Fade) // deleteRow
                 
 //                $items.deleteRow(at: indexPath, with: UITableView.RowAnimation.none)
