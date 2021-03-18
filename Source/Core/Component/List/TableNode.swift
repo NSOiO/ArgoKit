@@ -277,6 +277,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             node.observeFrameChanged {[weak self] (_, _) in
                 self?.reloadRowsHeight()
             }
@@ -290,6 +291,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let node = self.pSectionHeaderSourceHelper.nodeForRow(section, at: 0) {
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             node.observeFrameChanged {[weak self] (_, _) in
                 self?.reloadRowsHeight()
             }
@@ -303,6 +305,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
 
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let node = self.pSectionFooterSourceHelper.nodeForRow(section, at: 0) {
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             node.observeFrameChanged {[weak self] (_, _) in
                 self?.reloadRowsHeight()
             }
@@ -318,6 +321,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
+        if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            ArgoKitReusedLayoutHelper.removeLayoutNode(node)
+        }
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
@@ -326,6 +332,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
         guard let data = self.pSectionHeaderSourceHelper.dataForRow(section, at: 0) else {
             return
         }
+        if let node = self.pSectionFooterSourceHelper.nodeForRow(section, at: 0) {
+            ArgoKitReusedLayoutHelper.removeLayoutNode(node)
+        }
         let sel = #selector(self.tableView(_:didEndDisplayingHeaderView:forSection:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, section])
     }
@@ -333,6 +342,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
     func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         guard let data = self.pSectionFooterSourceHelper.dataForRow(section, at: 0)  else {
             return
+        }
+        if let node = self.pSectionFooterSourceHelper.nodeForRow(section, at: 0) {
+            ArgoKitReusedLayoutHelper.removeLayoutNode(node)
         }
         let sel = #selector(self.tableView(_:didEndDisplayingFooterView:forSection:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, section])

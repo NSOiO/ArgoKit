@@ -101,21 +101,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 @implementation ArgoKitNodeViewModifier
-+ (void)nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes{
-    if (!node) {
-        return;
-    }
-    [self _nodeViewAttributeWithNode:node attributes:attributes markDirty:YES];
-}
-
 + (void)nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
-    if (!node) {
-        return;
-    }
-    [self _nodeViewAttributeWithNode:node attributes:attributes markDirty:markDirty];
-}
-
-+ (void)_nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
     if (!node) {
         return;
     }
@@ -169,38 +155,30 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     }
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
-        ArgoKitNode *resueNode = reuseNodes[i];
+        ArgoKitNode *reuseNode = reuseNodes[i];
         
-        resueNode.linkNode = node;
+        reuseNode.linkNode = node;
         if (!node.view &&
-            resueNode.isEnabled &&
+            reuseNode.isEnabled &&
             // FIX: 修复父空间gone和子视图的gone不一致导致的复用问题
-            !CGRectEqualToRect(resueNode.frame, CGRectZero)) {
+            !CGRectEqualToRect(reuseNode.frame, CGRectZero)) {
             if ([node respondsToSelector:@selector(createNodeViewIfNeedWithoutAttributes:)]) {
-                [node createNodeViewIfNeedWithoutAttributes:resueNode.frame];
+                [node createNodeViewIfNeedWithoutAttributes:reuseNode.frame];
             }
             resetFrame = false;
         }
         
-        if (!CGRectEqualToRect(node.view.frame, resueNode.frame)) {
-            node.view.frame = resueNode.frame;
+        // 设置frame在前
+        if (!CGRectEqualToRect(node.view.frame, reuseNode.frame)) {
+            node.view.frame = reuseNode.frame;
         }
-        
+        // 更新UI属性在后
         if (!resetFrame) {
-            // 处理UIView属性点击事件
-            [self _nodeViewAttributeWithNode:node attributes:[resueNode nodeAllAttributeValue] markDirty:NO];
-            // 处理UIControl点击事件
-            if (node.nodeActions.count && [node.view isKindOfClass:[UIControl class]] && [node.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
-                NSArray<NodeAction *> *copyActions = [resueNode.nodeActions mutableCopy];
-                for(NodeAction *action in copyActions){
-                    [node addTarget:node.view forControlEvents:action.controlEvents action:action.actionBlock];
-                }
-            }
-            [node reuseNodeToView:resueNode view:node.view];
+            [self commitAttributeValueToView:node reuseNode:reuseNode];
         }
         
-        if (node.childs.count > 0 && node.childs.count == resueNode.childs.count) {
-            [self reuseNodeViewAttribute:node.childs reuseNodes:resueNode.childs onlyResetFrame:onlyResetFrame];
+        if (node.childs.count > 0) {
+            [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:onlyResetFrame];
         }
     }
 }
@@ -210,17 +188,30 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:NO];
 }
 
-+ (void)resetNodeViewFrame:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
++ (void)_resetNodeViewFrame:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
     reuseNode.linkNode = node;
     [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:YES];
 }
 
 + (void)resetNodeViewFrame:(nullable ArgoKitNode *)node{
     if (node.linkNode) {
-        [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
+        [ArgoKitNodeViewModifier _resetNodeViewFrame:node.linkNode reuseNode:node];
     }else{
-        [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
+        [ArgoKitNodeViewModifier _resetNodeViewFrame:node reuseNode:node];
     }
+}
+
++ (void)commitAttributeValueToView:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
+    // 处理UIView属性点击事件
+    [self nodeViewAttributeWithNode:node attributes:[reuseNode nodeAllAttributeValue] markDirty:NO];
+    // 处理UIControl点击事件
+    if (node.nodeActions.count && [node.view isKindOfClass:[UIControl class]] && [node.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
+        NSArray<NodeAction *> *copyActions = [reuseNode.nodeActions mutableCopy];
+        for(NodeAction *action in copyActions){
+            [node addTarget:node.view forControlEvents:action.controlEvents action:action.actionBlock];
+        }
+    }
+    [node reuseNodeToView:reuseNode view:node.view];
 }
 
 

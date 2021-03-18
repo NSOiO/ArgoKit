@@ -59,7 +59,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                          .shrink(1.0)
                         
                         Button(action: {
-                            
+                            item.sessionName = "hahahahahhadcsdcscsdcsdcdscd"
                         }){
                             Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!, placeholder: "")
                                 .margin(edge: .left, value: 4)
@@ -298,15 +298,15 @@ struct ListDemo:ArgoKit.View{
 //        }
     }
     func loadMoreData(_ callback:(()->())? = nil){
-        nodeQueue.async {
+//        nodeQueue.async {
             let items_ = self._loadMoreData()
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 $items.append(contentsOf: items_)
                 $items.apply()
                 if let callBack1 = callback{
                     callBack1()
-                }
-            }
+//                }
+//            }
         }
     }
     func _loadMoreData()->[SessionItem] {

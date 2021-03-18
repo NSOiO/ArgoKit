@@ -8,6 +8,7 @@
 import Foundation
 extension NSMutableAttributedString{
     public func setParagraphStyle(range: NSRange,paragraphStyle:@escaping (NSMutableParagraphStyle?)->()){
+       
         self.enumerateAttribute(NSAttributedString.Key.paragraphStyle, in: NSRange(location: 0, length: self.length ), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { [weak self]  (value, subRange, stop) in
             var style:NSMutableParagraphStyle? = nil
             if let value_ = value as? NSMutableParagraphStyle{
@@ -318,13 +319,6 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         var result = size
         var maxHeight = size.height
         if let attribut = self.attributedText{
-            attribut.enumerateAttributes(in: NSRange(location: 0, length: attribut.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) {[weak self] (attrs, range, stop) in
-                if attrs[NSAttributedString.Key.font] == nil{
-                    if let `self` = self{
-                        self.font(self.font,range: range)
-                    }
-                }
-            }
             var totolLineHeight:CGFloat = 0
             if numberOfLines > 0 {
                 let lineHeight:CGFloat = ceil(font.lineHeight + font.leading)
@@ -355,12 +349,12 @@ class ArgoKitTextNode: ArgoKitTextBaseNode {
     }
     
     func cleanLineSpacing() {
-        if let attriText = self.attributedText() {
+        if let attriText = self.attributedText {
             let attributedString = NSMutableAttributedString(attributedString: attriText)
             let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 0
-            paragraphStyle.lineBreakMode = self.lineBreakMode()
-            paragraphStyle.alignment = self.textAlignment()
+            paragraphStyle.lineBreakMode = self.lineBreakMode
+            paragraphStyle.alignment = self.textAlignment
             attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attriText.length))
             ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedString)
         }

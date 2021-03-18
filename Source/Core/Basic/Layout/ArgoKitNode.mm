@@ -396,6 +396,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     self.viewOnIndex = -1;
 }
 
+- (void)setUpNode:(Class)viewClass {
+    _viewClass = viewClass;
+    _resetOrigin = YES;
+    _isEnabled = YES;
+    _isUIView = [viewClass isMemberOfClass:[UIView class]];
+    _bindProperties = [NSMutableDictionary new];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -432,13 +440,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     return _identifiable;
 }
 
-- (void)setUpNode:(Class)viewClass {
-    _viewClass = viewClass;
-    _resetOrigin = YES;
-    _isEnabled = YES;
-    _isUIView = [viewClass isMemberOfClass:[UIView class]];
-    _bindProperties = [NSMutableDictionary new];
-}
+
 
 
 - (nullable UIView *)nodeView{
@@ -469,7 +471,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _view = view;
     _size = view.bounds.size;
     if (add) {
-        [self commitAttributes];
+        [ArgoKitNodeViewModifier commitAttributeValueToView:self reuseNode:self];
     }
     [self insertViewToParentNodeView];
 }
@@ -509,18 +511,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
-- (void)commitAttributes {
-    if (self.viewAttributes.count) {
-        [ArgoKitNodeViewModifier nodeViewAttributeWithNode:self attributes:[self nodeAllAttributeValue] markDirty:NO];
-    }
-    [self reuseNodeToView:self view:self.view];
-    if (_nodeActions.count && [self.view isKindOfClass:[UIControl class]] && [self.view respondsToSelector:@selector(addTarget:action:forControlEvents:)]) {
-        NSArray<NodeAction *> *copyActions = [self.nodeActions mutableCopy];
-        for(NodeAction *action in copyActions){
-            [self addTarget:self.view forControlEvents:action.controlEvents action:action.actionBlock];
-        }
-    }
-}
 
 - (void)insertViewToParentNodeView {
     if (!self.parentNode.view) {
@@ -684,11 +674,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [self addChildNode:node];
     }
 }
-//- (void)addChildNode:(ArgoKitNode *)node{
-//    [self.nodeLock lock];
-//    [self _addChildNode:node];
-//    [self.nodeLock unlock];
-//}
+
+
 - (void)addChildNode:(ArgoKitNode *)node{
     if (!node) {
         return;
@@ -708,11 +695,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 }
 
-//- (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
-//    [self.nodeLock lock];
-//    [self _insertChildNode:node atIndex:index];
-//    [self.nodeLock unlock];
-//}
 - (void)insertChildNode:(ArgoKitNode *)node atIndex:(NSInteger)index{
     if (!node) {
         return;
@@ -734,14 +716,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }];
 }
 
-//- (void)removeFromSuperNode{
-//    [self.nodeLock lock];
-//    [self _removeFromSuperNode];
-//    [self.nodeLock unlock];
-//}
+
 - (void)removeFromSuperNode{
     if(self.parentNode){
-        [self.parentNode.childs removeObject:self];
+        self.isEnabled = NO;
+        self.frame = CGRectZero;
         __weak typeof(self)weakSelf = self;
         [ArgoKitUtils runMainThreadAsyncBlock:^{
             [weakSelf.view removeFromSuperview];
@@ -751,13 +730,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     }
 }
 
-//
-//- (void)removeAllChildNodes{
-//    [self.nodeLock lock];
-//    [self _removeAllChildNodes];
-//    [self.nodeLock unlock];
-//}
-
 - (void)removeAllChildNodes {
     if (self.childs.count) {
         NSArray *childs = [self.childs copy];
@@ -766,6 +738,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
                 [child.view removeFromSuperview];
             }];
             child.parentNode = nil;
+            child.isEnabled = NO;
         }
         [self.childs removeAllObjects];
     }

@@ -42,6 +42,10 @@ static ArgoKitReusedLayoutHelper* _instance;
     [[ArgoKitReusedLayoutHelper sharedInstance] addLayoutNode:node];
 }
 
++ (void)removeLayoutNode:(nullable ArgoKitNode *)node{
+    [[ArgoKitReusedLayoutHelper sharedInstance] removeLayoutNode:node];
+}
+
 + (void)appLayout:(ArgoKitNode *)node{
     [[ArgoKitReusedLayoutHelper sharedInstance] _layout:node];
 }
