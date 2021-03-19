@@ -39,7 +39,7 @@ class GridCell: UICollectionViewCell {
             self.contentNode = node
             self.contentNode?.applyLayoutAferCalculation(withView: true)
         }
-        ArgoKitReusedLayoutHelper.addLayoutNode(node)
+//        ArgoKitReusedLayoutHelper.addLayoutNode(node)
     }
       
 }

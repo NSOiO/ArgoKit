@@ -321,6 +321,7 @@ class GridNode<D>: ArgoKitScrollViewNode,
     @available(iOS 8.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             node.observeFrameChanged {[weak self] (_, _) in
                 self?.reloadRowsHeight()
             }
@@ -337,6 +338,9 @@ class GridNode<D>: ArgoKitScrollViewNode,
         guard let data = self.dataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return
         }
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
+            ArgoKitReusedLayoutHelper.removeLayoutNode(node)
+        }
         let sel = #selector(self.collectionView(_:didEndDisplaying:forItemAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
     }
@@ -352,12 +356,16 @@ class GridNode<D>: ArgoKitScrollViewNode,
             dataSourceHelper = self.sectionFooterSourceHelper
         }
         if let node = dataSourceHelper?.nodeForRow(indexPath.section, at: 0) {
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
             node.observeFrameChanged {[weak self] (_, _) in
                 self?.reloadRowsHeight()
             }
         }
         guard let data = dataSourceHelper?.dataForRow(indexPath.section, at: 0) else {
             return
+        }
+        if let node = self.dataSourceHelper.nodeForRow(indexPath.section, at: 0) {
+            ArgoKitReusedLayoutHelper.removeLayoutNode(node)
         }
         if elementKind ==  UICollectionView.elementKindSectionHeader{
             self.collectionView(collectionView,willDisplayHeaderData: data,at: indexPath)
