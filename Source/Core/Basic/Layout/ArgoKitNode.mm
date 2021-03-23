@@ -236,10 +236,11 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
         },
     };
     
-    [node createNodeViewIfNeed:frame];
     if (!CGRectEqualToRect(node.frame, frame)) {
         node.frame = frame;
     }
+    [node createNodeViewIfNeed:frame];
+    
     if (![layout isLeaf]) {
         for (NSUInteger i=0; i<node.childs.count; i++) {
             ArgoKitNode *chiledNode = [node.childs objectAtIndex:i];
