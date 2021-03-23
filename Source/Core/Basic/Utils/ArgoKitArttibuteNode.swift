@@ -18,6 +18,6 @@ open class ArgoKitArttibuteNode: ArgoKitNode {
     public var numberOfLines:Int = 1
     public var lineBreakMode:NSLineBreakMode = .byTruncatingTail
     public var textAlignment:NSTextAlignment = .left
-    public var shadow:NSShadow = NSShadow()
+    public lazy var shadow:NSShadow = NSShadow()
     
 }

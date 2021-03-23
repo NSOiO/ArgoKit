@@ -94,8 +94,10 @@ extension View {
     ///```
     ///
     @discardableResult
-    public func alias(variable: Alias<Self>) -> Self {
-        variable.wrappedValue = self
+    public func alias(variable: Alias<Self>?) -> Self {
+        if let variable = variable{
+            variable.wrappedValue = self
+        }
         return self 
     }
 }

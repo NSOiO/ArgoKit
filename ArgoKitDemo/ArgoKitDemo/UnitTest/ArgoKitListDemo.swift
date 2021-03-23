@@ -388,6 +388,7 @@ struct ListDemo:ArgoKit.View{
         
         .refreshHeaderView {
             RefreshHeaderView(startRefreshing: {headerView in
+                self.$items.clear()
                 headerView?.endRefreshing()
             })
             {
