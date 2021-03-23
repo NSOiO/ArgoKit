@@ -171,6 +171,7 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         // 设置frame在前
         if (!CGRectEqualToRect(node.view.frame, reuseNode.frame)) {
             node.view.frame = reuseNode.frame;
+            
         }
         // 更新UI属性在后
         if (!resetFrame) {
@@ -211,7 +212,9 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
             [node addTarget:node.view forControlEvents:action.controlEvents action:action.actionBlock];
         }
     }
-    [node reuseNodeToView:reuseNode view:node.view];
+    if(!CGRectEqualToRect(reuseNode.frame, CGRectZero)){
+        [node reuseNodeToView:reuseNode view:node.view];
+    }
 }
 
 
