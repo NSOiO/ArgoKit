@@ -361,11 +361,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @implementation ArgoKitNode
 -(void)dealloc{
 //    NSLog(@"isRoot:dealloc:%@",self);
-    if (self.isRoot) {
+//    if (self.isRoot) {
 //        NSLog(@"isRoot:dealloc:%@",self);
         [self clearStrongRefrence];
         [self iterationRemoveActionMap:self.childs];
-    }
+//    }
 }
 
 - (void)iterationRemoveActionMap:(nullable NSArray<ArgoKitNode*> *)nodes{
@@ -374,7 +374,8 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         ArgoKitNode *node = nodes[i];
         [node clearStrongRefrence];
         if (node.childs.count > 0) {
-            [self iterationRemoveActionMap:node.childs];
+            [node iterationRemoveActionMap:node.childs];
+            [node.childs removeAllObjects];
         }
     }
 }
