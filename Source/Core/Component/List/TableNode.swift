@@ -204,7 +204,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
             self.pDataSourceHelper.registedReuseIdSet.insert(identifier)
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
-        
+        cell.sourceData = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
@@ -282,7 +282,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
                 self?.reloadRowsHeight()
             }
         }
-        guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+        guard let listCell = cell as? ListCell, let data = listCell.sourceData else {
             return
         }
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
@@ -318,7 +318,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+        guard let listCell = cell as? ListCell, let data = listCell.sourceData else {
             return
         }
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -326,6 +326,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
+        listCell.sourceData = nil
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
