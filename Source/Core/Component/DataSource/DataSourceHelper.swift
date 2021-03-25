@@ -273,6 +273,9 @@ extension DataSourceHelper{
 //        }
         if let node_ = node{
             self.cellNodeCache.remove(node_)
+            if let cellNode = node_ as? ArgoKitNode {
+                cellNode.destroyProperties()
+            }
         }
     }
     
@@ -282,6 +285,17 @@ extension DataSourceHelper{
 //                strongSelf.cellNodeCache.removeAllObjects()
 //            }
 //        }
+        
+        if let cache = self.cellNodeCache.copy() as? NSArray,
+           cache.count > 0 {
+            DispatchQueue.global().async {
+                for item in cache {
+                    if let cellNode = item as? ArgoKitNode {
+                        cellNode.destroyProperties()
+                    }
+                }
+            }
+        }
         self.cellNodeCache.removeAllObjects()
     }
     

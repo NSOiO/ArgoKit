@@ -76,6 +76,9 @@
 @property(nonatomic,assign) bool viewOnFront;
 @property(nonatomic,assign) bool viewOnBack;
 @property(nonatomic,assign) NSInteger viewOnIndex;
+
+@property(nonatomic,assign) BOOL completeDestroy;
+
 @end
 
 @interface NodeWrapper:NSObject
@@ -360,25 +363,25 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-//    NSLog(@"isRoot:dealloc:%@",self);
-//    if (self.isRoot) {
-//        NSLog(@"isRoot:dealloc:%@",self);
+    [self destroyProperties];
+}
+
+- (void)destroyProperties {
+    if (!self.completeDestroy) {
         [self clearStrongRefrence];
         [self iterationRemoveActionMap:self.childs];
-//    }
+        self.completeDestroy = YES;
+    }
 }
 
 - (void)iterationRemoveActionMap:(nullable NSArray<ArgoKitNode*> *)nodes{
     NSInteger nodeCount = nodes.count;
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
-        [node clearStrongRefrence];
-        if (node.childs.count > 0) {
-            [node iterationRemoveActionMap:node.childs];
-            [node.childs removeAllObjects];
-        }
+        [node destroyProperties];
     }
 }
+
 - (void)clearStrongRefrence{
     for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
         [self.view removeGestureRecognizer:gesture];
@@ -386,6 +389,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self.bindProperties argokit_removeAllObjects];
     [self.actionMap argokit_removeAllObjects];
     [self.nodeActions removeAllObjects];
+    [self removeAllNodeObservers];
     
 }
 
