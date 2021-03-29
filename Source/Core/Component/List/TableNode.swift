@@ -500,8 +500,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return nil
         }
-        let sel = #selector(self.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? UISwipeActionsConfiguration
+        let key:String = "argokit_tableView_leadingSwipe"
+        return self.sendAction(withObj:key, paramter: [data, indexPath]) as? UISwipeActionsConfiguration
     }
 
     @available(iOS 11.0, *)
@@ -509,8 +509,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return nil
         }
-        let sel = #selector(self.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? UISwipeActionsConfiguration
+        let key:String = "argokit_tableView_trailingSwipe"
+        return self.sendAction(withObj: key, paramter: [data, indexPath]) as? UISwipeActionsConfiguration
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
