@@ -69,8 +69,6 @@
 
 @property(nonatomic,strong)NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
 
-@property(atomic, strong)NSLock *nodeLock;
-
 @property(nonatomic,assign) bool viewOnFront;
 @property(nonatomic,assign) bool viewOnBack;
 @property(nonatomic,assign) NSInteger viewOnIndex;
@@ -404,9 +402,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _nodeActions = [NSMutableArray array];
     
     _nodeObservers = [NSHashTable weakObjectsHashTable];
-    
-    _nodeLock = [[NSLock alloc] init];
-    
 
 }
 
@@ -779,7 +774,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (attribute.selector) {
         selector_name = @(sel_getName(attribute.selector));
     }
-    [self.nodeLock lock];
     ViewAttribute *oldattribute = [self.viewAttributes argokit_getObjectForKey:selector_name];
     if (![selector_name hasPrefix:@"set"]) {//不是set方法则排除在外
         selector_name = [NSString stringWithFormat:@"%@:%@",selector_name,@([attribute.paramter.firstObject hash])];
@@ -791,14 +785,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self.viewAttributes argokit_setObject:attribute forKey:selector_name];
         }
     }
-    [self.nodeLock unlock];
 }
 
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue{
     NSArray *values = @[];
-    [self.nodeLock lock];
     values = [self.viewAttributes argokit_allValues];
-    [self.nodeLock unlock];
     return values;
 }
 - (nullable NSString *)text{
@@ -841,9 +832,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (nullable id)valueWithSelector:(SEL)selector{
     NSString *selector_name =  @(sel_getName(selector));
-    [self.nodeLock lock];
     ViewAttribute *attribute = [self.viewAttributes argokit_getObjectForKey:selector_name];
-    [self.nodeLock unlock];
     if (attribute) {
         return attribute.paramter.firstObject;
     }
