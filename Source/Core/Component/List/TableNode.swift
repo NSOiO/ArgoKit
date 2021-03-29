@@ -183,6 +183,17 @@ class TableNode<D>: ArgoKitScrollViewNode,
             self.pSectionHeaderSourceHelper = tableNode.sectionHeaderSourceHelper
             self.pSectionFooterSourceHelper = tableNode.sectionFooterSourceHelper
             
+            for identifier in pDataSourceHelper.registedReuseIdSet{
+                tableView.register(ListCell.self, forCellReuseIdentifier: identifier)
+            }
+            for identifier in  self.pSectionHeaderSourceHelper.registedReuseIdSet {
+                tableView.register(HeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
+            }
+            
+            for identifier in  self.pSectionFooterSourceHelper.registedReuseIdSet {
+                tableView.register(HeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
+            }
+            
             tableView.reloadData()
         }
     }

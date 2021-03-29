@@ -64,14 +64,12 @@
 @property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 //action 相关
 @property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
-@property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
 
+@property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
 
 @property(nonatomic,strong)NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
 
-@property(nonatomic,assign)BOOL isRoot;
-
-@property(atomic, strong)ArgoKitLock *nodeLock;
+@property(atomic, strong)NSLock *nodeLock;
 
 @property(nonatomic,assign) bool viewOnFront;
 @property(nonatomic,assign) bool viewOnBack;
@@ -390,16 +388,26 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self.actionMap argokit_removeAllObjects];
     [self.nodeActions removeAllObjects];
     [self removeAllNodeObservers];
-    
 }
 
 - (void)initContent{
-    _viewAttributes = [[NSMutableDictionary alloc] init];
-    _actionMap = [NSMutableDictionary new];
+    _layout = [[ArgoKitLayout alloc] initWithNode:self];
+    
     _childs = [[ArgoKitSafeMutableArray alloc] init];
-    self.viewOnFront = NO;
-    self.viewOnBack = NO;
-    self.viewOnIndex = -1;
+    
+    _viewAttributes = [[NSMutableDictionary alloc] init];
+    
+    _bindProperties = [NSMutableDictionary new];
+    
+    _actionMap = [NSMutableDictionary new];
+    
+    _nodeActions = [NSMutableArray array];
+    
+    _nodeObservers = [NSHashTable weakObjectsHashTable];
+    
+    _nodeLock = [[NSLock alloc] init];
+    
+
 }
 
 - (void)setUpNode:(Class)viewClass {
@@ -407,7 +415,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _resetOrigin = YES;
     _isEnabled = YES;
     _isUIView = [viewClass isMemberOfClass:[UIView class]];
-    _bindProperties = [NSMutableDictionary new];
+    
+    self.viewOnFront = NO;
+    self.viewOnBack = NO;
+    self.viewOnIndex = -1;
 }
 
 - (instancetype)init {
@@ -496,7 +507,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)_createNodeViewIfNeed:(CGRect)frame addAttributes:(BOOL)add{
-    self.isRoot = self.parentNode == nil;
     if (_isReused) {
         return;
     }
@@ -556,32 +566,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self sendFrameChanged:frame];
 }
 
--(ArgoKitLayout *)layout{
-    if (!_layout) {
-        _layout = [[ArgoKitLayout alloc] initWithNode:self];
-    }
-    return _layout;
-}
-
-- (NSMutableArray<NodeAction *> *)nodeActions{
-    if (!_nodeActions) {
-        _nodeActions = [NSMutableArray array];
-    }
-    return _nodeActions;
-}
-- (NSHashTable<ArgoKitNodeObserver *> *)nodeObservers{
-    if (!_nodeObservers) {
-        _nodeObservers = [NSHashTable weakObjectsHashTable];
-    }
-    return _nodeObservers;
-}
-
-
 #pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
         NSString *keyString = [@([obj hash]) stringValue];
-        [self.actionMap argokit_setValue:[action copy] forKey:keyString];
+        [self.actionMap setValue:[action copy] forKey:keyString];
     }
 }
 
@@ -591,7 +580,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (id)sendActionWithObj:(id)obj paramter:(NSArray *)paramter {
     NSString *keyString = [@([obj hash]) stringValue];
-    ArgoKitNodeBlock actionBlock = [self.actionMap argokit_getObjectForKey:keyString];
+    ArgoKitNodeBlock actionBlock = [self.actionMap objectForKey:keyString];
     if(actionBlock){
         id result = actionBlock(obj, paramter);
         return result;
@@ -669,18 +658,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @end
 
 @implementation ArgoKitNode(Hierarchy)
-- (ArgoKitLock *)nodeLock{
-    if (_nodeLock == nil) {
-        _nodeLock = [[ArgoKitLock alloc] init];
-    }
-    return _nodeLock;
-}
+
 - (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes {
     for (ArgoKitNode *node in nodes) {
         [self addChildNode:node];
     }
 }
-
 
 - (void)addChildNode:(ArgoKitNode *)node{
     if (!node) {
@@ -789,11 +772,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)prepareForUse:(UIView *)view{
 }
 - (void)addNodeViewAttribute:(ViewAttribute *)attribute{
-    [self.nodeLock lock];
-    [self _addNodeViewAttribute:attribute];
-    [self.nodeLock unlock];
-}
-- (void)_addNodeViewAttribute:(ViewAttribute *)attribute{
     if (!attribute) {
         return;
     }
@@ -801,6 +779,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     if (attribute.selector) {
         selector_name = @(sel_getName(attribute.selector));
     }
+    [self.nodeLock lock];
     ViewAttribute *oldattribute = [self.viewAttributes argokit_getObjectForKey:selector_name];
     if (![selector_name hasPrefix:@"set"]) {//不是set方法则排除在外
         selector_name = [NSString stringWithFormat:@"%@:%@",selector_name,@([attribute.paramter.firstObject hash])];
@@ -812,10 +791,15 @@ static CGFloat YGRoundPixelValue(CGFloat value)
             [self.viewAttributes argokit_setObject:attribute forKey:selector_name];
         }
     }
+    [self.nodeLock unlock];
 }
 
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue{
-    return [self.viewAttributes argokit_allValues];
+    NSArray *values = @[];
+    [self.nodeLock lock];
+    values = [self.viewAttributes argokit_allValues];
+    [self.nodeLock unlock];
+    return values;
 }
 - (nullable NSString *)text{
     return [self valueWithSelector:@selector(setText:)];
@@ -857,7 +841,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (nullable id)valueWithSelector:(SEL)selector{
     NSString *selector_name =  @(sel_getName(selector));
+    [self.nodeLock lock];
     ViewAttribute *attribute = [self.viewAttributes argokit_getObjectForKey:selector_name];
+    [self.nodeLock unlock];
     if (attribute) {
         return attribute.paramter.firstObject;
     }
