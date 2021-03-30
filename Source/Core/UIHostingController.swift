@@ -75,11 +75,43 @@ public class UIHostingView: UIView {
     public var useSafeAreaBottom = false
     public var useSafeAreaRight = false
     public override func layoutSubviews() {
-   
-        if !oldFrame.equalTo(self.frame) && !resetFrame{
-            oldFrame = self.frame
+       
+//        if !oldFrame.equalTo(self.frame) && !resetFrame{
+//            oldFrame = self.frame
+//            if let node = rootView?.node {
+//
+//                let width:CGFloat = oldFrame.size.width as CGFloat
+//                let height:CGFloat = oldFrame.size.height as CGFloat
+//                node.width(point: width)
+//                node.height(point: height)
+//                node.frame = frame
+//                node.resetOrigin = false
+//                if #available(iOS 11.0, *){
+//                    let insets = self.safeAreaInsets
+//                    if self.useSafeAreaTop{
+//                        node.paddingTop(point: insets.top)
+//                    }
+//                    if self.useSafeAreaLeft{
+//                        node.paddingLeft(point: insets.left)
+//                    }
+//                    if self.useSafeAreaBottom{
+//                        node.paddingBottom(point: insets.bottom)
+//                    }
+//                    if self.useSafeAreaRight{
+//                        node.paddingRight(point: insets.right)
+//                    }
+//                }
+//                node.applyLayout()
+//            }
+//        }
+        layout(frame: self.frame)
+        super.layoutSubviews()
+    }
+    
+    private func layout(frame:CGRect){
+        if !oldFrame.equalTo(frame) && !resetFrame{
+            oldFrame = frame
             if let node = rootView?.node {
-             
                 let width:CGFloat = oldFrame.size.width as CGFloat
                 let height:CGFloat = oldFrame.size.height as CGFloat
                 node.width(point: width)
@@ -104,7 +136,6 @@ public class UIHostingView: UIView {
                 node.applyLayout()
             }
         }
-        super.layoutSubviews()
     }
     
     /// Initializer
@@ -126,6 +157,7 @@ public class UIHostingView: UIView {
         rootView = HostView(self) {
             content.grow(1.0)
         }
+        layout(frame: frame)
     }
     
     /// Initializer
