@@ -136,6 +136,11 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     
     open func lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
         self.lineBreakMode = value
+        _lineBreakMode(value)
+        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
+    }
+    
+    private func _lineBreakMode(_ value:NSLineBreakMode, range: NSRange? = nil){
         guard let attributedText = attributedText,
               attributedText.length > 0 else {
             return
@@ -147,7 +152,6 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         attributedText.setParagraphStyle(range: innerRange){ paragraphStyle in
             paragraphStyle?.lineBreakMode = value
         }
-        ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.attributedText),attributedText)
     }
     open func numberOfLines(_ value:Int){
         ArgoKitNodeViewModifier.addAttribute(self,#selector(setter:UILabel.numberOfLines),value)
@@ -325,7 +329,9 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
                 totolLineHeight = lineSpacing * CGFloat((numberOfLines - 1)) + lineHeight * CGFloat(numberOfLines)
                 maxHeight = CGFloat.minimum(size.height, totolLineHeight)
             }
+            self._lineBreakMode(.byCharWrapping)
             let result_size = attribut.boundingRect(with: CGSize(width: size.width, height: maxHeight), options: [.usesLineFragmentOrigin], context: nil).size
+            self._lineBreakMode(self.lineBreakMode)
             let width = ceil(result_size.width);
             let height = ceil(result_size.height);
             result = CGSize(width:width, height:height)

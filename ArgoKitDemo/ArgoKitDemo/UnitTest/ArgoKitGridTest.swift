@@ -98,7 +98,7 @@ struct ArgoKitGridTest: ArgoKit.View {
         Grid(waterfall: false,data:model.$dataSource1){ data in
 
             Text(data.headerName)
-                .lineLimit(0)
+                .lineLimit(3)
                 .textAlign(.center)
                 .backgroundColor(.red)
 //                .font(style:.bold)
