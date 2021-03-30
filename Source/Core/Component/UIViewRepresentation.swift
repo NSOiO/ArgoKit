@@ -18,6 +18,7 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
         createView = nil
         reuseView = nil
         preForUse = nil
+        data = nil
     }
 
     init(data:D?) {

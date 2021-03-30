@@ -64,18 +64,17 @@
 @property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 //action 相关
 @property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
+
 @property (nonatomic,strong)NSMutableArray<NodeAction *> *nodeActions;
 
-
 @property(nonatomic,strong)NSHashTable<ArgoKitNodeObserver *> *nodeObservers;
-
-@property(nonatomic,assign)BOOL isRoot;
-
-@property(atomic, strong)ArgoKitLock *nodeLock;
 
 @property(nonatomic,assign) bool viewOnFront;
 @property(nonatomic,assign) bool viewOnBack;
 @property(nonatomic,assign) NSInteger viewOnIndex;
+
+@property(nonatomic,assign) BOOL completeDestroy;
+
 @end
 
 @interface NodeWrapper:NSObject
@@ -236,10 +235,11 @@ static void YGApplyLayoutToNodeHierarchy(ArgoKitNode *node)
         },
     };
     
-    [node createNodeViewIfNeed:frame];
     if (!CGRectEqualToRect(node.frame, frame)) {
         node.frame = frame;
     }
+    [node createNodeViewIfNeed:frame];
+    
     if (![layout isLeaf]) {
         for (NSUInteger i=0; i<node.childs.count; i++) {
             ArgoKitNode *chiledNode = [node.childs objectAtIndex:i];
@@ -359,11 +359,14 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-//    NSLog(@"isRoot:dealloc:%@",self);
-    if (self.isRoot) {
-//        NSLog(@"isRoot:dealloc:%@",self);
+    [self destroyProperties];
+}
+
+- (void)destroyProperties {
+    if (!self.completeDestroy) {
         [self clearStrongRefrence];
         [self iterationRemoveActionMap:self.childs];
+        self.completeDestroy = YES;
     }
 }
 
@@ -371,12 +374,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     NSInteger nodeCount = nodes.count;
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
-        [node clearStrongRefrence];
-        if (node.childs.count > 0) {
-            [self iterationRemoveActionMap:node.childs];
-        }
+        [node destroyProperties];
     }
 }
+
 - (void)clearStrongRefrence{
     for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
         [self.view removeGestureRecognizer:gesture];
@@ -384,16 +385,24 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self.bindProperties argokit_removeAllObjects];
     [self.actionMap argokit_removeAllObjects];
     [self.nodeActions removeAllObjects];
-    
+    [self removeAllNodeObservers];
 }
 
 - (void)initContent{
-    _viewAttributes = [[NSMutableDictionary alloc] init];
-    _actionMap = [NSMutableDictionary new];
+    _layout = [[ArgoKitLayout alloc] initWithNode:self];
+    
     _childs = [[ArgoKitSafeMutableArray alloc] init];
-    self.viewOnFront = NO;
-    self.viewOnBack = NO;
-    self.viewOnIndex = -1;
+    
+    _viewAttributes = [[NSMutableDictionary alloc] init];
+    
+    _bindProperties = [NSMutableDictionary new];
+    
+    _actionMap = [NSMutableDictionary new];
+    
+    _nodeActions = [NSMutableArray array];
+    
+    _nodeObservers = [NSHashTable weakObjectsHashTable];
+
 }
 
 - (void)setUpNode:(Class)viewClass {
@@ -401,7 +410,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     _resetOrigin = YES;
     _isEnabled = YES;
     _isUIView = [viewClass isMemberOfClass:[UIView class]];
-    _bindProperties = [NSMutableDictionary new];
+    
+    self.viewOnFront = NO;
+    self.viewOnBack = NO;
+    self.viewOnIndex = -1;
 }
 
 - (instancetype)init {
@@ -490,7 +502,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)_createNodeViewIfNeed:(CGRect)frame addAttributes:(BOOL)add{
-    self.isRoot = self.parentNode == nil;
     if (_isReused) {
         return;
     }
@@ -550,32 +561,11 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self sendFrameChanged:frame];
 }
 
--(ArgoKitLayout *)layout{
-    if (!_layout) {
-        _layout = [[ArgoKitLayout alloc] initWithNode:self];
-    }
-    return _layout;
-}
-
-- (NSMutableArray<NodeAction *> *)nodeActions{
-    if (!_nodeActions) {
-        _nodeActions = [NSMutableArray array];
-    }
-    return _nodeActions;
-}
-- (NSHashTable<ArgoKitNodeObserver *> *)nodeObservers{
-    if (!_nodeObservers) {
-        _nodeObservers = [NSHashTable weakObjectsHashTable];
-    }
-    return _nodeObservers;
-}
-
-
 #pragma mark --- Action ---
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
         NSString *keyString = [@([obj hash]) stringValue];
-        [self.actionMap argokit_setValue:[action copy] forKey:keyString];
+        [self.actionMap setValue:[action copy] forKey:keyString];
     }
 }
 
@@ -585,7 +575,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (id)sendActionWithObj:(id)obj paramter:(NSArray *)paramter {
     NSString *keyString = [@([obj hash]) stringValue];
-    ArgoKitNodeBlock actionBlock = [self.actionMap argokit_getObjectForKey:keyString];
+    ArgoKitNodeBlock actionBlock = [self.actionMap objectForKey:keyString];
     if(actionBlock){
         id result = actionBlock(obj, paramter);
         return result;
@@ -663,18 +653,12 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 @end
 
 @implementation ArgoKitNode(Hierarchy)
-- (ArgoKitLock *)nodeLock{
-    if (_nodeLock == nil) {
-        _nodeLock = [[ArgoKitLock alloc] init];
-    }
-    return _nodeLock;
-}
+
 - (void)addChildNodes:(NSArray<ArgoKitNode *> *)nodes {
     for (ArgoKitNode *node in nodes) {
         [self addChildNode:node];
     }
 }
-
 
 - (void)addChildNode:(ArgoKitNode *)node{
     if (!node) {
@@ -783,11 +767,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)prepareForUse:(UIView *)view{
 }
 - (void)addNodeViewAttribute:(ViewAttribute *)attribute{
-    [self.nodeLock lock];
-    [self _addNodeViewAttribute:attribute];
-    [self.nodeLock unlock];
-}
-- (void)_addNodeViewAttribute:(ViewAttribute *)attribute{
     if (!attribute) {
         return;
     }
@@ -809,7 +788,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue{
-    return [self.viewAttributes argokit_allValues];
+    NSArray *values = @[];
+    values = [self.viewAttributes argokit_allValues];
+    return values;
 }
 - (nullable NSString *)text{
     return [self valueWithSelector:@selector(setText:)];

@@ -77,8 +77,13 @@ public struct Image : View {
     
     /// Initializer
     /// - Parameter name: The name of the image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
-    public init(_ name: @escaping @autoclosure () -> String) {
-        let image: () -> UIImage? = { UIImage(named: name(), in: nil, compatibleWith: nil) }
+    public init(_ name: @escaping @autoclosure () -> String?) {
+        let image: () -> UIImage? = {
+            if let name = name(), !name.isEmpty {
+                return UIImage(named: name, in: nil, compatibleWith: nil)
+            }
+            return nil
+        }
         self.init(image: image(), highlightedImage: nil)
     }
     
@@ -99,8 +104,8 @@ public struct Image : View {
     ///   - placeholder: The name of the placeholder image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
     public init(urlString: @escaping @autoclosure () -> String?, placeholder: @escaping @autoclosure () -> String?) {
         self.init(image: nil, highlightedImage: nil)
-        var url:URL? = nil
         self.bindCallback({ [self] in
+            var url:URL? = nil
             if let urlString = urlString() {
                 url = URL(string: urlString)
             }
@@ -112,16 +117,27 @@ public struct Image : View {
     /// - Parameters:
     ///   - name: The name of the image asset or file. For images in asset catalogs, specify the name of the image asset. For PNG image files, specify the filename without the filename extension. For all other image file formats, include the filename extension in the name.
     ///   - bundle: The bundle containing the image file or asset catalog. Specify nil to search the app’s main bundle.
-    public init(_ name: @escaping @autoclosure () -> String, bundle: @escaping @autoclosure () -> Bundle) {
-        let image: () -> UIImage? = { UIImage(named: name(), in: bundle(), compatibleWith: nil) }
+    public init(_ name: @escaping @autoclosure () -> String?, bundle: @escaping @autoclosure () -> Bundle?) {
+        let image: () -> UIImage? = {
+            if let name = name(), !name.isEmpty {
+                return UIImage(named: name, in: bundle(), compatibleWith: nil)
+            }
+            return nil
+        }
         self.init(image: image(), highlightedImage: nil)
     }
     
     /// Initializer
     /// - Parameter name: The name of the system symbol image. Use the SF Symbols app to look up the names of system symbol images. You can download this app from the design resources page at developer.apple.com.
     @available(iOS 13.0, *)
-    public init(systemName name: @escaping @autoclosure () -> String) {
-        self.init(image: UIImage(systemName: name()), highlightedImage: nil)
+    public init(systemName name: @escaping @autoclosure () -> String?) {
+        let image: () -> UIImage? = {
+            if let name = name(), !name.isEmpty {
+                return UIImage(systemName: name)
+            }
+            return nil
+        }
+        self.init(image: image(), highlightedImage: nil)
     }
     
     /// Initializer

@@ -11,6 +11,7 @@ fileprivate let kCellReuseIdentifier = "ArgoKitListCell"
 fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 class TableView:UITableView{
+    lazy var registedReuseIdSet = Set<String>()
     private var oldFrame = CGRect.zero
     var reLayoutAction:((CGRect)->())?
     var hitTestAction:(()->())?
@@ -182,7 +183,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
             self.pDataSourceHelper = tableNode.dataSourceHelper
             self.pSectionHeaderSourceHelper = tableNode.sectionHeaderSourceHelper
             self.pSectionFooterSourceHelper = tableNode.sectionFooterSourceHelper
-            
             tableView.reloadData()
         }
     }
@@ -199,12 +199,13 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = self.pDataSourceHelper.reuseIdForRow(indexPath.row, at: indexPath.section) ?? kCellReuseIdentifier
-        if !self.pDataSourceHelper.registedReuseIdSet.contains(identifier) {
+        if let tableView_ = tableView as? TableView,
+           !tableView_.registedReuseIdSet.contains(identifier) {
             tableView.register(ListCell.self, forCellReuseIdentifier: identifier)
-            self.pDataSourceHelper.registedReuseIdSet.insert(identifier)
+            tableView_.registedReuseIdSet.insert(identifier)
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
-        
+        cell.sourceData = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
             cell.linkCellNode(node)
@@ -282,7 +283,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
                 self?.reloadRowsHeight()
             }
         }
-        guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+        guard let listCell = cell as? ListCell, let data = listCell.sourceData else {
             return
         }
         let sel = #selector(self.tableView(_:willDisplay:forRowAt:))
@@ -318,7 +319,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
     }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+        guard let listCell = cell as? ListCell, let data = listCell.sourceData else {
             return
         }
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
@@ -326,6 +327,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
         }
         let sel = #selector(self.tableView(_:didEndDisplaying:forRowAt:))
         self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath])
+        listCell.sourceData = nil
     }
 
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
@@ -375,9 +377,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         let identifier = "Header" + (self.pSectionHeaderSourceHelper.reuseIdForRow(section, at: 0) ?? kHeaderReuseIdentifier)
-        if !self.pSectionHeaderSourceHelper.registedReuseIdSet.contains(identifier) {
+        if let tableView_ = tableView as? TableView,
+            !tableView_.registedReuseIdSet.contains(identifier) {
             tableView.register(HeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
-            self.pSectionHeaderSourceHelper.registedReuseIdSet.insert(identifier)
+            tableView_.registedReuseIdSet.insert(identifier)
         }
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! HeaderFooterView
         if let node = sectionHeaderSourceHelper.nodeForRow(section, at: 0) {
@@ -389,9 +392,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 
         let identifier = "Footer" + (self.pSectionFooterSourceHelper.reuseIdForRow(section, at: 0) ?? kFooterReuseIdentifier)
-        if !self.pSectionFooterSourceHelper.registedReuseIdSet.contains(identifier) {
+        if let tableView_ = tableView as? TableView,
+           !tableView_.registedReuseIdSet.contains(identifier) {
             tableView.register(HeaderFooterView.self, forHeaderFooterViewReuseIdentifier: identifier)
-            self.pSectionFooterSourceHelper.registedReuseIdSet.insert(identifier)
+            tableView_.registedReuseIdSet.insert(identifier)
         }
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) as! HeaderFooterView
         if let node = sectionFooterSourceHelper.nodeForRow(section, at: 0) {
@@ -488,8 +492,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return nil
         }
-        let sel = #selector(self.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? UISwipeActionsConfiguration
+        let key:String = "argokit_tableView_leadingSwipe"
+        return self.sendAction(withObj:key, paramter: [data, indexPath]) as? UISwipeActionsConfiguration
     }
 
     @available(iOS 11.0, *)
@@ -497,8 +501,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return nil
         }
-        let sel = #selector(self.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
-        return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? UISwipeActionsConfiguration
+        let key:String = "argokit_tableView_trailingSwipe"
+        return self.sendAction(withObj: key, paramter: [data, indexPath]) as? UISwipeActionsConfiguration
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {

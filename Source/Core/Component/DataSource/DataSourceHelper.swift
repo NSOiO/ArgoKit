@@ -265,23 +265,25 @@ extension DataSourceHelper {
 
 extension DataSourceHelper{
     public func removeNode(_ node:Any?){
-//        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
-//            if let strongSelf = self,
-//               let node_ = node{
-//                strongSelf.cellNodeCache.remove(node_)
-//            }
-//        }
         if let node_ = node{
             self.cellNodeCache.remove(node_)
+            if let cellNode = node_ as? ArgoKitNode {
+                cellNode.destroyProperties()
+            }
         }
     }
     
     public func removeAll(){
-//        ArgoKitUtils.runMainThreadAsyncBlock {[weak self] in
-//            if let strongSelf = self{
-//                strongSelf.cellNodeCache.removeAllObjects()
-//            }
-//        }
+        if let cache = self.cellNodeCache.copy() as? NSArray,
+           cache.count > 0 {
+            DispatchQueue.global().async {
+                for item in cache {
+                    if let cellNode = item as? ArgoKitNode {
+                        cellNode.destroyProperties()
+                    }
+                }
+            }
+        }
         self.cellNodeCache.removeAllObjects()
     }
     

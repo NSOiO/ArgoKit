@@ -665,8 +665,8 @@ extension List {
     @available(iOS 11.0, *)
     @discardableResult
     public func leadingSwipeActions(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
-        let sel = #selector(TableNode<D>.tableView(_:leadingSwipeActionsConfigurationForRowAt:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+        let key:String = "argokit_tableView_leadingSwipe"
+        node?.observeAction(key, actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
                let data = paramter?.first as? D,
@@ -684,8 +684,8 @@ extension List {
     @available(iOS 11.0, *)
     @discardableResult
     public func trailingSwipeActions(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> ListSwipeActionsConfiguration?) -> Self {
-        let sel = #selector(TableNode<D>.tableView(_:trailingSwipeActionsConfigurationForRowAt:))
-        node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
+        let key:String = "argokit_tableView_trailingSwipe"
+        node?.observeAction(key, actionBlock: { (obj, paramter) -> Any? in
             
             if paramter?.count ?? 0 >= 2 ,
                let data = paramter?.first as? D,

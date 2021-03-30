@@ -9,6 +9,8 @@ import Foundation
 
 class ListCell: UITableViewCell {
     var contentNode: ArgoKitCellNode?
+    var sourceData: Any? // 数据源
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
@@ -21,6 +23,7 @@ class ListCell: UITableViewCell {
     // 清空视图属性
     override func prepareForReuse() {
         super.prepareForReuse()
+        sourceData = nil
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
     }
     
