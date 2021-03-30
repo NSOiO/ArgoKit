@@ -9,6 +9,7 @@
 #import <objc/runtime.h>
 #import "ArgoKitReusedLayoutHelper.h"
 #import "ArgoKitNodePrivateHeader.h"
+#import "ArgoKitUtils.h"
 static void performSelector(id object, SEL selector, NSArray<id> *values)
 {
     if (object == nil) {
@@ -102,6 +103,11 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 
 @implementation ArgoKitNodeViewModifier
 + (void)nodeViewAttributeWithNode:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
+    [ArgoKitUtils runMainThreadAsyncBlock:^{
+        [ArgoKitNodeViewModifier nodeViewAttributeWithNode_:node attributes:attributes markDirty:markDirty];
+    }];
+}
++ (void)nodeViewAttributeWithNode_:(nullable ArgoKitNode *)node attributes:(nullable NSArray<ViewAttribute *> *)attributes markDirty:(BOOL)markDirty{
     if (!node) {
         return;
     }
