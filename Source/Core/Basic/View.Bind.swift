@@ -21,13 +21,11 @@ extension View {
             cancels.append(cancel)
         }
 
-//        self.node?.bindProperties.setObject(cancels, forKey: key as NSString)
-        self.node?.bindProperties.argokit_setObject(cancels, forKey: key)
+        self.node?.bindProperties.setObject(cancels, forKey: key as NSString)
     }
     
     private func p_unwatch(key: String) {
-//        self.node?.bindProperties.removeObject(forKey: key as NSString)
-        self.node?.bindProperties.argokit_removeObject(forKey:key)
+        self.node?.bindProperties.removeObject(forKey: key as NSString)
     }
     
     /*
@@ -69,21 +67,36 @@ extension View {
     
     private func setCancellables(_ cancellables: [Disposable], forKey key: String) {
         if let node = self.node {
-//            node.bindProperties.setObject(cancellables, forKey: key as NSString)
-            node.bindProperties.argokit_setObject(cancellables, forKey: key)
+            node.bindProperties.setObject(cancellables, forKey: key as NSString)
         } else {
             fatalError("node should not be nil")
         }
-//        self.node?.bindProperties.setObject(cancellables, forKey: key as NSString)
+        
     }
     
     private func removeCancellables(forKey key: String) {
-//        self.node?.bindProperties.removeObject(forKey: key)
-        self.node?.bindProperties.argokit_removeObject(forKey: key)
+        self.node?.bindProperties.removeObject(forKey: key)
     }
     
     @discardableResult
     public func bindCallback(_ callback: @escaping () -> Void, forKey key: String) -> Self {
+//        Dep.setSub { //[weak self] in
+//            self.removeCancellables(forKey: key)
+//            self.bindCallback(callback, forKey: key)
+//        }
+//        callback()
+//        Dep.removeSub()
+//        let cancels = Dep.popAllCancellables()
+//        if cancels.count > 0 {
+//            self.setCancellables(cancels, forKey: key)
+//        }
+        ArgoKitUtils.runMainThreadSyncBlock {
+            self.bindCallback_(callback, forKey: key)
+        }
+        return self
+    }
+    
+    private func bindCallback_(_ callback: @escaping () -> Void, forKey key: String){
         Dep.setSub { //[weak self] in
             self.removeCancellables(forKey: key)
             self.bindCallback(callback, forKey: key)
@@ -94,7 +107,6 @@ extension View {
         if cancels.count > 0 {
             self.setCancellables(cancels, forKey: key)
         }
-        return self
     }
 
 //    func alias(_ alias: Alias<Self?>) -> Self{

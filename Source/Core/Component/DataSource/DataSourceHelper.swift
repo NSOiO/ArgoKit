@@ -30,6 +30,7 @@ class ArgoKitCellNode: ArgoKitNode {
     
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
         if frameObserber == nil{
+//            frameObserber = observe(\.frame, options:[.old,.new], changeHandler:changeHandler)
             frameObserber = observe(\.frame, options:[.old,.new], changeHandler: { (cellNode, change) in
                 if let oldFrame = change.oldValue,
                    let newFrame = change.newValue,
@@ -144,11 +145,11 @@ extension DataSourceHelper {
     
     
     private func rowHeight_(_ node:ArgoKitCellNode?,maxWidth: CGFloat){
-        nodeLock.lock()
-        defer {
-            nodeLock.unlock()
-        }
         if node?.size.width != maxWidth || node?.size.height == 0 {
+            nodeLock.lock()
+            defer {
+                nodeLock.unlock()
+            }
             node?.calculateLayout(size: CGSize(width: maxWidth, height: CGFloat.nan))
         }
     }

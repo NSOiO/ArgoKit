@@ -7,7 +7,6 @@
 
 #import "ArgoKitDictionary.h"
 #import <objc/runtime.h>
-#import "ArgoKitLock.h"
 @interface NSMutableDictionary(ArgoKit)
 @property(strong,nonatomic)NSMutableArray *argokit_keys;
 @property(strong,atomic)NSLock *argokit_lock;

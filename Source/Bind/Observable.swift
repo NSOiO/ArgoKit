@@ -19,7 +19,6 @@ public class Observable<Value> : DynamicProperty {
 //    private var subscribers = [(Value) -> Void]()
     private var subscribersMap = [Int: ((Value) -> Void)]()
     private func makeID() -> Int { internalID += 1; return internalID }
-    private let lock:NSLock = NSLock()
     /// Initialize with the provided initial value.
     public init(wrappedValue value: Value) {
         self._value = value
@@ -59,20 +58,12 @@ public class Observable<Value> : DynamicProperty {
 //    }
     
     public func subscribe(_ f: @escaping (Value) -> Void) -> Int{
-        self.lock.lock()
-        defer {
-            self.lock.unlock()
-        }
         let id = makeID()
         self.subscribersMap[id] = f
         return id
     }
     
     public func removesubscriber(_ id: Int) {
-        self.lock.lock()
-        defer {
-            self.lock.unlock()
-        }
         self.subscribersMap.removeValue(forKey: id)
     }
     

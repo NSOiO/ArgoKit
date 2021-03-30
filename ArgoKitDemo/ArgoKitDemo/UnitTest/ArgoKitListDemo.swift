@@ -17,6 +17,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
     var node: ArgoKitNode? = ArgoKitNode()
     typealias View = ArgoKit.View
     var item:SessionItem
+    var nodeQueue:DispatchQueue = DispatchQueue(label: "11com.argokit.create.list")
     var body: ArgoKit.View {
         let gesture = TapGesture{ tapGesture in
             let view:UIView? = tapGesture.view
@@ -61,7 +62,10 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                          .shrink(1.0)
                         
                         Button(action: {
-                            item.sessionName = "hahahahahhadcsdcscsdcsdcdscd"
+                            nodeQueue.async {
+                                item.sessionName = "hahahahahhadcsdcscsdcsdcdscd"
+                            }
+                           
                         }){
                             Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!, placeholder: "")
                                 .margin(edge: .left, value: 4)
@@ -291,31 +295,31 @@ struct ListDemo:ArgoKit.View{
         }
     }
     func loadMoreData1(){
-//        nodeQueue.async {
+        nodeQueue.async {
             let items_ = self._loadMoreData()
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 $items.append(contentsOf: items_)
                 $items.apply()
-//            }
-//        }
+            }
+        }
     }
     func loadMoreData(_ callback:(()->())? = nil){
-//        nodeQueue.async {
+        nodeQueue.async {
             let items_ = self._loadMoreData()
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 $items.append(contentsOf: items_)
                 $items.apply()
                 if let callBack1 = callback{
                     callBack1()
-//                }
-//            }
+                }
+            }
         }
     }
     func _loadMoreData()->[SessionItem] {
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         var items_:[SessionItem] = []
-        for index in 0..<500{
+        for index in 0..<100{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             

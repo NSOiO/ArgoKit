@@ -8,7 +8,6 @@
 #import "ArgoKitNode.h"
 #import <pthread.h>
 #import <objc/runtime.h>
-#import "ArgoKitLock.h"
 #import "yoga/Yoga.h"
 #import "ArgoKitLayoutHelper.h"
 #import "ArgoKitUtils.h"
