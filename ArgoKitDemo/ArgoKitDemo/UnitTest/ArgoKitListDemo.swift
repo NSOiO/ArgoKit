@@ -54,8 +54,10 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                  HStack{
                     HStack{
                         Text(item.sessionName)
-                         .textColor(UIColor(50,51,51))
-                         .font(size: 16.0)
+                            .textColor(.red)
+                            .textShadowColor(.yellow)
+                         .font(size: 25.0)
+                            .firstLineHeadIndent(30)
                          .shrink(1.0)
                         
                         Button(action: {

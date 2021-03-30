@@ -2,36 +2,36 @@ PODS:
   - ArgoAnimation (0.2.0):
     - ArgoAnimation/AnimationCPP (= 0.2.0)
   - ArgoAnimation/AnimationCPP (0.2.0)
-  - ArgoKit (1.0.11):
-    - ArgoKit/AnimationKit (= 1.0.11)
-    - ArgoKit/Bind (= 1.0.11)
-    - ArgoKit/Core (= 1.0.11)
+  - ArgoKit (1.0.15):
+    - ArgoKit/AnimationKit (= 1.0.15)
+    - ArgoKit/Bind (= 1.0.15)
+    - ArgoKit/Core (= 1.0.15)
     - Yoga
-  - ArgoKit/AnimationKit (1.0.11):
+  - ArgoKit/AnimationKit (1.0.15):
     - ArgoAnimation
     - Yoga
-  - ArgoKit/Bind (1.0.11):
+  - ArgoKit/Bind (1.0.15):
     - Yoga
-  - ArgoKit/Core (1.0.11):
+  - ArgoKit/Core (1.0.15):
     - ArgoKit/AnimationKit
     - ArgoKit/Bind
     - Yoga
-  - ArgoKitComponent (1.0.7):
+  - ArgoKitComponent (1.0.8):
     - ArgoKit
-    - ArgoKitComponent/Core (= 1.0.7)
-  - ArgoKitComponent/Core (1.0.7):
+    - ArgoKitComponent/Core (= 1.0.8)
+  - ArgoKitComponent/Core (1.0.8):
     - ArgoKit
     - ArgoKitComponent/SDImageLoader
-  - ArgoKitComponent/KFImageLoader (1.0.7):
+  - ArgoKitComponent/KFImageLoader (1.0.8):
     - ArgoKit
     - Kingfisher
-  - ArgoKitComponent/Refresh (1.0.7):
+  - ArgoKitComponent/Refresh (1.0.8):
     - ArgoKit
     - MJRefresh
-  - ArgoKitComponent/SDImageLoader (1.0.7):
+  - ArgoKitComponent/SDImageLoader (1.0.8):
     - ArgoKit
     - SDWebImage
-  - ArgoKitComponent/YYText (1.0.7):
+  - ArgoKitComponent/YYText (1.0.8):
     - ArgoKit
     - YYText
   - ArgoKitPreview (1.0.12):
@@ -72,8 +72,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
-  ArgoKit: 2eb2d1cf7a5cbdb77d9e870ff9f15af764fe6115
-  ArgoKitComponent: 99c490f373e7f4a81aaf8f7bd1274bde47064790
+  ArgoKit: 89eff1a570b524a372b9445cda64776d551f1b5b
+  ArgoKitComponent: 8b4df3ec7f68128c2e522151e5cfbffc1d57eb2b
   ArgoKitPreview: 18ddf22247124df8ed75cca897d7866bc17e0338
   Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
