@@ -11,10 +11,6 @@ class ArgoKitImageNode: ArgoKitNode {
     var placeholderImage: UIImage?
     override func prepareForUse(view:UIView?) {
         super.prepareForUse(view: view)
-        if let imageView = view as? UIImageView{
-            imageView.image = nil
-            imageView.highlightedImage = nil
-        }
     }
     
     override func createNodeView(withFrame frame: CGRect) -> UIView {

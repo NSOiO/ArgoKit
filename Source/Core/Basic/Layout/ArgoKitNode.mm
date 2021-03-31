@@ -384,7 +384,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self.bindProperties argokit_removeAllObjects];
     [self.actionMap argokit_removeAllObjects];
     [self.nodeActions removeAllObjects];
-    [self removeAllNodeObservers];
 }
 
 - (void)initContent{
