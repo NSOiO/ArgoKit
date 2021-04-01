@@ -61,7 +61,6 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
         guard let node_ = node as? UIViewRepresentationNode else {
             return
         }
-        
         self.createView = node_.createView
         self.reuseView = node_.reuseView
         self.preForUse = node_.preForUse

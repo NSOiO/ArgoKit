@@ -283,16 +283,14 @@ extension DataSourceHelper{
     public func removeAll(){
         if let cache = self.cellNodeCache.copy() as? NSArray,
            cache.count > 0 {
-            DispatchQueue.global().async {[weak self] in
+            DispatchQueue.global().async {
                 for item in cache {
                     if let cellNode = item as? ArgoKitNode {
                         cellNode.destroyProperties()
                     }
                 }
-                DispatchQueue.main.async {
-                    self?.cellNodeCache.removeAllObjects()
-                }
             }
+            self.cellNodeCache.removeAllObjects()
         }
        
     }
