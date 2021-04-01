@@ -358,12 +358,20 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 @implementation ArgoKitNode
 -(void)dealloc{
-    [self destroyProperties];
+    [self _destroyProperties:YES];
 }
 
 - (void)destroyProperties {
+    [self _destroyProperties:NO];
+}
+
+- (void)_destroyProperties:(BOOL)dealloc {
     if (!self.completeDestroy) {
-        [self clearStrongRefrence];
+        if (dealloc) {
+            [self clearStrongRefrence];
+        }else{
+            [self _clearStrongRefrence];
+        }
         [self iterationRemoveActionMap:self.childs];
         self.completeDestroy = YES;
     }
@@ -376,8 +384,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         [node destroyProperties];
     }
 }
-
 - (void)clearStrongRefrence{
+    [self _clearStrongRefrence];
+}
+- (void)_clearStrongRefrence{
     for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
         [self.view removeGestureRecognizer:gesture];
     }
@@ -385,7 +395,6 @@ static CGFloat YGRoundPixelValue(CGFloat value)
     [self.actionMap argokit_removeAllObjects];
     [self.nodeActions removeAllObjects];
 }
-
 - (void)initContent{
     _layout = [[ArgoKitLayout alloc] initWithNode:self];
     

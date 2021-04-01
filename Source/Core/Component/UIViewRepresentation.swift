@@ -27,9 +27,8 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
     }
 
     override func createNodeView(withFrame frame: CGRect) -> UIView {
-        if let contentView =  self.createView,
-           let data_ = data{
-            let view = contentView(data_)
+        if let contentView =  self.createView{
+            let view = contentView(data)
             self.gestures = view.gestureRecognizers
             let size = view.frame.size
             let frameZero = frame.size.equalTo(CGSize.zero)
@@ -59,8 +58,16 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
 
     override func reuseNodeToView(node: ArgoKitNode, view: UIView?) {
         super.reuseNodeToView(node:node,view:view)
-        if let node_ = node as? UIViewRepresentationNode,
-           let reuseView =  node_.reuseView,
+        guard let node_ = node as? UIViewRepresentationNode else {
+            return
+        }
+        
+        self.createView = node_.createView
+        self.reuseView = node_.reuseView
+        self.preForUse = node_.preForUse
+        self.data = node_.data
+        
+        if let reuseView =  node_.reuseView,
            let view_ =  view{
             let startSize = view_.frame.size
             reuseView(view_,node_.data)
