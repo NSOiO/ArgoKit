@@ -108,12 +108,14 @@ public class UIHostingView: UIView {
         super.layoutSubviews()
     }
     
-    private func layout(frame:CGRect){
+    private func layout(frame:CGRect,initLayout:Bool = false){
         if !oldFrame.equalTo(frame) && !resetFrame{
-            oldFrame = frame
+            if !initLayout {
+                oldFrame = frame
+            }
             if let node = rootView?.node {
-                let width:CGFloat = oldFrame.size.width as CGFloat
-                let height:CGFloat = oldFrame.size.height as CGFloat
+                let width:CGFloat = frame.size.width as CGFloat
+                let height:CGFloat = frame.size.height as CGFloat
                 node.width(point: width)
                 node.height(point: height)
                 node.frame = frame
@@ -157,7 +159,7 @@ public class UIHostingView: UIView {
         rootView = HostView(self) {
             content.grow(1.0)
         }
-        layout(frame: frame)
+        layout(frame: frame,initLayout: true)
     }
     
     /// Initializer
