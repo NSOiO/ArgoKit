@@ -72,8 +72,8 @@
 @property(nonatomic,assign) bool viewOnBack;
 @property(nonatomic,assign) NSInteger viewOnIndex;
 
+@property(nonatomic,assign) BOOL completeDealloc;
 @property(nonatomic,assign) BOOL completeDestroy;
-
 @end
 
 @interface NodeWrapper:NSObject
@@ -366,14 +366,19 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 - (void)_destroyProperties:(BOOL)dealloc {
-    if (!self.completeDestroy) {
-        if (dealloc) {
+    if (dealloc) {
+        if (!self.completeDealloc) {
             [self clearStrongRefrence];
-        }else{
-            [self _clearStrongRefrence];
+            [self iterationRemoveActionMap:self.childs];
+            self.completeDealloc = YES;
         }
-        [self iterationRemoveActionMap:self.childs];
-        self.completeDestroy = YES;
+    }else{
+        if (!self.completeDestroy) {
+            [self _clearStrongRefrence];
+            [self iterationRemoveActionMap:self.childs];
+            self.completeDestroy = YES;
+        }
+
     }
 }
 
