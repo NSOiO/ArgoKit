@@ -91,7 +91,7 @@ class DataSourceHelper<D> {
         if let list = dataSourceList?.dataSource {
             return [list]
         }
-        return [[]]
+        return nil
     }
 }
 

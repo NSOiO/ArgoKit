@@ -43,7 +43,7 @@ typedef id _Nullable(^ArgoKitNodeBlock)(id obj, NSArray<id> * _Nullable paramter
 //链接此node被复用到的node节点
 @property (nonatomic, weak,nullable)ArgoKitNode *linkNode;
 
-@property (nonatomic, strong) NSMutableDictionary *bindProperties;
+@property (atomic, strong) NSMutableDictionary *bindProperties;
 
 
 

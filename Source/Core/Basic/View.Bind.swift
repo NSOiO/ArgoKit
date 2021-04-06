@@ -21,11 +21,13 @@ extension View {
             cancels.append(cancel)
         }
 
-        self.node?.bindProperties.setObject(cancels, forKey: key as NSString)
+//        self.node?.bindProperties.setObject(cancels, forKey: key as NSString)
+        self.node?.bindProperties.argokit_setObject(cancels, forKey: key)
     }
     
     private func p_unwatch(key: String) {
-        self.node?.bindProperties.removeObject(forKey: key as NSString)
+//        self.node?.bindProperties.removeObject(forKey: key as NSString)
+        self.node?.bindProperties.argokit_removeObject(forKey: key)
     }
     
     /*
@@ -67,7 +69,8 @@ extension View {
     
     private func setCancellables(_ cancellables: [Disposable], forKey key: String) {
         if let node = self.node {
-            node.bindProperties.setObject(cancellables, forKey: key as NSString)
+//            node.bindProperties.setObject(cancellables, forKey: key as NSString)
+            node.bindProperties.argokit_setObject(cancellables, forKey: key)
         } else {
             fatalError("node should not be nil")
         }
@@ -75,7 +78,8 @@ extension View {
     }
     
     private func removeCancellables(forKey key: String) {
-        self.node?.bindProperties.removeObject(forKey: key)
+//        self.node?.bindProperties.removeObject(forKey: key)
+        self.node?.bindProperties.argokit_removeObject(forKey: key)
     }
     
     @discardableResult

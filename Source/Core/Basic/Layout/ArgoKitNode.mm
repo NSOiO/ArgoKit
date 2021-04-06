@@ -59,8 +59,10 @@
 @property (nonatomic,assign)BOOL isUIView;
 @property (nonatomic, assign) BOOL isReused;
 
+@property (nonatomic,strong)NSLock *lock;
+
 //存储View属性
-@property (nonatomic, strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
+@property (strong,nullable)NSMutableDictionary<NSString*, ViewAttribute *>* viewAttributes;
 //action 相关
 @property (nonatomic,strong)NSMutableDictionary<NSString *,ArgoKitNodeBlock> *actionMap;
 
@@ -402,14 +404,17 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 - (void)initContent{
     _layout = [[ArgoKitLayout alloc] initWithNode:self];
-    
+    _lock = [[NSLock alloc] init];
     _childs = [[ArgoKitSafeMutableArray alloc] init];
     
     _viewAttributes = [[NSMutableDictionary alloc] init];
+    [_viewAttributes setArgokit_lock:_lock];
     
-    _bindProperties = [NSMutableDictionary new];
+    _bindProperties = [[NSMutableDictionary alloc] init];
+    [_bindProperties setArgokit_lock:_lock];
     
-    _actionMap = [NSMutableDictionary new];
+    _actionMap = [[NSMutableDictionary alloc] init];
+    [_actionMap setArgokit_lock:_lock];
     
     _nodeActions = [NSMutableArray array];
     
@@ -577,7 +582,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)observeAction:(id)obj actionBlock:(ArgoKitNodeBlock)action{
     if (obj) {
         NSString *keyString = [@([obj hash]) stringValue];
-        [self.actionMap setValue:[action copy] forKey:keyString];
+        [self.actionMap argokit_setValue:[action copy] forKey:keyString];
     }
 }
 
@@ -587,7 +592,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (id)sendActionWithObj:(id)obj paramter:(NSArray *)paramter {
     NSString *keyString = [@([obj hash]) stringValue];
-    ArgoKitNodeBlock actionBlock = [self.actionMap objectForKey:keyString];
+    ArgoKitNodeBlock actionBlock = [self.actionMap argokit_getObjectForKey:keyString];
     if(actionBlock){
         id result = actionBlock(obj, paramter);
         return result;

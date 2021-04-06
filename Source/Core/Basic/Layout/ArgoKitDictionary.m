@@ -12,6 +12,13 @@
 @property(strong,atomic)NSLock *argokit_lock;
 @end
 @implementation NSMutableDictionary(ArgoKit)
+- (void)create_argokit_lock{
+    id lock = objc_getAssociatedObject(self,  @selector(argokit_lock));
+    if(!lock){
+        id lock = [[NSLock alloc] init];
+        objc_setAssociatedObject(self, @selector(argokit_lock), lock, OBJC_ASSOCIATION_RETAIN);
+    }
+}
 - (NSMutableArray *)argokit_keys{
     id keys = objc_getAssociatedObject(self,_cmd);
     if (keys) {
@@ -22,7 +29,9 @@
         return keys;
     }
 }
-
+- (void)setArgokit_lock:(NSLock *)argokit_lock{
+    objc_setAssociatedObject(self, @selector(argokit_lock), argokit_lock, OBJC_ASSOCIATION_RETAIN);
+}
 - (NSLock *)argokit_lock{
     id lock = objc_getAssociatedObject(self, _cmd);
     if (lock) {

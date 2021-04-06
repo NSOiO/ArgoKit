@@ -254,14 +254,13 @@ extension List {
     public func cellCanEdit(_ action: @escaping (_ data: D, _ indexPath: IndexPath) -> Bool) -> Self {
         let sel = #selector(TableNode<D>.tableView(_:canEditRowAt:))
         node?.observeAction(String(_sel: sel), actionBlock: { (obj, paramter) -> Any? in
-            
             if paramter?.count ?? 0 >= 2,
                let data = paramter?.first as? D,
                let indexPath = paramter?.last as? IndexPath
                {
                 return action(data, indexPath)
             }
-            return true
+            return false
         })
         return self
     }

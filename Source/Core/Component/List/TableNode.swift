@@ -487,17 +487,31 @@ class TableNode<D>: ArgoKitScrollViewNode,
         return self.sendAction(withObj: String(_sel: sel), paramter: [data, indexPath]) as? [UITableViewRowAction]
     }
 
-//    @available(iOS 11.0, *)
-//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
-//            return nil
-//        }
-//        let key:String = "argokit_tableView_leadingSwipe"
-//        return self.sendAction(withObj:key, paramter: [data, indexPath]) as? UISwipeActionsConfiguration
-//    }
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let dataSource = self.pDataSourceHelper.dataSource() else {
+            return nil
+        }
+        
+        if dataSource.count <= 0{
+            return nil
+        }
+        
+        guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
+            return nil
+        }
+        let key:String = "argokit_tableView_leadingSwipe"
+        return self.sendAction(withObj:key, paramter: [data, indexPath]) as? UISwipeActionsConfiguration
+    }
 
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let dataSource = self.pDataSourceHelper.dataSource() else {
+            return nil
+        }
+        if dataSource.count <= 0{
+            return nil
+        }
         guard let data = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section) else {
             return nil
         }

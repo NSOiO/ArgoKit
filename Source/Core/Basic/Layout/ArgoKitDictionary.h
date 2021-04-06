@@ -9,6 +9,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableDictionary(ArgoKit)
+- (void)create_argokit_lock;
+- (void)setArgokit_lock:(NSLock *)argokit_lock;
 -(NSArray *)argokit_allKeys;
 - (NSArray *)argokit_allValues;
 - (void)argokit_setObject:(id)object forKey:(NSString *)key;
