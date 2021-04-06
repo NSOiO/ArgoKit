@@ -30,8 +30,11 @@ class UIViewRepresentationNode<D>: ArgoKitNode {
         if let contentView =  self.createView{
             let view = contentView(data)
             self.gestures = view.gestureRecognizers
+            
             let size = view.frame.size
-            let frameZero = frame.size.equalTo(CGSize.zero)
+            
+            let frameZero = (frame.size.width == 0 || frame.size
+                                .height == 0)
             if !frameZero {
                 view.frame = frame
             }

@@ -214,22 +214,22 @@ class SessionRow:ArgoKit.View {
     
    var body: ArgoKit.View{
     
-        UIViewRepresentation(data: item)
-            .createUIView { (item) -> UIView in
-                return UILabel()
-            }
-            .updateUIView { (view, item) in
-                if let lable = view as? UILabel{
-                    lable.text = item?.imagePath
-                }
-            }
-            .grow(1)
-            .height(100)
-            .backgroundColor(.red)
-            .margin(edge: .bottom, value: 10)
-            .onTapGesture {[data = self.item] in
-                data.isEnable  = true
-            }
+//        UIViewRepresentation(data: item)
+//            .createUIView { (item) -> UIView in
+//                return UILabel()
+//            }
+//            .updateUIView { (view, item) in
+//                if let lable = view as? UILabel{
+//                    lable.text = item?.imagePath
+//                }
+//            }
+//            .grow(1)
+//            .height(100)
+//            .backgroundColor(.red)
+//            .margin(edge: .bottom, value: 10)
+//            .onTapGesture {[data = self.item] in
+//                data.isEnable  = true
+//            }
 
 
         MSUserInterractionHeaderView(item: item)
@@ -340,6 +340,20 @@ struct ListDemo:ArgoKit.View{
         ArgoKit.List(data:$items){ item in
            SessionRow(item: item)
         }
+        .tableHeaderView(headerContent: { () -> View? in
+//            MSUserInterractionContentView()
+//                .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
+//                .cornerRadius(5)
+//                .backgroundColor(UIColor(250,250,250))
+//                .grow(1)
+//
+            UIViewRepresentation<String>().createUIView { (_) -> UIView in
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
+                view.backgroundColor = .red
+                return view
+            }
+            .size(width: 1000, height: 20)
+        })
         .alias(variable: $list)
 //        .tableHeaderView(headerContent: { () -> View? in
 //                            CustomView(view: view)

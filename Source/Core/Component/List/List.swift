@@ -136,8 +136,15 @@ extension List{
     /// - Returns: Self
     @discardableResult
     public func tableHeaderView(headerContent: @escaping () -> View?) -> Self {
-        let container = headerContent()
-        tableNode.tableHeaderNode = container?.node
+        guard let container = headerContent() else {
+            return self
+        }
+        if let nodes = container.body.type.viewNodes(){
+            for subNode in nodes {
+                container.node?.addChildNode(subNode)
+            }
+        }
+        tableNode.tableHeaderNode = container.node
         return self
     }
     
@@ -146,8 +153,15 @@ extension List{
     /// - Returns: Self
     @discardableResult
     public func tableFooterView(headerContent: @escaping () -> View?) -> Self {
-        let container = headerContent()
-        tableNode.tableFooterNode = container?.node
+        guard let container = headerContent() else {
+            return self
+        }
+        if let nodes = container.body.type.viewNodes(){
+            for subNode in nodes {
+                container.node?.addChildNode(subNode)
+            }
+        }
+        tableNode.tableFooterNode = container.node
         return self
     }
     
