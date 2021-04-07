@@ -93,7 +93,10 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
         } else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(CGRect)]]) { // CGRect {CGRect={CGPoint=dd}}
             CGRect objVaule = [obj CGRectValue];
             [invocation setArgument:&objVaule atIndex:i + 2];
-        } else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(UIEdgeInsets)]]) { // UIEdgeInsets {UIEdgeInsets=dddd}
+        }else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(CGPoint)]]) { // CGRect {CGRect={CGPoint=dd}}
+            CGPoint objVaule = [obj CGPointValue];
+            [invocation setArgument:&objVaule atIndex:i + 2];
+        }else if ([argumentTypeString isEqualToString:[NSString stringWithUTF8String:@encode(UIEdgeInsets)]]) { // UIEdgeInsets {UIEdgeInsets=dddd}
             UIEdgeInsets objVaule = [obj UIEdgeInsetsValue];
             [invocation setArgument:&objVaule atIndex:i + 2];
         }
