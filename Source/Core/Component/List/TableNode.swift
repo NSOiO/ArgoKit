@@ -489,6 +489,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
 
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.count != 2 {
+            return nil
+        }
         guard let dataSource = self.pDataSourceHelper.dataSource() else {
             return nil
         }
@@ -506,6 +509,9 @@ class TableNode<D>: ArgoKitScrollViewNode,
 
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.count != 2 {
+            return nil
+        }
         guard let dataSource = self.pDataSourceHelper.dataSource() else {
             return nil
         }

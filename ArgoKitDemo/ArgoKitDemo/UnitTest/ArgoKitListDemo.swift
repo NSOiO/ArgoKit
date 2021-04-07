@@ -379,11 +379,19 @@ struct ListDemo:ArgoKit.View{
 ////                    .backgroundColor(.purple)
 //                nil
 //            })
-            if let items = list?.visibleModels(){
-                for item in items{
-                    print("visibleModels:\(String(describing: item))")
-                }
-            }
+//            if let items = list?.visibleModels(){
+//                for item in items{
+//                    print("visibleModels:\(String(describing: item))")
+//                }
+//            }
+//            let i1 = IndexPath(indexes: [])
+//            print(i1.section)
+            // This works:
+            let i2 = IndexPath(indexes: [1, 2])
+            print(i2.section)
+            // This traps because the count is 3:
+            let i3 = IndexPath(indexes: [1, 2, 3])
+            print(i3.section)
 //            $items.apply()
 //            let controller = ViewPagerController()
 //            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
