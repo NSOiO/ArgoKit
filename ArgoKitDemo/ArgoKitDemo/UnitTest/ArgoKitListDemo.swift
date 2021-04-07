@@ -384,17 +384,11 @@ struct ListDemo:ArgoKit.View{
 //                    print("visibleModels:\(String(describing: item))")
 //                }
 //            }
-//            let i1 = IndexPath(indexes: [])
-//            print(i1.section)
-            // This works:
-            let i2 = IndexPath(indexes: [1, 2])
-            print(i2.section)
-            // This traps because the count is 3:
-            let i3 = IndexPath(indexes: [1, 2, 3])
-            print(i3.section)
 //            $items.apply()
 //            let controller = ViewPagerController()
 //            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
+            
+            list?.setContentOffset(CGPoint(x: 0, y: 1500), animated: false)
         }
         .cellCanEdit({ (item, indx) -> Bool in
             return true
