@@ -137,7 +137,7 @@ extension List{
     @discardableResult
     public func tableHeaderView(headerContent: @escaping () -> View?) -> Self {
         guard let container = headerContent() else {
-            tableNode.tableFooterNode = nil
+            tableNode.tableHeaderNode = nil
             return self
         }
         if let nodes = container.body.type.viewNodes(){
