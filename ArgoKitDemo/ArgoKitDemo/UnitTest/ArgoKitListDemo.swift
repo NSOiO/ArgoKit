@@ -27,6 +27,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
          .font(size: 16.0)
          .shrink(1.0)
         .gesture(gesture)
+            .gone(item.isEnable)
         
          HStack{
             VStack{
@@ -213,29 +214,10 @@ class SessionRow:ArgoKit.View {
  
     
    var body: ArgoKit.View{
-    
-//        UIViewRepresentation(data: item)
-//            .createUIView { (item) -> UIView in
-//                return UILabel()
-//            }
-//            .updateUIView { (view, item) in
-//                if let lable = view as? UILabel{
-//                    lable.text = item?.imagePath
-//                }
-//            }
-//            .grow(1)
-//            .height(100)
-//            .backgroundColor(.red)
-//            .margin(edge: .bottom, value: 10)
-//            .onTapGesture {[data = self.item] in
-//                data.isEnable  = true
-//            }
-
-
         MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
-            .onTapGesture(enabled:self.item.isEnable) {[data = self.item] in
-                data.isEnable  = false
+            .onTapGesture() {[data = self.item] in
+                data.isEnable  = !data.isEnable
         }
     
         MSUserInterractionContentView()
@@ -264,6 +246,7 @@ struct ListDemo:ArgoKit.View{
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     var view:UIView = UIView()
     var view1:UIView = UIView()
+    @Observable var headerGone = false
     @Alias var list:List<SessionItem>?
     @DataSource var items:[SessionItem] = [SessionItem]()
     @DataSource var headerItems:[SessionItem] = [SessionItem]()
@@ -347,12 +330,23 @@ struct ListDemo:ArgoKit.View{
 //                .backgroundColor(UIColor(250,250,250))
 //                .grow(1)
 //
-            UIViewRepresentation<String>().createUIView { (_) -> UIView in
-                let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
-                view.backgroundColor = .red
-                return view
+            VStack{
+                UIViewRepresentation<String>().createUIView { (_) -> UIView in
+                    let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
+                    view.backgroundColor = .red
+                    return view
+                }
+                .size(width: 1000, height: 120)
+                .gone(headerGone)
+                
+                UIViewRepresentation<String>().createUIView { (_) -> UIView in
+                    let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 100))
+                    view.backgroundColor = .green
+                    return view
+                }
+                .size(width: 1000, height: 20)
             }
-            .size(width: 1000, height: 20)
+           
         })
         .alias(variable: $list)
 //        .tableHeaderView(headerContent: { () -> View? in
@@ -373,6 +367,7 @@ struct ListDemo:ArgoKit.View{
             print("items:\(des)")
         })
         .cellSelected {item, indexPath in
+            headerGone = true
 //            view.frame.size = CGSize(width: 100, height: 10)
 //            list?.tableHeaderView(headerContent: { () -> View? in
 ////                CustomView(view: view)
@@ -388,7 +383,7 @@ struct ListDemo:ArgoKit.View{
 //            let controller = ViewPagerController()
 //            self.viewController()?.navigationController?.pushViewController(controller, animated: true)
             
-            list?.setContentOffset(CGPoint(x: 0, y: 1500), animated: false)
+//            list?.setContentOffset(CGPoint(x: 0, y: 1500), animated: false)
         }
         .cellCanEdit({ (item, indx) -> Bool in
             return true

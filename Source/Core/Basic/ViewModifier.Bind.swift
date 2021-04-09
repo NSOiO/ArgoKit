@@ -104,7 +104,6 @@ extension View {
     public func gone(_ value: @escaping @autoclosure () -> Bool) -> Self {
         return self.bindCallback({[self] in
             let _value = value()
-            addAttribute(#selector(setter:UIView.isHidden), _value)
             if let enable = self.node?.isEnabled {
                 if !enable && !_value {
                     if let node =  self.node?.root {
@@ -120,6 +119,7 @@ extension View {
             }else{
                 self.node?.isEnabled = !_value
             }
+            addAttribute(#selector(setter:UIView.isHidden), _value)
         }, forKey: #function)
     }
     

@@ -78,12 +78,37 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none
     public weak var tableView: UITableView?
+    var headerNodeObservation:NSKeyValueObservation?
+    var footerNodeObservation:NSKeyValueObservation?
+    private func addFooterNodeObservation(_ obserNode:ArgoKitNode){
+        footerNodeObservation = obserNode.observe(\ArgoKitNode.frame, options: [.new, .old], changeHandler: {[weak self] (node, change) in
+            if let `self` = self{
+                self.addNodeObservation(change)
+            }
+        })
+    }
+    private func addHeaderNodeObservation(_ obserNode:ArgoKitNode){
+        headerNodeObservation = obserNode.observe(\ArgoKitNode.frame, options: [.new, .old], changeHandler: {[weak self] (node, change) in
+            if let `self` = self{
+                self.addNodeObservation(change)
+            }
+        })
+    }
+    private func addNodeObservation(_ change:NSKeyValueObservedChange<CGRect>){
+        if let old = change.oldValue,
+           let new = change.newValue{
+            if !new.equalTo(old) {
+                self.tableView?.reloadData()
+           }
+        }
+    }
     public var tableHeaderNode: ArgoKitNode?{
         didSet{
             if let tableView = self.tableView {
                 if let tableHeaderNode_ = tableHeaderNode {
                     tableHeaderNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
                     tableView.tableHeaderView = tableHeaderNode_.view
+                    addHeaderNodeObservation(tableHeaderNode_)
                 }else{
                     tableView.tableHeaderView = nil
                 }
@@ -97,6 +122,7 @@ class TableNode<D>: ArgoKitScrollViewNode,
                 if let tableFooterNode_ = tableFooterNode {
                     tableFooterNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
                     tableView.tableFooterView = tableFooterNode_.view
+                    addFooterNodeObservation(tableFooterNode_)
                 }else{
                     tableView.tableFooterView = nil
                 }
@@ -153,10 +179,12 @@ class TableNode<D>: ArgoKitScrollViewNode,
         if let tableHeaderNode_ = tableHeaderNode {
             tableHeaderNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
             tableView.tableHeaderView = tableHeaderNode_.view
+            addHeaderNodeObservation(tableHeaderNode_)
         }
         if let tableFooterNode_ = tableFooterNode {
             tableFooterNode_.applyLayout(size: CGSize(width: frame.size.width, height: CGFloat.nan))
             tableView.tableFooterView = tableFooterNode_.view
+            addFooterNodeObservation(tableFooterNode_)
         }
         tableView.separatorStyle = .none;
         if let preview = ArgoKitInstance.listPreviewService() {

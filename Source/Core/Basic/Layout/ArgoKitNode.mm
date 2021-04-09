@@ -571,7 +571,10 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 }
 
 #pragma mark --- property setter/getter ---
-
+- (void)setEnabled:(BOOL)isEnabled{
+    _isEnabled = isEnabled;
+//    [self markDirty];
+}
 - (void)setFrame:(CGRect)frame{
     _frame = frame;
     _size = frame.size;
@@ -641,7 +644,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 
 - (CGSize)applyLayout{
     if (self.layout) {
-        CGSize size = self.parentNode?CGSizeZero:self.size;
+        CGSize size =self.parentNode?CGSizeZero:CGSizeMake(NAN, NAN);
         self.size = [self applyLayout:size];
     }
     return self.size;
@@ -803,6 +806,7 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         }
     }
 }
+
 
 - (nullable NSArray<ViewAttribute *> *)nodeAllAttributeValue{
     NSArray *values = @[];
