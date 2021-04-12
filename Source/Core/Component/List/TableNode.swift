@@ -80,14 +80,36 @@ class TableNode<D>: ArgoKitScrollViewNode,
     public weak var tableView: UITableView?
     var headerNodeObservation:NSKeyValueObservation?
     var footerNodeObservation:NSKeyValueObservation?
-    private func addFooterNodeObservation(_ obserNode:ArgoKitNode){
+    private func addFooterNodeObservation(_ obserNode:ArgoKitNode?){
+        guard let obserNode = obserNode else {
+            if let _ = footerNodeObservation {
+                footerNodeObservation?.invalidate()
+                footerNodeObservation = nil
+            }
+            return
+        }
+        if let _ = footerNodeObservation {
+            footerNodeObservation?.invalidate()
+            footerNodeObservation = nil
+        }
         footerNodeObservation = obserNode.observe(\ArgoKitNode.frame, options: [.new, .old], changeHandler: {[weak self] (node, change) in
             if let `self` = self{
                 self.addNodeObservation(change)
             }
         })
     }
-    private func addHeaderNodeObservation(_ obserNode:ArgoKitNode){
+    private func addHeaderNodeObservation(_ obserNode:ArgoKitNode?){
+        guard let obserNode = obserNode else {
+            if let _ = headerNodeObservation {
+                headerNodeObservation?.invalidate()
+                headerNodeObservation = nil
+            }
+            return
+        }
+        if let _ = headerNodeObservation {
+            headerNodeObservation?.invalidate()
+            headerNodeObservation = nil
+        }
         headerNodeObservation = obserNode.observe(\ArgoKitNode.frame, options: [.new, .old], changeHandler: {[weak self] (node, change) in
             if let `self` = self{
                 self.addNodeObservation(change)
