@@ -116,6 +116,10 @@ extension View {
                     }
                 }else{
                     self.node?.isEnabled = !_value
+                    if let _ = self.node?.nodeView(),let node =  self.node?.root {
+                        self.node?.isEnabled = !_value
+                        ArgoKitReusedLayoutHelper.appLayout(node)
+                    }
                 }
             }else{
                 self.node?.isEnabled = !_value

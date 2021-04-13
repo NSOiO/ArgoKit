@@ -24,7 +24,7 @@ public class SessionItem:ArgoKitIdentifiable{
     var freshId = (Int.min...).makeIterator()
 
     var textCom:Text?
-    var hidden:Bool = false
+    @Observable var hidden:Bool = true
 
     init(reuseIdentifier:String) {
         self.reuser = reuseIdentifier
