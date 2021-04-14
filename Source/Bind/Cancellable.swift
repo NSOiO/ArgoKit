@@ -19,8 +19,11 @@ public class ClosureCancelable: Cancellable {
         self.callback = callback
     }
     deinit {
-        if let block = self.callback {
-            block()
+//        if let block = self.callback {
+//            block()
+//        }
+        if let _ = self.callback {
+            self.callback = nil
         }
     }
     public func cancel() {
