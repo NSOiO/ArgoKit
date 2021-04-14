@@ -13,9 +13,9 @@ extension ArgoKitNodeViewModifier{
             isDirty_ = true
         }
         
-        if selector == #selector(setter:UILabel.isHidden) {
-            isDirty_ = true
-        }
+//        if selector == #selector(setter:UILabel.isHidden) {
+//            isDirty_ = true
+//        }
         
         if selector == #selector(setter:UILabel.attributedText) {
             isDirty_ = true

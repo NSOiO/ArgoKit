@@ -30,7 +30,6 @@ class ArgoKitCellNode: ArgoKitNode {
     
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {
         if frameObserber == nil{
-//            frameObserber = observe(\.frame, options:[.old,.new], changeHandler:changeHandler)
             frameObserber = observe(\.frame, options:[.old,.new], changeHandler: { (cellNode, change) in
                 if let oldFrame = change.oldValue,
                    let newFrame = change.newValue,

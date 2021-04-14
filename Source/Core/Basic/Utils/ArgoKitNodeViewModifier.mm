@@ -162,6 +162,9 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
     if (nodeCount != reuseNodes.count) {
         return;
     }
+    if (nodeCount == 0) {
+        return;
+    }
     for (int i = 0; i < nodeCount; i++) {
         ArgoKitNode *node = nodes[i];
         ArgoKitNode *reuseNode = reuseNodes[i];
@@ -194,11 +197,17 @@ static void performSelector(id object, SEL selector, NSArray<id> *values)
 }
 
 + (void)reuseNodeViewAttribute:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
+    if (!CGRectEqualToRect(node.view.frame, reuseNode.frame)) {
+        node.view.frame = reuseNode.frame;
+    }
     reuseNode.linkNode = node;
     [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:NO];
 }
 
 + (void)_resetNodeViewFrame:(ArgoKitNode *)node reuseNode:(ArgoKitNode*)reuseNode{
+    if (!CGRectEqualToRect(node.view.frame, reuseNode.frame)) {
+        node.view.frame = reuseNode.frame;
+    }
     reuseNode.linkNode = node;
     [self reuseNodeViewAttribute:node.childs reuseNodes:reuseNode.childs onlyResetFrame:YES];
 }

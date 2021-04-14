@@ -22,12 +22,16 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
         let gesture = TapGesture{ tapGesture in
             let view:UIView? = tapGesture.view
         }
-        Text(item.sessionName)
-         .textColor(UIColor(50,51,51))
-         .font(size: 16.0)
-         .shrink(1.0)
-        .gesture(gesture)
-            .gone(item.isEnable)
+
+        HStack{
+            Text(item.sessionName)
+             .textColor(UIColor(50,51,51))
+             .font(size: 16.0)
+             .shrink(1.0)
+            .gesture(gesture)
+        }.gone(item.hidden)
+        .alignItems(.start)
+
         
          HStack{
             VStack{
@@ -63,9 +67,7 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                          .shrink(1.0)
                         
                         Button(action: {
-                            nodeQueue.async {
-                                item.sessionName = "hahahahahhadcsdcscsdcsdcdscd"
-                            }
+                            item.hidden = !item.hidden
                            
                         }){
                             Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!, placeholder: "")
