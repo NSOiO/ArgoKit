@@ -65,10 +65,12 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                          .font(size: 25.0)
                             .firstLineHeadIndent(30)
                          .shrink(1.0)
+                            .lineLimit(0)
+                            .backgroundColor(.blue)
                         
                         Button(action: {
                             item.hidden = !item.hidden
-                           
+                            item.sessionName = "asdscsdcdscdsvcsdfavbnhkdfjsbvka"
                         }){
                             Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!, placeholder: "")
                                 .margin(edge: .left, value: 4)

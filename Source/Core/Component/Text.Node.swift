@@ -28,6 +28,7 @@ extension NSMutableAttributedString{
 }
 open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
     var textColor:UIColor?
+    var firstHeadIndent:CGFloat = 0;
     open override func prepareForUse(view: UIView?) {
         super.prepareForUse(view: view)
         if let lable = view as? UILabel {
@@ -273,6 +274,7 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
               attributedText.length > 0 else {
             return
         }
+        firstHeadIndent = value;
         var innerRange = NSRange(location: 0, length: attributedText.length)
         if let range = range{
             innerRange = range
@@ -352,16 +354,19 @@ open class ArgoKitTextBaseNode: ArgoKitArttibuteNode{
         var maxHeight = size.height
         if let attribut = self.attributedText{
             var totolLineHeight:CGFloat = 0
+            let lineHeight:CGFloat = ceil(font.lineHeight + font.leading)
             if numberOfLines > 0 {
-                let lineHeight:CGFloat = ceil(font.lineHeight + font.leading)
                 totolLineHeight = lineSpacing * CGFloat((numberOfLines - 1)) + lineHeight * CGFloat(numberOfLines)
                 maxHeight = CGFloat.minimum(size.height, totolLineHeight)
             }
             self._lineBreakMode_(.byCharWrapping)
             let result_size = attribut.boundingRect(with: CGSize(width: size.width, height: maxHeight), options: [.usesLineFragmentOrigin], context: nil).size
             self._lineBreakMode_(self.lineBreakMode)
-            let width = ceil(result_size.width);
+            var width = ceil(result_size.width);
             let height = ceil(result_size.height);
+            if(height <= lineHeight){
+                width = width + firstHeadIndent;
+            }
             result = CGSize(width:width, height:height)
             return result
         }
