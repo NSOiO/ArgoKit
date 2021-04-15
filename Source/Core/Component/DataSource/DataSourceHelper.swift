@@ -11,7 +11,12 @@ class ArgoKitCellNode: ArgoKitNode {
     var frameObserber: NSKeyValueObservation?
 
     private var _nodeObserver:ArgoKitNodeObserver?
-    
+    public func containView()->Bool{
+        guard let _ = self.view else {
+            return false
+        }
+        return true
+    }
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode?) -> Void) {
         if _nodeObserver == nil {
             _nodeObserver = ArgoKitNodeObserver()
@@ -25,7 +30,6 @@ class ArgoKitCellNode: ArgoKitNode {
                 self.addNode(observer: nodeObserver)
             }
         }
-
     }
     
     public func observeFrameChanged(changeHandler: @escaping (ArgoKitCellNode, NSKeyValueObservedChange<CGRect>) -> Void) {

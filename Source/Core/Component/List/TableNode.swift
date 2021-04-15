@@ -12,6 +12,7 @@ fileprivate let kHeaderReuseIdentifier = "ArgoKitListHeaderView"
 fileprivate let kFooterReuseIdentifier = "ArgoKitListFooterView"
 class TableView:UITableView{
     lazy var registedReuseIdSet = Set<String>()
+    var cellCache:NSHashTable<ListCell> = NSHashTable<ListCell>.weakObjects()
     private var oldFrame = CGRect.zero
     var reLayoutAction:((CGRect)->())?
     var hitTestAction:(()->())?
@@ -248,11 +249,34 @@ class TableNode<D>: ArgoKitScrollViewNode,
             tableView.register(ListCell.self, forCellReuseIdentifier: identifier)
             tableView_.registedReuseIdSet.insert(identifier)
         }
+        var isReuedCell = false
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ListCell
-        cell.sourceData = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
+        if let tableView_ = tableView as? TableView{
+            if tableView_.cellCache.contains(cell) {
+                isReuedCell = true
+            }else{
+                isReuedCell = false
+                tableView_.cellCache.add(cell)
+            }
+        }
+        
+        let sourceData = self.pDataSourceHelper.dataForRow(indexPath.row, at: indexPath.section)
+        cell.sourceData = sourceData
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
-            cell.linkCellNode(node)
+            
+            // FIX:处理插入数据是node被绑定到多个cell上
+            if !isReuedCell && node.containView() {
+                if  let sourceData_ = sourceData as? ArgoKitIdentifiable  {
+                    sourceData_.argokit_linkNode  = nil
+                    self.pDataSourceHelper.rowHeight(sourceData_, maxWidth: cell.frame.width)
+                    if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section){
+                        cell.linkCellNode(node,isReused:isReuedCell)
+                    }
+                }
+            }else{
+                cell.linkCellNode(node,isReused:isReuedCell)
+            }
         }
         return cell
     }

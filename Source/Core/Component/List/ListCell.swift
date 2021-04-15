@@ -27,7 +27,7 @@ class ListCell: UITableViewCell {
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
     }
     
-    func linkCellNode(_ node: ArgoKitCellNode) {
+    func linkCellNode(_ node: ArgoKitCellNode,isReused:Bool) {
         if node.isPreviewing {
             node.bindView(self.contentView)
             self.contentNode = node
@@ -35,8 +35,7 @@ class ListCell: UITableViewCell {
             ArgoKitReusedLayoutHelper.addLayoutNode(node)
             return
         }
-        
-        if self.contentView.subviews.count != 0 && self.contentNode != nil {
+        if isReused {
             if node.frame.equalTo(.zero) || node.isDirty {
                 node.applyLayoutAferCalculation(withView:false)
             }
