@@ -36,21 +36,16 @@ class ArgoKitScrollViewNode: ArgoKitArttibuteNode, UIScrollViewDelegate {
     var setFlexGrow:Bool = false
     var autoHeight:CGFloat = 0 {
         didSet{
-            if autoHeight < defaultViewHeight {
-                self.height(point:autoHeight)
-                self.flexGrow(0)
-                self.markDirty()
-            }else{
-                self.height(point:defaultViewHeight)
-                self.flexGrow(defaultFlexGrow)
-                self.markDirty()
-            }
-            _ = self.applyLayout(size: self.size)
+            self.height(point:autoHeight)
+            self.flexGrow(0)
+            self.markDirty()
+//            _ = self.applyLayout(size: self.size)
         }
     }
 
     func setContentSizeViewHeight(_ height:CGFloat){
-        if adjustsHeightToFitSubView && autoHeight < defaultViewHeight{
+        if adjustsHeightToFitSubView{
+            defaultFlexGrow = 0
             autoHeight = height
         }
     }

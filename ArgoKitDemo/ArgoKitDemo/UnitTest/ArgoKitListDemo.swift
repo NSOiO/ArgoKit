@@ -269,9 +269,8 @@ struct ListDemo:ArgoKit.View{
     init() {
         view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         view1.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {[self] in
-            self.loadMoreData1()
-        }
+        
+        self.loadMoreData1()
       
         self.backgroundColor(.yellow)
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
@@ -390,7 +389,7 @@ struct ListDemo:ArgoKit.View{
                 }.backgroundColor(.red)
             } .cellSelected {item, indexPath in
                 self.loadMoreData()
-            }.height(ArgoValue(self.cellheight))
+            }.adjustsHeightToFitSubView(true)
             .backgroundColor(.gray)
             .scrollEnabled(false)
         }

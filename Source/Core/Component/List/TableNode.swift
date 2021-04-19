@@ -430,6 +430,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
            height > 0{
             return height
         }
+        let height = self.pDataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
+        if height.isNaN {
+            return 44
+        }
         return self.pDataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
     
