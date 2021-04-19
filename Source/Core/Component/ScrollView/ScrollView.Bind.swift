@@ -388,7 +388,7 @@ extension ScrollView{
         return self.bindCallback({ [self] in
             if let node = self.node as? ArgoKitScrollViewNode{
                 node.adjustsHeightToFitSubView = value()
-                node.height(point: 1024 * 8)
+                node.height(point: UIScreen.main.bounds.height)
             }
         }, forKey: #function)
     }

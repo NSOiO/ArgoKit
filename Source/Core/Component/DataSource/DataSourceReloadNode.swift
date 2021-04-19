@@ -37,7 +37,7 @@ public protocol DataSourceReloadNode: class {
     
     func apply()
     
-    func createNodeFromData(_ data:Any,helper:Any)->CGFloat
+    func createNodeFromData(_ data:Any,helper:Any)
 }
 
 extension DataSourceReloadNode {
@@ -46,8 +46,8 @@ extension DataSourceReloadNode {
         
     }
     
-    func createNodeFromData(_ data:Any,helper:Any)->CGFloat{
-        return 0
+    func createNodeFromData(_ data:Any,helper:Any){
+        
     }
     
     func apply(){

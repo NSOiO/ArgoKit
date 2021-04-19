@@ -258,8 +258,6 @@ struct ListDemo:ArgoKit.View{
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     var view:UIView = UIView()
     var view1:UIView = UIView()
-    @Observable var cellheight:CGFloat = 0
-    @Observable var totalHeight:CGFloat = 0
     @Observable var headerGone = false
     @Alias var list:List<SessionItem>?
     @DataSource var items:[SessionItem] = [SessionItem]()
@@ -300,18 +298,15 @@ struct ListDemo:ArgoKit.View{
             let items_ = self._loadMoreData()
         
             DispatchQueue.main.async {
-                
-                $inner_items.append(contentsOf: items1_)
-                for data in items1_{
-                    totalHeight = totalHeight + $inner_items.prepareNode(from: data)
-                }
-                $inner_items.apply()
-                self.cellheight = self.cellheight  + totalHeight
-                
                 if $items.count() < 1 {
                     $items.append(contentsOf: items_)
                     $items.apply()
                 }
+                
+                $inner_items.append(contentsOf: items1_)
+                $inner_items.apply()
+                
+             
                 
          
             }
@@ -322,17 +317,17 @@ struct ListDemo:ArgoKit.View{
             let items1_ = self._loadMoreData1()
             let items_ = self._loadMoreData()
             DispatchQueue.main.async {
-                $inner_items.append(contentsOf: items1_)
-                for data in items_{
-                    totalHeight = totalHeight + $inner_items.prepareNode(from: data)
-                }
-                $inner_items.apply()
-                self.cellheight = self.cellheight + totalHeight
                 
                 if $items.count() < 1 {
                     $items.append(contentsOf: items_)
                     $items.apply()
                 }
+                
+                $inner_items.append(contentsOf: items1_)
+    
+                $inner_items.apply()
+                
+          
                 if let callBack1 = callback{
                     callBack1()
                 }

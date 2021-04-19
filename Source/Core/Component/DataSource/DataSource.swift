@@ -202,11 +202,11 @@ extension DataSource{
     /// - Parameter element: The element to prepare a view node.
     /// - Returns: Self
     @discardableResult
-    public func prepareNode<Element>(from element:Element) -> CGFloat{
-        if let node = self._rootNode{
-           return node.createNodeFromData(element,helper: self)
+    public func prepareNode<Element>(from element:Element) -> Self{
+        if let node = self._rootNode, !(Thread.isMainThread){
+            node.createNodeFromData(element,helper: self)
         }
-        return 0
+        return self
     }
     
     /// prepare a viewnode from a  elements.
@@ -218,14 +218,17 @@ extension DataSource{
     /// - Parameter elements: The elements to prepare view nodes.
     /// - Returns: Self
     @discardableResult
-    public func prepareNode<Element>(from elements:DataList<Element>) -> CGFloat{
-        var height:CGFloat = 0
+    public func prepareNode<Element>(from elements:DataList<Element>) -> Self{
+        if Thread.isMainThread{
+            return self
+        }
+        
         for data in elements{
             if let node = self._rootNode {
-                height = height +  node.createNodeFromData(data,helper: self)
+                node.createNodeFromData(data,helper: self)
             }
         }
-        return height
+        return self
     }
 }
 // MARK: === data appended ===
