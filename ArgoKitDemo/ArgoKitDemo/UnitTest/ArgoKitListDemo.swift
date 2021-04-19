@@ -259,7 +259,7 @@ struct ListDemo:ArgoKit.View{
     var view:UIView = UIView()
     var view1:UIView = UIView()
     @Observable var headerGone = true
-    @Observable var close = true
+    @Observable var close = false
     @Alias var list:List<SessionItem>?
     @DataSource var items:[SessionItem] = [SessionItem]()
     @DataSource var inner_items:[SessionItem] = [SessionItem]()
@@ -383,7 +383,7 @@ struct ListDemo:ArgoKit.View{
 
             }
             .cellSelected {item, indexPath in
-                self.close = false
+                self.close = true
                 self.loadMoreData()
             }
             .adjustsHeightToFitSubView(true)

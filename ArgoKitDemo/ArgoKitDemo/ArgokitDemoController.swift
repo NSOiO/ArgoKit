@@ -22,6 +22,7 @@ public class SessionItem:ArgoKitIdentifiable{
     var timeLabel:String?
     var unreadCount:String?
     var freshId = (Int.min...).makeIterator()
+    var innerList_Items:[SessionItem] = []
 
     var textCom:Text?
     @Observable var hidden:Bool = true

@@ -235,6 +235,14 @@ class TableNode<D>: ArgoKitScrollViewNode,
             tableView.reloadData()
         }
     }
+    override func prepareForUse(view: UIView?) {
+          if let tableView = view as? TableView {
+            self.pDataSourceHelper = DataSourceHelper<D>()
+            self.pSectionHeaderSourceHelper = DataSourceHelper<D>()
+            self.pSectionFooterSourceHelper = DataSourceHelper<D>()
+            tableView.reloadData()
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
