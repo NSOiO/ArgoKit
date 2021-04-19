@@ -298,10 +298,8 @@ struct ListDemo:ArgoKit.View{
             let items_ = self._loadMoreData()
         
             DispatchQueue.main.async {
-                if $items.count() < 1 {
-                    $items.append(contentsOf: items_)
-                    $items.apply()
-                }
+                $items.append(contentsOf: items_)
+                $items.apply()
                 
                 $inner_items.append(contentsOf: items1_)
                 $inner_items.apply()
@@ -315,13 +313,13 @@ struct ListDemo:ArgoKit.View{
     func loadMoreData(_ callback:(()->())? = nil){
         nodeQueue.async {
             let items1_ = self._loadMoreData1()
-            let items_ = self._loadMoreData()
+//            let items_ = self._loadMoreData()
             DispatchQueue.main.async {
                 
-                if $items.count() < 1 {
-                    $items.append(contentsOf: items_)
-                    $items.apply()
-                }
+//                if $items.count() < 10 {
+//                    $items.append(contentsOf: items_)
+//                    $items.apply()
+//                }
                 
                 $inner_items.append(contentsOf: items1_)
     
@@ -338,7 +336,7 @@ struct ListDemo:ArgoKit.View{
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         var items_:[SessionItem] = []
-        for index in 0..<1{
+        for index in 0..<2{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             
@@ -347,9 +345,7 @@ struct ListDemo:ArgoKit.View{
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
             items_.append(item)
-            if $items.count() < 1 {
-                $items.prepareNode(from: item)
-            }
+            $items.prepareNode(from: item)
         }
         return items_
     }
@@ -376,15 +372,18 @@ struct ListDemo:ArgoKit.View{
     
     var body: ArgoKit.View{
         ArgoKit.List(data:$items){ item in
+            Text("============")
             List(data:$inner_items){item in
                 VStack{
                     Text(item.sessionName)
                     Text("hahahah")
                     Text("hahahah111")
                 }.backgroundColor(.red)
-            } .cellSelected {item, indexPath in
+            }
+            .cellSelected {item, indexPath in
                 self.loadMoreData()
-            }.adjustsHeightToFitSubView(true)
+            }
+            .adjustsHeightToFitSubView(true)
             .backgroundColor(.gray)
             .scrollEnabled(false)
         }
