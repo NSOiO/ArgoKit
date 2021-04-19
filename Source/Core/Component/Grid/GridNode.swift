@@ -801,36 +801,37 @@ extension GridNode{
 }
 
 extension GridNode{
-    func createNodeFromData(_ data: Any, helper: Any) {
+    func createNodeFromData(_ data: Any, helper: Any) ->CGFloat{
         if pthread_main_np() != 0{
-            return
+            return 0
         }
         if let datasource = helper as? DataSource<DataList<D>> {
 
             if datasource.type == .body {
-                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return dataSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
             if datasource.type == .header {
-                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
 
             if datasource.type == .footer {
-                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+                return sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
             }
         }
 
         if let datasource = helper as? DataSource<SectionDataList<D>> {
 
             if datasource.type == .body {
-                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return dataSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
             if datasource.type == .header {
-                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
 
             if datasource.type == .footer {
-                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+                return sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
             }
         }
+        return 0
     }
 }

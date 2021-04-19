@@ -212,7 +212,8 @@ extension DataSourceHelper {
         defer {
             nodeLock.unlock()
         }
-        if let sourceData_ = data as? D,let view = self.buildNodeFunc?(sourceData_) {
+        if let sourceData_ = data as? D,
+           let view = self.buildNodeFunc?(sourceData_) {
             if let nodes = view.type.viewNodes() {
                 let cellNode: ArgoKitCellNode = ArgoKitCellNode(viewClass: UIView.self)
                 cellNode.addChildNodes(nodes)

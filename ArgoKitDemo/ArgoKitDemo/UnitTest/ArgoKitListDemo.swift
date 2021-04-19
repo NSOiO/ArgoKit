@@ -22,16 +22,19 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
         let gesture = TapGesture{ tapGesture in
             let view:UIView? = tapGesture.view
         }
-
-        HStack{
-            Text(item.sessionName)
-             .textColor(UIColor(50,51,51))
-             .font(size: 16.0)
+        Button {
+            
+        } builder: { () -> View in
+            Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp"), placeholder: nil)
              .shrink(1.0)
+                .backgroundColor(.red)
+                .size(width: 140, height: 40)
             .gesture(gesture)
-        }.gone(item.hidden)
-        .alignItems(.start)
-
+        }.cornerRadius(4)
+        .borderWidth(1)
+        .borderColor(.yellow)
+        .gone(item.isEnable)
+        .size(width: 240, height: 40)
         
          HStack{
             VStack{
@@ -42,9 +45,9 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
 //                .cornerRadius(10)
                     .circle()
                 .backgroundColor(.red)
-//                    .borderWidth(1)
-//                    .borderColor(.cyan)
-                
+                    .borderWidth(1)
+                    .borderColor(.cyan)
+
                 Image(url: URL(string: "http://img.momocdn.com/feedimage/A1/D2/A1D2FE38-F933-4758-924C-CD5AC0E7AD8720201213_400x400.webp"), placeholder: "")
                 .height(12.0)
                 .width(18.0)
@@ -57,20 +60,24 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
 
              
              VStack{
+                Text(item.sessionName)
+                    .textColor(.red)
+                    .textShadowColor(.yellow)
+                 .font(size: 25.0)
                  HStack{
                     HStack{
                         Text(item.sessionName)
                             .textColor(.red)
                             .textShadowColor(.yellow)
                          .font(size: 25.0)
-                            .firstLineHeadIndent(30)
+//                            .firstLineHeadIndent(30)
                          .shrink(1.0)
-                            .lineLimit(0)
-                            .backgroundColor(.blue)
-                        
+
                         Button(action: {
-                            item.hidden = !item.hidden
-                            item.sessionName = "asdscsdcdscdsvcsdfavbnhkdfjsbvka"
+                            nodeQueue.async {
+                                item.sessionName = "hahahahahhadcsdcscsdcsdcdscd"
+                            }
+
                         }){
                             Image(url: URL(string: "http://img.momocdn.com/feedimage/82/8B/828BA59B-6A93-F96B-D467-FC22243F5BD120201211_L.webp")!, placeholder: "")
                                 .margin(edge: .left, value: 4)
@@ -80,17 +87,17 @@ struct MSUserInterractionHeaderView: ArgoKit.View {
                         .backgroundColor(.red)
                         .alignSelf(.center)
                         .padding(top: 7, right: 7, bottom: 7, left: 7)
-     
+
                     }.flex(1.0)
-                    
-                     
+
+
                      Text("10.0千米")
                          .textAlign(.right)
                          .font(size: 13)
                          .textColor(UIColor(170,170,170))
                         .backgroundColor(.yellow)
                         .margin(edge: .right, value: 10)
-                    
+
                  }.margin(edge: .left, value: 4)
                  .width(100%)
                  
@@ -218,11 +225,12 @@ class SessionRow:ArgoKit.View {
  
     
    var body: ArgoKit.View{
+
         MSUserInterractionHeaderView(item: item)
             .margin(edge: .top, value: 5)
             .onTapGesture() {[data = self.item] in
                 data.isEnable  = !data.isEnable
-        }
+            }.margin(edge: .bottom, value: 40)
     
         MSUserInterractionContentView()
             .margin(top: 10.0, right: 15.0, bottom: 15.0, left: 70.0)
@@ -250,15 +258,21 @@ struct ListDemo:ArgoKit.View{
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     var view:UIView = UIView()
     var view1:UIView = UIView()
+    @Observable var cellheight:CGFloat = 0
+    @Observable var totalHeight:CGFloat = 0
     @Observable var headerGone = false
     @Alias var list:List<SessionItem>?
     @DataSource var items:[SessionItem] = [SessionItem]()
+    @DataSource var inner_items:[SessionItem] = [SessionItem]()
     @DataSource var headerItems:[SessionItem] = [SessionItem]()
     @DataSource var footerItems:[SessionItem] = [SessionItem]()
     init() {
         view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         view1.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-       loadMoreData1()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {[self] in
+            self.loadMoreData1()
+        }
+      
         self.backgroundColor(.yellow)
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11111111111111111111111111111111111111111111111111111111111111111111111111111111111111","222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222","3333333333","4444444444444444444444","55555555555555555555"]
@@ -283,19 +297,43 @@ struct ListDemo:ArgoKit.View{
     }
     func loadMoreData1(){
         nodeQueue.async {
+            let items1_ = self._loadMoreData1()
             let items_ = self._loadMoreData()
+        
             DispatchQueue.main.async {
-                $items.append(contentsOf: items_)
-                $items.apply()
+                
+                $inner_items.append(contentsOf: items1_)
+                for data in items1_{
+                    totalHeight = totalHeight + $inner_items.prepareNode(from: data)
+                }
+                $inner_items.apply()
+                self.cellheight = self.cellheight  + totalHeight
+                
+                if $items.count() < 1 {
+                    $items.append(contentsOf: items_)
+                    $items.apply()
+                }
+                
+         
             }
         }
     }
     func loadMoreData(_ callback:(()->())? = nil){
         nodeQueue.async {
+            let items1_ = self._loadMoreData1()
             let items_ = self._loadMoreData()
             DispatchQueue.main.async {
-                $items.append(contentsOf: items_)
-                $items.apply()
+                $inner_items.append(contentsOf: items1_)
+                for data in items_{
+                    totalHeight = totalHeight + $inner_items.prepareNode(from: data)
+                }
+                $inner_items.apply()
+                self.cellheight = self.cellheight + totalHeight
+                
+                if $items.count() < 1 {
+                    $items.append(contentsOf: items_)
+                    $items.apply()
+                }
                 if let callBack1 = callback{
                     callBack1()
                 }
@@ -306,7 +344,7 @@ struct ListDemo:ArgoKit.View{
         let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
         let messages = ["11","22","33","44","55"]
         var items_:[SessionItem] = []
-        for index in 0..<100{
+        for index in 0..<1{
             let item = SessionItem( reuseIdentifier:"reuseIdentifier")
             item.imagePath = images[index%5]
             
@@ -315,7 +353,26 @@ struct ListDemo:ArgoKit.View{
             item.timeLabel = getTimeLabel()
             item.unreadCount = String(index)
             items_.append(item)
-            $items.prepareNode(from: item)
+            if $items.count() < 1 {
+                $items.prepareNode(from: item)
+            }
+        }
+        return items_
+    }
+    
+    func _loadMoreData1()->[SessionItem] {
+        let images = ["chincoteague.jpg","icybay.jpg","silversalmoncreek.jpg","umbagog.jpg","hiddenlake.jpg"]
+        let messages = ["11","22","33","44","55"]
+        var items_:[SessionItem] = []
+        for index in 0..<1{
+            let item = SessionItem( reuseIdentifier:"reuseIdentifier")
+            item.imagePath = images[index%5]
+            
+            item.sessionName = images[index%5] + "+\(String(index))"
+            item.lastMessage = messages[index%5] + "+\(String(index))"
+            item.timeLabel = getTimeLabel()
+            item.unreadCount = String(index)
+            items_.append(item)
         }
         return items_
     }
@@ -325,7 +382,17 @@ struct ListDemo:ArgoKit.View{
     
     var body: ArgoKit.View{
         ArgoKit.List(data:$items){ item in
-           SessionRow(item: item)
+            List(data:$inner_items){item in
+                VStack{
+                    Text(item.sessionName)
+                    Text("hahahah")
+                    Text("hahahah111")
+                }.backgroundColor(.red)
+            } .cellSelected {item, indexPath in
+                self.loadMoreData()
+            }.height(ArgoValue(self.cellheight))
+            .backgroundColor(.gray)
+            .scrollEnabled(false)
         }
         .tableHeaderView(headerContent: { () -> View? in
 //            MSUserInterractionContentView()
@@ -353,17 +420,6 @@ struct ListDemo:ArgoKit.View{
            
         })
         .alias(variable: $list)
-//        .tableHeaderView(headerContent: { () -> View? in
-//                            CustomView(view: view)
-//                                .backgroundColor(.yellow)
-//                                .height(1)
-////            EmptyView().size(width: <#T##ArgoValue#>, height: <#T##ArgoValue#>)
-//////            HStack{
-////
-//////                CustomView(view: view)
-//////                    .backgroundColor(.purple)
-//////            }
-//        })
         .didEndScroll({ (items, view) in
             print("items:\(items),scrollView:\(view)")
         })
@@ -407,43 +463,44 @@ struct ListDemo:ArgoKit.View{
         })
         
         
-        .refreshHeaderView {
-            RefreshHeaderView(startRefreshing: {headerView in
-                self.$items.clear()
-                headerView?.endRefreshing()
-            })
-            {
-                Text("refreshheader")
-                    .alignSelf(.center)
-                    .lineLimit(0).font(size: 20).backgroundColor(.red)
-
-            }.pullingDown{ point in
-//                print("pullingDown\(String(describing: point))")
-            }
-            .backgroundColor(.cyan)
-            .height(100.0)
-        }
-        .refreshFooterView{
-            RefreshFooterView(startRefreshing: {refresh in
-                self.loadMoreData(){
-                    refresh?.endRefreshing()
-                    refresh?.resetNoMoreData()
-                }
-                print("footerhead")
-            })
-            {
-                Text("refreshfooter").alignSelf(.center).lineLimit(0).font(size: 20).backgroundColor(.red)
-            }
-            .height(.auto)
-            .autoRefreshOffPage(2)
-            .backgroundColor(.red)
-
-        }
+//        .refreshHeaderView {
+//            RefreshHeaderView(startRefreshing: {headerView in
+//                self.$items.clear()
+//                headerView?.endRefreshing()
+//            })
+//            {
+//                Text("refreshheader")
+//                    .alignSelf(.center)
+//                    .lineLimit(0).font(size: 20).backgroundColor(.red)
+//
+//            }.pullingDown{ point in
+////                print("pullingDown\(String(describing: point))")
+//            }
+//            .backgroundColor(.cyan)
+//            .height(100.0)
+//        }
+//        .refreshFooterView{
+//            RefreshFooterView(startRefreshing: {refresh in
+//                self.loadMoreData(){
+//                    refresh?.endRefreshing()
+//                    refresh?.resetNoMoreData()
+//                }
+//                print("footerhead")
+//            })
+//            {
+//                Text("refreshfooter").alignSelf(.center).lineLimit(0).font(size: 20).backgroundColor(.red)
+//            }
+//            .height(.auto)
+//            .autoRefreshOffPage(2)
+//            .backgroundColor(.red)
+//
+//        }
         .sectionHeader($headerItems, headerContent: { (item) -> View in
             Text("sectionHeader").height(50).backgroundColor(.gray)
         })
         .backgroundColor(.purple)
-        .grow(1)
+        .height(500)
+//        .grow(1)
 //        Text("hahahha").height(100).backgroundColor(.orange)
 //
 //        Text("hahahha").height(100).backgroundColor(.blue)

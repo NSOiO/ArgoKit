@@ -202,11 +202,11 @@ extension DataSource{
     /// - Parameter element: The element to prepare a view node.
     /// - Returns: Self
     @discardableResult
-    public func prepareNode<Element>(from element:Element) -> Self{
-        if let node = self._rootNode, !(Thread.isMainThread){
-            node.createNodeFromData(element,helper: self)
+    public func prepareNode<Element>(from element:Element) -> CGFloat{
+        if let node = self._rootNode{
+           return node.createNodeFromData(element,helper: self)
         }
-        return self
+        return 0
     }
     
     /// prepare a viewnode from a  elements.
@@ -218,17 +218,14 @@ extension DataSource{
     /// - Parameter elements: The elements to prepare view nodes.
     /// - Returns: Self
     @discardableResult
-    public func prepareNode<Element>(from elements:DataList<Element>) -> Self{
-        if Thread.isMainThread{
-            return self
-        }
-        
+    public func prepareNode<Element>(from elements:DataList<Element>) -> CGFloat{
+        var height:CGFloat = 0
         for data in elements{
             if let node = self._rootNode {
-                node.createNodeFromData(data,helper: self)
+                height = height +  node.createNodeFromData(data,helper: self)
             }
         }
-        return self
+        return height
     }
 }
 // MARK: === data appended ===
@@ -251,9 +248,6 @@ extension DataSource{
     public func append<Element>(_ newElement:Element) -> Self
     where Value == DataList<Element>{
         dataSource.append(newElement)
-        if let node = self._rootNode {
-            node.createNodeFromData(newElement,helper: self)
-        }
         return self
     }
     
@@ -278,11 +272,6 @@ extension DataSource{
     public func append<Element>(_ newElement:DataList<Element>) -> Self
     where Value == SectionDataList<Element>{
         dataSource.append(newElement)
-//        for data in newElement{
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
-//        }
         return self
     }
     
@@ -307,9 +296,6 @@ extension DataSource{
             return self
         }
         dataSource[section].append(newElement)
-        if let node = self._rootNode {
-            node.createNodeFromData(newElement,helper: self)
-        }
         return self
     }
     
@@ -334,11 +320,6 @@ extension DataSource{
             return self
         }
         dataSource[section].append(contentsOf: newElements)
-//        for data in newElements{
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
-//        }
         return self
     }
     
@@ -359,11 +340,6 @@ extension DataSource{
     public func append<Element>(contentsOf newElements:DataList<Element>) -> Self
     where Value == DataList<Element>{
         dataSource.append(contentsOf: newElements)
-//        for data in newElements{
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
-//        }
         return self
     }
     
@@ -383,13 +359,6 @@ extension DataSource{
     public func append<Element>(contentsOf newElements:SectionDataList<Element>) -> Self
     where Value == SectionDataList<Element>{
         dataSource.append(contentsOf: newElements)
-//        for datas in newElements{
-//            for data in datas{
-//                if let node = self._rootNode {
-//                    node.createNodeFromData(data,helper: self)
-//                }
-//            }
-//        }
         return self
     }
 }
@@ -427,9 +396,6 @@ extension DataSource{
                 continue
             }
             dataSource.insert(data, at: indexPath.row)
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
         }
         self.insertRows(at: indexPaths)
         return self
@@ -459,11 +425,6 @@ extension DataSource{
             return self
         }
         dataSource.insert(contentsOf:datas, at: position)
-//        for data in datas{
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
-//        }
         self.reloadData()
         return self
     }
@@ -503,9 +464,6 @@ extension DataSource{
                 continue
             }
             dataSource[indexPath.section].insert(data, at: indexPath.row)
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
         }
         self.insertRows(at: indexPaths)
         return self
@@ -542,11 +500,6 @@ extension DataSource{
         }
         
         dataSource[section].insert(contentsOf:datas, at: position)
-//        for data in datas {
-//            if let node = self._rootNode {
-//                node.createNodeFromData(data,helper: self)
-//            }
-//        }
         self.reloadData()
         return self
     }

@@ -347,7 +347,8 @@ class TableNode<D>: ArgoKitScrollViewNode,
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             ArgoKitReusedLayoutHelper.addLayoutNode(node)
-            node.observeFrameChanged {[weak self] (_, _) in
+            node.observeFrameChanged {[weak self] (cellNode, _) in
+                print("cellNode:\(cellNode),height:\(cellNode.size)")
                 self?.reloadRowsHeight()
             }
         }
@@ -429,7 +430,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
            height > 0{
             return height
         }
-        
         return self.pDataSourceHelper.rowHeight(indexPath.row, at: indexPath.section, maxWidth: tableView.frame.width)
     }
     
@@ -914,8 +914,8 @@ extension TableNode {
     }
 
     public func reloadRowsHeight() {
-        tableView?.beginUpdates()
-        tableView?.endUpdates()
+        self.tableView?.beginUpdates()
+        self.tableView?.endUpdates()
     }
     
     func removeNode(_ node:Any?){
@@ -931,36 +931,34 @@ extension TableNode {
 }
 
 extension TableNode{
-    func createNodeFromData(_ data: Any,helper:Any) {
-        if pthread_main_np() != 0{
-            return
-        }
+    func createNodeFromData(_ data: Any,helper:Any)->CGFloat {
         if let datasource = helper as? DataSource<DataList<D>> {
 
             if datasource.type == .body {
-                pDataSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return pDataSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
             if datasource.type == .header {
-                pSectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return pSectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
 
             if datasource.type == .footer {
-                pSectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+                return pSectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
             }
         }
 
         if let datasource = helper as? DataSource<SectionDataList<D>> {
 
             if datasource.type == .body {
-                dataSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return dataSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
             if datasource.type == .header {
-                sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
+                return sectionHeaderSourceHelper.rowHeight(data, maxWidth: maxWith)
             }
 
             if datasource.type == .footer {
-                sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
+                return sectionFooterSourceHelper.rowHeight(data, maxWidth:maxWith)
             }
         }
+        return 0
     }
 }
