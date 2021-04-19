@@ -69,6 +69,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
     
     var needLoadNodes: NSMutableArray = NSMutableArray()
     var scrollToToping: Bool = false
+    var _closeAnimation:Bool = false
+    public func setCloseAnimation(_ animation:Bool){
+        _closeAnimation = animation
+    }
     
     public var style: UITableView.Style = .plain
     public var selectionStyle: UITableViewCell.SelectionStyle = .none
@@ -918,8 +922,16 @@ extension TableNode {
     }
 
     public func reloadRowsHeight() {
-        self.tableView?.beginUpdates()
-        self.tableView?.endUpdates()
+        if self._closeAnimation == true {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            self.tableView?.beginUpdates()
+            self.tableView?.endUpdates()
+            CATransaction.commit()
+        }else{
+            self.tableView?.beginUpdates()
+            self.tableView?.endUpdates()
+        }
     }
     
     func removeNode(_ node:Any?){

@@ -217,4 +217,11 @@ extension List{
             tableNode.estimatedRowHeight = value()
         }, forKey: #function)
     }
+    
+    public func closeAnimation( value: @escaping @autoclosure () ->Bool) -> Self{
+        return self.bindCallback({ [tableNode = self.tableNode] in
+            let value = value()
+            tableNode.setCloseAnimation(value)
+        }, forKey: #function)
+    }
 }

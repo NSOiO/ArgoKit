@@ -258,7 +258,8 @@ struct ListDemo:ArgoKit.View{
     var nodeQueue:DispatchQueue = DispatchQueue(label: "com.argokit.create.list")
     var view:UIView = UIView()
     var view1:UIView = UIView()
-    @Observable var headerGone = false
+    @Observable var headerGone = true
+    @Observable var close = true
     @Alias var list:List<SessionItem>?
     @DataSource var items:[SessionItem] = [SessionItem]()
     @DataSource var inner_items:[SessionItem] = [SessionItem]()
@@ -379,8 +380,10 @@ struct ListDemo:ArgoKit.View{
                     Text("hahahah")
                     Text("hahahah111")
                 }.backgroundColor(.red)
+
             }
             .cellSelected {item, indexPath in
+                self.close = false
                 self.loadMoreData()
             }
             .adjustsHeightToFitSubView(true)
@@ -492,8 +495,9 @@ struct ListDemo:ArgoKit.View{
             Text("sectionHeader").height(50).backgroundColor(.gray)
         })
         .backgroundColor(.purple)
-        .height(500)
-//        .grow(1)
+//        .height(500)
+        .grow(1)
+        .closeAnimation(value: close)
 //        Text("hahahha").height(100).backgroundColor(.orange)
 //
 //        Text("hahahha").height(100).backgroundColor(.blue)
