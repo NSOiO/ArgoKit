@@ -661,6 +661,22 @@ static CGFloat YGRoundPixelValue(CGFloat value)
 - (void)applyLayoutAferCalculationWithView:(BOOL)withView{
     if (self.layout) {
         [self.layout applyLayoutAferCalculationWithView:withView];
+    }else{
+        if (withView) {
+            [self layoutToNodeView:self];
+        }
+    }
+}
+- (void)layoutToNodeView:(ArgoKitNode *)node
+{
+    node.isReused = NO;
+    [node createNodeViewIfNeed:node.frame];
+    if (node.isEnabled) {
+        for (NSUInteger i=0; i<node.childs.count; i++) {
+            ArgoKitNode *chiledNode = [node.childs objectAtIndex:i];
+            YGApplyLayoutToNodeHierarchy([node.childs objectAtIndex:i]);
+            [self layoutToNodeView:chiledNode];
+        }
     }
 }
 

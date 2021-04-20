@@ -131,9 +131,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
                     tableView.tableHeaderView = tableHeaderNode_.view
                     addHeaderNodeObservation(tableHeaderNode_)
                 }else{
+                    tableView.tableHeaderView?.removeFromSuperview()
                     tableView.tableHeaderView = nil
                 }
-                tableView.reloadData()
+//                tableView.reloadData()
             }
         }
     }
@@ -145,9 +146,10 @@ class TableNode<D>: ArgoKitScrollViewNode,
                     tableView.tableFooterView = tableFooterNode_.view
                     addFooterNodeObservation(tableFooterNode_)
                 }else{
+                    tableView.tableFooterView?.removeFromSuperview()
                     tableView.tableFooterView = nil
                 }
-                tableView.reloadData()
+//                tableView.reloadData()
             }
         }
     }
@@ -276,7 +278,6 @@ class TableNode<D>: ArgoKitScrollViewNode,
         cell.sourceData = sourceData
         if let node = self.pDataSourceHelper.nodeForRow(indexPath.row, at: indexPath.section) {
             cell.selectionStyle = selectionStyle
-            
             // FIX:处理插入数据是node被绑定到多个cell上
             if !isReuedCell && node.containView() {
                 if  let sourceData_ = sourceData as? ArgoKitIdentifiable  {
