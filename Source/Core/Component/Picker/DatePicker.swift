@@ -43,7 +43,7 @@ public struct DatePicker:View{
     /// init DatePicker
     /// - Parameter onDateChange: dateChange callback
     public init(onDateChange:@escaping(_ onSelectedData:Date)->Void){
-        pNode = ArgoKitNode(viewClass: UIDatePicker.self)
+        pNode = ArgoKitNode(viewClass: UIDatePicker.self, type: DatePicker.self)
         
         pNode.addAction({ (obj, paramter) -> Any? in
             if let dataPicker = obj as? UIDatePicker {

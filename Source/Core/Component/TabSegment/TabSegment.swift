@@ -66,7 +66,7 @@ public class TabSegment: View {
     // MARK: - Public
     public init(_ itemSpace: Float) {
         _itemSpaceValue = itemSpace
-        _node = ArgoKitTabSegmentNode(viewClass: UIScrollView.self)
+        _node = ArgoKitTabSegmentNode(viewClass: UIScrollView.self, type: Self.self)
         _node.row();
         _node.maxWidth(percent: 100)
         _node.addChildNode(_container.node!)

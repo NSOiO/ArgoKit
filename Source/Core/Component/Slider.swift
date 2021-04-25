@@ -12,7 +12,7 @@ public struct Slider:View{
         pNode
     }
     public init<V>(value: @escaping @autoclosure () -> V, in bounds: @escaping @autoclosure () -> ClosedRange<V> = 0...1, onValueChanged: @escaping (_ value:Float) -> Void = { _ in })where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{
-        pNode = ArgoKitNode(viewClass:UISlider.self)
+        pNode = ArgoKitNode(viewClass:UISlider.self, type: Self.self)
         self.value(Float(value()), animated: false)
         self.minimumValue(Float(bounds().lowerBound))
         self.maximumValue(Float(bounds().upperBound))

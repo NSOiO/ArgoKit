@@ -68,7 +68,7 @@ public class TextView : ScrollView {
     }
     
     override func createNode() {
-        pNode = ArgoKitTextViewNode(viewClass: UITextView.self)
+        pNode = ArgoKitTextViewNode(viewClass: UITextView.self, type: Self.self)
     }
 }
 

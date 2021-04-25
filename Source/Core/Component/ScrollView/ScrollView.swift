@@ -28,7 +28,7 @@ public class ScrollView: View {
     }
     
     func createNode() {
-        let node = ArgoKitScrollViewNode(viewClass: UIScrollView.self)
+        let node = ArgoKitScrollViewNode(viewClass: UIScrollView.self, type: Self.self)
         node.createContentNode()
         pNode = node
     }

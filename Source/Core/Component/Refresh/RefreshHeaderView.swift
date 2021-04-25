@@ -57,7 +57,7 @@ public class RefreshHeaderView: View {
         pNode
     }
     public init(startRefreshing:((RefreshHeader?) -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = RefreshHeaderNode(viewClass: RefreshHeader.self)
+        pNode = RefreshHeaderNode(viewClass: RefreshHeader.self, type: Self.self)
         pNode?.refreshingBlock = startRefreshing
         addSubViews(builder:builder)
     }

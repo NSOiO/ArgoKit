@@ -63,7 +63,7 @@ class ArgoKitScrollViewNode: ArgoKitArttibuteNode, UIScrollViewDelegate {
     }
 
     func createContentNode() {
-        let node = ArgoKitScrollContentNode(viewClass: UIScrollView.self)
+        let node = ArgoKitScrollContentNode(viewClass: UIScrollView.self, type: ScrollView.self)
         frameObserver.setFrameChange { [weak self] frame in
             if let strongSelf = self {
                 ArgoKitNodeViewModifier._addAttribute_(isCALayer: false, strongSelf, #selector(setter:UIScrollView.contentSize), [frame.size])

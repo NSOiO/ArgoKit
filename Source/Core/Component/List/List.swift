@@ -50,7 +50,7 @@ public class List<D>: ScrollView  {
     }
     
     override func createNode() {
-        pNode = TableNode<D>(viewClass: TableView.self)
+        pNode = TableNode<D>(viewClass: TableView.self, type: Self.self)
     }
     
     required init(style: UITableView.Style?) {

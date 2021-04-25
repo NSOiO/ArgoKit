@@ -15,7 +15,7 @@ public class ViewPage<T> : ScrollView {
     }
     
     override func createNode() {
-        pNode = ArgoKitViewPageNode<T>(viewClass: UICollectionView.self)
+        pNode = ArgoKitViewPageNode<T>(viewClass: UICollectionView.self, type: Self.self)
         pNode?.flexGrow(1.0)
     }
 

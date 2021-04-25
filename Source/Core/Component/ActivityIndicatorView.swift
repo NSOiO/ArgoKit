@@ -41,7 +41,7 @@ public struct ActivityIndicatorView : View {
     /// Initializer
     /// - Parameter style: A constant that specifies the style of the object to be created. See UIActivityIndicatorView.Style for descriptions of the style constants.
     public init(style: UIActivityIndicatorView.Style) {
-        pNode = ArgoKitIndicatorViewNode(viewClass: UIActivityIndicatorView.self)
+        pNode = ArgoKitIndicatorViewNode(viewClass: UIActivityIndicatorView.self, type: Self.self)
         pNode.style = style
     }
 }

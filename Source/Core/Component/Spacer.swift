@@ -24,7 +24,7 @@ public struct Spacer: View {
         pNode
     }
     public init() {
-        pNode = ArgoKitNode(viewClass: UIView.self)
+        pNode = ArgoKitNode(viewClass: UIView.self, type: Spacer.self)
         pNode.flexGrow(1.0)
     }
 }

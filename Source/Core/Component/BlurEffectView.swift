@@ -30,7 +30,7 @@ public struct BlurEffectView: View {
     ///   - builder: A view builder that creates the content of this visual effect view.
     public init(style:UIBlurEffect.Style, @ArgoKitViewBuilder _ builder:@escaping () -> View) {
         let blurEffect:UIBlurEffect = UIBlurEffect(style: style)
-        pNode = ArgoKitNode(viewClass: UIVisualEffectView.self)
+        pNode = ArgoKitNode(viewClass: UIVisualEffectView.self, type: Self.self)
         addSubViews(builder:builder)
         addAttribute(#selector(setter:UIVisualEffectView.effect), blurEffect)
     }

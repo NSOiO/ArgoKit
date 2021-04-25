@@ -30,7 +30,7 @@ public struct SegmenteControl:View{
             }
         }
         pSegment = UISegmentedControl(items: items)
-        pNode = ArgoKitNode(view: pSegment)
+        pNode = ArgoKitNode(view: pSegment, type: Self.self)
         
         pNode.addAction({ (obj, paramter) -> Any? in
             if let segmentedControl = obj as? UISegmentedControl {

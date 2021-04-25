@@ -28,7 +28,7 @@ public struct Button: View {
     }
     
     private init() {
-        pNode = ArgoKitArttibuteNode(viewClass: UIButton.self)
+        pNode = ArgoKitArttibuteNode(viewClass: UIButton.self, type: Self.self)
         pNode.row()
     }
     

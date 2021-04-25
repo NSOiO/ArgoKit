@@ -25,7 +25,7 @@ public struct VStack:View {
         pNode
     }
     public init(){
-        pNode = ArgoKitNode(viewClass: UIView.self)
+        pNode = ArgoKitNode(viewClass: UIView.self, type: Self.self)
         pNode.column()
     }
     

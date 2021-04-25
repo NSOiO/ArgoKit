@@ -59,7 +59,7 @@ public struct RefreshFooterView: View {
         pNode
     }
     public init(startRefreshing:((RefreshFooter?) -> ())?,@ArgoKitViewBuilder _ builder:@escaping ()->View) {
-        pNode = RefreshFooterNode(viewClass: ArgoKitRefreshAutoFooter.self)
+        pNode = RefreshFooterNode(viewClass: ArgoKitRefreshAutoFooter.self, type: Self.self)
         pNode?.refreshingBlock = startRefreshing
         addSubViews(builder:builder)
     }

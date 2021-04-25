@@ -25,7 +25,7 @@ public struct TextField : View {
     ///   - text: string or nil
     ///   - placeholder: string for placeholder or nil
     public init(text: @escaping @autoclosure () -> String? = nil, placeholder: @escaping @autoclosure () -> String? = nil) {
-        pNode = ArgoKitTextFieldNode(viewClass:UITextField.self)
+        pNode = ArgoKitTextFieldNode(viewClass:UITextField.self, type: Self.self)
         self.text(text())
         self.placeholder(placeholder())
     }

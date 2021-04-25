@@ -19,7 +19,7 @@ public struct EmptyView: View {
     
     /// Initializer
     public init() {
-        pNode = ArgoKitNode(viewClass: UIView.self)
+        pNode = ArgoKitNode(viewClass: UIView.self, type: Self.self)
     }
 }
 

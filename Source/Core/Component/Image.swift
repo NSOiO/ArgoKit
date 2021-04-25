@@ -150,7 +150,7 @@ public struct Image : View {
     ///   - image: The initial image to display in the image view. You may specify an image object that contains an animated sequence of images.
     ///   - highlightedImage: The image to display when the image view is highlighted. You may specify an image object that contains an animated sequence of images.
     public init(image: @escaping @autoclosure () -> UIImage?, highlightedImage: @escaping @autoclosure () -> UIImage? = nil) {
-        pNode = ArgoKitImageNode(viewClass: UIImageView.self)
+        pNode = ArgoKitImageNode(viewClass: UIImageView.self, type: Self.self)
         addAttribute(#selector(setter:UIImageView.isUserInteractionEnabled),true)
         self.bindCallback({ [self] in
             if let img = image() {

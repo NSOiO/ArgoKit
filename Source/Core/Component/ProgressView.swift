@@ -53,7 +53,7 @@ public struct ProgressView : View {
     ///The value of this property is a constant that specifies the style of the progress view. The default style is UIProgressView.Style.default. For more on these constants, see UIProgressView.Style.
     /// - Parameter style: the style
     public init(progressViewStyle style: @escaping @autoclosure () -> UIProgressView.Style) {
-        pNode = ArgoKitNode(viewClass:UIProgressView.self)
+        pNode = ArgoKitNode(viewClass:UIProgressView.self, type: Self.self)
         self.progressViewStyle(style())
     }
     

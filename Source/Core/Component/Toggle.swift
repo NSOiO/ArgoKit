@@ -18,7 +18,7 @@ public struct Toggle:View{
         pNode
     }
     public init(_ isOn: @escaping @autoclosure () -> Bool,action:@escaping (_ isOn:Bool)->Void){
-        pNode = ArgoKitToggleNode(viewClass:UISwitch.self);
+        pNode = ArgoKitToggleNode(viewClass:UISwitch.self, type: Self.self)
         self.setOn(isOn(), animated: false)
         pNode.addAction({ (obj, paramter) -> Any? in
             if let swit = obj as? UISwitch {

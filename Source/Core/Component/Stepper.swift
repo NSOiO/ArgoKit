@@ -17,7 +17,7 @@ public struct Stepper:View{
         pNode
     }
     public init<V>(value: @escaping @autoclosure () -> V, in bounds: @escaping @autoclosure () -> ClosedRange<V> = 0...1,step:Double = 1.0, onValueChanged: @escaping (_ value:Double) -> Void = { _ in })where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{
-        pNode = ArgoKitNode(viewClass:UIStepper.self)
+        pNode = ArgoKitNode(viewClass:UIStepper.self, type: Self.self)
         
         self.stepValue(Double(value()))
         self.minimumValue(Double(bounds().lowerBound))

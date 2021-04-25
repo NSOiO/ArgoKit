@@ -26,7 +26,7 @@ public struct Text:TextProtocol {
     
     /// initialize the Text with emptry
     public init() {
-        pNode = ArgoKitTextNode(viewClass:UILabel.self)
+        pNode = ArgoKitTextNode(viewClass:UILabel.self, type: Self.self)
     }
     /// initialize the Text with a string
     /// - Parameter text: a string value

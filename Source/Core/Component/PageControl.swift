@@ -17,7 +17,7 @@ public struct PageControl:View{
         pNode
     }
     public init(currentPage: @escaping @autoclosure () -> Int, numberOfPages: @escaping @autoclosure () -> Int, onPageChange: @escaping(_ currentPage:Int) -> Void) {
-        pNode = ArgoKitPageControlNode(viewClass: UIPageControl.self)
+        pNode = ArgoKitPageControlNode(viewClass: UIPageControl.self, type: Self.self)
         self.currentPage(currentPage())
         self.numberOfPages(numberOfPages())
 
