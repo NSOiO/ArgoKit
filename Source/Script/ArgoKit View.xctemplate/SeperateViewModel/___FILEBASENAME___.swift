@@ -10,7 +10,7 @@ protocol ___FILEBASENAMEASIDENTIFIER___ModelProtocol: ViewModelProtocol {
 // view
 struct ___FILEBASENAMEASIDENTIFIER___: ArgoKit.ViewProtocol {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = ArgoKitNode()
+    var node: ArgoKitNode? = ArgoKitNode(type: Self.self)
     private var model: ___FILEBASENAMEASIDENTIFIER___ModelProtocol
     init(model: ___FILEBASENAMEASIDENTIFIER___ModelProtocol) {
         self.model = model
