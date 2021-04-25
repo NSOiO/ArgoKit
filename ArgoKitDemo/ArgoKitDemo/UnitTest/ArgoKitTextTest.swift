@@ -25,7 +25,7 @@ class ArgoKitTextTestModel {
 // view
 struct ArgoKitTextTest: ArgoKit.View {
     typealias View = ArgoKit.View
-    var node: ArgoKitNode? = ArgoKitNode()
+    var node: ArgoKitNode? = ArgoKitNode(type: Self.self)
     private var model: ArgoKitTextTestModel
     @DataSource var dataSource:[[Int]] = [[1, 2, 3,4],[4, 5, 6],[7, 8, 9]]
    

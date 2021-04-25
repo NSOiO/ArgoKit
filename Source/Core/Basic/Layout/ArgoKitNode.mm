@@ -23,6 +23,8 @@
 #endif
 
 #import "ArgoKitNodePrivateHeader.h"
+#import "UIView+ArgoKit.h"
+
 @implementation NodeAction
 - (instancetype)initWithAction:(ArgoKitNodeBlock)action controlEvents:(UIControlEvents)controlEvents{
     if (self = [super init]) {
@@ -536,6 +538,9 @@ static CGFloat YGRoundPixelValue(CGFloat value)
         if (!self.view.superview) {
             [self insertViewToParentNodeView];
         }
+    }
+    if (self.viewAliasName) {
+        self.view.argokit_viewAliasName = self.viewAliasName;
     }
 }
 

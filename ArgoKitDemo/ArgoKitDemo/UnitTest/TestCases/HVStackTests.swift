@@ -33,7 +33,7 @@ struct HVStackTests: ArgoKit.View {
                     .margin(edge: .right, value: 10)
                     .backgroundColor(.brown)
 
-                Text("HStack 3dddddddddddddddd")
+                Text("HStack 3dddddddddddddddddd")
                     .backgroundColor(.brown)
                     .flex(1)
             }
@@ -44,13 +44,13 @@ struct HVStackTests: ArgoKit.View {
             .padding(edge: .right, value: 20)
             
             VStack {
+                Text("VStack 1fdfafdd")
+                Text("VStack fdafdfafdafda2")
                 Text("VStack 1")
                 Text("VStack 2")
                 Text("VStack 1")
                 Text("VStack 2")
-                Text("VStack 1")
-                Text("VStack 2")
-                Text("VStack 1")
+//                Text("VStack 1")
                     .backgroundColor(.blue)
                 Text("VStack 2")
                     .width(200)

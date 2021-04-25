@@ -165,3 +165,18 @@ extension View {
     }
 }
 
+public extension ArgoKitNode {
+    convenience init(type: View.Type) {
+        self.init()
+        self.viewAliasName = "\(type)"
+    }
+    convenience init(viewClass: AnyClass, type: View.Type) {
+        self.init(viewClass: viewClass)
+        self.viewAliasName = "\(type)"
+    }
+    convenience init(view: UIView, type: View.Type) {
+        self.init(view: view)
+        self.viewAliasName = "\(type)"
+//        view.argokit_viewAliasName = "\(type)"
+    }
+}
