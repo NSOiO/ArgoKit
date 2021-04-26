@@ -27,3 +27,5 @@ DerivedData/
 # ArgoKitDemo/Pods/
 ArgoKitDemo/Pods
 ArgoVersionDemo/
+
+deploy_preview_mm.sh

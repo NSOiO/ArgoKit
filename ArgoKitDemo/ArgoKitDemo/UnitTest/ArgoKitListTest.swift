@@ -16,7 +16,7 @@ class ArgoKitListTestModel :ArgoKitIdentifiable{
     var timeLabel:String?
     var unreadCount:String?
 
-    var textCom:Text?
+    @Alias var textCom:Text?
     var hidden:Bool = false
 }
 
@@ -29,7 +29,7 @@ class ArgoKitListCellModel :ArgoKitIdentifiable{
     var timeLabel:String?
     var unreadCount:String?
 
-    var textCom:Text?
+    @Alias var textCom:Text?
     var hidden:Bool = false
 }
 // view
@@ -51,33 +51,34 @@ struct ArgoKitListTest: ArgoKit.View {
     typealias View = ArgoKit.View
     var node: ArgoKitNode? = ArgoKitNode()
     private var model: ArgoKitListTestModel
-    private var models: [ArgoKitListTestModel] = [ArgoKitListTestModel]()
+    @DataSource var models:[ArgoKitListTestModel] = [ArgoKitListTestModel]()
     init(model: ArgoKitListTestModel) {
         self.model = model
-        for index in 1..<1000{
+        for index in 1..<100{
             let item = ArgoKitListTestModel()
             item.sessionName = String(index)
             item.unreadCount = String(index)
-            models.append(item)
+            $models.append(item)
         }
     }
     
     var body: ArgoKit.View {
-        ArgoKitCellTest(model: ArgoKitListCellModel())
-//        List{
-//            Text("dsds11")
-//            Text("dsds22")
-//            Text("dsds333")
+        
+        List{
+            
+            Text("")
+                .lineLimit(2)
+                .width(150)
+//                .alias(variable: data.$textCom)
+            Image("icybay.jpg")
+                .aspect(ratio: 1)
+//                .onTapGesture {
+//                    data.textCom?.text("asdacbdskbcvhjkdsbvcdfjbvhjkdfbvdkfjbvfdkjbvdfkjb")
+//                }
+        }.grow(1.0)
+//        .cellSelected { (mode, index) in
+//            print("\(mode)")
 //        }
-//        .backgroundColor(.red)
-////
-        List(data:models){ data in
-            Text(data.sessionName)
-                .height(50)
-        }
-        .width(100%)
-        .height(400)
-        .backgroundColor(.red)
     }
 }
 
@@ -93,11 +94,18 @@ class ArgoKitListTestModel_Previews:  ArgoKitListTestModel {
 }
 
 @available(iOS 13.0.0, *)
+fileprivate func ArgoKitRender(@ArgoKitViewBuilder builder:@escaping ()-> ArgoKit.View) -> ArgoRender {
+    ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
+    ArgoKitInstance.registerPreviewService(previewService: ArgoKitPreview.listPreviewService())
+    ArgoKit.Dep.registerDep( _argokit__preview_dep_ )
+    return ArgoRender(builder: builder)
+}
+
+@available(iOS 13.0.0, *)
 struct ArgoKitListTest_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        ArgoKitInstance.registerImageLoader(imageLoader: ArgoKitComponent.ImageLoader())
-        return ArgoRender {
-            ArgoKitListTest(model: ArgoKitListTestModel_Previews())
+        ArgoKitRender {
+            ArgoKitListTest(model: ArgoKitListTestModel_Previews()).grow(1)
         }
     }
 }

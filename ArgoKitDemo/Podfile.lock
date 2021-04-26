@@ -1,43 +1,69 @@
 PODS:
-  - ArgoAnimation (0.1.7):
-    - ArgoAnimation/AnimationCPP (= 0.1.7)
-  - ArgoAnimation/AnimationCPP (0.1.7)
-  - ArgoKit (1.0.4):
-    - ArgoKit/AnimationKit (= 1.0.4)
-    - ArgoKit/Bind (= 1.0.4)
-    - ArgoKit/Core (= 1.0.4)
+  - ArgoAnimation (0.2.0):
+    - ArgoAnimation/AnimationCPP (= 0.2.0)
+  - ArgoAnimation/AnimationCPP (0.2.0)
+  - ArgoKit (1.0.15):
+    - ArgoKit/AnimationKit (= 1.0.15)
+    - ArgoKit/Bind (= 1.0.15)
+    - ArgoKit/Core (= 1.0.15)
     - Yoga
-  - ArgoKit/AnimationKit (1.0.4):
+  - ArgoKit/AnimationKit (1.0.15):
     - ArgoAnimation
     - Yoga
-  - ArgoKit/Bind (1.0.4):
+  - ArgoKit/Bind (1.0.15):
     - Yoga
-  - ArgoKit/Core (1.0.4):
+  - ArgoKit/Core (1.0.15):
+    - ArgoKit/AnimationKit
+    - ArgoKit/Bind
     - Yoga
-  - ArgoKitComponent (1.0.2):
+  - ArgoKitComponent (1.0.8):
     - ArgoKit
-    - ArgoKitComponent/ImageLoader (= 1.0.2)
-  - ArgoKitComponent/ImageLoader (1.0.2):
+    - ArgoKitComponent/Core (= 1.0.8)
+  - ArgoKitComponent/Core (1.0.8):
+    - ArgoKit
+    - ArgoKitComponent/SDImageLoader
+  - ArgoKitComponent/KFImageLoader (1.0.8):
+    - ArgoKit
+    - Kingfisher
+  - ArgoKitComponent/Refresh (1.0.8):
+    - ArgoKit
+    - MJRefresh
+  - ArgoKitComponent/SDImageLoader (1.0.8):
     - ArgoKit
     - SDWebImage
-  - ArgoKitPreview (1.0.2):
+  - ArgoKitComponent/YYText (1.0.8):
+    - ArgoKit
+    - YYText
+  - ArgoKitPreview (1.0.12):
     - ArgoKit
     - ArgoKitComponent
-  - SDWebImage (5.10.0):
-    - SDWebImage/Core (= 5.10.0)
-  - SDWebImage/Core (5.10.0)
+  - FLEX (4.4.0)
+  - Kingfisher (6.1.0)
+  - MJRefresh (3.5.0)
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
   - Yoga (1.14.0)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - ArgoKit (from `../`)
-  - ArgoKitComponent (from `../`)
+  - ArgoKitComponent/KFImageLoader (from `../`)
+  - ArgoKitComponent/Refresh (from `../`)
+  - ArgoKitComponent/SDImageLoader (from `../`)
+  - ArgoKitComponent/YYText (from `../`)
   - ArgoKitPreview (from `../`)
+  - FLEX
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - ArgoAnimation
+    - FLEX
+    - Kingfisher
+    - MJRefresh
     - SDWebImage
     - Yoga
+    - YYText
 
 EXTERNAL SOURCES:
   ArgoKit:
@@ -45,17 +71,20 @@ EXTERNAL SOURCES:
   ArgoKitComponent:
     :path: "../"
   ArgoKitPreview:
-    :link_style: weak
     :path: "../"
 
 SPEC CHECKSUMS:
-  ArgoAnimation: fcec4a80797568e9af23ddb8fe25a9ff6ae942ed
-  ArgoKit: a3bd73382e0f77b0ad11b6d4262d62e04199eb29
-  ArgoKitComponent: bb417eeaec9fff18c36531cc60a4fc4dfe435650
-  ArgoKitPreview: e17b060a20043deb6dbb4e97c5a4faf038e2b052
-  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+  ArgoAnimation: 2358401ae7ae74d8a1c7a79c651c5fcc383684e3
+  ArgoKit: 89eff1a570b524a372b9445cda64776d551f1b5b
+  ArgoKitComponent: 8b4df3ec7f68128c2e522151e5cfbffc1d57eb2b
+  ArgoKitPreview: 18ddf22247124df8ed75cca897d7866bc17e0338
+  FLEX: 0592c011c6dfbfdb94a5e24f2d4a9dbff0c6026d
+  Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 1c5c843eb46c49323ba33433ef6f6c3b9289e0d4
+PODFILE CHECKSUM: 8512b9551570af41969512abbc8e231224cc4c1f
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

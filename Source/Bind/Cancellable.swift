@@ -7,6 +7,8 @@
 
 import Foundation
 
+#if false
+// use Disposable instead.
 public protocol Cancellable {
     func cancel()
 }
@@ -15,13 +17,14 @@ public class ClosureCancelable: Cancellable {
     var callback: (() -> Void)?
     public init(callback: @escaping () -> Void) {
         self.callback = callback
-        print("Watcher init ", callback)
     }
     deinit {
-        if let block = self.callback {
-            block()
+//        if let block = self.callback {
+//            block()
+//        }
+        if let _ = self.callback {
+            self.callback = nil
         }
-        print("Watcher deinit ",self.callback ?? "")
     }
     public func cancel() {
         guard let block = self.callback else {
@@ -32,3 +35,4 @@ public class ClosureCancelable: Cancellable {
         self.callback = nil
     }
 }
+#endif

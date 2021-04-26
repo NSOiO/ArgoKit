@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 public enum ArgoKitNodeType {
     case empty
     case multiple([ArgoKitNode])
@@ -38,23 +39,30 @@ public enum ArgoKitNodeType {
     }
 }
 
+/// A type that represents part of your app’s user interface and provides modifiers that you use to configure views.
 public protocol View {
-    // 初始视图层次
-    var type: ArgoKitNodeType{get}
-    // 布局节点对象
-    var node:ArgoKitNode?{get}
     
+    /// The type of the node.
+    /// Required. Default implementations provided.
+    var type: ArgoKitNodeType { get }
+    
+    /// The node behind the view.
+    /// Required.
+    var node:ArgoKitNode? { get }
+    
+    /// The content and behavior of the view.
+    /// Required. Default implementations provided.
     @ArgoKitViewBuilder var body: View { get }
-    
 }
 
-public extension View{
+public extension View {
     
     @ArgoKitViewBuilder var body: View {
         ViewEmpty()
     }
-    var type: ArgoKitNodeType{
-        if let _node:ArgoKitNode = node {
+    
+    var type: ArgoKitNodeType {
+        if let _node: ArgoKitNode = node {
             return .single(_node)
         }else{
             return .empty
@@ -62,86 +70,113 @@ public extension View{
     }
 }
 
-extension View{
-    public static func ViewNode()->ArgoKitNode{
-        return ArgoKitNode(viewClass: UIView.self)
-    }
-}
-
-extension View{
+extension View {
+    /*
     @discardableResult
+    @available(*, deprecated, message: "alias(variable ptr:inout) had been deprecated")
     public func alias<T>(variable ptr:inout T?) -> Self where T: View{
         ptr = self as? T
         return self
     }
+    */
+    
+    /// Assigns the view to the specified variable or property.
+    /// - Parameter variable: The specified variable or property that is  assigned with the view.
+    /// - Returns: self
+    ///
+    ///```
+    ///    struct DemoView: View {
+    ///        @Alias var text: Text?
+    ///        var body: View {
+    ///            Text("Hello, ArgoKit").alias(variable: $text)
+    ///        }
+    ///    }
+    ///```
+    ///
+    @discardableResult
+    public func alias(variable: Alias<Self>?) -> Self {
+        if let variable = variable{
+            variable.wrappedValue = self
+        }
+        return self 
+    }
 }
 
-extension View{
-    public func addSubNodes(@ArgoKitViewBuilder builder:@escaping ()->View){
+
+public enum ViewPosition {
+    case `default`
+    case front
+    case back
+    case index(Int)
+}
+extension View {
+    
+    /// Get view that belong to node.
+    /// - Parameter view: hat belong to node.
+    public func nodeView() -> UIView?{
+        return self.node?.nodeView()
+    }
+    /// Adds sub views to this view hierarchy.
+    /// - Parameter builder: A view builder that creates the sub views of this view.
+    @discardableResult
+    public func addSubViews(position:ViewPosition = .default,@ArgoKitViewBuilder builder:@escaping ()->View) -> Self{
         let container = builder()
         if let nodes = container.type.viewNodes() {
             for node in nodes {
                 self.node!.addChildNode(node)
+                switch position {
+                case .front:
+                    node.positonToFront()
+                    break
+                case .back:
+                    node.positonToBack()
+                    break
+                case .index(let index):
+                    node.positon(to: index)
+                break
+                default:
+                    break
+                }
             }
-        }
-    }
-}
-
-
-// UIGestureRecognizer
-extension View{
-    @discardableResult
-    public func gesture(gesture:Gesture)->Self{
-        gesture.gesture.isEnabled = true
-        addAttribute(#selector(setter: UIView.isUserInteractionEnabled),true)
-        addAttribute(#selector(UIView.addGestureRecognizer(_:)),gesture.gesture)
-        self.node?.addTarget(gesture.gesture, for: UIControl.Event.valueChanged) { (obj, paramter) in
-            if let gestureRecognizer = obj as? UIGestureRecognizer {
-                gesture.action(gestureRecognizer)
-            }
-            return nil
         }
         return self
     }
+    
+   /// Unlinks the view from its superview and its hostview, and removes it from the responder chain.
     @discardableResult
-    public func removeGesture(gesture:Gesture)->Self{
-        self.node?.view?.removeGestureRecognizer(gesture.gesture)
+    public func removeFromSuperView() -> Self{
+        guard let node = self.node else {
+            return self
+        }
+        node.removeFromSuperNode()
         return self
-    }
-}
-
-extension View{
-    @discardableResult
-    public func onTapGesture(numberOfTaps: Int = 1, numberOfTouches: Int = 1,action:@escaping ()->Void)->Self{
-        let gesture = TapGesture(numberOfTaps: numberOfTaps, numberOfTouches: numberOfTouches) { gesture in
-            action()
-        }
-        return self.gesture(gesture:gesture)
-    }
-    @discardableResult
-    public func onLongPressGesture(numberOfTaps:Int, numberOfTouches:Int,minimumPressDuration:TimeInterval = 0.5,allowableMovement:CGFloat = 10,action:@escaping ()->Void)->Self{
-        let gesture = LongPressGesture(numberOfTaps:numberOfTaps,numberOfTouches:numberOfTouches,minimumPressDuration:minimumPressDuration,allowableMovement:allowableMovement) { gesture in
-            action()
-        }
-        return self.gesture(gesture:gesture)
     }
 }
 
 extension View {
+    
+    /// Causes the view (or one of its embedded text fields) to resign the first responder status.
+    /// - Parameter force: Specify true to force the first responder to resign, regardless of whether it wants to do so.
+    /// - Returns: self
     @discardableResult
     public func endEditing(_ force: Bool) -> Self {
-        self.node?.view?.endEditing(force)
+        addAttribute(#selector(UIView.endEditing(_:)), force)
         return self
     }
 }
 
-extension View {
-    @discardableResult
-    public func addAnimation(_ animation: Animation) -> Self {
-        if let view = self.node?.view {
-            animation.attach(view)
-        }
-        return self
+public extension ArgoKitNode {
+    convenience init(type: View.Type) {
+        self.init()
+        self.viewAliasName = "\(type)"
+    }
+    convenience init(viewClass: AnyClass, type: View.Type) {
+        self.init(viewClass: viewClass)
+        self.viewAliasName = "\(type)"
+    }
+    convenience init(view: UIView, type: View.Type) {
+        self.init(view: view)
+        self.viewAliasName = "\(type)"
+//        view.argokit_viewAliasName = "\(type)"
     }
 }
-

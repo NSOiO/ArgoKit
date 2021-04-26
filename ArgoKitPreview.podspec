@@ -5,7 +5,7 @@
 
 podspec = Pod::Spec.new do |spec|
     spec.name = 'ArgoKitPreview'
-    spec.version = '1.0.2'
+    spec.version = '1.0.12'
     spec.license =  { :type => 'MIT', :file => "LICENSE" }
     spec.homepage = 'https://git.wemomo.com/module/argokit'
     # spec.documentation_url = 'argokit'
@@ -20,24 +20,26 @@ podspec = Pod::Spec.new do |spec|
     }
   
     spec.platform = :ios
-    spec.ios.deployment_target = '10.0'
-    spec.ios.frameworks = 'UIKit', 'SwiftUI'
+    spec.ios.deployment_target = '11.0'
+    spec.ios.frameworks = 'UIKit'
+    spec.ios.weak_frameworks = 'SwiftUI'
 
     spec.dependency 'ArgoKit'
     spec.dependency 'ArgoKitComponent'
     
     spec.module_name = 'ArgoKitPreview'
-    spec.source_files = "Source/Preview/**/*.{h,m,mm,swift}"
+    spec.source_files = "Source/Preview/src/**/*.{h,m,mm,swift}"
 #    spec.resources = ['Source/Script/**/*']
-    spec.resources = ['Source/Script/*']
+    spec.resources = ['Source/Script/*', 'Source/Preview/*.swift']
     spec.prepare_command = <<-CMD
-                pwd
-                chmod +x  ./Source//Script/config.sh
-                ./Source//Script/config.sh
+        path=./Source//Script/config.sh
+        if [ -f "$path" ]; then
+          sh $path
+        else
+          echo "$path not exist"
+        fi
     CMD
   end
-  
-  # See https://github.com/facebook/yoga/pull/366
-  #podspec.attributes_hash["readme"] = "argokit/README.md"
+        
 
   

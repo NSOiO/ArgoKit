@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let contentView = LandmarkList()
 //        let contentView = ArgoKitViewDemo()
 //        let contentView = PreviewDemo()
-        ArgoKitInstance.registerImageLoader(imageLoader: ImageLoader())
 //        let contentView = ArgoKitOtherViewTest(model:ArgoKitOtherViewTestModel())
 //        let contentView = ArgoKitButtonTest(model: ArgoKitButtonTestModel())
 //        let contentView = ListTests(model: ListTestsModel())
@@ -39,9 +38,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            let vc = UIHostingController(rootView: contentView)
 //            vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
             
-            let vc = SwiftUI.UIHostingController.init(rootView: ArgoKitOtherViewTest_Previews.previews)
+            let vc = SwiftUI.UIHostingController.init(rootView: ArgoKitTextTest_Previews.previews)
             
             let nav = UINavigationController(rootViewController: vc)
+//            let nav = ArgokitDemoController()
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = nav
             self.window = window

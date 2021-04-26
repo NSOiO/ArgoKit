@@ -7,6 +7,7 @@
 
 import Foundation
 public class ArgoKitInstance {
+    
     private var pimageLoader:ArgoKitImageLoader?
     private var plistPreviewService: ArgoKitListPreviewService?
     
@@ -17,7 +18,9 @@ public class ArgoKitInstance {
     private init() {}
     
     public class func registerImageLoader(imageLoader:ArgoKitImageLoader?){
-        ArgoKitInstance.shared.pimageLoader = imageLoader
+        if ArgoKitInstance.shared.pimageLoader == nil {
+            ArgoKitInstance.shared.pimageLoader = imageLoader
+        }
     }
     
     public class func imageLoader()->ArgoKitImageLoader?{
@@ -25,7 +28,9 @@ public class ArgoKitInstance {
     }
     
     public class func registerPreviewService(previewService: ArgoKitListPreviewService) {
-        ArgoKitInstance.shared.plistPreviewService = previewService
+        if ArgoKitInstance.shared.plistPreviewService == nil {
+            ArgoKitInstance.shared.plistPreviewService = previewService
+        }
     }
     
     public class func listPreviewService()->ArgoKitListPreviewService?{

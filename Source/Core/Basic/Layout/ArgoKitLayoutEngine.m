@@ -52,21 +52,33 @@
 }
 
 - (void)addLayoutNode:(nullable ArgoKitNode *)node{
-    if (node.isRootNode && ![self.layoutNodesPool containsObject:node]) {
+    NSArray *nodes = self.layoutNodesPool.allObjects;
+    if (node.isRootNode && ![nodes containsObject:node]) {
         [self.layoutNodesPool addObject:node];
     }
 }
 
 - (void)removeLayoutNode:(nullable ArgoKitNode *)node{
-    if (node.isRootNode && [self.layoutNodesPool containsObject:node]) {
+    NSArray *nodes = self.layoutNodesPool.allObjects;
+    if (node.isRootNode && [nodes containsObject:node]) {
         [self.layoutNodesPool removeObject:node];
     }
 }
 - (void)layout:(void(^)(ArgoKitNode *node))block{
-    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool copy];
+    NSArray *nodes = self.layoutNodesPool.allObjects;
     for(ArgoKitNode *node in nodes){
         if (block) {
             block(node);
+        }
+    }
+}
+
+
+- (void)reLayoutNode:(nullable NSArray *)cellNodes frame:(CGRect)frame{
+    NSArray<ArgoKitNode *> *nodes = [self.layoutNodesPool allObjects];
+    for (id node in cellNodes) {
+        if ([node isKindOfClass:[ArgoKitNode class]] && [nodes containsObject:node] ) {
+            [node applyLayout:CGSizeMake(frame.size.width,NAN)];
         }
     }
 }

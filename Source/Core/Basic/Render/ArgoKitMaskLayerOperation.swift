@@ -7,6 +7,7 @@
 
 import Foundation
 class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
+    var bezierPathCache:[String:UIBezierPath] = [:]
     private var _needRemake:Bool = false
     var needRemake: Bool{
         get{
@@ -28,24 +29,26 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
     var shadowPath:UIBezierPath? = nil
     private var pcircle:Bool? = false
     weak var viewNode:ArgoKitNode?
-    
+    private var observation:NSKeyValueObservation?
     required init(viewNode:ArgoKitNode){
         self.viewNode = viewNode
         super.init()
         
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:strongSelf)
-                strongSelf.needRemake = true
-                view.addObserver(strongSelf, forKeyPath: "frame", options: [.new,.old], context: nil)
+                strongSelf.observation = view.observe(\UIView.frame, options: [.new,.old], changeHandler: { (view, change) in
+                    strongSelf.observeValue(change, of: view)
+                })
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
-        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
+    private func observeValue(_ change:NSKeyValueObservedChange<CGRect>,of object: Any?){
+        let newrect:CGRect = change.newValue ?? CGRect.zero
+        let oldrect:CGRect = change.oldValue ?? CGRect.zero
         if (newrect.equalTo(oldrect)) {
             return
         }
@@ -79,7 +82,14 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
                 let cornerRadius = CGFloat.minimum(bounds.size.width, bounds.size.height)/2.0
                 self.multiRadius = ArgoKitCornerRadius(topLeft: cornerRadius, topRight: cornerRadius, bottomLeft: cornerRadius, bottomRight: cornerRadius)
             }
-            let maskPath = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius)
+            let key = "\(bounds.width)"+"\(bounds.height)"+"\(self.multiRadius)"
+            var maskPath:UIBezierPath
+            if let path = bezierPathCache[key]{
+                maskPath = path
+            }else{
+                maskPath = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius)
+                bezierPathCache[key] = maskPath
+            }
             var maskLayer:CAShapeLayer? = nil
             if let mask = view.layer.mask {
                 maskLayer = mask as? CAShapeLayer
@@ -94,8 +104,5 @@ class ArgoKitMaskLayerOperation:NSObject, ArgoKitViewReaderOperation {
     }
     
     deinit {
-        if let view = self.viewNode?.view{
-            view.removeObserver(self, forKeyPath: "frame")
-        }
     }
 }

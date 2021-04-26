@@ -30,41 +30,40 @@ class ArgoKitScrollContentNode: ArgoKitArttibuteNode {
 }
 
 class ArgoKitScrollViewNode: ArgoKitArttibuteNode, UIScrollViewDelegate {
-        
-    lazy var nodeObserver = ArgoKitNodeObserver()
-    private var frameObserver = ArgoKitNodeObserver()
-    
-    lazy var contentNode = createContentNode()
-    private var contentSize = CGSize(width: CGFloat.nan, height: CGFloat.nan)
-    
-    override init(view: UIView) {
-        super.init(view: view)
-        self.contentNode.bindView(view)
-    }
-    
-    override init(viewClass: AnyClass) {
-        super.init(viewClass: viewClass)
-        nodeObserver.setCreateViewBlock { [weak self] view in
-            if let strongSelf = self {
-                strongSelf.contentNode.bindView(view)
-                strongSelf.contentNode.applyLayout(size: strongSelf.contentSize)
-            }
+    var defaultViewHeight:CGFloat = 0
+    var defaultFlexGrow:CGFloat = 0
+    var adjustsHeightToFitSubView:Bool = false
+    var setFlexGrow:Bool = false
+    var autoHeight:CGFloat = 0 {
+        didSet{
+            self.height(point:autoHeight)
+            self.flexGrow(0)
+            self.markDirty()
+//            _ = self.applyLayout(size: self.size)
         }
-        self.addNode(observer: nodeObserver)
     }
-        
-    override func setValue(_ selector:Selector,_ value:Any?) -> Void {
-        contentNode.setValue(selector, value)
+
+    func setContentSizeViewHeight(_ height:CGFloat){
+        if adjustsHeightToFitSubView{
+            defaultFlexGrow = 0
+            autoHeight = height
+        }
     }
     
+    lazy var nodeObserver = ArgoKitNodeObserver()
+    lazy var frameObserver = ArgoKitNodeObserver()
+    
+    var contentNode: ArgoKitScrollContentNode?
+    private var contentSize = CGSize(width: CGFloat.nan, height: CGFloat.nan)
+
     override func createNodeView(withFrame frame: CGRect) -> UIView {
         let scrollView = UIScrollView(frame: frame)
         scrollView.delegate = self
         return scrollView
     }
 
-    func createContentNode() -> ArgoKitScrollContentNode {
-        let node = ArgoKitScrollContentNode(viewClass: UIScrollView.self)
+    func createContentNode() {
+        let node = ArgoKitScrollContentNode(viewClass: UIScrollView.self, type: ScrollView.self)
         frameObserver.setFrameChange { [weak self] frame in
             if let strongSelf = self {
                 ArgoKitNodeViewModifier._addAttribute_(isCALayer: false, strongSelf, #selector(setter:UIScrollView.contentSize), [frame.size])
@@ -74,7 +73,15 @@ class ArgoKitScrollViewNode: ArgoKitArttibuteNode, UIScrollViewDelegate {
             }
         }
         node.addNode(observer: frameObserver)
-        return node
+        contentNode = node
+        
+        nodeObserver.setCreateViewBlock { [weak self] view in
+            if let strongSelf = self {
+                strongSelf.contentNode?.bindView(view)
+                strongSelf.contentNode?.applyLayout(size: strongSelf.contentSize)
+            }
+        }
+        self.addNode(observer: nodeObserver)
     }
 }
     
@@ -82,49 +89,73 @@ extension ArgoKitScrollViewNode {
     
     public func contentSize(_ value: CGSize) {
         contentSize = value
-        contentNode.width(point: value.width)
-        contentNode.height(point: value.height)
+        contentNode?.width(point: value.width)
+        contentNode?.height(point: value.height)
     }
     
     public func contentWidth(_ value: CGFloat) {
         contentSize.width = value
-        contentNode.width(point: value)
+        contentNode?.width(point: value)
     }
     
     public func contentHeight(_ value: CGFloat) {
         contentSize.height = value
-        contentNode.height(point: value)
+        contentNode?.height(point: value)
     }
 }
 
 extension ArgoKitScrollViewNode {
     
     override func addChildNode(_ node: ArgoKitNode?) {
-        contentNode.addChildNode(node)
+        if let _contentNode = self.contentNode {
+            _contentNode.addChildNode(node)
+        }else{
+            super.addChildNode(node)
+        }
     }
-    
+
     override func insertChildNode(_ node: ArgoKitNode, at index: Int) {
-        contentNode.insertChildNode(node, at: index)
+        if let _contentNode = self.contentNode {
+            _contentNode.insertChildNode(node, at: index)
+        }else{
+            super.insertChildNode(node, at: index)
+        }
     }
-    
+
     override func applyLayout() -> CGSize {
-        contentNode.applyLayout(size: contentSize)
-        return super.applyLayout()
+        if let _contentNode = self.contentNode {
+            _contentNode.applyLayout(size: contentSize)
+            return super.applyLayout()
+        }else{
+            return super.applyLayout()
+        }
     }
-    
+
     override func applyLayout(size: CGSize) -> CGSize {
-        contentNode.applyLayout(size: contentSize)
-        return super.applyLayout(size: size)
+        if let _contentNode = self.contentNode {
+            _contentNode.applyLayout(size: contentSize)
+            return super.applyLayout(size: size)
+        }else{
+            return super.applyLayout(size: size)
+        }
     }
-    
+
     override func calculateLayout(size: CGSize) -> CGSize {
-        contentNode.calculateLayout(size: contentSize)
-        return super.calculateLayout(size: size)
+        if let _contentNode = self.contentNode {
+            _contentNode.calculateLayout(size: contentSize)
+            return super.calculateLayout(size: size)
+        }else{
+            return super.calculateLayout(size: size)
+        }
     }
-    
+
     override func applyLayoutAferCalculation(withView: Bool) {
-        contentNode.applyLayoutAferCalculation(withView: withView)
-        super.applyLayoutAferCalculation(withView: withView)
+        if let _contentNode = self.contentNode {
+            _contentNode.applyLayoutAferCalculation(withView: withView)
+            super.applyLayoutAferCalculation(withView: withView)
+        }else{
+            super.applyLayoutAferCalculation(withView: withView)
+        }
     }
 }
 
@@ -164,12 +195,17 @@ extension ArgoKitScrollViewNode {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let sel = #selector(self.scrollViewDidEndDecelerating(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [scrollView])
+        self.scrollViewDidEndScroll(scrollView)
     }
 
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let sel = #selector(self.scrollViewDidEndScrollingAnimation(_:))
         self.sendAction(withObj: String(_sel: sel), paramter: [scrollView])
+        self.scrollViewDidEndScroll(scrollView)
+    }
+    
+    @objc func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
     }
 
     

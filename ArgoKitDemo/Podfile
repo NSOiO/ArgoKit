@@ -1,17 +1,52 @@
 source 'https://github.com/CocoaPods/Specs.git'
-
-platform :ios, '10.0'
-
+source 'https://git.wemomo.com/ios/Specs.git'
+platform :ios, '11.0'
 use_frameworks!:linkage => :static
 use_modular_headers!
 
 target 'ArgoKitDemo' do
-  pod 'ArgoKit', :path=>'../'
-  pod 'ArgoKitPreview', :path=>'../', :link_style => 'weak'
-  pod 'ArgoKitComponent', :path =>'../'
-
-#  pod 'ArgoUI/Kit/AnimationCPP', :git => 'https://github.com/mmdongxin/MLN', :branch => 'dev_iOS_dx_temp'
-#  pod 'ArgoUI/Kit/AnimationKit', :path => '../../MLN/ArgoUI.podspec'
-# :modular_headers => true
+  pod 'ArgoKit',:path=>'../'
+  pod 'ArgoKitPreview', :path=>'../' , :configuration => 'Debug'#, :link_style => 'weak'
+  pod 'ArgoKitComponent/SDImageLoader', :path =>'../'
+  pod 'ArgoKitComponent/YYText', :path =>'../'
+  pod 'ArgoKitComponent/Refresh', :path =>'../'
+  pod 'ArgoKitComponent/KFImageLoader', :path => '../'
+#  pod 'ArgoKitComponent/AvatarBreathView', :path => '../'
+#  pod 'ArgoKitComponent/LikeView', :path => '../'
+#  pod 'MDAvatarBreathAnimationView', :path => '../../MDAvatarBreathAnimationView'
+#  pod 'pop', '1.0.12.a.debug.25', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
+#  pod 'MMFrameManager', '0.1.5.a.debug.26', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
+#  pod 'MDLikeView', '0.1.7.a.debug.26', :source => 'https://git.wemomo.com/ios/BinarySpec.git'
+  pod 'FLEX'
 end
 
+# from argokit_preview_config.rb
+#post_integrate do |installer|
+#    installer.generated_pod_targets.each do |target|
+#      if target.name == "ArgoKitPreview"
+#        pod_dir = target.sandbox.pod_dir(target.name)
+#
+##        #执行prepare_command中的脚本。因为ArgoKitPreview通过:path引入，脚本不会自动执行。如果通过版本号引入，不需要这一句.
+##        #参考：https://guides.cocoapods.org/syntax/podspec.html#prepare_command
+##        installer.development_pod_targets.each do |dev_target|
+##          if dev_target.name == target.name
+##            `cd #{pod_dir}/Source/Script/ && sh ./config.sh`
+##          end
+##        end
+#
+#        require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
+#        config_preview_files installer,target
+#      end
+#    end
+#end
+
+
+post_integrate do |installer|
+    installer.generated_pod_targets.each do |target|
+      if target.name == "ArgoKitPreview"
+        pod_dir = target.sandbox.pod_dir(target.name)
+        require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
+        config_preview_files installer,target
+      end
+    end
+end

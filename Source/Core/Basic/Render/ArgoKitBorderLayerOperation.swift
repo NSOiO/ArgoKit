@@ -7,6 +7,7 @@
 
 import Foundation
 class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
+    var borderLayerCache:[String:CAShapeLayer] = [:]
     weak var viewNode:ArgoKitNode?
     private var borderLayer:CAShapeLayer?
     private var _needRemake:Bool = false
@@ -48,23 +49,26 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
             _nodeObserver
         }
     }
+    private var observation:NSKeyValueObservation?
     required init(viewNode: ArgoKitNode) {
         self.viewNode = viewNode
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
-                strongSelf.needRemake = true
-                view.addObserver(strongSelf, forKeyPath: "frame", options:  [.new,.old], context: nil)
+                strongSelf.observation = view.observe(\UIView.frame, options: [.new,.old], changeHandler: { (view, change) in
+                    strongSelf.observeValue(change, of: view)
+                })
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
-        let newrect:CGRect = change?[NSKeyValueChangeKey.newKey] as! CGRect
-        let oldrect:CGRect = change?[NSKeyValueChangeKey.oldKey] as! CGRect
-        if newrect.equalTo(oldrect) {
+    private func observeValue(_ change:NSKeyValueObservedChange<CGRect>,of object: Any?){
+        let newrect:CGRect = change.newValue ?? CGRect.zero
+        let oldrect:CGRect = change.oldValue ?? CGRect.zero
+        if (newrect.equalTo(oldrect)) {
             return
         }
         if let view = object as? UIView {
@@ -101,17 +105,16 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     
     private func remark(){
-       
-        let borderLayer = CAShapeLayer()
-        borderLayer.strokeColor = self.borderColor.cgColor
-        borderLayer.fillColor = nil
         if let view = self.viewNode?.view {
+            let borderLayer = CAShapeLayer()
             let bounds = view.bounds
             let maxBorderWidth = CGFloat.minimum(bounds.size.width, bounds.size.height)
             let borderWidth = (self.borderWidth < maxBorderWidth) ? self.borderWidth:maxBorderWidth
             if pcircle {
                 self.multiRadius = ArgoKitCornerRadius(topLeft: maxBorderWidth/2.0, topRight: maxBorderWidth/2.0, bottomLeft: maxBorderWidth/2.0, bottomRight: maxBorderWidth/2.0)
             }
+            borderLayer.strokeColor = self.borderColor.cgColor
+            borderLayer.fillColor = nil
             borderLayer.path = ArgoKitCornerManagerTool.bezierPath(frame: bounds, multiRadius: self.multiRadius, lineWidth: borderWidth).cgPath
             borderLayer.frame = bounds
             borderLayer.lineWidth = borderWidth
@@ -129,7 +132,7 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     
     
     func cleanBorderLayerIfNeed (){
-        self.needRemake = true
+        self.needRemake = false
         if let borderLayer = self.borderLayer {
             borderLayer.removeFromSuperlayer()
             self.borderLayer = nil
@@ -141,9 +144,6 @@ class ArgoKitBorderLayerOperation:NSObject, ArgoKitViewReaderOperation {
     }
     
     deinit {
-        if let view = self.viewNode?.view{
-            view.removeObserver(self, forKeyPath: "frame")
-        }
     }
     
 }

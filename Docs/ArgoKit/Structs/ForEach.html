@@ -1,0 +1,2839 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ForEach Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Struct/ForEach" class="dashAnchor"></a>
+
+    <a title="ForEach Structure Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          ArgoKit 1.0.11 Docs
+        </a>
+         (71% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">ArgoKit Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      ForEach Structure Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AlertView.html">AlertView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Animation.html">Animation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AnimationBasic.html">AnimationBasic</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AnimationGroup.html">AnimationGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/GestureProperty.html">GestureProperty</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Grid.html">Grid</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListContextualAction.html">ListContextualAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListRowAction.html">ListRowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ListSwipeActionsConfiguration.html">ListSwipeActionsConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ProgressViewStyleConfiguration.html">ProgressViewStyleConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ScrollView.html">ScrollView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SpringAnimation.html">SpringAnimation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TabSegment.html">TabSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TextView.html">TextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/UIHostingController.html">UIHostingController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/UIHostingView.html">UIHostingView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ViewPage.html">ViewPage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnimationElement.html">AnimationElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnimationGroupElement.html">AnimationGroupElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnimationTimingFunc.html">AnimationTimingFunc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnimationType.html">AnimationType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnimationValue.html">AnimationValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoAlign.html">ArgoAlign</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoDirection.html">ArgoDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoEdge.html">ArgoEdge</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoFlexDirection.html">ArgoFlexDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoJustify.html">ArgoJustify</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoKitNodeType.html">ArgoKitNodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoPositionType.html">ArgoPositionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ArgoWrapType.html">ArgoWrapType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNode.html">ArgoKitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ArgoKitNodeViewModifier.html">ArgoKitNodeViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ArgoKitIdentifiable.html">ArgoKitIdentifiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Gesture.html">Gesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ProgressViewStyle.html">ProgressViewStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TextProtocol.html">TextProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/View.html">View</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ViewModelProtocol.html">ViewModelProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ActivityIndicatorView.html">ActivityIndicatorView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ArgoKitAnimationBuilder.html">ArgoKitAnimationBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ArgoKitAnimationsBuilder.html">ArgoKitAnimationsBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/BlurEffectView.html">BlurEffectView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Button.html">Button</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DatePicker.html">DatePicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/EmptyView.html">EmptyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ForEach.html">ForEach</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/HStack.html">HStack</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/HostView.html">HostView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Image.html">Image</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/LongPressGesture.html">LongPressGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PanGesture.html">PanGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PanGesture/PanGestureDirection.html">– PanGestureDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PickerView.html">PickerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PinchGesture.html">PinchGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ProgressView.html">ProgressView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RotationGesture.html">RotationGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ScreenEdgePanGesture.html">ScreenEdgePanGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/SegmenteControl.html">SegmenteControl</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Slider.html">Slider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Spacer.html">Spacer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Stepper.html">Stepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/SwipeGesture.html">SwipeGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TapGesture.html">TapGesture</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Text.html">Text</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Toggle.html">Toggle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VStack.html">VStack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit8DataLista">DataList</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit14FinishCallbacka">FinishCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit13PauseCallbacka">PauseCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit14RepeatCallbacka">RepeatCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit14ResumeCallbacka">ResumeCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit15SectionDataLista">SectionDataList</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:7ArgoKit13StartCallbacka">StartCallback</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>ForEach</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/View.html">View</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A structure that computes views on demand from an underlying collection of of data.</p>
+<pre class="highlight swift"><code>     <span class="kt">ForEach</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">titles</span><span class="p">)</span> <span class="p">{</span> <span class="n">item</span> <span class="k">in</span>
+         <span class="kt">Text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="nf">margin</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">23</span><span class="p">)</span>
+     <span class="p">}</span>
+</code></pre>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV4nodeSo0aB4NodeCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/node" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV4nodeSo0aB4NodeCSgvp">node</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The node behind the ForEach.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">node</span><span class="p">:</span> <span class="kt">ArgoKitNode</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV4typeAA0aB8NodeTypeOvp"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV4typeAA0aB8NodeTypeOvp">type</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of the node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoKitNodeType.html">ArgoKitNodeType</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachVyACyxGSayxGSg_AA4View_pxSgctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachVyACyxGSayxGSg_AA4View_pxSgctcfc">init(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Array</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kd">@ArgoKitViewBuilder</span> <span class="n">_</span> <span class="nv">builder</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">T</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data that the ForEach instance uses to create views dynamically.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>builder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view builder that creates views dynamically.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachVyACySnySiGGAD_AA4View_pSictcADRszlufc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachVyACySnySiGGAD_AA4View_pSictcADRszlufc">init(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="kd">@ArgoKitViewBuilder</span> <span class="n">_</span> <span class="nv">builder</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">==</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A constant range.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>builder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view builder that creates views dynamically.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV10parentNodeSo0abF0CSgyF"></a>
+                    <a name="//apple_ref/swift/Method/parentNode()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV10parentNodeSo0abF0CSgyF">parentNode()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ArgoKitNode</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11applyLayoutSo6CGSizeVyF"></a>
+                    <a name="//apple_ref/swift/Method/applyLayout()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11applyLayoutSo6CGSizeVyF">applyLayout()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">applyLayout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11applyLayout4sizeySo6CGSizeV_tF"></a>
+                    <a name="//apple_ref/swift/Method/applyLayout(size:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11applyLayout4sizeySo6CGSizeV_tF">applyLayout(size:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">applyLayout</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV15calculateLayout4sizeySo6CGSizeV_tF"></a>
+                    <a name="//apple_ref/swift/Method/calculateLayout(size:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV15calculateLayout4sizeySo6CGSizeV_tF">calculateLayout(size:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">calculateLayout</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV13flexDirectionyACyxGAA0a4FlexF0OF"></a>
+                    <a name="//apple_ref/swift/Method/flexDirection(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV13flexDirectionyACyxGAA0a4FlexF0OF">flexDirection(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">flexDirection</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoFlexDirection.html">ArgoFlexDirection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV14justifyContentyACyxGAA0A7JustifyOF"></a>
+                    <a name="//apple_ref/swift/Method/justifyContent(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV14justifyContentyACyxGAA0A7JustifyOF">justifyContent(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">justifyContent</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoJustify.html">ArgoJustify</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV12alignContentyACyxGAA0A5AlignOF"></a>
+                    <a name="//apple_ref/swift/Method/alignContent(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV12alignContentyACyxGAA0A5AlignOF">alignContent(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">alignContent</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoAlign.html">ArgoAlign</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV10alignItemsyACyxGAA0A5AlignOF"></a>
+                    <a name="//apple_ref/swift/Method/alignItems(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV10alignItemsyACyxGAA0A5AlignOF">alignItems(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">alignItems</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoAlign.html">ArgoAlign</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9alignSelfyACyxGAA0A5AlignOF"></a>
+                    <a name="//apple_ref/swift/Method/alignSelf(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9alignSelfyACyxGAA0A5AlignOF">alignSelf(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">alignSelf</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoAlign.html">ArgoAlign</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV12positionTypeyACyxGAA0a8PositionF0OF"></a>
+                    <a name="//apple_ref/swift/Method/positionType(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV12positionTypeyACyxGAA0a8PositionF0OF">positionType(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">positionType</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoPositionType.html">ArgoPositionType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV4wrapyACyxGAA0A8WrapTypeOF"></a>
+                    <a name="//apple_ref/swift/Method/wrap(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV4wrapyACyxGAA0A8WrapTypeOF">wrap(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoWrapType.html">ArgoWrapType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11displayFlexACyxGyF"></a>
+                    <a name="//apple_ref/swift/Method/displayFlex()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11displayFlexACyxGyF">displayFlex()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">displayFlex</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11displayNoneACyxGyF"></a>
+                    <a name="//apple_ref/swift/Method/displayNone()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11displayNoneACyxGyF">displayNone()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">displayNone</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV4flexyACyxG12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/flex(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV4flexyACyxG12CoreGraphics7CGFloatVF">flex(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">flex</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV4growyACyxG12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/grow(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV4growyACyxG12CoreGraphics7CGFloatVF">grow(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">grow</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6shrinkyACyxG12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/shrink(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6shrinkyACyxG12CoreGraphics7CGFloatVF">shrink(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shrink</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV5basisyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/basis(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV5basisyACyxGAA0A5ValueOF">basis(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">basis</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV8position3top5right6bottom4leftACyxGAA0A5ValueO_A3KtF"></a>
+                    <a name="//apple_ref/swift/Method/position(top:right:bottom:left:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV8position3top5right6bottom4leftACyxGAA0A5ValueO_A3KtF">position(top:<wbr>right:<wbr>bottom:<wbr>left:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">position</span><span class="p">(</span><span class="nv">top</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">right</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">bottom</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">left</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV8position4edge5valueACyxGAA0A4EdgeO_AA0A5ValueOtF"></a>
+                    <a name="//apple_ref/swift/Method/position(edge:value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV8position4edge5valueACyxGAA0A4EdgeO_AA0A5ValueOtF">position(edge:<wbr>value:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">position</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoEdge.html">ArgoEdge</a></span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6margin3top5right6bottom4leftACyxGAA0A5ValueO_A3KtF"></a>
+                    <a name="//apple_ref/swift/Method/margin(top:right:bottom:left:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6margin3top5right6bottom4leftACyxGAA0A5ValueO_A3KtF">margin(top:<wbr>right:<wbr>bottom:<wbr>left:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">margin</span><span class="p">(</span><span class="nv">top</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">right</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">bottom</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">left</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6margin4edge5valueACyxGAA0A4EdgeO_AA0A5ValueOtF"></a>
+                    <a name="//apple_ref/swift/Method/margin(edge:value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6margin4edge5valueACyxGAA0A4EdgeO_AA0A5ValueOtF">margin(edge:<wbr>value:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">margin</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoEdge.html">ArgoEdge</a></span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV7padding3top5right6bottom4leftACyxGAA0A5ValueO_A3KtF"></a>
+                    <a name="//apple_ref/swift/Method/padding(top:right:bottom:left:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV7padding3top5right6bottom4leftACyxGAA0A5ValueO_A3KtF">padding(top:<wbr>right:<wbr>bottom:<wbr>left:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">padding</span><span class="p">(</span><span class="nv">top</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">right</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">bottom</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">left</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV7padding4edge5valueACyxGAA0A4EdgeO_AA0A5ValueOtF"></a>
+                    <a name="//apple_ref/swift/Method/padding(edge:value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV7padding4edge5valueACyxGAA0A4EdgeO_AA0A5ValueOtF">padding(edge:<wbr>value:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">padding</span><span class="p">(</span><span class="nv">edge</span><span class="p">:</span> <span class="kt"><a href="../Enums/ArgoEdge.html">ArgoEdge</a></span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV4size5width6heightACyxGAA0A5ValueO_AItF"></a>
+                    <a name="//apple_ref/swift/Method/size(width:height:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV4size5width6heightACyxGAA0A5ValueO_AItF">size(width:<wbr>height:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">size</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV5widthyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/width(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV5widthyACyxGAA0A5ValueOF">width(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">width</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6heightyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/height(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6heightyACyxGAA0A5ValueOF">height(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">height</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV8minWidthyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/minWidth(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV8minWidthyACyxGAA0A5ValueOF">minWidth(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">minWidth</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9minHeightyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/minHeight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9minHeightyACyxGAA0A5ValueOF">minHeight(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">minHeight</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV8maxWidthyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/maxWidth(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV8maxWidthyACyxGAA0A5ValueOF">maxWidth(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">maxWidth</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9maxHeightyACyxGAA0A5ValueOF"></a>
+                    <a name="//apple_ref/swift/Method/maxHeight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9maxHeightyACyxGAA0A5ValueOF">maxHeight(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">maxHeight</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ArgoValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV5width12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/width()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV5width12CoreGraphics7CGFloatVyF">width()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">width</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6height12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/height()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6height12CoreGraphics7CGFloatVyF">height()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">height</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV8minWidth12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/minWidth()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV8minWidth12CoreGraphics7CGFloatVyF">minWidth()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">minWidth</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9minHeight12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/minHeight()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9minHeight12CoreGraphics7CGFloatVyF">minHeight()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">minHeight</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV8maxWidth12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/maxWidth()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV8maxWidth12CoreGraphics7CGFloatVyF">maxWidth()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">maxWidth</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9maxHeight12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/maxHeight()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9maxHeight12CoreGraphics7CGFloatVyF">maxHeight()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">maxHeight</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6aspect5ratioACyxG12CoreGraphics7CGFloatV_tF"></a>
+                    <a name="//apple_ref/swift/Method/aspect(ratio:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6aspect5ratioACyxG12CoreGraphics7CGFloatV_tF">aspect(ratio:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">aspect</span><span class="p">(</span><span class="nv">ratio</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV24isUserInteractionEnabledyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/isUserInteractionEnabled(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV24isUserInteractionEnabledyACyxGSbF">isUserInteractionEnabled(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isUserInteractionEnabled</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV3tagyACyxGSiF"></a>
+                    <a name="//apple_ref/swift/Method/tag(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV3tagyACyxGSiF">tag(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tag</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV3tagSiSgyF"></a>
+                    <a name="//apple_ref/swift/Method/tag()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV3tagSiSgyF">tag()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tag</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV5layerSo7CALayerCSgyF"></a>
+                    <a name="//apple_ref/swift/Method/layer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV5layerSo7CALayerCSgyF">layer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">layer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CALayer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV16canBecomeFocusedSbSgyF"></a>
+                    <a name="//apple_ref/swift/Method/canBecomeFocused()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV16canBecomeFocusedSbSgyF">canBecomeFocused()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">canBecomeFocused</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9isFocusedSbSgyF"></a>
+                    <a name="//apple_ref/swift/Method/isFocused()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9isFocusedSbSgyF">isFocused()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isFocused</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV20focusGroupIdentifieryACyxGSSSgF"></a>
+                    <a name="//apple_ref/swift/Method/focusGroupIdentifier(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV20focusGroupIdentifieryACyxGSSSgF">focusGroupIdentifier(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview&rsquo;s focus group.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">14.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"ForEach does not support the method!"</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">focusGroupIdentifier</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV20focusGroupIdentifierSSSgyF"></a>
+                    <a name="//apple_ref/swift/Method/focusGroupIdentifier()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV20focusGroupIdentifierSSSgyF">focusGroupIdentifier()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">focusGroupIdentifier</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV24semanticContentAttributeyACyxGSo010UISemanticfG0VF"></a>
+                    <a name="//apple_ref/swift/Method/semanticContentAttribute(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV24semanticContentAttributeyACyxGSo010UISemanticfG0VF">semanticContentAttribute(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">semanticContentAttribute</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UISemanticContentAttribute</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV24semanticContentAttributeSo010UISemanticfG0VSgyF"></a>
+                    <a name="//apple_ref/swift/Method/semanticContentAttribute()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV24semanticContentAttributeSo010UISemanticfG0VSgyF">semanticContentAttribute()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">semanticContentAttribute</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UISemanticContentAttribute</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV37effectiveUserInterfaceLayoutDirectionSo06UIUserghI0VSgyF"></a>
+                    <a name="//apple_ref/swift/Method/effectiveUserInterfaceLayoutDirection()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV37effectiveUserInterfaceLayoutDirectionSo06UIUserghI0VSgyF">effectiveUserInterfaceLayoutDirection()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">effectiveUserInterfaceLayoutDirection</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIUserInterfaceLayoutDirection</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV15backgroundColoryACyxGSo7UIColorCF"></a>
+                    <a name="//apple_ref/swift/Method/backgroundColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV15backgroundColoryACyxGSo7UIColorCF">backgroundColor(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">backgroundColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV15backgroundColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/backgroundColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV15backgroundColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF">backgroundColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">backgroundColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV15backgroundColor3hex5alphaACyxGSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/backgroundColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV15backgroundColor3hex5alphaACyxGSi_SftF">backgroundColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">backgroundColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV5alphayACyxG12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/alpha(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV5alphayACyxG12CoreGraphics7CGFloatVF">alpha(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">alpha</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6opaqueyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/opaque(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6opaqueyACyxGSbF">opaque(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">opaque</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV26clearsContextBeforeDrawingyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/clearsContextBeforeDrawing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV26clearsContextBeforeDrawingyACyxGSbF">clearsContextBeforeDrawing(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">clearsContextBeforeDrawing</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6hiddenyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/hidden(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6hiddenyACyxGSbF">hidden(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hidden</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV7displayyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/display(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV7displayyACyxGSbF">display(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">display</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11contentModeyACyxGSo013UIViewContentF0VF"></a>
+                    <a name="//apple_ref/swift/Method/contentMode(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11contentModeyACyxGSo013UIViewContentF0VF">contentMode(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">contentMode</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIView</span><span class="o">.</span><span class="kt">ContentMode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9tintColoryACyxGSo7UIColorCF"></a>
+                    <a name="//apple_ref/swift/Method/tintColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9tintColoryACyxGSo7UIColorCF">tintColor(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9tintColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/tintColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9tintColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF">tintColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV9tintColor3hex5alphaACyxGSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/tintColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV9tintColor3hex5alphaACyxGSi_SftF">tintColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV18tintAdjustmentModeyACyxGSo010UIViewTintfG0VF"></a>
+                    <a name="//apple_ref/swift/Method/tintAdjustmentMode(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV18tintAdjustmentModeyACyxGSo010UIViewTintfG0VF">tintAdjustmentMode(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tintAdjustmentMode</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIView</span><span class="o">.</span><span class="kt">TintAdjustmentMode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV13clipsToBoundsyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/clipsToBounds(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV13clipsToBoundsyACyxGSbF">clipsToBounds(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">clipsToBounds</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV12cornerRadiusyACyxG12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/cornerRadius(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV12cornerRadiusyACyxG12CoreGraphics7CGFloatVF">cornerRadius(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cornerRadius</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV12cornerRadius7topLeft0G5Right06bottomH00jI0ACyxG12CoreGraphics7CGFloatV_A3LtF"></a>
+                    <a name="//apple_ref/swift/Method/cornerRadius(topLeft:topRight:bottomLeft:bottomRight:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV12cornerRadius7topLeft0G5Right06bottomH00jI0ACyxG12CoreGraphics7CGFloatV_A3LtF">cornerRadius(topLeft:<wbr>topRight:<wbr>bottomLeft:<wbr>bottomRight:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cornerRadius</span><span class="p">(</span><span class="nv">topLeft</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">topRight</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">bottomLeft</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">bottomRight</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11borderWidthyACyxG12CoreGraphics7CGFloatVF"></a>
+                    <a name="//apple_ref/swift/Method/borderWidth(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11borderWidthyACyxG12CoreGraphics7CGFloatVF">borderWidth(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderWidth</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11borderColoryACyxGSo7UIColorCF"></a>
+                    <a name="//apple_ref/swift/Method/borderColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11borderColoryACyxGSo7UIColorCF">borderColor(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11borderColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/borderColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11borderColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF">borderColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11borderColor3hex5alphaACyxGSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/borderColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11borderColor3hex5alphaACyxGSi_SftF">borderColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">borderColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6circleACyxGyF"></a>
+                    <a name="//apple_ref/swift/Method/circle()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6circleACyxGyF">circle()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">circle</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11shadowColoryACyxGSo7UIColorCSgF"></a>
+                    <a name="//apple_ref/swift/Method/shadowColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11shadowColoryACyxGSo7UIColorCSgF">shadowColor(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadowColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11shadowColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF"></a>
+                    <a name="//apple_ref/swift/Method/shadowColor(red:green:blue:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11shadowColor3red5green4blue5alphaACyxGSi_S2i12CoreGraphics7CGFloatVtF">shadowColor(red:<wbr>green:<wbr>blue:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadowColor</span><span class="p">(</span><span class="n">red</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">green</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">blue</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11shadowColor3hex5alphaACyxGSi_SftF"></a>
+                    <a name="//apple_ref/swift/Method/shadowColor(hex:alpha:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11shadowColor3hex5alphaACyxGSi_SftF">shadowColor(hex:<wbr>alpha:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadowColor</span><span class="p">(</span><span class="nv">hex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">alpha</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6shadow6offset6radius7opacityACyxGSo6CGSizeV_12CoreGraphics7CGFloatVSftF"></a>
+                    <a name="//apple_ref/swift/Method/shadow(offset:radius:opacity:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6shadow6offset6radius7opacityACyxGSo6CGSizeV_12CoreGraphics7CGFloatVSftF">shadow(offset:<wbr>radius:<wbr>opacity:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadow</span><span class="p">(</span><span class="nv">offset</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">,</span> <span class="nv">radius</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">opacity</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV6shadow5color6offset6radius7opacity7cornersACyxGSo7UIColorCSg_So6CGSizeV12CoreGraphics7CGFloatVSfSo12UIRectCornerVtF"></a>
+                    <a name="//apple_ref/swift/Method/shadow(color:offset:radius:opacity:corners:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV6shadow5color6offset6radius7opacity7cornersACyxGSo7UIColorCSg_So6CGSizeV12CoreGraphics7CGFloatVSfSo12UIRectCornerVtF">shadow(color:<wbr>offset:<wbr>radius:<wbr>opacity:<wbr>corners:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shadow</span><span class="p">(</span><span class="nv">color</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="nv">offset</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">,</span> <span class="nv">radius</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">opacity</span><span class="p">:</span> <span class="kt">Float</span><span class="p">,</span> <span class="nv">corners</span><span class="p">:</span> <span class="kt">UIRectCorner</span> <span class="o">=</span> <span class="o">.</span><span class="n">allCorners</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV13gradientColor05startF003endF09directionACyxGSo7UIColorCSg_AkA0aB12GradientTypeVSgtF"></a>
+                    <a name="//apple_ref/swift/Method/gradientColor(startColor:endColor:direction:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV13gradientColor05startF003endF09directionACyxGSo7UIColorCSg_AkA0aB12GradientTypeVSgtF">gradientColor(startColor:<wbr>endColor:<wbr>direction:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">gradientColor</span><span class="p">(</span><span class="nv">startColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="nv">endColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="nv">direction</span><span class="p">:</span> <span class="kt">ArgoKitGradientType</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV18cleanGradientLayerACyxGyF"></a>
+                    <a name="//apple_ref/swift/Method/cleanGradientLayer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV18cleanGradientLayerACyxGyF">cleanGradientLayer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cleanGradientLayer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV13addBlurEffect5style5alpha5colorACyxGSo06UIBlurG5StyleV_12CoreGraphics7CGFloatVSgSo7UIColorCSgtF"></a>
+                    <a name="//apple_ref/swift/Method/addBlurEffect(style:alpha:color:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV13addBlurEffect5style5alpha5colorACyxGSo06UIBlurG5StyleV_12CoreGraphics7CGFloatVSgSo7UIColorCSgtF">addBlurEffect(style:<wbr>alpha:<wbr>color:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addBlurEffect</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">UIBlurEffect</span><span class="o">.</span><span class="kt">Style</span><span class="p">,</span> <span class="nv">alpha</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">color</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV16removeBlurEffectACyxGyF"></a>
+                    <a name="//apple_ref/swift/Method/removeBlurEffect()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV16removeBlurEffectACyxGyF">removeBlurEffect()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeBlurEffect</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV5alias8variableACyxGqd__Sgz_tAA4ViewRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/alias(variable:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV5alias8variableACyxGqd__Sgz_tAA4ViewRd__lF">alias(variable:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">alias</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">variable</span> <span class="nv">ptr</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">T</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/View.html">View</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV11addSubNodes7builderyAA4View_pyc_tF"></a>
+                    <a name="//apple_ref/swift/Method/addSubNodes(builder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV11addSubNodes7builderyAA4View_pyc_tF">addSubNodes(builder:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addSubNodes</span><span class="p">(</span><span class="kd">@ArgoKitViewBuilder</span> <span class="nv">builder</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/View.html">View</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV7gestureAdCyxGAA7Gesture_p_tF"></a>
+                    <a name="//apple_ref/swift/Method/gesture(gesture:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV7gestureAdCyxGAA7Gesture_p_tF">gesture(gesture:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">gesture</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Gesture.html">Gesture</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV13removeGesture7gestureACyxGAA0F0_p_tF"></a>
+                    <a name="//apple_ref/swift/Method/removeGesture(gesture:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV13removeGesture7gestureACyxGAA0F0_p_tF">removeGesture(gesture:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeGesture</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Gesture.html">Gesture</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV12onTapGesture12numberOfTaps0hI7Touches6actionACyxGSi_SiyyctF"></a>
+                    <a name="//apple_ref/swift/Method/onTapGesture(numberOfTaps:numberOfTouches:action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV12onTapGesture12numberOfTaps0hI7Touches6actionACyxGSi_SiyyctF">onTapGesture(numberOfTaps:<wbr>numberOfTouches:<wbr>action:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">onTapGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV18onLongPressGesture12numberOfTaps0iJ7Touches07minimumG8Duration17allowableMovement6actionACyxGSi_SiSd12CoreGraphics7CGFloatVyyctF"></a>
+                    <a name="//apple_ref/swift/Method/onLongPressGesture(numberOfTaps:numberOfTouches:minimumPressDuration:allowableMovement:action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV18onLongPressGesture12numberOfTaps0iJ7Touches07minimumG8Duration17allowableMovement6actionACyxGSi_SiSd12CoreGraphics7CGFloatVyyctF">onLongPressGesture(numberOfTaps:<wbr>numberOfTouches:<wbr>minimumPressDuration:<wbr>allowableMovement:<wbr>action:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">onLongPressGesture</span><span class="p">(</span><span class="nv">numberOfTaps</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">numberOfTouches</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">minimumPressDuration</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nv">allowableMovement</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV10endEditingyACyxGSbF"></a>
+                    <a name="//apple_ref/swift/Method/endEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV10endEditingyACyxGSbF">endEditing(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">endEditing</span><span class="p">(</span><span class="n">_</span> <span class="nv">force</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7ArgoKit7ForEachV12addAnimationyACyxGAA0F0CF"></a>
+                    <a name="//apple_ref/swift/Method/addAnimation(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ArgoKit7ForEachV12addAnimationyACyxGAA0F0CF">addAnimation(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addAnimation</span><span class="p">(</span><span class="n">_</span> <span class="nv">animation</span><span class="p">:</span> <span class="kt"><a href="../Classes/Animation.html">Animation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ForEach</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2021 <a class="link" href="https://git.wemomo.com/module/argokit" target="_blank" rel="external">MoMo</a>. All rights reserved. (Last updated: 2021-01-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

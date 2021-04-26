@@ -43,13 +43,12 @@ class row: View{
 //                .alias(variable: &self.item.textCom)
         }.width(100%)
     }
-    
 }
+
 class DemoContentView: View {
     var node: ArgoKitNode? = ArgoKitNode(viewClass: UIView.self)
-    var items:[ArgoKitItem]
+    @DataSource var items:[ArgoKitItem] = [ArgoKitItem]()
     public init(){
-        items = [ArgoKitItem]()
         for index in 1..<100 {
             let item:ArgoKitItem = ArgoKitItem()
             item.text = String(index * index)
@@ -60,12 +59,12 @@ class DemoContentView: View {
                 item.reuseIdentifier = "200"
             }
             item.identifier = "\(index)"
-            items.append(item)
+            $items.append(item)
         }
     }
     
     var body:View{
-        List(data:items) { item in
+        List(data:$items) { item in
             if item.index % 2 == 0{
                 row(item: item).padding(edge: .left, value: 10).backgroundColor(.orange)
             }else{
@@ -73,7 +72,7 @@ class DemoContentView: View {
             }
            
         }.width(100%).height(100%).backgroundColor(.white)
-        .didSelectRow { item, indexPath in
+        .cellSelected { item, indexPath in
             item.textCom?.text("haha11"+item.text)
         }
     }

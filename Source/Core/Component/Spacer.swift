@@ -6,15 +6,26 @@
 //
 
 import Foundation
+/// Representing of space within a container along the main axis.
+/// same as the view of which felxGrow is 1.0.
+///
+/// ```
+///     HStack {
+///         Text("1")
+///         Text("2")
+///         Spacer()
+///         Text("3")
+///     }
+/// ```
 public struct Spacer: View {
     private let pNode:ArgoKitNode
+    /// the node begind the Spacer
     public var node: ArgoKitNode?{
         pNode
     }
     public init() {
-        pNode = ArgoKitNode(viewClass: UIView.self)
-//        pNode.flexGrow(1.0)
-        pNode.flex(1)
+        pNode = ArgoKitNode(viewClass: UIView.self, type: Spacer.self)
+        pNode.flexGrow(1.0)
     }
 }
 

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stopRunloop;
 - (void)addLayoutNode:(nullable ArgoKitNode *)node;
 - (void)removeLayoutNode:(nullable ArgoKitNode *)node;
+
+- (void)reLayoutNode:(nullable NSArray *)cellNodes frame:(CGRect)frame;
 @end
 
 NS_ASSUME_NONNULL_END

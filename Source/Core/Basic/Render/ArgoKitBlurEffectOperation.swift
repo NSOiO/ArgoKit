@@ -52,8 +52,8 @@ class ArgoKitBlurEffectOperation: NSObject,ArgoKitViewReaderOperation {
         super.init()
         self.nodeObserver.setCreateViewBlock {[weak self] view in
             if let strongSelf = self{
+                strongSelf.remakeIfNeed()
                 ArgoKitViewReaderHelper.shared.addRenderOperation(operation:self)
-                strongSelf.needRemake = true
             }
         }
         self.viewNode?.addNode(observer:self.nodeObserver)

@@ -13,9 +13,9 @@ extension ArgoKitNodeViewModifier{
             isDirty_ = true
         }
         
-        if selector == #selector(setter:UILabel.isHidden) {
-            isDirty_ = true
-        }
+//        if selector == #selector(setter:UILabel.isHidden) {
+//            isDirty_ = true
+//        }
         
         if selector == #selector(setter:UILabel.attributedText) {
             isDirty_ = true
@@ -28,20 +28,29 @@ extension ArgoKitNodeViewModifier{
             isDirty_ = true
         }
         
-        if selector == #selector(setter:UIImageView.image) {
-            isDirty_ = true
-        }
-        
-        if selector == #selector(setter:UIImageView.highlightedImage) {
-            isDirty_ = true
-        }
+//        if selector == #selector(setter:UIImageView.image) {
+//            isDirty_ = true
+//        }
+//
+//        if selector == #selector(setter:UIImageView.highlightedImage) {
+//            isDirty_ = true
+//        }
         
         return isDirty_;
     }
     public class func addAttribute(isCALayer:Bool = false,isDirty:Bool = false,_ outNode:ArgoKitNode?, _ selector:Selector, _ patamter:Any? ...) {
         ArgoKitNodeViewModifier._addAttribute_(isCALayer:isCALayer,outNode, selector, patamter)
     }
-    public class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+    class func _addAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) {
+        if let node = outNode{
+            let attribute = _preformAttribute_(isCALayer: isCALayer, isDirty: isDirty, outNode, selector, patamter)
+            node.addNodeddView(attribute:attribute)
+        }
+    }
+    
+    
+    @discardableResult
+    class func _preformAttribute_(isCALayer:Bool = false,isDirty:Bool = false, _ outNode:ArgoKitNode?,_ selector:Selector, _ patamter:[Any?]) -> ViewAttribute? {
         if let node = outNode{
             // 获取参数
             var paraList:Array<Any> = Array()
@@ -51,7 +60,7 @@ extension ArgoKitNodeViewModifier{
                 }
             }
             if patamter.count !=  paraList.count{
-                return
+                return nil
             }
             
             let attribute = ViewAttribute(selector:selector,paramter:paraList)
@@ -62,281 +71,141 @@ extension ArgoKitNodeViewModifier{
             attribute.isCALayer = isCALayer
             
             self.setNodeAttribute(node, attribute)
-            node.nodeAddView(attribute:attribute)
             
+            return attribute
         }
+        return nil
     }
     
     class func setNodeAttribute(_ node:ArgoKitNode?,_ attribute:ViewAttribute){
         if let linkNode = node?.link {
              self.nodeViewAttribute(with:linkNode, attributes: [attribute], markDirty: false)
          }else{
-             self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: true)
+             self.nodeViewAttribute(with:node, attributes: [attribute], markDirty: false)
          }
-        if attribute.isDirty == true {
+        
+        if let _ = node?.nodeView(),attribute.isDirty == true {
             node?.markDirty()
         }
     }
 }
 
-extension View{
+extension View {
     
-    public func addAttribute(isCALayer:Bool = false,isDirty:Bool = false, _ selector:Selector, _ patamter:Any? ...) {
-        ArgoKitNodeViewModifier._addAttribute_(isCALayer: isCALayer, self.node, selector, patamter)
+    /// Adds attribute to the UIKit View
+    /// - Parameters:
+    ///   - isCALayer: true if is calayer.
+    ///   - isDirty: true if the attribute may change the view layout
+    ///   - selector: The selector of the attribute.
+    ///   - patamter: patamter.
+    public func addAttribute(isCALayer: Bool = false, isDirty: Bool = false, _ selector: Selector, _ patamter: Any? ...) {
+        ArgoKitNodeViewModifier._addAttribute_(isCALayer: isCALayer, isDirty: isDirty, self.node, selector, patamter)
+    }
+    
+    /// Preform attribute to the UIKit View
+    /// - Parameters:
+    ///   - isCALayer: true if is calayer.
+    ///   - isDirty: true if the attribute may change the view layout
+    ///   - selector: The selector of the attribute.
+    ///   - patamter: patamter.
+    public func preformAttribute(isCALayer: Bool = false, isDirty: Bool = false, _ selector: Selector, _ patamter: Any? ...) {
+        ArgoKitNodeViewModifier._preformAttribute_(isCALayer: isCALayer, isDirty: isDirty, self.node, selector, patamter)
     }
 }
 
 // modifier
 extension View {
-    
+
+    /// Sets an integer that you can use to identify view objects in your application.
+    /// - Parameter value: An integer that you can use to identify view objects in your application.
+    /// - Returns: Self
     @discardableResult
-    public func isUserInteractionEnabled(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.isUserInteractionEnabled),value)
-        return self
-    }
-    
-    @discardableResult
-    public func tag(_ value:Int)->Self{
+    public func tag(_ value: Int) -> Self {
         addAttribute(#selector(setter:UIView.tag),value)
         return self
     }
     
-    public func tag()->Int?{
+    /// Gets an integer that you can use to identify view objects in your application.
+    /// - Returns: An integer that you can use to identify view objects in your application.
+    public func tag() -> Int? {
         return self.node?.view?.tag
     }
-    public func layer()-> CALayer? {
+    
+    /// Gets the view’s Core Animation layer used for rendering.
+    /// - Returns: The view’s Core Animation layer used for rendering.
+    public func layer() -> CALayer? {
         return self.node?.view?.layer
     }
-
+    
+    /// Gets a Boolean value that indicates whether the view is currently capable of being focused.
+    /// - Returns: A Boolean value that indicates whether the view is currently capable of being focused.
     @available(iOS 9.0, *)
-    public func canBecomeFocused()-> Bool? {
+    public func canBecomeFocused() -> Bool? {
         return self.node?.view?.canBecomeFocused
     }
-
+    
+    /// Gets a Boolean value that indicates whether the item is currently focused.
+    /// - Returns: A Boolean value that indicates whether the item is currently focused.
     @available(iOS 9.0, *)
     public func isFocused()-> Bool? {
         return self.node?.view?.isFocused
     }
 
-    /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
+    /// Sets the identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
+    /// - Parameter value: The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
+    /// - Returns: Self
     @available(iOS 14.0, *)
     @discardableResult
-    public func focusGroupIdentifier(_ value:String?)->Self{
+    public func focusGroupIdentifier(_ value: String?) -> Self {
         addAttribute(#selector(setter:UIView.focusGroupIdentifier),value)
         return self
     }
     
+    /// Gets the identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
+    /// - Returns: The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
     @available(iOS 14.0, *)
     @discardableResult
-    public func focusGroupIdentifier()-> String? {
+    public func focusGroupIdentifier() -> String? {
         return self.node?.view?.focusGroupIdentifier
     }
-
+    
+    /// Sets a semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.
+    /// - Parameter value: A semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.
+    /// - Returns: Self
     @available(iOS 9.0, *)
     @discardableResult
-    public func semanticContentAttribute(_ value:UISemanticContentAttribute)->Self{
+    public func semanticContentAttribute(_ value: UISemanticContentAttribute) -> Self {
         addAttribute(#selector(setter:UIView.semanticContentAttribute),value)
         return self
     }
-    public func semanticContentAttribute()->UISemanticContentAttribute?{
+    
+    /// Gets a semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.
+    /// - Returns: A semantic description of the view’s contents, used to determine whether the view should be flipped when switching between left-to-right and right-to-left layouts.
+    public func semanticContentAttribute() -> UISemanticContentAttribute? {
         return self.node?.view?.semanticContentAttribute
     }
+    
+    /// Gets the user interface layout direction appropriate for arranging the immediate content of the view.
+    /// - Returns: The user interface layout direction appropriate for arranging the immediate content of the view.
     @available(iOS 10.0, *)
-    public func effectiveUserInterfaceLayoutDirection()-> UIUserInterfaceLayoutDirection? {
+    public func effectiveUserInterfaceLayoutDirection() -> UIUserInterfaceLayoutDirection? {
         return self.node?.view?.effectiveUserInterfaceLayoutDirection
     }
 }
 
 extension View{
-    
-    @discardableResult
-    public func backgroundColor(_ value:UIColor)->Self{
-        addAttribute(#selector(setter:UIView.backgroundColor),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func backgroundColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(#selector(setter:UIView.backgroundColor),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func backgroundColor(hex :Int,alpha a:Float = 1)->Self{
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(#selector(setter:UIView.backgroundColor),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func alpha(_ value:CGFloat)->Self{
-        addAttribute(#selector(setter:UIView.alpha),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func opaque(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.isOpaque),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func clearsContextBeforeDrawing(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.clearsContextBeforeDrawing),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func hidden(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.isHidden),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func display(_ value:Bool)->Self{
-        let display_ = !value
-        addAttribute(#selector(setter:UIView.isHidden),display_)
-        if let enable = self.node?.isEnabled {
-            if !enable && !display_ {
-                if let node =  self.node?.root{
-                    self.node?.isEnabled = !display_
-                    ArgoKitReusedLayoutHelper.appLayout(node)
-                }
-            }else{
-                self.node?.isEnabled = !display_
-            }
-        }else{
-            self.node?.isEnabled = !display_
-        }
-      
-        return self;
-    }
-    
-    @discardableResult
-    public func contentMode(_ value:UIView.ContentMode)->Self{
-        addAttribute(#selector(setter:UIView.contentMode),value.rawValue)
-        return self;
-    }
-    
-    @discardableResult
-    public func tintColor(_ value:UIColor)->Self{
-        addAttribute(#selector(setter:UIView.tintColor),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func tintColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(#selector(setter:UIView.tintColor),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func tintColor(hex :Int,alpha a:Float = 1)->Self{
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(#selector(setter:UIView.tintColor),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func tintAdjustmentMode(_ value:UIView.TintAdjustmentMode)->Self{
-        addAttribute(#selector(setter:UIView.tintAdjustmentMode),value.rawValue)
-        return self;
-    }
-    
-    @discardableResult
-    public func clipsToBounds(_ value:Bool)->Self{
-        addAttribute(#selector(setter:UIView.clipsToBounds),value)
-        return self;
-    }
-    
-    @discardableResult
-    public func cornerRadius(_ value:CGFloat)->Self{
-        return self.cornerRadius(topLeft: value, topRight: value, bottomLeft: value, bottomRight: value);
-    }
-    
-    @discardableResult
-    public func cornerRadius(topLeft:CGFloat,topRight:CGFloat,bottomLeft:CGFloat,bottomRight:CGFloat)->Self{
-        let multiRadius = ArgoKitCornerRadius(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
-        self.node?.maskLayerOperation?.updateCornersRadius(multiRadius)
-        
-        self.node?.borderLayerOperation?.updateCornersRadius(multiRadius)
-        return self;
-    }
-    
-    @discardableResult
-    public func borderWidth(_ value:CGFloat)->Self{
-        self.node?.borderLayerOperation?.borderWidth = value
-        return self;
-    }
-    
-    @discardableResult
-    public func borderColor(_ value:UIColor)->Self{
-        self.node?.borderLayerOperation?.borderColor = value
-        return self;
-    }
-    
-    @discardableResult
-    public func borderColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
-        return self;
-    }
-    
-    @discardableResult
-    public func borderColor(hex :Int,alpha a:Float = 1)->Self{
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        addAttribute(isCALayer: true,#selector(setter:CALayer.borderColor),value.cgColor)
-        return self;
-    }
-    
+    /// Clip this view to circle.
+    /// - Returns: Self
     @discardableResult
     public func circle()->Self{
-        _ = self.clipsToBounds(true)
+//        _ = self.clipsToBounds(true)
         self.node?.maskLayerOperation?.circle()
         self.node?.borderLayerOperation?.circle()
         return self;
     }
     
-    @discardableResult
-    public func shadowColor(_ value: UIColor?) -> Self {
-        self.node?.shadowOperation?.updateShadowColor(value)
-        return self
-    }
-    
-    @discardableResult
-    public func shadowColor(red r:Int,green g :Int,blue b:Int,alpha a:CGFloat = 1)->Self{
-        let value = UIColor(red: CGFloat(Double(r)/255.0), green: CGFloat(Double(g)/255.0), blue: CGFloat(Double(b)/255.0), alpha: a)
-        self.node?.shadowOperation?.updateShadowColor(value)
-        return self;
-    }
-    
-    @discardableResult
-    public func shadowColor(hex :Int,alpha a:Float = 1)->Self{
-        let value = ArgoKitUtils.color(withHex: hex,alpha:a)
-        self.node?.shadowOperation?.updateShadowColor(value)
-        return self;
-    }
-    
-    @discardableResult
-    public func shadow(offset: CGSize, radius: CGFloat, opacity: Float) -> Self {
-        self.node?.shadowOperation?.updateShadow(offset: offset, radius: radius, opacity: opacity)
-        return self
-    }
-    
-    @discardableResult
-    public func shadow(color:UIColor? = .gray, offset:CGSize,radius:CGFloat,opacity:Float,corners:UIRectCorner = .allCorners)->Self{
-        self.node?.shadowOperation?.updateCornersRadius(shadowColor: color, shadowOffset: offset, shadowRadius: radius, shadowOpacity: opacity, corners: corners)
-        return self;
-    }
-    
-    @discardableResult
-    public func gradientColor(startColor: UIColor?,endColor:UIColor?,direction:ArgoKitGradientType?) -> Self {
-        self.node?.gradientLayerOperation?.updateGradientLayer(startColor: startColor, endColor: endColor, direction: direction)
-        return self
-    }
-    
+    /// Clean the view’s background gradient color.
+    /// - Returns: Self
     @discardableResult
     public func cleanGradientLayer() -> Self {
         self.node?.gradientLayerOperation?.cleanGradientLayerIfNeed()
@@ -346,14 +215,22 @@ extension View{
 
 extension View{
     
+    /// Adds blur effect to this view.
+    /// - Parameters:
+    ///   - style: The intensity of the blur effect. See UIBlurEffect.Style for valid options.
+    ///   - alpha: The alpha of the blur effect.
+    ///   - color: The color of the blur effect.
+    /// - Returns: Self
     @discardableResult
-    public func addBlurEffect(style:UIBlurEffect.Style,alpha:CGFloat? = nil,color:UIColor? = nil) -> Self{
+    public func addBlurEffect(style: UIBlurEffect.Style, alpha: CGFloat? = nil, color: UIColor? = nil) -> Self {
         self.node?.blurEffectOperation?.addBlurEffect(style: style,alpha: alpha,color: color)
         return self
     }
     
+    /// Removes blur effect.
+    /// - Returns: Self
     @discardableResult
-    public func removeBlurEffect() -> Self{
+    public func removeBlurEffect() -> Self {
         self.node?.blurEffectOperation?.removeBlurEffect()
         return self
     }

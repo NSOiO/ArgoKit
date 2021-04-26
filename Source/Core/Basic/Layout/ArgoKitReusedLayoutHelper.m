@@ -9,6 +9,7 @@
 #import "ArgoKitNode.h"
 #import "ArgoKitNodeViewModifier.h"
 #import "ArgoKitLayoutEngine.h"
+#import "ArgoKitUtils.h"
 #import <os/lock.h>
 
 @interface ArgoKitReusedLayoutHelper(){
@@ -41,13 +42,21 @@ static ArgoKitReusedLayoutHelper* _instance;
     [[ArgoKitReusedLayoutHelper sharedInstance] addLayoutNode:node];
 }
 
++ (void)removeLayoutNode:(nullable ArgoKitNode *)node{
+    [[ArgoKitReusedLayoutHelper sharedInstance] removeLayoutNode:node];
+}
+
 + (void)appLayout:(ArgoKitNode *)node{
     [[ArgoKitReusedLayoutHelper sharedInstance] _layout:node];
+}
+
++ (void)reLayoutNode:(nullable NSArray *)cellNodes frame:(CGRect)frame{
+    [[ArgoKitReusedLayoutHelper sharedInstance].layoutEngine reLayoutNode:cellNodes frame:frame];
 }
 #pragma mark --- private methods ---
 - (void)startLayoutEngine {
     __weak typeof(self)wealSelf = self;
-    [self.layoutEngine startRunloop:kCFRunLoopBeforeWaiting | kCFRunLoopExit repeats:true order:0 block:^(ArgoKitNode * _Nonnull node) {
+    [self.layoutEngine startRunloop:kCFRunLoopBeforeWaiting repeats:true order:0 block:^(ArgoKitNode * _Nonnull node) {
         [wealSelf layout:node];
     }];
 }
@@ -69,10 +78,18 @@ static ArgoKitReusedLayoutHelper* _instance;
 - (void)_layout:(ArgoKitNode *)node{
     [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
     [node applyLayoutAferCalculationWithView:NO];
-    if (node.linkNode) {
-        [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
-    }else{
-        [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
-    }
+    [ArgoKitNodeViewModifier resetNodeViewFrame:node];
+
+//    [ArgoKitUtils asynCaculationBlock:^{
+//        [node calculateLayoutWithSize:CGSizeMake(node.size.width, NAN)];
+//        [ArgoKitUtils runMainThreadAsyncBlock:^{
+//            [node applyLayoutAferCalculationWithView:NO];
+//            if (node.linkNode) {
+//                [ArgoKitNodeViewModifier resetNodeViewFrame:node.linkNode reuseNode:node];
+//            }else{
+//                [ArgoKitNodeViewModifier resetNodeViewFrame:node reuseNode:node];
+//            }
+//        }];
+//    }];
 }
 @end

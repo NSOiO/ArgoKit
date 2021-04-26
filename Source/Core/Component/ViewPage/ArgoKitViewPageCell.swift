@@ -10,7 +10,8 @@ import Foundation
 class ArgoKitViewPageCell: UICollectionViewCell {
     
     var contentNode: ArgoKitCellNode?
-    var tempNode: ArgoKitCellNode?
+    var reuseEnable = true
+    
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -22,14 +23,25 @@ class ArgoKitViewPageCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        guard self.reuseEnable else { return }
+        
         ArgoKitNodeViewModifier.prepare(forReuse: self.contentNode)
     }
     
     public func linkCellNode(_ node: ArgoKitCellNode) {
+        if node.isPreviewing {
+            node.bindView(self.contentView)
+            self.contentNode = node
+            self.contentNode?.applyLayoutAferCalculation(withView: true)
+            ArgoKitReusedLayoutHelper.addLayoutNode(node)
+            return
+        }
+        
         if self.contentView.subviews.count != 0 && self.contentNode != nil {
-            if node.frame.equalTo(.zero) || node.isDirty {
-                node.applyLayoutAferCalculation(withView:false)
-            }
+            guard self.reuseEnable else { return }
+            
+            node.calculateLayout(size: self.frame.size)
+            node.applyLayoutAferCalculation(withView:false)
             ArgoKitNodeViewModifier.reuseNodeViewAttribute(self.contentNode!, reuse: node)
         }else{
             node.bindView(self.contentView)
