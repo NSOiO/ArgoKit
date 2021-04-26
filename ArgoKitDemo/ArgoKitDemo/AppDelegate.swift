@@ -9,7 +9,9 @@ import UIKit
 import ArgoKit
 import SwiftUI
 import FLEX
-
+#if DEBUG
+import ArgoKitPreview
+#endif
 var argokit_dep = ArgoKit.Dep()
 
 @main
@@ -22,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         #if DEBUG
         _argokit_preview_config_()
+        ArgoKitPreview_FitFlex();
         FLEXManager.shared.showExplorer()
         #endif
         var nav: UINavigationController?
