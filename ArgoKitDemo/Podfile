@@ -1,0 +1,24 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://git.wemomo.com/ios/Specs.git'
+platform :ios, '11.0'
+use_frameworks!:linkage => :static
+use_modular_headers!
+
+target 'ArgoKitDemo' do
+  pod 'ArgoKit',:path=>'../'
+  pod 'ArgoKitPreview', :path=>'../'
+  pod 'ArgoKitComponent/SDImageLoader', :path =>'../'
+#  pod 'ArgoKitComponent/YYText', :path =>'../'
+#  pod 'ArgoKitComponent/Refresh', :path =>'../'
+#  pod 'ArgoKitComponent/KFImageLoader', :path => '../'
+end
+
+post_integrate do |installer|
+    installer.generated_pod_targets.each do |target|
+      if target.name == "ArgoKitPreview"
+        pod_dir = target.sandbox.pod_dir(target.name)
+        require "#{pod_dir}/Source/Script/argokit_preview_config.rb"
+        config_preview_files installer,target
+      end
+    end
+end

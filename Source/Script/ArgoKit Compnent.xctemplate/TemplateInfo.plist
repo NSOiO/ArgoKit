@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SupportsSwiftPackage</key>
+	<true/>
+	<key>Kind</key>
+	<string>Xcode.IDEFoundation.TextSubstitutionFileTemplateKind</string>
+	<key>Description</key>
+	<string>ArgoKitComponent Template File</string>
+	<key>Summary</key>
+	<string>ArgoKitComponent Template File.</string>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.swift-source</string>
+	</array>
+	<key>Platforms</key>
+	<array/>
+	<key>DefaultCompletionName</key>
+	<string>File</string>
+	<key>MainTemplateFile</key>
+	<string>___FILEBASENAME___.swift</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Default</key>
+			<string>ArgoKit Component</string>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Name</key>
+			<string>Name:</string>
+			<key>Description</key>
+			<string>The name of the file to create</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>NotPersisted</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>LinkView</string>
+			<key>Required</key>
+			<string>YES</string>
+			<key>Name</key>
+			<string>Link View:</string>
+			<key>Description</key>
+			<string>What class to subclass in the new file</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Default</key>
+			<string>NSObject</string>
+			<key>FallbackHeader</key>
+			<string>#import &lt;UIKit/UIKit.h&gt;</string>
+			<key>Values</key>
+			<array>
+				<string>NSObject</string>
+				<string>UIView</string>
+				<string>UITableViewCell</string>
+				<string>UICollectionViewCell</string>
+			</array>
+			<key>Suffixes</key>
+			<dict>
+				<key>UITableViewCell</key>
+				<string>TableViewCell</string>
+				<key>UICollectionViewCell</key>
+				<string>CollectionViewCell</string>
+				<key>UICollectionReusableView</key>
+				<string>CollectionReusableView</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

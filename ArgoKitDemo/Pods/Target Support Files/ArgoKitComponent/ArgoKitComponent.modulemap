@@ -1,0 +1,6 @@
+framework module ArgoKitComponent {
+  umbrella header "ArgoKitComponent-umbrella.h"
+
+  export *
+  module * { export * }
+}

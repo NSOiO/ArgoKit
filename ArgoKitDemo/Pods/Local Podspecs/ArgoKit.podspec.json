@@ -1,0 +1,57 @@
+{
+  "name": "ArgoKit",
+  "version": "1.3.0",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "homepage": "https://git.wemomo.com/module/argokit",
+  "documentation_url": "https://momotech.github.io/argokit/",
+  "summary": "A Declarative and Reactive Framework.",
+  "description": "ArgoKit is a declarative and reactive Framework and based on UIKit, inspired by SwiftUI, compatible with iOS 11+.\n\n- **Declarative** ArgoKit uses almost the same `DSL` as SwiftUI(e.g., `Text` `Button` `List` ).You simply describe the UI elements and Animation, and the framework takes care of the rest.\n- **React** The created view automatically listens directly to streams and updates the DOM accordingly.\n- **Flexbox Layout** ArgoKit uses [Yoga](https://facebook.github.io/yoga/) as layout engine.\n- **Preview and templating** ArgoKit uses the same preview approach as SwiftUI, and you can be easily developed through the template files.",
+  "authors": "MoMo",
+  "source": {
+    "git": "https://git.wemomo.com/module/argokit.git",
+    "tag": "ArgoKit/1.3.0"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "ios": {
+    "frameworks": "UIKit"
+  },
+  "dependencies": {
+    "Yoga": [
+
+    ]
+  },
+  "module_name": "ArgoKit",
+  "header_dir": ".",
+  "libraries": [
+    "z",
+    "c++"
+  ],
+  "subspecs": [
+    {
+      "name": "AnimationKit",
+      "dependencies": {
+        "ArgoAnimation": [
+
+        ]
+      },
+      "source_files": "Source/AnimationKit/**/*.{h,m,mm,c,cpp,swift}"
+    },
+    {
+      "name": "Bind",
+      "source_files": "Source/Bind/**/*.{swift}"
+    },
+    {
+      "name": "Core",
+      "source_files": [
+        "Source/Core/**/*.{h,m,mm}",
+        "Source/Core/**/*.{swift}"
+      ],
+      "public_header_files": "ArgoKit/Source/*.h"
+    }
+  ]
+}

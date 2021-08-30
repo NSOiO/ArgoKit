@@ -1,0 +1,13 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/ArgoAnimation" "${PODS_CONFIGURATION_BUILD_DIR}/ArgoKit" "${PODS_CONFIGURATION_BUILD_DIR}/ArgoKitComponent" "${PODS_CONFIGURATION_BUILD_DIR}/ArgoKitPreview" "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage" "${PODS_CONFIGURATION_BUILD_DIR}/Yoga"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/ArgoAnimation/ArgoAnimation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ArgoKit/ArgoKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ArgoKitComponent/ArgoKitComponent.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ArgoKitPreview/ArgoKitPreview.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Yoga/yoga.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"z" -framework "ArgoAnimation" -framework "ArgoKit" -framework "ArgoKitComponent" -framework "ArgoKitPreview" -framework "ImageIO" -framework "SDWebImage" -framework "UIKit" -framework "yoga" -weak_framework "SwiftUI"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D SDIMAGELOADER
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

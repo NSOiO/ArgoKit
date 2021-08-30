@@ -1,0 +1,37 @@
+{
+  "name": "ArgoKitPreview",
+  "version": "1.0.16",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "homepage": "https://git.wemomo.com/module/argokit",
+  "summary": "ArgoKitPreview",
+  "authors": "MoMo",
+  "source": {
+    "git": "https://git.wemomo.com/module/argokit.git",
+    "tag": "ArgoKitPreview/1.0.16"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "ios": {
+    "frameworks": "UIKit",
+    "weak_frameworks": "SwiftUI"
+  },
+  "dependencies": {
+    "ArgoKit": [
+
+    ],
+    "ArgoKitComponent": [
+
+    ]
+  },
+  "module_name": "ArgoKitPreview",
+  "source_files": "Source/Preview/src/**/*.{h,m,mm,swift}",
+  "resources": [
+    "Source/Script/*",
+    "Source/Preview/*.swift"
+  ],
+  "prepare_command": "path=./Source//Script/config.sh\nif [ -f \"$path\" ]; then\n  sh $path\nelse\n  echo \"$path not exist\"\nfi"
+}

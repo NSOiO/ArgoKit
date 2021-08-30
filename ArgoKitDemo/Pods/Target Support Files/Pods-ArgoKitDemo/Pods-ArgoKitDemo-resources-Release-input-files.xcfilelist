@@ -1,0 +1,7 @@
+${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources.sh
+${PODS_ROOT}/../../Source/Script/argokit_preview_config.rb
+${PODS_ROOT}/../../Source/Script/config.sh
+${PODS_ROOT}/../../Source/Script/ArgoKit Compnent.xctemplate
+${PODS_ROOT}/../../Source/Script/ArgoKit View.xctemplate
+${PODS_ROOT}/../../Source/Preview/ArgoKitPreviewConfig.swift
+${PODS_ROOT}/../../Source/Preview/ArgoKitPreviewTypes.swift

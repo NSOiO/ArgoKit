@@ -1,0 +1,6 @@
+framework module ArgoKitPreview {
+  umbrella header "ArgoKitPreview-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,81 @@
+{
+  "name": "ArgoKitComponent",
+  "version": "1.0.8",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "homepage": "https://git.wemomo.com/module/argokit",
+  "summary": "ArgoKitComponent",
+  "authors": "MoMo",
+  "source": {
+    "git": "https://git.wemomo.com/module/argokit.git",
+    "tag": "ArgoKitComponent/1.0.8"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "ios": {
+    "frameworks": "UIKit"
+  },
+  "module_name": "ArgoKitComponent",
+  "dependencies": {
+    "ArgoKit": [
+
+    ]
+  },
+  "default_subspecs": "Core",
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Source/Component/Core/**/*.{h,m,mm,swift}",
+      "dependencies": {
+        "ArgoKitComponent/SDImageLoader": [
+
+        ]
+      }
+    },
+    {
+      "name": "SDImageLoader",
+      "source_files": "Source/Component/SDImageLoader/**/*.{h,m,mm,swift}",
+      "dependencies": {
+        "SDWebImage": [
+
+        ]
+      },
+      "xcconfig": {
+        "OTHER_SWIFT_FLAGS": "-D SDIMAGELOADER"
+      }
+    },
+    {
+      "name": "KFImageLoader",
+      "source_files": "Source/Component/KFImageLoader/**/*.{h,m,mm,swift}",
+      "dependencies": {
+        "Kingfisher": [
+
+        ]
+      },
+      "xcconfig": {
+        "OTHER_SWIFT_FLAGS": "-D KFIMAGELOADER"
+      }
+    },
+    {
+      "name": "YYText",
+      "source_files": "Source/Component/YYText/**/*.{h,m,mm,swift}",
+      "dependencies": {
+        "YYText": [
+
+        ]
+      }
+    },
+    {
+      "name": "Refresh",
+      "source_files": "Source/Component/Refresh/**/*.{h,m,mm,swift}",
+      "dependencies": {
+        "MJRefresh": [
+
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,711 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		238F9DE826DD1D7F0050CAFC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DE326DD1D7F0050CAFC /* MainViewModel.swift */; };
+		238F9DE926DD1D7F0050CAFC /* HomeMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DE426DD1D7F0050CAFC /* HomeMainView.swift */; };
+		238F9DEA26DD1D7F0050CAFC /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DE526DD1D7F0050CAFC /* HomeMainViewController.swift */; };
+		238F9DFC26DD1F850050CAFC /* Lesson3List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DED26DD1F850050CAFC /* Lesson3List.swift */; };
+		238F9DFD26DD1F850050CAFC /* Lesson3Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DEE26DD1F850050CAFC /* Lesson3Cell.swift */; };
+		238F9DFE26DD1F850050CAFC /* Lesson4GridHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF026DD1F850050CAFC /* Lesson4GridHeaderView.swift */; };
+		238F9DFF26DD1F850050CAFC /* Lesson4Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF126DD1F850050CAFC /* Lesson4Grid.swift */; };
+		238F9E0026DD1F850050CAFC /* Lesson4GridHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF226DD1F850050CAFC /* Lesson4GridHeaderCell.swift */; };
+		238F9E0126DD1F850050CAFC /* Lesson4GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF326DD1F850050CAFC /* Lesson4GridCell.swift */; };
+		238F9E0226DD1F850050CAFC /* FeedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF526DD1F850050CAFC /* FeedDetailView.swift */; };
+		238F9E0326DD1F850050CAFC /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF626DD1F850050CAFC /* FeedDetailViewModel.swift */; };
+		238F9E0426DD1F850050CAFC /* Lesson1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DF826DD1F850050CAFC /* Lesson1View.swift */; };
+		238F9E0526DD1F850050CAFC /* Lesson6CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DFA26DD1F850050CAFC /* Lesson6CustomView.swift */; };
+		238F9E0626DD1F850050CAFC /* Lesson6AddCustomUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9DFB26DD1F850050CAFC /* Lesson6AddCustomUIView.swift */; };
+		238F9E2526DD1F9A0050CAFC /* ArgoKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E0A26DD1F9A0050CAFC /* ArgoKitButton.swift */; };
+		238F9E2626DD1F9A0050CAFC /* ArgoKitTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E0B26DD1F9A0050CAFC /* ArgoKitTextView.swift */; };
+		238F9E2726DD1F9A0050CAFC /* ArgoKitAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E0C26DD1F9A0050CAFC /* ArgoKitAlias.swift */; };
+		238F9E2826DD1F9A0050CAFC /* ArgoKitVStackAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E0D26DD1F9A0050CAFC /* ArgoKitVStackAlign.swift */; };
+		238F9E2926DD1F9A0050CAFC /* ArgoKitAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E0E26DD1F9A0050CAFC /* ArgoKitAlertView.swift */; };
+		238F9E2A26DD1F9A0050CAFC /* ArgoKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E0F26DD1F9A0050CAFC /* ArgoKitTextField.swift */; };
+		238F9E2B26DD1F9A0050CAFC /* ArgoKitImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1026DD1F9A0050CAFC /* ArgoKitImageLoader.swift */; };
+		238F9E2C26DD1F9A0050CAFC /* ArgoKitToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1126DD1F9A0050CAFC /* ArgoKitToggle.swift */; };
+		238F9E2D26DD1F9A0050CAFC /* ArgoKitScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1226DD1F9A0050CAFC /* ArgoKitScrollView.swift */; };
+		238F9E2E26DD1F9A0050CAFC /* ArgoKitForEach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1326DD1F9A0050CAFC /* ArgoKitForEach.swift */; };
+		238F9E2F26DD1F9A0050CAFC /* ArgoKitGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1426DD1F9A0050CAFC /* ArgoKitGesture.swift */; };
+		238F9E3026DD1F9A0050CAFC /* ArgoKitStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1526DD1F9A0050CAFC /* ArgoKitStepper.swift */; };
+		238F9E3126DD1F9A0050CAFC /* ArgoKitAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1626DD1F9A0050CAFC /* ArgoKitAnimation.swift */; };
+		238F9E3226DD1F9A0050CAFC /* ArgoKitSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1726DD1F9A0050CAFC /* ArgoKitSpacer.swift */; };
+		238F9E3326DD1F9A0050CAFC /* ArgoKitDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1826DD1F9A0050CAFC /* ArgoKitDatePicker.swift */; };
+		238F9E3426DD1F9A0050CAFC /* ArgoKitHVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1926DD1F9A0050CAFC /* ArgoKitHVStack.swift */; };
+		238F9E3526DD1F9A0050CAFC /* ActivityFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1C26DD1F9A0050CAFC /* ActivityFeed.swift */; };
+		238F9E3626DD1F9A0050CAFC /* ActivityFeedHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1D26DD1F9A0050CAFC /* ActivityFeedHeadView.swift */; };
+		238F9E3726DD1F9A0050CAFC /* ActivityFeedCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1E26DD1F9A0050CAFC /* ActivityFeedCellContent.swift */; };
+		238F9E3826DD1F9A0050CAFC /* ActivityFeedThem1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E1F26DD1F9A0050CAFC /* ActivityFeedThem1Cell.swift */; };
+		238F9E3926DD1F9A0050CAFC /* ActivityFeedFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F9E2026DD1F9A0050CAFC /* ActivityFeedFootView.swift */; };
+		238F9E4026DD23800050CAFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 238F9E3E26DD23800050CAFC /* LaunchScreen.storyboard */; };
+		26C14AA698D4BB681700E747 /* ArgoKitPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6A042F9C3EC54D2309CE9 /* ArgoKitPreviewTypes.swift */; };
+		326335CE254133D20094676D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326335CD254133D20094676D /* AppDelegate.swift */; };
+		326335D7254133D30094676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326335D6254133D30094676D /* Assets.xcassets */; };
+		6B21D80B68DA31D05E185A09 /* Pods_ArgoKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250657F4897BD8A1D8E1BE10 /* Pods_ArgoKitDemo.framework */; };
+		94F0F963477E81A8DE7FFC49 /* ArgoKitPreviewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53106E3E53A22FE8CA8EC0B8 /* ArgoKitPreviewConfig.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA72311C257E633800C6492B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		238F9DE126DD1D7E0050CAFC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		238F9DE326DD1D7F0050CAFC /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		238F9DE426DD1D7F0050CAFC /* HomeMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMainView.swift; sourceTree = "<group>"; };
+		238F9DE526DD1D7F0050CAFC /* HomeMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
+		238F9DED26DD1F850050CAFC /* Lesson3List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson3List.swift; sourceTree = "<group>"; };
+		238F9DEE26DD1F850050CAFC /* Lesson3Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson3Cell.swift; sourceTree = "<group>"; };
+		238F9DF026DD1F850050CAFC /* Lesson4GridHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson4GridHeaderView.swift; sourceTree = "<group>"; };
+		238F9DF126DD1F850050CAFC /* Lesson4Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson4Grid.swift; sourceTree = "<group>"; };
+		238F9DF226DD1F850050CAFC /* Lesson4GridHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson4GridHeaderCell.swift; sourceTree = "<group>"; };
+		238F9DF326DD1F850050CAFC /* Lesson4GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson4GridCell.swift; sourceTree = "<group>"; };
+		238F9DF526DD1F850050CAFC /* FeedDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailView.swift; sourceTree = "<group>"; };
+		238F9DF626DD1F850050CAFC /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
+		238F9DF826DD1F850050CAFC /* Lesson1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson1View.swift; sourceTree = "<group>"; };
+		238F9DFA26DD1F850050CAFC /* Lesson6CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson6CustomView.swift; sourceTree = "<group>"; };
+		238F9DFB26DD1F850050CAFC /* Lesson6AddCustomUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson6AddCustomUIView.swift; sourceTree = "<group>"; };
+		238F9E0A26DD1F9A0050CAFC /* ArgoKitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitButton.swift; sourceTree = "<group>"; };
+		238F9E0B26DD1F9A0050CAFC /* ArgoKitTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitTextView.swift; sourceTree = "<group>"; };
+		238F9E0C26DD1F9A0050CAFC /* ArgoKitAlias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitAlias.swift; sourceTree = "<group>"; };
+		238F9E0D26DD1F9A0050CAFC /* ArgoKitVStackAlign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitVStackAlign.swift; sourceTree = "<group>"; };
+		238F9E0E26DD1F9A0050CAFC /* ArgoKitAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitAlertView.swift; sourceTree = "<group>"; };
+		238F9E0F26DD1F9A0050CAFC /* ArgoKitTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitTextField.swift; sourceTree = "<group>"; };
+		238F9E1026DD1F9A0050CAFC /* ArgoKitImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitImageLoader.swift; sourceTree = "<group>"; };
+		238F9E1126DD1F9A0050CAFC /* ArgoKitToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitToggle.swift; sourceTree = "<group>"; };
+		238F9E1226DD1F9A0050CAFC /* ArgoKitScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitScrollView.swift; sourceTree = "<group>"; };
+		238F9E1326DD1F9A0050CAFC /* ArgoKitForEach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitForEach.swift; sourceTree = "<group>"; };
+		238F9E1426DD1F9A0050CAFC /* ArgoKitGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitGesture.swift; sourceTree = "<group>"; };
+		238F9E1526DD1F9A0050CAFC /* ArgoKitStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitStepper.swift; sourceTree = "<group>"; };
+		238F9E1626DD1F9A0050CAFC /* ArgoKitAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitAnimation.swift; sourceTree = "<group>"; };
+		238F9E1726DD1F9A0050CAFC /* ArgoKitSpacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitSpacer.swift; sourceTree = "<group>"; };
+		238F9E1826DD1F9A0050CAFC /* ArgoKitDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitDatePicker.swift; sourceTree = "<group>"; };
+		238F9E1926DD1F9A0050CAFC /* ArgoKitHVStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgoKitHVStack.swift; sourceTree = "<group>"; };
+		238F9E1C26DD1F9A0050CAFC /* ActivityFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFeed.swift; sourceTree = "<group>"; };
+		238F9E1D26DD1F9A0050CAFC /* ActivityFeedHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFeedHeadView.swift; sourceTree = "<group>"; };
+		238F9E1E26DD1F9A0050CAFC /* ActivityFeedCellContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFeedCellContent.swift; sourceTree = "<group>"; };
+		238F9E1F26DD1F9A0050CAFC /* ActivityFeedThem1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFeedThem1Cell.swift; sourceTree = "<group>"; };
+		238F9E2026DD1F9A0050CAFC /* ActivityFeedFootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFeedFootView.swift; sourceTree = "<group>"; };
+		238F9E3F26DD23800050CAFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		23F6A042F9C3EC54D2309CE9 /* ArgoKitPreviewTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewTypes.swift; path = ../Source/Preview/ArgoKitPreviewTypes.swift; sourceTree = "<group>"; };
+		250657F4897BD8A1D8E1BE10 /* Pods_ArgoKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArgoKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		326335CA254133D20094676D /* ArgoKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgoKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		326335CD254133D20094676D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		326335D6254133D30094676D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		53106E3E53A22FE8CA8EC0B8 /* ArgoKitPreviewConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgoKitPreviewConfig.swift; path = ../Source/Preview/ArgoKitPreviewConfig.swift; sourceTree = "<group>"; };
+		89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.release.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.release.xcconfig"; sourceTree = "<group>"; };
+		A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgoKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		326335C7254133D20094676D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B21D80B68DA31D05E185A09 /* Pods_ArgoKitDemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		238F9DE026DD1CC60050CAFC /* HomeMain */ = {
+			isa = PBXGroup;
+			children = (
+				326335CD254133D20094676D /* AppDelegate.swift */,
+				238F9DE426DD1D7F0050CAFC /* HomeMainView.swift */,
+				238F9DE526DD1D7F0050CAFC /* HomeMainViewController.swift */,
+				238F9DE126DD1D7E0050CAFC /* Info.plist */,
+				238F9E3E26DD23800050CAFC /* LaunchScreen.storyboard */,
+				238F9DE326DD1D7F0050CAFC /* MainViewModel.swift */,
+			);
+			path = HomeMain;
+			sourceTree = "<group>";
+		};
+		238F9DEB26DD1F850050CAFC /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DEC26DD1F850050CAFC /* Lesson3 */,
+				238F9DEF26DD1F850050CAFC /* Lesson4 */,
+				238F9DF426DD1F850050CAFC /* Lesson2 */,
+				238F9DF726DD1F850050CAFC /* Lesson1 */,
+				238F9DF926DD1F850050CAFC /* Lesson6 */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		238F9DEC26DD1F850050CAFC /* Lesson3 */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DED26DD1F850050CAFC /* Lesson3List.swift */,
+				238F9DEE26DD1F850050CAFC /* Lesson3Cell.swift */,
+			);
+			path = Lesson3;
+			sourceTree = "<group>";
+		};
+		238F9DEF26DD1F850050CAFC /* Lesson4 */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DF026DD1F850050CAFC /* Lesson4GridHeaderView.swift */,
+				238F9DF126DD1F850050CAFC /* Lesson4Grid.swift */,
+				238F9DF226DD1F850050CAFC /* Lesson4GridHeaderCell.swift */,
+				238F9DF326DD1F850050CAFC /* Lesson4GridCell.swift */,
+			);
+			path = Lesson4;
+			sourceTree = "<group>";
+		};
+		238F9DF426DD1F850050CAFC /* Lesson2 */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DF526DD1F850050CAFC /* FeedDetailView.swift */,
+				238F9DF626DD1F850050CAFC /* FeedDetailViewModel.swift */,
+			);
+			path = Lesson2;
+			sourceTree = "<group>";
+		};
+		238F9DF726DD1F850050CAFC /* Lesson1 */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DF826DD1F850050CAFC /* Lesson1View.swift */,
+			);
+			path = Lesson1;
+			sourceTree = "<group>";
+		};
+		238F9DF926DD1F850050CAFC /* Lesson6 */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DFA26DD1F850050CAFC /* Lesson6CustomView.swift */,
+				238F9DFB26DD1F850050CAFC /* Lesson6AddCustomUIView.swift */,
+			);
+			path = Lesson6;
+			sourceTree = "<group>";
+		};
+		238F9E0726DD1F890050CAFC /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				326335D6254133D30094676D /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		238F9E0826DD1F9A0050CAFC /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				238F9E0926DD1F9A0050CAFC /* CommonView */,
+				238F9E1A26DD1F9A0050CAFC /* List */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		238F9E0926DD1F9A0050CAFC /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				238F9E0A26DD1F9A0050CAFC /* ArgoKitButton.swift */,
+				238F9E0B26DD1F9A0050CAFC /* ArgoKitTextView.swift */,
+				238F9E0C26DD1F9A0050CAFC /* ArgoKitAlias.swift */,
+				238F9E0D26DD1F9A0050CAFC /* ArgoKitVStackAlign.swift */,
+				238F9E0E26DD1F9A0050CAFC /* ArgoKitAlertView.swift */,
+				238F9E0F26DD1F9A0050CAFC /* ArgoKitTextField.swift */,
+				238F9E1026DD1F9A0050CAFC /* ArgoKitImageLoader.swift */,
+				238F9E1126DD1F9A0050CAFC /* ArgoKitToggle.swift */,
+				238F9E1226DD1F9A0050CAFC /* ArgoKitScrollView.swift */,
+				238F9E1326DD1F9A0050CAFC /* ArgoKitForEach.swift */,
+				238F9E1426DD1F9A0050CAFC /* ArgoKitGesture.swift */,
+				238F9E1526DD1F9A0050CAFC /* ArgoKitStepper.swift */,
+				238F9E1626DD1F9A0050CAFC /* ArgoKitAnimation.swift */,
+				238F9E1726DD1F9A0050CAFC /* ArgoKitSpacer.swift */,
+				238F9E1826DD1F9A0050CAFC /* ArgoKitDatePicker.swift */,
+				238F9E1926DD1F9A0050CAFC /* ArgoKitHVStack.swift */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
+		238F9E1A26DD1F9A0050CAFC /* List */ = {
+			isa = PBXGroup;
+			children = (
+				238F9E1B26DD1F9A0050CAFC /* Activity */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		238F9E1B26DD1F9A0050CAFC /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				238F9E1C26DD1F9A0050CAFC /* ActivityFeed.swift */,
+				238F9E1D26DD1F9A0050CAFC /* ActivityFeedHeadView.swift */,
+				238F9E1E26DD1F9A0050CAFC /* ActivityFeedCellContent.swift */,
+				238F9E1F26DD1F9A0050CAFC /* ActivityFeedThem1Cell.swift */,
+				238F9E2026DD1F9A0050CAFC /* ActivityFeedFootView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		238F9E3D26DD20BC0050CAFC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				238F9DEB26DD1F850050CAFC /* Tutorial */,
+				238F9E0826DD1F9A0050CAFC /* Demo */,
+				238F9DE026DD1CC60050CAFC /* HomeMain */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		326335C1254133D20094676D = {
+			isa = PBXGroup;
+			children = (
+				326335CC254133D20094676D /* ArgoKitDemo */,
+				326335CB254133D20094676D /* Products */,
+				F4111651BAEBC0F7E7C25E97 /* Pods */,
+				8266FB072263C28BD6505C25 /* Frameworks */,
+				62FE0835838FF2C5F47C3127 /* ArgoKitPreviewFiles */,
+			);
+			sourceTree = "<group>";
+		};
+		326335CB254133D20094676D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				326335CA254133D20094676D /* ArgoKitDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		326335CC254133D20094676D /* ArgoKitDemo */ = {
+			isa = PBXGroup;
+			children = (
+				238F9E3D26DD20BC0050CAFC /* Classes */,
+				238F9E0726DD1F890050CAFC /* Resource */,
+			);
+			path = ArgoKitDemo;
+			sourceTree = "<group>";
+		};
+		62FE0835838FF2C5F47C3127 /* ArgoKitPreviewFiles */ = {
+			isa = PBXGroup;
+			children = (
+				23F6A042F9C3EC54D2309CE9 /* ArgoKitPreviewTypes.swift */,
+				53106E3E53A22FE8CA8EC0B8 /* ArgoKitPreviewConfig.swift */,
+			);
+			name = ArgoKitPreviewFiles;
+			sourceTree = "<group>";
+		};
+		8266FB072263C28BD6505C25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				250657F4897BD8A1D8E1BE10 /* Pods_ArgoKitDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4111651BAEBC0F7E7C25E97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */,
+				89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		326335C9254133D20094676D /* ArgoKitDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 326335F4254133D40094676D /* Build configuration list for PBXNativeTarget "ArgoKitDemo" */;
+			buildPhases = (
+				D72DD5057E1A6D051356CD99 /* [CP] Check Pods Manifest.lock */,
+				326335C6254133D20094676D /* Sources */,
+				326335C7254133D20094676D /* Frameworks */,
+				326335C8254133D20094676D /* Resources */,
+				FA72311C257E633800C6492B /* Embed Frameworks */,
+				0B30BCB0124BAB3663ACE922 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArgoKitDemo;
+			productName = ArgoKitDemo;
+			productReference = 326335CA254133D20094676D /* ArgoKitDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		326335C2254133D20094676D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					326335C9254133D20094676D = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 326335C5254133D20094676D /* Build configuration list for PBXProject "ArgoKitDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 326335C1254133D20094676D;
+			productRefGroup = 326335CB254133D20094676D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				326335C9254133D20094676D /* ArgoKitDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		326335C8254133D20094676D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				326335D7254133D30094676D /* Assets.xcassets in Resources */,
+				238F9E4026DD23800050CAFC /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B30BCB0124BAB3663ACE922 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArgoKitDemo/Pods-ArgoKitDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D72DD5057E1A6D051356CD99 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ArgoKitDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		326335C6254133D20094676D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				238F9DFF26DD1F850050CAFC /* Lesson4Grid.swift in Sources */,
+				238F9E2826DD1F9A0050CAFC /* ArgoKitVStackAlign.swift in Sources */,
+				238F9E0426DD1F850050CAFC /* Lesson1View.swift in Sources */,
+				326335CE254133D20094676D /* AppDelegate.swift in Sources */,
+				238F9E0526DD1F850050CAFC /* Lesson6CustomView.swift in Sources */,
+				238F9E2B26DD1F9A0050CAFC /* ArgoKitImageLoader.swift in Sources */,
+				238F9E3926DD1F9A0050CAFC /* ActivityFeedFootView.swift in Sources */,
+				238F9E2F26DD1F9A0050CAFC /* ArgoKitGesture.swift in Sources */,
+				238F9DFC26DD1F850050CAFC /* Lesson3List.swift in Sources */,
+				238F9E0126DD1F850050CAFC /* Lesson4GridCell.swift in Sources */,
+				238F9E3726DD1F9A0050CAFC /* ActivityFeedCellContent.swift in Sources */,
+				238F9E3026DD1F9A0050CAFC /* ArgoKitStepper.swift in Sources */,
+				238F9E2626DD1F9A0050CAFC /* ArgoKitTextView.swift in Sources */,
+				238F9E3226DD1F9A0050CAFC /* ArgoKitSpacer.swift in Sources */,
+				238F9DFD26DD1F850050CAFC /* Lesson3Cell.swift in Sources */,
+				238F9E2D26DD1F9A0050CAFC /* ArgoKitScrollView.swift in Sources */,
+				238F9E2C26DD1F9A0050CAFC /* ArgoKitToggle.swift in Sources */,
+				238F9E2726DD1F9A0050CAFC /* ArgoKitAlias.swift in Sources */,
+				238F9E0626DD1F850050CAFC /* Lesson6AddCustomUIView.swift in Sources */,
+				238F9E0026DD1F850050CAFC /* Lesson4GridHeaderCell.swift in Sources */,
+				238F9E3126DD1F9A0050CAFC /* ArgoKitAnimation.swift in Sources */,
+				238F9E3526DD1F9A0050CAFC /* ActivityFeed.swift in Sources */,
+				238F9E2926DD1F9A0050CAFC /* ArgoKitAlertView.swift in Sources */,
+				238F9E3326DD1F9A0050CAFC /* ArgoKitDatePicker.swift in Sources */,
+				238F9E0326DD1F850050CAFC /* FeedDetailViewModel.swift in Sources */,
+				238F9E3426DD1F9A0050CAFC /* ArgoKitHVStack.swift in Sources */,
+				238F9DE926DD1D7F0050CAFC /* HomeMainView.swift in Sources */,
+				238F9E2526DD1F9A0050CAFC /* ArgoKitButton.swift in Sources */,
+				238F9E2A26DD1F9A0050CAFC /* ArgoKitTextField.swift in Sources */,
+				238F9DFE26DD1F850050CAFC /* Lesson4GridHeaderView.swift in Sources */,
+				238F9DEA26DD1D7F0050CAFC /* HomeMainViewController.swift in Sources */,
+				238F9E2E26DD1F9A0050CAFC /* ArgoKitForEach.swift in Sources */,
+				238F9E3826DD1F9A0050CAFC /* ActivityFeedThem1Cell.swift in Sources */,
+				26C14AA698D4BB681700E747 /* ArgoKitPreviewTypes.swift in Sources */,
+				94F0F963477E81A8DE7FFC49 /* ArgoKitPreviewConfig.swift in Sources */,
+				238F9E3626DD1F9A0050CAFC /* ActivityFeedHeadView.swift in Sources */,
+				238F9E0226DD1F850050CAFC /* FeedDetailView.swift in Sources */,
+				238F9DE826DD1D7F0050CAFC /* MainViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		238F9E3E26DD23800050CAFC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				238F9E3F26DD23800050CAFC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		326335F2254133D40094676D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		326335F3254133D40094676D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		326335F5254133D40094676D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A38CAF246A0F92155EAEC1B2 /* Pods-ArgoKitDemo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0;
+				DEVELOPMENT_TEAM = 46J43Q8335;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
+				INFOPLIST_FILE = ArgoKitDemo/Classes/HomeMain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-framework",
+					"\"ArgoKit\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"yoga\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemomo1.ArgoKitDemo1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		326335F6254133D40094676D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89BE9FE0126A2F9714932539 /* Pods-ArgoKitDemo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0;
+				DEVELOPMENT_TEAM = 46J43Q8335;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_INPUT_FILETYPE = automatic;
+				INFOPLIST_FILE = ArgoKitDemo/Classes/HomeMain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-framework",
+					"\"ArgoKit\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"yoga\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemomo1.ArgoKitDemo1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		326335C5254133D20094676D /* Build configuration list for PBXProject "ArgoKitDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				326335F2254133D40094676D /* Debug */,
+				326335F3254133D40094676D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		326335F4254133D40094676D /* Build configuration list for PBXNativeTarget "ArgoKitDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				326335F5254133D40094676D /* Debug */,
+				326335F6254133D40094676D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 326335C2254133D20094676D /* Project object */;
+}
